@@ -1,6 +1,6 @@
 package tw.org.iiiedu.thegivers.model;
 
-public class RHistoryModel {
+public class RaiserHistoryModel {
 	private Long id;
 	private Long raiser_id;
 	private Long campaign_id;

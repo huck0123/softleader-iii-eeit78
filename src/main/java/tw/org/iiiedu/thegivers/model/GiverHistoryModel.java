@@ -1,6 +1,6 @@
 package tw.org.iiiedu.thegivers.model;
 
-public class DHistoryModel {
+public class GiverHistoryModel {
 
 	private Long id;
 

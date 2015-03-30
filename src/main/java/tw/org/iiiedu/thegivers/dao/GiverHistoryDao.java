@@ -10,16 +10,16 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import tw.org.iiiedu.thegivers.model.DHistoryModel;
+import tw.org.iiiedu.thegivers.model.GiverHistoryModel;
 
 @Repository
-public class DHistoryDao {
+public class GiverHistoryDao {
 	
 	@Autowired
 	private DataSource datasource2;
 	
-	public DHistoryModel getById(Long id){
-		DHistoryModel dhm = null;
+	public GiverHistoryModel getById(Long id){
+		GiverHistoryModel dhm = null;
 		
 		Connection conn = null;
 		
@@ -31,7 +31,7 @@ public class DHistoryDao {
 			
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
-				dhm = new DHistoryModel();
+				dhm = new GiverHistoryModel();
 				dhm.setId(rs.getLong("id"));
 				dhm.setCampaignId(rs.getLong("campaign_id"));
 				dhm.setDonation(rs.getLong("donation"));
