@@ -2,30 +2,74 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
- 
+
 <struts>
- 
-  <constant name="struts.devMode" value="true" />
-  <constant name="struts.ui.theme" value="simple" />
-  <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-  <constant name="struts.custom.i18n.resources" value="locale/global" />
-  
-  <package name="default" namespace="/" extends="struts-default">
-  	
-  	<action name="page" class="demoAction" method="page">
-  		<result name="success">/WEB-INF/page/demo_page.jsp</result>
-  	</action>
-  	
-  	<action name="demo" class="demoAction" method="execute">
-  		<result name="success">/WEB-INF/page/demo_success.jsp</result>
-  		<result name="fail">/WEB-INF/page/demo_page.jsp</result>
-  	</action>
-  	
-  	<action name="ajaxDemo" class="ajaxDemoAction" method="ajax">
-  		<result name="success" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-  	</action>
-  </package>
+
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.custom.i18n.resources" value="locale/global" />
+
+	<package name="user-defined" abstract="true" extends="struts-default">
+
+		<interceptors>
+			<!--定義一個名為authentication的自定攔截器 -->
+			<interceptor
+				class="tw.org.iiiedu.thegivers.interceptor.AuthenticationInterceptor"
+				name="authentication" />
+			<!--定義一個驗證登入的攔截器堆疊 -->
+			<interceptor-stack name="myAuthenticationDefault">
+				<interceptor-ref name="defaultStack" />         <!--堆疊內設定原Struts2內建的: 預設攔截器堆疊 -->
+				<interceptor-ref name="authentication" />     <!--堆疊內設定前述名為authentication的: 自定攔截器 -->
+			</interceptor-stack>
+		</interceptors>
+
+	</package>
+
+
+
+
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<action name="page" class="demoAction" method="page">
+			<result name="success">/WEB-INF/page/demo_page.jsp</result>
+		</action>
+
+		<action name="demo" class="demoAction" method="execute">
+			<result name="success">/WEB-INF/page/demo_success.jsp</result>
+			<result name="fail">/WEB-INF/page/demo_page.jsp</result>
+		</action>
+
+		<action name="ajaxDemo" class="ajaxDemoAction" method="ajax">
+			<result name="success" type="stream">
+				<param name="contentType">appliction/json</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+
+
+	<package name="giver" namespace="/giver" extends="user-defined">
+
+		<!-- <action name="page" class="demoAction" method="page"> -->
+		<!-- one can use the defaultStack or customized Stack as interceptors stack 
+			on the action -->
+		<!-- <interceptor-ref name="myAuthenticationDefault" /> -->
+		<!-- <interceptor-ref name="defaultStack" /> -->
+		<!-- <result name="success">/WEB-INF/page/demo_page.jsp</result> -->
+		<!-- </action> -->
+
+	</package>
+
+
+	<package name="raiser" namespace="/raiser" extends="user-defined">
+
+	</package>
+
+	<package name="campaign" namespace="/campaign" extends="user-defined">
+
+	</package>
+
+
 </struts>
