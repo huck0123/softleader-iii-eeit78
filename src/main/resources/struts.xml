@@ -60,6 +60,14 @@
 		<!-- <result name="success">/WEB-INF/page/demo_page.jsp</result> -->
 		<!-- </action> -->
 
+<global-results>
+			<result name="login">/secure/login.jsp</result>
+		</global-results>
+		
+				<action name="*">
+			<result name="success">/META-INF/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
+		</action>
+
 	</package>
 
 

@@ -18,15 +18,15 @@
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="get*" read-only="true" />
-			<tx:method name="*" rollback-for="java.lang.Exception" />
-		</tx:attributes>
-	</tx:advice>
-	<aop:config>
-		<aop:pointcut id="serviceOperation" expression="execution(* *..service..*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
-	</aop:config>
+<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> -->
+<!-- 		<tx:attributes> -->
+<!-- 			<tx:method name="get*" read-only="true" /> -->
+<!-- 			<tx:method name="*" rollback-for="java.lang.Exception" /> -->
+<!-- 		</tx:attributes> -->
+<!-- 	</tx:advice> -->
+<!-- 	<aop:config> -->
+<!-- 		<aop:pointcut id="serviceOperation" expression="execution(* *..service..*.*(..))" /> -->
+<!-- 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" /> -->
+<!-- 	</aop:config> -->
 
 </beans>        
