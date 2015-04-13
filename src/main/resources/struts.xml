@@ -111,13 +111,6 @@
 	</package>
 
 
-	<package name="raiser" namespace="/raiser" extends="user-defined">
-
-	</package>
-
-	<package name="campaign" namespace="/campaign" extends="user-defined">
-
-	</package>
 
 
 </struts>

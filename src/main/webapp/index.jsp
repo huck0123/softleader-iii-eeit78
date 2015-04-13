@@ -38,6 +38,7 @@
 	<p />
 	<a href="<c:url value='/login/login'/>">進入登入頁面</a>
 	<p />
+
 </c:if>
 
 </body>
