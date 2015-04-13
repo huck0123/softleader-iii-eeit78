@@ -3,7 +3,7 @@ package tw.org.iiiedu.thegivers.form;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
-public class DonatorForm {
+public class GiverForm {
 
 	private Long id;
 	

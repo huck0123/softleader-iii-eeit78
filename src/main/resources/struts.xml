@@ -10,6 +10,20 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.custom.i18n.resources" value="locale/global" />
 
+	<package name="loginPackage" namespace="/login" extends="struts-default">
+		<action name="loginAct" class="tw.org.iiiedu.thegivers.web.LoginAct">
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="login">/META-INF/login/Login.jsp</result>
+		</action>
+
+		<action name="*">
+			<result>/META-INF/login/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
+		</action>
+	</package>
+
+
+
+
 	<package name="user-defined" abstract="true" extends="struts-default">
 
 		<interceptors>
@@ -60,11 +74,11 @@
 		<!-- <result name="success">/WEB-INF/page/demo_page.jsp</result> -->
 		<!-- </action> -->
 
-<global-results>
+		<global-results>
 			<result name="login">/secure/login.jsp</result>
 		</global-results>
-		
-				<action name="*">
+
+		<action name="*">
 			<result name="success">/META-INF/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
 		</action>
 

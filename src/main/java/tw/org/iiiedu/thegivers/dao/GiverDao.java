@@ -11,15 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.org.iiiedu.thegivers.model.CampaignModel;
-import tw.org.iiiedu.thegivers.model.DonatorModel;
+import tw.org.iiiedu.thegivers.model.GiverModel;
 
 @Repository
-public class DonatorDao {
+public class GiverDao {
 
 	@Autowired
 	private DataSource datasource2;
 
-	public DonatorModel getById(Long id) {
+	public GiverModel getById(Long id) {
 
 		String sqlString = "select * from donator where id = ?";
 		ResultSet rs = null;
@@ -28,10 +28,10 @@ public class DonatorDao {
 
 			pstmt.setLong(1, id);
 			rs = pstmt.executeQuery();
-			DonatorModel dm = null;
+			GiverModel dm = null;
 
 			if (rs.next()) {
-				dm = new DonatorModel();
+				dm = new GiverModel();
 				dm.setId(rs.getLong("id"));
 				dm.setAccount(rs.getString("account"));
 				dm.setPasswd(rs.getString("passwd"));

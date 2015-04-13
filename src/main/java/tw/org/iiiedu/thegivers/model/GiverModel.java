@@ -3,7 +3,7 @@ package tw.org.iiiedu.thegivers.model;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
-public class DonatorModel {
+public class GiverModel {
 
 	private Long id;
 	
