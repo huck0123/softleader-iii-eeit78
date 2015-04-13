@@ -11,6 +11,11 @@
 </head>
 <body>
 
+<c:if test="${admin != null}">${admin}</c:if>
+<c:if test="${giver != null}">${giver}</c:if>
+<c:if test="${raiser != null}">${raiser}</c:if>
+
+<c:if test="${empty admin && empty giver && empty raiser}">
 	<form action="<c:url value='/login/loginAct'/>" method="post">
 		<table>
 			<tr>
@@ -33,6 +38,7 @@
 	<p />
 	<a href="<c:url value='/login/Login'/>">進入登入頁面</a>
 	<p />
+</c:if>
 
 </body>
 </html>

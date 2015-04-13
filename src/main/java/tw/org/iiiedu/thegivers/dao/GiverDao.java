@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import tw.org.iiiedu.thegivers.model.AdminModel;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 
@@ -17,54 +22,30 @@ import tw.org.iiiedu.thegivers.model.GiverModel;
 public class GiverDao {
 
 	@Autowired
-	private DataSource datasource2;
+	SessionFactory sessionFactory;
 
-	public GiverModel getById(Long id) {
+	public GiverModel getByAccount(String account) {
 
-		String sqlString = "select * from donator where id = ?";
-		ResultSet rs = null;
-		try (Connection conn = datasource2.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+		GiverModel result = null;
 
-			pstmt.setLong(1, id);
-			rs = pstmt.executeQuery();
-			GiverModel dm = null;
+		Session session = sessionFactory.getCurrentSession();
 
-			if (rs.next()) {
-				dm = new GiverModel();
-				dm.setId(rs.getLong("id"));
-				dm.setAccount(rs.getString("account"));
-				dm.setPasswd(rs.getString("passwd"));
-				dm.setName(rs.getString("name"));
-				dm.setGender(rs.getBoolean("gender"));
-				dm.setId_number(rs.getString("id_number"));
-				dm.setTel(rs.getString("tel"));
-				dm.setAddress(rs.getString("address"));
-				dm.setEmail(rs.getString("email"));
-				dm.setGet_info(rs.getBoolean("gender"));
-				dm.setHeadshot(rs.getBlob("headshot"));
-				dm.setBirth(rs.getTimestamp("birth"));
-				dm.setProved(rs.getBoolean("gender"));
-				return dm;
+		
+		try {
+			Iterator giverModels = session.createCriteria(GiverModel.class)
+					.add(Restrictions.eq("account", account).ignoreCase()).list().iterator();
+
+			if (giverModels.hasNext()) {
+		
+				result = (GiverModel) giverModels.next();
 			}
-		} catch (SQLException e) {
+	
+		} catch (Exception e) {
+	
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 		}
+		return result;
 
-		return null;
-	}
-
-	public String getName() {
-		return "Gary Lee";
 	}
 
 }

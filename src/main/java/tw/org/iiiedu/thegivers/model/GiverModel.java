@@ -1,11 +1,11 @@
 package tw.org.iiiedu.thegivers.model;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class GiverModel {
 
-	private Long id;
+	private int id;
 	
 	private String account;
 	
@@ -13,9 +13,11 @@ public class GiverModel {
 	
 	private String name;
 	
+	private String familyName;
+	
 	private boolean gender;
 	
-	private String id_number;
+	private String idNumber;
 	
 	private String tel;
 	
@@ -23,29 +25,19 @@ public class GiverModel {
 	
 	private String email;
 	
-	private boolean get_info;
+	private boolean getInfo;
 	
-	private Blob headshot;
+	private byte[] headshot;
 	
 	private Timestamp birth;
 	
-	private boolean proved;
+	private boolean valid;
 
-	@Override
-	public String toString() {
-		return "DonatorModel [id=" + id + ", account=" + account + ", passwd="
-				+ passwd + ", name=" + name + ", gender=" + gender
-				+ ", id_number=" + id_number + ", tel=" + tel + ", address="
-				+ address + ", email=" + email + ", get_info=" + get_info
-				+ ", headshot=" + headshot + ", birth=" + birth + ", proved="
-				+ proved + "]";
-	}
-
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -73,6 +65,14 @@ public class GiverModel {
 		this.name = name;
 	}
 
+	public String getFamilyName() {
+		return familyName;
+	}
+
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
+	}
+
 	public boolean isGender() {
 		return gender;
 	}
@@ -81,12 +81,12 @@ public class GiverModel {
 		this.gender = gender;
 	}
 
-	public String getId_number() {
-		return id_number;
+	public String getIdNumber() {
+		return idNumber;
 	}
 
-	public void setId_number(String id_number) {
-		this.id_number = id_number;
+	public void setIdNumber(String idNumber) {
+		this.idNumber = idNumber;
 	}
 
 	public String getTel() {
@@ -113,19 +113,19 @@ public class GiverModel {
 		this.email = email;
 	}
 
-	public boolean isGet_info() {
-		return get_info;
+	public boolean isGetInfo() {
+		return getInfo;
 	}
 
-	public void setGet_info(boolean get_info) {
-		this.get_info = get_info;
+	public void setGetInfo(boolean getInfo) {
+		this.getInfo = getInfo;
 	}
 
-	public Blob getHeadshot() {
+	public byte[] getHeadshot() {
 		return headshot;
 	}
 
-	public void setHeadshot(Blob headshot) {
+	public void setHeadshot(byte[] headshot) {
 		this.headshot = headshot;
 	}
 
@@ -137,14 +137,24 @@ public class GiverModel {
 		this.birth = birth;
 	}
 
-	public boolean isProved() {
-		return proved;
+	public boolean isValid() {
+		return valid;
 	}
 
-	public void setProved(boolean proved) {
-		this.proved = proved;
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "GiverModel [id=" + id + ", account=" + account + ", passwd="
+				+ passwd + ", name=" + name + ", familyName=" + familyName
+				+ ", gender=" + gender + ", idNumber=" + idNumber + ", tel="
+				+ tel + ", address=" + address + ", email=" + email
+				+ ", getInfo=" + getInfo  + ", valid="
+				+ valid + "]";
+	}
+
 	
 	
 }

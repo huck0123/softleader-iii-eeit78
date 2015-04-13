@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015/4/1 ?U?? 08:04:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="tw.org.iiiedu.thegivers.model.GiverModel" table="GIVER">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="account" type="java.lang.String">
+			<column name="ACCOUNT" />
+		</property>
+		<property name="passwd" type="java.lang.String">
+			<column name="PASSWD" />
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="familyName" type="java.lang.String">
+			<column name="FAMILY_NAME" />
+		</property>
+		<property name="gender" type="boolean">
+			<column name="GENDER" />
+		</property>
+		<property name="idNumber" type="java.lang.String">
+			<column name="ID_NUMBER" />
+		</property>
+		<property name="tel" type="java.lang.String">
+			<column name="TEL" />
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="ADDRESS" />
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="EMAIL" />
+		</property>
+		<property name="getInfo" type="boolean">
+			<column name="GET_INFO" />
+		</property>
+		<property name="headshot" type="binary">
+			<column name="headshot" />
+		</property>
+		<property name="birth" type="java.sql.Timestamp">
+			<column name="BIRTH" />
+		</property>
+		<property name="valid" type="boolean">
+			<column name="VALID" />
+		</property>
+	</class>
+</hibernate-mapping>

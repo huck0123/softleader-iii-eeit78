@@ -33,7 +33,9 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-<!-- 				<value>com/gis/User.hbm.xml</value> -->
+				<value>AdminModel.hbm.xml</value>
+				<value>GiverModel.hbm.xml</value>
+				<value>RaiserModel.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
