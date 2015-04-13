@@ -13,7 +13,7 @@
 	<package name="loginPackage" namespace="/login" extends="struts-default">
 		<action name="loginAct" class="tw.org.iiiedu.thegivers.web.LoginAct">
 			<result name="success" type="redirect">/index.jsp</result>
-			<result name="login">/META-INF/login/Login.jsp</result>
+			<result name="login">/META-INF/login/login.jsp</result>
 		</action>
 
 		<action name="*">
@@ -24,6 +24,19 @@
 	<package name="loginPackage" namespace="/giver" extends="struts-default">
 
 		<action name="giverAction" class="tw.org.iiiedu.thegivers.web.GiverAction">
+			<result name="insert" type="redirect">/index.jsp</result>
+			<result name="update" type="redirect">/index.jsp</result>
+			<result name="select" type="redirect">/index.jsp</result>
+		</action>
+
+		<action name="*">
+			<result>/META-INF/login/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
+		</action>
+	</package>
+
+	<package name="loginPackage" namespace="/raiser" extends="struts-default">
+
+		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction">
 			<result name="insert" type="redirect">/index.jsp</result>
 			<result name="update" type="redirect">/index.jsp</result>
 			<result name="select" type="redirect">/index.jsp</result>
