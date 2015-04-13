@@ -1,5 +1,8 @@
 package tw.org.iiiedu.thegivers.web;
 
-public class GiverAction {
+import com.opensymphony.xwork2.ActionSupport;
 
+public class GiverAction extends ActionSupport {
+
+	
 }
