@@ -6,7 +6,7 @@
 	<class name="tw.org.iiiedu.thegivers.model.GiverModel" table="GIVER">
 		<id name="id" type="int">
 			<column name="ID" />
-			<generator class="native" />
+			<generator class="identity" />
 		</id>
 		<property name="account" type="java.lang.String">
 			<column name="ACCOUNT" />

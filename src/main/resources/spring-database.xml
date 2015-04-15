@@ -36,6 +36,7 @@
 				<value>AdminModel.hbm.xml</value>
 				<value>GiverModel.hbm.xml</value>
 				<value>RaiserModel.hbm.xml</value>
+				<value>CampaignModel.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

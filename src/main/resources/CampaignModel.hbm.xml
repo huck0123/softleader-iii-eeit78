@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015/4/1 ?U?? 08:04:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="tw.org.iiiedu.thegivers.model.CampaignModel" table="CAMPAIGN">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="raiserId" type="int">
+			<column name="RAISER_ID" />
+		</property>
+		<property name="goal" type="int">
+			<column name="GOAL" />
+		</property>
+		<property name="startDate" type="java.sql.Timestamp">
+			<column name="START_DATE" />
+		</property>
+		<property name="endDate" type="java.sql.Timestamp">
+			<column name="END_DATE" />
+		</property>
+		<property name="currentFund" type="int">
+			<column name="CURRENT_FUND" />
+		</property>
+		<property name="type" type="java.lang.String">
+			<column name="TYPE" />
+		</property>
+		<property name="vedioUrl" type="java.lang.String">
+			<column name="VEDIO_URL" />
+		</property>
+		<property name="detail" type="java.lang.String">
+			<column name="DETAIL" />
+		</property>
+		<property name="show" type="boolean">
+			<column name="SHOW" />
+		</property>
+		<property name="valid" type="boolean">
+			<column name="VALID" />
+		</property>
+		<property name="location" type="java.lang.String">
+			<column name="LOCATION" />
+		</property>
+		<property name="image" type="binary">
+			<column name="image" />
+		</property>
+	</class>
+</hibernate-mapping>

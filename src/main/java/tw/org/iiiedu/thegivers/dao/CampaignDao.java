@@ -8,359 +8,290 @@ import java.util.*;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.org.iiiedu.thegivers.model.CampaignModel;
+import tw.org.iiiedu.thegivers.model.GiverModel;
 
 @Repository
 public class CampaignDao {
 
 	@Autowired
-	private DataSource dataSource;
+	SessionFactory sessionFactory;
 
-	public CampaignModel getById(Long id) {
+	public GiverModel getByAccount(String account) {
 
-		String sqlString = "select * from campaign where id = ?";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+		GiverModel result = null;
 
-			pstmt.setLong(1, id);
-			rs = pstmt.executeQuery();
-			CampaignModel cm = null;
+		Session session = sessionFactory.getCurrentSession();
 
-			if (rs.next()) {
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				return cm;
+		try {
+			Iterator giverModels = session.createCriteria(GiverModel.class)
+					.add(Restrictions.eq("account", account).ignoreCase())
+					.list().iterator();
+
+			if (giverModels.hasNext()) {
+
+				result = (GiverModel) giverModels.next();
 			}
-		} catch (SQLException e) {
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 		}
-		return null;
+		return result;
+
+	}
+
+	public CampaignModel getById(int id) {
+
+		CampaignModel result = null;
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			result = (CampaignModel) session.get(CampaignModel.class, id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
 	}
 
 	public List<CampaignModel> getAll() {
 
-		String sqlString = "select * from campaign";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+		List<CampaignModel> result = new ArrayList<CampaignModel>();
+		Session session = sessionFactory.getCurrentSession();
 
-			rs = pstmt.executeQuery();
-			List<CampaignModel> lcm = new ArrayList<>();
-			CampaignModel cm = null;
-			while (rs.next()) {			
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				lcm.add(cm);
+		try {
+			Iterator<CampaignModel> campaignModels = session
+					.createCriteria(CampaignModel.class).list().iterator();
+
+			while (campaignModels.hasNext()) {
+				CampaignModel cm = campaignModels.next();
+				result.add(cm);
 			}
-			return lcm;
-		} catch (SQLException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			return null;
 		}
-		return null;
+		return result;
 	}
 
 	public boolean insert(CampaignModel cm) {
-		String sqlStmt = "insert into campaign(name, raiser_id, goal, date, duration,"
-				+ " current_fund, type, vedio_url, detail, show, location)"
-				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlStmt);) {
-			pstmt.setString(1, cm.getName());
-			pstmt.setInt(2, cm.getRaiserId());
-			pstmt.setInt(3, cm.getGoal());
-			pstmt.setTimestamp(4, cm.getDate());
-			pstmt.setInt(5, cm.getDuration());
-			pstmt.setInt(6, cm.getCurrentFund());
-			pstmt.setString(7, cm.getType());
-			pstmt.setString(8, cm.getVedioUrl());
-			pstmt.setString(9, cm.getDetail());
-			pstmt.setBoolean(10, cm.isShow());
-			pstmt.setString(11, cm.getLocation());
-			if(pstmt.executeUpdate()==1){
-				return true;
-			}
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
 
-	public boolean update(CampaignModel cm) {
-		String UPDATE = "update campaign set name = ?,raiser_id = ?,goal = ?,"
-				+ "date = ?,duration = ?,current_fund = ?,type = ?,vedio_url = ?,"
-				+ "detail =?,show = ?,location = ? where id = ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Session session = sessionFactory.getCurrentSession();
 		try {
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement(UPDATE);
-			pstmt.setString(1, cm.getName());
-			pstmt.setInt(2, cm.getRaiserId());
-			pstmt.setInt(3, cm.getGoal());
-			pstmt.setTimestamp(4, cm.getDate());
-			pstmt.setInt(5, cm.getDuration());
-			pstmt.setInt(6, cm.getCurrentFund());
-			pstmt.setString(7, cm.getType());
-			pstmt.setString(8, cm.getVedioUrl());
-			pstmt.setString(9, cm.getDetail());
-			pstmt.setBoolean(10, cm.isShow());
-			pstmt.setString(11, cm.getLocation());
-			pstmt.setLong(12, cm.getId());
-			int num = pstmt.executeUpdate();
-			if (num != 0) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean delete(long id) {
-		String sqlString = "delete from campaign where id = ?";
-
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-			pstmt.setLong(1, id);
-			pstmt.executeUpdate();
+			session.save(cm);
 			return true;
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			System.out.println("campaigndao insert exception");
 			e.printStackTrace();
+			return false;
 		}
 
-		return false;
 	}
 	
-	public List<CampaignModel> getByLocation(String location) {
+	 public boolean update(CampaignModel cm) {
+		 
+		 Session session = sessionFactory.getCurrentSession();
+		 try {
+				session.update(cm);
+				return true;
+			} catch (Exception e) {
+				System.out.println("campaigndao update exception");
+				e.printStackTrace();
+				return false;
+			}
+	 }
+	//
+	// public boolean delete(long id) {
+	// String sqlString = "delete from campaign where id = ?";
+	//
+	// try (Connection conn = dataSource.getConnection();
+	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+	// pstmt.setLong(1, id);
+	// pstmt.executeUpdate();
+	// return true;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// return false;
+	// }
+	//
+	// public List<CampaignModel> getByLocation(String location) {
+	//
+	// String sqlString = "select * from campaign where location = ?";
+	// ResultSet rs = null;
+	// try (Connection conn = dataSource.getConnection();
+	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+	// pstmt.setString(1, location);
+	// rs = pstmt.executeQuery();
+	// List<CampaignModel> lcm = new ArrayList<>();
+	// CampaignModel cm = null;
+	// while (rs.next()) {
+	// cm = new CampaignModel();
+	// cm.setId(rs.getLong("id"));
+	// cm.setName(rs.getString("name"));
+	// cm.setRaiserId(rs.getInt("raiser_id"));
+	// cm.setGoal(rs.getInt("goal"));
+	// cm.setDate(rs.getTimestamp("date"));
+	// cm.setDuration(rs.getInt("duration"));
+	// cm.setCurrentFund(rs.getInt("current_fund"));
+	// cm.setType(rs.getString("type"));
+	// cm.setType(rs.getString("vedio_url"));
+	// cm.setType(rs.getString("detail"));
+	// cm.setShow(rs.getBoolean("show"));
+	// cm.setLocation(rs.getString("location"));
+	// lcm.add(cm);
+	// }
+	// return lcm;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// if (rs != null) {
+	// try {
+	// rs.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// public List<CampaignModel> getByName(String name) {
+	//
+	// String sqlString = "select * from campaign where name like ?";
+	// ResultSet rs = null;
+	// try (Connection conn = dataSource.getConnection();
+	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+	// pstmt.setString(1, "%" + name + "%");
+	// rs = pstmt.executeQuery();
+	// List<CampaignModel> lcm = new ArrayList<>();
+	// CampaignModel cm = null;
+	// while (rs.next()) {
+	// cm = new CampaignModel();
+	// cm.setId(rs.getLong("id"));
+	// cm.setName(rs.getString("name"));
+	// cm.setRaiserId(rs.getInt("raiser_id"));
+	// cm.setGoal(rs.getInt("goal"));
+	// cm.setDate(rs.getTimestamp("date"));
+	// cm.setDuration(rs.getInt("duration"));
+	// cm.setCurrentFund(rs.getInt("current_fund"));
+	// cm.setType(rs.getString("type"));
+	// cm.setType(rs.getString("vedio_url"));
+	// cm.setType(rs.getString("detail"));
+	// cm.setShow(rs.getBoolean("show"));
+	// cm.setLocation(rs.getString("location"));
+	// lcm.add(cm);
+	// }
+	// return lcm;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// if (rs != null) {
+	// try {
+	// rs.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// public List<CampaignModel> getByType(String type) {
+	//
+	// String sqlString = "select * from campaign where type = ?";
+	// ResultSet rs = null;
+	// try (Connection conn = dataSource.getConnection();
+	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+	// pstmt.setString(1, type);
+	// rs = pstmt.executeQuery();
+	// List<CampaignModel> lcm = new ArrayList<>();
+	// CampaignModel cm = null;
+	// while (rs.next()) {
+	// cm = new CampaignModel();
+	// cm.setId(rs.getLong("id"));
+	// cm.setName(rs.getString("name"));
+	// cm.setRaiserId(rs.getInt("raiser_id"));
+	// cm.setGoal(rs.getInt("goal"));
+	// cm.setDate(rs.getTimestamp("date"));
+	// cm.setDuration(rs.getInt("duration"));
+	// cm.setCurrentFund(rs.getInt("current_fund"));
+	// cm.setType(rs.getString("type"));
+	// cm.setType(rs.getString("vedio_url"));
+	// cm.setType(rs.getString("detail"));
+	// cm.setShow(rs.getBoolean("show"));
+	// cm.setLocation(rs.getString("location"));
+	// lcm.add(cm);
+	// }
+	// return lcm;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// if (rs != null) {
+	// try {
+	// rs.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// public List<CampaignModel> getByRaiserName(String raiserName) {
+	//
+	// String sqlString =
+	// "select * from campaign c1 join raiser r1 on r1.name= ?";
+	// ResultSet rs = null;
+	// try (Connection conn = dataSource.getConnection();
+	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
+	// pstmt.setString(1, raiserName);
+	// rs = pstmt.executeQuery();
+	// List<CampaignModel> lcm = new ArrayList<>();
+	// CampaignModel cm = null;
+	// while (rs.next()) {
+	// cm = new CampaignModel();
+	// cm.setId(rs.getLong("id"));
+	// cm.setName(rs.getString("name"));
+	// cm.setRaiserId(rs.getInt("raiser_id"));
+	// cm.setGoal(rs.getInt("goal"));
+	// cm.setDate(rs.getTimestamp("date"));
+	// cm.setDuration(rs.getInt("duration"));
+	// cm.setCurrentFund(rs.getInt("current_fund"));
+	// cm.setType(rs.getString("type"));
+	// cm.setType(rs.getString("vedio_url"));
+	// cm.setType(rs.getString("detail"));
+	// cm.setShow(rs.getBoolean("show"));
+	// cm.setLocation(rs.getString("location"));
+	// lcm.add(cm);
+	// }
+	// return lcm;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// if (rs != null) {
+	// try {
+	// rs.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return null;
+	// }
 
-		String sqlString = "select * from campaign where location = ?";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-			pstmt.setString(1, location);
-			rs = pstmt.executeQuery();
-			List<CampaignModel> lcm = new ArrayList<>();
-			CampaignModel cm = null;
-			while (rs.next()) {			
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				lcm.add(cm);
-			}
-			return lcm;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-	
-	public List<CampaignModel> getByName(String name) {
-
-		String sqlString = "select * from campaign where name like ?";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-			pstmt.setString(1, "%"+name+"%");
-			rs = pstmt.executeQuery();
-			List<CampaignModel> lcm = new ArrayList<>();
-			CampaignModel cm = null;
-			while (rs.next()) {			
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				lcm.add(cm);
-			}
-			return lcm;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-	
-	public List<CampaignModel> getByType(String type) {
-
-		String sqlString = "select * from campaign where type = ?";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-			pstmt.setString(1, type);
-			rs = pstmt.executeQuery();
-			List<CampaignModel> lcm = new ArrayList<>();
-			CampaignModel cm = null;
-			while (rs.next()) {			
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				lcm.add(cm);
-			}
-			return lcm;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-	
-	public List<CampaignModel> getByRaiserName(String raiserName) {
-
-		String sqlString = "select * from campaign c1 join raiser r1 on r1.name= ?";
-		ResultSet rs = null;
-		try (Connection conn = dataSource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-			pstmt.setString(1, raiserName);
-			rs = pstmt.executeQuery();
-			List<CampaignModel> lcm = new ArrayList<>();
-			CampaignModel cm = null;
-			while (rs.next()) {			
-				cm = new CampaignModel();
-				cm.setId(rs.getLong("id"));
-				cm.setName(rs.getString("name"));
-				cm.setRaiserId(rs.getInt("raiser_id"));
-				cm.setGoal(rs.getInt("goal"));
-				cm.setDate(rs.getTimestamp("date"));
-				cm.setDuration(rs.getInt("duration"));
-				cm.setCurrentFund(rs.getInt("current_fund"));
-				cm.setType(rs.getString("type"));
-				cm.setType(rs.getString("vedio_url"));
-				cm.setType(rs.getString("detail"));
-				cm.setShow(rs.getBoolean("show"));
-				cm.setLocation(rs.getString("location"));
-				lcm.add(cm);
-			}
-			return lcm;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
-	
 }

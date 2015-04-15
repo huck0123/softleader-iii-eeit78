@@ -1,10 +1,11 @@
 package tw.org.iiiedu.thegivers.model;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class CampaignModel {
-
-	private long id;
+	
+	private int id;
 
 	private String name;
 
@@ -12,9 +13,9 @@ public class CampaignModel {
 
 	private int goal;
 
-	private Timestamp date;
+	private Timestamp startDate;
 
-	private int duration;
+	private Timestamp endDate;
 
 	private int currentFund;
 
@@ -25,24 +26,18 @@ public class CampaignModel {
 	private String detail;
 
 	private boolean show;
+	
+	private boolean valid;
 
 	private String location;
+	
+	private byte[] image;
 
-	@Override
-	public String toString() {
-		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
-				+ raiserId + ", goal=" + goal + ", date=" + date
-				+ ", duration=" + duration + ", currentFund=" + currentFund
-				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
-				+ detail + ", show=" + show + ", location=" + location
-				+ "]";
-	}
-
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -70,20 +65,22 @@ public class CampaignModel {
 		this.goal = goal;
 	}
 
-	public Timestamp getDate() {
-		return date;
+	
+
+	public Timestamp getStartDate() {
+		return startDate;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
 	}
 
-	public int getDuration() {
-		return duration;
+	public Timestamp getEndDate() {
+		return endDate;
 	}
 
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
 	}
 
 	public int getCurrentFund() {
@@ -126,6 +123,14 @@ public class CampaignModel {
 		this.show = show;
 	}
 
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -133,5 +138,28 @@ public class CampaignModel {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
+				+ raiserId + ", goal=" + goal + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", currentFund=" + currentFund
+				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
+				+ detail + ", show=" + show + ", valid=" + valid
+				+ ", location=" + location + ", image="
+				+ Arrays.toString(image) + "]";
+	}
+
+
+
+	
 
 }
