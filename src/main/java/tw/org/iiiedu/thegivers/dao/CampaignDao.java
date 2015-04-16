@@ -22,6 +22,7 @@ public class CampaignDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
 
 	public GiverModel getByAccount(String account) {
 
@@ -96,34 +97,60 @@ public class CampaignDao {
 		}
 
 	}
-	
-	 public boolean update(CampaignModel cm) {
-		 
-		 Session session = sessionFactory.getCurrentSession();
-		 try {
-				session.update(cm);
-				return true;
-			} catch (Exception e) {
-				System.out.println("campaigndao update exception");
-				e.printStackTrace();
-				return false;
+
+	public boolean update(CampaignModel cm) {
+
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			session.update(cm);
+			return true;
+		} catch (Exception e) {
+			System.out.println("campaigndao update exception");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean delete(int id) {
+
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			Iterator<CampaignModel> campaignModels = session
+					.createCriteria(CampaignModel.class)
+					.add(Restrictions.eq("id", id)).list().iterator();
+			if (campaignModels.hasNext()) {
+				session.delete(campaignModels.next());
 			}
-	 }
-	//
-	// public boolean delete(long id) {
-	// String sqlString = "delete from campaign where id = ?";
-	//
-	// try (Connection conn = dataSource.getConnection();
-	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-	// pstmt.setLong(1, id);
-	// pstmt.executeUpdate();
-	// return true;
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return false;
-	// }
+			return true;
+		} catch (Exception e) {
+			System.out.println("campaigndao delete exception");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public List<CampaignModel> getByName(String name) {
+
+		List<CampaignModel> result = new ArrayList<CampaignModel>();
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			Iterator<CampaignModel> campaignModels = session
+					.createCriteria(CampaignModel.class)
+					.add(Restrictions.like("name", "%" + name + "%")).list()
+					.iterator();
+			while (campaignModels.hasNext()) {
+				CampaignModel cm = campaignModels.next();
+				result.add(cm);
+			}
+			return result;
+		} catch (Exception e) {
+			System.out.println("campaigndao getyByName exception");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	//
 	// public List<CampaignModel> getByLocation(String location) {
 	//
@@ -167,47 +194,7 @@ public class CampaignDao {
 	// return null;
 	// }
 	//
-	// public List<CampaignModel> getByName(String name) {
-	//
-	// String sqlString = "select * from campaign where name like ?";
-	// ResultSet rs = null;
-	// try (Connection conn = dataSource.getConnection();
-	// PreparedStatement pstmt = conn.prepareStatement(sqlString);) {
-	// pstmt.setString(1, "%" + name + "%");
-	// rs = pstmt.executeQuery();
-	// List<CampaignModel> lcm = new ArrayList<>();
-	// CampaignModel cm = null;
-	// while (rs.next()) {
-	// cm = new CampaignModel();
-	// cm.setId(rs.getLong("id"));
-	// cm.setName(rs.getString("name"));
-	// cm.setRaiserId(rs.getInt("raiser_id"));
-	// cm.setGoal(rs.getInt("goal"));
-	// cm.setDate(rs.getTimestamp("date"));
-	// cm.setDuration(rs.getInt("duration"));
-	// cm.setCurrentFund(rs.getInt("current_fund"));
-	// cm.setType(rs.getString("type"));
-	// cm.setType(rs.getString("vedio_url"));
-	// cm.setType(rs.getString("detail"));
-	// cm.setShow(rs.getBoolean("show"));
-	// cm.setLocation(rs.getString("location"));
-	// lcm.add(cm);
-	// }
-	// return lcm;
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// } finally {
-	// if (rs != null) {
-	// try {
-	// rs.close();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	// return null;
-	// }
+	
 	//
 	// public List<CampaignModel> getByType(String type) {
 	//

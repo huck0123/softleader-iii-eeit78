@@ -63,25 +63,30 @@ public class CampaignService {
 			return false;
 		}
 	}
-//
-//	public boolean delete(long id) {
-//		if (campaignDao.delete(id) == true) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
-//
-//	public List<CampaignModel> getByCampaignName(String name) {
-//		List<CampaignModel> list1 = new ArrayList<>();
-//		list1 = campaignDao.getByName(name);
-//		if (list1 != null) {
-//			return list1;
-//		} else {
-//			return null;
-//		}
-//	}
-//
+
+	public boolean delete(int id) {
+		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		boolean b = campaignDao.delete(id);
+		tx.commit();
+		if (b) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<CampaignModel> getByCampaignName(String name) {
+		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		List<CampaignModel> list1 = new ArrayList<>();
+		list1 = campaignDao.getByName(name);
+		tx.commit();
+		if (list1 != null) {
+			return list1;
+		} else {
+			return null;
+		}
+	}
+
 //	public List<CampaignModel> getByLocation(String location) {
 //		List<CampaignModel> list2 = new ArrayList<>();
 //		list2 = campaignDao.getByLocation(location);

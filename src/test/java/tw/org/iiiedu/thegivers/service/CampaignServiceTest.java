@@ -67,15 +67,19 @@ public class CampaignServiceTest extends GenericTest {
 		assertTrue(campaignService.getById(4).getName().equals(name));
 	}
 
-	// @Test
-	// public void testDelete() {
-	// assertTrue(campaignService.delete(1));
-	// }
-	// @Test
-	// public void testGetByCampaignName() {
-	// assertTrue(campaignService.getByCampaignName("cam")!=null);
-	// }
+	
 	//
+	 @Test
+	 public void testDelete() {
+	 assertTrue(campaignService.delete(3));
+	 }
+	 
+	 @Test
+	 public void testGetByCampaignName() {
+	 assertTrue(campaignService.getByCampaignName("")!=null);
+	 System.out.println(campaignService.getByCampaignName(""));
+	 }
+	
 	// @Test
 	// public void testGetByLocation() {
 	// assertTrue(campaignService.getByLocation("台北市大安區資策會")!=null);
