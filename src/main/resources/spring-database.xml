@@ -26,9 +26,17 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-				<prop key="hibernate.current_session_context_class">thread</prop>
+<!-- 如果要用 給Spring控管Transaction 絕對不要加此行
+<prop key="hibernate.current_session_context_class">thread</prop> 
+When using spring and spring managed transactions never mess around with the hibernate.current_session_context_class property UNLESS you are using JTA.
+Spring will by default set its own CurrentSessionContext implementation (the SpringSessionContext), however if you set it yourself this will not be the case. Basically breaking proper transaction integration.
+The only reason for chancing this setting is if you want to use JTA managed transactions, then you have to setup this to properly integrate with JTA.				
+
+-->
+
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="format_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -41,10 +49,11 @@
 		</property>
 	</bean>
 	
-<!-- 	<bean id="transactionManager" -->
-<!-- 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+<!-- 		<property name="dataSource" ref="dataSource"/> -->
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 
 
 </beans>        

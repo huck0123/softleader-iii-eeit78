@@ -20,10 +20,10 @@ public class CampaignService {
 	SessionFactory sessionFactory;
 
 	public List<CampaignModel> getAll() {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		List<CampaignModel> list1 = new ArrayList<>();
 		list1 = campaignDao.getAll();
-		tx.commit();
+//		tx.commit();
 		if (list1 != null) {
 			return list1;
 		} else {
@@ -32,9 +32,9 @@ public class CampaignService {
 	}
 	
 	public CampaignModel getById(int id) {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		CampaignModel cm = campaignDao.getById(id);
-		tx.commit();
+//		tx.commit();
 		if (cm != null) {
 			return cm;
 		} else {
@@ -43,9 +43,9 @@ public class CampaignService {
 	}
 	
 	public boolean insert(CampaignModel cm) {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.insert(cm);
-		tx.commit();
+//		tx.commit();
 		if (b) {
 			return true;
 		} else {
@@ -54,9 +54,9 @@ public class CampaignService {
 	}
 
 	public boolean update(CampaignModel cm) {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.update(cm); 
-		tx.commit();
+//		tx.commit();
 		if (b) {
 			return true;
 		} else {
@@ -65,9 +65,9 @@ public class CampaignService {
 	}
 
 	public boolean delete(int id) {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.delete(id);
-		tx.commit();
+//		tx.commit();
 		if (b) {
 			return true;
 		} else {
@@ -76,10 +76,10 @@ public class CampaignService {
 	}
 
 	public List<CampaignModel> getByCampaignName(String name) {
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		List<CampaignModel> list1 = new ArrayList<>();
 		list1 = campaignDao.getByName(name);
-		tx.commit();
+//		tx.commit();
 		if (list1 != null) {
 			return list1;
 		} else {
