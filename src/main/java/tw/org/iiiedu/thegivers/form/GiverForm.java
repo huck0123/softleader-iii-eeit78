@@ -5,13 +5,15 @@ import java.sql.Timestamp;
 
 public class GiverForm {
 
-	private Long id;
+	private Integer id;
 	
 	private String account;
 	
 	private String passwd;
 	
 	private String name;
+	
+	private String familyName;
 	
 	private boolean gender;
 	
@@ -27,25 +29,16 @@ public class GiverForm {
 	
 	private Blob headshot;
 	
-	private Timestamp birth;
+	private java.util.Date birth;
 	
 	private boolean proved;
 
-	@Override
-	public String toString() {
-		return "DonatorModel [id=" + id + ", account=" + account + ", passwd="
-				+ passwd + ", name=" + name + ", gender=" + gender
-				+ ", id_number=" + id_number + ", tel=" + tel + ", address="
-				+ address + ", email=" + email + ", get_info=" + get_info
-				+ ", headshot=" + headshot + ", birth=" + birth + ", proved="
-				+ proved + "]";
-	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -71,6 +64,14 @@ public class GiverForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getFamilyName() {
+		return familyName;
+	}
+
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
 	}
 
 	public boolean isGender() {
@@ -129,11 +130,11 @@ public class GiverForm {
 		this.headshot = headshot;
 	}
 
-	public Timestamp getBirth() {
+	public java.util.Date getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Timestamp birth) {
+	public void setBirth(java.util.Date birth) {
 		this.birth = birth;
 	}
 
@@ -144,7 +145,15 @@ public class GiverForm {
 	public void setProved(boolean proved) {
 		this.proved = proved;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "GiverForm [id=" + id + ", account=" + account + ", passwd="
+				+ passwd + ", name=" + name + ", familyName=" + familyName
+				+ ", gender=" + gender + ", id_number=" + id_number + ", tel="
+				+ tel + ", address=" + address + ", email=" + email
+				+ ", get_info=" + get_info + ", headshot=" + headshot
+				+ ", birth=" + birth + ", proved=" + proved + "]";
+	}
 	
 }

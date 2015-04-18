@@ -5,6 +5,7 @@
 
 <struts>
 
+	<include file="struts-givers.xml"/>
 	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
@@ -23,18 +24,7 @@
 		</action>
 	</package>
 
-	<package name="giverPackage" namespace="/giver" extends="struts-default">
-
-		<action name="giverAction" class="tw.org.iiiedu.thegivers.web.GiverAction">
-			<result name="insert" type="redirect">/index.jsp</result>
-			<result name="update" type="redirect">/index.jsp</result>
-			<result name="select" type="redirect">/index.jsp</result>
-		</action>
-
-		<action name="*">
-			<result>/META-INF/login/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
-		</action>
-	</package>
+	
 
 	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
 

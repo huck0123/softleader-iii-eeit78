@@ -14,31 +14,35 @@ public class GiverService {
 
 	@Autowired
 	private GiverDao giverDao;
-	@Autowired
-	SessionFactory sessionFactory;
 
-public GiverModel login(String account, String passwd){
+	//登入
+	public GiverModel login(String account, String passwd) {
 
-//	Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
-	if(passwd!=null && passwd.length()!=0) {
-		
-		GiverModel gm = giverDao.getByAccount(account);
-//		tx.commit();
+		if (passwd != null && passwd.length() != 0) {
 
+			GiverModel gm = giverDao.getByAccount(account);
 
-		if(gm!=null) {	
-			String pass = gm.getPasswd();	//資料庫抓出：byte[]
-			if(passwd.equals(pass)) {
-				return gm;
+			if (gm != null) {
+				String pass = gm.getPasswd(); // 資料庫抓出：byte[]
+				if (passwd.equals(pass)) {
+					return gm;
+				}
 			}
-		}	
+		}
+		return null;
 	}
-	return null;
-}
-
 	
+	//註冊帳號
+	public GiverModel register(GiverModel model){
+		model = giverDao.insert(model);
+		return model;
+	}
+	
+	//帳號收尋
+	public GiverModel getByAccount(String account){
+		GiverModel model = giverDao.getByAccount(account);
+		return model;
+	}
 	
 
-
-	
 }
