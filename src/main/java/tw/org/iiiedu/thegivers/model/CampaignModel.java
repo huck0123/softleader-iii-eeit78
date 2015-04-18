@@ -5,19 +5,19 @@ import java.util.Arrays;
 
 public class CampaignModel {
 	
-	private int id;
+	private Integer id;
 
 	private String name;
 
-	private int raiserId;
+	private Integer raiserId;
 
-	private int goal;
+	private Integer goal;
 
 	private Timestamp startDate;
 
 	private Timestamp endDate;
 
-	private int currentFund;
+	private Integer currentFund;
 
 	private String type;
 
@@ -33,11 +33,11 @@ public class CampaignModel {
 	
 	private byte[] image;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -49,23 +49,21 @@ public class CampaignModel {
 		this.name = name;
 	}
 
-	public int getRaiserId() {
+	public Integer getRaiserId() {
 		return raiserId;
 	}
 
-	public void setRaiserId(int raiserId) {
+	public void setRaiserId(Integer raiserId) {
 		this.raiserId = raiserId;
 	}
 
-	public int getGoal() {
+	public Integer getGoal() {
 		return goal;
 	}
 
-	public void setGoal(int goal) {
+	public void setGoal(Integer goal) {
 		this.goal = goal;
 	}
-
-	
 
 	public Timestamp getStartDate() {
 		return startDate;
@@ -83,11 +81,11 @@ public class CampaignModel {
 		this.endDate = endDate;
 	}
 
-	public int getCurrentFund() {
+	public Integer getCurrentFund() {
 		return currentFund;
 	}
 
-	public void setCurrentFund(int currentFund) {
+	public void setCurrentFund(Integer currentFund) {
 		this.currentFund = currentFund;
 	}
 
@@ -147,16 +145,7 @@ public class CampaignModel {
 		this.image = image;
 	}
 
-	@Override
-	public String toString() {
-		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
-				+ raiserId + ", goal=" + goal + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", currentFund=" + currentFund
-				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
-				+ detail + ", show=" + show + ", valid=" + valid
-				+ ", location=" + location + ", image="
-				+ Arrays.toString(image) + "]";
-	}
+	
 
 
 

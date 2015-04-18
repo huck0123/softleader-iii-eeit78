@@ -68,11 +68,11 @@ public class CampaignServiceTest extends GenericTest {
 	}
 
 	
-	//
-	 @Test
-	 public void testDelete() {
-	 assertTrue(campaignService.delete(3));
-	 }
+//
+//	 @Test
+//	 public void testDelete() {
+//	 assertTrue(campaignService.delete(3));
+//	 }
 	 
 	 @Test
 	 public void testGetByCampaignName() {

@@ -4,17 +4,17 @@
 <!-- Generated 2015/4/1 ?U?? 08:04:07 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
 	<class name="tw.org.iiiedu.thegivers.model.CampaignModel" table="CAMPAIGN">
-        <id name="id" type="int">
+        <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
         </id>
 		<property name="name" type="java.lang.String">
 			<column name="NAME" />
 		</property>
-		<property name="raiserId" type="int">
+		<property name="raiserId" type="java.lang.Integer">
 			<column name="RAISER_ID" />
 		</property>
-		<property name="goal" type="int">
+		<property name="goal" type="java.lang.Integer">
 			<column name="GOAL" />
 		</property>
 		<property name="startDate" type="java.sql.Timestamp">
@@ -23,7 +23,7 @@
 		<property name="endDate" type="java.sql.Timestamp">
 			<column name="END_DATE" />
 		</property>
-		<property name="currentFund" type="int">
+		<property name="currentFund" type="java.lang.Integer">
 			<column name="CURRENT_FUND" />
 		</property>
 		<property name="type" type="java.lang.String">

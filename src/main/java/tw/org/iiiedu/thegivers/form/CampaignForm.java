@@ -4,19 +4,13 @@ import java.sql.Timestamp;
 
 public class CampaignForm {
 
-	private long id;
-
 	private String name;
 
-	private int raiserId;
+	private Integer goal;
 
-	private int goal;
+	private Timestamp startDate;
 
-	private Timestamp date;
-
-	private int duration;
-
-	private int currentFund;
+	private Timestamp endDate;
 
 	private String type;
 
@@ -24,27 +18,9 @@ public class CampaignForm {
 
 	private String detail;
 
-	private boolean show;
-
 	private String location;
 
-	@Override
-	public String toString() {
-		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
-				+ raiserId + ", goal=" + goal + ", date=" + date
-				+ ", duration=" + duration + ", currentFund=" + currentFund
-				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
-				+ detail + ", show=" + show + ", location=" + location
-				+ "]";
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private byte[] image;
 
 	public String getName() {
 		return name;
@@ -54,44 +30,28 @@ public class CampaignForm {
 		this.name = name;
 	}
 
-	public int getRaiserId() {
-		return raiserId;
-	}
-
-	public void setRaiserId(int raiserId) {
-		this.raiserId = raiserId;
-	}
-
-	public int getGoal() {
+	public Integer getGoal() {
 		return goal;
 	}
 
-	public void setGoal(int goal) {
+	public void setGoal(Integer goal) {
 		this.goal = goal;
 	}
 
-	public Timestamp getDate() {
-		return date;
+	public Timestamp getStartDate() {
+		return startDate;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
 	}
 
-	public int getDuration() {
-		return duration;
+	public Timestamp getEndDate() {
+		return endDate;
 	}
 
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	public int getCurrentFund() {
-		return currentFund;
-	}
-
-	public void setCurrentFund(int currentFund) {
-		this.currentFund = currentFund;
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getType() {
@@ -118,20 +78,20 @@ public class CampaignForm {
 		this.detail = detail;
 	}
 
-	public boolean isShow() {
-		return show;
-	}
-
-	public void setShow(boolean show) {
-		this.show = show;
-	}
-
 	public String getLocation() {
 		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }
