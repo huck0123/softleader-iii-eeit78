@@ -10,9 +10,12 @@ import com.opensymphony.xwork2.conversion.TypeConversionException;
 public class TimestampConverter extends StrutsTypeConverter {
 
 	public Object convertFromString(Map context, String[] values, Class toClass) {
+		System.out.println(values[0]);
 		DateFormat[] TimestampFormat = {
 				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"),
-				new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss") // rfc3399
+				new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+				new SimpleDateFormat("yy-MM-dd"), new SimpleDateFormat("yyyy-MM-dd"),
+				new SimpleDateFormat("yy/MM/dd"), new SimpleDateFormat("yyyy/MM/dd")
 		};
 		for (DateFormat df : TimestampFormat)
 			try {

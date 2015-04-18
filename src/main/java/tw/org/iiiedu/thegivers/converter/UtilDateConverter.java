@@ -16,7 +16,7 @@ public class UtilDateConverter extends StrutsTypeConverter {
 		};
 		for (DateFormat df : UtilDateFormat)
 			try {
-				System.out.println("��UtilDateConverter��");
+				System.out.println("DateConverter");
 				java.util.Date date = (java.util.Date) df.parse(values[0]);
 				return date;
 			} catch (ParseException e) { 

@@ -1,6 +1,7 @@
 package tw.org.iiiedu.thegivers.form;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class CampaignForm {
 
@@ -94,4 +95,15 @@ public class CampaignForm {
 		this.image = image;
 	}
 
+	@Override
+	public String toString() {
+		return "CampaignForm [name=" + name + ", goal=" + goal + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", type=" + type
+				+ ", vedioUrl=" + vedioUrl + ", detail=" + detail
+				+ ", location=" + location + ", image="
+				+ Arrays.toString(image) + "]";
+	}
+
+	
+	
 }

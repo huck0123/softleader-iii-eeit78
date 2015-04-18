@@ -11,39 +11,37 @@
 </head>
 <body>
 
-<c:if test="${admin != null}">${admin}</c:if>
-<c:if test="${giver != null}">${giver}</c:if>
-<c:if test="${raiser != null}">${raiser}</c:if>
+	<c:if test="${admin != null}">${admin}</c:if>
+	<c:if test="${giver != null}">${giver}</c:if>
+	<c:if test="${raiser != null}">${raiser}</c:if>
 
-<c:if test="${empty admin && empty giver && empty raiser}">
-	<form action="<c:url value='/login/loginAction'/>" method="post">
-		<table>
-			<tr>
-				<td>ID :</td>
-				<td><input type="text" name="account" value="${param.account}"></td>
-				<td><span class="error">${errors.account}</span></td>
-			</tr>
-			<tr>
-				<td>PWD :</td>
-				<td><input type="text" name="passwd" value="${param.passwd}"></td>
-				<td><span class="error">${errors.passwd}</span></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td align="right"><input type="submit" value="Login"></td>
-			</tr>
-		</table>
-		${wrongLogin}
-	</form>
-	<p />
-	<a href="<c:url value='/login/login'/>">進入登入頁面</a>
-	<p />
+	<c:if test="${empty admin && empty giver && empty raiser}">
+		<form action="<c:url value='/login/loginAction'/>" method="post">
+			<table>
+				<tr>
+					<td>ID :</td>
+					<td><input type="text" name="account" value="${param.account}"></td>
+					<td><span class="error">${errors.account}</span></td>
+				</tr>
+				<tr>
+					<td>PWD :</td>
+					<td><input type="text" name="passwd" value="${param.passwd}"></td>
+					<td><span class="error">${errors.passwd}</span></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td align="right"><input type="submit" value="Login"></td>
+				</tr>
+			</table>
+			${wrongLogin}
+		</form>
 		<p />
+		<a href="<c:url value='/login/login'/>">進入登入頁面</a>
+		<p />
+	</c:if>
+	<p />
 	<a href="<c:url value='/campaign/campaignRaise'/>">發起活動</a>
 	<p />
-	
-
-</c:if>
 
 </body>
 </html>

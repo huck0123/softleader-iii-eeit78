@@ -33,6 +33,19 @@ public class CampaignModel {
 	
 	private byte[] image;
 
+	
+	
+	@Override
+	public String toString() {
+		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
+				+ raiserId + ", goal=" + goal + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", currentFund=" + currentFund
+				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
+				+ detail + ", show=" + show + ", valid=" + valid
+				+ ", location=" + location + ", image="
+				+ Arrays.toString(image) + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
