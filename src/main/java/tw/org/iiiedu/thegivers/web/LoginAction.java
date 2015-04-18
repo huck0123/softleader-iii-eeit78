@@ -17,7 +17,7 @@ import tw.org.iiiedu.thegivers.service.AdminService;
 import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
-public class LoginAct extends ActionSupport {
+public class LoginAction extends ActionSupport {
 
 	@Autowired
 	private GiverService giverService;

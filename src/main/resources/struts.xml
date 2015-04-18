@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	
+
 	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
@@ -12,10 +12,10 @@
 	<constant name="struts.custom.i18n.resources" value="locale/global" />
 
 	<package name="loginPackage" namespace="/login" extends="struts-default">
-		<action name="loginAct" class="loginAct">
+		<action name="loginAction" class="loginAction">
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="login">/META-INF/login/login.jsp</result>
-<!-- <result name="login">/index.jsp</result>  -->
+			<!-- <result name="login">/index.jsp</result> -->
 		</action>
 
 		<action name="*">
@@ -49,7 +49,19 @@
 		</action>
 	</package>
 
-
+	 <package name="campaignPackage" namespace="/campaign" extends="user-defined">
+	 <global-results> 
+		<result name="login">/META-INF/login/raiserLogin.jsp</result> </global-results>
+		<action name="loginAction" class="loginAction">
+		<interceptor-ref name="campaignDefault" /> 
+			<result name="success" type="redirect">/index.jsp</result>
+			<result name="login">/META-INF/login/login.jsp</result>
+		</action>
+		<action name="*">
+			<interceptor-ref name="campaignDefault" /> 
+			<result>/META-INF/campaign/{1}.jsp</result>                     
+		</action>
+	</package> 
 
 
 	<package name="user-defined" abstract="true" extends="struts-default">
@@ -57,12 +69,12 @@
 		<interceptors>
 			<!--定義一個名為authentication的自定攔截器 -->
 			<interceptor
-				class="tw.org.iiiedu.thegivers.interceptor.AuthenticationInterceptor"
-				name="authentication" />
+				class="tw.org.iiiedu.thegivers.interceptor.CampaignAuthentication"
+				name="campaignAuthentication" />
 			<!--定義一個驗證登入的攔截器堆疊 -->
-			<interceptor-stack name="myAuthenticationDefault">
+			<interceptor-stack name="campaignDefault">
 				<interceptor-ref name="defaultStack" />         <!--堆疊內設定原Struts2內建的: 預設攔截器堆疊 -->
-				<interceptor-ref name="authentication" />     <!--堆疊內設定前述名為authentication的: 自定攔截器 -->
+				<interceptor-ref name="campaignAuthentication" />     <!--堆疊內設定前述名為authentication的: 自定攔截器 -->
 			</interceptor-stack>
 		</interceptors>
 
@@ -92,28 +104,14 @@
 	</package>
 
 
-<!-- 	
-		<package name="giver" namespace="/giver" extends="user-defined"> 
-
-		 <action name="page" class="demoAction" method="page"> 
-		 one can use the defaultStack or customized Stack as interceptors stack 
-			on the action 
-		 <interceptor-ref name="myAuthenticationDefault" /> 
-		 <interceptor-ref name="defaultStack" /> 
-		 <result name="success">/WEB-INF/page/demo_page.jsp</result> 
-		 </action> 
-
-		<global-results>
-			<result name="login">/secure/login.jsp</result>
-		</global-results>
-
-		<action name="*">
-			<result name="success">/META-INF/{1}.jsp</result>                       沒有name屬性代表name="sucess" 
-		</action>
-
-		</package>
-	
--->
+	<!-- <package name="giver" namespace="/giver" extends="user-defined"> <action 
+		name="page" class="demoAction" method="page"> one can use the defaultStack 
+		or customized Stack as interceptors stack on the action <interceptor-ref 
+		name="myAuthenticationDefault" /> <interceptor-ref name="defaultStack" /> 
+		<result name="success">/WEB-INF/page/demo_page.jsp</result> </action> <global-results> 
+		<result name="login">/secure/login.jsp</result> </global-results> <action 
+		name="*"> <result name="success">/META-INF/{1}.jsp</result> 沒有name屬性代表name="sucess" 
+		</action> </package> -->
 
 
 

@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
-public class AuthenticationInterceptor extends AbstractInterceptor {
+public class CampaignAuthentication extends AbstractInterceptor {
 	
 	public String intercept(ActionInvocation invocation) throws Exception {
 
@@ -22,7 +22,7 @@ public class AuthenticationInterceptor extends AbstractInterceptor {
 	
 
 				 // 如為 null, 代表此user未登入過, 才做以下工作
-				if (session.get("login") == null) { 
+				if (session.get("raiser") == null) { 
 					 // 取得HttpServletRequest
 					HttpServletRequest request = ServletActionContext.getRequest();
 					 // 記下目前location(來源網頁)
