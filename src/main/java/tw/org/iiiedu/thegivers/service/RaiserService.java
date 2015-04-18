@@ -20,11 +20,11 @@ public class RaiserService {
 
 	public RaiserModel login(String account, String passwd) {
 
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		if (passwd != null && passwd.length() != 0) {
 
 			RaiserModel rm = raiserDao.getByAccount(account);
-			tx.commit();
+//			tx.commit();
 
 			if (rm != null) {
 				String pass = rm.getPasswd(); // 資料庫抓出：byte[]

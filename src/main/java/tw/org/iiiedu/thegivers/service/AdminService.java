@@ -21,10 +21,10 @@ public class AdminService {
 	public AdminModel login(String account, String passwd){
 
 		
-		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		if(passwd!=null && passwd.length()!=0) {
 			AdminModel am = adminDao.getByAccount(account);
-			tx.commit();
+//			tx.commit();
 			
 
 			if(am!=null) {	

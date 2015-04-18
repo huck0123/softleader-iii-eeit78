@@ -19,11 +19,11 @@ public class GiverService {
 
 public GiverModel login(String account, String passwd){
 
-	Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+//	Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 	if(passwd!=null && passwd.length()!=0) {
 		
 		GiverModel gm = giverDao.getByAccount(account);
-		tx.commit();
+//		tx.commit();
 
 
 		if(gm!=null) {	

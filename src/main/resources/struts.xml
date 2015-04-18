@@ -12,7 +12,7 @@
 	<constant name="struts.custom.i18n.resources" value="locale/global" />
 
 	<package name="loginPackage" namespace="/login" extends="struts-default">
-		<action name="loginAct" class="tw.org.iiiedu.thegivers.web.LoginAct">
+		<action name="loginAct" class="loginAct">
 			<result name="success" type="redirect">/index.jsp</result>
 			<result name="login">/META-INF/login/login.jsp</result>
 <!-- <result name="login">/index.jsp</result>  -->

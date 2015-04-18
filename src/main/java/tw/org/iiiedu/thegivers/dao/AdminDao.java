@@ -1,6 +1,7 @@
 package tw.org.iiiedu.thegivers.dao;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,10 +26,10 @@ public class AdminDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			Iterator adminModels = session.createCriteria(AdminModel.class)
-					.add(Restrictions.eq("account", account).ignoreCase()).list().iterator();
-			if (adminModels.hasNext()) {
-				result = (AdminModel) adminModels.next();
+			List adminModels = session.createCriteria(AdminModel.class)
+					.add(Restrictions.eq("account", account).ignoreCase()).list();
+			if (adminModels.size()>0) {
+				result = (AdminModel) adminModels.get(0);
 			}
 
 		} catch (Exception e) {
