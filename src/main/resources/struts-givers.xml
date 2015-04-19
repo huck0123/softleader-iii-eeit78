@@ -15,10 +15,10 @@
 	<package name="giverPackage" namespace="/giver" extends="struts-default">
 
 		<action name="giverAction" class="giverAction">
-			<result name="insert" type="">/META-INF/giver/registerSuccess.jsp</result>
+			<result name="insert" type="redirect">/giver/registerSuccess</result>
 			<result name="update" type="">/index.jsp</result>
 			<result name="success" type="">/index.jsp</result>
-			<result name="fail" type="">/META-INF/giver/registerFail.jsp</result>
+			<result name="fail" type="">/index.jsp</result>
 			<result name="input" type="">/META-INF/giver/giverRegister.jsp</result>
 		</action>
 		
@@ -30,8 +30,7 @@
 		</action>
 
 		<action name="*">
-			<result>/META-INF/giver/giverRegister.jsp</result>
-			<!-- <result>/META-INF/giver/{1}.jsp</result> 沒有name屬性代表name="sucess" -->
+			<result type="">/META-INF/giver/{1}.jsp</result> 
 		</action>
 	</package>
 
