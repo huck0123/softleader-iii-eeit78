@@ -22,9 +22,12 @@ public class CampaignService {
 	public List<CampaignModel> getAll() {
 //		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		List<CampaignModel> list1 = new ArrayList<>();
+		
 		list1 = campaignDao.getAll();
+		System.out.println("campaignservice" + list1);
 //		tx.commit();
 		if (list1 != null) {
+			System.out.println("service if");
 			return list1;
 		} else {
 			return null;

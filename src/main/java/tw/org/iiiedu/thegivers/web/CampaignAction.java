@@ -47,13 +47,16 @@ public class CampaignAction extends ActionSupport implements
 	}
 
 	public String selectAll() throws Exception {
-System.out.println("selectAll");
+
 		List campaigns = campaignService.getAll();
+
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);
-		System.out.println("json String" + json);
+
+		
 		inputStream = new ByteArrayInputStream(
 				json.getBytes(StandardCharsets.UTF_8));
+		
 		return "selectAll";
 	}
 
