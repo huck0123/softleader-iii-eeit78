@@ -60,5 +60,11 @@ public class GiverService {
 		
 		return count;
 	}
+	
+	//頁次
+	public List<GiverModel> getPerPage(){
+		List<GiverModel> result = giverDao.getPerPage();
+		return result;
+	}
 
 }

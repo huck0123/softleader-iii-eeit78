@@ -28,6 +28,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private GiverService service;
 
 	private HttpServletRequest request;
+	private ServletContext context;
 	private String FAIL = "fail";
 	private InputStream inputStream;
 	private GiverForm form;
@@ -52,7 +53,9 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	public String insert() {
 //		System.out.println(form);
-//		request.
+		context = request.getSession().getServletContext();
+		Integer giverCount = (Integer) context.getAttribute("giverCount");
+		System.out.println(giverCount);
 		GiverModel model = new GiverModel();
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
@@ -73,6 +76,8 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		try {
 			model = service.register(model);
 			if (model != null) {
+				giverCount++;				//資料筆數+1
+				context.setAttribute("giverCount", giverCount.toString());
 				System.out.println("註冊成功");
 				System.out.println(model);
 				return "insert";

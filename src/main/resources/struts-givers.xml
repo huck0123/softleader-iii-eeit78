@@ -5,14 +5,15 @@
 
 <struts>
 
-	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
-	<constant name="struts.devMode" value="true" />
-	<constant name="struts.ui.theme" value="simple" />
-	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<constant name="struts.custom.i18n.resources" value="locale/global" />
+<!-- 	<constant name="struts.objectFactory" value="spring" />把Action交給spring -->
+<!-- 	<constant name="struts.devMode" value="true" /> -->
+<!-- 	<constant name="struts.ui.theme" value="simple" /> -->
+<!-- 	<constant name="struts.enable.DynamicMethodInvocation" value="true" /> -->
+<!-- 	<constant name="struts.custom.i18n.resources" value="locale/global" /> -->
 
 
-	<package name="giverPackage" namespace="/giver" extends="struts-default">
+	<package name="giverPackage" namespace="/giver" extends="count">
+		<default-interceptor-ref name="myCountInterceptor"></default-interceptor-ref>
 
 		<action name="giverAction" class="giverAction">
 			<result name="insert" type="redirect">/giver/registerSuccess</result>
@@ -32,6 +33,7 @@
 		<action name="*">
 			<result type="">/META-INF/giver/{1}.jsp</result> 
 		</action>
+		
 	</package>
 
 

@@ -81,22 +81,22 @@ public class GiverDao {
 	}
 	
 	//關閉帳號 (用戶端)
-	public boolean hide(String account){
-		
-		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		Iterator iterator = criteria
-				.add(Restrictions.eq("account", account).ignoreCase()).list().iterator();
-		try {
-			if (iterator.hasNext()) {
-				GiverModel bean = (GiverModel) iterator.next();
-				bean.setValid(false);
-				return true;
-			}
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+//	public boolean hide(String account){
+//		
+//		Criteria criteria = getSession().createCriteria(GiverModel.class);
+//		Iterator iterator = criteria
+//				.add(Restrictions.eq("account", account).ignoreCase()).list().iterator();
+//		try {
+//			if (iterator.hasNext()) {
+//				GiverModel bean = (GiverModel) iterator.next();
+//				bean.setValid(false);
+//				return true;
+//			}
+//		} catch (HibernateException e) {
+//			e.printStackTrace();
+//		}
+//		return false;
+//	}
 	
 	//getAll
 	public List<GiverModel> getAll(){
@@ -104,7 +104,7 @@ public class GiverDao {
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
 		List<GiverModel> result = criteria.list();
 		
-//		System.out.println(result.size());
+		System.out.println(result.size());
 		return result;
 	}
 	
@@ -116,6 +116,14 @@ public class GiverDao {
 		int count = result.size();
 		
 		return count;
+	}
+	
+	//頁次
+	public List<GiverModel> getPerPage(){
+		Criteria criteria = getSession().createCriteria(GiverModel.class)
+				.setFirstResult(1*2).setMaxResults(2);
+		List<GiverModel> result = criteria.list();
+		return result;
 	}
 	
 	//名字收尋 unfinish
