@@ -20,7 +20,9 @@
 
 	<button type="button" onclick="load()">Change Content</button>
 	<table id="myTable" class="table">
-		
+		<tbody id="tbdy">
+
+		</tbody>
 	</table>
 	<!-- 	</div> -->
 
@@ -43,9 +45,9 @@
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var JsonObject = JSON.parse(xmlhttp.responseText);
 					
-					var myTable = document.getElementById("myTable");
-					while (myTable.hasChildNodes()){
-						myTable.removeChild(myTable.firstChild);
+					var tbdy = document.getElementById("tbdy");
+					while (tbdy.hasChildNodes()){
+						tbdy.removeChild(tbdy.firstChild);
 					}
 					
 					var tr1 = document.createElement("tr");
@@ -137,19 +139,19 @@
 					tr11.appendChild(td22);
 
 					
-					myTable.className = "table";
-
-					myTable.appendChild(tr1);
-					myTable.appendChild(tr2);
-					myTable.appendChild(tr3);
-					myTable.appendChild(tr4);
-					myTable.appendChild(tr5);
-					myTable.appendChild(tr6);
-					myTable.appendChild(tr7);
-					myTable.appendChild(tr8);
-					myTable.appendChild(tr9);
-					myTable.appendChild(tr10);
-					myTable.appendChild(tr11);
+					tbdy.appendChild(tr1);
+					tbdy.appendChild(tr2);
+					tbdy.appendChild(tr3);
+					tbdy.appendChild(tr4);
+					tbdy.appendChild(tr5);
+					tbdy.appendChild(tr6);
+					tbdy.appendChild(tr7);
+					tbdy.appendChild(tr8);
+					tbdy.appendChild(tr9);
+					tbdy.appendChild(tr10);
+					tbdy.appendChild(tr11);
+					
+					
 				}
 			}
 		}

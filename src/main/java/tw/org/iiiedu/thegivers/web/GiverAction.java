@@ -7,6 +7,11 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,12 +21,13 @@ import tw.org.iiiedu.thegivers.service.GiverService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class GiverAction extends ActionSupport {
+public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private GiverService service;
 
+	private HttpServletRequest request;
 	private String FAIL = "fail";
 	private InputStream inputStream;
 	private GiverForm form;
@@ -39,12 +45,14 @@ public class GiverAction extends ActionSupport {
 		this.form = form;
 	}
 
+
+	
 	
 	
 	
 	public String insert() {
 //		System.out.println(form);
-		
+//		request.
 		GiverModel model = new GiverModel();
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
@@ -62,16 +70,18 @@ public class GiverAction extends ActionSupport {
 		model.setTel(form.getTel());
 		model.setValid(true);
 		
-		model = service.register(model);
-		try{
-		if(model != null){
-			System.out.println("註冊成功");
-			System.out.println(model);
-			return "insert";
-		}else{
-			return FAIL;
-		}}catch(Exception e){
+		try {
+			model = service.register(model);
+			if (model != null) {
+				System.out.println("註冊成功");
+				System.out.println(model);
+				return "insert";
+			} else {
+				return FAIL;
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("action fail");
 			return FAIL;
 		}
 		
@@ -110,10 +120,16 @@ public class GiverAction extends ActionSupport {
 		return "select";
 	}
 
-
 	@Override
 	public String execute() {
 		return "success";
+	}
+
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+		
 	}
 
 }

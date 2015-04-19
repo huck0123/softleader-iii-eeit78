@@ -1,5 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,19 @@ public class GiverService {
 		return model;
 	}
 	
+	//select All
+	public List<GiverModel> getAll(){
+		
+		List<GiverModel> result = giverDao.getAll();
+		
+		return result;
+	}
+	
+	//總筆數
+	public int getCount(){
+		int count = giverDao.getCount();
+		
+		return count;
+	}
 
 }

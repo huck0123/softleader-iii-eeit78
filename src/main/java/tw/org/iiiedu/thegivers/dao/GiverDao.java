@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -52,15 +53,16 @@ public class GiverDao {
 		criteria.add(Restrictions.eq("account", bean.getAccount()).ignoreCase());
 		List<GiverModel> result = criteria.list();
 
-		try {
+//		try {
 			getSession().save(bean);
 			return bean;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			System.out.println("insert fail");
-		}
-
-		return bean;
+//		} 
+//		catch (HibernateException e) {
+//			e.printStackTrace();
+//			System.out.println("insert fail");
+//		}
+//
+//		return bean;
 	}
 
 	// 取得ID
@@ -102,7 +104,18 @@ public class GiverDao {
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
 		List<GiverModel> result = criteria.list();
 		
+//		System.out.println(result.size());
 		return result;
+	}
+	
+	//總筆數
+	public int getCount(){
+		
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		List<GiverModel> result = criteria.list();
+		int count = result.size();
+		
+		return count;
 	}
 	
 	//名字收尋 unfinish
