@@ -24,29 +24,7 @@ public class CampaignDao {
 	SessionFactory sessionFactory;
 	
 
-	public GiverModel getByAccount(String account) {
 
-		GiverModel result = null;
-
-		Session session = sessionFactory.getCurrentSession();
-
-		try {
-			Iterator giverModels = session.createCriteria(GiverModel.class)
-					.add(Restrictions.eq("account", account).ignoreCase())
-					.list().iterator();
-
-			if (giverModels.hasNext()) {
-
-				result = (GiverModel) giverModels.next();
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return result;
-
-	}
 
 	public CampaignModel getById(int id) {
 
@@ -65,23 +43,24 @@ public class CampaignDao {
 
 	public List<CampaignModel> getAll() {
 
-		List<CampaignModel> result = new ArrayList<CampaignModel>();
+
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			Iterator<CampaignModel> campaignModels = session
-					.createCriteria(CampaignModel.class).list().iterator();
+			List campaignModels = session
+					.createCriteria(CampaignModel.class).setFirstResult(1*2).setMaxResults(2).list();
+System.out.println("campaignDao"+campaignModels);
 
-			while (campaignModels.hasNext()) {
-				CampaignModel cm = campaignModels.next();
-				result.add(cm);
+			if(campaignModels.size()>0) {
+				System.out.println("in if");
+				return campaignModels;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		return result;
+		return null;
 	}
 
 	public boolean insert(CampaignModel cm) {

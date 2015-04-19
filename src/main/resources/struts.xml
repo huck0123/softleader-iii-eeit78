@@ -42,7 +42,6 @@
 
 
 	<package name="user-defined" abstract="true" extends="struts-default">
-
 		<interceptors>
 			<!--定義一個名為authentication的自定攔截器 -->
 			<interceptor
@@ -51,7 +50,7 @@
 			<!--定義一個驗證登入的攔截器堆疊 -->
 			<interceptor-stack name="campaignDefault">
 				<interceptor-ref name="defaultStack" />         <!--堆疊內設定原Struts2內建的: 預設攔截器堆疊 -->
-				<interceptor-ref name="campaignAuthentication" />     <!--堆疊內設定前述名為authentication的: 自定攔截器 -->
+				<interceptor-ref name="campaignAuthentication" />    
 			</interceptor-stack>
 		</interceptors>
 
