@@ -1,9 +1,12 @@
 package tw.org.iiiedu.thegivers.web;
 
+import java.io.FileInputStream;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,13 +35,14 @@ public class CampaignAction extends ActionSupport implements ServletRequestAware
 	}
 
 	public String insert() throws Exception {
+		System.out.println(System.currentTimeMillis());
 		System.out.println(campaignForm);
 		CampaignModel cm = new CampaignModel();
 		RaiserModel rm = (RaiserModel) request.getSession().getAttribute("raiser");
 		cm.setGoal(campaignForm.getGoal());
 		cm.setDetail(campaignForm.getDetail());
 		cm.setEndDate(campaignForm.getEndDate());
-		cm.setImage(campaignForm.getImage());
+		cm.setImage(IOUtils.toByteArray(new FileInputStream(campaignForm.getImage())));
 		cm.setLocation(campaignForm.getLocation());
 		cm.setName(campaignForm.getName());
 		cm.setRaiserId(rm.getId());
@@ -46,6 +50,7 @@ public class CampaignAction extends ActionSupport implements ServletRequestAware
 		cm.setType(campaignForm.getType());
 		cm.setVedioUrl(campaignForm.getVedioUrl());
 		System.out.println(cm);
+		System.out.println(System.currentTimeMillis());
 		campaignService.insert(cm);
 		return "insert";
 	}

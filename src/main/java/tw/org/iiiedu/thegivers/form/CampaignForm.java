@@ -1,5 +1,6 @@
 package tw.org.iiiedu.thegivers.form;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
@@ -21,7 +22,7 @@ public class CampaignForm {
 
 	private String location;
 
-	private byte[] image;
+	private File image;
 
 	public String getName() {
 		return name;
@@ -87,11 +88,11 @@ public class CampaignForm {
 		this.location = location;
 	}
 
-	public byte[] getImage() {
+	public File getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(File image) {
 		this.image = image;
 	}
 
@@ -100,9 +101,10 @@ public class CampaignForm {
 		return "CampaignForm [name=" + name + ", goal=" + goal + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", type=" + type
 				+ ", vedioUrl=" + vedioUrl + ", detail=" + detail
-				+ ", location=" + location + ", image="
-				+ Arrays.toString(image) + "]";
+				+ ", location=" + location + ", image=" + image + "]";
 	}
+
+
 
 	
 	

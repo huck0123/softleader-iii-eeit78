@@ -10,9 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<s:form action="campaignAction" namespace="/campaign" method="post">
+	<s:form action="campaignAction" namespace="/campaign" method="post" enctype="multipart/form-data">
 
-
+<s:actionerror/>
 		<table>
 			<tr>
 				<td>活動名稱：</td>
@@ -20,11 +20,12 @@
 					value="${param.name}"></td>
 				<td><span class="error">${errors.id}</span></td>
 			</tr>
-			<!-- 			<tr> -->
-			<!-- 				<td>活動圖片：</td> -->
-			<!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
-			<%-- 				<td><span class="error">${errors.id}</span></td> --%>
-			<!-- 			</tr> -->
+			<tr>
+			<td><s:file name="campaignForm.image" label="活動圖片："></s:file></td> 
+<!-- 				<td>活動圖片：</td> -->
+<!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
+<%-- 				<td><span class="error">${errors.id}</span></td> --%>
+			</tr>
 			<tr>
 				<td>目標金額：</td>
 				<td><input type="text" name="campaignForm.goal"
