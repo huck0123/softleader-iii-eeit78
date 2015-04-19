@@ -17,11 +17,11 @@
 		<table>
 			<tr>
 				<td><label for="">帳號:</label></td>
-				<td><input type="text" name="form.account" value=""></td>
+				<td><input type="text" name="form.account" value="" required="required"></td>
 			</tr>
 			<tr>
 				<td><label for="">密碼:</label></td>
-				<td><input type="password" name="form.passwd" value=""></td>
+				<td><input type="password" name="form.passwd" value="" required="required"></td>
 			</tr>
 			<tr>
 				<td><label for="">姓:</label></td>
@@ -59,7 +59,7 @@
 			</tr>
 			<tr>
 				<td><label for="">生日:</label></td>
-				<td><input type="date" name="form.birth" value=""></td>
+				<td><input type="date" name="form.birth" value="" required="required"></td>
 			</tr>
 			<tr>
 				<td><label for="">照片:</label></td>

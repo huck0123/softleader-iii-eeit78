@@ -22,7 +22,7 @@ public class GiverAction extends ActionSupport {
 	@Autowired
 	private GiverService service;
 
-	private String Fail = "fail";
+	private String FAIL = "fail";
 	private InputStream inputStream;
 	private GiverForm form;
 	private GiverModel model;
@@ -43,11 +43,12 @@ public class GiverAction extends ActionSupport {
 	
 	
 	public String insert() {
-		System.out.println(form);
+//		System.out.println(form);
 		
 		GiverModel model = new GiverModel();
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
+//		System.out.println(form.getBirth());
 		model.setBirth(new Timestamp(form.getBirth().getTime()));
 		model.setEmail(form.getEmail());
 		
@@ -62,20 +63,26 @@ public class GiverAction extends ActionSupport {
 		model.setValid(true);
 		
 		model = service.register(model);
+		try{
 		if(model != null){
 			System.out.println("註冊成功");
 			System.out.println(model);
 			return "insert";
 		}else{
-			return Fail;
+			return FAIL;
+		}}catch(Exception e){
+			e.printStackTrace();
+			return FAIL;
 		}
+		
+		
 	}
 	
 	//select by account
 	public String select() throws UnsupportedEncodingException{
 		
 		model = service.getByAccount("goodman9527");
-		System.out.println(model);
+//		System.out.println(model);
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("account", model.getAccount());
