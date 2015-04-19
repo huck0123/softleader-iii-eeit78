@@ -1,6 +1,10 @@
 package tw.org.iiiedu.thegivers.web;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -16,16 +20,24 @@ import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.RaiserModel;
 import tw.org.iiiedu.thegivers.service.CampaignService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CampaignAction extends ActionSupport implements ServletRequestAware {
+public class CampaignAction extends ActionSupport implements
+		ServletRequestAware {
+
+	private InputStream inputStream;
 
 	private CampaignForm campaignForm;
 	private HttpServletRequest request;
 	@Autowired
 	private CampaignService campaignService;
-	
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
 	public CampaignForm getCampaignForm() {
 		return campaignForm;
 	}
@@ -34,15 +46,30 @@ public class CampaignAction extends ActionSupport implements ServletRequestAware
 		this.campaignForm = campaignForm;
 	}
 
+	public String selectAll() throws Exception {
+System.out.println("selectAll");
+		List campaigns = campaignService.getAll();
+		Gson gson = new Gson();
+		String json = gson.toJson(campaigns);
+		System.out.println("json String" + json);
+		inputStream = new ByteArrayInputStream(
+				json.getBytes(StandardCharsets.UTF_8));
+		return "selectAll";
+	}
+
 	public String insert() throws Exception {
 		System.out.println(System.currentTimeMillis());
 		System.out.println(campaignForm);
 		CampaignModel cm = new CampaignModel();
-		RaiserModel rm = (RaiserModel) request.getSession().getAttribute("raiser");
+		RaiserModel rm = (RaiserModel) request.getSession().getAttribute(
+				"raiser");
 		cm.setGoal(campaignForm.getGoal());
 		cm.setDetail(campaignForm.getDetail());
 		cm.setEndDate(campaignForm.getEndDate());
-		cm.setImage(IOUtils.toByteArray(new FileInputStream(campaignForm.getImage())));
+		if (campaignForm.getImage() != null) {
+			cm.setImage(IOUtils.toByteArray(new FileInputStream(campaignForm
+					.getImage())));
+		}
 		cm.setLocation(campaignForm.getLocation());
 		cm.setName(campaignForm.getName());
 		cm.setRaiserId(rm.getId());

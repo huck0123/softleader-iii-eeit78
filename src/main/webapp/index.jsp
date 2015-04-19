@@ -45,6 +45,8 @@
 	<p />
 	<a href="<c:url value='/giver/giverRegister'/>">捐款人註冊</a>
 	<p />
-
+	<p />
+	<a href="<c:url value='/campaign/campaignShow'/>">顯示所有活動</a>
+	<p />
 </body>
 </html>
