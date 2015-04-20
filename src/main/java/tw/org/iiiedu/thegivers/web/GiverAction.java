@@ -1,17 +1,23 @@
 package tw.org.iiiedu.thegivers.web;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.hibernate.HibernateException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +25,7 @@ import tw.org.iiiedu.thegivers.form.GiverForm;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 import tw.org.iiiedu.thegivers.service.GiverService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GiverAction extends ActionSupport implements ServletRequestAware{
@@ -50,16 +57,15 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	
 	
-	
+	//註冊帳號
 	public String insert() {
 //		System.out.println(form);
 		context = request.getSession().getServletContext();
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
-		System.out.println(giverCount);
+		System.out.println("giverCount=" + giverCount);
 		GiverModel model = new GiverModel();
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
-//		System.out.println(form.getBirth());
 		model.setBirth(new Timestamp(form.getBirth().getTime()));
 		model.setEmail(form.getEmail());
 		
@@ -67,7 +73,18 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		model.setName(form.getName());
 		model.setGender(form.isGender());
 		model.setGetInfo(form.isGet_info());
-		model.setHeadshot(null);   //unfinish
+
+		if(form.getHeadshot() != null){
+			try {
+				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				System.out.println("GiverAction--->FileNotFoundException");
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("GiverAction--->IOException");
+			}
+		}
 		model.setIdNumber(form.getId_number());
 		model.setPasswd(form.getPasswd());
 		model.setTel(form.getTel());
@@ -78,15 +95,15 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			if (model != null) {
 				giverCount++;				//資料筆數+1
 				context.setAttribute("giverCount", giverCount.toString());
-				System.out.println("註冊成功");
+				System.out.println("GiverAction註冊成功");
 				System.out.println(model);
 				return "insert";
 			} else {
 				return FAIL;
 			}
-		} catch (Exception e) {
+		} catch (HibernateException e) {
 			e.printStackTrace();
-			System.out.println("action fail");
+			System.out.println("GiverAction--->HibernateException");
 			return FAIL;
 		}
 		
@@ -96,7 +113,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	//select by account
 	public String select() throws UnsupportedEncodingException{
 		
-		model = service.getByAccount("goodman9527");
+		model = service.getByAccount("Jimmy1");
 //		System.out.println(model);
 		
 		Map<String, String> map = new HashMap<>();
@@ -113,24 +130,46 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		map.put("tel", model.getTel());
 		map.put("address", model.getAddress());
 		map.put("email", model.getEmail());
-		map.put("get_info", "model.isGetInfo()");
-		map.put("headshot", "model.getHeadshot()");
+		if(model.isGetInfo() == true){
+			map.put("get_info", "是");
+		}else{
+			map.put("get_info", "否");
+		}
+		map.put("headshot", model.getHeadshot().toString());
 		map.put("birth", model.getBirth().toString());
 		
 		JSONObject json=new JSONObject();
 		String jsonStr = json.toJSONString(map);
 		
 		
-		inputStream = new ByteArrayInputStream(jsonStr.getBytes("UTF-8"));
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
 
-	@Override
-	public String execute() {
-		return "success";
+	//Select All
+	public String selectAll() throws UnsupportedEncodingException{
+		List<GiverModel> list = service.getAll();
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(list);
+
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "selectAll";
+		
 	}
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

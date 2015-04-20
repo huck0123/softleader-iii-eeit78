@@ -5,11 +5,6 @@
 
 <struts>
 
-<!-- 	<constant name="struts.objectFactory" value="spring" />把Action交給spring -->
-<!-- 	<constant name="struts.devMode" value="true" /> -->
-<!-- 	<constant name="struts.ui.theme" value="simple" /> -->
-<!-- 	<constant name="struts.enable.DynamicMethodInvocation" value="true" /> -->
-<!-- 	<constant name="struts.custom.i18n.resources" value="locale/global" /> -->
 
 
 	<package name="giverPackage" namespace="/giver" extends="count">
@@ -24,6 +19,10 @@
 		</action>
 		
 		<action name="giverSelect" class="giverAction">
+			<result type="stream" name="selectAll">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 			<result type="stream" name="select">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>

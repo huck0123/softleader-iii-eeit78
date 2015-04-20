@@ -151,7 +151,7 @@ public class GiverModel {
 				+ passwd + ", name=" + name + ", familyName=" + familyName
 				+ ", gender=" + gender + ", idNumber=" + idNumber + ", tel="
 				+ tel + ", address=" + address + ", email=" + email
-				+ ", getInfo=" + getInfo  + ", valid="
+				+ ", getInfo=" + getInfo + ", birth=" + birth + ", valid="
 				+ valid + "]";
 	}
 

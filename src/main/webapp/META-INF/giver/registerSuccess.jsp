@@ -18,7 +18,7 @@
 	<!-- 	<div id="myDiv"> -->
 	<h2>Let AJAX change this text</h2>
 
-	<button type="button" onclick="load()">Change Content</button>
+	<button onclick="load()">Change Content</button>
 	<table id="myTable" class="table">
 		<tbody id="tbdy">
 
@@ -45,6 +45,8 @@
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var JsonObject = JSON.parse(xmlhttp.responseText);
 					
+					console.log(JsonObject);//console
+					
 					var tbdy = document.getElementById("tbdy");
 					while (tbdy.hasChildNodes()){
 						tbdy.removeChild(tbdy.firstChild);
@@ -52,7 +54,7 @@
 					
 					var tr1 = document.createElement("tr");
 					var td1 = document.createElement("td");
-					td1.innerHTML = "±b¸¹";
+					td1.innerHTML = "±b¸¹:";
 					var td2 = document.createElement("td");
 					td2.innerHTML = JsonObject.account;
 					tr1.appendChild(td1);
