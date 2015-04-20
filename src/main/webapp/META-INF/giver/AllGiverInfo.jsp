@@ -3,13 +3,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>所有捐款人資訊</title>
+
+
+<style>
+.draggable {
+	width: 150px;
+	height: 150px;
+	padding: 0.5em;
+}
+</style>
+
+<script>
+	$(function() {
+		$(".draggable").draggable();
+	});
+</script>
 
 </head>
 <body>
 	<button onclick="load()">Surprise</button>
-
+	
+	<!--無聊一下 -->
+	<div class="draggable" style="border: 1px solid blue;">
+		<p>Drag me around</p>
+	</div>
+	<div class="draggable" style="border: 1px solid red;">
+		<p>Hello</p>
+	</div>
 
 
 	<script>
@@ -34,7 +58,14 @@
 				}
 			}
 		}
-
 	</script>
+
+
+
+
+
+	
+	
+	
 </body>
 </html>
