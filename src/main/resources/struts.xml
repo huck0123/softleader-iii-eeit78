@@ -7,6 +7,7 @@
 
 	<include file="struts-givers.xml"/>
 	<include file="struts-campaign.xml"/>
+	<include file="struts-raiser.xml" />
 	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
@@ -27,18 +28,18 @@
 
 	
 
-	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
+<!-- 	<package name="raiserPackage" namespace="/raiser" extends="struts-default"> -->
 
-		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction">
-			<result name="insert" type="redirect">/index.jsp</result>
-			<result name="update" type="redirect">/index.jsp</result>
-			<result name="select" type="redirect">/index.jsp</result>
-		</action>
+<!-- 		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction"> -->
+<!-- 			<result name="insert" type="redirect">/index.jsp</result> -->
+<!-- 			<result name="update" type="redirect">/index.jsp</result> -->
+<!-- 			<result name="select" type="redirect">/index.jsp</result> -->
+<!-- 		</action> -->
 
-		<action name="*">
-			<result>/META-INF/login/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
-		</action>
-	</package>
+<!-- 		<action name="*"> -->
+<!-- 			<result>/META-INF/login/{1}.jsp</result>                      沒有name屬性代表name="sucess" -->
+<!-- 		</action> -->
+<!-- 	</package> -->
 
 
 	<package name="user-defined" abstract="true" extends="struts-default">

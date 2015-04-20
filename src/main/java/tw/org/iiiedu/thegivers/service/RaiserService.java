@@ -1,5 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,12 @@ public class RaiserService {
 
 	public RaiserModel login(String account, String passwd) {
 
-//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		// Transaction tx =
+		// sessionFactory.getCurrentSession().beginTransaction();
 		if (passwd != null && passwd.length() != 0) {
 
 			RaiserModel rm = raiserDao.getByAccount(account);
-//			tx.commit();
+			// tx.commit();
 
 			if (rm != null) {
 				String pass = rm.getPasswd(); // 資料庫抓出：byte[]
@@ -35,4 +38,46 @@ public class RaiserService {
 		}
 		return null;
 	}
+
+	public RaiserModel register(RaiserModel rm) {
+		rm = raiserDao.insertAccount(rm);
+		if (rm != null) {
+			return rm;
+		}
+		return null;
+	}
+
+	public RaiserModel dataUpdate(RaiserModel rm) {
+		rm = raiserDao.update(rm);
+		if (rm != null) {
+			return rm;
+		}
+		return null;
+	}
+
+	public RaiserModel getByAccount(String account) {
+		RaiserModel rm = raiserDao.getByAccount(account);
+		if (rm != null) {
+			return rm;
+		}
+		return null;
+	}
+
+	public List<RaiserModel> getAll() {
+		List<RaiserModel> result = raiserDao.getAll();
+		return result;
+	}
+	
+	public int getCount(){
+		int count = raiserDao.getCount();
+		
+		return count;
+	}
+	
+	
+	public List<RaiserModel> getPerPage(){
+		List<RaiserModel> result = raiserDao.getPerPage();
+		return result;
+	}
+
 }
