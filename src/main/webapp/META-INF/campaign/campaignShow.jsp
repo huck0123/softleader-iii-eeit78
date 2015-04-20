@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="BIG5"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
@@ -8,11 +8,34 @@
 </head>
 <body>
 
-<button type="button" onclick="load()">Show</button>
+	<div id="div1"></div>
+
+
+
 </body>
 <script>
 
-function load() {
+
+for (var i = 0; i < Math.ceil(${application.campaignCount}/${application.campaignShowPageSize}); i++) { 
+
+	var txtA = document.createTextNode(i+1);
+	var eleA = document.createElement("p");
+	eleA.appendChild(txtA);
+	eleA.setAttribute("id","page"+i);
+	eleA.setAttribute("name","page");
+ 	console.log(eleA.getAttribute("id").substring(4));
+  	eleA.addEventListener('click',function(){
+  		load(1,${application.campaignShowPageSize});
+  	});
+	document.getElementById('div1').appendChild(eleA);
+}
+
+
+
+
+
+
+function load(pageNum,pageSize) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
@@ -20,7 +43,7 @@ function load() {
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
-	var url = "/softleader-iii-eeit78/campaign/campaignAction!selectAll";
+	var url = "/softleader-iii-eeit78/campaign/campaignAction!selectAll?pageNum="+pageNum+"&pageSize="+pageSize;
 
 	xmlhttp.open("get", url, true);
 	xmlhttp.send();
@@ -31,6 +54,9 @@ function load() {
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 			console.log("here");		
 console.log(jsonObj);
+console.log(xmlhttp.responseText);
+			
+			
 			
 			
 		}

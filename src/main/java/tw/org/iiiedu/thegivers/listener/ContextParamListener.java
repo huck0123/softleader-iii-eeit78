@@ -26,10 +26,12 @@ public class ContextParamListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext sc = sce.getServletContext();
+
 		WebApplicationContextUtils.getRequiredWebApplicationContext(sc).getAutowireCapableBeanFactory().autowireBean(this);
 		
 		sc.setAttribute("campaignCount", campaignService.getCount() );
 		sc.setAttribute("giverCount", giverService.getCount() );
+		sc.setAttribute("campaignShowPageSize", 5 );
 	}
 
 	

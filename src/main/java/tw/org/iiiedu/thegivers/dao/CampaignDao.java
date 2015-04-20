@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,9 +25,6 @@ public class CampaignDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
-
-
 
 	public CampaignModel getById(int id) {
 
@@ -41,18 +41,17 @@ public class CampaignDao {
 		return result;
 	}
 
-	public List<CampaignModel> getAll() {
-
+	public List<CampaignModel> getAll(Integer pageNum,Integer pageSize) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			List campaignModels = session
-					.createCriteria(CampaignModel.class).setFirstResult(1*2).setMaxResults(2).list();
-System.out.println("campaignDao"+campaignModels);
+			List campaignModels = session.createCriteria(CampaignModel.class)
+					.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
 
-			if(campaignModels.size()>0) {
-				System.out.println("in if");
+
+			if (campaignModels.size() > 0) {
+
 				return campaignModels;
 			}
 
@@ -60,6 +59,27 @@ System.out.println("campaignDao"+campaignModels);
 			e.printStackTrace();
 			return null;
 		}
+		return null;
+	}
+
+	public List<CampaignModel> getByAllCondition(String name, String type, String location) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(CampaignModel.class);
+		if(name != null){
+			criteria.add(Restrictions.like("name", "%"+name+"%"));
+		}
+		if(type != null){
+			criteria.add(Restrictions.eq("type", type));
+		}
+		if(location != null){
+			criteria.add(Restrictions.eq("location", location));
+		}
+
+		criteria.add(Restrictions.eq("show", true));
+		
+		Integer rows = (Integer) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		System.out.println(rows);
+		
 		return null;
 	}
 
@@ -129,22 +149,20 @@ System.out.println("campaignDao"+campaignModels);
 			return null;
 		}
 	}
-	
-	public Integer getCount(){
-		
-		Session session = sessionFactory.getCurrentSession();
-			List campaignModels = session
-					.createCriteria(CampaignModel.class).list();
 
-			if(campaignModels.size()>0) {
-				
-				return campaignModels.size();
-			}
+	public Integer getCount() {
+
+		Session session = sessionFactory.getCurrentSession();
+		List campaignModels = session.createCriteria(CampaignModel.class)
+				.list();
+
+		if (campaignModels.size() > 0) {
+
+			return campaignModels.size();
+		}
 		return null;
 	}
-	
-	
-	
+
 	//
 	// public List<CampaignModel> getByLocation(String location) {
 	//
@@ -188,7 +206,7 @@ System.out.println("campaignDao"+campaignModels);
 	// return null;
 	// }
 	//
-	
+
 	//
 	// public List<CampaignModel> getByType(String type) {
 	//

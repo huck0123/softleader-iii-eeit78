@@ -19,15 +19,15 @@ public class CampaignService {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public List<CampaignModel> getAll() {
+	public List<CampaignModel> getAll(Integer pageNum,Integer pageSize) {
 //		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		List<CampaignModel> list1 = new ArrayList<>();
 		
-		list1 = campaignDao.getAll();
+		list1 = campaignDao.getAll(pageNum,pageSize);
 		System.out.println("campaignservice" + list1);
 //		tx.commit();
 		if (list1 != null) {
-			System.out.println("service if");
+
 			return list1;
 		} else {
 			return null;

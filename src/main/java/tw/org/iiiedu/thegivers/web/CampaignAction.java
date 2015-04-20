@@ -33,6 +33,18 @@ public class CampaignAction extends ActionSupport implements
 	private HttpServletRequest request;
 	@Autowired
 	private CampaignService campaignService;
+	private Integer pageNum;
+	private Integer pageSize;
+
+
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
 
 	public InputStream getInputStream() {
 		return inputStream;
@@ -48,7 +60,12 @@ public class CampaignAction extends ActionSupport implements
 
 	public String selectAll() throws Exception {
 
-		List campaigns = campaignService.getAll();
+		System.out.println(pageNum+", "+pageSize);
+		
+		
+		if(pageNum == null){pageNum=0;}
+		if(pageSize == null){pageSize=5;}
+		List campaigns = campaignService.getAll(pageNum,pageSize);
 
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);
