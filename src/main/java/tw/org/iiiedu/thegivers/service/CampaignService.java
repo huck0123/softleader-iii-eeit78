@@ -90,6 +90,10 @@ public class CampaignService {
 		}
 	}
 
+	public Integer getCount(){
+		return campaignDao.getCount();
+	}
+	
 //	public List<CampaignModel> getByLocation(String location) {
 //		List<CampaignModel> list2 = new ArrayList<>();
 //		list2 = campaignDao.getByLocation(location);

@@ -130,6 +130,21 @@ System.out.println("campaignDao"+campaignModels);
 		}
 	}
 	
+	public Integer getCount(){
+		
+		Session session = sessionFactory.getCurrentSession();
+			List campaignModels = session
+					.createCriteria(CampaignModel.class).list();
+
+			if(campaignModels.size()>0) {
+				
+				return campaignModels.size();
+			}
+		return null;
+	}
+	
+	
+	
 	//
 	// public List<CampaignModel> getByLocation(String location) {
 	//

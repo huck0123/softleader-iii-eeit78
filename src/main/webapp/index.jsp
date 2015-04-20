@@ -10,7 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+campaignCount: ${application.campaignCount}<br/>
+giverCount: ${application.giverCount }
 	<c:if test="${admin != null}">${admin}</c:if>
 	<c:if test="${giver != null}">${giver}</c:if>
 	<c:if test="${raiser != null}">${raiser}</c:if>
