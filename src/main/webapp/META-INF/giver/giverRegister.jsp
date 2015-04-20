@@ -13,7 +13,7 @@
 	<fieldset>
 		<legend>填入表單:</legend>
 
-		<form action='<c:url value="/giver/giverAction!insert.action"/>' method="post">
+		<form action='<c:url value="/giver/giverAction!insert.action"/>' method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td><label for="">帳號:</label></td>

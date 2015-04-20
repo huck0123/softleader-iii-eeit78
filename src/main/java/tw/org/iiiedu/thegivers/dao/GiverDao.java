@@ -104,7 +104,6 @@ public class GiverDao {
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
 		List<GiverModel> result = criteria.list();
 		
-		System.out.println(result.size());
 		return result;
 	}
 	

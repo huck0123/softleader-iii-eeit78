@@ -1,7 +1,6 @@
 package tw.org.iiiedu.thegivers.form;
 
-import java.sql.Blob;
-import java.sql.Timestamp;
+import java.io.File;
 
 public class GiverForm {
 
@@ -27,7 +26,7 @@ public class GiverForm {
 	
 	private boolean get_info;
 	
-	private Blob headshot;
+	private File headshot;
 	
 	private java.util.Date birth;
 	
@@ -122,11 +121,11 @@ public class GiverForm {
 		this.get_info = get_info;
 	}
 
-	public Blob getHeadshot() {
+	public File getHeadshot() {
 		return headshot;
 	}
 
-	public void setHeadshot(Blob headshot) {
+	public void setHeadshot(File headshot) {
 		this.headshot = headshot;
 	}
 
