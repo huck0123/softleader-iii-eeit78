@@ -15,10 +15,10 @@ public class CampaignServiceTest extends GenericTest {
 	@Autowired
 	private CampaignService campaignService;
 
-	@Test
-	public void testGetAll() {
-		assertTrue(campaignService.getAll() != null);
-	}
+//	@Test
+//	public void testGetAll() {
+//		assertTrue(campaignService.getAll() != null);
+//	}
 
 	@Test
 	public void testGetById() {
