@@ -8,7 +8,7 @@
 		<default-interceptor-ref name="myCountInterceptor"></default-interceptor-ref>
 
 		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction">
-			<result name="insert" type="redirect">/META-INF/raiser/raiserCheck.jsp</result>
+			<result name="insert" type="redirect">/raiser/raiserCheck.action</result>
 			<result name="update" type="redirect">/META-INF/raiser/raiserCheck.jsp</result>
 			<result name="select" type="redirect">/META-INF/raiser/raiserCheck.jsp</result>
 			<result name="error" type="redirect">/META-INF/raiser/raiserRegister.jsp
