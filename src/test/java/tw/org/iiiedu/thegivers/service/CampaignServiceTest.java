@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.org.iiiedu.thegivers.GenericTest;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 
+
 public class CampaignServiceTest extends GenericTest {
 
 	@Autowired
@@ -67,6 +68,19 @@ public class CampaignServiceTest extends GenericTest {
 		assertTrue(campaignService.getById(4).getName().equals(name));
 	}
 
+	 @Test 
+	 public void getByAllConditionCount(){
+	
+		 System.out.println(campaignService.getByAllConditionCount("KK", null, null));
+	
+	 }
+	 
+	 @Test
+	 public void getByAllCondition(){
+		 System.out.println("here");
+		 System.out.println(campaignService.getByAllCondition("KK", null, null, 0, 5));
+		 System.out.println("there");
+	 }
 	
 //
 //	 @Test

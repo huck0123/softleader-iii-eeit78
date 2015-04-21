@@ -3,8 +3,12 @@ package tw.org.iiiedu.thegivers.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,10 +94,19 @@ public class CampaignService {
 		}
 	}
 
+	public List<CampaignModel> getByAllCondition(String name, String type, String location, Integer pageNum, Integer pageSize){
+		
+		return campaignDao.getByAllCondition(name, type, location, pageNum, pageSize);
+	}
+	
 	public Integer getCount(){
 		return campaignDao.getCount();
 	}
 	
+	public Long getByAllConditionCount(String name, String type, String location) {
+		
+		return campaignDao.getByAllConditionCount(name, type, location);
+	}
 //	public List<CampaignModel> getByLocation(String location) {
 //		List<CampaignModel> list2 = new ArrayList<>();
 //		list2 = campaignDao.getByLocation(location);

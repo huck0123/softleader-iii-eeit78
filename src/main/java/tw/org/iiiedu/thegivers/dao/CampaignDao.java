@@ -62,11 +62,11 @@ public class CampaignDao {
 		return null;
 	}
 
-	public List<CampaignModel> getByAllCondition(String name, String type, String location) {
+	public Long getByAllConditionCount(String name, String type, String location) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
 		if(name != null){
-			criteria.add(Restrictions.like("name", "%"+name+"%"));
+			criteria.add(Restrictions.like("name", "%"+name+"%").ignoreCase());
 		}
 		if(type != null){
 			criteria.add(Restrictions.eq("type", type));
@@ -77,10 +77,31 @@ public class CampaignDao {
 
 		criteria.add(Restrictions.eq("show", true));
 		
-		Integer rows = (Integer) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		Long rows = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 		System.out.println(rows);
 		
-		return null;
+		return rows;
+	}
+	
+	public List<CampaignModel> getByAllCondition(String name, String type, String location, Integer pageNum, Integer pageSize) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(CampaignModel.class);
+		if(name != null){
+			criteria.add(Restrictions.like("name", "%"+name+"%").ignoreCase());
+		}
+		if(type != null){
+			criteria.add(Restrictions.eq("type", type));
+		}
+		if(location != null){
+			criteria.add(Restrictions.eq("location", location));
+		}
+
+		criteria.add(Restrictions.eq("show", true));
+		
+		
+		List campaignModels = criteria.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
+		
+		return campaignModels;
 	}
 
 	public boolean insert(CampaignModel cm) {

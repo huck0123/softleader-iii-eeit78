@@ -15,6 +15,7 @@
 </body>
 <script>
 
+function makeFunction(j ){return function(){ load(j,${application.campaignShowPageSize}); }};
 
 for (var i = 0; i < Math.ceil(${application.campaignCount}/${application.campaignShowPageSize}); i++) { 
 
@@ -24,9 +25,7 @@ for (var i = 0; i < Math.ceil(${application.campaignCount}/${application.campaig
 	eleA.setAttribute("id","page"+i);
 	eleA.setAttribute("name","page");
  	console.log(eleA.getAttribute("id").substring(4));
-  	eleA.addEventListener('click',function(){
-  		load(1,${application.campaignShowPageSize});
-  	});
+  	eleA.addEventListener('click',makeFunction(i));
 	document.getElementById('div1').appendChild(eleA);
 }
 

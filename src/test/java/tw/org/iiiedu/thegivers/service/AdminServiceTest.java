@@ -17,4 +17,5 @@ public class AdminServiceTest extends GenericTest  {
 		assertTrue(adminService.login("admin", "password")!=null);
 	}
 
+
 }
