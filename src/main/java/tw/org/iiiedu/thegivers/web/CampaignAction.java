@@ -35,8 +35,34 @@ public class CampaignAction extends ActionSupport implements
 	private CampaignService campaignService;
 	private Integer pageNum;
 	private Integer pageSize;
+	private String nameSearch;
+	private String typeSearch;
+	private String locationSearch;
 
 
+	public String getNameSearch() {
+		return nameSearch;
+	}
+
+	public void setNameSearch(String nameSearch) {
+		this.nameSearch = nameSearch;
+	}
+
+	public String getTypeSearch() {
+		return typeSearch;
+	}
+
+	public void setTypeSearch(String typeSearch) {
+		this.typeSearch = typeSearch;
+	}
+
+	public String getLocationSearch() {
+		return locationSearch;
+	}
+
+	public void setLocationSearch(String locationSearch) {
+		this.locationSearch = locationSearch;
+	}
 
 	public Integer getPageNum() {
 		return pageNum;
@@ -58,14 +84,14 @@ public class CampaignAction extends ActionSupport implements
 		this.campaignForm = campaignForm;
 	}
 
-	public String selectAll() throws Exception {
+	public String selectByAllCondition() throws Exception {
 
+		System.out.println("selectByAllCondition");
 		System.out.println(pageNum+", "+pageSize);
 		
-		
 		if(pageNum == null){pageNum=0;}
-		if(pageSize == null){pageSize=5;}
-		List campaigns = campaignService.getAll(pageNum,pageSize);
+		if(pageSize == null){pageSize=2;}
+		List campaigns = campaignService.getByAllCondition(nameSearch, typeSearch, locationSearch, pageNum, pageSize);
 
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);
@@ -74,7 +100,20 @@ public class CampaignAction extends ActionSupport implements
 		inputStream = new ByteArrayInputStream(
 				json.getBytes(StandardCharsets.UTF_8));
 		
-		return "selectAll";
+		return "selectByAllCondition";
+	}
+	
+	public String selectByAllConditionCount() throws Exception {
+
+		System.out.println("nameSearch= " + nameSearch);
+		Long count = campaignService.getByAllConditionCount(nameSearch, typeSearch, locationSearch);
+
+
+		
+		inputStream = new ByteArrayInputStream(
+				count.toString().getBytes(StandardCharsets.UTF_8));
+		
+		return "selectByAllConditionCount";
 	}
 
 	public String insert() throws Exception {
