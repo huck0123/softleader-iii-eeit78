@@ -19,7 +19,11 @@
 		<action name="campaignAction" class="campaignAction">
 			<result name="insert" type="redirect">/index.jsp</result>
 			<result name="input">/META-INF/campaign/campaignRaise.jsp</result>
-			<result type="stream" name="selectAll">
+			<result type="stream" name="selectByAllCondition">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<result type="stream" name="selectByAllConditionCount">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>

@@ -43,7 +43,7 @@ giverCount: ${application.giverCount }
 	<p />
 	<a href="<c:url value='/campaign/campaignRaise'/>">發起活動</a>
 	<p />
-	<c:if test="${giver != null }">
+	<c:if test="${giver == null }">
 	<p />
 	<a href="<c:url value='/giver/giverRegister'/>">捐款人註冊</a>
 	<p />

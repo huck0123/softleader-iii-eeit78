@@ -75,10 +75,10 @@ public class CampaignDao {
 			criteria.add(Restrictions.eq("location", location));
 		}
 
-		criteria.add(Restrictions.eq("show", true));
+		// criteria.add(Restrictions.eq("show", true));
 		
 		Long rows = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-		System.out.println(rows);
+		System.out.println("rows="+ rows);
 		
 		return rows;
 	}
@@ -96,7 +96,7 @@ public class CampaignDao {
 			criteria.add(Restrictions.eq("location", location));
 		}
 
-		criteria.add(Restrictions.eq("show", true));
+		// criteria.add(Restrictions.eq("show", true));
 		
 		
 		List campaignModels = criteria.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();

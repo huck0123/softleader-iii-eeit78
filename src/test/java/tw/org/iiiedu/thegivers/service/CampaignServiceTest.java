@@ -71,14 +71,14 @@ public class CampaignServiceTest extends GenericTest {
 	 @Test 
 	 public void getByAllConditionCount(){
 	
-		 System.out.println(campaignService.getByAllConditionCount("KK", null, null));
+		 System.out.println(campaignService.getByAllConditionCount(null, null, null));
 	
 	 }
 	 
 	 @Test
 	 public void getByAllCondition(){
 		 System.out.println("here");
-		 System.out.println(campaignService.getByAllCondition("KK", null, null, 0, 5));
+		 System.out.println(campaignService.getByAllCondition(null, null, null, 0, 5));
 		 System.out.println("there");
 	 }
 	
