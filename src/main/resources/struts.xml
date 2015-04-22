@@ -57,20 +57,6 @@
 
 	</package>
 
-<!-- 	有insert跟delete的Action，package需要繼承count -->
-<!-- 	package 的	extends 改為 extends="count" -->
-	<package name="count" extends="struts-default">
-		
-		<interceptors>
-			<interceptor name="countInterceptor" 
-				class="tw.org.iiiedu.thegivers.interceptor.CountInterceptor"/>
-			<interceptor-stack name="myCountInterceptor">
-				<interceptor-ref name="defaultStack" /> 
-				<interceptor-ref name="countInterceptor"/>
-			</interceptor-stack>
-		</interceptors>
-	
-	</package>
 
 
 	<package name="default" namespace="/" extends="struts-default">

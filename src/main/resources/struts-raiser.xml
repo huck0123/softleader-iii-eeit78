@@ -4,8 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="raiserPackage" namespace="/raiser" extends="count">
-		<default-interceptor-ref name="myCountInterceptor"></default-interceptor-ref>
+	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
 
 		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction">
 			<result name="insert" type="redirect">/raiser/raiserCheck.action</result>

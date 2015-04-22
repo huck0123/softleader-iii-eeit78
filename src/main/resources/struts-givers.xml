@@ -7,8 +7,7 @@
 
 
 
-	<package name="giverPackage" namespace="/giver" extends="count">
-		<default-interceptor-ref name="myCountInterceptor"></default-interceptor-ref>
+	<package name="giverPackage" namespace="/giver" extends="struts-default">
 
 		<action name="giverAction" class="giverAction">
 			<result name="insert" type="redirect">/giver/registerSuccess</result>
