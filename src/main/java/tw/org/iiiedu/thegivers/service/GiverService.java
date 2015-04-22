@@ -62,9 +62,16 @@ public class GiverService {
 	}
 	
 	//頁次
-	public List<GiverModel> getPerPage(){
-		List<GiverModel> result = giverDao.getPerPage();
+	public List<GiverModel> getPerPage(int pageNum){
+		List<GiverModel> result = giverDao.getPerPage(pageNum);
 		return result;
+	}
+	
+	//條件收尋
+	public List<GiverModel> getByAllCondition(String account, String name, String familyName
+			, String tel, String email, Integer pageNum, Integer pageSize){
+		List<GiverModel> models = giverDao.getByAllCondition(account, name, familyName,  tel, email, pageNum, pageSize);
+		return models;
 	}
 
 }

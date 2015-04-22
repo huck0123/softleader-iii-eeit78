@@ -50,30 +50,30 @@ public class GiverDaoTest extends GenericTest{
 //		tx.commit();
 //	}
 
-	@Test
-	public void testUpdate(){
-		Session session = dao.getSession();
-		Transaction tx = session.beginTransaction();
-		
-		GiverModel bean = new GiverModel();
-		bean.setAccount("Jsona");
-		bean.setAddress("台北市大安區");
-		bean.setBirth(new Timestamp((new java.util.Date()).getTime()));
-		bean.setEmail("Jsona@gmail.com");
-		bean.setFamilyName("張");
-		bean.setGender(true);
-		bean.setGetInfo(true);
-		bean.setHeadshot(null);
-		bean.setIdNumber("A123456788");
-		bean.setName("君亞");
-		bean.setPasswd("sa123456");
-		bean.setTel("0931468725");
-		bean.setValid(true);
-		
-		bean = dao.update(bean);
-		System.out.println("test  "+bean);
-		tx.commit();
-	}
+//	@Test
+//	public void testUpdate(){
+//		Session session = dao.getSession();
+//		Transaction tx = session.beginTransaction();
+//		
+//		GiverModel bean = new GiverModel();
+//		bean.setAccount("Jsona");
+//		bean.setAddress("台北市大安區");
+//		bean.setBirth(new Timestamp((new java.util.Date()).getTime()));
+//		bean.setEmail("Jsona@gmail.com");
+//		bean.setFamilyName("張");
+//		bean.setGender(true);
+//		bean.setGetInfo(true);
+//		bean.setHeadshot(null);
+//		bean.setIdNumber("A123456788");
+//		bean.setName("君亞");
+//		bean.setPasswd("sa123456");
+//		bean.setTel("0931468725");
+//		bean.setValid(true);
+//		
+//		bean = dao.update(bean);
+//		System.out.println("test  "+bean);
+//		tx.commit();
+//	}
 	
 //	@Test 
 //	public void testGetById(){

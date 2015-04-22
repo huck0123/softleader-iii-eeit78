@@ -27,6 +27,10 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result type="stream" name="getPerPage" >
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 
 		<action name="*">

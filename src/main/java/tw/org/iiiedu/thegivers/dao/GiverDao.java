@@ -20,50 +20,30 @@ public class GiverDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	private Session session;
-
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
 	// 查詢帳號
-	public GiverModel getByAccount(String account) {
+		public GiverModel getByAccount(String account) {
 
-		GiverModel result = null;
+			GiverModel result = null;
 
-		try {
 			Criteria criteria = getSession().createCriteria(GiverModel.class);
-			criteria.add(Restrictions.eq("account", account).ignoreCase());
-			Iterator i = criteria.list().iterator();
+			result = (GiverModel) criteria
+					.add(Restrictions.eq("account", account).ignoreCase()).list()
+					.get(0);
 
-			if (i.hasNext()) {
-				result = (GiverModel) i.next();
-			}
-
-		} catch (HibernateException e) {
-			e.printStackTrace();
+			return result;
 		}
-		return result;
-	}
 
-	// 註冊帳號
-	public GiverModel insert(GiverModel bean) {
+		// 註冊帳號
+		public GiverModel insert(GiverModel bean) {
 
-		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		criteria.add(Restrictions.eq("account", bean.getAccount()).ignoreCase());
-		List<GiverModel> result = criteria.list();
-
-//		try {
 			getSession().save(bean);
+			
 			return bean;
-//		} 
-//		catch (HibernateException e) {
-//			e.printStackTrace();
-//			System.out.println("insert fail");
-//		}
-//
-//		return bean;
-	}
+		}
 
 	// 取得ID
 	public GiverModel getById(int id) {
@@ -117,10 +97,10 @@ public class GiverDao {
 		return count;
 	}
 	
-	//頁次
-	public List<GiverModel> getPerPage(){
+	//頁次   pageNum為第幾頁,一頁5筆
+	public List<GiverModel> getPerPage(int pageNum){
 		Criteria criteria = getSession().createCriteria(GiverModel.class)
-				.setFirstResult(1*2).setMaxResults(2);
+				.setFirstResult((pageNum-1)*5).setMaxResults(5);
 		List<GiverModel> result = criteria.list();
 		return result;
 	}
@@ -134,26 +114,45 @@ public class GiverDao {
 //	}
 	
 
-	// 更新資料
-	public GiverModel update(GiverModel bean) {
-		Session session = sessionFactory.openSession();
-		
-		Criteria criteria = session.createCriteria(GiverModel.class)
-				.add(Restrictions.eq("account", bean.getAccount()).ignoreCase());
-		GiverModel model = (GiverModel) criteria.list().iterator().next();
-
-		bean.setId(model.getId());
-		session.close();
-		try {
+		// 更新資料
+		public void update(GiverModel bean) {
 			getSession().update(bean);
-			return bean;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			System.out.println("update fail");
-		}
-		return null;
 
-	}
+		}
+		
+		//刪除資料
+		public void delete(String accouont){
+			getSession().delete(accouont);
+		}
+		
+		//條件收尋
+		public List<GiverModel> getByAllCondition(String account, String name, String familyName
+				, String tel, String email, Integer pageNum, Integer pageSize) {
+			
+			Criteria criteria = getSession().createCriteria(GiverModel.class);
+			if(account != null){
+				criteria.add(Restrictions.like("account", "%"+account+"%").ignoreCase());
+			}
+			if(name != null){
+				criteria.add(Restrictions.eq("name", name));
+			}
+			if(familyName != null){
+				criteria.add(Restrictions.eq("familyName", familyName));
+			}
+			if(tel != null){
+				criteria.add(Restrictions.eq("tel", tel));
+			}
+			if(email != null){
+				criteria.add(Restrictions.eq("email", email));
+			}
+	
+			// criteria.add(Restrictions.eq("show", true));
+			
+			
+			List<GiverModel> models = criteria.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
+			
+			return models;
+		}
 
 	
 	

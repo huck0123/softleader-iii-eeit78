@@ -34,9 +34,21 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(i);
 //	}
 	
+//	@Test
+//	public void testGetPerPage(){
+//		List<GiverModel> list = giverService.getPerPage(2);
+//		
+//		Iterator<GiverModel> i = list.iterator();
+//		
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//			
+//	}
+	
 	@Test
-	public void testGetPerPage(){
-		List<GiverModel> list = giverService.getPerPage();
+	public void testGetByAllCondition(){
+		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
 		
 		Iterator<GiverModel> i = list.iterator();
 		
