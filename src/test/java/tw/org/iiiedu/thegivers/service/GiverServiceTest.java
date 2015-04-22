@@ -16,10 +16,10 @@ public class GiverServiceTest extends GenericTest {
 	@Autowired
 	private GiverService giverService;
 
-//	@Test
-//	public void testLogin() {
-//		assertTrue(giverService.login("jerry0123", "password")!=null);
-//	}
+	@Test
+	public void testLogin() {
+		System.out.println(giverService.login("jerry0123", "password"));
+	}
 //	
 //	@Test
 //	public void testGetAll(){
