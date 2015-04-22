@@ -16,11 +16,13 @@ public class GiverServiceTest extends GenericTest {
 	@Autowired
 	private GiverService giverService;
 
+	//OK
 //	@Test
 //	public void testLogin() {
 //		assertTrue(giverService.login("jerry0123", "password")!=null);
 //	}
-//	
+	
+	//OK
 //	@Test
 //	public void testGetAll(){
 //		List<GiverModel> list = giverService.getAll();
@@ -28,12 +30,14 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(list.get(0));
 //	}
 	
+	//OK
 //	@Test
 //	public void testGetCount(){
 //		int i = giverService.getCount();
 //		System.out.println(i);
 //	}
 	
+	//OK
 //	@Test
 //	public void testGetPerPage(){
 //		List<GiverModel> list = giverService.getPerPage(2);
@@ -46,16 +50,17 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
-	@Test
-	public void testGetByAllCondition(){
-		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
-		
-		Iterator<GiverModel> i = list.iterator();
-		
-		while(i.hasNext()){
-			System.out.println(i.next());
-		}
-			
-	}
+	//OK
+//	@Test
+//	public void testGetByAllCondition(){
+//		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
+//		
+//		Iterator<GiverModel> i = list.iterator();
+//		
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//			
+//	}
 
 }

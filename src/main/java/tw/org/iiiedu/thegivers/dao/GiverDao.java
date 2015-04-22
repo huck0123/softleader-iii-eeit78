@@ -114,46 +114,49 @@ public class GiverDao {
 //	}
 	
 
-		// 更新資料
-		public void update(GiverModel bean) {
-			getSession().update(bean);
+	// 更新資料
+	public void update(GiverModel bean) {
+		getSession().update(bean);
 
+	}
+
+	// 刪除資料
+	public void delete(String accouont) {
+		getSession().delete(accouont);
+	}
+
+	// 條件收尋
+	public List<GiverModel> getByAllCondition(String account, String name,
+			String familyName, String tel, String email, Integer pageNum,
+			Integer pageSize) {
+
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		if (account != null) {
+			criteria.add(Restrictions.like("account", "%" + account + "%")
+					.ignoreCase());
 		}
-		
-		//刪除資料
-		public void delete(String accouont){
-			getSession().delete(accouont);
+		if (name != null) {
+			criteria.add(Restrictions.eq("name", name));
 		}
-		
-		//條件收尋
-		public List<GiverModel> getByAllCondition(String account, String name, String familyName
-				, String tel, String email, Integer pageNum, Integer pageSize) {
-			
-			Criteria criteria = getSession().createCriteria(GiverModel.class);
-			if(account != null){
-				criteria.add(Restrictions.like("account", "%"+account+"%").ignoreCase());
-			}
-			if(name != null){
-				criteria.add(Restrictions.eq("name", name));
-			}
-			if(familyName != null){
-				criteria.add(Restrictions.eq("familyName", familyName));
-			}
-			if(tel != null){
-				criteria.add(Restrictions.eq("tel", tel));
-			}
-			if(email != null){
-				criteria.add(Restrictions.eq("email", email));
-			}
-	
-			// criteria.add(Restrictions.eq("show", true));
-			
-			
-			List<GiverModel> models = criteria.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
-			
-			return models;
+		if (familyName != null) {
+			criteria.add(Restrictions.eq("familyName", familyName));
+		}
+		if (tel != null) {
+			criteria.add(Restrictions.eq("tel", tel));
+		}
+		if (email != null) {
+			criteria.add(Restrictions.eq("email", email));
 		}
 
+		// criteria.add(Restrictions.eq("show", true));
+
+		List<GiverModel> models = criteria.setFirstResult(pageNum * pageSize)
+				.setMaxResults(pageSize).list();
+
+		return models;
+	}
+
+	// 條件收尋筆數
 	
 	
 }
