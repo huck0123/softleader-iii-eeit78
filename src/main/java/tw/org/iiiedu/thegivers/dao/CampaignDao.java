@@ -78,7 +78,6 @@ public class CampaignDao {
 		// criteria.add(Restrictions.eq("show", true));
 		
 		Long rows = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-		System.out.println("rows="+ rows);
 		
 		return rows;
 	}
@@ -111,7 +110,6 @@ public class CampaignDao {
 			session.save(cm);
 			return true;
 		} catch (Exception e) {
-			System.out.println("campaigndao insert exception");
 			e.printStackTrace();
 			return false;
 		}
@@ -125,7 +123,6 @@ public class CampaignDao {
 			session.update(cm);
 			return true;
 		} catch (Exception e) {
-			System.out.println("campaigndao update exception");
 			e.printStackTrace();
 			return false;
 		}
@@ -143,7 +140,6 @@ public class CampaignDao {
 			}
 			return true;
 		} catch (Exception e) {
-			System.out.println("campaigndao delete exception");
 			e.printStackTrace();
 			return false;
 		}
@@ -165,7 +161,6 @@ public class CampaignDao {
 			}
 			return result;
 		} catch (Exception e) {
-			System.out.println("campaigndao getyByName exception");
 			e.printStackTrace();
 			return null;
 		}
