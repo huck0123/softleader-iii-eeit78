@@ -28,7 +28,7 @@ public class ContextParamListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		log.debug("Running ContextParamListener");
+		log.debug("Running ContextParamListener {}", sce);
 		
 		ServletContext sc = sce.getServletContext();
 
