@@ -1,34 +1,38 @@
 package tw.org.iiiedu.thegivers.model;
 
+import java.sql.Timestamp;
+
 public class RaiserHistoryModel {
+	
 	private Long id;
-	private Long raiser_id;
-	private Long campaign_id;
+	private Integer raiser_id;
+	private Integer campaign_id;
+	private Timestamp date;
 	private String ip;
 	
-	
-	@Override
-	public String toString() {
-		return "RHistoryModel [id=" + id + ", raiser_id=" + raiser_id
-				+ ", campaign_id=" + campaign_id + ", ip=" + ip + "]";
-	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getRaiser_id() {
+	public Integer getRaiser_id() {
 		return raiser_id;
 	}
-	public void setRaiser_id(Long raiser_id) {
+	public void setRaiser_id(Integer raiser_id) {
 		this.raiser_id = raiser_id;
 	}
-	public Long getCampaign_id() {
+	public Integer getCampaign_id() {
 		return campaign_id;
 	}
-	public void setCampaign_id(Long campaign_id) {
+	public void setCampaign_id(Integer campaign_id) {
 		this.campaign_id = campaign_id;
+	}
+	public Timestamp getDate() {
+		return date;
+	}
+	public void setDate(Timestamp date) {
+		this.date = date;
 	}
 	public String getIp() {
 		return ip;
@@ -36,6 +40,12 @@ public class RaiserHistoryModel {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
-
+	@Override
+	public String toString() {
+		return "RaiserHistoryModel [id=" + id + ", raiser_id=" + raiser_id
+				+ ", campaign_id=" + campaign_id + ", date=" + date + ", ip="
+				+ ip + ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }

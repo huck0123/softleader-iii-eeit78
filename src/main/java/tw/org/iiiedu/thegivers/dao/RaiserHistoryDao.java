@@ -4,50 +4,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import tw.org.iiiedu.thegivers.model.GiverHistoryModel;
 import tw.org.iiiedu.thegivers.model.RaiserHistoryModel;
+import tw.org.iiiedu.thegivers.model.RaiserModel;
 
 @Repository
 public class RaiserHistoryDao {
+	
 	@Autowired
-	private DataSource datasource2;
+	SessionFactory sessionFactory;
 
-	public RaiserHistoryModel getById(Long id) {
-		PreparedStatement prst = null;
-		Connection conn = null;
-		RaiserHistoryModel rhm = null;
-		try {
-			conn = datasource2.getConnection();
-			String stmt = "select * from r_history where id = ?";
-			prst = conn.prepareStatement(stmt);
-			prst.setLong(1, id);
-			ResultSet rs = prst.executeQuery();
-			if (rs.next()) {
-				rhm = new RaiserHistoryModel();
-				rhm.setId(rs.getLong("id"));
-				rhm.setRaiser_id(rs.getLong("raiser_id"));
-				rhm.setCampaign_id(rs.getLong("campaign_id"));
-				rhm.setIp(rs.getString("ip"));
-				return rhm;
+	public List<RaiserHistoryModel> getByRaiser_id(Integer raiser_id) {
 
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return null;
+		List<RaiserHistoryModel> result = null;
+		Session session = sessionFactory.getCurrentSession();
+
+		result = session.createCriteria(RaiserHistoryModel.class)
+				.add(Restrictions.eq("raiser_id", raiser_id)).list();
+		System.out.println(result);
+		return result;
 	}
 }
