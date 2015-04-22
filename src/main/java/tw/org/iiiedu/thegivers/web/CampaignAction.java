@@ -117,8 +117,8 @@ public class CampaignAction extends ActionSupport implements
 	}
 
 	public String insert() throws Exception {
-		System.out.println(System.currentTimeMillis());
-		System.out.println(campaignForm);
+
+
 		CampaignModel cm = new CampaignModel();
 		RaiserModel rm = (RaiserModel) request.getSession().getAttribute(
 				"raiser");
@@ -135,8 +135,8 @@ public class CampaignAction extends ActionSupport implements
 		cm.setStartDate(campaignForm.getStartDate());
 		cm.setType(campaignForm.getType());
 		cm.setVedioUrl(campaignForm.getVedioUrl());
-		System.out.println(cm);
-		System.out.println(System.currentTimeMillis());
+
+
 		campaignService.insert(cm);
 		return "insert";
 	}

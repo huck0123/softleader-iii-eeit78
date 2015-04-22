@@ -10,7 +10,11 @@
 </head>
 <body>
 
+<<<<<<< Updated upstream
 Welcome : ${()pageContext.request.userPrincipal} 
+=======
+Welcome : ${request.userPrincipal} 
+>>>>>>> Stashed changes
 	
 </body>
 </html>
