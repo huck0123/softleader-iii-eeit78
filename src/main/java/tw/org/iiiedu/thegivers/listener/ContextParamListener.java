@@ -4,7 +4,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -13,7 +14,7 @@ import tw.org.iiiedu.thegivers.service.GiverService;
 
 public class ContextParamListener implements ServletContextListener{
 	
-	private static Logger log = Logger.getLogger(ContextParamListener.class);
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private CampaignService campaignService;
 	@Autowired
