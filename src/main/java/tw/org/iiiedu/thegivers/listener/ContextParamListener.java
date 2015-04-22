@@ -28,8 +28,8 @@ public class ContextParamListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		log.error("Running ContextParamListener");
-
+		log.error("Running ContextParamListener {}", sce);
+		
 		ServletContext sc = sce.getServletContext();
 
 		WebApplicationContextUtils.getRequiredWebApplicationContext(sc).getAutowireCapableBeanFactory().autowireBean(this);
