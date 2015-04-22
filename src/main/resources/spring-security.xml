@@ -15,7 +15,7 @@
  
 		<form-login 
 		    login-page="/login.jsp" 
-		    default-target-url="/welcome.jsp" 
+		    default-target-url="/raiser/raiserShow" 
 			authentication-failure-url="/login.jsp?error" 
 			username-parameter="account"
 			password-parameter="passwd" />
