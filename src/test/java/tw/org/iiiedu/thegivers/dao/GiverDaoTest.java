@@ -15,15 +15,13 @@ public class GiverDaoTest extends GenericTest{
 	@Autowired
 	GiverDao dao;
 	
-//	@Test
-//	public void testGetByAccount() {
-//		Session session = dao.getSession();
-//		Transaction tx = session.beginTransaction();
-//		
-//		GiverModel bean = dao.getByAccount("aa");
-//		System.out.println(bean);
-//		tx.commit();
-//	}
+	@Test
+	public void testGetByAccount() {
+		Session session = dao.getSession();
+		
+		GiverModel bean = dao.getByAccount("jerry0123");
+		System.out.println(bean);
+	}
 	
 //	@Test
 //	public void testInsert(){

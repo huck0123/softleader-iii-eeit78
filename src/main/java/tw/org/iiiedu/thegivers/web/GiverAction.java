@@ -40,7 +40,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private InputStream inputStream;
 	private GiverForm form;
 	private GiverModel model;
-	private int giverCount;
+	private int thisPage;
 
 	public InputStream getInputStream() {
 		return inputStream;
@@ -54,12 +54,12 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		this.form = form;
 	}
 	
-	public int getGiverCount() {
-		return giverCount;
+	public int getThisPage() {
+		return thisPage;
 	}
 
-	public void setGiverCount(int giverCount) {
-		this.giverCount = giverCount;
+	public void setThisPage(int thisPage) {
+		this.thisPage = thisPage;
 	}
 
 	
@@ -171,7 +171,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	}
 
 	public String getPerPage(){
-		List<GiverModel> models = service.getPerPage(giverCount);
+		List<GiverModel> models = service.getPerPage(thisPage);
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(models);
