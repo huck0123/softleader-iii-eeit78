@@ -1,7 +1,10 @@
 package tw.org.iiiedu.thegivers.web;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,6 +41,13 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware{
 		rm.setContactPerson(raiserForm.getContactPerson());	
 		rm.setContactTel(raiserForm.getContactTel());	
 		rm.setEmail(raiserForm.getEmail());	
+		
+		 try {
+			 rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+		 } catch (IOException e1) {
+		 // TODO Auto-generated catch block
+		 e1.printStackTrace();
+		 }
 		rm.setAddress(raiserForm.getAddress());	
 		rm.setDetail(raiserForm.getDetail());	
 		rm.setVideoUrl(raiserForm.getVideoUrl());	
