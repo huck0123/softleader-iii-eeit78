@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015/4/1 ?U?? 08:04:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="tw.org.iiiedu.thegivers.model.RaiserHistoryModel" table="raiser_history">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="raiser_id" type="java.lang.Integer">
+			<column name="raiser_id" />
+		</property>
+		<property name="campaign_id" type="java.lang.Integer">
+			<column name="campaign_id" />
+		</property>
+		<property name="date" type="java.sql.Timestamp">
+			<column name="date" />
+		</property>		
+		<property name="ip" type="java.lang.String">
+			<column name="ip" />
+		</property>
+	</class>
+</hibernate-mapping>
