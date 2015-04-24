@@ -98,7 +98,7 @@ public class CampaignAction extends ActionSupport implements
 
 		
 		inputStream = new ByteArrayInputStream(
-				json.getBytes(StandardCharsets.UTF_8));
+				json.getBytes(StandardCharsets.UTF_16));
 		
 		return "selectByAllCondition";
 	}

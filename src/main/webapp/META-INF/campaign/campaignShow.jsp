@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -43,7 +43,9 @@ function load(){
 			$('#showColumn').empty();
 			$(data).each(function(index,value){
 				var child = $('<p>'+value.id + ', '+ value.name +'</p>');
+				var imgchild = $('<img src="data:image/jpeg;base64,"'+ value.image  +'/>')
 				child.appendTo($('#showColumn'));
+				imgchild.appendTo($('#showColumn'));
 			})
 		})
 		
@@ -57,12 +59,26 @@ function makeFunction(j){return function(){
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
 			var child = $('<p>'+value.id + ', '+ value.name +'</p>');
+			var str = arrayBufferToBase64(value.image); 
+			var imgchild = $('<img src="data:image/png;base64,' + str +'"/>')
 			child.appendTo($('#showColumn'));
+			imgchild.appendTo($('#showColumn'));
+			console.log(value.id);
+			console.log(imgchild.attr("src"));
 		})
 	})
 
 }}
 
+function arrayBufferToBase64( buffer ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+}
 
 
 
