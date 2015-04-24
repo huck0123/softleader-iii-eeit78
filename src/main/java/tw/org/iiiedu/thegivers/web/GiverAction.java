@@ -41,6 +41,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private GiverForm form;
 	private GiverModel model;
 	private int thisPage;
+	private String thisAccount;
 
 	public InputStream getInputStream() {
 		return inputStream;
@@ -61,15 +62,20 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public void setThisPage(int thisPage) {
 		this.thisPage = thisPage;
 	}
+	
+	public String getThisAccount() {
+		return thisAccount;
+	}
 
-	
-	
-	
+	public void setThisAccount(String thisAccount) {
+		this.thisAccount = thisAccount;
+	}
+
 	
 	
 	//註冊帳號
 	public String insert() {
-//		System.out.println(form);
+
 		context = request.getSession().getServletContext();
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
 		System.out.println("giverCount=" + giverCount);
@@ -105,8 +111,9 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			if (model != null) {
 				giverCount++;				//資料筆數+1
 				context.setAttribute("giverCount", giverCount.toString());
-				System.out.println("GiverAction註冊成功");
-				System.out.println(model);
+//				System.out.println("GiverAction註冊成功");
+//				System.out.println(model);
+				request.getSession().setAttribute("giverRegister", model);
 				return "insert";
 			} else {
 				return FAIL;
@@ -123,8 +130,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	//select by account
 	public String select() throws UnsupportedEncodingException{
 		
-		model = service.getByAccount("Jimmy1");
-//		System.out.println(model);
+		model = service.getByAccount(thisAccount);
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("account", model.getAccount());
@@ -170,6 +176,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		
 	}
 
+	//抓某頁的資料
 	public String getPerPage(){
 		List<GiverModel> models = service.getPerPage(thisPage);
 		
