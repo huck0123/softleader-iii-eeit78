@@ -4,7 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>活動列表</title>
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<style>
+
+</style>
 </head>
 <body>
 依名稱蒐尋：<input type="text" id="nameSearch">
@@ -15,11 +20,16 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script>
 
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+
+<script>
 var totalCount = 0;
-// var pageSize = ${application.campaignShowPageSize}
+
+//0是第一頁
+var currentPage= 0;
+
 load();
 
 function load(){
@@ -56,15 +66,15 @@ function load(){
 function makeFunction(j){return function(){
 	$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 			{'pageNum':j,'nameSearch':$('#nameSearch').val()},function(data){
+				currentPage=j;
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
 			var child = $('<p>'+value.id + ', '+ value.name +'</p>');
 			var str = arrayBufferToBase64(value.image); 
 			var imgchild = $('<img src="data:image/png;base64,' + str +'"/>')
-			child.appendTo($('#showColumn'));
 			imgchild.appendTo($('#showColumn'));
-			console.log(value.id);
-			console.log(imgchild.attr("src"));
+			child.appendTo($('#showColumn'));
+			
 		})
 	})
 
