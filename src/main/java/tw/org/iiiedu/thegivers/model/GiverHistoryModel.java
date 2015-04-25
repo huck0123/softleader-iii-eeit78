@@ -4,17 +4,17 @@ import java.sql.Timestamp;
 
 public class GiverHistoryModel {
 
-	private Long id;
+	private Integer id;
 	private Integer giver_id;
 	private Integer campaign_id;
 	private Integer amount;
 	private Timestamp date;
 	private String ip;
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Integer getGiver_id() {
