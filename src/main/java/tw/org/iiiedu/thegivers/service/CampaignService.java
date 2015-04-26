@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.org.iiiedu.thegivers.dao.CampaignDao;
+import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 
 @Service
@@ -94,18 +95,18 @@ public class CampaignService {
 		}
 	}
 
-	public List<CampaignModel> getByAllCondition(String name, String type, String location, Integer pageNum, Integer pageSize){
+	public List<CampaignModel> getByAllCondition(CampaignForm campaignForm){
 		
-		return campaignDao.getByAllCondition(name, type, location, pageNum, pageSize);
+		return campaignDao.getByAllCondition(campaignForm);
 	}
 	
 	public Integer getCount(){
 		return campaignDao.getCount();
 	}
 	
-	public Long getByAllConditionCount(String name, String type, String location) {
+	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		
-		return campaignDao.getByAllConditionCount(name, type, location);
+		return campaignDao.getByAllConditionCount(campaignForm);
 	}
 //	public List<CampaignModel> getByLocation(String location) {
 //		List<CampaignModel> list2 = new ArrayList<>();

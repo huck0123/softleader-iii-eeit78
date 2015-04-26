@@ -5,30 +5,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>活動列表</title>
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <style>
-
 </style>
 </head>
 <body>
-依名稱蒐尋：<input type="text" id="nameSearch">
-<button id="btn1"> Click </button>
+	依名稱蒐尋：
+	<input type="text" id="nameSearch">
+	<button id="btn1">Click</button> <button id="btn2">返回活動列表</button>
 	<div id="div1"></div>
 	<div id="showColumn"></div>
 
 
 
 </body>
-
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+
 
 <script>
 var totalCount = 0;
 
 //0是第一頁
-var currentPage= 0;
+
+var currentPage = 0;
 
 load();
 
@@ -36,7 +39,7 @@ function load(){
 
 
 	$.get('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-			{'pageNum':0,'nameSearch':$('#nameSearch').val()},function(data){
+			{'campaignForm.name':$('#nameSearch').val()},function(data){
 		
 		totalCount = data;
 		$('#div1').empty()
@@ -49,27 +52,40 @@ function load(){
 		}
 		
 		$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
-				{'pageNum':0,'nameSearch':$('#nameSearch').val()},function(data){
+				{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val()},function(data){
 			$('#showColumn').empty();
 			$(data).each(function(index,value){
-				var child = $('<p>'+value.id + ', '+ value.name +'</p>');
-				var imgchild = $('<img src="data:image/jpeg;base64,"'+ value.image  +'/>')
-				child.appendTo($('#showColumn'));
+				var child = $('<a></a>');
+				child.attr("href","#");
+				child.text(value.id +", "+value.name);
+				child.on('click',function(){goDetail(value)});
+				var imgchild = $('<img src="data:image/jpeg;base64,"'+ value.image  +'/>');
 				imgchild.appendTo($('#showColumn'));
+				child.appendTo($('#showColumn'));
 			})
 		})
 		
 	})}
 
-	$('#btn1').on('click',load);
+	$('#btn1').on('click',function(){
+		currentPage = 0;
+		load();
+	});
+	
+	$('#btn2').on('click',function(){
+		load();
+	});
 
 function makeFunction(j){return function(){
 	$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
-			{'pageNum':j,'nameSearch':$('#nameSearch').val()},function(data){
+			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
 				currentPage=j;
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
-			var child = $('<p>'+value.id + ', '+ value.name +'</p>');
+			var child = $('<a></a>');
+			child.attr("href","#");
+			child.text(value.id +", "+value.name);
+			child.on('click',function(){goDetail(value)});
 			var str = arrayBufferToBase64(value.image); 
 			var imgchild = $('<img src="data:image/png;base64,' + str +'"/>')
 			imgchild.appendTo($('#showColumn'));
@@ -79,6 +95,17 @@ function makeFunction(j){return function(){
 	})
 
 }}
+
+
+function goDetail(campaignModel){
+	console.log("modelName" + campaignModel.name);
+	$('#div1').empty();
+	$('#showColumn').empty();
+	var child = $('<p></p>');
+	child.text(campaignModel.id +", "+campaignModel.name);
+	child.appendTo($('#showColumn'));
+}
+
 
 function arrayBufferToBase64( buffer ) {
     var binary = '';

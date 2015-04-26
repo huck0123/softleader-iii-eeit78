@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.GenericTest;
+import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 
 
@@ -70,16 +71,17 @@ public class CampaignServiceTest extends GenericTest {
 
 	 @Test 
 	 public void getByAllConditionCount(){
-	
-		 System.out.println(campaignService.getByAllConditionCount(null, null, null));
+		 CampaignForm cf = new CampaignForm();
+		 assertTrue(campaignService.getByAllConditionCount(cf)>0);
 	
 	 }
 	 
 	 @Test
 	 public void getByAllCondition(){
-		 System.out.println("here");
-		 System.out.println(campaignService.getByAllCondition(null, null, null, 0, 5));
-		 System.out.println("there");
+		 CampaignForm cf = new CampaignForm();
+		 cf.setPageNum(0);
+		 cf.setPageSize(5);
+		 assertTrue(campaignService.getByAllCondition(cf).size()>0);
 	 }
 	
 //

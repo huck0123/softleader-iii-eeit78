@@ -5,8 +5,12 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class CampaignForm {
+	
+	private Integer id;
 
 	private String name;
+
+	private Integer raiserId;
 
 	private Integer goal;
 
@@ -14,15 +18,49 @@ public class CampaignForm {
 
 	private Timestamp endDate;
 
+	private Integer currentFund;
+
 	private String type;
 
 	private String vedioUrl;
 
 	private String detail;
 
+	private Boolean show;
+	
+	private Boolean valid;
+
 	private String location;
 
 	private File image;
+	
+	private Integer pageNum;
+	
+	private Integer pageSize;
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -30,6 +68,14 @@ public class CampaignForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getRaiserId() {
+		return raiserId;
+	}
+
+	public void setRaiserId(Integer raiserId) {
+		this.raiserId = raiserId;
 	}
 
 	public Integer getGoal() {
@@ -56,6 +102,14 @@ public class CampaignForm {
 		this.endDate = endDate;
 	}
 
+	public Integer getCurrentFund() {
+		return currentFund;
+	}
+
+	public void setCurrentFund(Integer currentFund) {
+		this.currentFund = currentFund;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -80,6 +134,22 @@ public class CampaignForm {
 		this.detail = detail;
 	}
 
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
+	}
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -96,13 +166,7 @@ public class CampaignForm {
 		this.image = image;
 	}
 
-	@Override
-	public String toString() {
-		return "CampaignForm [name=" + name + ", goal=" + goal + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", type=" + type
-				+ ", vedioUrl=" + vedioUrl + ", detail=" + detail
-				+ ", location=" + location + ", image=" + image + "]";
-	}
+	
 
 
 

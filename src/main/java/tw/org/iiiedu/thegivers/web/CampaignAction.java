@@ -33,44 +33,10 @@ public class CampaignAction extends ActionSupport implements
 	private HttpServletRequest request;
 	@Autowired
 	private CampaignService campaignService;
-	private Integer pageNum;
-	private Integer pageSize;
-	private String nameSearch;
-	private String typeSearch;
-	private String locationSearch;
 
 
-	public String getNameSearch() {
-		return nameSearch;
-	}
 
-	public void setNameSearch(String nameSearch) {
-		this.nameSearch = nameSearch;
-	}
-
-	public String getTypeSearch() {
-		return typeSearch;
-	}
-
-	public void setTypeSearch(String typeSearch) {
-		this.typeSearch = typeSearch;
-	}
-
-	public String getLocationSearch() {
-		return locationSearch;
-	}
-
-	public void setLocationSearch(String locationSearch) {
-		this.locationSearch = locationSearch;
-	}
-
-	public Integer getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
+	
 
 	public InputStream getInputStream() {
 		return inputStream;
@@ -86,12 +52,11 @@ public class CampaignAction extends ActionSupport implements
 
 	public String selectByAllCondition() throws Exception {
 
-		System.out.println("selectByAllCondition");
-		System.out.println(pageNum+", "+pageSize);
+
 		
-		if(pageNum == null){pageNum=0;}
-		if(pageSize == null){pageSize=2;}
-		List campaigns = campaignService.getByAllCondition(nameSearch, typeSearch, locationSearch, pageNum, pageSize);
+		if(campaignForm.getPageNum() == null){campaignForm.setPageNum(0);}
+		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(2);}
+		List campaigns = campaignService.getByAllCondition(campaignForm);
 
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);
@@ -105,8 +70,8 @@ public class CampaignAction extends ActionSupport implements
 	
 	public String selectByAllConditionCount() throws Exception {
 
-		System.out.println("nameSearch= " + nameSearch);
-		Long count = campaignService.getByAllConditionCount(nameSearch, typeSearch, locationSearch);
+
+		Long count = campaignService.getByAllConditionCount(campaignForm);
 
 
 		

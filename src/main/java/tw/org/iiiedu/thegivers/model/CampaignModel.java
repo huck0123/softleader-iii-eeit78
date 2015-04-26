@@ -25,26 +25,13 @@ public class CampaignModel {
 
 	private String detail;
 
-	private boolean show;
+	private Boolean show;
 	
-	private boolean valid;
+	private Boolean valid;
 
 	private String location;
 	
 	private byte[] image;
-
-	
-	
-	@Override
-	public String toString() {
-		return "CampaignModel [id=" + id + ", name=" + name + ", raiserId="
-				+ raiserId + ", goal=" + goal + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", currentFund=" + currentFund
-				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
-				+ detail + ", show=" + show + ", valid=" + valid
-				+ ", location=" + location + ", image="
-				+ Arrays.toString(image) + "]";
-	}
 
 	public Integer getId() {
 		return id;
@@ -126,19 +113,19 @@ public class CampaignModel {
 		this.detail = detail;
 	}
 
-	public boolean isShow() {
+	public Boolean getShow() {
 		return show;
 	}
 
-	public void setShow(boolean show) {
+	public void setShow(Boolean show) {
 		this.show = show;
 	}
 
-	public boolean isValid() {
+	public Boolean getValid() {
 		return valid;
 	}
 
-	public void setValid(boolean valid) {
+	public void setValid(Boolean valid) {
 		this.valid = valid;
 	}
 
@@ -157,6 +144,10 @@ public class CampaignModel {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	
+	
+
 
 	
 
