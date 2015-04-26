@@ -13,7 +13,7 @@
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script> console.log(${param.form.account})</script>
+
 </head>
 <body>
 	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>

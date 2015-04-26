@@ -27,7 +27,11 @@
 		</action>
 	</package>
 
-	
+	<package name="logoutPackage" namespace="/logout" extends="struts-default">
+		<action name="logoutAction" class="logoutAction">
+			<result name="success" type="redirect">/index.jsp</result>
+		</action>
+	</package>
 
 <!-- 	<package name="raiserPackage" namespace="/raiser" extends="struts-default"> -->
 
