@@ -193,6 +193,8 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	
 	
+	
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
