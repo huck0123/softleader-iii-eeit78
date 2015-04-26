@@ -1,65 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>©Ò¦³®½´Ú¤H¸ê°T</title>
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>æ‰€æœ‰ææ¬¾äººè³‡è¨Š</title>
 
-<style>
-.draggable {
-	width: 350px;
-	height: 350px;
-	padding: 0.5em;
-}
-</style>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="/softleader-iii-eeit78/js/giver.js " charset="UTF-8"></script>
 
-<script>
-	$(function() {
-		$(".draggable").draggable();
-	});
-</script>
 
 </head>
 <body>
-
-	<button onclick="before()">¤W¤@­¶</button>
-	<button onclick="nowPage()" value="1" id="page">¥»­¶</button>
-	<button onclick="after()">¤U¤@­¶</button>
-	<!--µL²á¤@¤U -->
-
-<!-- 	<div class="draggable" style="border: 1px solid gray;"> -->
-		<table class="table">
+	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">å›é¦–é </a></div>
+	
+	<div class="container">
+		<button onclick="before()">ä¸Šä¸€é </button>
+		<button onclick="nowPage()" value="1" id="page">æœ¬é </button>
+		<button onclick="after()">ä¸‹ä¸€é </button>
+	
+		<table class="table table-condensed">
 			<tr>
-				<th>±b¸¹</th>
-				<th>±K½X</th>
-				<th>©m</th>
-				<th>¦W¦r</th>
-				<th>©Ê§O</th>
-				<th>¨­¤ÀÃÒ¸¹½X</th>
-				<th>¤â¾÷¸¹½X</th>
-				<th>¦a§}</th>
+				<th>å¸³è™Ÿ</th>
+				<th>å¯†ç¢¼</th>
+				<th>å§“</th>
+				<th>åå­—</th>
+				<th>æ€§åˆ¥</th>
+				<th>èº«åˆ†è­‰è™Ÿç¢¼</th>
+				<th>æ‰‹æ©Ÿè™Ÿç¢¼</th>
+				<th>åœ°å€</th>
 				<th>email</th>
-				<th>Àò±o¸ê°T</th>
-				<th>¹Ï¤ù</th>
-				<th>¥Í¤é</th>
+				<th>ç²å¾—è³‡è¨Š</th>
+				<th>ç”Ÿæ—¥</th>
 			</tr>
 			<tbody id="tbdy">
+				
 
 			</tbody>
 		</table>
-<!-- 	</div> -->
+	</div>
 
 
 	<script>
 		
 		var giverCount = ${application.giverCount}/5;
 		var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!getPerPage";
+		
 		
 		function getData(data){
 			$.each(data,function(index,obj){
@@ -68,15 +58,14 @@
 						+ "<td>" +obj.passwd +"</td>"
 						+ "<td>"+ obj.familyName +"</td>" 
 						+ "<td>"+ obj.name +"</td>" 
-						+ "<td>"+ obj.gender +"</td>" 
+						+ "<td>"+ gender(obj.gender) +"</td>" 
 						+ "<td>"+ obj.idNumber +"</td>" 
 						+ "<td>"+ obj.tel +"</td>" 
 						+ "<td>"+ obj.address +"</td>" 
 						+ "<td>"+ obj.email +"</td>" 
-						+ "<td>"+ obj.getInfo +"</td>" 
-// 						+ "<td>"+ obj.headshot +"</td>" 
+						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
 						+ "<td>"+ obj.birth +"</td>" 
-						+"</hr>");	
+						+"</tr>");	
 			});
 		};
 		
@@ -115,7 +104,7 @@
 		
 		
 		
-		 				                 <!--Ajax¤èªk-->
+		 				                 <!--Ajaxæ–¹æ³•-->
 		// 		function load() {
 		// 			var xmlhttp;
 		// 			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari

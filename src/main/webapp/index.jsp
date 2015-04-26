@@ -51,10 +51,11 @@ giverCount: ${application.giverCount }
 	<p />
 	<a href="<c:url value='/campaign/campaignShow'/>">顯示所有活動</a>
 	<p />
-	<p />
 	<a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a>
 	<p />
 	<a href="<c:url value='/raiser/raiserRegister'/>">進入團體申請帳號頁面</a>
-	
+	<p />
+	<a href="<c:url value='/giver/giverInfo'/>">修改捐款人資訊</a>
+	<p />
 </body>
 </html>

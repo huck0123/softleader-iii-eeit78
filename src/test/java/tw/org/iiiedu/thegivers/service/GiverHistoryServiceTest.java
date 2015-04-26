@@ -12,8 +12,8 @@ public class GiverHistoryServiceTest extends GenericTest  {
 	@Autowired 
 	private GiverHistoryService giverHistoryService;
 	
-	@Test
-	public void testLogin(){
-		assertTrue(giverHistoryService.getByGiver_id(1)!=null);
-	}
+//	@Test
+//	public void testLogin(){
+//		assertTrue(giverHistoryService.getByGiver_id(1)!=null);
+//	}
 }

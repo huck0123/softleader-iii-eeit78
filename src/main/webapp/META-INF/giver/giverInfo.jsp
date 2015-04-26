@@ -8,6 +8,7 @@
 <title>捐贈者資訊</title>
 </head>
 <body>
+	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
 	<h2>XXX你好</h2>
 	
 

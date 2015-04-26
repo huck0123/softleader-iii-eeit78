@@ -16,11 +16,16 @@ public class GiverServiceTest extends GenericTest {
 	@Autowired
 	private GiverService giverService;
 
-	@Test
-	public void testLogin() {
-		System.out.println(giverService.login("jerry0123", "password"));
-	}
-//	
+//	@Test
+//	public void testLogin() {
+//		System.out.println(giverService.login("jerry0123", "password"));
+//	}
+	
+//	@Test 
+//	public void testGetByAccount(){
+//		System.out.println(giverService.getByAccount("json123").getHeadshot());
+//	}
+	
 //	@Test
 //	public void testGetAll(){
 //		List<GiverModel> list = giverService.getAll();
@@ -46,16 +51,25 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
+//	@Test
+//	public void testGetByAllCondition(){
+//		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
+//		
+//		Iterator<GiverModel> i = list.iterator();
+//		
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//			
+//	}
+	
 	@Test
-	public void testGetByAllCondition(){
-		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
-		
-		Iterator<GiverModel> i = list.iterator();
-		
-		while(i.hasNext()){
-			System.out.println(i.next());
-		}
-			
+	public void testUpdate(){
+		GiverModel model = giverService.getByAccount("kitty");
+		System.out.println(model);
+		model.setEmail("Hellokitty@gmail.com");
+		model = giverService.getByAccount("kitty");
+		System.out.println(model);
 	}
 
 }

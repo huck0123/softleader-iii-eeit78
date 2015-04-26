@@ -25,7 +25,7 @@ public class GiverService {
 			GiverModel gm = giverDao.getByAccount(account);
 
 			if (gm != null) {
-				String pass = gm.getPasswd(); // 資料庫抓出：byte[]
+				String pass = gm.getPasswd(); // 資料庫抓出
 				if (passwd.equals(pass)) {
 					return gm;
 				}
@@ -72,6 +72,11 @@ public class GiverService {
 			, String tel, String email, Integer pageNum, Integer pageSize){
 		List<GiverModel> models = giverDao.getByAllCondition(account, name, familyName,  tel, email, pageNum, pageSize);
 		return models;
+	}
+	
+	//更新資料
+	public void update(GiverModel model){
+		giverDao.update(model);
 	}
 
 }

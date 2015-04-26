@@ -25,13 +25,14 @@ public class GiverDao {
 	// 查詢帳號
 	public GiverModel getByAccount(String account) {
 
-		GiverModel result = null;
+		GiverModel model = null;
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
 		List<GiverModel> list =  criteria.add(Restrictions.eq("account", account).ignoreCase())
 				.list();			
 		if(list.size()>0){
-			return list.get(0);
+			model = list.get(0);
+			return model;
 		}else{
 			return null;
 		}
@@ -39,26 +40,19 @@ public class GiverDao {
 	}
 
 	// 註冊帳號
-	public GiverModel insert(GiverModel bean) {
+	public GiverModel insert(GiverModel model) {
 
-		getSession().save(bean);
+		getSession().save(model);
 
-		return bean;
+		return model;
 	}
 
-	// 取得ID
+	// ID收尋
 	public GiverModel getById(int id) {
 
-		try {
-			GiverModel bean = (GiverModel) getSession().get(GiverModel.class,
-					id);
-			return bean;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			System.out.println("can not find this id");
-		}
+		GiverModel model = (GiverModel) getSession().get(GiverModel.class, id);
+		return model;
 
-		return null;
 	}
 
 	// 關閉帳號 (用戶端)
@@ -83,17 +77,17 @@ public class GiverDao {
 	public List<GiverModel> getAll() {
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		List<GiverModel> result = criteria.list();
+		List<GiverModel> models = criteria.list();
 
-		return result;
+		return models;
 	}
 
 	// 總筆數
 	public int getCount() {
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		List<GiverModel> result = criteria.list();
-		int count = result.size();
+		List<GiverModel> models = criteria.list();
+		int count = models.size();
 
 		return count;
 	}
@@ -102,8 +96,8 @@ public class GiverDao {
 	public List<GiverModel> getPerPage(int pageNum) {
 		Criteria criteria = getSession().createCriteria(GiverModel.class)
 				.setFirstResult((pageNum - 1) * 5).setMaxResults(5);
-		List<GiverModel> result = criteria.list();
-		return result;
+		List<GiverModel> models = criteria.list();
+		return models;
 	}
 
 	// 名字收尋 unfinish

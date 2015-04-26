@@ -7,6 +7,7 @@
 <title>註冊失敗</title>
 </head>
 <body>
+	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
 	<h2>註冊失敗</h2>
 </body>
 </html>

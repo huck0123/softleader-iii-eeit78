@@ -95,10 +95,10 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
-				System.out.println("GiverAction--->FileNotFoundException");
+				return FAIL;
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("GiverAction--->IOException");
+				return FAIL;
 			}
 		}
 		model.setIdNumber(form.getId_number());
@@ -111,8 +111,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			if (model != null) {
 				giverCount++;				//資料筆數+1
 				context.setAttribute("giverCount", giverCount.toString());
-//				System.out.println("GiverAction註冊成功");
-//				System.out.println(model);
 				request.getSession().setAttribute("giverRegister", model);
 				return "insert";
 			} else {
@@ -120,7 +118,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			System.out.println("GiverAction--->HibernateException");
 			return FAIL;
 		}
 		
@@ -132,31 +129,31 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		
 		model = service.getByAccount(thisAccount);
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("account", model.getAccount());
-		map.put("passwd", model.getPasswd());
-		map.put("name", model.getName());
-		map.put("familyName", model.getFamilyName());
-		if(model.isGender() == true){
-			map.put("gender", "男");
-		}else{
-			map.put("gender", "女");
-		}
-		map.put("id_number", model.getIdNumber());
-		map.put("tel", model.getTel());
-		map.put("address", model.getAddress());
-		map.put("email", model.getEmail());
-		if(model.isGetInfo() == true){
-			map.put("get_info", "是");
-		}else{
-			map.put("get_info", "否");
-		}
-		map.put("headshot", model.getHeadshot().toString());
-		map.put("birth", model.getBirth().toString());
-		
-		JSONObject json=new JSONObject();
-		String jsonStr = json.toJSONString(map);
-		
+//		Map<String, String> map = new HashMap<>();
+//		map.put("account", model.getAccount());
+//		map.put("passwd", model.getPasswd());
+//		map.put("name", model.getName());
+//		map.put("familyName", model.getFamilyName());
+//		if(model.isGender() == true){
+//			map.put("gender", "男");
+//		}else{
+//			map.put("gender", "女");
+//		}
+//		map.put("id_number", model.getIdNumber());
+//		map.put("tel", model.getTel());
+//		map.put("address", model.getAddress());
+//		map.put("email", model.getEmail());
+//		if(model.isGetInfo() == true){
+//			map.put("get_info", "是");
+//		}else{
+//			map.put("get_info", "否");
+//		}
+//		map.put("headshot", model.getHeadshot().toString());
+//		map.put("birth", model.getBirth().toString());
+//		
+//		String jsonStr = JSONObject.toJSONString(map);
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(model);
 		
 		inputStream = new ByteArrayInputStream(
 				jsonStr.getBytes(StandardCharsets.UTF_8));
