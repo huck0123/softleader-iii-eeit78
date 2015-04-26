@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 
@@ -62,17 +63,20 @@ public class CampaignDao {
 		return null;
 	}
 
-	public Long getByAllConditionCount(String name, String type, String location) {
+	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
-		if(name != null){
-			criteria.add(Restrictions.like("name", "%"+name+"%").ignoreCase());
+		if(campaignForm.getId() != null){
+			criteria.add(Restrictions.like("id", campaignForm.getId()));
 		}
-		if(type != null){
-			criteria.add(Restrictions.eq("type", type));
+		if(campaignForm.getName() != null){
+			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
 		}
-		if(location != null){
-			criteria.add(Restrictions.eq("location", location));
+		if(campaignForm.getType() != null){
+			criteria.add(Restrictions.eq("type", campaignForm.getType()));
+		}
+		if(campaignForm.getLocation() != null){
+			criteria.add(Restrictions.eq("location", campaignForm.getLocation()));
 		}
 
 		// criteria.add(Restrictions.eq("show", true));
@@ -82,23 +86,26 @@ public class CampaignDao {
 		return rows;
 	}
 	
-	public List<CampaignModel> getByAllCondition(String name, String type, String location, Integer pageNum, Integer pageSize) {
+	public List<CampaignModel> getByAllCondition(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
-		if(name != null){
-			criteria.add(Restrictions.like("name", "%"+name+"%").ignoreCase());
+		if(campaignForm.getId() != null){
+			criteria.add(Restrictions.like("id", campaignForm.getId()));
 		}
-		if(type != null){
-			criteria.add(Restrictions.eq("type", type));
+		if(campaignForm.getName() != null){
+			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
 		}
-		if(location != null){
-			criteria.add(Restrictions.eq("location", location));
+		if(campaignForm.getType() != null){
+			criteria.add(Restrictions.eq("type", campaignForm.getType()));
+		}
+		if(campaignForm.getLocation() != null){
+			criteria.add(Restrictions.eq("location", campaignForm.getLocation()));
 		}
 
 		// criteria.add(Restrictions.eq("show", true));
 		
 		
-		List campaignModels = criteria.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
+		List campaignModels = criteria.setFirstResult(campaignForm.getPageNum() * campaignForm.getPageSize()).setMaxResults(campaignForm.getPageSize()).list();
 		
 		return campaignModels;
 	}

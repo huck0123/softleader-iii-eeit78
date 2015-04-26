@@ -51,6 +51,9 @@ giverCount: ${application.giverCount }
 	<p />
 	<a href="<c:url value='/campaign/campaignShow'/>">顯示所有活動</a>
 	<p />
+		<p />
+	<a href="<c:url value='/campaign/campaignDetail?campaignForm.id=565'/>">顯示活動細節</a>
+	<p />
 	<a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a>
 	<p />
 	<a href="<c:url value='/raiser/raiserRegister'/>">進入團體申請帳號頁面</a>

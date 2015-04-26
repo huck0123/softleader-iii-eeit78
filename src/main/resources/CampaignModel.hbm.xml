@@ -35,10 +35,10 @@
 		<property name="detail" type="java.lang.String">
 			<column name="DETAIL" />
 		</property>
-		<property name="show" type="boolean">
+		<property name="show" type="java.lang.Boolean">
 			<column name="SHOW" />
 		</property>
-		<property name="valid" type="boolean">
+		<property name="valid" type="java.lang.Boolean">
 			<column name="VALID" />
 		</property>
 		<property name="location" type="java.lang.String">
