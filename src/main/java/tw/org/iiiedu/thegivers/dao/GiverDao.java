@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,15 +29,15 @@ public class GiverDao {
 		GiverModel model = null;
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		List<GiverModel> list =  criteria.add(Restrictions.eq("account", account).ignoreCase())
-				.list();			
-		if(list.size()>0){
+		List<GiverModel> list = criteria.add(
+				Restrictions.eq("account", account).ignoreCase()).list();
+		if (list.size() > 0) {
 			model = list.get(0);
 			return model;
-		}else{
+		} else {
 			return null;
 		}
-		
+
 	}
 
 	// 註冊帳號
@@ -55,24 +56,6 @@ public class GiverDao {
 
 	}
 
-	// 關閉帳號 (用戶端)
-	// public boolean hide(String account){
-	//
-	// Criteria criteria = getSession().createCriteria(GiverModel.class);
-	// Iterator iterator = criteria
-	// .add(Restrictions.eq("account", account).ignoreCase()).list().iterator();
-	// try {
-	// if (iterator.hasNext()) {
-	// GiverModel bean = (GiverModel) iterator.next();
-	// bean.setValid(false);
-	// return true;
-	// }
-	// } catch (HibernateException e) {
-	// e.printStackTrace();
-	// }
-	// return false;
-	// }
-
 	// getAll
 	public List<GiverModel> getAll() {
 
@@ -86,8 +69,10 @@ public class GiverDao {
 	public int getCount() {
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		List<GiverModel> models = criteria.list();
-		int count = models.size();
+		int count = ((Long) criteria.setProjection(Projections.rowCount())
+				.uniqueResult()).intValue();
+		// List<GiverModel> models = criteria.list();
+		// int count = models.size();
 
 		return count;
 	}
@@ -117,6 +102,33 @@ public class GiverDao {
 	// 刪除資料
 	public void delete(String accouont) {
 		getSession().delete(accouont);
+	}
+
+	// 條件收尋筆數
+	public int getByAllConditionCount(String account, String name,
+			String familyName, String tel, String email) {
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		if (account != null) {
+			criteria.add(Restrictions.like("account", "%" + account + "%")
+					.ignoreCase());
+		}
+		if (name != null) {
+			criteria.add(Restrictions.eq("name", name));
+		}
+		if (familyName != null) {
+			criteria.add(Restrictions.eq("familyName", familyName));
+		}
+		if (tel != null) {
+			criteria.add(Restrictions.eq("tel", tel));
+		}
+		if (email != null) {
+			criteria.add(Restrictions.eq("email", email));
+		}
+
+		int count = ((Long) criteria.setProjection(
+				Projections.rowCount()).uniqueResult()).intValue();
+
+		return count;
 	}
 
 	// 條件收尋

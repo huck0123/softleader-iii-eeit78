@@ -67,6 +67,13 @@ public class GiverService {
 		return result;
 	}
 	
+	//條件收尋筆數
+	public int getByAllConditionCount(String account, String name, String familyName
+			, String tel, String email){
+		int count = giverDao.getByAllConditionCount(account, name, familyName, tel, email);
+		return count;
+	}
+	
 	//條件收尋
 	public List<GiverModel> getByAllCondition(String account, String name, String familyName
 			, String tel, String email, Integer pageNum, Integer pageSize){
@@ -77,6 +84,22 @@ public class GiverService {
 	//更新資料
 	public void update(GiverModel model){
 		giverDao.update(model);
+	}
+	
+	// 關閉帳號 (用戶端)
+	public boolean hide(String account){
+		GiverModel model = giverDao.getByAccount(account);
+		model.setValid(false);
+		giverDao.update(model);
+		return true;
+	}
+	
+	//開啟帳號(用戶端)
+	public boolean open(String account){
+		GiverModel model = giverDao.getByAccount(account);
+		model.setValid(true);
+		giverDao.update(model);
+		return true;
 	}
 
 }

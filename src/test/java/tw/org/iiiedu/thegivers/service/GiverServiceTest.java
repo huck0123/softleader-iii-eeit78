@@ -36,7 +36,9 @@ public class GiverServiceTest extends GenericTest {
 //	@Test
 //	public void testGetCount(){
 //		int i = giverService.getCount();
+//		int j = giverService.getCount();
 //		System.out.println(i);
+//		System.out.println(j);
 //	}
 	
 //	@Test
@@ -51,6 +53,12 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
+	@Test
+	public void testGetByAllConditionCount(){
+		int i = giverService.getByAllConditionCount(null, "冰冰", null, null, null);
+		System.out.println(i);
+	}
+	
 //	@Test
 //	public void testGetByAllCondition(){
 //		List<GiverModel> list = giverService.getByAllCondition("Tim", "P", "柯", null, null, 0, 5);
@@ -63,13 +71,25 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
-	@Test
-	public void testUpdate(){
-		GiverModel model = giverService.getByAccount("kitty");
-		System.out.println(model);
-		model.setEmail("Hellokitty@gmail.com");
-		model = giverService.getByAccount("kitty");
-		System.out.println(model);
-	}
+//	@Test
+//	public void testUpdate(){
+//		GiverModel model = giverService.getByAccount("kitty");
+//		System.out.println(model);
+//		model.setEmail("Hellokitty@gmail.com");
+//		model = giverService.getByAccount("kitty");
+//		System.out.println(model);
+//	}
+	
+//	@Test
+//	public void testHide(){
+//		giverService.hide("kitty");
+//		System.out.println(giverService.getByAccount("kitty"));
+//	}
+	
+//	@Test
+//	public void testOpen(){
+//		giverService.open("kitty");
+//		System.out.println(giverService.getByAccount("kitty"));
+//	}
 
 }

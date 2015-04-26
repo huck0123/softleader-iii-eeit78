@@ -15,8 +15,9 @@ giverCount: ${applicationScope.giverCount }
 	<c:if test="${admin != null}">${admin}</c:if>
 	<c:if test="${giver != null}">${giver}</c:if>
 	<c:if test="${raiser != null}">${raiser}</c:if>
+	<c:if test="${raiser != null || giver != null || admin != null}">
 
-	<p/><a href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a>
+	<p/><a href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></c:if>
 	<c:if test="${empty admin && empty giver && empty raiser}">
 		<form action="<c:url value='/login/loginAction'/>" method="post">
 			<table>
