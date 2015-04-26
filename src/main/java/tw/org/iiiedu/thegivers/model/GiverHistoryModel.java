@@ -11,6 +11,7 @@ public class GiverHistoryModel {
 	private Timestamp date;
 	private String ip;
 	
+	
 	public Integer getId() {
 		return id;
 	}

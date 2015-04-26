@@ -4,13 +4,23 @@ import java.sql.Timestamp;
 
 public class GiverHistoryAllConditionModel {
 	
+	private Integer giver_id = null;
 	private Integer campaign_id = null;
 	private String campaign_name = null;
 	private Integer minAmount = null;
 	private Integer maxAmount = null;
 	private Timestamp beforeDate = null;
 	private Timestamp afterDate = null;
+	private Integer pageNumber = null;
+	private Integer pageSize = null;
 	
+	
+	public Integer getGiver_id() {
+		return giver_id;
+	}
+	public void setGiver_id(Integer giver_id) {
+		this.giver_id = giver_id;
+	}
 	public Integer getCampaign_id() {
 		return campaign_id;
 	}
@@ -46,6 +56,18 @@ public class GiverHistoryAllConditionModel {
 	}
 	public void setAfterDate(Timestamp afterDate) {
 		this.afterDate = afterDate;
+	}
+	public Integer getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(Integer pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 	@Override
