@@ -24,6 +24,7 @@
 	<bean id="loginAction" class="tw.org.iiiedu.thegivers.web.LoginAction"></bean>
 	<bean id="campaignAction" class="tw.org.iiiedu.thegivers.web.CampaignAction"></bean>
 	<bean id="giverAction" class="tw.org.iiiedu.thegivers.web.GiverAction" scope="prototype"/>
+	<bean id="giverHistoryAction" class="tw.org.iiiedu.thegivers.web.GiverHistoryAction" scope="prototype"/>
 	<!-- 此頁提供 xxxxAction的程式碼位置-->
 	<!-- 以下以demoAction為例:
 			<bean id ="demoAction" ....>的值對應到 struts.xml裡的  
