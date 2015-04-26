@@ -71,8 +71,8 @@ public class CampaignServiceTest extends GenericTest {
 
 	 @Test 
 	 public void getByAllConditionCount(){
-	
-		 System.out.println(campaignService.getByAllConditionCount(null, null, null));
+		 CampaignForm cf = new CampaignForm();
+		 assertTrue(campaignService.getByAllConditionCount(cf)>0);
 	
 	 }
 	 
