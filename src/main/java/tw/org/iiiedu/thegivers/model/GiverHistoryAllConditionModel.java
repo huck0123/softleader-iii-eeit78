@@ -1,18 +1,28 @@
 package tw.org.iiiedu.thegivers.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class GiverHistoryAllConditionModel {
 	
+	public final static Integer MIN_AMOUNT = 0;
+	public final static Integer MAX_AMOUNT = Integer.MAX_VALUE;
+	public final static Integer PAGE_NUMBER = 0;
+	public final static Integer PAGE_SIZE = 5;
+	public Timestamp BEFORE_DATE = new Timestamp(new Date().getTime());
+	public Timestamp AFTER_DATE = new Timestamp(new Date(0).getTime());
 	private Integer giver_id = null;
 	private Integer campaign_id = null;
 	private String campaign_name = null;
 	private Integer minAmount = null;
 	private Integer maxAmount = null;
-	private Timestamp beforeDate = null;
-	private Timestamp afterDate = null;
 	private Integer pageNumber = null;
 	private Integer pageSize = null;
+	private Timestamp beforeDate = null;
+	private Timestamp afterDate = null;
 	
 	
 	public Integer getGiver_id() {
@@ -45,18 +55,6 @@ public class GiverHistoryAllConditionModel {
 	public void setMaxAmount(Integer maxAmount) {
 		this.maxAmount = maxAmount;
 	}
-	public Timestamp getBeforeDate() {
-		return beforeDate;
-	}
-	public void setBeforeDate(Timestamp beforeDate) {
-		this.beforeDate = beforeDate;
-	}
-	public Timestamp getAfterDate() {
-		return afterDate;
-	}
-	public void setAfterDate(Timestamp afterDate) {
-		this.afterDate = afterDate;
-	}
 	public Integer getPageNumber() {
 		return pageNumber;
 	}
@@ -69,13 +67,43 @@ public class GiverHistoryAllConditionModel {
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
-	
-	@Override
-	public String toString() {
-		return "GiverHistoryAllCondition [campaign_id=" + campaign_id
-				+ ", campaign_name=" + campaign_name + ", minAmount="
-				+ minAmount + ", maxAmount=" + maxAmount + ", beforeDate="
-				+ beforeDate + ", afterDate=" + afterDate + ", toString()="
-				+ super.toString() + "]";
+	public Timestamp getBeforeDate() {
+		return beforeDate;
 	}
+	public void setBeforeDate(Timestamp beforeDate) {
+		this.beforeDate = beforeDate;
+	}
+	public Timestamp getAfterDate() {
+		return afterDate;
+	}
+	public void setAfterDate(Timestamp afterDate) {
+		this.afterDate = afterDate;
+	}
+	
+	
+	public void makeDefaultPage(GiverHistoryAllConditionModel allCondition){
+		if(allCondition.getPageNumber() == null){
+			allCondition.setPageNumber(PAGE_NUMBER);
+		}
+		if(allCondition.getPageSize() == null){
+			allCondition.setPageSize(PAGE_SIZE);
+		}
+	}
+	public void makeDefaultAmount(GiverHistoryAllConditionModel allCondition){
+		if(allCondition.getMinAmount() == null){
+			allCondition.setMinAmount(MIN_AMOUNT);
+		}
+		if(allCondition.getMaxAmount() == null){
+			allCondition.setMaxAmount(MAX_AMOUNT);
+		}
+	}
+	public void makeDefaultDate(GiverHistoryAllConditionModel allCondition){
+		if(allCondition.getBeforeDate() == null){
+			allCondition.setBeforeDate(BEFORE_DATE);
+		}
+		if(allCondition.getAfterDate() == null){
+			allCondition.setAfterDate(AFTER_DATE);
+		}
+	}
+	
 }

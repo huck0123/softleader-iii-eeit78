@@ -76,7 +76,11 @@ public class GiverHistoryAction extends ActionSupport implements ServletRequestA
 		return "selectByAllCondition";
 	}
 	
-	
+	public String selectByAllConditionCount(){
+		Integer count = giverHistoryService.loadCount(allCondition);
+		inputStream = new ByteArrayInputStream(count.toString().getBytes(StandardCharsets.UTF_8));
+		return "selectByAllConditionCount";
+	}
 	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
