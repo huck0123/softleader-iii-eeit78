@@ -76,6 +76,9 @@ public class GiverHistoryAction extends ActionSupport implements ServletRequestA
 		return "selectByAllCondition";
 	}
 	
+	public String selectByAllConditionCount(){
+		return "selectByAllConditionCount";
+	}
 	
 	
 	@Override
