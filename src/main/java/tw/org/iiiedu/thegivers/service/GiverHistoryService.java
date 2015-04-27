@@ -37,7 +37,8 @@ public class GiverHistoryService {
 		Set<GiverHistoryModel> result = new TreeSet<GiverHistoryModel>();
 		
 		if(allCondition.getCampaign_id() != null){
-			List<GiverHistoryModel> searchById = giverHistoryDao.getByCampaign_id(allCondition.getGiver_id(), allCondition.getCampaign_id());
+			List<GiverHistoryModel> searchById = giverHistoryDao
+					.getByCampaign_id(allCondition.getGiver_id(), allCondition.getCampaign_id());
 			if(searchById.size()>0){
 				for(GiverHistoryModel g:searchById){
 					result.add(g);
@@ -45,7 +46,8 @@ public class GiverHistoryService {
 			}
 		}
 		if(allCondition.getCampaign_name() != null){
-			List<CampaignModel> searchByName = giverHistoryDao.getByCampaign_name(allCondition.getGiver_id(), allCondition.getCampaign_name());
+			List<CampaignModel> searchByName = giverHistoryDao
+					.getByCampaign_name(allCondition.getGiver_id(), allCondition.getCampaign_name());
 			if(searchByName.size()>0){
 				for(CampaignModel c:searchByName){
 					List<GiverHistoryModel> searchById = giverHistoryDao.getByCampaign_id(allCondition.getGiver_id(), c.getId());
@@ -59,7 +61,8 @@ public class GiverHistoryService {
 		}
 		if(allCondition.getMinAmount() != null || allCondition.getMaxAmount() != null){
 			giverHistoryAllConditionModel.makeDefaultAmount(allCondition);
-			List<GiverHistoryModel> searchByAmount = giverHistoryDao.getByAmount(allCondition.getGiver_id(), allCondition.getMinAmount(), allCondition.getMaxAmount());
+			List<GiverHistoryModel> searchByAmount = giverHistoryDao
+					.getByAmount(allCondition.getGiver_id(), allCondition.getMinAmount(), allCondition.getMaxAmount());
 			if(searchByAmount.size()>0){
 				for(GiverHistoryModel g:searchByAmount){
 					result.add(g);
@@ -68,7 +71,8 @@ public class GiverHistoryService {
 		}
 		if(allCondition.getBeforeDate() != null || allCondition.getAfterDate() != null){
 			giverHistoryAllConditionModel.makeDefaultDate(allCondition);
-			List<GiverHistoryModel> searchByDate = giverHistoryDao.getByDate(allCondition.getGiver_id(), allCondition.getBeforeDate(), allCondition.getAfterDate());
+			List<GiverHistoryModel> searchByDate = giverHistoryDao
+					.getByDate(allCondition.getGiver_id(), allCondition.getBeforeDate(), allCondition.getAfterDate());
 			if(searchByDate.size()>0){
 				for(GiverHistoryModel g:searchByDate){
 					result.add(g);
@@ -86,5 +90,9 @@ public class GiverHistoryService {
 		}else{
 			return null;
 		}
+	}
+	
+	public Integer loadCount(GiverHistoryAllConditionModel allCondition){
+		return giverHistoryDao.getCount(allCondition);
 	}
 }
