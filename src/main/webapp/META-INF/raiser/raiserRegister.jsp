@@ -13,7 +13,7 @@
 	<form action="<c:url value='/raiser/raiserAction!insert.action' />" method="post" enctype="multipart/form-data">
 		帳號:<input type="text" name="raiserForm.account" required="required"> <br>
 		密碼:<input type="password" name="raiserForm.passwd" required="required"> <br>
-		姓名:<input type="text" name="raiserForm.name" required="required"> <br>
+		團體名稱:<input type="text" name="raiserForm.name" required="required"> <br>
 		電話:<input type="text" name="raiserForm.tel"> <br>
 		連絡人姓名:<input type="text" name="raiserForm.contactPerson"><br> 
 		連絡人電話:<input type="text" name="raiserForm.contactTel"><br>
