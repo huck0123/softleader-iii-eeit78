@@ -33,18 +33,18 @@ public class TimeConverter extends StrutsTypeConverter {
 		return df.format(obj);
 	}
 	
-	public static void main(String args[]) {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		try {
-			java.util.Date date = (java.util.Date) sdf.parse("21:07:31");
-			//java.util.Date date = (java.util.Date) sdf.parse("21:07");
-			System.out.println("java.sql.Time="+ new java.sql.Time(date.getTime()));
-
-			String str = sdf.format(date);
-			System.out.println("str=" + str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String args[]) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+//		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//		try {
+//			java.util.Date date = (java.util.Date) sdf.parse("21:07:31");
+//			//java.util.Date date = (java.util.Date) sdf.parse("21:07");
+//			System.out.println("java.sql.Time="+ new java.sql.Time(date.getTime()));
+//
+//			String str = sdf.format(date);
+//			System.out.println("str=" + str);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

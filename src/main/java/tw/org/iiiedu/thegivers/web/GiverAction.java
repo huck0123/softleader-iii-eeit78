@@ -19,6 +19,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.hibernate.HibernateException;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.form.GiverForm;
@@ -30,6 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private static final long serialVersionUID = 1L;
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private GiverService service;
@@ -78,7 +81,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 
 		context = request.getSession().getServletContext();
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
-		System.out.println("giverCount=" + giverCount);
+		log.debug("----------------------giverAction insert---------------------------> {}", giverCount);
 		GiverModel model = new GiverModel();
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
@@ -111,7 +114,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			if (model != null) {
 				giverCount++;				//資料筆數+1
 				context.setAttribute("giverCount", giverCount.toString());
-				request.getSession().setAttribute("giverRegister", model);
+				request.getSession().setAttribute("giver", model);
 				return "insert";
 			} else {
 				return FAIL;

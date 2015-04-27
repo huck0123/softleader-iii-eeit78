@@ -62,7 +62,7 @@ giverCount: ${applicationScope.giverCount }
 	<a href="<c:url value='/raiser/raiserShow'/>">顯示所有團體資訊</a>
 	<a href="<c:url value='/raiser/raiserInfo'/>">進入團體專區</a>
 	<p />
-	<a href="<c:url value='/giver/giverInfo'/>">修改捐款人資訊</a>
+	<a href="<c:url value='/giver/giverArea'/>">捐款人專區</a>
 	<p />
 </body>
 </html>
