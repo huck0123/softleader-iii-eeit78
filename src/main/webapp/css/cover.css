@@ -72,7 +72,7 @@ opacity: 0.7;
 .site-wrapper-inner {
 
 	display: table-cell;
-	vertical-align: top;
+	vertical-align: middle;
 /* 	background-color: yellow; */
 }
 
@@ -101,36 +101,36 @@ opacity: 0.7;
  .header-pic{ width: 45px;
  height:45px}
  
- .header-font{
- font-size: 1.7em;
- color: violet ;
- }
+
  
 .masthead-brand {
 	margin-top: 10px;
 	margin-bottom: 10px;
+	margin-left: 10px;
 }
+
+
 
 .masthead-nav>li {
 	display: inline-block;
+	font-weight: bold;
+	font-size: 1.5em;
 }
 
-.masthead-nav>li+li {
-	margin-left: 20px;
-}
+
 
 .masthead-nav>li>a {
 	padding-right: 0;
 	padding-left: 0;
 /* 	font-size: 16px; */
 	font-weight: bold;
-/* 	font-family: "·L³n¥¿¶ÂÅé"; */
+/* 	font-family: "ï¿½Lï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; */
 	color: orangered; /* IE8 proofing */
 /* 	color: rgba(255, 255, 255, .75); */
 /* 	border-bottom: 2px solid transparent; */
 }
 
-.masthead-nav>li>a:hover, .masthead-nav>li>a:focus {
+.masthead-nav a:hover, .masthead-nav a:focus {
 	background-color: transparent;
 	border-bottom-color: #a9a9a9;
 	border-bottom-color: rgba(255, 255, 255, .25);
@@ -172,6 +172,17 @@ opacity: 0.7;
  * Affix and center
  */
 @media {
+		.header-fixed {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		background-color: black;
+		opacity: 0.7;
+	}
+	
 	.site-wrapper{
 	position: absolute;
 	top:0
@@ -198,17 +209,6 @@ opacity: 0.7;
 }
 
 @media ( min-width : 768px) {
-	/* Pull out the header and footer */
-	.header-fixed {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: auto;
-		background-color: black;
-		opacity: 0.7;
-	}
 	
 	.giverfoot {
 		position: fixed;
@@ -230,3 +230,5 @@ opacity: 0.7;
 		width: 1200px;
 	}
 }
+
+.
