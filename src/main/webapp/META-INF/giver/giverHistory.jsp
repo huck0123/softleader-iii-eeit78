@@ -36,11 +36,8 @@
 	
 	function loadAllByGiver_id(){
 		$.getJSON('/softleader-iii-eeit78/tw.org.iiiedu.thegivers.web/GiverHistoryAction!selectAll',{},function(data){
-			$(data).each(function(index, value){
-				$('#resultTable').append(childTr);
-				$(value).each(function(index2, value2){
-					
-				})
+			$.each(data, function(name, value){
+				
 			})
 		})
 	}
