@@ -28,7 +28,7 @@
 			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }±z¦n</h2>
 			<div><img src="" class="img-circle" id="headshot" style="width:80px; height:80px"></div>
 			
-			<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
+			<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
 				method="post" enctype="multipart/form-data">
 				<table class="table table-condensed">
 					<tr>

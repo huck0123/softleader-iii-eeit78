@@ -11,7 +11,7 @@
 
 		<action name="giverAction" class="giverAction">
 			<result name="insert" type="redirect">/giver/registerSuccess</result>
-			<result name="update" type="">/index.jsp</result>
+			<result name="update" type="redirect">/giver/registerSuccess</result>
 			<result name="success" type="">/index.jsp</result>
 			<result name="fail" type="">/META-INF/giver/giverRegister.jsp</result>
 			<result name="input" type="">/META-INF/giver/giverRegister.jsp</result>

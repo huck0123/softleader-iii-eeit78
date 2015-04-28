@@ -19,7 +19,7 @@ public class TimestampConverter extends StrutsTypeConverter {
 		};
 		for (DateFormat df : TimestampFormat)
 			try {
-				System.out.println("��TimestampConverter��");
+//				System.out.println("��TimestampConverter��");
 				java.util.Date date = (java.util.Date) df.parse(values[0]);
 				return new java.sql.Timestamp(date.getTime());
 			} catch (ParseException e) { 

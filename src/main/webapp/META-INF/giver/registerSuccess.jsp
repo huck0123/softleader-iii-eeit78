@@ -80,19 +80,17 @@
 
 			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
 			var thisAccount = "${sessionScope.giver.account}";
-
-			function getData(data) {
-				var str = arrayBufferToBase64(data.headshot);
-				$('#headshot').attr("src", "data:image/png;base64," + str);
+			
+			function getData(data){
+				var str = arrayBufferToBase64(data.headshot); 
+				$('#headshot').attr("src","data:image/png;base64," + str);
 			}
+			$.getJSON(url, {'thisAccount': 'android4' }, getData);
 
-			$.getJSON(url, {
-				'thisAccount' : thisAccount
-			}, getData);
 		}
 		getInformation();
 
-		// 		function load() {
+		//		function load() {
 		// 			var xmlhttp;
 		// 			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		// 				xmlhttp = new XMLHttpRequest();
