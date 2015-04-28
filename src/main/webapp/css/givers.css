@@ -1,0 +1,50 @@
+
+.vertical-space{
+	height:50px;
+}
+
+.outer-wrapper {
+	width:100%;
+
+	height:800px;
+	display: table;
+	vertical-align: middle;
+}
+
+.inner-wrapper {
+
+		display: table-cell;
+	vertical-align: middle;
+	
+}
+
+.wrapped-container {
+
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.margin-auto {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@media {
+	/* Handle the widths */
+	.wrapped-container {
+		width: 100%;
+	}
+}
+
+@media ( min-width : 768px) {
+	/* Handle the widths */
+	.wrapped-container {
+		width: 100%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.wrapped-container {
+		width: 1200px;
+	}
+}
