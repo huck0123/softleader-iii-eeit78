@@ -1,29 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<title>®½´Ú¤H±M°Ï</title>
+<title>ææ¬¾äººå°ˆå€</title>
 </head>
 <body>
 	<div>
-		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">¦^­º­¶</a>
+		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">å›é¦–é </a>
 	</div>
 
 	<div class="row container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }±z¦n</h2>
-			<a href="#">®½´Ú¤H¾ú¥v°T®§</a> 
+			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }æ‚¨å¥½</h2>
+			<a href="/softleader-iii-eeit78/giver/giverHistory">ææ¬¾äººæ­·å²è¨Šæ¯</a> 
 			<p />
-			<a href="/softleader-iii-eeit78/giver/giverInfo">­×§ï·|­û¸ê®Æ</a>
+			<a href="/softleader-iii-eeit78/giver/giverInfo">ä¿®æ”¹æœƒå“¡è³‡æ–™</a>
 		</div>
 		<div class="col-md-2"></div>
 

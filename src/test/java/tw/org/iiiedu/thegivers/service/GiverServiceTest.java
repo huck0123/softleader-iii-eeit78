@@ -53,11 +53,11 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
-	@Test
-	public void testGetByAllConditionCount(){
-		int i = giverService.getByAllConditionCount(null, "冰冰", null, null, null);
-		System.out.println(i);
-	}
+//	@Test
+//	public void testGetByAllConditionCount(){
+//		int i = giverService.getByAllConditionCount(null, "冰冰", null, null, null);
+//		System.out.println(i);
+//	}
 	
 //	@Test
 //	public void testGetByAllCondition(){
@@ -71,14 +71,15 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
-//	@Test
-//	public void testUpdate(){
-//		GiverModel model = giverService.getByAccount("kitty");
-//		System.out.println(model);
-//		model.setEmail("Hellokitty@gmail.com");
-//		model = giverService.getByAccount("kitty");
-//		System.out.println(model);
-//	}
+	@Test
+	public void testUpdate(){
+		GiverModel model = giverService.getByAccount("kitty");
+		System.out.println(model);
+		model.setEmail("Hellokitty@gmail.com");
+		giverService.update(model);
+		model = giverService.getByAccount("kitty");
+		System.out.println(model);
+	}
 	
 //	@Test
 //	public void testHide(){

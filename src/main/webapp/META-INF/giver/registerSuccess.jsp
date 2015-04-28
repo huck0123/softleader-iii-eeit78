@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <html>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>µù¥U¦¨¥\</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>è¨»å†ŠæˆåŠŸ</title>
 
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/giver.js"></script>
@@ -17,9 +17,9 @@
 </head>
 <body>
 	<div>
-		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">¦^­º­¶</a>
+		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">å›é¦–é </a>
 	</div>
-	<h2>µù¥U¦¨¥\</h2>
+	<h2>è¨»å†ŠæˆåŠŸ</h2>
 
 	<div class="container">
 		<div>
@@ -29,31 +29,31 @@
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
-					<td>±b¸¹:</td>
+					<td>å¸³è™Ÿ:</td>
 					<td>${sessionScope.giver.account }</td>
 				</tr>
 				<tr>
-					<td>±K½X</td>
+					<td>å¯†ç¢¼</td>
 					<td>${sessionScope.giver.passwd }</td>
 				</tr>
 				<tr>
-					<td>©m¦W</td>
+					<td>å§“å</td>
 					<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
 				</tr>
 				<tr>
-					<td>©Ê§O</td>
+					<td>æ€§åˆ¥</td>
 					<td id="gender"></td>
 				</tr>
 				<tr>
-					<td>¨­¤ÀÃÒ¸¹½X</td>
+					<td>èº«åˆ†è­‰è™Ÿç¢¼</td>
 					<td>${sessionScope.giver.idNumber }</td>
 				</tr>
 				<tr>
-					<td>¤â¾÷¸¹½X</td>
+					<td>æ‰‹æ©Ÿè™Ÿç¢¼</td>
 					<td>${sessionScope.giver.tel }</td>
 				</tr>
 				<tr>
-					<td>¦a§}</td>
+					<td>åœ°å€</td>
 					<td>${sessionScope.giver.address }</td>
 				</tr>
 				<tr>
@@ -61,11 +61,11 @@
 					<td>${sessionScope.giver.email }</td>
 				</tr>
 				<tr>
-					<td>Àò±o¸ê°T</td>
+					<td>ç²å¾—è³‡è¨Š</td>
 					<td id="getInfo"></td>
 				</tr>
 				<tr>
-					<td>¥Í¤é</td>
+					<td>ç”Ÿæ—¥</td>
 					<td>${sessionScope.giver.birth }</td>
 				</tr>
 			</tbody>
@@ -82,10 +82,11 @@
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){
+				console.log(data);
 				var str = arrayBufferToBase64(data.headshot); 
 				$('#headshot').attr("src","data:image/png;base64," + str);
 			}
-			$.getJSON(url, {'thisAccount': 'android4' }, getData);
+			$.getJSON(url, {'thisAccount': thisAccount }, getData);
 
 		}
 		getInformation();
@@ -117,7 +118,7 @@
 
 		// 					var tr1 = document.createElement("tr");
 		// 					var td1 = document.createElement("td");
-		// 					td1.innerHTML = "±b¸¹:";
+		// 					td1.innerHTML = "å¸³è™Ÿ:";
 		// 					var td2 = document.createElement("td");
 		// 					td2.innerHTML = JsonObject.account;
 		// 					tr1.appendChild(td1);
@@ -125,7 +126,7 @@
 
 		// 					var tr2 = document.createElement("tr");
 		// 					var td3 = document.createElement("td");
-		// 					td3.innerHTML = "±K½X:";
+		// 					td3.innerHTML = "å¯†ç¢¼:";
 		// 					var td4 = document.createElement("td");
 		// 					td4.innerHTML = JsonObject.passwd;
 		// 					tr2.appendChild(td3);
@@ -133,7 +134,7 @@
 
 		// 					var tr3 = document.createElement("tr");
 		// 					var td5 = document.createElement("td");
-		// 					td5.innerHTML = "©m:";
+		// 					td5.innerHTML = "å§“:";
 		// 					var td6 = document.createElement("td");
 		// 					td6.innerHTML = JsonObject.familyName;
 		// 					tr3.appendChild(td5);
@@ -141,7 +142,7 @@
 
 		// 					var tr4 = document.createElement("tr");
 		// 					var td7 = document.createElement("td");
-		// 					td7.innerHTML = "¦W¦r:";
+		// 					td7.innerHTML = "åå­—:";
 		// 					var td8 = document.createElement("td");
 		// 					td8.innerHTML = JsonObject.name;
 		// 					tr4.appendChild(td7);
@@ -149,7 +150,7 @@
 
 		// 					var tr5 = document.createElement("tr");
 		// 					var td9 = document.createElement("td");
-		// 					td9.innerHTML = "©Ê§O:";
+		// 					td9.innerHTML = "æ€§åˆ¥:";
 		// 					var td10 = document.createElement("td");
 		// 					td10.innerHTML = JsonObject.gender;
 		// 					tr5.appendChild(td9);
@@ -157,7 +158,7 @@
 
 		// 					var tr6 = document.createElement("tr");
 		// 					var td11 = document.createElement("td");
-		// 					td11.innerHTML = "¨­¤ÀÃÒ¦r¸¹:";
+		// 					td11.innerHTML = "èº«åˆ†è­‰å­—è™Ÿ:";
 		// 					var td12 = document.createElement("td");
 		// 					td12.innerHTML = JsonObject.id_number;
 		// 					tr6.appendChild(td11);
@@ -165,7 +166,7 @@
 
 		// 					var tr7 = document.createElement("tr");
 		// 					var td13 = document.createElement("td");
-		// 					td13.innerHTML = "¤â¾÷:";
+		// 					td13.innerHTML = "æ‰‹æ©Ÿ:";
 		// 					var td14 = document.createElement("td");
 		// 					td14.innerHTML = JsonObject.tel;
 		// 					tr7.appendChild(td13);
@@ -173,7 +174,7 @@
 
 		// 					var tr8 = document.createElement("tr");
 		// 					var td15 = document.createElement("td");
-		// 					td15.innerHTML = "¦í§}:";
+		// 					td15.innerHTML = "ä½å€:";
 		// 					var td16 = document.createElement("td");
 		// 					td16.innerHTML = JsonObject.address;
 		// 					tr8.appendChild(td15);
@@ -189,7 +190,7 @@
 
 		// 					var tr10 = document.createElement("tr");
 		// 					var td19 = document.createElement("td");
-		// 					td19.innerHTML = "¬O§_Àò±o¸ê°T:";
+		// 					td19.innerHTML = "æ˜¯å¦ç²å¾—è³‡è¨Š:";
 		// 					var td20 = document.createElement("td");
 		// 					td20.innerHTML = JsonObject.get_info;
 		// 					tr10.appendChild(td19);
@@ -197,7 +198,7 @@
 
 		// 					var tr11 = document.createElement("tr");
 		// 					var td21 = document.createElement("td");
-		// 					td21.innerHTML = "¥Í¤é:";
+		// 					td21.innerHTML = "ç”Ÿæ—¥:";
 		// 					var td22 = document.createElement("td");
 		// 					td22.innerHTML = JsonObject.birth;
 		// 					tr11.appendChild(td21);

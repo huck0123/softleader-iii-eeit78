@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>®½ÃØªÌ¸ê°T­×§ï</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>æè´ˆè€…è³‡è¨Šä¿®æ”¹</title>
 
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/giver.js"></script>
@@ -19,53 +19,53 @@
 </head>
 <body>
 	<div>
-		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">¦^­º­¶</a>
+		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">å›é¦–é </a>
 	</div>
 
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="container col-md-8">
-			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }±z¦n</h2>
+			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }æ‚¨å¥½</h2>
 			<div><img src="" class="img-circle" id="headshot" style="width:80px; height:80px"></div>
 			
 			<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
 				method="post" enctype="multipart/form-data">
 				<table class="table table-condensed">
 					<tr>
-						<td><label for="">±b¸¹:</label></td>
+						<td><label for="">å¸³è™Ÿ:</label></td>
 						<td><input type="text" name="form.account"
 							value="${sessionScope.giver.account }" required="required"></td>
 					</tr>
 					<tr>
-						<td><label for="">±K½X:</label></td>
+						<td><label for="">å¯†ç¢¼:</label></td>
 						<td><input type="password" name="form.passwd"
 							value="${sessionScope.giver.passwd }" required="required"></td>
 					</tr>
 					<tr>
-						<td><label for="">©m:</label></td>
+						<td><label for="">å§“:</label></td>
 						<td><input type="text" name="form.familyName"
 							value="${sessionScope.giver.familyName }"></td>
 					</tr>
 					<tr>
-						<td><label for="">¦W¦r:</label></td>
+						<td><label for="">åå­—:</label></td>
 						<td><input type="text" name="form.name"
 							value="${sessionScope.giver.name }"></td>
 					</tr>
 					<tr>
-						<td><label for="">©Ê§O:</label></td>
+						<td><label for="">æ€§åˆ¥:</label></td>
 						<td id="gender"></td>
 					</tr>
 					<tr>
-						<td><label for="">¨­¤ÀÃÒ¦r¸¹:</label></td>
+						<td><label for="">èº«åˆ†è­‰å­—è™Ÿ:</label></td>
 						<td>${sessionScope.giver.idNumber }</td>
 					</tr>
 					<tr>
-						<td><label for="">¤â¾÷:</label></td>
+						<td><label for="">æ‰‹æ©Ÿ:</label></td>
 						<td><input type="text" name="form.tel"
 							value="${sessionScope.giver.tel }"></td>
 					</tr>
 					<tr>
-						<td><label for="">¦í§}:</label></td>
+						<td><label for="">ä½å€:</label></td>
 						<td><input type="text" name="form.address"
 							value="${sessionScope.giver.address }"></td>
 					</tr>
@@ -75,21 +75,21 @@
 							value="${sessionScope.giver.email }"></td>
 					</tr>
 					<tr>
-						<td><label for="">¬O§_Àò±o¸ê°T:</label></td>
+						<td><label for="">æ˜¯å¦ç²å¾—è³‡è¨Š:</label></td>
 						<td><input type="radio" name="form.get_info" value="true"
-							id="getInfo1">¬O <input type="radio" name="form.get_info"
-							value="false" id="getInfo2">§_</td>
+							id="getInfo1">æ˜¯ <input type="radio" name="form.get_info"
+							value="false" id="getInfo2">å¦</td>
 					</tr>
 					<tr>
-						<td><label for="">¥Í¤é:</label></td>
+						<td><label for="">ç”Ÿæ—¥:</label></td>
 						<td>${sessionScope.giver.birth }</td>
 					</tr>
 					<tr>
-						<td><label for="">·Ó¤ù:</label></td>
+						<td><label for="">ç…§ç‰‡:</label></td>
 						<td><input type="file" name="form.headshot" value=""></td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="°e¥X"></td>
+						<td><input type="submit" value="é€å‡º"></td>
 					</tr>
 				</table>
 			</form>
@@ -111,6 +111,7 @@
 			
 			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
 			function getData(data){
+				console.log(data);
 				var str = arrayBufferToBase64(data.headshot); 
 				$('#headshot').attr("src","data:image/png;base64," + str);
 			}
