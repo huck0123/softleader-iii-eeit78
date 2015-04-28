@@ -19,7 +19,7 @@ public class TimestampConverter extends StrutsTypeConverter {
 		};
 		for (DateFormat df : TimestampFormat)
 			try {
-				System.out.println("��TimestampConverter��");
+//				System.out.println("��TimestampConverter��");
 				java.util.Date date = (java.util.Date) df.parse(values[0]);
 				return new java.sql.Timestamp(date.getTime());
 			} catch (ParseException e) { 
@@ -36,18 +36,18 @@ public class TimestampConverter extends StrutsTypeConverter {
 		return df.format(obj);
 	}
 
-	public static void main(String args[]) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		try {
-			java.util.Date date = (java.util.Date) sdf.parse("1999-07-31 22:20:41");
-			//java.util.Date date = (java.util.Date) sdf.parse("1999-07-31T22:20:41");
-			System.out.println("java.sql.Timestamp="+ new java.sql.Timestamp(date.getTime()));
-
-			String str = sdf.format(date);
-			System.out.println("str=" + str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String args[]) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+//		try {
+//			java.util.Date date = (java.util.Date) sdf.parse("1999-07-31 22:20:41");
+//			//java.util.Date date = (java.util.Date) sdf.parse("1999-07-31T22:20:41");
+//			System.out.println("java.sql.Timestamp="+ new java.sql.Timestamp(date.getTime()));
+//
+//			String str = sdf.format(date);
+//			System.out.println("str=" + str);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

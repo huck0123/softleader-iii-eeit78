@@ -16,7 +16,7 @@ public class UtilDateConverter extends StrutsTypeConverter {
 		};
 		for (DateFormat df : UtilDateFormat)
 			try {
-				System.out.println("DateConverter");
+//				System.out.println("DateConverter");
 				java.util.Date date = (java.util.Date) df.parse(values[0]);
 				return date;
 			} catch (ParseException e) { 
@@ -33,22 +33,22 @@ public class UtilDateConverter extends StrutsTypeConverter {
 		return df.format(obj);
 	}
 
-	public static void main(String args[]) {
-		//SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		//SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		try {
-			//java.util.Date date = (java.util.Date) sdf.parse("99-07-31");
-			//java.util.Date date = (java.util.Date) sdf.parse("1999-07-31");
-			//java.util.Date date = (java.util.Date) sdf.parse("99/07/31");
-			java.util.Date date = (java.util.Date) sdf.parse("1999/07/31");
-			System.out.println("java.util.Date="+ date);
-
-			String str = sdf.format(date);
-			System.out.println("str=" + str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String args[]) {
+//		//SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+//		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		//SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//		try {
+//			//java.util.Date date = (java.util.Date) sdf.parse("99-07-31");
+//			//java.util.Date date = (java.util.Date) sdf.parse("1999-07-31");
+//			//java.util.Date date = (java.util.Date) sdf.parse("99/07/31");
+//			java.util.Date date = (java.util.Date) sdf.parse("1999/07/31");
+//			System.out.println("java.util.Date="+ date);
+//
+//			String str = sdf.format(date);
+//			System.out.println("str=" + str);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

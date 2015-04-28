@@ -8,11 +8,18 @@
 
 		<action name="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction">
 			<result name="insert" type="redirect">/raiser/raiserCheck.action</result>
-			<result name="update" type="redirect">/META-INF/raiser/raiserCheck.jsp</result>
-			<result name="select" type="redirect">/META-INF/raiser/raiserCheck.jsp</result>
+			<result name="update" type="redirect">/META-INF/raiser/raiserUpdate.jsp
+			</result>
 			<result name="error" type="redirect">/META-INF/raiser/raiserRegister.jsp
 			</result>
 			<result name="success" type="redirect">/META-INF/login/login.jsp</result>
+		</action>
+
+		<action name="raiserSelectAll" class="tw.org.iiiedu.thegivers.web.RaiserAction">
+			<result name="select" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 
 		<action name="*">

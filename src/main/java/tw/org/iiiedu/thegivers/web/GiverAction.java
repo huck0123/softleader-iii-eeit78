@@ -19,6 +19,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.hibernate.HibernateException;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.form.GiverForm;
@@ -30,6 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private static final long serialVersionUID = 1L;
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private GiverService service;
@@ -77,14 +80,13 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public String insert() {
 
 		context = request.getSession().getServletContext();
-		Integer giverCount = (Integer) context.getAttribute("giverCount");
-		System.out.println("giverCount=" + giverCount);
-		GiverModel model = new GiverModel();
+//		Integer giverCount = (Integer) context.getAttribute("giverCount");
+		model = new GiverModel();
+//		log.debug("----------------------giverAction insert--------------------------- {}", giverCount);
 		model.setAccount(form.getAccount());
 		model.setAddress(form.getAddress());
 		model.setBirth(new Timestamp(form.getBirth().getTime()));
 		model.setEmail(form.getEmail());
-		
 		model.setFamilyName(form.getFamilyName());
 		model.setName(form.getName());
 		model.setGender(form.isGender());
@@ -109,9 +111,10 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		try {
 			model = service.register(model);
 			if (model != null) {
-				giverCount++;				//資料筆數+1
-				context.setAttribute("giverCount", giverCount.toString());
-				request.getSession().setAttribute("giverRegister", model);
+//				giverCount++;				//資料筆數+1
+//				context.setAttribute("giverCount", giverCount.toString());
+				request.getSession().setAttribute("giver", model);
+				log.debug("-----giverInsert------ {}{}", model,form);
 				return "insert";
 			} else {
 				return FAIL;
@@ -185,7 +188,39 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "getPerPage";
 	}
 	
-	
+	//更新資料
+	public String update(){
+		GiverModel temp = new GiverModel();
+		temp = (GiverModel) request.getSession().getAttribute("giver");
+		log.debug("---------------update-------------{}",temp);
+		
+		model.setAddress(form.getAddress());
+		model.setBirth(temp.getBirth());
+		model.setEmail(form.getEmail());
+		model.setFamilyName(form.getFamilyName());
+		model.setName(form.getName());
+		model.setGender(temp.isGender());
+		model.setGetInfo(form.isGet_info());
+
+		if(form.getHeadshot() != null){
+			try {
+				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return FAIL;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return FAIL;
+			}
+		}
+		model.setIdNumber(temp.getIdNumber());
+		model.setPasswd(form.getPasswd());
+		model.setTel(form.getTel());
+		model.setValid(true);
+		service.update(model);
+		
+		return "update";
+	}
 	
 	
 	

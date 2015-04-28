@@ -5,94 +5,92 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<title>註冊成功</title>
+
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/giver.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-<title>註冊成功</title>
 </head>
 <body>
-	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
+	<div>
+		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a>
+	</div>
 	<h2>註冊成功</h2>
 
 	<div class="container">
-		<div><img src="" id="headshot" style="width:50px; height:50px"></div>
+		<div>
+			<img src="" class="img-circle" id="headshot"
+				style="width: 80px; height: 80px">
+		</div>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
 					<td>帳號:</td>
-					<td>${giverRegister.account }</td>
+					<td>${sessionScope.giver.account }</td>
 				</tr>
 				<tr>
 					<td>密碼</td>
-					<td>${giverRegister.passwd }</td>
+					<td>${sessionScope.giver.passwd }</td>
 				</tr>
 				<tr>
 					<td>姓名</td>
-					<td>${giverRegister.familyName }${giverRegister.name }</td>
+					<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
 				</tr>
 				<tr>
 					<td>性別</td>
-					<td>${giverRegister.gender }</td>
+					<td id="gender"></td>
 				</tr>
 				<tr>
 					<td>身分證號碼</td>
-					<td>${giverRegister.idNumber }</td>
+					<td>${sessionScope.giver.idNumber }</td>
 				</tr>
 				<tr>
 					<td>手機號碼</td>
-					<td>${giverRegister.tel }</td>
+					<td>${sessionScope.giver.tel }</td>
 				</tr>
 				<tr>
 					<td>地址</td>
-					<td>${giverRegister.address }</td>
+					<td>${sessionScope.giver.address }</td>
 				</tr>
 				<tr>
 					<td>email</td>
-					<td>${giverRegister.email }</td>
+					<td>${sessionScope.giver.email }</td>
 				</tr>
 				<tr>
 					<td>獲得資訊</td>
-					<td>${giverRegister.getInfo }</td>
+					<td id="getInfo"></td>
 				</tr>
 				<tr>
 					<td>生日</td>
-					<td>${giverRegister.birth }</td>
+					<td>${sessionScope.giver.birth }</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
 	<script>
-		
-		var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
-		var thisAccount = "${giverRegister.account}";
+	
+		function getInformation() {
+			$('#gender').text(gender(${sessionScope.giver.gender}));
+			$('#getInfo').text(getInfo(${sessionScope.giver.getInfo}));
 
-		function arrayBufferToBase64( buffer ) {
-		    var binary = '';
-		    var bytes = new Uint8Array( buffer );
-		    var len = bytes.byteLength;
-		    for (var i = 0; i < len; i++) {
-		        binary += String.fromCharCode( bytes[ i ] );
-		    }
-		    return window.btoa( binary );
+			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
+			var thisAccount = "${sessionScope.giver.account}";
+			
+			function getData(data){
+				var str = arrayBufferToBase64(data.headshot); 
+				$('#headshot').attr("src","data:image/png;base64," + str);
+			}
+			$.getJSON(url, {'thisAccount': 'android4' }, getData);
+
 		}
+		getInformation();
 
-		function getData(data){
-// 			console.log(data.headshot);
-			var str = arrayBufferToBase64(data.headshot); 
-			$('#headshot').attr("src","data:image/png;base64," + str);
-		}
-	
-		$.getJSON(url, {'thisAccount': thisAccount }, getData);
-		
-		
-	
-	
-
-		// 		function load() {
+		//		function load() {
 		// 			var xmlhttp;
 		// 			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		// 				xmlhttp = new XMLHttpRequest();
