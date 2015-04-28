@@ -8,19 +8,19 @@ a, a:focus, a:hover {
 }
 
 /* Custom default button */
-.btn-default, .btn-default:hover, .btn-default:focus {
-	color: #333;
-	text-shadow: none; /* Prevent inheritence from `body` */
-	background-color: #fff;
-	border: 1px solid #fff;
-}
+/* .btn-default, .btn-default:hover, .btn-default:focus { */
+/* 	color: #333; */
+/* 	text-shadow: none; Prevent inheritence from `body` */
+/* 	background-color: #fff; */
+/* 	border: 1px solid #fff; */
+/* } */
 
 /*
  * Base structure
  */
 html, body {
 	height: 100%;
-	background-color: grey;
+/* 	background-color: grey; */
 }
 
 body {
@@ -31,18 +31,49 @@ body {
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
+	top:0;
+	left:0;
+
+	  z-index: 2;
+/* 		  background-image: url('../pictures/bulb.jpeg'); */
 	display: table;
 	width: 100%;
 	height: 100%; /* For at least Firefox */
 	min-height: 100%;
-	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
-	box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+	-webkit-box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5);
+	box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5);
+}
+
+.background-image {
+
+  left: 0;
+  right: 0;
+  z-index: 1;
+		  background-image: url('../pictures/bulb.jpeg');
+		  background-size: cover;
+/*   display: table; */
+
+  width: 100%;
+  height: 100%;
+opacity: 0.7;
+/*   -webkit-filter: blur(3px); */
+/*   -moz-filter: blur(3px); */
+/*   -o-filter: blur(3px); */
+/*   -ms-filter: blur(3px); */
+/*   filter: blur(3px); */
+}
+
+.content {
+
+  z-index: 9999;
+
 }
 
 .site-wrapper-inner {
+
 	display: table-cell;
 	vertical-align: top;
-	background-color: yellow;
+/* 	background-color: yellow; */
 }
 
 .cover-container {
@@ -135,18 +166,17 @@ body {
 	font-weight: bold;
 }
 
-/*
- * Footer
- */
-.mastfoot {
-	color: #999; /* IE8 proofing */
-	color: rgba(255, 255, 255, .5);
-}
+
 
 /*
  * Affix and center
  */
 @media {
+	.site-wrapper{
+	position: absolute;
+	top:0
+	}
+	
 		.masthead {
 		background-color: #EEEEEE; position : absolute;
 		top: 0;
@@ -155,22 +185,13 @@ body {
 		position: absolute;
 	}
 	
-	.header-fixed {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: auto;
-		background-color: black;
-		opacity: 0.5;
-	}
+
 	
 	.site-wrapper-inner {
 		vertical-align: middle;
 	}
 	/* Handle the widths */
-	.masthead, .mastfoot, .cover-container {
+	.masthead, .giverfoot, .cover-container {
 		width: 100%;
 		/* Must be percentage or pixels for horizontal alignment */
 	}
@@ -184,11 +205,12 @@ body {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 80px;
+		height: auto;
 		background-color: black;
-		opacity: 0.5;
+		opacity: 0.7;
 	}
-	.mastfoot {
+	
+	.giverfoot {
 		position: fixed;
 		bottom: 0;
 	}
@@ -197,14 +219,14 @@ body {
 		vertical-align: middle;
 	}
 	/* Handle the widths */
-	.masthead, .mastfoot, .cover-container {
+	.masthead, .giverfoot, .cover-container {
 		width: 100%;
 		/* Must be percentage or pixels for horizontal alignment */
 	}
 }
 
 @media ( min-width : 992px) {
-	.masthead, .mastfoot, .cover-container {
+	.masthead, .giverfoot, .cover-container {
 		width: 1200px;
 	}
 }
