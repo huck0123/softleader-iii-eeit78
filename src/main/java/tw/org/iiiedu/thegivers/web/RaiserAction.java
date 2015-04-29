@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.form.RaiserForm;
+import tw.org.iiiedu.thegivers.model.GiverModel;
 import tw.org.iiiedu.thegivers.model.RaiserModel;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
@@ -41,8 +44,6 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return inputStream;
 	}
 
-	
-	
 	public String insert() throws Exception {
 		RaiserModel rm = new RaiserModel();
 
@@ -87,8 +88,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public String selectAll() {
 		List<RaiserModel> list = raiserService.getAll();
 		Gson gson = new Gson();
-		String jsonString =  gson.toJson(list);
-		System.out.println(list);
+		String jsonString = gson.toJson(list);
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";
@@ -96,21 +96,54 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String update() {
 		RaiserModel rm = new RaiserModel();
-		rm.setPasswd(raiserForm.getPasswd());
-		rm.setName(raiserForm.getName());
-		rm.setTel(raiserForm.getTel());
-		rm.setContactPerson(raiserForm.getContactPerson());
-		rm.setContactTel(raiserForm.getContactTel());
-		rm.setEmail(raiserForm.getEmail());
-		rm.setAddress(raiserForm.getAddress());
-		rm.setDetail(raiserForm.getDetail());
-		rm.setVideoUrl(raiserForm.getVideoUrl());
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		rm.setId(raiserForm.getId());
+		rm.setAccount(raiserForm.getAccount());
+		if (raiserForm.getPasswd() != null) {
+			rm.setPasswd(raiserForm.getPasswd());
+		}
+		if (raiserForm.getName() != null) {
+			rm.setName(raiserForm.getName());
+		}
+		if (raiserForm.getTel() != null) {
+			rm.setTel(raiserForm.getTel());
+		}
+		if (raiserForm.getContactPerson() != null) {
+			rm.setContactPerson(raiserForm.getContactPerson());
+		}
+		if (raiserForm.getContactTel() != null) {
+			rm.setContactTel(raiserForm.getContactTel());
+		}
+		if (raiserForm.getEmail() != null) {
+			rm.setEmail(raiserForm.getEmail());
+		}
+		if (raiserForm.getAddress() != null) {
+			rm.setAddress(raiserForm.getAddress());
+		}
+		if (raiserForm.getDetail() != null) {
+			rm.setDetail(raiserForm.getDetail());
+		}
+		if (raiserForm.getVideoUrl() != null) {
+			rm.setVideoUrl(raiserForm.getVideoUrl());
+		}
 		rm = raiserService.dataUpdate(rm);
 		if (rm != null) {
+			session.setAttribute("raiser", rm);
 			return "update";
 		} else {
 			return "error";
 		}
+	}
+
+	public String getPerPage() {
+		List<RaiserModel> models = raiserService.getPerPage();
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(models);
+
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "getPerPage";
 	}
 
 	@Override

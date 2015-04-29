@@ -10,7 +10,7 @@
 <title>團體-註冊帳號</title>
 </head>
 <body>
-	<form action="<c:url value='/raiser/raiserAction!insert.action' />" method="post" enctype="multipart/form-data">
+	<form action="<c:url value='/raiser/raiserAction!insert' />" method="post" enctype="multipart/form-data">
 		帳號:<input type="text" name="raiserForm.account" required="required"> <br>
 		密碼:<input type="password" name="raiserForm.passwd" required="required"> <br>
 		團體名稱:<input type="text" name="raiserForm.name" required="required"> <br>
@@ -24,5 +24,6 @@
 		團體短片:<input type="text" name="raiserForm.videoUrl"><br>
 		<input type="submit" value="確定送出"><input type="reset" value="清除資料">
 	</form>
+	<a href="<c:url value='/index.jsp' />">回首頁</a>
 </body>
 </html>
