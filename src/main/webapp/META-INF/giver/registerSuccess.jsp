@@ -78,7 +78,7 @@
 			$('#gender').text(gender(${sessionScope.giver.gender}));
 			$('#getInfo').text(getInfo(${sessionScope.giver.getInfo}));
 
-			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
+			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){

@@ -11,7 +11,8 @@
 </head>
 <body>
 campaignCount: ${applicationScope.campaignCount}<br/>
-giverCount: ${applicationScope.giverCount }
+giverCount: ${applicationScope.giverCount }<br/>
+raiserCount:${raiserCount }<br/>
 	<c:if test="${admin != null}">${admin}</c:if>
 	<c:if test="${giver != null}">${giver}</c:if>
 	<c:if test="${raiser != null}">${raiser}</c:if>

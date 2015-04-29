@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div>
-		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a>
+		<a href="/softleader-iii-eeit78/index.jsp">回首頁</a>
 	</div>
 
 	<div class="row container">

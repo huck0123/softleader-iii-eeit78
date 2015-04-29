@@ -16,7 +16,7 @@
 
 </head>
 <body>
-	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
+	<div><a href="/softleader-iii-eeit78/index.jsp">回首頁</a></div>
 	
 	<div class="container">
 		<button onclick="before()">上一頁</button>
@@ -48,7 +48,7 @@
 	<script>
 		
 		var giverCount = ${application.giverCount}/5;
-		var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!getPerPage";
+		var url = "/softleader-iii-eeit78/giver/giverSelect!getPerPage";
 		
 		
 		function getData(data){
