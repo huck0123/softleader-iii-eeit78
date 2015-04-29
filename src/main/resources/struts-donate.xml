@@ -7,15 +7,15 @@
 
 	<package name="donatePackage" namespace="/donate" extends="struts-default">
 
-		<action name="donate" class="donate">
+		<action name="donateAction" class="donateAction">
 			<result name="success">/META-INF/donate/billInfo.jsp</result>
 		</action>
 
-		<action name="billInfo" class="billInfo">
+		<action name="billInfoAction" class="billInfoAction">
 			<result name="success">/META-INF/donate/infoConfirm.jsp</result>
 		</action>
 		
-				<action name="infoConfirm" class="infoConfirm">
+				<action name="infoConfirmAction" class="infoConfirmAction">
 			<result name="success">/META-INF/donate/donateSuccess.jsp</result>
 		</action>
 

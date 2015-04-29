@@ -18,7 +18,7 @@
 選擇金額...
 選擇捐款方式：信用卡...
 <br/>
-<a href="<c:url value='/donate/billInfo'/>" class="btn btn-default">下一步</a>
+<a href="<c:url value='/donate/donateAction'/>" class="btn btn-default">下一步</a>
 </body>
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>

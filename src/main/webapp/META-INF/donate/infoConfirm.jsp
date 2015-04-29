@@ -16,7 +16,7 @@
 <body>
 請確認資料是否正確。
 <br/>
-<a href="" class="btn btn-default">確認送出</a>
+<a href="<c:url value='/donate/infoConfirmAction'/>" class="btn btn-default">確認送出</a>
 </body>
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>

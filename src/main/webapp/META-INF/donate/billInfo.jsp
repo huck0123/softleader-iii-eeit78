@@ -18,7 +18,7 @@
 請輸入信用卡資訊
 <br/>
 
-<a href="<c:url value='/donate/infoConfirm'/>" class="btn btn-default">下一步</a>
+<a href="<c:url value='/donate/billInfoAction'/>" class="btn btn-default">下一步</a>
 
 
 </body>
