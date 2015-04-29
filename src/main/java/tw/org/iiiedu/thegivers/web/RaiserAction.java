@@ -31,6 +31,15 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private RaiserForm raiserForm;
 	private RaiserModel rm;
 	private InputStream inputStream;
+	private int page;
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
 
 	public RaiserForm getRaiserForm() {
 		return raiserForm;
@@ -136,14 +145,19 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String getPerPage() {
-		List<RaiserModel> models = raiserService.getPerPage();
+		List<RaiserModel> models = raiserService.getPerPage(page);
 
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(models);
 
 		inputStream = new ByteArrayInputStream(
 				jsonStr.getBytes(StandardCharsets.UTF_8));
-		return "getPerPage";
+		return "select";
+	}
+	
+	public String checkInformation(){
+		return null;
+		
 	}
 
 	@Override

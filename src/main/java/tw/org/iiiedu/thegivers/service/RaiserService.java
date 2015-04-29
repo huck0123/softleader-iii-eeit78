@@ -67,16 +67,29 @@ public class RaiserService {
 		List<RaiserModel> result = raiserDao.getAll();
 		return result;
 	}
-	
-	public int getCount(){
+
+	public int getCount() {
 		int count = raiserDao.getCount();
-		
+
 		return count;
 	}
-	
-	
-	public List<RaiserModel> getPerPage(){
-		List<RaiserModel> result = raiserDao.getPerPage();
+
+	public int getByAllConditionCount(String account, String name,
+			String contactPerson) {
+		int count = raiserDao.getByAllConditionCount(account, name,
+				contactPerson);
+		return count;
+	}
+
+	public List<RaiserModel> getByAllCondition(String account, String name,
+			String contactPerson, Integer pageNum, Integer pageSize) {
+		List<RaiserModel> result = raiserDao.getByAllCondition(account, name,
+				contactPerson, pageNum, pageSize);
+		return result;
+	}
+
+	public List<RaiserModel> getPerPage(int page) {
+		List<RaiserModel> result = raiserDao.getPerPage(page);
 		return result;
 	}
 
