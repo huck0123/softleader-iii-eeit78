@@ -26,6 +26,7 @@ public class GiverHistoryService {
 		giverHistoryAllConditionModel.makeDefaultPage(allCondition);
 		List<GiverHistoryModel> searchAll = giverHistoryDao
 				.getAll(allCondition.getGiver_id(), allCondition.getPageNumber(), allCondition.getPageSize());
+		System.out.println(searchAll);
 		if(searchAll.size()>0){
 			return searchAll;
 		}else{

@@ -60,6 +60,7 @@ public class GiverHistoryAction extends ActionSupport implements ServletRequestA
 		}
 		
 		List<GiverHistoryModel> giverHistoryModel = giverHistoryService.loadAll(allCondition);
+		System.out.println(giverHistoryModel);
 		String json = new Gson().toJson(giverHistoryModel);
 		inputStream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 		return "selectAll";
