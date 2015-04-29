@@ -16,7 +16,7 @@
 <body>
 	<div class="row" >
 		<div class="col-md-2"></div>
-		<div class="col-md-8" style="background:red">
+		<div class="col-md-8">
 			<form action="<c:url value='/raiser/raiserAction!insert' />"
 				method="post" enctype="multipart/form-data">
 
