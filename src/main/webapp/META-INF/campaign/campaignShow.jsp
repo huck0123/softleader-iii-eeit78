@@ -45,7 +45,7 @@ function load(){
 		$('#div1').empty()
 		for (var i = 0; i < Math.ceil(totalCount/2); i++) { 
 
-		var child = $('<a href="#">'+(i+1)+'</a>')
+		var child = $('<a href="">'+(i+1)+'</a>')
 		child.on('click',makeFunction(i))
 		child.appendTo($('#div1'));
 		$('#div1').append(" ");
@@ -56,7 +56,7 @@ function load(){
 			$('#showColumn').empty();
 			$(data).each(function(index,value){
 				var child = $('<a></a>');
-				child.attr("href","#");
+				child.attr("href","");
 				child.text(value.id +", "+value.name);
 				child.on('click',function(){goDetail(value)});
 				var str = arrayBufferToBase64(value.image); 
@@ -85,7 +85,7 @@ function makeFunction(j){return function(){
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
 			var child = $('<a></a>');
-			child.attr("href","#");
+			child.attr("href","");
 			child.text(value.id +", "+value.name);
 			child.on('click',function(){goDetail(value)});
 			var str = arrayBufferToBase64(value.image); 
