@@ -45,12 +45,12 @@ body {
 }
 
 .background-image {
-
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: -1;
 		  background-image: url('../pictures/bulb.jpeg');
 		  background-size: cover;
+/* background-repeat: no-repeat; */
 /*   display: table; */
 
   width: 100%;
@@ -98,8 +98,8 @@ opacity: 0.7;
 /*
  * Header
  */
- .header-pic{ width: 45px;
- height:45px}
+ .header-pic{ width: 36px;
+ height:36px}
  
 
  
@@ -130,11 +130,11 @@ opacity: 0.7;
 /* 	border-bottom: 2px solid transparent; */
 }
 
-.masthead-nav a:hover, .masthead-nav a:focus {
-	background-color: transparent;
-	border-bottom-color: #a9a9a9;
-	border-bottom-color: rgba(255, 255, 255, .25);
-}
+/* .masthead-nav a:hover, .masthead-nav a:focus { */
+/* 	background-color: transparent; */
+/* 	border-bottom-color: #a9a9a9; */
+/* 	border-bottom-color: rgba(255, 255, 255, .25); */
+/* } */
 
 .masthead-nav>.active>a, .masthead-nav>.active>a:hover, .masthead-nav>.active>a:focus
 	{
@@ -172,7 +172,7 @@ opacity: 0.7;
  * Affix and center
  */
 @media {
-		.header-fixed {
+		.headerFixed {
 		display: none;
 		position: fixed;
 		top: 0;
