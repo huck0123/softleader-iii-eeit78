@@ -21,7 +21,7 @@
 				method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
-					<label for="inputid">id</label> <input type="text" style="display:none"
+					<input type="text" style="display:none"
 						class="form-control" id="inputid" name="raiserForm.id"
 						value="${raiser.id}">
 				</div>
