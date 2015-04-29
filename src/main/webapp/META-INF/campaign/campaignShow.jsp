@@ -38,9 +38,9 @@ load();
 function load(){
 
 
-	$.get('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
 			{'campaignForm.name':$('#nameSearch').val()},function(data){
-		
+				data = JSON.parse(data);
 		totalCount = data;
 		$('#div1').empty()
 		for (var i = 0; i < Math.ceil(totalCount/2); i++) { 
@@ -51,8 +51,9 @@ function load(){
 		$('#div1').append(" ");
 		}
 		
-		$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val()},function(data){
+			data = JSON.parse(data);
 			$('#showColumn').empty();
 			$(data).each(function(index,value){
 				var child = $('<a></a>');
@@ -79,8 +80,9 @@ function load(){
 	});
 
 function makeFunction(j){return function(){
-	$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
+				data = JSON.parse(data);
 				currentPage=j;
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
