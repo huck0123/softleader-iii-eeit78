@@ -28,7 +28,7 @@
 
 
 </head>
-<html>
+
 <body id="body">
 <div class="background-image"></div>
 

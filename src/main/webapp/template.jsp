@@ -32,9 +32,9 @@
 <body id="body">
 
 
-<div class="site-wrapper content">
+<div class="outer-wrapper2">
 
-	<div class="site-wrapper-inner">
+	<div class="inner-wrapper height-auto">
 
 		<div class="cover-container">
 
@@ -142,7 +142,7 @@
 
 <div class="outer-wrapper">
 	<div class="inner-wrapper">
-		<div class="wrapped-container">
+		<div class="wrapped-container" style="background-color: green">
 			
 			do things here 
 			
@@ -152,7 +152,7 @@
 
 
 
-
+</body>
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>

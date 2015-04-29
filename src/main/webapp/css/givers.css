@@ -1,3 +1,6 @@
+a:hover{
+	cursor: pointer;
+}
 
 .vertical-space{
 	height:50px;
@@ -5,9 +8,18 @@
 
 .outer-wrapper {
 	width:100%;
-
+	top:0;
 	height:800px;
-	display: table;
+display: table;
+	vertical-align: middle;
+}
+
+.outer-wrapper2 {
+	position:absolute;
+	width:100%;
+	top:0;
+	height:20%;
+display: table;
 	vertical-align: middle;
 }
 
@@ -19,7 +31,6 @@
 }
 
 .wrapped-container {
-
 	margin-right: auto;
 	margin-left: auto;
 }
