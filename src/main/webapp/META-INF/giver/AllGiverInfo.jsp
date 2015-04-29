@@ -48,7 +48,7 @@
 	<script>
 		
 		var giverCount = ${application.giverCount}/5;
-		var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!getPerPage";
+		var url = "/softleader-iii-eeit78/giver/giverSelect!getPerPage";
 		
 		
 		function getData(data){
