@@ -90,7 +90,7 @@ public class CampaignDao {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
 		if(campaignForm.getId() != null){
-			criteria.add(Restrictions.like("id", campaignForm.getId()));
+			criteria.add(Restrictions.eq("id", campaignForm.getId()));
 		}
 		if(campaignForm.getName() != null){
 			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
