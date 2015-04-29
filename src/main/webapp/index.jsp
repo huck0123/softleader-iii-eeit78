@@ -52,7 +52,7 @@ raiserCount:${raiserCount }<br/>
 	<p />
 	</c:if>
 	<p />
-	<a href="<c:url value='/campaign/campaignShow'/>">顯示所有活動</a>
+	<a href="<c:url value='/campaign/campaignShow#'/>">顯示所有活動</a>
 	<p />
 		<p />
 	<a href="<c:url value='/campaign/campaignDetail?campaignForm.id=565'/>">顯示活動細節</a>

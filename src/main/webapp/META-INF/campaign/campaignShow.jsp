@@ -59,9 +59,11 @@ function load(){
 				child.attr("href","#");
 				child.text(value.id +", "+value.name);
 				child.on('click',function(){goDetail(value)});
-				var imgchild = $('<img src="data:image/jpeg;base64,"'+ value.image  +'/>');
+				var str = arrayBufferToBase64(value.image); 
+				var imgchild = $('<img src="data:image/png;base64,' + str +'"/>')
 				imgchild.appendTo($('#showColumn'));
 				child.appendTo($('#showColumn'));
+				
 			})
 		})
 		
