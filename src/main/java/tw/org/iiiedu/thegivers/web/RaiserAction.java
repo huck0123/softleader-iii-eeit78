@@ -65,6 +65,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		rm.setEmail(raiserForm.getEmail());
 
 		try {
+			if(raiserForm.getLogo()!=null)
 			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
