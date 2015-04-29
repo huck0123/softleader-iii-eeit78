@@ -45,12 +45,12 @@ body {
 }
 
 .background-image {
-
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: -1;
 		  background-image: url('../pictures/bulb.jpeg');
 		  background-size: cover;
+/* background-repeat: no-repeat; */
 /*   display: table; */
 
   width: 100%;
