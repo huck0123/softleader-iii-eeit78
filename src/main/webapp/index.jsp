@@ -163,7 +163,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">我要捐款</a> 
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>
@@ -176,7 +176,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">我要捐款</a>
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a>
 							</p>
 						</div>
 					</div>
@@ -188,7 +188,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">我要捐款</a> 
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>
