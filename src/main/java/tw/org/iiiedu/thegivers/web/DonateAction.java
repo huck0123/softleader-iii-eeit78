@@ -20,7 +20,7 @@ import tw.org.iiiedu.thegivers.service.AdminService;
 import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
-public class donateAction extends ActionSupport {
+public class DonateAction extends ActionSupport {
 	
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
