@@ -30,7 +30,7 @@ th {
 		<div class="col-md-10">
 			<table class="table table-condensed table-bordered">
 				<tr>
-					<th style="width: 20px">#</th>
+					<th style="width: 10px"></th>
 					<th style="width: 100px">團體名稱</th>
 					<th>帳號</th>
 					<th style="width: 70px">密碼</th>
@@ -42,7 +42,8 @@ th {
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-	<div id="btnn">
+	<div id= "detail"></div>
+	<div id= "btnn">
 		<input type="button" name="forward" value="上一頁" id="btnf"> <input
 			type="text" name="now" size="1" value="1" id="btnw"> <input
 			type="button" name="next" value="下一頁" id="btnx"> <a
@@ -63,6 +64,7 @@ th {
 			} else {
 				page = $("#btnw").val("1");
 			}
+			$('#detail').children().remove();
 			$('#tbody').children().remove();
 			$.getJSON(url, {
 				'page' : page
@@ -74,6 +76,7 @@ th {
 			if ($("#btnw").val() > 1) {
 				page--;
 				$("#btnw").val(page);
+				$('#detail').children().remove();
 				$('#tbody').children().remove();
 				$.getJSON(url, {
 					'page' : page
@@ -86,6 +89,7 @@ th {
 			if ($("#btnw").val() < Max) {
 				page++;
 				$("#btnw").val(page);
+				$('#detail').children().remove();
 				$('#tbody').children().remove();
 				$.getJSON(url, {
 					'page' : page
@@ -97,13 +101,26 @@ th {
 			$(data).each(
 					function(index, raiser) {
 						$(tbody).append(
-								"<tr><td><button id=btnchk'"+raiser.id+"'><span class='glyphicon glyphicon-collapse-down' ></span></button></td>"
+								"<tr><td><button id='btnchk"+raiser.id+"'><span id='spanpic' class='glyphicon glyphicon-chevron-down' ></span></button></td>"
 										+ "<td><a>" + raiser.name + "</a></td>"
 										+ "<td>" + raiser.account + "</td>"
 										+ "<td>" + raiser.passwd + "</td>"
-										+ "<td>" + raiser.email + "</td></tr><br><div></div>");
+										+ "<td>" + raiser.email + "</td></tr>");
 						$("#btnchk"+raiser.id).click(function(){
-							console.log(raiser.id);
+							$("#detail").children().remove();
+							$("#detail").append(
+								"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  帳 號:　"+raiser.account+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  密 碼:　"+raiser.passwd+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  名 稱:　"+raiser.name+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  電 話:　"+raiser.tel+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>聯絡人姓名:　"+raiser.contactPerson+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>聯絡人電話:　"+raiser.contactTel+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>電 子  信 箱:　"+raiser.email+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  地 址:　"+raiser.address+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>團 體  短 片:　"+raiser.videoUrl+ "</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-8'>團 體  資 訊:</div><div class='col-md-3'></div></div>"
+								+"<div class='row'><div class='col-md-3'></div><div class='col-md-5'>　　"+raiser.detail+ "</div></div>"
+							);
 						});
 					});
 		};
