@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div>
-		<a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a>
+		<a href="/softleader-iii-eeit78/index.jsp">回首頁</a>
 	</div>
 
 	<div class="row">
@@ -109,7 +109,7 @@
 				$('#getInfo2').prop("checked", true);
 			}
 			
-			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!select";
+			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			function getData(data){
 				console.log(data);
 				var str = arrayBufferToBase64(data.headshot); 
