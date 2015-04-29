@@ -92,6 +92,9 @@
 <!-- 									<li class="margin-both10"><a href="#bottom">關於我們</a></li> -->
 									<li class="margin-both10"><a href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
 									<li class="margin-both10"><a href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
+									
+										<c:if test="${giver != null}"><li class="margin-both10"><a href="<c:url value='/giver/giverArea'/>">捐款人專區</a></li></c:if>
+									
 <!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 								</ul>
 							</nav>
@@ -102,8 +105,12 @@
 									<li class="margin-both10"><a href="#"><img
 											class="header-pic"
 											src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
+											
 									<li class="margin-both10"><a href="register.jsp"><img class="header-pic"
 										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
+										<c:if test="${raiser != null || giver != null || admin != null}">
+	<li class="margin-both10"><a href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li></c:if>
+										
 								</ul>
 							</nav>
 						</div>
