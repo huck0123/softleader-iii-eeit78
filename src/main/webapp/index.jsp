@@ -94,7 +94,7 @@
 									<li class="margin-both10"><a href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
 									
 										<c:if test="${giver != null}"><li class="margin-both10"><a href="<c:url value='/giver/giverArea'/>">捐款人專區</a></li></c:if>
-									
+									<c:if test="${giver != null}"><li class="margin-both10">	<a href="<c:url value='/raiser/raiserInfo'/>">進入團體專區</a></li></c:if>
 <!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 								</ul>
 							</nav>
@@ -163,8 +163,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="#" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>
@@ -177,8 +176,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="#" class="btn btn-primary" role="button">我要捐款</a>
 							</p>
 						</div>
 					</div>
@@ -190,8 +188,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="#" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>
