@@ -45,7 +45,7 @@ th {
 	<div id= "detail"></div>
 	<div id= "btnn">
 		<input type="button" name="forward" value="上一頁" id="btnf"> <input
-			type="text" name="now" size="1" value="1" id="btnw"> <input
+			type="tel" name="now" size="1" value="1" id="btnw"> <input
 			type="button" name="next" value="下一頁" id="btnx"> <a
 			href="<c:url value='/index.jsp' />">回首頁</a>
 	</div>
@@ -59,10 +59,11 @@ th {
 
 		//用數字輸入可搜尋頁數
 		$("#btnw").change(function() {
-			if ($("#btnw").val() <= Max) {
+			if ($("#btnw").val() <= Max && $("#btnw").val()>0) {
 				page = $("#btnw").val();
 			} else {
-				page = $("#btnw").val("1");
+				$("#btnw").val("1");
+				page=1;
 			}
 			$('#detail').children().remove();
 			$('#tbody').children().remove();
