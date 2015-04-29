@@ -14,9 +14,9 @@
 <title>นฮล้-ต๙ฅUฑbธน</title>
 </head>
 <body>
-	<div class="row">
+	<div class="row" >
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="background:red">
 			<form action="<c:url value='/raiser/raiserAction!insert' />"
 				method="post" enctype="multipart/form-data">
 

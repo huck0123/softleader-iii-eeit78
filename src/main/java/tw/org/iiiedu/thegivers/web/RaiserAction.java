@@ -55,7 +55,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String insert() throws Exception {
 		RaiserModel rm = new RaiserModel();
-
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		rm.setAccount(raiserForm.getAccount());
 		rm.setPasswd(raiserForm.getPasswd());
 		rm.setName(raiserForm.getName());
@@ -77,6 +77,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 		rm = raiserService.register(rm);
 		if (rm != null) {
+			session.setAttribute("raiser", rm);
 			return "insert";
 		} else {
 			return "error";
