@@ -30,8 +30,9 @@
 <body id="body">
 
 	<div class="cover-wrapper">
+	<p>ffff</p>
 		<div class="cover-wrapper-inner">
-
+<p>awfaewfaew</p>
 			<div class="container">
 
 
@@ -133,7 +134,7 @@
 	
 
 
-	<div class="section"></div>
+
 	<div id="campaingDiv" class="normal-wrapper">
 
 	<div class="normal-wrapper-inner">

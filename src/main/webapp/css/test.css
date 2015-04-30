@@ -1,10 +1,38 @@
-.cover-wrapper {
+body {
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
 
+.container {
+	padding-right: 0px;
+}
+
+
+
+
+.background-image {
+	left: 0;
+	right: 0;
+	z-index: -10;
+	background-image: url('../pictures/bulb.jpeg');
+	background-size: cover;
 	position: absolute;
-	top:0;
+	/* background-repeat: no-repeat; */
+	/*   display: table; */
 	width: 100%;
-	hieght:100%;
-  min-height: 100%;
+	height: 100%;
+	opacity: 0.7;
+	/*   -webkit-filter: blur(3px); */
+	/*   -moz-filter: blur(3px); */ /*   -o-filter: blur(3px); */
+	/*   -ms-filter: blur(3px); */ /*   filter: blur(3px); */
+}
+
+.cover-wrapper { /* 	z-index: 9999; */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	background-color: yellow;
 	display: table;
 	/* 	-webkit-box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
@@ -18,15 +46,320 @@
 }
 
 .normal-wrapper {
- 	position:relative;
 	width: 100%;
+	height: 100%;
 	background-color: pink;
 	display: table;
 	/* 	-webkit-box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
 	/* 	box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
 }
+
 .normal-wrapper-inner {
 	display: table-cell;
 	vertical-align: middle;
 	width: 100%;
+}
+
+.header-pic {
+	margin: 0;
+	padding: 0;
+	width: 25px;
+	height: 25px
+}
+
+.cover-container {
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+}
+
+.header {
+	background-color: white;
+	position: relative;
+	top: 0;
+	width: 100%;
+}
+
+.display-table {
+	display: table;
+	/*     table-layout: fixed; */
+}
+
+.display-cell {
+	display: table-cell;
+	vertical-align: bottom;
+	float: none;
+}
+
+.header-brand {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.opacity60 {
+	opacity: 60;
+}
+
+.margin-bottom0 {
+	margin-bottom: 0px;
+}
+
+.header-nav>li { /* 	display: inline-block; */
+	font-weight: bold;
+	font-size: 19px;
+}
+
+.header-nav>li>a { /* 	padding-right: 0; */
+	/* 	padding-left: 0; */
+	font-weight: bold;
+	color: orangered;
+	/* 	color: rgba(255, 255, 255, .75); */
+	border-bottom: orange 2px solid transparent;
+}
+
+/* .header-nav a:hover, header-nav a:focus { */
+/* 	background-color: transparent; */
+/* 	border-bottom-color: #a9a9a9; */
+/* 	border-bottom-color: rgba(255, 255, 255, .25); */
+/* } */
+/* header-nav li:hover { */
+/* 	background-color: none; */
+/* } */
+
+/* .header-nav>.active>a, header-nav>.active>a:hover, header-nav>.active>a:focus */
+/* 	{ */
+/* 	color: #fff; */
+/* 	border-bottom-color: #fff; */
+/* } */
+@media {
+	.headerFixed {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		background-color: black;
+		opacity: 0.7;
+	}
+	.header {
+		width: 100%;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0:
+	}
+}
+
+@media ( min-width : 768px) {
+	.header {
+		width: 100%;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0:
+	}
+}
+
+@media ( min-width : 992px) {
+	.header {
+		width: 1200px;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0:
+	}
+	#collapseExample {
+		position: fixed;
+		width: 100%;
+	}
+}
+
+.background-image {
+	left: 0;
+	right: 0;
+	background-image: url('../pictures/bulb.jpeg');
+	background-size: cover;
+	position: absolute;
+	/* background-repeat: no-repeat; */
+	/*   display: table; */
+	width: 100%;
+	height: 100%;
+	opacity: 0.7;
+	width: 100% /*   -webkit-filter: blur(3px); */ 
+		/*   -moz-filter: blur(3px); */ /*   -o-filter: blur(3px); */ 
+		/*   -ms-filter: blur(3px); */ /*   filter: blur(3px); */
+}
+
+.cover-wrapper {
+	/* 	z-index: 9999; */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: yellow;
+	display: table;
+	/* 	-webkit-box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
+	/* 	box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
+}
+
+.cover-wrapper-inner {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.normal-wrapper {
+	width: 100%;
+	height: 100%;
+	background-color: pink;
+	display: table;
+	/* 	-webkit-box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
+	/* 	box-shadow: inset 0 0 100px rgba(70%, 70%, 70%, .5); */
+}
+
+.normal-wrapper-inner {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.header-pic {
+	margin: 0;
+	padding: 0;
+	width: 25px;
+	height: 25px
+}
+
+.cover-container {
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+}
+
+.header {
+	background-color: white;
+	position: relative;
+	top: 0;
+	width: 100%;
+}
+
+.display-table {
+	display: table;
+	/*     table-layout: fixed; */
+}
+
+.display-cell {
+	display: table-cell;
+	vertical-align: bottom;
+	float: none;
+}
+
+.header-brand {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.opacity60 {
+	opacity: 60;
+}
+
+.margin-bottom0 {
+	margin-bottom: 0px;
+}
+
+.header-nav>li {
+	/* 	display: inline-block; */
+	font-weight: bold;
+	font-size: 19px;
+}
+
+.header-nav>li>a {
+	/* 	padding-right: 0; */
+	/* 	padding-left: 0; */
+	font-weight: bold;
+	color: orangered;
+	/* 	color: rgba(255, 255, 255, .75); */
+	border-bottom: orange 2px solid transparent;
+}
+
+/* .header-nav a:hover, header-nav a:focus { */
+/* 	background-color: transparent; */
+/* 	border-bottom-color: #a9a9a9; */
+/* 	border-bottom-color: rgba(255, 255, 255, .25); */
+/* } */
+/* header-nav li:hover { */
+/* 	background-color: none; */
+/* } */
+
+/* .header-nav>.active>a, header-nav>.active>a:hover, header-nav>.active>a:focus */
+/* 	{ */
+/* 	color: #fff; */
+/* 	border-bottom-color: #fff; */
+/* } */
+@media {
+	.headerFixed {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		background-color: black;
+		opacity: 0.7;
+	}
+	.header {
+		width: 100%;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px:
+	}
+}
+
+@media ( min-width : 768px) {
+	.header {
+		width: 100%;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px:
+	}
+}
+
+@media ( min-width : 992px) {
+	.header {
+		width: 1200px;
+	}
+	.container {
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	#collapseExample {
+		position: fixed;
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.container {
+		width: 1170px;
+	}
+	#collapseExample {
+		position: fixed;
+		width: 1200px;
+	}
 }
