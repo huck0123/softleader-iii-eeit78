@@ -86,7 +86,7 @@
 				var str = arrayBufferToBase64(data.headshot); 
 				$('#headshot').attr("src","data:image/png;base64," + str);
 			}
-			$.getJSON(url, {'thisAccount': thisAccount }, getData);
+			$.post(url, {'thisAccount': thisAccount }, getData);
 
 		}
 		getInformation();

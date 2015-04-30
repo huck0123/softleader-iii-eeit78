@@ -111,11 +111,11 @@
 			
 			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			function getData(data){
-				console.log(data);
+				data = JSON.parse(data);
 				var str = arrayBufferToBase64(data.headshot); 
 				$('#headshot').attr("src","data:image/png;base64," + str);
 			}
-			$.getJSON(url, {'thisAccount': '${sessionScope.giver.account}' }, getData);
+			$.post(url, {'thisAccount': '${sessionScope.giver.account}' }, getData);
 		}
 		getInformation();
 				

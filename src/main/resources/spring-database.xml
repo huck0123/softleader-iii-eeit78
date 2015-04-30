@@ -34,8 +34,8 @@ The only reason for chancing this setting is if you want to use JTA managed tran
 
 -->
 
-<!-- 				<prop key="hibernate.show_sql">true</prop> -->
-<!-- 				<prop key="format_sql">true</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="format_sql">true</prop>
 				<prop key="hibernate.connection.autocommit">false</prop>
 			</props>
 		</property>
