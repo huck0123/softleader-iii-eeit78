@@ -9,6 +9,8 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/givers.css">
 <style>
 </style>
 </head>
@@ -38,35 +40,34 @@ load();
 function load(){
 
 
-	$.get('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
 			{'campaignForm.name':$('#nameSearch').val()},function(data){
 		
 		totalCount = data;
 		$('#div1').empty()
 		for (var i = 0; i < Math.ceil(totalCount/2); i++) { 
 
-		var child = $('<a href="">'+(i+1)+'</a>')
+		var child = $('<a>'+(i+1)+'</a>')
 		child.on('click',makeFunction(i))
 		child.appendTo($('#div1'));
 		$('#div1').append(" ");
 		}
 		
-		$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val()},function(data){
-			$('#showColumn').empty();
+			data = JSON.parse(data);
+					$('#showColumn').empty();
 			$(data).each(function(index,value){
 				var child = $('<a></a>');
-				child.attr("href","");
+
 				child.text(value.id +", "+value.name);
 				child.on('click',function(){goDetail(value)});
 				var str = arrayBufferToBase64(value.image); 
-				var imgchild = $('<img src="data:image/png;base64,' + str +'"/>')
+				var imgchild = $('<img src="data:image/jpeg;base64,"'+ value.image  +'/>');
 				imgchild.appendTo($('#showColumn'));
 				child.appendTo($('#showColumn'));
-				
 			})
 		})
-		
 	})}
 
 	$('#btn1').on('click',function(){
@@ -79,13 +80,14 @@ function load(){
 	});
 
 function makeFunction(j){return function(){
-	$.getJSON('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
+				data = JSON.parse(data);
 				currentPage=j;
 		$('#showColumn').empty();
 		$(data).each(function(index,value){
 			var child = $('<a></a>');
-			child.attr("href","");
+
 			child.text(value.id +", "+value.name);
 			child.on('click',function(){goDetail(value)});
 			var str = arrayBufferToBase64(value.image); 

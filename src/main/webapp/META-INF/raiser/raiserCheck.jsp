@@ -13,7 +13,7 @@
 	<form action="<c:url value="" />" method="post">
 		帳號:${raiserForm.account} <br> 
 		密碼:${raiserForm.passwd} <br> 
-		姓名:${raiserForm.name} <br>
+		姓名:${raiser.name} <br>
 		電話:${raiserForm.tel} <br> 
 		連絡人姓名:${raiserForm.contactPerson} <br>
 		連絡人電話:${raiserForm.contactTel} <br> 

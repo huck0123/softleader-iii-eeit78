@@ -69,7 +69,7 @@ public class RaiserServiceTest extends GenericTest {
 	
 	@Test
 	public void testGetPerPage(){
-		List<RaiserModel> list = raiserService.getPerPage();
+		List<RaiserModel> list = raiserService.getPerPage(1);
 		
 		Iterator<RaiserModel> i = list.iterator();
 		

@@ -5,7 +5,7 @@
 
 <struts>
 	<package name="giverHistoryPackage" namespace="/giverHistory" extends="struts-default">
-		<action name="giverHistoryAction" class="giverHistoryAction">
+		<action name="giverHistoryAction" class="GiverHistoryAction">
 			<result type="stream" name="selectAll">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
@@ -14,6 +14,9 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+		</action>
+		<action name="*">
+			<result>/META-INF/giver/{1}.jsp</result>
 		</action>
 	</package>
 </struts>

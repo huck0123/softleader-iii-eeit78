@@ -1,5 +1,10 @@
-<!DOCTYPE html>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <meta charset="utf-8">
 <!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
@@ -23,7 +28,7 @@
 
 
 </head>
-<html>
+
 <body id="body">
 <div class="background-image"></div>
 
@@ -44,10 +49,10 @@
 							<nav class="header-font">
 								<ul class="nav masthead-nav masthead-nav-left">
 
-									<li class="margin-both10"><a href="">關於我們</a></li>
-									<li class="margin-both10"><a href="">活動列表</a></li>
-									<li class="margin-both10"><a href="#">參與團體</a></li>
-									<li class="margin-both10"><a href="#">新聞查詢</a></li>
+<!-- 									<li class="margin-both10"><a href="">關於我們</a></li> -->
+									<li class="margin-both10"><a href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
+									<li class="margin-both10"><a href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
+<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 								</ul>
 							</nav>
 						</div>
@@ -57,8 +62,12 @@
 									<li class="margin-both10"><a href="#"><img
 											class="header-pic"
 											src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
-									<li class="margin-both10"><a href=""><img class="header-pic"
+											
+											
+									<li class="margin-both10"><a href="register.jsp"><img class="header-pic"
 										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
+										
+										
 									<li class="margin-both10"><a href="#body"><img
 											class="header-pic opacity60"
 											src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
@@ -80,10 +89,13 @@
 							<nav>
 								<ul class="nav masthead-nav masthead-nav-left ">
 
-									<li class="margin-both10"><a href="#bottom">關於我們</a></li>
-									<li class="margin-both10"><a href="index.jsp">活動列表</a></li>
-									<li class="margin-both10"><a href="#">參與團體</a></li>
-									<li class="margin-both10"><a href="#">新聞查詢</a></li>
+<!-- 									<li class="margin-both10"><a href="#bottom">關於我們</a></li> -->
+									<li class="margin-both10"><a href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
+									<li class="margin-both10"><a href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
+									
+										<c:if test="${giver != null}"><li class="margin-both10"><a href="<c:url value='/giver/giverArea'/>">捐款人專區</a></li></c:if>
+									<c:if test="${giver != null}"><li class="margin-both10">	<a href="<c:url value='/raiser/raiserInfo'/>">進入團體專區</a></li></c:if>
+<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 								</ul>
 							</nav>
 						</div>
@@ -93,8 +105,12 @@
 									<li class="margin-both10"><a href="#"><img
 											class="header-pic"
 											src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
-									<li class="margin-both10"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></li>
+											
+									<li class="margin-both10"><a href="register.jsp"><img class="header-pic"
+										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
+										<c:if test="${raiser != null || giver != null || admin != null}">
+	<li class="margin-both10"><a href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li></c:if>
+										
 								</ul>
 							</nav>
 						</div>
@@ -147,8 +163,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>
@@ -161,8 +176,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a>
 							</p>
 						</div>
 					</div>
@@ -174,8 +188,7 @@
 							<h3>Thumbnail label</h3>
 							<p>...</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button">Button</a> <a
-									href="#" class="btn btn-default" role="button">Button</a>
+								<a href="<c:url value='/donate/donate'/>" class="btn btn-primary" role="button">我要捐款</a> 
 							</p>
 						</div>
 					</div>

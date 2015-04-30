@@ -12,12 +12,12 @@
 	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
 	<div>
 	<h2>篩選條件(可多重查詢):</h2>
-		<form name="conditionForm" action="<c:url value='/giverHistory/giverHistoryAction!selectByAllCondition' />" method="POST">
+		<form action="<c:url value='/giverHistory/giverHistoryAction!selectByAllCondition' />" method="POST">
 			<p>依活動ID: <input type="text" name="allCondition.campaign_id" size="10"></p>
 			<p>依活動名稱(或關鍵字): <input type="text" name="allCondition.campaign_name" size="15"></p>
 			<p>依金額範圍: <input type="text" name="allCondition.minAmount" size="10"> 到 <input type="text" name="allCondition.maxAmount" size="10"> 元</p>
 			<p>依捐贈日範圍: <input type="date" name="allCondition.afterDate"> 到 <input type="date" name="allCondition.beforeDate"></p>
-			<input type="submit" value="送出條件"><input type="button" value="清除條件" onclick="cleanForm"><br /><hr />
+			<input type="submit" value="送出" onclick="loadByForm"><input type="button" value="清除" onclick="cleanForm"><br /><hr />
 		</form>
 	</div>
 	<div>
@@ -29,32 +29,39 @@
 				<th>捐款金額</th>
 				<th>捐款日期</th>
 			</tr>
-
 		</table>
 	</div>
 <script>
-	var childTr = $('<tr></tr>');
-	var childTd = $('<td></td>');
+	var campaignId = null;
+	var campaign = null;
 	var url1 = '${pageContext.request.contextPath}/giverHistory/giverHistoryAction!selectAll';
-	var url2 = '/softleader-iii-eeit78/giverHistory/giverHistoryAction!selectByAllCondition';
-	var url3 = '/softleader-iii-eeit78/giverHistory/giverHistoryAction!selectByAllConditionCount';
+	var url2 = '${pageContext.request.contextPath}/giverHistory/giverHistoryAction!selectByAllCondition';
+	var url3 = '${pageContext.request.contextPath}/giverHistory/giverHistoryAction!selectByAllConditionCount';
+	var url4 = '${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition';
 	
-	$.getJSON(url1, {'allCondition.giver_id':"${giver.id}"}, loadAll);
-	$.getJSON(url2, {'allCondition.giver_id':"${giver.id}"}, loadAll);
-	
+ 	$.getJSON(url1, {'allCondition.giver_id':"${giver.id}"}, loadAll);
+ 	function loadByForm(){
+ 		$.getJSON(url2, {'allCondition.giver_id':"${giver.id}",'':''}, loadAll);
+ 	}
+ 	
 	function loadAll(data){
 		$.each(data, function(name, value){
-			console.log(value);
-			$('#resultTable').after(childTr);
-			$.each(value,function(){
-				$("tr:last").prepend(childTd);
-				$("td:last").prepend(value);
+			campaignId = value.campaign_id;
+			$.getJSON(url4, {'campaignForm.id':campaignId}, function(data){
+				campaign = data.get(0);
 			})
+			console.log("campaign="+campaign);
+			$('#resultTable').append("<tr>"	
+										+ "<td>"+ value.campaign_id +"</td>"
+										+ "<td>"+ campaign.name +"</td>"
+										+ "<td>"+ value.amount +"</td>"
+										+ "<td>"+ value.date +"</td>"
+									+"</tr>");
 		})
 	}
 	
 	function cleanForm(){
-		$("input:text,date").text("");
+		$("input:text").text("");
 	}
 </script>
 </body>
