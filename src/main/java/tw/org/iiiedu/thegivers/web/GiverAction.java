@@ -45,6 +45,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private GiverModel model;
 	private int thisPage;
 	private String thisAccount;
+	private boolean valid;
 
 	public InputStream getInputStream() {
 		return inputStream;
@@ -73,9 +74,17 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public void setThisAccount(String thisAccount) {
 		this.thisAccount = thisAccount;
 	}
+	
+	public boolean isValid() {
+		return valid;
+	}
 
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 	
 	
+
 	//註冊帳號
 	public String insert() {
 
@@ -179,7 +188,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	//抓某頁的資料
 	public String getPerPage(){
 		List<GiverModel> models = service.getPerPage(thisPage);
-		
+		log.debug("                                             {}",models);
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(models);
 		
@@ -234,10 +243,16 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "update";
 	}
 	
-	
-	
-	
-	
+	//validate
+	public String valid(){
+		log.debug("=================GiverAction valid======================={},{}",thisAccount,valid);
+		if(valid == true){
+			service.open(thisAccount);
+		}else{
+			service.hide(thisAccount);
+		}
+		return null;
+	}
 	
 	
 	

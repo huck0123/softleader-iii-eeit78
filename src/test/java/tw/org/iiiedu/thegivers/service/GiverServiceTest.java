@@ -50,7 +50,6 @@ public class GiverServiceTest extends GenericTest {
 //		while(i.hasNext()){
 //			System.out.println(i.next());
 //		}
-//			
 //	}
 	
 //	@Test
@@ -71,15 +70,15 @@ public class GiverServiceTest extends GenericTest {
 //			
 //	}
 	
-	@Test
-	public void testUpdate(){
-		GiverModel model = giverService.getByAccount("kitty");
-		System.out.println(model);
-		model.setEmail("Hellokitty@gmail.com");
-		giverService.update(model);
-		model = giverService.getByAccount("kitty");
-		System.out.println(model);
-	}
+//	@Test
+//	public void testUpdate(){
+//		GiverModel model = giverService.getByAccount("kitty");
+//		System.out.println(model);
+//		model.setEmail("Hellokitty@gmail.com");
+//		giverService.update(model);
+//		model = giverService.getByAccount("kitty");
+//		System.out.println(model);
+//	}
 	
 //	@Test
 //	public void testHide(){
@@ -87,10 +86,10 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(giverService.getByAccount("kitty"));
 //	}
 	
-//	@Test
-//	public void testOpen(){
-//		giverService.open("kitty");
-//		System.out.println(giverService.getByAccount("kitty"));
-//	}
+	@Test
+	public void testOpen(){
+		giverService.open("jerry0123");
+		System.out.println(giverService.getByAccount("jerry0123"));
+	}
 
 }

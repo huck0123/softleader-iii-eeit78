@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,7 @@ public class GiverDao {
 	public List<GiverModel> getPerPage(int pageNum) {
 		Criteria criteria = getSession().createCriteria(GiverModel.class)
 				.setFirstResult((pageNum - 1) * 5).setMaxResults(5);
-		List<GiverModel> models = criteria.list();
+		List<GiverModel> models = criteria.addOrder(Order.asc("id")).list();
 		return models;
 	}
 
