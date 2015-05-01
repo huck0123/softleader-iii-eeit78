@@ -92,6 +92,7 @@
 			});
 			$('#before').prop("disabled", false);
 			$('#after').prop("disabled", false);
+			$('select').prop("disabled", false);
 		};
 		
 		// 系統管理員管理giver驗證
@@ -122,6 +123,7 @@
 		
 		//選擇第幾頁
 		$('select').on("change", function(){
+			$(this).prop("disabled",true);
 			$('#tbdy').empty();
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp},getData);
