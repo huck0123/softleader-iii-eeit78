@@ -83,6 +83,7 @@
 			
 			function getData(data){
 				console.log(data);
+				data = JSON.parse(data);
 				var str = arrayBufferToBase64(data.headshot); 
 				$('#headshot').attr("src","data:image/png;base64," + str);
 			}

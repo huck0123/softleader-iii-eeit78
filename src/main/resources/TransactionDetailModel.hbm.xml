@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015/4/1 ?U?? 08:04:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="tw.org.iiiedu.thegivers.model.TransactionDetailModel" table="transaction_detail">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="giverId" type="java.lang.Integer">
+			<column name="giver_id" />
+		</property>
+		<property name="campaignId" type="java.lang.Integer">
+			<column name="campaign_id" />
+		</property>
+		<property name="amount" type="java.lang.Integer">
+			<column name="amount" />
+		</property>
+		<property name="date" type="java.sql.Timestamp">
+			<column name="date" />
+		</property>
+		<property name="cardNo" type="java.lang.String">
+			<column name="card_no" />
+		</property>
+		<property name="credit" type="boolean">
+			<column name="credit" />
+		</property>
+		<property name="ip" type="java.lang.String">
+			<column name="ip"></column>
+		</property>
+	</class>
+</hibernate-mapping>
