@@ -33,8 +33,6 @@
 
 <body id="body">
 
-	<div class="background-image"></div>
-
 	<!-- headerFixed start -->
 	<div>
 		<div id="headerFixed" class="headerFixed">
@@ -64,39 +62,14 @@
 
 
 
-							<li><a href=""><img class="header-pic"
+							<li><a href="register.jsp"><img class="header-pic"
 									src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
-							<c:if test="${raiser ==null && giver ==null && admin ==null}">
-								<li><a data-toggle="collapse" data-target="#collapse1"
-									aria-expanded="false" aria-controls="collapse1"> <img
-										class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
-							</c:if>
 
-							<c:if test="${raiser != null || giver != null || admin != null}">
-								<li><a class="dropdown-toggle" id="menu1"
-									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a>
-									<ul class="dropdown-menu" role="menu">
-										<c:if test="${raiser != null}">
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
-										</c:if>
-										<c:if test="${giver != null}">
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
-										</c:if>
-										<li class="divider"></li>
-										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
-									</ul></li>
-							</c:if>
+							<li><a data-toggle="collapse" data-target="#collapse1"
+								aria-expanded="false" aria-controls="collapse1"> <img
+									class="header-pic"
+									src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
+
 
 							<li><a href="#body"><img class="header-pic opacity60"
 									src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
@@ -190,37 +163,34 @@
 
 							<li><a href=""><img class="header-pic"
 									src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
+							<li><a data-toggle="collapse" data-target="#collapseExample"
+								aria-expanded="false" aria-controls="collapseExample"> <img
+									class="header-pic"
+									src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
 
-							<c:if test="${raiser ==null && giver ==null && admin ==null}">
-								<li><a data-toggle="collapse"
-									data-target="#collapseExample" aria-expanded="false"
-									aria-controls="collapseExample"> <img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
-							</c:if>
-							<c:if test="${raiser != null || giver != null || admin != null}">
-								<li><a class="dropdown-toggle" id="menu1"
-									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a>
-									<ul class="dropdown-menu" role="menu">
-										<c:if test="${raiser != null}">
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
-										</c:if>
-										<c:if test="${giver != null}">
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
-										</c:if>
-										<li class="divider"></li>
+
+							<li><a class="dropdown-toggle" id="menu1"
+								data-toggle="dropdown"><img class="header-pic"
+									src="/softleader-iii-eeit78/pictures/login2.png" /></a>
+								<ul class="dropdown-menu" role="menu">
+									<c:if test="${raiser != null}">
 										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
-									</ul></li>
-							</c:if>
+											href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
+										<li><a role="menuitem"
+											href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
+										<li><a role="menuitem"
+											href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
+									</c:if>
+									<c:if test="${giver != null}">
+										<li><a role="menuitem"
+											href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
+										<li><a role="menuitem"
+											href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
+									</c:if>
+									<li class="divider"></li>
+									<li><a role="menuitem"
+										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
+								</ul></li>
 						</ul>
 					</nav>
 				</div>
@@ -269,73 +239,10 @@
 	</div>
 	<!-- header ends -->
 
+<p> this is a template. </p>
 
+<div style="height:3000px"></div>
 
-	<div id="campaingDiv" class="container">
-
-		<div class="inner-wrapper">
-			<div class="wrapped-container">
-				<h2>最新活動</h2>
-			</div>
-			<div class="vertical-space"></div>
-			<div class="vertical-space"></div>
-
-			<div class="wrapped-container">
-
-
-
-				<div class="row">
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
 </body>
 
 
