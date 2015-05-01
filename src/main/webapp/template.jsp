@@ -33,8 +33,6 @@
 
 <body id="body">
 
-	<div class="background-image"></div>
-
 	<!-- headerFixed start -->
 	<div>
 		<div id="headerFixed" class="headerFixed">
@@ -280,72 +278,12 @@
 	<!-- header ends -->
 
 
-
-	<div id="campaingDiv" class="container">
-
-		<div class="inner-wrapper">
-			<div class="wrapped-container">
-				<h2>最新活動</h2>
-			</div>
-			<div class="vertical-space"></div>
-			<div class="vertical-space"></div>
-
-			<div class="wrapped-container">
+<div> this is a template. Do things here. </div>
 
 
 
-				<div class="row">
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
+<div style="height:3000px"></div>
 
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
 </body>
 
 
