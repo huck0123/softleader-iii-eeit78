@@ -76,7 +76,7 @@
 							<c:if test="${raiser != null || giver != null || admin != null}">
 								<li><a class="dropdown-toggle" id="menu1"
 									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a>
+										src="/softleader-iii-eeit78/pictures/login3.png" /></a>
 									<ul class="dropdown-menu" role="menu">
 										<c:if test="${raiser != null}">
 											<li><a role="menuitem"
@@ -91,6 +91,11 @@
 												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
 											<li><a role="menuitem"
 												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
+										</c:if>
+										<c:if test="${admin != null}">
+										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
+										<li></li>
+										<li>顯示所有交易紀錄</li>
 										</c:if>
 										<li class="divider"></li>
 										<li><a role="menuitem"
@@ -200,7 +205,7 @@
 							<c:if test="${raiser != null || giver != null || admin != null}">
 								<li><a class="dropdown-toggle" id="menu1"
 									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a>
+										src="/softleader-iii-eeit78/pictures/login3.png" /></a>
 									<ul class="dropdown-menu" role="menu">
 										<c:if test="${raiser != null}">
 											<li><a role="menuitem"
@@ -215,6 +220,11 @@
 												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
 											<li><a role="menuitem"
 												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
+										</c:if>
+										<c:if test="${admin != null}">
+										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
+										<li></li>
+										<li>顯示所有交易紀錄</li>
 										</c:if>
 										<li class="divider"></li>
 										<li><a role="menuitem"
