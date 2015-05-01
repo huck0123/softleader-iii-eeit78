@@ -24,9 +24,10 @@
 	</div>
 
 	<div class="container">
-		<button onclick="before()">上一頁</button>
-		<button onclick="nowPage()" value="1" id="page">本頁</button>
-		<button onclick="after()">下一頁</button>
+		<button id="before" onclick="before()">上一頁</button>
+		<select></select>
+<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
+		<button id="after" onclick="after()">下一頁</button>
 
 		<table class="table table-condensed">
 			<tr>
@@ -54,10 +55,21 @@
 	<script>
 		
 		var giverCount = ${application.giverCount}/5;
-		console.log(${application.giverCount});
-		var url = "/softleader-iii-eeit78/giver/giverSelect!getPerPage";
-		var urlv = "/softleader-iii-eeit78/giver/giverAction!valid";
+// 		console.log(${application.giverCount});
+	
+		var url = "${pageContext.request.contextPath}/giver/giverSelect!getPerPage";
+		var urlv = "${pageContext.request.contextPath}/giver/giverAction!valid";
 // 		console.log(${pageContext.request.contextPath})
+		
+		//建立select選單
+		for(var i=1; i<giverCount+1; i++){
+			$('select').append("<option value='"+ i +"'>"+ i +"</option>");	
+		}
+		
+		//載入第一頁
+		$.post(url,{'thisPage':1},getData);
+		
+		
 		
 		function getData(data){
 			data = JSON.parse(data);
@@ -78,6 +90,8 @@
 						+"</tr>");	
 				valid(obj.account, obj.valid);
 			});
+			$('#before').prop("disabled", false);
+			$('#after').prop("disabled", false);
 		};
 		
 		// 系統管理員管理giver驗證
@@ -106,37 +120,78 @@
 			})
 		}
 		
-		function nowPage(){
-			var thisPage = $('#page').val();
-			$('#tbdy').children().remove();
-			
-			$.post(url,{'thisPage':thisPage},getData);
-		};
+		//選擇第幾頁
+		$('select').on("change", function(){
+			$('#tbdy').empty();
+			var temp = $(this).val();
+			$.post(url,{'thisPage':temp},getData);
+			console.log(temp);
+		});
 		
-		nowPage();
-		
+		//上一頁
 		function before(){
-			var thisPage = $('#page').val();
+			$('#before').prop("disabled", true);
+			var thisPage = $('select').val();
 			if(thisPage > 1){
 				thisPage--;
 				
-				$('#page').val(thisPage);
+				$('select').val(thisPage);
+				$('#tbdy').empty();
+				$.post(url,{'thisPage':thisPage},getData);
+			}
+		};
+		
+		//下一頁
+		function after() {
+			$('#after').prop("disabled", true);
+			var thisPage = $('select').val();
+			if(thisPage < giverCount ){
+				thisPage++;
+				
+				$('select').val(thisPage);
 				$('#tbdy').children().remove();
 				$.post(url,{'thisPage':thisPage},getData);
 			}
 		};
 		
-
-		function after() {
-			var thisPage = $('#page').val();
-			if(thisPage < giverCount ){
-				thisPage++;
+		
+		
+		
+		
+		
+		
+		
+// 		function nowPage(){
+// 			var thisPage = $('#page').val();
+// 			$('#tbdy').children().remove();
+			
+// 			$.post(url,{'thisPage':thisPage},getData);
+// 		};
+		
+// 		nowPage();
+		
+// 		function before(){
+// 			var thisPage = $('#page').val();
+// 			if(thisPage > 1){
+// 				thisPage--;
 				
-				$('#page').val(thisPage);
-				$('#tbdy').children().remove();
-				$.post(url,{'thisPage':thisPage},getData);
-			}
-		};
+// 				$('#page').val(thisPage);
+// 				$('#tbdy').children().remove();
+// 				$.post(url,{'thisPage':thisPage},getData);
+// 			}
+// 		};
+		
+
+// 		function after() {
+// 			var thisPage = $('#page').val();
+// 			if(thisPage < giverCount ){
+// 				thisPage++;
+				
+// 				$('#page').val(thisPage);
+// 				$('#tbdy').children().remove();
+// 				$.post(url,{'thisPage':thisPage},getData);
+// 			}
+// 		};
 		
 		
 		
