@@ -1,36 +1,62 @@
 package tw.org.iiiedu.thegivers.web;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import tw.org.iiiedu.thegivers.form.TransactionDetailForm;
+import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
+import tw.org.iiiedu.thegivers.service.TransactionService;
+
 import com.opensymphony.xwork2.ActionSupport;
 
-import tw.org.iiiedu.thegivers.model.AdminModel;
-import tw.org.iiiedu.thegivers.model.GiverModel;
-import tw.org.iiiedu.thegivers.model.RaiserModel;
-import tw.org.iiiedu.thegivers.service.AdminService;
-import tw.org.iiiedu.thegivers.service.GiverService;
-import tw.org.iiiedu.thegivers.service.RaiserService;
-
 public class DonateAction extends ActionSupport {
-	
+	private static final long serialVersionUID = 1L;
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Override
-	public String execute() throws Exception {
+	
+	@Autowired
+	TransactionService service;
+	
+	private TransactionDetailForm form;
+	private TransactionDetailModel model;
+	
+	
+	public TransactionDetailForm getForm() {
+		return form;
+	}
+
+	public void setForm(TransactionDetailForm form) {
+		this.form = form;
+	}
+
+
+
+
+	//insert
+	public String donate(){
+		log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++{}",form);
+		model = new TransactionDetailModel();
 		
-log.debug("++++++++++++++++++++++++++++++donateAction");
-		
-		
-		
-			return SUCCESS;
-		} 
+		model.setGiverId(form.getGiverId());
+		model.setCampaignId(form.getCampaignId());
+		model.setAmount(form.getAmount());
+		model.setCardType(form.getCardType());
+		model.setCardNo(form.getCardNo());
+		model.setCardHolder(form.getCardHolder());
+		model.setCardHolderEmail(form.getCardHolderEmail());
+		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
+
+		try{
+			service.insert(model);
+			log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++{}",form);
+		}catch(HibernateException e){
+			e.printStackTrace();
+			return "fail";
+		}
+		return SUCCESS;
+	}
+	
 }

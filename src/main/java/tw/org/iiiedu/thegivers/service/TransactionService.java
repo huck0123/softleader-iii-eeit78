@@ -14,7 +14,11 @@ public class TransactionService {
 	
 	//捐款(信用卡捐款)
 	public TransactionDetailModel insert(TransactionDetailModel model){
+		
+		model.setDate(new java.sql.Timestamp(new java.util.Date().getTime()));  //預設現在時間為捐款時間
+		model.setCredit(false);
 		model = dao.insert(model);
+		
 		return model;
 	}
 }

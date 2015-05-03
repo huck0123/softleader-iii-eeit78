@@ -79,7 +79,7 @@
 					<tr>
 						<td><label for="">生日:</label></td>
 						<td><input type="date" name="form.birth" value=""
-							required="required"></td>
+							required="required" style="height:30px;"></td>
 					</tr>
 					<tr>
 						<td><label for="">照片:</label></td>

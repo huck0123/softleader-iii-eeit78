@@ -10,19 +10,22 @@ import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 public class TransactionServiceTest extends GenericTest{
 
 	@Autowired
-	private TransactionDao dao;
+	private TransactionService service;
 	
 	@Test
 	public void test() {
 		TransactionDetailModel model = new TransactionDetailModel();
-		model.setGiverId(5);
-		model.setCampaignId(3);
+		model.setGiverId(1);
+		model.setCampaignId(2);
 		model.setAmount(500);
+		model.setCardType("visa");
 		model.setCardNo("1234567891234567");
-		model.setCredit(false);
+		model.setCardHolder("Tony");
+		model.setCardHolderEmail("Tony@gmail.com");
+		model.setCredit(true);
 		model.setIp(null);
 		
-		dao.insert(model);
+		service.insert(model);
 	}
 
 }

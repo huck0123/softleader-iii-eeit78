@@ -8,16 +8,17 @@
 	<package name="donatePackage" namespace="/donate" extends="struts-default">
 
 		<action name="donateAction" class="donateAction">
-			<result name="success">/META-INF/donate/billInfo.jsp</result>
+			<result name="success" type="redirect">/donate/donateSuccess</result>
+			<result name="fail" type="redirect">/donate/donate</result>
 		</action>
 
-		<action name="billInfoAction" class="billInfoAction">
-			<result name="success">/META-INF/donate/infoConfirm.jsp</result>
-		</action>
+<!-- 		<action name="billInfoAction" class="billInfoAction"> -->
+<!-- 			<result name="success">/META-INF/donate/infoConfirm.jsp</result> -->
+<!-- 		</action> -->
 		
-				<action name="infoConfirmAction" class="infoConfirmAction">
-			<result name="success">/META-INF/donate/donateSuccess.jsp</result>
-		</action>
+<!-- 				<action name="infoConfirmAction" class="infoConfirmAction"> -->
+<!-- 			<result name="success">/META-INF/donate/donateSuccess.jsp</result> -->
+<!-- 		</action> -->
 
 		<action name="*">
 			<result>/META-INF/donate/{1}.jsp</result>

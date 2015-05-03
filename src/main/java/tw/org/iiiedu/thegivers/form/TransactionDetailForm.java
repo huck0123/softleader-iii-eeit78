@@ -1,9 +1,9 @@
-package tw.org.iiiedu.thegivers.model;
+package tw.org.iiiedu.thegivers.form;
 
 import java.sql.Timestamp;
 
+public class TransactionDetailForm {
 
-public class TransactionDetailModel {
 	private Integer id;
 	private Integer giverId;
 	private Integer campaignId;
@@ -16,13 +16,25 @@ public class TransactionDetailModel {
 	private boolean credit;
 	private String ip;
 	
+	private String campaignName;
+	private String cardCheck;
+	private String cardDeadline;
+	private String cardHolderBirth;
+	private String cardHolderPhone;
+
+	
+
 	@Override
 	public String toString() {
-		return "TransactionDetailModel [id=" + id + ", giverId=" + giverId
+		return "TransactionDetailForm [id=" + id + ", giverId=" + giverId
 				+ ", campaignId=" + campaignId + ", amount=" + amount
 				+ ", date=" + date + ", cardType=" + cardType + ", cardNo="
 				+ cardNo + ", cardHolder=" + cardHolder + ", cardHolderEmail="
-				+ cardHolderEmail + ", credit=" + credit + ", ip=" + ip + "]";
+				+ cardHolderEmail + ", credit=" + credit + ", ip=" + ip
+				+ ", campaignName=" + campaignName + ", cardCheck=" + cardCheck
+				+ ", cardDeadline=" + cardDeadline + ", cardHolderBirth="
+				+ cardHolderBirth + ", cardHolderPhone=" + cardHolderPhone
+				+ "]";
 	}
 
 	public Integer getId() {
@@ -112,8 +124,46 @@ public class TransactionDetailModel {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
-	
+
+	public String getCampaignName() {
+		return campaignName;
+	}
+
+	public void setCampaignName(String campaignName) {
+		this.campaignName = campaignName;
+	}
+
+	public String getCardCheck() {
+		return cardCheck;
+	}
+
+	public void setCardCheck(String cardCheck) {
+		this.cardCheck = cardCheck;
+	}
+
+	public String getCardDeadline() {
+		return cardDeadline;
+	}
+
+	public void setCardDeadline(String cardDeadline) {
+		this.cardDeadline = cardDeadline;
+	}
+
+	public String getCardHolderBirth() {
+		return cardHolderBirth;
+	}
+
+	public void setCardHolderBirth(String cardHolderBirth) {
+		this.cardHolderBirth = cardHolderBirth;
+	}
+
+	public String getCardHolderPhone() {
+		return cardHolderPhone;
+	}
+
+	public void setCardHolderPhone(String cardHolderPhone) {
+		this.cardHolderPhone = cardHolderPhone;
+	}
 	
 	
 	

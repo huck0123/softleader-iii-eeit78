@@ -10,7 +10,7 @@
 	<include file="struts-raiser.xml" />
 	<include file="struts-giverHistory.xml" />
 	<include file="struts-donate.xml" />
-<!-- 	<include file="struts-giverHistory.xml" /> -->
+
 	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />

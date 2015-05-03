@@ -20,8 +20,17 @@
 		<property name="date" type="java.sql.Timestamp">
 			<column name="date" />
 		</property>
+		<property name="cardType" type="java.lang.String">
+			<column name="card_type" />
+		</property>
 		<property name="cardNo" type="java.lang.String">
 			<column name="card_no" />
+		</property>
+		<property name="cardHolder" type="java.lang.String">
+			<column name="card_holder" />
+		</property>
+		<property name="cardHolderEmail" type="java.lang.String">
+			<column name="card_holder_email" />
 		</property>
 		<property name="credit" type="boolean">
 			<column name="credit" />
