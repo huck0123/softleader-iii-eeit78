@@ -4,12 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+
 <title>Insert title here</title>
 </head>
-<body>
-	<div>
-		<a href="/softleader-iii-eeit78/index.jsp">回首頁</a>
-	</div>
+<body id="body">
+	<jsp:include page="../../header.jsp" />
 
 
 	捐款成功 捐款資訊如下...

@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.GenericTest;
-import tw.org.iiiedu.thegivers.dao.TransactionDao;
+import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 
 public class TransactionServiceTest extends GenericTest{
@@ -12,11 +12,19 @@ public class TransactionServiceTest extends GenericTest{
 	@Autowired
 	private TransactionService service;
 	
+	@Autowired
+	private CampaignService cService;
+	
 	@Test
 	public void test() {
 		TransactionDetailModel model = new TransactionDetailModel();
+		CampaignModel temp;
+		temp = cService.getById(2);
+		int i = temp.getCurrentFund();
+		temp.setCurrentFund(i+500);
+		
 		model.setGiverId(1);
-		model.setCampaignId(2);
+		model.setCampaignModel(temp);
 		model.setAmount(500);
 		model.setCardType("visa");
 		model.setCardNo("1234567891234567");

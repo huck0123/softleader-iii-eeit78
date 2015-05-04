@@ -25,5 +25,7 @@ public class TransactionDao {
 		return model;
 	}
 	
+	//收尋
+//	public TransactionDetailModel getByAllCondition()
 	
 }

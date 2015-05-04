@@ -1,28 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
-<%-- <%@ taglib prefix="s" uri="/struts-tags"%> --%>
-<%-- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<title>確認資料</title>
 </head>
-<body>
-	<div>
-		<a href="/softleader-iii-eeit78/index.jsp">回首頁</a>
-	</div>
+<body id="body">
+
+	<jsp:include page="../../header.jsp" />
 
 	<div class="row container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			${sessionScope.giver.familyName }${sessionScope.giver.name }您好!
-			<form action="/softleader-iii-eeit78/donate/donateAction!donate.action" method="post">
+			<form
+				action="/softleader-iii-eeit78/donate/donateAction!donate.action"
+				method="post">
 				<div>
 					<h3>捐款資訊</h3>
 				</div>
@@ -40,10 +45,10 @@
 						<td><input type="text" name="form.giverId"
 							value="${sessionScope.giver.id }"></td>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td><label for="">捐款人IP</label></td> -->
-<!-- 						<td><input type="hidden" name="form.ip" value=""></td> -->
-<!-- 					</tr> -->
+					<!-- 					<tr> -->
+					<!-- 						<td><label for="">捐款人IP</label></td> -->
+					<!-- 						<td><input type="hidden" name="form.ip" value=""></td> -->
+					<!-- 					</tr> -->
 					<tr>
 						<td><label for="">捐款金額</label></td>
 						<td><input type="hidden" name="form.amount"
@@ -112,11 +117,8 @@
 	</div>
 
 </body>
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+
 <script>
-
-
+	
 </script>
 </html>

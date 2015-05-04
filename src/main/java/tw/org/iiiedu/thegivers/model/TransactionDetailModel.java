@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 public class TransactionDetailModel {
 	private Integer id;
 	private Integer giverId;
-	private Integer campaignId;
+//	private Integer campaignId;
+	private CampaignModel CampaignModel;
 	private Integer amount;
 	private Timestamp date;
 	private String cardType;
@@ -16,15 +17,26 @@ public class TransactionDetailModel {
 	private boolean credit;
 	private String ip;
 	
+//	@Override
+//	public String toString() {
+//		return "TransactionDetailModel [id=" + id + ", giverId=" + giverId
+//				+ ", campaignId=" + campaignId + ", amount=" + amount
+//				+ ", date=" + date + ", cardType=" + cardType + ", cardNo="
+//				+ cardNo + ", cardHolder=" + cardHolder + ", cardHolderEmail="
+//				+ cardHolderEmail + ", credit=" + credit + ", ip=" + ip + "]";
+//	}
+
+
 	@Override
 	public String toString() {
 		return "TransactionDetailModel [id=" + id + ", giverId=" + giverId
-				+ ", campaignId=" + campaignId + ", amount=" + amount
+				+ ", CampaignModel=" + CampaignModel + ", amount=" + amount
 				+ ", date=" + date + ", cardType=" + cardType + ", cardNo="
 				+ cardNo + ", cardHolder=" + cardHolder + ", cardHolderEmail="
 				+ cardHolderEmail + ", credit=" + credit + ", ip=" + ip + "]";
 	}
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -41,13 +53,13 @@ public class TransactionDetailModel {
 		this.giverId = giverId;
 	}
 
-	public Integer getCampaignId() {
-		return campaignId;
-	}
-
-	public void setCampaignId(Integer campaignId) {
-		this.campaignId = campaignId;
-	}
+//	public Integer getCampaignId() {
+//		return campaignId;
+//	}
+//
+//	public void setCampaignId(Integer campaignId) {
+//		this.campaignId = campaignId;
+//	}
 
 	public Integer getAmount() {
 		return amount;
@@ -112,7 +124,16 @@ public class TransactionDetailModel {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
+
+	public CampaignModel getCampaignModel() {
+		return CampaignModel;
+	}
+
+	public void setCampaignModel(CampaignModel campaignModel) {
+		CampaignModel = campaignModel;
+	}
+
+
 	
 	
 	

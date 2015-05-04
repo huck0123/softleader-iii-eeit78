@@ -11,9 +11,12 @@
 		<property name="giverId" type="java.lang.Integer">
 			<column name="giver_id" />
 		</property>
-		<property name="campaignId" type="java.lang.Integer">
-			<column name="campaign_id" />
-		</property>
+		<many-to-one name="CampaignModel" column="campaign_id"
+				class="tw.org.iiiedu.thegivers.model.CampaignModel" cascade="all" outer-join="true">
+		</many-to-one>
+<!-- 		<property name="campaignId" type="java.lang.Integer"> -->
+<!-- 			<column name="campaign_id" /> -->
+<!-- 		</property> -->
 		<property name="amount" type="java.lang.Integer">
 			<column name="amount" />
 		</property>
