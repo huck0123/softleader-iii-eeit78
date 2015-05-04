@@ -7,14 +7,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <title>Insert title here</title>
 </head>
 <body>
+
 	<s:form action="campaignAction" namespace="/campaign" method="post" enctype="multipart/form-data">
 
 <s:actionerror/>
-		<table>
-			<tr>
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+		<table class="table table-hover">
+			<tr style="height: 30px">
 				<td>活動名稱：</td>
 				<td><input type="text" name="campaignForm.name"
 					value="${param.name}"></td>
@@ -22,6 +30,8 @@
 			</tr>
 			<tr>
 			<td><s:file name="campaignForm.image" label="活動圖片："></s:file></td> 
+			<td></td>
+			<td></td>
 <!-- 				<td>活動圖片：</td> -->
 <!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
 <%-- 				<td><span class="error">${errors.id}</span></td> --%>
@@ -68,13 +78,16 @@
 				<td><span class="error">${errors.expire}</span></td>
 			</tr>
 			<tr>
+			<td></td>
 				<td><s:submit value="送出" method="insert" /></td>
 				<td><button type="button" id="btn1" name="填上資料" />Fill</td>
 			</tr>
 
 
 		</table>
-
+</div>
+<div class="col-md-2"></div>
+</div>
 	</s:form>
 
 </body>

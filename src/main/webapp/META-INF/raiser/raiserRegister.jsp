@@ -14,76 +14,106 @@
 <title>團體-註冊帳號</title>
 </head>
 <body>
-	<div class="row" >
+
+	<div class="row" style="padding-top: 20px">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form action="<c:url value='/raiser/raiserAction!insert' />"
-				method="post" enctype="multipart/form-data">
+				method="post" enctype="multipart/form-data" class="form-horizontal">
 
 				<div class="form-group">
-					<label for="account">帳號</label> <input type="text"
-						class="form-control" id="account" name="raiserForm.account">
+					<label for="account"  class="col-sm-2 control-label">帳號:</label>
+					<div class="col-sm-10"> 
+						<input type="text" class="form-control" id="account" name="raiserForm.account">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="inputpw">密碼</label> <input type="password"
-						class="form-control" id="inputpw" name="raiserForm.passwd"
-						required="required">
+					<label for="inputpw" class="col-sm-2 control-label">密碼:</label> 
+					<div class="col-sm-10"> 
+						<input type="password" class="form-control" id="inputpw" name="raiserForm.passwd"
+							required="required">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="name">團體名稱</label> <input type="text"
-						class="form-control" id="name" name="raiserForm.name"
-						required="required">
+					<label for="name" class="col-sm-2 control-label">團體名稱:</label> 
+					<div class="col-sm-10"> 
+						<input type="text" class="form-control" id="name" name="raiserForm.name"	required="required">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="tel">電話</label> <input type="text"
-						class="form-control" id="tel" name="raiserForm.tel">
+					<label for="tel" class="col-sm-2 control-label">電話:</label> 
+					<div class="col-sm-10"> 
+						<input type="text" class="form-control" id="tel" name="raiserForm.tel">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="cname">連絡人姓名</label> <input type="text"
-						class="form-control" id="cname" name="raiserForm.contactPerson">
+					<label for="cname" class="col-sm-2 control-label">連絡人姓名:</label> 
+					<div class="col-sm-10"> 
+						<input type="text" class="form-control" id="cname" name="raiserForm.contactPerson">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="ctel">連絡人電話</label> <input type="tel"
-						class="form-control" id="ctel" name="raiserForm.contactTel">
+					<label for="ctel" class="col-sm-2 control-label">連絡人電話:</label>
+					<div class="col-sm-10">  
+						<input type="tel" class="form-control" id="ctel" name="raiserForm.contactTel">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="mail">信箱</label> <input type="email"
-						class="form-control" id="mail" name="raiserForm.email">
+					<label for="mail" class="col-sm-2 control-label">信箱:</label>
+					<div class="col-sm-10">   
+						<input type="email" class="form-control" id="mail" name="raiserForm.email">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="add">地址</label> <input type="text" class="form-control"
-						id="add" name="raiserForm.address">
+					<label for="add" class="col-sm-2 control-label">地址:</label> 
+					<div class="col-sm-10">   
+						<input type="text" class="form-control" id="add" name="raiserForm.address">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label>圖標</label> <input type="file" class="form-control"
-						name="raiserForm.logo" value=>
+					<label class="col-sm-2 control-label">圖標:</label> 
+					<div class="col-sm-10">  
+						<input type="file" name="raiserForm.logo" value=>
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="del">團體介紹</label>
-					<textarea rows="4" cols="50" class="form-control" id="del"
-						name="raiserForm.detail"></textarea>
+					<label for="del" class="col-sm-2 control-label">團體介紹:</label>
+					<div class="col-sm-10">  
+						<textarea rows="4" cols="50" class="form-control" id="del"
+							name="raiserForm.detail"></textarea>
+					</div>	
 				</div>
 
 				<div class="form-group">
-					<label for="vdl">團體短片</label> <input type="url"
-						class="form-control" id="vdl" name="raiserForm.videoUrl">
+					<label for="vdl" class="col-sm-2 control-label">團體短片:</label>
+					<div class="col-sm-10">  
+						<input type="url"  class="form-control"  id="vdl" name="raiserForm.videoUrl">
+					</div>
 				</div>
-
-				<button type="submit" class="btn btn-default">確定送出</button>
-				<button type="reset" class="btn btn-default">清除資料</button>
+				
+				<div class="row" style="padding-top: 20px">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-default">確定送出</button>
+						<button type="reset" class="btn btn-default">清除資料</button>
+					</div>
+					<div class="col-md-4">
+						<a href="<c:url value='/index.jsp' />"	>回首頁</a>
+					</div>
+				</div>
+				
 			</form>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-	<a href="<c:url value='/index.jsp' />"	>回首頁</a>
 </body>
 </html>
