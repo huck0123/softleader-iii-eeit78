@@ -10,7 +10,9 @@
 
 			<div class="row">
 				<div class="col-md-2 ">
-					<h2 class="header-brand">TheGivers</h2>
+					<h2 class="header-brand">
+						<a href="<c:url value='/index.jsp'/>">TheGivers</a>
+					</h2>
 				</div>
 				<div class="col-md-8 ">
 					<nav class="navbar margin-bottom0">
@@ -136,7 +138,9 @@
 		<div id="header" class="header">
 			<div class="row">
 				<div class="col-md-2">
-					<h2 class="header-brand">TheGivers</h2>
+					<h2 class="header-brand">
+						<a href="<c:url value='/index.jsp'/>">TheGivers</a>
+					</h2>
 				</div>
 				<div class="col-md-8">
 

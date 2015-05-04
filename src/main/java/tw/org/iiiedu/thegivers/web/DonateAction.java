@@ -41,7 +41,7 @@ public class DonateAction extends ActionSupport {
 		model = new TransactionDetailModel();
 		
 		model.setGiverId(form.getGiverId());
-		model.setCampaignId(form.getCampaignId());
+//		model.setCampaignId(form.getCampaignId());
 		model.setAmount(form.getAmount());
 		model.setCardType(form.getCardType());
 		model.setCardNo(form.getCardNo());
