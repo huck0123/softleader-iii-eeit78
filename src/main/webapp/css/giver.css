@@ -25,6 +25,11 @@ body {
 	/*   -ms-filter: blur(3px); */ /*   filter: blur(3px); */
 }
 
+.media-image{
+	width:146px;
+	height: 146px;
+}
+
 .cover-wrapper { /* 	z-index: 9999; */
 	position: absolute;
 	top: 0;
@@ -142,6 +147,14 @@ body {
 			width:100%;
 			opacity: 1;
 	}
+		#collapseExample {
+		position: fixed;
+		width: 100%;
+		padding-left: 0px;
+ 		padding-right: 0px; 
+	}
+	#collapseExample div{margin:0px;
+}
 }
 
 @media ( min-width : 768px) {
@@ -164,12 +177,7 @@ body {
 		padding-left: 0;
 		padding-right: 0:
 	}
-	#collapseExample {
-		position: fixed;
-		width: 100%;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+
 }
 
 @media ( min-width : 1200px) {
@@ -180,6 +188,8 @@ body {
 		position: fixed;
 		width: 1200px;
 		z-index: 99;
+				padding-left: 0px;
+ 		padding-right: 0px; 
 	}
 	
 }

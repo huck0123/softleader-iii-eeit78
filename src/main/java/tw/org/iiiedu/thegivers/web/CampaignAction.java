@@ -55,7 +55,7 @@ public class CampaignAction extends ActionSupport implements
 
 		
 		if(campaignForm.getPageNum() == null){campaignForm.setPageNum(0);}
-		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(2);}
+		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(3);}
 		List campaigns = campaignService.getByAllCondition(campaignForm);
 
 		Gson gson = new Gson();
@@ -63,7 +63,7 @@ public class CampaignAction extends ActionSupport implements
 
 		
 		inputStream = new ByteArrayInputStream(
-				json.getBytes(StandardCharsets.UTF_16));
+				json.getBytes(StandardCharsets.UTF_8));
 		
 		return "selectByAllCondition";
 	}
