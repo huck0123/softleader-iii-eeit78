@@ -298,7 +298,7 @@ function load(){
 		
 		totalCount = data;
 		$('#div1').empty()
-		for (var i = 0; i < Math.ceil(totalCount/3); i++) { 
+		for (var i = 0; i < Math.ceil(totalCount/6); i++) { 
 
 		var child = $('<a>'+(i+1)+'</a>')
 		child.on('click',makeFunction(i))
@@ -309,7 +309,7 @@ function load(){
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val()},function(data){
 			data = JSON.parse(data);
-// 					$('#showColumn').empty();
+ 					$('#row').empty();
 			$(data).each(function(index,value){
 				var rowDiv = $('#row');
 				var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
@@ -317,12 +317,15 @@ function load(){
 				
 				var str = arrayBufferToBase64(value.image); 
 				var image = $('<img src="data:image/png;base64,' + str +'"/>');
+				image.on('click',function(){goDetail(value)});
 				
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>'+value.name+'</h3>');
 				var p1 = $('<p>'+ value.detail+'</p>');
 				var p2 = $('<p></p>');
-				var a = $('<a href="#" class="btn btn-primary" role="button">我要捐款</a>')
+				var a = $('<a href="" class="btn btn-primary" role="button">我要捐款</a>');
+				var url = "${pageContext.request.contextPath}/campaign/campaignDetail?id="+value.id;
+				a.attr('href',url);
 				a.appendTo(p2);
 				h3.appendTo(captionDiv);
 				p1.appendTo(captionDiv);
@@ -349,7 +352,7 @@ function makeFunction(j){return function(){
 			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
-// 		$('#showColumn').empty();
+ 		$('#row').empty();
 		$(data).each(function(index,value){
 			var rowDiv = $('#row');
 			var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
@@ -357,12 +360,16 @@ function makeFunction(j){return function(){
 			
 			var str = arrayBufferToBase64(value.image); 
 			var image = $('<img  src="data:image/png;base64,' + str +'"/>');
+			image.on('click',function(){goDetail(value)});
 			
 			var captionDiv = $('<div class="caption"></div>');
 			var h3 = $('<h3>'+value.name+'</h3>');
 			var p1 = $('<p>'+ value.detail+'</p>');
 			var p2 = $('<p></p>');
-			var a = $('<a href="#" class="btn btn-primary" role="button">我要捐款</a>')
+			var a = $('<a href="" class="btn btn-primary" role="button">我要捐款</a>');
+			var url = "${pageContext.request.contextPath}/campaign/campaignDetail?id="+value.id;
+			a.attr('href',url);
+			
 			a.appendTo(p2);
 			h3.appendTo(captionDiv);
 			p1.appendTo(captionDiv);
@@ -378,12 +385,8 @@ function makeFunction(j){return function(){
 
 
 function goDetail(campaignModel){
-	console.log("modelName" + campaignModel.name);
-	$('#div1').empty();
-	$('#showColumn').empty();
-	var child = $('<p></p>');
-	child.text(campaignModel.id +", "+campaignModel.name);
-	child.appendTo($('#showColumn'));
+
+	
 }
 
 

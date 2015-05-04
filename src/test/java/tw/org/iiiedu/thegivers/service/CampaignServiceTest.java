@@ -79,8 +79,8 @@ public class CampaignServiceTest extends GenericTest {
 	 @Test
 	 public void getByAllCondition(){
 		 CampaignForm cf = new CampaignForm();
-		 cf.setPageNum(0);
-		 cf.setPageSize(5);
+		 cf.setId(23);
+		 System.out.println("hahaha"+campaignService.getByAllCondition(cf));
 		 assertTrue(campaignService.getByAllCondition(cf).size()>0);
 	 }
 	

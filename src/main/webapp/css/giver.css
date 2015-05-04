@@ -8,6 +8,10 @@ body {
 	padding-right: 0px;
 }
 
+.iframe{
+	width:400px;
+}
+
 .background-image {
 	left: 0;
 	right: 0;

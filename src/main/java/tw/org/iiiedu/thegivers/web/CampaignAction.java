@@ -53,9 +53,9 @@ public class CampaignAction extends ActionSupport implements
 	public String selectByAllCondition() throws Exception {
 
 
-		
+		System.out.println(campaignForm.getId());
 		if(campaignForm.getPageNum() == null){campaignForm.setPageNum(0);}
-		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(3);}
+		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(6);}
 		List campaigns = campaignService.getByAllCondition(campaignForm);
 
 		Gson gson = new Gson();

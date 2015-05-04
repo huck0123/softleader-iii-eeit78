@@ -87,12 +87,15 @@ public class CampaignDao {
 	}
 	
 	public List<CampaignModel> getByAllCondition(CampaignForm campaignForm) {
+		System.out.println(campaignForm.getId());
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
 		if(campaignForm.getId() != null){
+			System.out.println(campaignForm.getId());
 			criteria.add(Restrictions.eq("id", campaignForm.getId()));
 		}
 		if(campaignForm.getName() != null){
+			System.out.println(campaignForm.getName());
 			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
 		}
 		if(campaignForm.getType() != null){
@@ -106,7 +109,7 @@ public class CampaignDao {
 		
 		
 		List campaignModels = criteria.setFirstResult(campaignForm.getPageNum() * campaignForm.getPageSize()).setMaxResults(campaignForm.getPageSize()).list();
-		
+		System.out.println(campaignModels);
 		return campaignModels;
 	}
 

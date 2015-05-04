@@ -35,7 +35,7 @@
 
 	<div class="background-image"></div>
 
-	<jsp:include page="header.jsp" />
+	<jsp:include page="/header.jsp" />
 
 
 
