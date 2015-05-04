@@ -27,7 +27,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="account">±b¸¹</label> <input type="text"
+					<label for="account">±b¸¹</label> <input type="text"  style="display:none"
 						class="form-control" id="account" name="raiserForm.account"
 						value="${raiser.account}">
 				</div>
