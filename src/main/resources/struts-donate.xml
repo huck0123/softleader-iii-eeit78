@@ -12,13 +12,6 @@
 			<result name="fail" type="redirect">/donate/donate</result>
 		</action>
 
-<!-- 		<action name="billInfoAction" class="billInfoAction"> -->
-<!-- 			<result name="success">/META-INF/donate/infoConfirm.jsp</result> -->
-<!-- 		</action> -->
-		
-<!-- 				<action name="infoConfirmAction" class="infoConfirmAction"> -->
-<!-- 			<result name="success">/META-INF/donate/donateSuccess.jsp</result> -->
-<!-- 		</action> -->
 
 		<action name="*">
 			<result>/META-INF/donate/{1}.jsp</result>

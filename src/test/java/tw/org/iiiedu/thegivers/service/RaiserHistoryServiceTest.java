@@ -12,8 +12,8 @@ public class RaiserHistoryServiceTest extends GenericTest  {
 	@Autowired 
 	private RaiserHistoryService raiserHistoryService;
 	
-	@Test
-	public void testLogin(){
-		assertTrue(raiserHistoryService.getByRaiser_id(1)!=null);
-	}
+//	@Test
+//	public void testLogin(){
+//		assertTrue(raiserHistoryService.getByRaiser_id(1)!=null);
+//	}
 }
