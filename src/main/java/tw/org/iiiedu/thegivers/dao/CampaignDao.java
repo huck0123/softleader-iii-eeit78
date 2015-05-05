@@ -42,14 +42,14 @@ public class CampaignDao {
 		return result;
 	}
 
-	public List<CampaignModel> getAll(Integer pageNum,Integer pageSize) {
+	public List<CampaignModel> getAll(Integer pageNum, Integer pageSize) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			List campaignModels = session.createCriteria(CampaignModel.class)
-					.setFirstResult(pageNum * pageSize).setMaxResults(pageSize).list();
-
+					.setFirstResult(pageNum * pageSize).setMaxResults(pageSize)
+					.list();
 
 			if (campaignModels.size() > 0) {
 
@@ -66,47 +66,56 @@ public class CampaignDao {
 	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
-		if(campaignForm.getId() != null){
+		if (campaignForm.getId() != null) {
 			criteria.add(Restrictions.like("id", campaignForm.getId()));
 		}
-		if(campaignForm.getName() != null){
-			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
+		if (campaignForm.getName() != null) {
+			criteria.add(Restrictions.like("name",
+					"%" + campaignForm.getName() + "%").ignoreCase());
 		}
-		if(campaignForm.getType() != null){
+		if (campaignForm.getType() != null) {
 			criteria.add(Restrictions.eq("type", campaignForm.getType()));
 		}
-		if(campaignForm.getLocation() != null){
+		if (campaignForm.getLocation() != null) {
 			criteria.add(Restrictions.eq("location", campaignForm.getLocation()));
 		}
 
 		// criteria.add(Restrictions.eq("show", true));
-		
-		Long rows = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-		
+
+		Long rows = (Long) criteria.setProjection(Projections.rowCount())
+				.uniqueResult();
+
 		return rows;
 	}
-	
+
 	public List<CampaignModel> getByAllCondition(CampaignForm campaignForm) {
+		System.out.println(campaignForm.getId());
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
-		if(campaignForm.getId() != null){
+		if (campaignForm.getId() != null) {
+			System.out.println(campaignForm.getId());
 			criteria.add(Restrictions.eq("id", campaignForm.getId()));
+		} else {
+			if (campaignForm.getName() != null) {
+				System.out.println(campaignForm.getName());
+				criteria.add(Restrictions.like("name",
+						"%" + campaignForm.getName() + "%").ignoreCase());
+			}
+			if (campaignForm.getType() != null) {
+				criteria.add(Restrictions.eq("type", campaignForm.getType()));
+			}
+			if (campaignForm.getLocation() != null) {
+				criteria.add(Restrictions.eq("location",
+						campaignForm.getLocation()));
+			}
 		}
-		if(campaignForm.getName() != null){
-			criteria.add(Restrictions.like("name", "%"+campaignForm.getName()+"%").ignoreCase());
-		}
-		if(campaignForm.getType() != null){
-			criteria.add(Restrictions.eq("type", campaignForm.getType()));
-		}
-		if(campaignForm.getLocation() != null){
-			criteria.add(Restrictions.eq("location", campaignForm.getLocation()));
-		}
-
 		// criteria.add(Restrictions.eq("show", true));
-		
-		
-		List campaignModels = criteria.setFirstResult(campaignForm.getPageNum() * campaignForm.getPageSize()).setMaxResults(campaignForm.getPageSize()).list();
-		
+
+		List campaignModels = criteria
+				.setFirstResult(
+						campaignForm.getPageNum() * campaignForm.getPageSize())
+				.setMaxResults(campaignForm.getPageSize()).list();
+		System.out.println(campaignModels);
 		return campaignModels;
 	}
 
