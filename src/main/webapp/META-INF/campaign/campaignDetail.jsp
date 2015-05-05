@@ -18,6 +18,8 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <style>
+#sideDiv{text-align: left;}
+
 </style>
 </head>
 <body id="body">
@@ -31,13 +33,6 @@
 	<div class="container" id="showColumn">
 	<div id="row" class=row></div>
 	</div>
-	
-
-id:${param.id}
-<br/>
-currentPage:${param.currentPage}
-<br/>
-nameSearch:${param.nameSearch }
 
 
 </body>
@@ -57,22 +52,40 @@ function load(){
 				{'campaignForm.id':"${param.id}"},function(data){
 
 			data = JSON.parse(data);
- 					$('#row').empty();
- 					console.log(data);
 			$(data).each(function(index,value){
-				var rowDiv = $('#row');
+				var rowDiv1 = $('<div class="row"></div>');
+				var titleP = $('<p>'+value.name+'</p>');
+				var raiserP = $('<p>'+value.id+'</p>');
+				titleP.appendTo(rowDiv1);
+				raiserP.appendTo(rowDiv1);
+				rowDiv1.appendTo($('#showColumn'));
 				
+				var rowDiv2 = $('<div class="row"></div>');
 				var vedioDiv = $('<div class="col-sm-12 col-md-8"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
 				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/YNoFkgOozLo'+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
-				var sideDiv = $('<div class="col-sm-12 col-md-4"></div>');
+				var sideDiv = $('<div id="sideDiv" class="col-sm-12 col-md-4"></div>');
+				var giverP = $('<p>已有<strong>3</strong>人支持</p>');
+				var moneyP = $('<p>已募得<strong>$4500</strong>元/60000元</p>');
+				var dateP = $('<p>於<strong>2015/4/30</strong>結束</p>');
+				var barP = $('<p>目前進度</p>');
+				var otherInfo = $('<p>類型、地點、分享...</p>');
+				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'" class="btn btn-primary" role="button"><strong>我要捐款</strong></a>');
+				giverP.appendTo(sideDiv);
+				moneyP.appendTo(sideDiv);
+				dateP.appendTo(sideDiv);
+				barP.appendTo(sideDiv);
+				otherInfo.appendTo(sideDiv);
+				donateBtn.appendTo(sideDiv);
+				vedioDiv.appendTo(rowDiv2);
+				sideDiv.appendTo(rowDiv2);
+				rowDiv2.appendTo($('#showColumn'));
 				
-				vedioDiv.appendTo(rowDiv);
-				sideDiv.appendTo(rowDiv);
 				
 
+				
 				
 			})
 		})

@@ -8,9 +8,13 @@ body {
 	padding-right: 0px;
 }
 
-.iframe{
-	width:400px;
+.btn-warning{
+	  background-color: orangered;
+  border-color: orangered;
+	
 }
+
+strong { font-size: 36px;}
 
 .background-image {
 	left: 0;

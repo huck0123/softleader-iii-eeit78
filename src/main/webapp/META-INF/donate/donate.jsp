@@ -22,7 +22,7 @@
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-
+${param.id}
 	<div class="row container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
