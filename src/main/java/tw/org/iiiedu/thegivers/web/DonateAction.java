@@ -41,7 +41,6 @@ public class DonateAction extends ActionSupport {
 		model = new TransactionDetailModel();
 		
 		model.setGiverId(form.getGiverId());
-//		model.setCampaignId(form.getCampaignId());
 		model.setAmount(form.getAmount());
 		model.setCardType(form.getCardType());
 		model.setCardNo(form.getCardNo());
@@ -50,7 +49,7 @@ public class DonateAction extends ActionSupport {
 		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 
 		try{
-			service.insert(model);
+			service.insert(model, form.getCampaignId()); //Service insert接收兩參數
 			log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++{}",form);
 		}catch(HibernateException e){
 			e.printStackTrace();

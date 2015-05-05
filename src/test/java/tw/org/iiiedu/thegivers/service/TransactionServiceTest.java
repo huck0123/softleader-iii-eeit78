@@ -19,12 +19,8 @@ public class TransactionServiceTest extends GenericTest{
 	public void test() {
 		TransactionDetailModel model = new TransactionDetailModel();
 		CampaignModel temp;
-		temp = cService.getById(2);
-		int i = temp.getCurrentFund();
-		temp.setCurrentFund(i+500);
 		
 		model.setGiverId(1);
-		model.setCampaignModel(temp);
 		model.setAmount(500);
 		model.setCardType("visa");
 		model.setCardNo("1234567891234567");
@@ -32,8 +28,8 @@ public class TransactionServiceTest extends GenericTest{
 		model.setCardHolderEmail("Tony@gmail.com");
 		model.setCredit(true);
 		model.setIp(null);
-		
-		service.insert(model);
+
+		service.insert(model, 2);
 	}
 
 }

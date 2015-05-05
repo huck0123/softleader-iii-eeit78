@@ -1,15 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>fix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <title>捐贈者歷史紀錄</title>
+
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+
 </head>
-<body>
-	<div><a href="http://localhost:8080/softleader-iii-eeit78/index.jsp">回首頁</a></div>
+<body id="body">
+	
+	<jsp:include page="../../header.jsp" />
+	
 	<div>
 	<h2>篩選條件(可多重查詢):</h2>
 		<form action="<c:url value='/giverHistory/giverHistoryAction!selectByAllCondition' />" method="POST">

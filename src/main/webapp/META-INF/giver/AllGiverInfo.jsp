@@ -1,36 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>所有捐款人資訊</title>
+
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>所有捐款人資訊</title>
-
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/softleader-iii-eeit78/js/giver.js "
-	charset="UTF-8"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/giver.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 
+<style>
+tr th {
+	text-align: center;
+}
+</style>
 
 </head>
-<body>
-	<div>
-		<a href="/softleader-iii-eeit78/index.jsp">回首頁</a>
-	</div>
+<body id="body">
+
+	<jsp:include page="../../header.jsp" />
 
 	<div class="container">
 		<button id="before" onclick="before()">上一頁</button>
 		<select></select>
-<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
+		<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
 		<button id="after" onclick="after()">下一頁</button>
 
-		<table class="table table-condensed">
+		<table class="table table-bordered">
 			<tr>
+				<th>大頭貼</th>
 				<th>帳號</th>
 				<!-- 				<th>密碼</th> -->
 				<th>姓</th>
@@ -73,8 +82,10 @@
 		
 		function getData(data){
 			data = JSON.parse(data);
+// 			console.log(data)
 			$.each(data,function(index,obj){
 				$(tbdy).append("<tr>"
+						+ "<td><img src='' class='img-circle' id='"+ obj.id +"'	style='width: 80px; height: 80px'></td>"
 						+ "<td>"+ obj.account +"</td>"
 // 						+ "<td>" +obj.passwd +"</td>"
 						+ "<td>"+ obj.familyName +"</td>" 
@@ -89,7 +100,13 @@
 						+ "<td>"+ "<input type='checkbox' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
 						+"</tr>");	
 				valid(obj.account, obj.valid);
+				
+				if(obj.headshot != null){
+				var str = arrayBufferToBase64(obj.headshot); 
+				$('#'+obj.id).attr("src","data:image/png;base64," + str);
+				}
 			});
+			
 			$('#before').prop("disabled", false);
 			$('#after').prop("disabled", false);
 			$('select').prop("disabled", false);
@@ -111,12 +128,12 @@
 					$.post(urlv, { 'thisAccount':account, 'valid':false});
 					$(this).val("false").val();
 					$('.'+account).text("false");
-					console.log(false);
+// 					console.log(false);
 				}else{
 					$.post(urlv, { 'thisAccount':account, 'valid':true});
 					$(this).val("true").val();
 					$('.'+account).text("true");
-					console.log(true);
+// 					console.log(true);
 				}
 			})
 		}
@@ -127,7 +144,7 @@
 			$('#tbdy').empty();
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp},getData);
-			console.log(temp);
+// 			console.log(temp);
 		});
 		
 		//上一頁
