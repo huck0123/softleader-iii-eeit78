@@ -72,7 +72,7 @@ function load(){
 				var dateP = $('<p>於<strong>2015/4/30</strong>結束</p>');
 				var barP = $('<p>目前進度</p>');
 				var otherInfo = $('<p>類型、地點、分享...</p>');
-				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'" class="btn btn-primary" role="button"><strong>我要捐款</strong></a>');
+				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name+'" class="btn btn-primary" role="button"><strong>我要捐款</strong></a>');
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
 				dateP.appendTo(sideDiv);
