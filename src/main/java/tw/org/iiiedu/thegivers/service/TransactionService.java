@@ -32,4 +32,14 @@ public class TransactionService {
 		
 		return model;
 	}
+	
+	//取出某campaignId的所有交易紀錄
+	public int getCountByCampaignId(int cId){
+
+		CampaignModel cModel = new CampaignModel();
+		cModel.setId(cId);
+		int count = dao.getCountByCampaignId(cModel);
+		
+		return count;
+	}
 }

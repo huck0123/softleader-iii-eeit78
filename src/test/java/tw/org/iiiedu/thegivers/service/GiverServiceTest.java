@@ -33,13 +33,13 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(list.get(0));
 //	}
 	
-//	@Test
-//	public void testGetCount(){
-//		int i = giverService.getCount();
-//		int j = giverService.getCount();
-//		System.out.println(i);
-//		System.out.println(j);
-//	}
+	@Test
+	public void testGetCount(){
+		int i = giverService.getCount();
+		int j = giverService.getCount();
+		System.out.println(i);
+		System.out.println(j);
+	}
 	
 //	@Test
 //	public void testGetPerPage(){
@@ -86,10 +86,10 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(giverService.getByAccount("kitty"));
 //	}
 	
-	@Test
-	public void testOpen(){
-		giverService.open("jerry0123");
-		System.out.println(giverService.getByAccount("jerry0123"));
-	}
+//	@Test
+//	public void testOpen(){
+//		giverService.open("jerry0123");
+//		System.out.println(giverService.getByAccount("jerry0123"));
+//	}
 
 }
