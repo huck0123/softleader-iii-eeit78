@@ -39,63 +39,13 @@
 
 
 
-	<div id="campaingDiv" class="container">
+	<div id="campaignDiv" class="container">
+		<div id="campaignRow"></div>
 
-		<div class="inner-wrapper">
-			<div class="wrapped-container">
-				<h2>最新活動</h2>
-			</div>
-			<div class="vertical-space"></div>
-			<div class="vertical-space"></div>
+	</div>
 
-			<div class="wrapped-container">
-
-
-
-				<div class="row">
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="" alt="">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>...</p>
-								<p>
-									<a href="<c:url value='/donate/donate'/>"
-										class="btn btn-primary" role="button">我要捐款</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div id="raiserDiv">
+		<div id="raiserRow"></div>
 	</div>
 
 
@@ -109,6 +59,55 @@
 
 <script>
 
+loadCampaign();
+loadRaiser();
+
+function loadCampaign(){
+		
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+				{'campaignForm.pageSize':3,},function(data){
+
+			data = JSON.parse(data);
+ 					
+			$(data).each(function(index,value){
+				var rowDiv = $('#campaignRow');
+				var colDiv = $('<div class="col-sm-12 col-md-4"></div>');
+				var thumbnailDiv = $('<div class="thumbnail"></div>');
+				
+				var str = arrayBufferToBase64(value.image); 
+				var image = $('<img src="data:image/png;base64,' + str +'"/>');
+				var imageA = $('<a></a>');
+				image.appendTo(imageA);
+				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
+				
+				var captionDiv = $('<div class="caption"></div>');
+				var h3 = $('<h3>'+value.name+'</h3>');
+				var p1 = $('<p>'+ value.detail+'</p>');
+				var p2 = $('<p></p>');
+				var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
+				var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
+				a.attr('href',url);
+				a.appendTo(p2);
+				h3.appendTo(captionDiv);
+				p1.appendTo(captionDiv);
+				p2.appendTo(captionDiv);
+				imageA.appendTo(thumbnailDiv);
+				captionDiv.appendTo(thumbnailDiv);
+				thumbnailDiv.appendTo(colDiv);
+				colDiv.appendTo(rowDiv);
+			})
+		})
+	}
+
+function arrayBufferToBase64( buffer ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+}
 	
 </script>
 
