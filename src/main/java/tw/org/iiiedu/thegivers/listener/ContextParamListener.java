@@ -12,6 +12,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import tw.org.iiiedu.thegivers.service.CampaignService;
 import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
+import tw.org.iiiedu.thegivers.service.TransactionService;
 
 public class ContextParamListener implements ServletContextListener{
 	
@@ -22,6 +23,8 @@ public class ContextParamListener implements ServletContextListener{
 	private GiverService giverService;
 	@Autowired
 	private RaiserService raiserService;
+	@Autowired
+	private TransactionService transactionService;
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -41,6 +44,7 @@ public class ContextParamListener implements ServletContextListener{
 		sc.setAttribute("giverCount", giverService.getCount() );
 		sc.setAttribute("campaignShowPageSize", 5 );
 		sc.setAttribute("raiserCount", raiserService.getCount());
+		sc.setAttribute("transactionCount", transactionService.getCount());
 	}
 
 	

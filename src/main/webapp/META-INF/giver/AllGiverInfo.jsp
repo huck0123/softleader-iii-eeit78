@@ -63,8 +63,8 @@ tr th {
 
 	<script>
 		
-		var giverCount = ${application.giverCount}/5;
-// 		console.log(${application.giverCount});
+		var giverCount = ${applicationScope.giverCount}/5;
+// 		console.log(${applicationScope.giverCount});
 	
 		var url = "${pageContext.request.contextPath}/giver/giverSelect!getPerPage";
 		var urlv = "${pageContext.request.contextPath}/giver/giverAction!valid";

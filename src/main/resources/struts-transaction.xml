@@ -12,6 +12,12 @@
 			<result name="fail" type="redirect">/donate/donate</result>
 		</action>
 
+		<action name="transactionDetailAction" class="transactionAction">
+			<result type="stream" name="transactionDetail">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 
 		<action name="*">
 			<result>/META-INF/donate/{1}.jsp</result>

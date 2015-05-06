@@ -38,9 +38,9 @@ body{
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
-				團體名稱 : <input type="text" class="searchtext" size="20"
-					placeholder="依名稱搜尋"> <input type="button" name="searchbtn"
-					value="查詢" id="btnSch" class="btn btn-default">
+				團體名稱 : 
+				<input type="text" size="20" placeholder="依名稱搜尋" id="textSch" class="searchtext"> 
+				<input type="button" name="searchbtn" value="查詢" id="btnSch" class="btn btn-default">
 			</div>
 			<div class="col-md-4">
 				<input type="button" name="clearbtn" value="清除查詢結果" id="btnClr"
@@ -72,23 +72,24 @@ body{
 		<div id="detail"></div>
 		<div id="btnn">
 			<input type="button" name="forward" value="上一頁" id="btnf"> <input
-				type="tel" name="now" size="1" value="1" id="btnw"> <input
-				type="button" name="next" value="下一頁" id="btnx"> <a
-				href="<c:url value='/index.jsp' />">回首頁</a>
+				type="tel" name="now" size="1" value="1" id="btnw"> <div id="divMax"></div>
+				<input type="button" name="next" value="下一頁" id="btnx">
+				 <a	href="<c:url value='/index.jsp' />">回首頁</a>
 		</div>
 	</div>
 	<script>
-		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!getPerPage";
+		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!getByCondition";
 		$.post(url, getData);
 
 		var page = $("#btnw").val();
 		var Max = Math.ceil("${raiserCount}" / 3);
-		$("#btnx").before("/" + Max + "\t");
+		$("#divMax").text("/" + Max + "\t");
 		var test = true;
 
 		//以下分頁用
 		//用數字輸入可搜尋頁數
 		$("#btnw").change(function() {
+			console.log("change")
 			if ($("#btnw").val() <= Max && $("#btnw").val() > 0) {
 				page = $("#btnw").val();
 			} else {
@@ -99,7 +100,7 @@ body{
 			test = true;
 			$('#tbody').children().remove();
 			$.post(url, {
-				'page' : page
+				'name' : $("#textSch").val(),'page' : page
 			}, getData);
 		});
 
@@ -112,7 +113,7 @@ body{
 				test = true;
 				$('#tbody').children().remove();
 				$.post(url, {
-					'page' : page
+					'name' : $("#textSch").val(),'page' : page
 				}, getData);
 			}
 		});
@@ -126,7 +127,7 @@ body{
 				test = true;
 				$('#tbody').children().remove();
 				$.post(url, {
-					'page' : page
+					'name' : $("#textSch").val(),'page' : page
 				}, getData);
 			}
 		});
@@ -160,7 +161,7 @@ body{
 									stAll += "<td id='tdCk"+raiser.id+"'>"
 											+ st1 + "</td></tr>";
 								} else {
-									var st2 = "<button id='btnStop"+raiser.id+"' class='btn btn-danger'>解除封鎖</button>";
+									var st2 = "<button id='btnStop"+raiser.id+"' class='btn btn-success'>解除封鎖</button>";
 									stAll += "<td id='tdCk"+raiser.id+"'>"
 											+ st2 + "</td></tr>";
 								}
@@ -256,7 +257,7 @@ body{
 																.removeClass(
 																		"btn btn-warning")
 																.addClass(
-																		'btn btn-danger')
+																		'btn btn-success')
 																.text("解除封鎖");
 													} else {
 														lock = true;
@@ -273,7 +274,7 @@ body{
 																"#btnStop"
 																		+ raiser.id)
 																.removeClass(
-																		"btn btn-danger")
+																		"btn btn-success")
 																.addClass(
 																		'btn btn-warning')
 																.html(
@@ -285,11 +286,21 @@ body{
 		};
 
 		//以下搜尋相關
-		// 		$("#btnsch").click(function(){
-		// 			var urlCount = "/softleader-iii-eeit78/raiser/raiserSelectAll!getByConditionCount";
-		// 			console.log()
-		// 			Max = Math.ceil("${resultCount}" / 3);
-		// 		});
+// 				$("#btnSch").click(function(){
+// 					$('#detail').children().remove();
+// 					test = true;
+// 					$('#tbody').children().remove();
+// 					$.post(url, {
+// 						'name' : $("#textSch").val(),'page' : page
+// 					}, getData);
+// 					console.log($("#textSch").val());
+// 					Max = Math.ceil("${resultCount}" / 3); 
+// 					$("#divMax").text("/" + Max + "\t");
+// 					console.log("${resultCount}");
+// 					$("#btnw").val("1");
+// 					page = 1;
+// 				});
+		
 	</script>
 
 </body>

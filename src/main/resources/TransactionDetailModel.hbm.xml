@@ -11,7 +11,7 @@
 		<property name="giverId" type="java.lang.Integer">
 			<column name="giver_id" />
 		</property>
-		<many-to-one name="CampaignModel" column="campaign_id"
+		<many-to-one name="campaignModel" column="campaign_id"
 				class="tw.org.iiiedu.thegivers.model.CampaignModel" cascade="all" outer-join="true">
 		</many-to-one>
 <!-- 		<property name="campaignId" type="java.lang.Integer"> -->
@@ -20,7 +20,7 @@
 		<property name="amount" type="java.lang.Integer">
 			<column name="amount" />
 		</property>
-		<property name="date" type="java.sql.Timestamp">
+		<property name="date" type="java.sql.Timestamp" insert="false">
 			<column name="date" />
 		</property>
 		<property name="cardType" type="java.lang.String">

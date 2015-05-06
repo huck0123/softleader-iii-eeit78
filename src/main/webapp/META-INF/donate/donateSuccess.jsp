@@ -13,7 +13,7 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 
-<title>Insert title here</title>
+<title>捐款成功</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />

@@ -34,14 +34,14 @@
 				<table class="table table-condensed">
 					<tr>
 						<td><label for="">捐款活動名稱</label></td>
-						<td><input type="hidden" name="form.campaignName" value="xxx">xxx</td>
+						<td><input type="hidden" name="form.campaignName" value="${param.campaignName }">${param.campaignName }</td>
 					</tr>
-					<tr>
-						<td><label for="">捐款活動ID</label></td>
-						<td><input type="text" name="form.campaignId" value=""></td>
+					<tr style="display: none">
+						<td>捐款活動ID</td>
+						<td><input type="text" name="form.campaignId" value="${param.campaignId }"></td>
 					</tr>
-					<tr>
-						<td><label for="">捐款人ID</label></td>
+					<tr style="display: none">
+						<td>捐款人ID</td>
 						<td><input type="text" name="form.giverId"
 							value="${sessionScope.giver.id }"></td>
 					</tr>
