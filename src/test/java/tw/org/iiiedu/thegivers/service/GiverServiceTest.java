@@ -26,20 +26,22 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(giverService.getByAccount("json123").getHeadshot());
 //	}
 	
-//	@Test
-//	public void testGetAll(){
-//		List<GiverModel> list = giverService.getAll();
-//		
-//		System.out.println(list.get(0));
-//	}
-	
 	@Test
-	public void testGetCount(){
-		int i = giverService.getCount();
-		int j = giverService.getCount();
-		System.out.println(i);
-		System.out.println(j);
+	public void testGetAll(){
+		List<GiverModel> list = giverService.getAll();
+		Iterator<GiverModel> i = list.iterator();
+		while(i.hasNext()){
+			System.out.println(i.next());
+		}
 	}
+	
+//	@Test
+//	public void testGetCount(){
+//		int i = giverService.getCount();
+//		int j = giverService.getCount();
+//		System.out.println(i);
+//		System.out.println(j);
+//	}
 	
 //	@Test
 //	public void testGetPerPage(){

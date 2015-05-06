@@ -61,7 +61,7 @@ public class GiverDao {
 	public List<GiverModel> getAll() {
 
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		List<GiverModel> models = criteria.list();
+		List<GiverModel> models = criteria.addOrder(Order.asc("id")).list();
 
 		return models;
 	}
