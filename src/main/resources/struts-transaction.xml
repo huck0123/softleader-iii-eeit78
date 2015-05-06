@@ -5,9 +5,9 @@
 
 <struts>
 
-	<package name="donatePackage" namespace="/donate" extends="struts-default">
+	<package name="transactionPackage" namespace="/donate" extends="struts-default">
 
-		<action name="donateAction" class="donateAction">
+		<action name="donateAction" class="transactionAction">
 			<result name="success" type="redirect">/donate/donateSuccess</result>
 			<result name="fail" type="redirect">/donate/donate</result>
 		</action>
