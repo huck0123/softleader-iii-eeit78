@@ -51,7 +51,7 @@ public class TransactionDao {
 
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
-		criteria.add(Restrictions.eq("CampaignModel", cModel)).add(Restrictions.eq("credit", true)).setProjection(
+		criteria.add(Restrictions.eq("campaignModel", cModel)).add(Restrictions.eq("credit", true)).setProjection(
 				Projections.rowCount());
 		int count = ((Long) criteria.uniqueResult()).intValue();
 
