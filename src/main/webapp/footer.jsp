@@ -521,12 +521,15 @@ p {
 										+ strimg
 										+ "</a>";
 								$("#raiserLogo").append(
-										"<div class='col-md-3' id=hover"+raiser.id+"><li style='padding:5px'>"
+										"<div class='col-md-3' id='hover"+raiser.id+"'><li style='padding:5px'>"
 												+ strhref + "</li></div>");
 								$("#logo" + raiser.id).attr("src",
 										"data:image/png;base64," + srclogo);
 							});
 		}
 		
+		$("div[id^='hover']").on($(this).mouseenter(function(){
+			console.log("12345");
+		}))
 </script>
 </html>
