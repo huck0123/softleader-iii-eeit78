@@ -6,6 +6,84 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style>
+.fTitle {
+	color: #FFFFFF;
+	font-size: 24px;
+}
+
+.linkWord {
+	color: #F75000;
+	font-size: 16px;
+}
+
+.date {
+	color: orange;
+}
+</style>
+
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="http://www.socialcops.org/xmlrpc.php" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="http://socialcops.wpengine.netdna-cdn.com/wp-content/uploads/2014/08/16.png">
+<link rel="apple-touch-icon"
+	href="http://socialcops.wpengine.netdna-cdn.com/wp-content/uploads/2014/08/16.png" />
+<link
+	href='http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,500,200|Lato:200,300,400,600,800|Oxygen:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Oxygen:200,300,400,600,700,800|Lato:200,300,400,600,700,800&subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
+<link rel="canonical" href="http://www.socialcops.org/" />
+<link rel="author" href="https://plus.google.com/105357087621746626066" />
+<link rel="publisher"
+	href="https://plus.google.com/+SocialcopsOrg/about" />
+<link rel="stylesheet"
+	href="http://www.socialcops.org/wp-content/cache/scripts/cbd58eef9b2b0f5dc8a9b6990413a230.css"
+	type="text/css" media="all" />
+<style type="text/css">
+.ssba {
+	
+}
+
+.ssba img {
+	width: 40px !important;
+	padding: 4px;
+	border: 0;
+	box-shadow: none !important;
+	display: inline !important;
+	vertical-align: middle;
+}
+
+.ssba, .ssba a {
+	text-decoration: none;
+	background: none;
+	font-size: 12px;
+}
+</style>
+<meta name="generator"
+	content="Powered by Visual Composer - drag and drop page builder for WordPress." />
+<style type="text/css" data-type="vc-custom-css">
+.q_icon_with_title .icon_text_holder .icon_title {
+	font-weight: 800;
+}
+
+p {
+	text-align: justify;
+}
+
+.mail-chimp {
+	background: #ffd800 !important;
+	border: none !important;
+	font-family: 'Lato', sans-serif;
+}
+
+.mail-chimp:hover {
+	background: #ffd800 !important;
+	border: none !important;
+	font-family: 'Lato', sans-serif;
+}
+</style>
+
+
 <meta charset="utf-8">
 <!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -91,9 +169,9 @@
 												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
 										</c:if>
 										<c:if test="${admin != null}">
-										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
-										<li></li>
-										<li>顯示所有交易紀錄</li>
+											<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
+											<li></li>
+											<li>顯示所有交易紀錄</li>
 										</c:if>
 										<li class="divider"></li>
 										<li><a role="menuitem"
@@ -220,9 +298,9 @@
 												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
 										</c:if>
 										<c:if test="${admin != null}">
-										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
-										<li></li>
-										<li>顯示所有交易紀錄</li>
+											<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
+											<li></li>
+											<li>顯示所有交易紀錄</li>
 										</c:if>
 										<li class="divider"></li>
 										<li><a role="menuitem"
@@ -278,11 +356,9 @@
 	<!-- header ends -->
 
 
-<div> this is a template. Do things here. </div>
+	<div>this is a template. Do things here.</div>
 
-
-
-<div style="height:3000px"></div>
+	<div style="height: 3000px"></div>
 
 </body>
 
@@ -317,79 +393,89 @@
 </script>
 
 
+<footer class="uncover" id="footer">
+	<div class="footer_inner clearfix">
+		<div class="footer_top_holder">
+			<div class="container">
+				<div class="container_inner">
+					<div class="three_columns clearfix">
+						<div class="column1">
+							<div class="column_inner">
 
 
-
-
-
-<footer class="uncover">
-<div class="footer_inner clearfix">
-<div class="footer_top_holder">
-<div class="footer_top">
-<div class="container">
-<div class="container_inner">
-<div class="three_columns clearfix">
-<div class="column1">
-<div class="column_inner">
-
-<div id="text-34" class="widget widget_text"> <div class="textwidget"><a href="http://www.socialcops.org"><img class="wp-image-16570 size-thumbnail aligncenter" src="http://socialcops.wpengine.netdna-cdn.com/wp-content/uploads/2014/03/1024-150x150.png" alt="" width="150" height="150"/></a></div>
-</div><div id="text-35" class="widget widget_text"><h5> </h5> <div class="textwidget"><div style="text-align:center;"><span class='q_social_icon_holder circle_social' data-hover-background-color=#000000 data-hover-color=#ffd649><a href='https://www.facebook.com/SocialCops' target='_'><span class='fa-stack fa-2x' style='background-color: #ffd649;'><i class='fa fa-facebook' style='color: #000000;'></i></span></a></span>
-<span class='q_social_icon_holder circle_social' data-hover-background-color=#000000 data-hover-color=#ffd649><a href='https://twitter.com/Social_Cops' target='_'><span class='fa-stack fa-2x' style='background-color: #ffd649;'><i class='fa fa-twitter' style='color: #000000;'></i></span></a></span><span class='q_social_icon_holder circle_social' data-hover-background-color=#000000 data-hover-color=#ffd649><a href='http://instagram.com/SocialCops' target='_'><span class='fa-stack fa-2x' style='background-color: #ffd649;'><i class='fa fa-instagram' style='color: #000000;'></i></span></a></span><span class='q_social_icon_holder circle_social' data-hover-background-color=#000000 data-hover-color=#ffd649><a href='https://www.linkedin.com/company/social-cops' target='_'><span class='fa-stack fa-2x' style='background-color: #ffd649;'><i class='fa fa-linkedin' style='color: #000000;'></i></span></a></span></div></div>
-</div> </div>
-</div>
-<div class="column2">
-<div class="column_inner">
-<div id="recent-posts-2" class="widget widget_recent_entries"> <h5>Recent News About Us</h5> <ul>
-<li>
-<a href="http://www.socialcops.org/2014/12/17/child-labour-issue-end-new-law/">Child Labour: Does the issue end with a new law</a>
-<span class="post-date">December 17, 2014</span>
-</li>
-<li>
-<a href="http://www.socialcops.org/2014/12/12/why-blaming-uber-is-not-enough/">Why blaming Uber is not enough</a>
-<span class="post-date">December 12, 2014</span>
-</li>
-<li>
-<a href="http://www.socialcops.org/2014/11/26/now-serving-dashboards-platters/">Now Serving, Dashboards on Platters</a>
-<span class="post-date">November 26, 2014</span>
-</li>
-</ul>
-</div> </div>
-</div>
-<div class="column3">
-<div class="column_inner">
-<div id="text-36" class="widget widget_text"> <div class="textwidget">
- 
- 
-</div>
-</div> </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="footer_bottom_holder">
-<div class="footer_bottom">
-</div>
-</div>
-</div>
+								<div id="text-34" class="widget widget_text">
+									<div class="textwidget">
+										<a href="http://www.socialcops.org"><img
+											class="wp-image-16570 size-thumbnail aligncenter"
+											alt="" width="100" height="100" />THEGIVERS</a>
+									</div>
+								</div>
+								<div id="text-35" class="widget widget_text">
+									<h5></h5>
+									<div class="textwidget">
+										<div style="text-align: center;">
+											<span class='q_social_icon_holder circle_social'
+												data-hover-background-color=#000000 data-hover-color=#ffd649><a
+												href='https://www.facebook.com/SocialCops' target='_'><span
+													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
+														class='fa fa-facebook' style='color: #000000;'></i></span></a></span> <span
+												class='q_social_icon_holder circle_social'
+												data-hover-background-color=#000000 data-hover-color=#ffd649><a
+												href='https://twitter.com/Social_Cops' target='_'><span
+													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
+														class='fa fa-twitter' style='color: #000000;'></i></span></a></span><span
+												class='q_social_icon_holder circle_social'
+												data-hover-background-color=#000000 data-hover-color=#ffd649><a
+												href='http://instagram.com/SocialCops' target='_'><span
+													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
+														class='fa fa-instagram' style='color: #000000;'></i></span></a></span><span
+												class='q_social_icon_holder circle_social'
+												data-hover-background-color=#000000 data-hover-color=#ffd649><a
+												href='https://www.linkedin.com/company/social-cops'
+												target='_'><span class='fa-stack fa-2x'
+													style='background-color: #ffd649;'><i
+														class='fa fa-linkedin' style='color: #000000;'></i></span></a></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="recent-posts-2">
+							<h5 class="fTitle">Recent News About Us</h5>
+							<ul>
+								<li><a
+									href="http://www.socialcops.org/2014/12/17/child-labour-issue-end-new-law/"
+									class="linkWord">Raise fund for Nepal after the devastating
+										earthquake.</a> <span class="date">May 1, 2015</span></li>
+								<li><a
+									href="http://www.socialcops.org/2014/12/12/why-blaming-uber-is-not-enough/"
+									class="linkWord">Help this kid with his education after
+										deaths of his parents.</a> <span class="date">April 12,
+										2015</span></li>
+								<li><a
+									href="http://www.socialcops.org/2014/11/26/now-serving-dashboards-platters/"
+									class="linkWord">See how large the gap is between the rich
+										and the poor in India.</a> <span class="date">January 18,
+										2015</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+$(document).ready(function(){
+	$(window).scroll(function(){
+		if ($(window).scrollTop() + $(window).height() <= $(document).height() - 10) {
+			$('#footer').slideUp();
+		} else {
+			$('#footer').slideDown();
+		}
+	});
+});
+</script>
 
 </html>

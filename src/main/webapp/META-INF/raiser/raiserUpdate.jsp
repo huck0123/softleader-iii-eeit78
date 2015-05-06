@@ -11,11 +11,13 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>	
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <title>團體-更新帳號</title>
 </head>
 <body>
 	<div class="row">
-		<div class="col-md-2"></div>
+		<div class="col-md-2"><img src='' class='img-thumbnail' id='logo' style='width:200px; height:200px'></div>
 		<div class="col-md-8">
 			<form action="<c:url value='/raiser/raiserAction!update.action' />"
 				method="post" enctype="multipart/form-data">
@@ -27,7 +29,9 @@
 				</div>
 
 				<div class="form-group">
-					<label for="account">帳號</label> <input type="text"  style="display:none"
+					<label for="account">帳號</label>
+					<input type="text" value="${raiser.account}" class="form-control" disabled="disabled"> 
+					 <input type="text"  style="display:none"
 						class="form-control" id="account" name="raiserForm.account"
 						value="${raiser.account}">
 				</div>
@@ -97,5 +101,15 @@
 		<div class="col-md-2"></div>
 	</div>
 	<a href="<c:url value='/index.jsp' />">回首頁</a>
+	
+	<script>
+		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
+		$.post(url , {"account":"${raiser.account}"} , getdata , "json");
+		function getdata(raiser){
+			var str = arrayBufferToBase64(raiser.logo); 
+			$('#logo').attr("src","data:image/png;base64," + str);
+			
+		}
+	</script>
 </body>
 </html>

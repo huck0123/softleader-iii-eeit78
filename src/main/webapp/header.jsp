@@ -22,8 +22,14 @@
 							<li class="margin-both10"><a href="">關於我們</a></li>
 							<li class="margin-both10"><a
 								href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
+							<li class="margin-both10">
+							<c:if test="${admin != null }">
+								<a href="<c:url value='/raiser/raiserShow'/>">參與團體</a>
+							</c:if>
+							<c:if test="${admin == null }">
+								<a href="<c:url value='/raiser/raiserCheck'/>">參與團體</a>
+							</c:if>
+							</li>
 							<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 						</ul>
 					</nav>
@@ -152,10 +158,16 @@
 							<li class="margin-both10"><a href="">關於我們</a></li>
 							<li class="margin-both10"><a
 								href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
-
-
+							<li class="margin-both10">
+							
+<%-- 								<a href="<c:url value='/raiser/raiserShow'/>">參與團體</a> --%>
+								<c:if test="${admin == null }">
+									<a href="<c:url value='/raiser/raiserCheck'/>">參與團體</a>
+								</c:if>
+								<c:if test="${admin != null }">
+									<a href="<c:url value='/raiser/raiserShow'/>">參與團體</a>
+								</c:if>
+							</li>
 							<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
 						</ul>
 

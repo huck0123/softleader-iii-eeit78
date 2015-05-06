@@ -12,7 +12,7 @@ import tw.org.iiiedu.thegivers.service.TransactionService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class DonateAction extends ActionSupport {
+public class TransactionAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
