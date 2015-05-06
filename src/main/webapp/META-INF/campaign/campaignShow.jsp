@@ -80,6 +80,7 @@ function load(){
 				var image = $('<img src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
+				
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
 				
 				var captionDiv = $('<div class="caption"></div>');

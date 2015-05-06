@@ -19,6 +19,7 @@ import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.RaiserModel;
 import tw.org.iiiedu.thegivers.service.CampaignService;
+import tw.org.iiiedu.thegivers.service.TransactionService;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
@@ -33,6 +34,8 @@ public class CampaignAction extends ActionSupport implements
 	private HttpServletRequest request;
 	@Autowired
 	private CampaignService campaignService;
+	@Autowired
+	private TransactionService transactionService;
 
 
 
@@ -106,6 +109,19 @@ public class CampaignAction extends ActionSupport implements
 		return "insert";
 	}
 
+	public String selectGiverCountByCampaignId(){
+		
+Integer count = transactionService.getCountByCampaignId(campaignForm.getId());
+
+
+		
+		inputStream = new ByteArrayInputStream(
+				count.toString().getBytes(StandardCharsets.UTF_8));
+		
+		return "selectCampaignGiverCount";
+	}
+	
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

@@ -22,6 +22,7 @@
 
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script
@@ -83,6 +84,13 @@ function loadCampaign(){
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>'+value.name+'</h3>');
 				var p1 = $('<p>'+ value.detail+'</p>');
+				
+				var percent = value.currentFund/value.goal*100;
+				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '+value.location+' <span class="glyphicon glyphicon-tag"></span> '+value.type+' <span class="glyphicon glyphicon-stats"></span> '+formatFloat(percent,2)+'%已完成</p>');
+				var progressDiv = $('<div class="progress"></div>');
+				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'+percent+'%"></div>');
+				progressBarDiv.appendTo(progressDiv);
+				
 				var p2 = $('<p></p>');
 				var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
 				var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
@@ -90,6 +98,9 @@ function loadCampaign(){
 				a.appendTo(p2);
 				h3.appendTo(captionDiv);
 				p1.appendTo(captionDiv);
+				otherInfo.appendTo(captionDiv);
+				progressDiv.appendTo(captionDiv);
+				
 				p2.appendTo(captionDiv);
 				imageA.appendTo(thumbnailDiv);
 				captionDiv.appendTo(thumbnailDiv);
