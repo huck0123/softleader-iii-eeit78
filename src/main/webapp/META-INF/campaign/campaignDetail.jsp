@@ -28,10 +28,10 @@
 
 	依名稱蒐尋：
 	<input type="text" id="nameSearch">
-	<button id="btn1">Click</button> <button id="btn2">返回活動列表</button>
-<p>----</p>
+	
+
 	<div class="container" id="showColumn">
-	<div id="row" class=row></div>
+
 	</div>
 
 
@@ -59,11 +59,11 @@ function load(){
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
-				
+
 				var rowDiv2 = $('<div class="row"></div>');
 				var vedioDiv = $('<div class="col-sm-12 col-md-8"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/YNoFkgOozLo'+'"></iframe>');
+				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/UutiBRDxJ0U'+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
 				var sideDiv = $('<div id="sideDiv" class="col-sm-12 col-md-4"></div>');
@@ -72,7 +72,7 @@ function load(){
 				var dateP = $('<p>於<strong>2015/4/30</strong>結束</p>');
 				var barP = $('<p>目前進度</p>');
 				var otherInfo = $('<p>類型、地點、分享...</p>');
-				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name+'" class="btn btn-primary" role="button"><strong>我要捐款</strong></a>');
+				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name+'" class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
 				dateP.appendTo(sideDiv);

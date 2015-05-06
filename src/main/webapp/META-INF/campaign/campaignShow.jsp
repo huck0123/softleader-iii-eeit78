@@ -78,20 +78,22 @@ function load(){
 				
 				var str = arrayBufferToBase64(value.image); 
 				var image = $('<img src="data:image/png;base64,' + str +'"/>');
-				image.on('click',function(){goDetail(value)});
+				var imageA = $('<a></a>');
+				image.appendTo(imageA);
+				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
 				
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>'+value.name+'</h3>');
 				var p1 = $('<p>'+ value.detail+'</p>');
 				var p2 = $('<p></p>');
-				var a = $('<a href="" class="btn btn-primary" role="button">我要捐款</a>');
-				var url = "${pageContext.request.contextPath}/campaign/campaignDetail?id="+value.id;
+				var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
+				var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
 				a.attr('href',url);
 				a.appendTo(p2);
 				h3.appendTo(captionDiv);
 				p1.appendTo(captionDiv);
 				p2.appendTo(captionDiv);
-				image.appendTo(thumbnailDiv);
+				imageA.appendTo(thumbnailDiv);
 				captionDiv.appendTo(thumbnailDiv);
 				thumbnailDiv.appendTo(colDiv);
 				colDiv.appendTo(rowDiv);
@@ -109,7 +111,7 @@ function load(){
 	});
 
 function makeFunction(j){return function(){
-	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
@@ -121,21 +123,23 @@ function makeFunction(j){return function(){
 			
 			var str = arrayBufferToBase64(value.image); 
 			var image = $('<img  src="data:image/png;base64,' + str +'"/>');
-			image.on('click',function(){goDetail(value)});
+			var imageA = $('<a></a>');
+			image.appendTo(imageA);
+			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
 			
 			var captionDiv = $('<div class="caption"></div>');
 			var h3 = $('<h3>'+value.name+'</h3>');
 			var p1 = $('<p>'+ value.detail+'</p>');
 			var p2 = $('<p></p>');
 			var a = $('<a href="" class="btn btn-primary" role="button">我要捐款</a>');
-			var url = "${pageContext.request.contextPath}/campaign/campaignDetail?id="+value.id;
+			var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
 			a.attr('href',url);
 			
 			a.appendTo(p2);
 			h3.appendTo(captionDiv);
 			p1.appendTo(captionDiv);
 			p2.appendTo(captionDiv);
-			image.appendTo(thumbnailDiv);
+			imageA.appendTo(thumbnailDiv);
 			captionDiv.appendTo(thumbnailDiv);
 			thumbnailDiv.appendTo(colDiv);
 			colDiv.appendTo(rowDiv);
@@ -160,30 +164,6 @@ function arrayBufferToBase64( buffer ) {
     }
     return window.btoa( binary );
 }
-
-$(window).scroll(function() {
-	$('.in').removeClass("in");
-	if ($(window).scrollTop() > 99) {
-		console.log($(window).scrollTop());
-		$('#headerFixed').slideDown();
-		$('#header').addClass("vis-hidden");
-
-	} else {
-		console.log($(window).scrollTop());
-		$('#headerFixed').slideUp();
-		$('#header').removeClass("vis-hidden");
-
-	}
-});
-
-// function for moving smoothly to anchor
-$('a[href^="#"]').click(function() {
-	$('html, body').animate({
-		scrollTop : $($.attr(this, 'href')).offset().top
-	}, 600, 'easeInOutExpo');
-	return false;
-});
-
 
 </script>
 </html>
