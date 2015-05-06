@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -32,6 +33,15 @@ public class TransactionDao {
 		return model;
 	}
 
+	//取出所有交易紀錄筆數
+	public int getCount(){
+		
+		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
+		criteria.setProjection(Projections.rowCount());
+		int count = ((Long) criteria.uniqueResult()).intValue();
+		return count;
+	}
+	
 	// 取出某campaignId的所有交易紀錄筆數
 	public int getCountByCampaignId(CampaignModel cModel) {
 
@@ -41,7 +51,7 @@ public class TransactionDao {
 
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
-		criteria.add(Restrictions.eq("CampaignModel", cModel)).setProjection(
+		criteria.add(Restrictions.eq("CampaignModel", cModel)).add(Restrictions.eq("credit", true)).setProjection(
 				Projections.rowCount());
 		int count = ((Long) criteria.uniqueResult()).intValue();
 
@@ -50,43 +60,57 @@ public class TransactionDao {
 
 	// 取出某giverId的所有交易紀錄
 	public List<TransactionDetailModel> getByGiverId(int gId) {
+		
+		Criteria criteria = getSession().createCriteria(
+				TransactionDetailModel.class);
+		List<TransactionDetailModel> models = criteria
+				.add(Restrictions.eq("giverId", gId)).addOrder(Order.asc("id"))
+				.list();
+
+		return models;
+	}
+
+	// 取出所有交易紀錄
+	public List<TransactionDetailModel> getAll() {
 
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
-		List<TransactionDetailModel> models = criteria.add(
-				Restrictions.eq("giverId", gId)).addOrder(Order.asc("id")).list();
-
+		List<TransactionDetailModel> models = criteria
+				.addOrder(Order.asc("id")).list();
 		return models;
 	}
 
-	//取出所有交易紀錄
-	public List<TransactionDetailModel> getAll(){
-		
-		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
+	// 頁次 pageNum為第幾頁,一頁5筆
+	public List<TransactionDetailModel> getPerPage(int pageNum) {
+
+		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class)
+				.setFirstResult((pageNum-1)*5).setMaxResults(5);
 		List<TransactionDetailModel> models = criteria.addOrder(Order.asc("id")).list();
 		return models;
 	}
-	
-	//用ID查詢
-	public TransactionDetailModel getById(int id){
+
+	// 用ID查詢
+	public TransactionDetailModel getById(int id) {
 		TransactionDetailModel model;
-		
-		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
-		List<TransactionDetailModel> list = criteria.add(Restrictions.eq("id", id)).list();
-		if(list.size() > 0){
+
+		Criteria criteria = getSession().createCriteria(
+				TransactionDetailModel.class);
+		List<TransactionDetailModel> list = criteria.add(
+				Restrictions.eq("id", id)).list();
+		if (list.size() > 0) {
 			model = list.get(0);
 			return model;
-		}else{
+		} else {
 			return null;
 		}
 	}
-	
-	//更新
-	public void update(TransactionDetailModel model){
-		
+
+	// 更新
+	public void update(TransactionDetailModel model) {
+
 		getSession().save(model);
 	}
-	
+
 	// 收尋
 	// public TransactionDetailModel getByAllCondition()
 

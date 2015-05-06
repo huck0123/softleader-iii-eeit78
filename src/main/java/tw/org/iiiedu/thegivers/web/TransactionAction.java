@@ -1,5 +1,12 @@
 package tw.org.iiiedu.thegivers.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
@@ -10,19 +17,23 @@ import tw.org.iiiedu.thegivers.form.TransactionDetailForm;
 import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 import tw.org.iiiedu.thegivers.service.TransactionService;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TransactionAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
-	
 	@Autowired
 	TransactionService service;
 	
+	private ServletContext context;
 	private TransactionDetailForm form;
 	private TransactionDetailModel model;
-	
+	private InputStream inputStream;
+	private int thisPage;
+	private int thisId;
+	private boolean credit;
 	
 	public TransactionDetailForm getForm() {
 		return form;
@@ -32,12 +43,46 @@ public class TransactionAction extends ActionSupport {
 		this.form = form;
 	}
 
+	public InputStream getInputStream() {
+		return inputStream;
+	}
 
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
 
+	public int getThisPage() {
+		return thisPage;
+	}
 
+	public void setThisPage(int thisPage) {
+		this.thisPage = thisPage;
+	}
+
+	public int getThisId() {
+		return thisId;
+	}
+
+	public void setThisId(int thisId) {
+		this.thisId = thisId;
+	}
+
+	public boolean isCredit() {
+		return credit;
+	}
+
+	public void setCredit(boolean credit) {
+		this.credit = credit;
+	}
+
+	
+	
 	//insert
 	public String donate(){
-		log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++{}",form);
+		context = ServletActionContext.getServletContext();
+		Integer transactionCount = (Integer) context.getAttribute("transactionCount");
+				
+		log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++form:{} transactionCount:{}",form,transactionCount);
 		model = new TransactionDetailModel();
 		
 		model.setGiverId(form.getGiverId());
@@ -50,12 +95,41 @@ public class TransactionAction extends ActionSupport {
 
 		try{
 			service.insert(model, form.getCampaignId()); //Service insert接收兩參數
-			log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++{}",form);
+			transactionCount++;
+			context.setAttribute("transactionCount", transactionCount);
+			log.debug("++++++++++++++transactionAction+++++++++++++ transactionCount:{}",transactionCount);
 		}catch(HibernateException e){
 			e.printStackTrace();
 			return "fail";
 		}
 		return SUCCESS;
 	}
+	
+	//交易明細
+	public String transactionDetail(){
+		
+		List<TransactionDetailModel> list = service.getPerPage(thisPage);
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(list);
+		
+		inputStream = new ByteArrayInputStream(jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "transactionDetail";
+	}
+	
+	//credit
+	public String credit(){
+		log.debug("*******************TransactionAction*******credit*****{}{}",thisId,credit);
+		
+		if(credit == true){
+			service.creditCheck(thisId);
+		}else{
+			service.creditUncheck(thisId);
+		}
+		
+		return null;
+	}
+	
+	
 	
 }

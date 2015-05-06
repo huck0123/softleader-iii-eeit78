@@ -22,7 +22,7 @@
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-${param.id}
+
 	<div class="row container">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
@@ -31,7 +31,11 @@ ${param.id}
 				<table class="table">
 					<tr>
 						<td><label for="">捐款活動名稱</label></td>
-						<td>XXXX</td>
+						<td><input type="hidden" name="campaignName" value="${param.name }">${param.name }</td>
+					</tr>
+					<tr style="display: none">
+						<td><label for="">捐款活動Id</label></td>
+						<td><input type="text" name="campaignId" value="${param.id }"></td>
 					</tr>
 					<tr>
 						<td><label for="">捐款人姓名</label></td>

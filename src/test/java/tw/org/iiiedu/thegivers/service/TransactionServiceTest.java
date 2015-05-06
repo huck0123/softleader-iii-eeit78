@@ -1,9 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
 import java.util.Iterator;
-import java.util.ListIterator;
-
-import junit.framework.Assert;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,11 @@ public class TransactionServiceTest extends GenericTest{
 //		model.setIp(null);
 //
 //		service.insert(model, 2);
+//	}
+	
+//	@Test
+//	public void testGetCount(){
+//		System.out.println(service.getCount());
 //	}
 
 //	@Test
@@ -90,6 +93,13 @@ public class TransactionServiceTest extends GenericTest{
 //		service.creditUncheck(3);
 //	}
 	
-	
+//	@Test
+//	public void testGetPerPage(){
+//		List<TransactionDetailModel> list = service.getPerPage(6);
+//		Iterator<TransactionDetailModel> i = list.iterator();
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//	}
 	
 }

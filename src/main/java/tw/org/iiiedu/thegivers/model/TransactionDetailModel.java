@@ -7,7 +7,7 @@ public class TransactionDetailModel {
 	private Integer id;
 	private Integer giverId;
 //	private Integer campaignId;
-	private CampaignModel CampaignModel;
+	private CampaignModel campaignModel;
 	private Integer amount;
 	private Timestamp date;
 	private String cardType;
@@ -30,12 +30,13 @@ public class TransactionDetailModel {
 	@Override
 	public String toString() {
 		return "TransactionDetailModel [id=" + id + ", giverId=" + giverId
-				+ ", CampaignModel=" + CampaignModel + ", amount=" + amount
+				+ ", campaignModel=" + campaignModel + ", amount=" + amount
 				+ ", date=" + date + ", cardType=" + cardType + ", cardNo="
 				+ cardNo + ", cardHolder=" + cardHolder + ", cardHolderEmail="
 				+ cardHolderEmail + ", credit=" + credit + ", ip=" + ip + "]";
 	}
-
+	
+	
 	
 	public Integer getId() {
 		return id;
@@ -126,11 +127,11 @@ public class TransactionDetailModel {
 	}
 
 	public CampaignModel getCampaignModel() {
-		return CampaignModel;
+		return campaignModel;
 	}
 
 	public void setCampaignModel(CampaignModel campaignModel) {
-		CampaignModel = campaignModel;
+		this.campaignModel = campaignModel;
 	}
 
 

@@ -28,11 +28,18 @@ public class TransactionService {
 		cModel.setCurrentFund(temp);
 		
 		model.setCampaignModel(cModel);
-		model.setDate(new java.sql.Timestamp(new java.util.Date().getTime()));  //預設現在時間為捐款時間
+//		model.setDate(new java.sql.Timestamp(new java.util.Date().getTime()));  //預設現在時間為捐款時間
 		model.setCredit(false);
 		model = dao.insert(model);
 		
 		return model;
+	}
+	
+	//取出所有交易紀錄筆數
+	public int getCount(){
+		
+		int count = dao.getCount();
+		return count;
 	}
 	
 	//取出某campaignId的所有交易紀錄筆數
@@ -56,6 +63,13 @@ public class TransactionService {
 	public List<TransactionDetailModel> getAll(){
 		
 		List<TransactionDetailModel> models = dao.getAll();
+		return models;
+	}
+	
+	// 頁次 pageNum為第幾頁,一頁5筆
+	public List<TransactionDetailModel> getPerPage(int pageNum){
+		
+		List<TransactionDetailModel> models = dao.getPerPage(pageNum);
 		return models;
 	}
 	
