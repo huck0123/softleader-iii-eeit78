@@ -21,6 +21,9 @@
 .date {
 	color: orange;
 }
+#footer{
+	position: relative;
+}
 </style>
 
 <link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -39,6 +42,20 @@
 <link rel="stylesheet"
 	href="http://www.socialcops.org/wp-content/cache/scripts/cbd58eef9b2b0f5dc8a9b6990413a230.css"
 	type="text/css" media="all" />
+	
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	
 <style type="text/css">
 .ssba {
 	
@@ -112,6 +129,7 @@ p {
 <body id="body">
 
 	<!-- headerFixed start -->
+
 	<div>
 		<div id="headerFixed" class="headerFixed">
 
@@ -354,43 +372,25 @@ p {
 		</div>
 	</div>
 	<!-- header ends -->
+	
+	<div class="row" style="height:1000px; background-color:#FFAF60">
+		<div style="height:50px"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-8"><ul class="list-unstyled"><div class="row" id="Body"></div></ul></div>
+		<div class="col-md-2"></div>
+	</div>
+
+	<script>
+
+	</script>
 
 
-	<div>this is a template. Do things here.</div>
-
-	<div style="height: 3000px"></div>
-
-</body>
+<!-- 	<div style="height: 3000px; background-color:yellow"></div> -->
 
 
-<script>
-	// function for popping out head
-	$(document).ready(function() {
-		$(window).scroll(function() {
-			$('.in').removeClass("in");
-			if ($(window).scrollTop() > 99) {
-				console.log($(window).scrollTop());
-				$('#headerFixed').slideDown();
-				$('#header').addClass("vis-hidden");
 
-			} else {
-				console.log($(window).scrollTop());
-				$('#headerFixed').slideUp();
-				$('#header').removeClass("vis-hidden");
 
-			}
-		});
 
-		// function for moving smoothly to anchor
-		$('a[href^="#"]').click(function() {
-			$('html, body').animate({
-				scrollTop : $($.attr(this, 'href')).offset().top
-			}, 600, 'easeInOutExpo');
-			return false;
-		});
-
-	});
-</script>
 
 
 <footer class="uncover" id="footer">
@@ -465,17 +465,62 @@ p {
 		</div>
 	</div>
 </footer>
-
+</body>
 <script>
-$(document).ready(function(){
-	$(window).scroll(function(){
-		if ($(window).scrollTop() + $(window).height() <= $(document).height() - 10) {
-			$('#footer').slideUp();
-		} else {
-			$('#footer').slideDown();
-		}
-	});
-});
+// $(document).ready(function(){
+// 	$(window).scroll(function(){
+// 		if ($(window).scrollTop() + $(window).height() <= $(document).height() - 500) {
+// 			$('#footer').slideUp();
+// 		} else {
+// 			$('#footer').slideDown();
+// 		}
+// 	});
+// });
 </script>
+<script>
+	// function for popping out head
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			$('.in').removeClass("in");
+			if ($(window).scrollTop() > 99) {
+				console.log($(window).scrollTop());
+				$('#headerFixed').slideDown();
+				$('#header').addClass("vis-hidden");
 
+			} else {
+				console.log($(window).scrollTop());
+				$('#headerFixed').slideUp();
+				$('#header').removeClass("vis-hidden");
+
+			}
+		});
+
+		// function for moving smoothly to anchor
+		$('a[href^="#"]').click(function() {
+			$('html, body').animate({
+				scrollTop : $($.attr(this, 'href')).offset().top
+			}, 600, 'easeInOutExpo');
+			return false;
+		});
+
+	});
+	
+	var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!selectAll";
+	$.post(url, getData);
+	
+	function getData(raisers) {
+		raisers = JSON.parse(raisers);
+		$(raisers).each(function(index, raiser) {
+			var srclogo = arrayBufferToBase64(raiser.logo); 
+			var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
+			var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="+raiser.account+"'/>'>"+raiser.name+"</a>";
+			
+			$("#Body").append("<div class='col-md-3'><li>"
+					+strimg
+					+strhref
+					+"</li></div>");
+			$("#logo"+raiser.id).attr("src","data:image/png;base64," + srclogo);
+		});
+	}
+</script>
 </html>
