@@ -32,7 +32,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private RaiserModel rm;
 	private InputStream inputStream;
 	private int page;
-	private boolean lock; 
+	private boolean lock;
 	private String account;
 
 	public int getPage() {
@@ -54,7 +54,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public InputStream getInputStream() {
 		return inputStream;
 	}
-	
+
 	public boolean isLock() {
 		return lock;
 	}
@@ -83,8 +83,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		rm.setEmail(raiserForm.getEmail());
 
 		try {
-			if(raiserForm.getLogo()!=null)
-			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+			if (raiserForm.getLogo() != null)
+				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -103,15 +103,15 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String select() {
-		rm = raiserService.getByAccount(raiserForm.getAccount());
+		rm = raiserService.getByAccount(account);
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(rm);
 
-		Map<String, String> map = new HashMap<>();
-
-		if (rm != null) {
-			return "select";
-		} else {
-			return "error";
-		}
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		session.setAttribute("raiserSelf", rm);
+		return "select";
 	}
 
 	public String selectAll() {
@@ -124,8 +124,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String update() {
-		RaiserModel rm = new RaiserModel();
 		HttpSession session = ServletActionContext.getRequest().getSession();
+		RaiserModel rm = (RaiserModel) session.getAttribute("raiser");
 		rm.setId(raiserForm.getId());
 		rm.setAccount(raiserForm.getAccount());
 		if (raiserForm.getPasswd() != null) {
@@ -156,10 +156,9 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			rm.setVideoUrl(raiserForm.getVideoUrl());
 		}
 		try {
-			if(raiserForm.getLogo()!=null)
+			if (raiserForm.getLogo() != null) 
 			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		rm = raiserService.dataUpdate(rm);
@@ -172,20 +171,20 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String getPerPage() {
-		List<RaiserModel> models = raiserService.getPerPage(page);
+		List<RaiserModel> list = raiserService.getPerPage(page);
 		Gson gson = new Gson();
-		String jsonStr = gson.toJson(models);
+		String jsonString = gson.toJson(list);
 
 		inputStream = new ByteArrayInputStream(
-				jsonStr.getBytes(StandardCharsets.UTF_8));
+				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
-	
-	public String checkInformation(){
+
+	public String checkInformation() {
 		boolean result = raiserService.valid(account, lock);
 		return null;
 	}
-	
+
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

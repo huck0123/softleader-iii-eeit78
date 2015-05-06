@@ -7,10 +7,11 @@
 	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
 
 		<action name="raiserAction" class="raiserAction">
-			<result name="insert" type="redirect">/raiser/raiserInfo.action</result>
-			<result name="update" type="redirect">/index.jsp</result>
+			<result name="insert" type="redirect">/index.jsp</result>
+			<result name="update" type="redirect">/raiser/raiserUpdate.action</result>
 			<result name="error" type="redirect">/META-INF/raiser/raiserRegister.jsp
 			</result>
+			<result name="select" type="redirect">/raiser/raiserForOne.action</result>
 			
 			
 			<result name="getPerPage" type="stream">
