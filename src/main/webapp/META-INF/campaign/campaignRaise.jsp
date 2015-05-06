@@ -18,6 +18,7 @@
 	<s:form action="campaignAction" namespace="/campaign" method="post" enctype="multipart/form-data">
 
 <s:actionerror/>
+<div class="container">
 <div class="row">
 <div class="col-md-2"></div>
 <div class="col-md-8">
@@ -87,7 +88,7 @@
 		</table>
 </div>
 <div class="col-md-2"></div>
-</div>
+</div></div>
 	</s:form>
 
 </body>

@@ -9,12 +9,10 @@
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style type="text/css">
@@ -22,32 +20,37 @@ body {
 	text-align: left;
 }
 </style>
-<title>${raiserSelf.account} 123</title>
+<title>${raiserSelf.account}123</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-2">
-			<img src='' class='img-thumbnail' id='logo'
-				style='width: 200px; height: 200px'>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-2">
+				<img src='' class='img-thumbnail' id='logo'
+					style='width: 200px; height: 200px'>
+			</div>
+			<div class="col-md-4">
+				<h1>${raiserSelf.name}</h1>
+				${raiserSelf.address} <br> ${raiserSelf.tel} <br>
+				${raiserSelf.email} <br> ${raiserSelf.contactPerson} <br>
+				${raiserSelf.contactTel} <br> ${raiserSelf.videoUrl} <br>
+			</div>
+			<div class="col-md-3"></div>
 		</div>
-		<div class="col-md-4">
-			<h1>${raiserSelf.name}</h1>
-			${raiserSelf.address} <br> ${raiserSelf.tel} <br> ${raiserSelf.email} <br>
-			${raiserSelf.contactPerson} <br> ${raiserSelf.contactTel} <br>
-			${raiserSelf.videoUrl} <br>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<br> ${raiserSelf.detail} <br>
+			</div>
+			<div class="col-md-3"></div>
 		</div>
-		<div class="col-md-3"></div>
+		<br>
+		<div style="text-align: center;">
+			<a href="<c:url value='/index.jsp' />">回首頁</a>
+		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
-			<br> ${raiserSelf.detail} <br>
-		</div>
-		<div class="col-md-3"></div>
-	</div>
-	<a href="<c:url value='/index.jsp' />">回首頁</a>
 	<script>
 		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
 		$.post(url, {

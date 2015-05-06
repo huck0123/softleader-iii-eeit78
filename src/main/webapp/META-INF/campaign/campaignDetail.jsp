@@ -18,8 +18,31 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <style>
-#sideDiv{text-align: left;}
+#sideDiv{
+text-align: left;
+border-bottom: silver 1px solid;
+vertical-align: top;
+height:100%;}
+.row-table{ display:table;}
 
+
+.row-table {
+    display: table;
+}
+
+.left-side {
+    float: none;
+    display: table-cell;
+
+}
+
+.right-side {
+    float: none;
+    display: table-cell;
+    border-bottom: silver 1px solid;
+}
+
+strong { font-size: 46px;}
 </style>
 </head>
 <body id="body">
@@ -52,42 +75,64 @@ function load(){
 				{'campaignForm.id':"${param.id}"},function(data){
 
 			data = JSON.parse(data);
-			$(data).each(function(index,value){
-				var rowDiv1 = $('<div class="row"></div>');
-				var titleP = $('<p>'+value.name+'</p>');
-				var raiserP = $('<p>'+value.id+'</p>');
+			value = data[0];
+				var rowDiv1 = $('<div  class="row"></div>');
+				var titleP = $('<h3>'+value.name+'</h3>');
+				var raiserP = $('<p>由<span style="font-size:20px">'+value.id+'</span>發起</p>');
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
 
-				var rowDiv2 = $('<div class="row"></div>');
-				var vedioDiv = $('<div class="col-sm-12 col-md-8"></div>');
+				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
+				var vedioDiv = $('<div class="col-md-8 left-side"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/UutiBRDxJ0U'+'"></iframe>');
+				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/y4RjHV8YY_c'+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
-				var sideDiv = $('<div id="sideDiv" class="col-sm-12 col-md-4"></div>');
-				var giverP = $('<p>已有<strong>3</strong>人支持</p>');
-				var moneyP = $('<p>已募得<strong>$4500</strong>元/60000元</p>');
-				var dateP = $('<p>於<strong>2015/4/30</strong>結束</p>');
-				var barP = $('<p>目前進度</p>');
-				var otherInfo = $('<p>類型、地點、分享...</p>');
-				var donateBtn = $('<a href="${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name+'" class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				var sideDiv = $('<div id="sideDiv" class="col-md-4 right-side"></div>');
+				var giverP = $('<p>已有<strong id="giverStrong"></strong>人支持</p>');
+				var moneyP = $('<p>已募得<strong>'+commafy(value.currentFund)+'</strong>元/'+commafy(value.goal)+'元</p>');
+				var d = new Date(value.endDate);
+				
+				var dateP = $('<p>於<strong>'+d.getFullYear()+'/'+d.getMonth()+'/'+d.getDate()+'</strong>結束</p>');
+				
+
+				var percent = value.currentFund/value.goal*100;
+				var progressDiv = $('<div class="progress"></div>');
+				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'+percent+'%"></div>');
+			
+				progressBarDiv.appendTo(progressDiv);
+				
+				
+				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '+value.location+' <span class="glyphicon glyphicon-tag"></span> '+value.type+' <span class="glyphicon glyphicon-stats"></span> '+percent+'%已完成</p>');
+				
+
+				
+				
+				
+				var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				donateBtn.attr('href', url);
+				
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
 				dateP.appendTo(sideDiv);
-				barP.appendTo(sideDiv);
 				otherInfo.appendTo(sideDiv);
+				progressDiv.appendTo(sideDiv);
 				donateBtn.appendTo(sideDiv);
 				vedioDiv.appendTo(rowDiv2);
 				sideDiv.appendTo(rowDiv2);
 				rowDiv2.appendTo($('#showColumn'));
 				
-				
+				$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
+						{'campaignForm.id':'${param.id}'},function(data){
+							console.log("getgiver: "+data);
+							$('#giverStrong').text(data);
+						})
 
 				
 				
-			})
+
 		})
 	}
 
@@ -151,7 +196,14 @@ function arrayBufferToBase64( buffer ) {
     return window.btoa( binary );
 }
 
-
+function commafy(num) {
+    num = num + "";
+    var re = /(-?\d+)(\d{3})/
+    while (re.test(num)) {
+        num = num.replace(re, "$1,$2")
+    }
+    return num;
+}
 
 </script>
 </html>
