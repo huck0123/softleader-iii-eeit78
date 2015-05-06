@@ -12,7 +12,7 @@
 
 	<a href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a><p />
 	<a href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a><p />
-	
+	<a href="<c:url value='/raiser/raiserForOne'/>">單一個</a><p />
 	<a href="<c:url value='/index.jsp' />">回首頁</a>
 </body>
 </html>
