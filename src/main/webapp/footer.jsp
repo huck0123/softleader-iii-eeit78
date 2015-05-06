@@ -372,14 +372,14 @@ p {
 		</div>
 	</div>
 	<!-- header ends -->
-	
-	<div class="row" style="height:1000px; background-color:#FFAF60">
+	<div class="container">
+	<div class="row" style="background-color:#FFAF60">
 		<div style="height:50px"></div>
 		<div class="col-md-2"></div>
-		<div class="col-md-8"><ul class="list-unstyled"><div class="row" id="Body"></div></ul></div>
+		<div class="col-md-8"><ul class="list-unstyled"><div class="row" id="raiserLogo"></div></ul></div>
 		<div class="col-md-2"></div>
 	</div>
-
+</div>
 	<script>
 
 	</script>
@@ -505,22 +505,27 @@ p {
 
 	});
 	
-	var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!selectAll";
-	$.post(url, getData);
-	
-	function getData(raisers) {
-		raisers = JSON.parse(raisers);
-		$(raisers).each(function(index, raiser) {
-			var srclogo = arrayBufferToBase64(raiser.logo); 
-			var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
-			var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="+raiser.account+"'/>'>"+raiser.name+"</a>";
-			
-			$("#Body").append("<div class='col-md-3'><li>"
-					+strimg
-					+strhref
-					+"</li></div>");
-			$("#logo"+raiser.id).attr("src","data:image/png;base64," + srclogo);
-		});
-	}
+	var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!selectAll"
+		$.post(url, getData);
+
+		function getData(raisers) {
+			raisers = JSON.parse(raisers);
+			$(raisers)
+					.each(
+							function(index, raiser) {
+								var srclogo = arrayBufferToBase64(raiser.logo);
+								var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
+								var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="
+										+ raiser.account
+										+ "'/>'>"
+										+ strimg
+										+ "</a>";
+								$("#raiserLogo").append(
+										"<div class='col-md-3'><li style='padding:5px'>"
+												+ strhref + "</li></div>");
+								$("#logo" + raiser.id).attr("src",
+										"data:image/png;base64," + srclogo);
+							});
+		}
 </script>
 </html>
