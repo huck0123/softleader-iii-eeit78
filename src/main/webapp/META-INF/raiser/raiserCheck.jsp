@@ -37,14 +37,12 @@
 			$(raisers).each(function(index, raiser) {
 				var srclogo = arrayBufferToBase64(raiser.logo); 
 				var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
-				var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="+raiser.account+"'/>'>raiser.account</a>";
+				var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="+raiser.account+"'/>'>"+raiser.account+"</a>";
 				
-				$("#Body").append("<div  class='col-md-3'><li>"
+				$("#Body").append("<div class='col-md-3'><li>"
 						+strimg
 						+strhref
 						+"</li></div>");
-				
-				
 				$("#logo"+raiser.id).attr("src","data:image/png;base64," + srclogo);
 			});
 		}
