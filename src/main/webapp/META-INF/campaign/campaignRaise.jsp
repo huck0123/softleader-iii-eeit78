@@ -15,81 +15,84 @@
 </head>
 <body>
 
-	<s:form action="campaignAction" namespace="/campaign" method="post" enctype="multipart/form-data">
-
-<s:actionerror/>
-<div class="container">
-<div class="row">
-<div class="col-md-2"></div>
-<div class="col-md-8">
-		<table class="table table-hover">
-			<tr style="height: 30px">
-				<td>活動名稱：</td>
-				<td><input type="text" name="campaignForm.name"
-					value="${param.name}"></td>
-				<td><span class="error">${errors.id}</span></td>
-			</tr>
-			<tr>
-			<td><s:file name="campaignForm.image" label="活動圖片："></s:file></td> 
-			<td></td>
-			<td></td>
-<!-- 				<td>活動圖片：</td> -->
-<!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
-<%-- 				<td><span class="error">${errors.id}</span></td> --%>
-			</tr>
-			<tr>
-				<td>目標金額：</td>
-				<td><input type="text" name="campaignForm.goal"
-					value="${param.goal}"></td>
-				<td><span class="error">${errors.id}</span></td>
-			</tr>
-			<tr>
-				<td>開始日期 :</td>
-				<td><input type="text" name="campaignForm.startDate"
-					value="${param.startDate}"></td>
-				<td><span class="error">${errors.price}</span></td>
-			</tr>
-			<tr>
-				<td>結束日期 :</td>
-				<td><input type="text" name="campaignForm.endDate"
-					value="${param.endDate}"></td>
-				<td><span class="error">${errors.make}</span></td>
-			</tr>
-			<tr>
-				<td>類型 :</td>
-				<td><input type="text" name="campaignForm.type"
-					value="${param.type}"></td>
-				<td><span class="error">${errors.expire}</span></td>
-			</tr>
-			<tr>
-				<td>影片連結:</td>
-				<td><input type="text" name="campaignForm.vedioUrl"
-					value="${param.vedioUrl}"></td>
-				<td><span class="error">${errors.expire}</span></td>
-			</tr>
-			<tr>
-				<td>地區 :</td>
-				<td><input type="text" name="campaignForm.location"
-					value="${param.location}"></td>
-				<td><span class="error">${errors.expire}</span></td>
-			</tr>
-			<tr>
-				<td>活動詳情:</td>
-				<td><textarea name="campaignForm.detail">${param.detail}</textarea></td>
-				<td><span class="error">${errors.expire}</span></td>
-			</tr>
-			<tr>
-			<td></td>
-				<td><s:submit value="送出" method="insert" /></td>
-				<td><button type="button" id="btn1" name="填上資料" />Fill</td>
-			</tr>
+	<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
+		method="post" enctype="multipart/form-data">
 
 
-		</table>
-</div>
-<div class="col-md-2"></div>
-</div></div>
-	</s:form>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<table class="table table-hover">
+						<tr style="height: 30px">
+							<td>活動名稱：</td>
+							<td><input type="text" name="campaignForm.name"
+								value="${param.name}"></td>
+							<td><span class="error">${errors.id}</span></td>
+						</tr>
+						<tr>
+							<td><input type="file" name="campaignForm.image"
+								label="活動圖片：">
+							</file></td>
+							<td></td>
+							<td></td>
+							<!-- 				<td>活動圖片：</td> -->
+							<!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
+							<%-- 				<td><span class="error">${errors.id}</span></td> --%>
+						</tr>
+						<tr>
+							<td>目標金額：</td>
+							<td><input type="text" name="campaignForm.goal"
+								value="${param.goal}"></td>
+							<td><span class="error">${errors.id}</span></td>
+						</tr>
+						<tr>
+							<td>開始日期 :</td>
+							<td><input type="text" name="campaignForm.startDate"
+								value="${param.startDate}"></td>
+							<td><span class="error">${errors.price}</span></td>
+						</tr>
+						<tr>
+							<td>結束日期 :</td>
+							<td><input type="text" name="campaignForm.endDate"
+								value="${param.endDate}"></td>
+							<td><span class="error">${errors.make}</span></td>
+						</tr>
+						<tr>
+							<td>類型 :</td>
+							<td><input type="text" name="campaignForm.type"
+								value="${param.type}"></td>
+							<td><span class="error">${errors.expire}</span></td>
+						</tr>
+						<tr>
+							<td>影片連結:</td>
+							<td><input type="text" name="campaignForm.vedioUrl"
+								value="${param.vedioUrl}"></td>
+							<td><span class="error">${errors.expire}</span></td>
+						</tr>
+						<tr>
+							<td>地區 :</td>
+							<td><input type="text" name="campaignForm.location"
+								value="${param.location}"></td>
+							<td><span class="error">${errors.expire}</span></td>
+						</tr>
+						<tr>
+							<td>活動詳情:</td>
+							<td><textarea name="campaignForm.detail">${param.detail}</textarea></td>
+							<td><span class="error">${errors.expire}</span></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="送出" /></td>
+							<td><button type="button" id="btn1" name="填上資料" />Fill</td>
+						</tr>
+
+					</table>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</form>
 
 </body>
 <script>
