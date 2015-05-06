@@ -30,7 +30,7 @@
 		<div class="col-md-2"></div>
 		<div class="container col-md-8">
 			<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好</h2>
-			<div><img src="" class="img-circle" id="headshot" style="width:80px; height:80px"></div>
+			<div><img src="" class="img-thumbnail" id="logo" style="width:80px; height:80px"></div>
 			
 			<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
 				method="post" enctype="multipart/form-data">
