@@ -93,4 +93,8 @@ public class RaiserService {
 		return result;
 	}
 
+	public boolean valid(String account,boolean valid){
+		boolean	result = raiserDao.check(account, valid);
+		return result;
+	}
 }
