@@ -1,5 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,7 @@ public class TransactionService {
 		return model;
 	}
 	
-	//取出某campaignId的所有交易紀錄
+	//取出某campaignId的所有交易紀錄筆數
 	public int getCountByCampaignId(int cId){
 
 		CampaignModel cModel = new CampaignModel();
@@ -42,4 +44,42 @@ public class TransactionService {
 		
 		return count;
 	}
+	
+	// 取出某giverId的所有交易紀錄
+	public List<TransactionDetailModel> getByGiverId(int gId){
+		
+		List<TransactionDetailModel> models = dao.getByGiverId(gId);
+		return models;
+	}
+	
+	//取出所有交易紀錄
+	public List<TransactionDetailModel> getAll(){
+		
+		List<TransactionDetailModel> models = dao.getAll();
+		return models;
+	}
+	
+	//ID查詢
+	public TransactionDetailModel getById(int id){
+		
+		TransactionDetailModel model = dao.getById(id);
+		return model;
+	}
+	
+	//確認金額入帳
+	public boolean creditCheck(int id){
+		
+		TransactionDetailModel model = dao.getById(id);
+		model.setCredit(true);
+		return true;
+	}
+
+	//金額未入帳
+	public boolean creditUncheck(int id){
+		
+		TransactionDetailModel model = dao.getById(id);
+		model.setCredit(false);
+		return false;
+	}
+	
 }
