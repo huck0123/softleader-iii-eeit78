@@ -105,9 +105,9 @@ function loadCampaign(){
 						})
 				
 				var today = (new Date()).getTime();
-				console.log("today: "+today);
+
 				var d = (new Date(value.endDate)).getTime();
-				console.log("d: "+d);
+console.log(value.endDate);
 				var remain = Math.floor((d - today)/(1000*60*60*24));
 				var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span> 倒數日<br/>'+remain+'<br/></div>');
 				

@@ -34,13 +34,17 @@
 			${sessionScope.giver.familyName }${sessionScope.giver.name }您好!
 			<form action="/softleader-iii-eeit78/donate/infoConfirm"
 				method="post">
-				<table class="table table-condensed">
-					<tr style="display: none">
-						<td><label for="">捐款活動名稱</label></td>
-						<td><input type="text" name="campaignName" value=""></td>
+				<table class="table table-condensed" style="display: none">
+					<tr>
+						<td>捐款活動名稱</td>
+						<td><input type="text" name="campaignName" value="${param.campaignName }"></td>
 					</tr>
-					<tr style="display: none">
-						<td><label for="">捐款金額</label></td>
+					<tr>
+						<td>捐款活動ID</td>
+						<td><input type="text" name="campaignId" value="${param.campaignId }"></td>
+					</tr>
+					<tr>
+						<td>捐款金額</td>
 						<td><input type="text" name="amount" value="${param.amount }"></td>
 					</tr>
 				</table>

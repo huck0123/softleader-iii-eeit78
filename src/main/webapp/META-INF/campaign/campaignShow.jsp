@@ -47,8 +47,7 @@ var totalCount = 0;
 
 //0是第一頁
 
-var currentPage = 0;
-
+var currentPage =0;
 load();
 
 function load(){
