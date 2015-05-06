@@ -34,6 +34,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private int page;
 	private boolean lock;
 	private String account;
+	private String name;
+	private String contactPerson;
 
 	public int getPage() {
 		return page;
@@ -69,6 +71,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public void setAccount(String account) {
 		this.account = account;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String insert() throws Exception {
@@ -185,6 +195,21 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return null;
 	}
 
+	public String  getByCondition(){
+		System.out.println(name);
+		System.out.println();
+		System.out.println();
+		Integer resultCount =raiserService.getByAllConditionCount(account, name, contactPerson);
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		List<RaiserModel> list = raiserService.getByAllCondition(account, name, contactPerson, page, 3);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(list);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+//		session.removeAttribute("resultCount");
+		session.setAttribute("resultCount", resultCount);
+		return "select";
+	}
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

@@ -74,9 +74,9 @@ public class RaiserService {
 		return count;
 	}
 
-	public int getByAllConditionCount(String account, String name,
+	public Integer getByAllConditionCount(String account, String name,
 			String contactPerson) {
-		int count = raiserDao.getByAllConditionCount(account, name,
+		Integer count = raiserDao.getByAllConditionCount(account, name,
 				contactPerson);
 		return count;
 	}

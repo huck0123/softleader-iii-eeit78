@@ -42,7 +42,7 @@
 					.each(
 							function(index, raiser) {
 								var srclogo = arrayBufferToBase64(raiser.logo);
-								var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
+								var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:120px; height:100px'>";
 								var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="
 										+ raiser.account
 										+ "'/>'>"
