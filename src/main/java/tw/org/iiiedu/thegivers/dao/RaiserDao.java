@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class RaiserDao {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class)
 				.setFirstResult((page - 1) * 3).setMaxResults(3);
-		List<RaiserModel> result = criteria.list();
+		List<RaiserModel> result = criteria.addOrder(Order.desc("id")).list();
 		return result;
 	}
 
@@ -156,5 +157,13 @@ public class RaiserDao {
 				.setMaxResults(pageSize).list();
 
 		return list;
+	}
+	
+	public boolean check(String account , boolean valid){
+		Session session = sessionFactory.getCurrentSession();
+		RaiserModel rm = this.getByAccount(account);
+		rm.setValid(valid);
+		this.update(rm);
+		return valid;
 	}
 }

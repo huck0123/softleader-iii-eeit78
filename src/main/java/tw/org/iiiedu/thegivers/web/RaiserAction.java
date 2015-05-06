@@ -32,6 +32,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private RaiserModel rm;
 	private InputStream inputStream;
 	private int page;
+	private boolean lock; 
+	private String account;
 
 	public int getPage() {
 		return page;
@@ -51,6 +53,22 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public InputStream getInputStream() {
 		return inputStream;
+	}
+	
+	public boolean isLock() {
+		return lock;
+	}
+
+	public void setLock(boolean lock) {
+		this.lock = lock;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String insert() throws Exception {
@@ -137,6 +155,13 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		if (raiserForm.getVideoUrl() != null) {
 			rm.setVideoUrl(raiserForm.getVideoUrl());
 		}
+		try {
+			if(raiserForm.getLogo()!=null)
+			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		rm = raiserService.dataUpdate(rm);
 		if (rm != null) {
 			session.setAttribute("raiser", rm);
@@ -148,7 +173,6 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getPerPage() {
 		List<RaiserModel> models = raiserService.getPerPage(page);
-
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(models);
 
@@ -158,10 +182,10 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 	
 	public String checkInformation(){
+		boolean result = raiserService.valid(account, lock);
 		return null;
-		
 	}
-
+	
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

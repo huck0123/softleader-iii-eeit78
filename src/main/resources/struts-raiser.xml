@@ -8,7 +8,7 @@
 
 		<action name="raiserAction" class="raiserAction">
 			<result name="insert" type="redirect">/raiser/raiserInfo.action</result>
-			<result name="update" type="redirect">/META-INF/login/login.jsp</result>
+			<result name="update" type="redirect">/index.jsp</result>
 			<result name="error" type="redirect">/META-INF/raiser/raiserRegister.jsp
 			</result>
 			
