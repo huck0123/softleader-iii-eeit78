@@ -14,6 +14,14 @@ public class TransactionServiceTest extends GenericTest{
 	@Autowired
 	private TransactionService service;
 	
+	@Test
+	public void testGetByCondition(){
+		List<TransactionDetailModel> list = service.getByCondition("1111222233334444");
+		Iterator<TransactionDetailModel> i = list.iterator();
+		while(i.hasNext()){
+			System.out.println(i.next());
+		}
+	}
 	
 //	@Test
 //	public void testInsert() {

@@ -31,7 +31,7 @@ tr th {
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container">
+	<div class="container panel alert">
 		<button id="before" onclick="before()">上一頁</button>
 		<select></select>
 		<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->

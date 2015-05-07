@@ -93,7 +93,7 @@ public class TransactionAction extends ActionSupport {
 				
 		log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++form:{} transactionCount:{}",form,transactionCount);
 		model = new TransactionDetailModel();
-		
+
 		model.setGiverId(form.getGiverId());
 		model.setAmount(form.getAmount());
 		model.setCardType(form.getCardType());

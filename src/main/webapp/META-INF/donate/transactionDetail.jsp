@@ -28,16 +28,19 @@ tr th {
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container">
-		<div class="col-md-2">
-			<select id="pageAmount"></select>顯示筆數(預設5筆)
+	<div class="container panel alert">
+		<div class="row">
+			<div class="col-md-2">
+				<select id="pageAmount"></select>顯示筆數(預設5筆)
+			</div>
+			<div class="col-md-8">
+				<button id="before" onclick="before()">上一頁</button>
+				<select id="page"></select>
+				<button id="after" onclick="after()">下一頁</button>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
-		<div class="col-md-8">
-			<button id="before" onclick="before()">上一頁</button>
-			<select id="page"></select>
-			<button id="after" onclick="after()">下一頁</button>
-		</div>
-		<div class="col-md-2"></div>
+		
 		<table class="table table-bordered">
 			<tr>
 				<th>捐款人ID</th>
@@ -88,7 +91,7 @@ tr th {
 		}
 		
 		function onload(){
-	
+
 			pageAmount = $('#pageAmount').val();
 			pageCount = transactionCount/pageAmount;
 			
@@ -110,13 +113,22 @@ tr th {
 			var thisPage = $('#page').val();			
 			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount}, getData);
 		});
-		
+
+		//判斷是否為null
+		function undefinedCheck(data){
+			if(data == undefined){
+				data = "";
+				return data;
+			}else{
+				return data;
+			}
+		};
 		
 		function getData(data){
 			data = JSON.parse(data);
-			$.each(data, function(index,obj){
+			$.each(data, function(index,obj){				
 				$(tbdy).append("<tr>"
-						+"<td>"+ obj.giverId +"</td>"
+						+"<td>"+ undefinedCheck(obj.giverId) +"</td>"
 						+"<td>"+ obj.campaignModel.name +"</td>"
 						+"<td>"+ obj.amount +"</td>"
 						+"<td>"+ obj.date +"</td>"
@@ -127,7 +139,7 @@ tr th {
 						+"<td>"+ "<input type='checkbox' id='"+ obj.id +"' value='"+ obj.credit +"'>" +"<span class='"+ obj.id +"'></span>" +"</td>"
 						+"</tr>");	
 				valid(obj.id, obj.credit);
-				
+				console.log(obj);
 				$('#before').prop("disabled", false);
 				$('#after').prop("disabled", false);
 				$('#page').prop("disabled", false);

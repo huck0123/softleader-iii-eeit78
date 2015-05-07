@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -64,9 +64,39 @@ public class TransactionDao {
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
 		List<TransactionDetailModel> models = criteria
-				.add(Restrictions.eq("giverId", gId)).addOrder(Order.asc("id"))
-				.list();
+				.add(Restrictions.eq("giverId", gId)).addOrder(Order.asc("id")).list();
 
+		return models;
+	}
+	
+	//取出條件收尋的紀錄
+	public List<TransactionDetailModel> getByCondition(String condition){
+		
+		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
+		
+		Boolean b = null;
+		if(condition == "true"){
+			b = true;
+		}else if(condition == "false"){
+			b = false;
+		}
+		
+		//方法一
+		Disjunction or = Restrictions.disjunction();
+		or.add(Restrictions.like("cardType", "%"+condition+"%").ignoreCase());
+		or.add(Restrictions.eq("cardNo", condition));
+		or.add(Restrictions.like("cardHolder", "%"+condition+"%").ignoreCase());
+		or.add(Restrictions.like("cardHolderEmail", "%"+condition+"%").ignoreCase());
+		or.add(Restrictions.eq("credit", b));
+		List<TransactionDetailModel> models = criteria.add(or).addOrder(Order.asc("id")).list();
+
+		
+		//方法二
+//		Criterion c1 = Restrictions.like("cardType", "%"+condition+"%").ignoreCase();
+//		Criterion c2 = Restrictions.like("cardHolderEmail", "%"+condition+"%").ignoreCase();
+//		Criterion c3 = Restrictions.or(c1, c2);
+//		List<TransactionDetailModel> models = criteria.add(c3).list();
+		
 		return models;
 	}
 
@@ -110,8 +140,5 @@ public class TransactionDao {
 
 		getSession().save(model);
 	}
-
-	// 收尋
-	// public TransactionDetailModel getByAllCondition()
 
 }

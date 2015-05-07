@@ -55,6 +55,13 @@ public class TransactionService {
 		return models;
 	}
 	
+	//取出條件收尋的紀錄
+	public List<TransactionDetailModel> getByCondition(String condition){
+		
+		List<TransactionDetailModel> models = dao.getByCondition(condition);
+		return models;
+	}
+	
 	//取出所有交易紀錄
 	public List<TransactionDetailModel> getAll(){
 		
