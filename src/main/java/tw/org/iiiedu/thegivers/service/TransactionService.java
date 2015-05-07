@@ -19,16 +19,12 @@ public class TransactionService {
 	private CampaignService cService;
 	
 	
-	//捐款(信用卡捐款)
+	//捐款(信用卡捐款) cId為campaignId
 	public TransactionDetailModel insert(TransactionDetailModel model, Integer cId){
 
 		CampaignModel cModel = cService.getById(cId);
-		int temp = cModel.getCurrentFund();
-		temp = temp + model.getAmount();
-		cModel.setCurrentFund(temp);
 		
 		model.setCampaignModel(cModel);
-//		model.setDate(new java.sql.Timestamp(new java.util.Date().getTime()));  //預設現在時間為捐款時間
 		model.setCredit(false);
 		model = dao.insert(model);
 		
@@ -67,9 +63,9 @@ public class TransactionService {
 	}
 	
 	// 頁次 pageNum為第幾頁,一頁5筆
-	public List<TransactionDetailModel> getPerPage(int pageNum){
+	public List<TransactionDetailModel> getPerPage(int pageNum, int pageAmount){
 		
-		List<TransactionDetailModel> models = dao.getPerPage(pageNum);
+		List<TransactionDetailModel> models = dao.getPerPage(pageNum, pageAmount);
 		return models;
 	}
 	
@@ -80,10 +76,16 @@ public class TransactionService {
 		return model;
 	}
 	
-	//確認金額入帳
+	//確認金額入帳  id為與transaction_detail相對應的id
 	public boolean creditCheck(int id){
 		
 		TransactionDetailModel model = dao.getById(id);
+		CampaignModel cModel = model.getCampaignModel();
+		int temp = cModel.getCurrentFund();
+		temp += model.getAmount();
+		cModel.setCurrentFund(temp);
+		
+		model.setCampaignModel(cModel);
 		model.setCredit(true);
 		return true;
 	}
@@ -92,6 +94,12 @@ public class TransactionService {
 	public boolean creditUncheck(int id){
 		
 		TransactionDetailModel model = dao.getById(id);
+		CampaignModel cModel = model.getCampaignModel();
+		int temp = cModel.getCurrentFund();
+		temp -= model.getAmount();
+		cModel.setCurrentFund(temp);
+		
+		model.setCampaignModel(cModel);
 		model.setCredit(false);
 		return false;
 	}

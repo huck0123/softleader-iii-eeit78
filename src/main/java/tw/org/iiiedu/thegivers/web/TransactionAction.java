@@ -32,6 +32,7 @@ public class TransactionAction extends ActionSupport {
 	private TransactionDetailModel model;
 	private InputStream inputStream;
 	private int thisPage;
+	private int pageAmount;
 	private int thisId;
 	private boolean credit;
 	
@@ -57,6 +58,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setThisPage(int thisPage) {
 		this.thisPage = thisPage;
+	}
+
+	public int getPageAmount() {
+		return pageAmount;
+	}
+
+	public void setPageAmount(int pageAmount) {
+		this.pageAmount = pageAmount;
 	}
 
 	public int getThisId() {
@@ -108,7 +117,7 @@ public class TransactionAction extends ActionSupport {
 	//交易明細
 	public String transactionDetail(){
 		
-		List<TransactionDetailModel> list = service.getPerPage(thisPage);
+		List<TransactionDetailModel> list = service.getPerPage(thisPage, pageAmount);
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(list);

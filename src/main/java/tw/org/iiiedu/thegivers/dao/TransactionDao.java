@@ -81,10 +81,10 @@ public class TransactionDao {
 	}
 
 	// 頁次 pageNum為第幾頁,一頁5筆
-	public List<TransactionDetailModel> getPerPage(int pageNum) {
+	public List<TransactionDetailModel> getPerPage(int pageNum, int pageAmount) {
 
 		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class)
-				.setFirstResult((pageNum-1)*5).setMaxResults(5);
+				.setFirstResult((pageNum-1)*pageAmount).setMaxResults(pageAmount);
 		List<TransactionDetailModel> models = criteria.addOrder(Order.asc("id")).list();
 		return models;
 	}

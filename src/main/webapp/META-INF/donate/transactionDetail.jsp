@@ -15,6 +15,7 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<%-- <script src="/softleader-iii-eeit78/js/giver.js"></script> --%>
 
 <style>
 tr th {
@@ -28,9 +29,15 @@ tr th {
 	<jsp:include page="../../header.jsp" />
 
 	<div class="container">
-		<button id="before" onclick="before()">上一頁</button>
-		<select></select>
-		<button id="after" onclick="after()">下一頁</button>
+		<div class="col-md-2">
+			<select id="pageAmount"></select>顯示筆數(預設5筆)
+		</div>
+		<div class="col-md-8">
+			<button id="before" onclick="before()">上一頁</button>
+			<select id="page"></select>
+			<button id="after" onclick="after()">下一頁</button>
+		</div>
+		<div class="col-md-2"></div>
 		<table class="table table-bordered">
 			<tr>
 				<th>捐款人ID</th>
@@ -43,27 +50,66 @@ tr th {
 				<th>卡片持有人Email</th>
 				<th>是否收到帳款</th>
 			</tr>
-			
+
 			<tbody id="tbdy">
-			
+
 			</tbody>
 		</table>
-	
+
 	</div>
-	
+
 	<script>
 		
-		var transactionCount = ${applicationScope.transactionCount}/5;
+		var transactionCount = ${applicationScope.transactionCount}; //交易總筆數
 		var url = "${pageContext.request.contextPath}/donate/transactionDetailAction!transactionDetail";
 		var urlv = "${pageContext.request.contextPath}/donate/transactionDetailAction!credit";
-			
-		//建立select選單
-		for(var i=1; i<transactionCount+1; i++){
-			$('select').append("<option value='"+ i +"'>"+ i +"</option>");	
+		var pageAmount;
+		var pageCount;
+		
+		load();
+		//初始載入頁面
+		function load(){
+			//建立每頁幾筆選單
+			for(var i=1; i<=transactionCount; i++){
+				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
+			}
+
+			$('#pageAmount').val(5);  //預設一頁五筆
+			pageAmount = $('#pageAmount').val();
+			pageCount = transactionCount/pageAmount;
+	
+			//建立select選單
+			for(var i=1; i<pageCount+1; i++){
+				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			}
+		
+			//載入第一頁
+			$.post(url,{'thisPage':1,'pageAmount':pageAmount}, getData);
 		}
 		
-		$.post(url,{'thisPage':1}, getData);
-
+		function onload(){
+	
+			pageAmount = $('#pageAmount').val();
+			pageCount = transactionCount/pageAmount;
+			
+			//清除page select選單
+			$('#page').empty();
+			
+			//建立page select選單
+			for(var i=1; i<pageCount+1; i++){
+				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			}
+		
+		}
+		
+		$('#pageAmount').on("change", function(){
+			$(this).prop("disabled",true);
+			$('#tbdy').empty();
+			pageAmount = $(this).val();
+			onload();
+			var thisPage = $('#page').val();			
+			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount}, getData);
+		});
 		
 		
 		function getData(data){
@@ -84,8 +130,8 @@ tr th {
 				
 				$('#before').prop("disabled", false);
 				$('#after').prop("disabled", false);
-				$('select').prop("disabled", false);
-				
+				$('#page').prop("disabled", false);
+				$('#pageAmount').prop("disabled", false);
 			})
 			
 		};
@@ -113,46 +159,46 @@ tr th {
 					$('.'+id).text("true");
 				}
 			})
-		}
+		};
 		
 
 		//選擇第幾頁
-		$('select').on("change", function(){
+		$('#page').on("change", function(){
 			$(this).prop("disabled",true);
 			$('#tbdy').empty();
 			var temp = $(this).val();
-			$.post(url,{'thisPage':temp},getData);
+			$.post(url,{'thisPage':temp,'pageAmount':pageAmount},getData);
 		});
-		
+
 		//上一頁
 		function before(){
 			$('#before').prop("disabled", true);
-			var thisPage = $('select').val();
+			var thisPage = $('#page').val();
 			if(thisPage > 1){
 				thisPage--;
 				
-				$('select').val(thisPage);
+				$('#page').val(thisPage);
 				$('#tbdy').empty();
-				$.post(url,{'thisPage':thisPage},getData);
+				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount},getData);
 			}
 		};
-		
+
 		//下一頁
 		function after() {
 			$('#after').prop("disabled", true);
-			var thisPage = $('select').val();
-			if(thisPage < transactionCount ){
+			var thisPage = $('#page').val();
+			if(thisPage < pageCount ){
 				thisPage++;
 				
-				$('select').val(thisPage);
-				$('#tbdy').children().remove();
-				$.post(url,{'thisPage':thisPage},getData);
+				$('#page').val(thisPage);
+				$('#tbdy').empty();
+				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount},getData);
 			}
 		};
 		
 		
 	</script>
-	
-	
+
+
 </body>
 </html>

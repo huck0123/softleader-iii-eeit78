@@ -20,7 +20,7 @@ public class TransactionServiceTest extends GenericTest{
 //		TransactionDetailModel model = new TransactionDetailModel();
 //		
 //		model.setGiverId(1);
-//		model.setAmount(500);
+//		model.setAmount(8);
 //		model.setCardType("visa");
 //		model.setCardNo("1234567891234567");
 //		model.setCardHolder("Tony");
@@ -28,7 +28,7 @@ public class TransactionServiceTest extends GenericTest{
 //		model.setCredit(true);
 //		model.setIp(null);
 //
-//		service.insert(model, 2);
+//		service.insert(model, 1);
 //	}
 	
 //	@Test
