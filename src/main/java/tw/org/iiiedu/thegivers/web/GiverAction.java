@@ -199,11 +199,11 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	//更新資料
 	public String update(){
-		GiverModel temp1;
-		temp1 = (GiverModel) request.getSession().getAttribute("giver");
-		GiverModel temp = service.getByAccount(temp1.getAccount());
+		GiverModel temp;
+		temp = (GiverModel) request.getSession().getAttribute("giver");
+//		GiverModel temp = service.getByAccount(temp1.getAccount());
 		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
-		
+
 		model = new GiverModel();
 		
 		model.setId(temp.getId());
