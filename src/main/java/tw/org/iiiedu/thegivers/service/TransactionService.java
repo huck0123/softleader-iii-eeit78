@@ -55,10 +55,18 @@ public class TransactionService {
 		return models;
 	}
 	
-	//取出條件收尋的紀錄
-	public List<TransactionDetailModel> getByCondition(String condition){
+	// 取出條件收尋的紀錄筆數
+	public int getByConditionCount(String condition) {
 		
-		List<TransactionDetailModel> models = dao.getByCondition(condition);
+		int conditionCount = dao.getByConditionCount(condition);
+		return conditionCount;
+	}
+	
+	//取出條件收尋的紀錄
+	public List<TransactionDetailModel> getByCondition(String condition,
+			int pageNum, int pageAmount){
+		
+		List<TransactionDetailModel> models = dao.getByCondition(condition, pageNum, pageAmount);
 		return models;
 	}
 	

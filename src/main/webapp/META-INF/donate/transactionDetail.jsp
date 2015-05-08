@@ -30,15 +30,17 @@ tr th {
 
 	<div class="container panel alert">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<select id="pageAmount"></select>顯示筆數(預設5筆)
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<button id="before" onclick="before()">上一頁</button>
 				<select id="page"></select>
 				<button id="after" onclick="after()">下一頁</button>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-3">
+				<input type="text" id="condition"> <button id="click">查詢</button>
+			</div>
 		</div>
 		
 		<table class="table table-bordered">
@@ -65,19 +67,40 @@ tr th {
 		
 		var transactionCount = ${applicationScope.transactionCount}; //交易總筆數
 		var url = "${pageContext.request.contextPath}/donate/transactionDetailAction!transactionDetail";
+		var urlc = "${pageContext.request.contextPath}/donate/transactionDetailAction!conditionCount";
 		var urlv = "${pageContext.request.contextPath}/donate/transactionDetailAction!credit";
 		var pageAmount;
 		var pageCount;
+		var condition;
+		
+		$('#click').on("click",function(){
+			condition = $('#condition').val();
+			$.post(urlc,{'condition':condition},function(data){
+				
+				data = JSON.parse(data);
+				transactionCount = data.conditionCount;
+				console.log("first   "+transactionCount);
+				load();
+			});
+			
+		})
 		
 		load();
+		
 		//初始載入頁面
 		function load(){
-			//建立每頁幾筆選單
+			console.log("transactionCount   "+transactionCount);
+			$('#tbdy').empty();
+			$('#pageAmount').empty();
+			$('#page').empty();
+			
+			//建立每頁幾筆資料選單
 			for(var i=1; i<=transactionCount; i++){
 				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
 			}
-
-			$('#pageAmount').val(5);  //預設一頁五筆
+			
+			//預設一頁五筆
+			$('#pageAmount').val(5);  
 			pageAmount = $('#pageAmount').val();
 			pageCount = transactionCount/pageAmount;
 	
@@ -85,9 +108,9 @@ tr th {
 			for(var i=1; i<pageCount+1; i++){
 				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
 			}
-		
+			console.log("finish");
 			//載入第一頁
-			$.post(url,{'thisPage':1,'pageAmount':pageAmount}, getData);
+			$.post(url,{'thisPage':1,'pageAmount':pageAmount,'condition':condition}, getData);
 		}
 		
 		function onload(){
@@ -105,13 +128,14 @@ tr th {
 		
 		}
 		
+		//讀取使用者每頁顯示幾筆資料之值
 		$('#pageAmount').on("change", function(){
 			$(this).prop("disabled",true);
 			$('#tbdy').empty();
 			pageAmount = $(this).val();
 			onload();
 			var thisPage = $('#page').val();			
-			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount}, getData);
+			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition}, getData);
 		});
 
 		//判斷是否為null
@@ -139,7 +163,7 @@ tr th {
 						+"<td>"+ "<input type='checkbox' id='"+ obj.id +"' value='"+ obj.credit +"'>" +"<span class='"+ obj.id +"'></span>" +"</td>"
 						+"</tr>");	
 				valid(obj.id, obj.credit);
-				console.log(obj);
+
 				$('#before').prop("disabled", false);
 				$('#after').prop("disabled", false);
 				$('#page').prop("disabled", false);
@@ -179,7 +203,7 @@ tr th {
 			$(this).prop("disabled",true);
 			$('#tbdy').empty();
 			var temp = $(this).val();
-			$.post(url,{'thisPage':temp,'pageAmount':pageAmount},getData);
+			$.post(url,{'thisPage':temp,'pageAmount':pageAmount,'condition':condition},getData);
 		});
 
 		//上一頁
@@ -191,7 +215,7 @@ tr th {
 				
 				$('#page').val(thisPage);
 				$('#tbdy').empty();
-				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount},getData);
+				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
 			}
 		};
 
@@ -204,7 +228,7 @@ tr th {
 				
 				$('#page').val(thisPage);
 				$('#tbdy').empty();
-				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount},getData);
+				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
 			}
 		};
 		

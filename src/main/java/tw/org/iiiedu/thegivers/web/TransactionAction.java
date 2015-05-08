@@ -3,12 +3,15 @@ package tw.org.iiiedu.thegivers.web;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.HibernateException;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 import tw.org.iiiedu.thegivers.service.TransactionService;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TransactionAction extends ActionSupport {
@@ -33,8 +37,10 @@ public class TransactionAction extends ActionSupport {
 	private InputStream inputStream;
 	private int thisPage;
 	private int pageAmount;
+	private String condition;
 	private int thisId;
 	private boolean credit;
+	
 	
 	public TransactionDetailForm getForm() {
 		return form;
@@ -66,6 +72,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPageAmount(int pageAmount) {
 		this.pageAmount = pageAmount;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 
 	public int getThisId() {
@@ -114,15 +128,44 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	//條件收尋筆數
+	public String conditionCount(){
+		int conditionCount;
+		conditionCount = service.getByConditionCount(condition);
+		
+		System.out.println(conditionCount);
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("conditionCount", conditionCount);
+		String jsonStr = JSONObject.toJSONString(map);
+//		Gson gson = new Gson();
+//		String jsonStr = gson.toJson(conditionCount);
+		
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "transactionConditionCount";
+	}
+	
 	//交易明細
-	public String transactionDetail(){
+	public String transactionDetail() {
 		
-		List<TransactionDetailModel> list = service.getPerPage(thisPage, pageAmount);
-		
+		List<TransactionDetailModel> list;
+		if (condition == null) {
+			list = service.getPerPage(thisPage, pageAmount);
+			System.out.println("HAHAHA");
+		} else {
+			System.out.println("condition=" + condition);
+			list = service.getByCondition(condition, thisPage, pageAmount);
+			
+		}
+
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(list);
+
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
 		
-		inputStream = new ByteArrayInputStream(jsonStr.getBytes(StandardCharsets.UTF_8));
 		return "transactionDetail";
 	}
 	
@@ -136,6 +179,11 @@ public class TransactionAction extends ActionSupport {
 			service.creditUncheck(thisId);
 		}
 		
+		return null;
+	}
+	
+	//giver歷史資料
+	public String giverDetail(){
 		return null;
 	}
 	

@@ -51,8 +51,9 @@ public class TransactionDao {
 
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
-		criteria.add(Restrictions.eq("campaignModel", cModel)).add(Restrictions.eq("credit", true)).setProjection(
-				Projections.rowCount());
+		criteria.add(Restrictions.eq("campaignModel", cModel))
+				.add(Restrictions.eq("credit", true))
+				.setProjection(Projections.rowCount());
 		int count = ((Long) criteria.uniqueResult()).intValue();
 
 		return count;
@@ -68,9 +69,37 @@ public class TransactionDao {
 
 		return models;
 	}
+
+	// 取出條件收尋的紀錄筆數
+	public int getByConditionCount(String condition) {
+		Criteria criteria = getSession().createCriteria(
+				TransactionDetailModel.class);
+
+		Boolean b = null;
+		if (condition == "true") {
+			b = true;
+		} else if (condition == "false") {
+			b = false;
+		}
+
+		// 方法一
+		Disjunction or = Restrictions.disjunction();
+		or.add(Restrictions.like("cardType", "%" + condition + "%").ignoreCase());
+		or.add(Restrictions.eq("cardNo", condition));
+		or.add(Restrictions.like("cardHolder", "%" + condition + "%").ignoreCase());
+		or.add(Restrictions.like("cardHolderEmail", "%" + condition + "%").ignoreCase());
+		or.add(Restrictions.eq("credit", b));
+		or.add(Restrictions.like("cardType", "%" + condition + "%").ignoreCase());
+		criteria.add(or).setProjection(Projections.rowCount());
+		int conditionCount = ((Long) criteria.uniqueResult()).intValue();
+		
+		return conditionCount;
+				
+	}
 	
 	//取出條件收尋的紀錄
-	public List<TransactionDetailModel> getByCondition(String condition){
+	public List<TransactionDetailModel> getByCondition(String condition,
+			int pageNum, int pageAmount) {
 		
 		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
 		
@@ -88,7 +117,9 @@ public class TransactionDao {
 		or.add(Restrictions.like("cardHolder", "%"+condition+"%").ignoreCase());
 		or.add(Restrictions.like("cardHolderEmail", "%"+condition+"%").ignoreCase());
 		or.add(Restrictions.eq("credit", b));
-		List<TransactionDetailModel> models = criteria.add(or).addOrder(Order.asc("id")).list();
+		List<TransactionDetailModel> models = criteria.add(or)
+				.setFirstResult((pageNum - 1) * pageAmount)
+				.setMaxResults(pageAmount).addOrder(Order.asc("id")).list();
 
 		
 		//方法二
@@ -125,8 +156,7 @@ public class TransactionDao {
 
 		Criteria criteria = getSession().createCriteria(
 				TransactionDetailModel.class);
-		List<TransactionDetailModel> list = criteria.add(
-				Restrictions.eq("id", id)).list();
+		List<TransactionDetailModel> list = criteria.add(Restrictions.eq("id", id)).list();
 		if (list.size() > 0) {
 			model = list.get(0);
 			return model;
