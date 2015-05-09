@@ -39,7 +39,7 @@ tr th {
 				<button id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
-				<input type="text" id="condition"> <button id="click">查詢</button>
+				<input type="text" id="condition"> <button onclick="search()">查詢</button>
 			</div>
 		</div>
 		
@@ -73,23 +73,20 @@ tr th {
 		var pageCount;
 		var condition;
 		
-		$('#click').on("click",function(){
+		function search(){
 			condition = $('#condition').val();
 			$.post(urlc,{'condition':condition},function(data){
 				
 				data = JSON.parse(data);
 				transactionCount = data.conditionCount;
-				console.log("first   "+transactionCount);
 				load();
 			});
-			
-		})
+		}
 		
 		load();
 		
 		//初始載入頁面
 		function load(){
-			console.log("transactionCount   "+transactionCount);
 			$('#tbdy').empty();
 			$('#pageAmount').empty();
 			$('#page').empty();
@@ -100,15 +97,19 @@ tr th {
 			}
 			
 			//預設一頁五筆
-			$('#pageAmount').val(5);  
+			if(transactionCount>=5){
+				$('#pageAmount').val(5);  
+			}else{
+				$('#pageAmount').val(transactionCount);
+			}
 			pageAmount = $('#pageAmount').val();
 			pageCount = transactionCount/pageAmount;
-	
+			
 			//建立select選單
 			for(var i=1; i<pageCount+1; i++){
 				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
 			}
-			console.log("finish");
+
 			//載入第一頁
 			$.post(url,{'thisPage':1,'pageAmount':pageAmount,'condition':condition}, getData);
 		}
@@ -132,7 +133,7 @@ tr th {
 		$('#pageAmount').on("change", function(){
 			$(this).prop("disabled",true);
 			$('#tbdy').empty();
-			pageAmount = $(this).val();
+// 			pageAmount = $(this).val();
 			onload();
 			var thisPage = $('#page').val();			
 			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition}, getData);

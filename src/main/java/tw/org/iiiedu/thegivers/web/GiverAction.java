@@ -8,9 +8,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.hibernate.HibernateException;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.org.iiiedu.thegivers.form.GiverForm;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 import tw.org.iiiedu.thegivers.service.GiverService;
+import tw.org.iiiedu.thegivers.util.IdCheck;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
@@ -90,6 +88,13 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 
 		context = request.getSession().getServletContext();
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
+
+		//驗證身分證
+		IdCheck check = new IdCheck(form.getId_number() ,form.isGender());
+		if(check.IdVerify() == false){
+			return FAIL;				
+		}
+		
 		model = new GiverModel();
 		log.debug("++++++++++++++++++++++++++++++++++++++++++++giverAction insert++++++++++++++++++++++++++++++++++++++ {}", giverCount);
 		model.setAccount(form.getAccount());
@@ -112,6 +117,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;
 			}
 		}
+		
 		model.setIdNumber(form.getId_number());
 		model.setPasswd(form.getPasswd());
 		model.setTel(form.getTel());
@@ -188,7 +194,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	//抓某頁的資料
 	public String getPerPage(){
 		List<GiverModel> models = service.getPerPage(thisPage);
-		log.debug("                                             {}",models);
+		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX{}",models);
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(models);
 		
@@ -199,11 +205,16 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	//更新資料
 	public String update(){
-		GiverModel temp;
-		temp = (GiverModel) request.getSession().getAttribute("giver");
+		GiverModel temp = (GiverModel) request.getSession().getAttribute("giver");
 //		GiverModel temp = service.getByAccount(temp1.getAccount());
 		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
 
+		//驗證身分證
+		IdCheck check = new IdCheck(form.getId_number() ,form.isGender());
+		if(check.IdVerify() == false){
+			return FAIL;				
+		}
+		
 		model = new GiverModel();
 		
 		model.setId(temp.getId());

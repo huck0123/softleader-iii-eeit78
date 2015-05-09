@@ -103,6 +103,8 @@
 	
 	<script>
 		
+		var url = "/softleader-iii-eeit78/giver/giverSelect!select";
+			
 		function getInformation(){
 			$('#gender').text(gender(${sessionScope.giver.gender}));
 			
@@ -113,7 +115,6 @@
 				$('#getInfo2').prop("checked", true);
 			}
 			
-			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			function getData(data){
 				data = JSON.parse(data);
 				var str = arrayBufferToBase64(data.headshot); 

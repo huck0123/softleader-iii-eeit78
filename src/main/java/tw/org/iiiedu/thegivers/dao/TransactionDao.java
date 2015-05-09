@@ -72,13 +72,12 @@ public class TransactionDao {
 
 	// 取出條件收尋的紀錄筆數
 	public int getByConditionCount(String condition) {
-		Criteria criteria = getSession().createCriteria(
-				TransactionDetailModel.class);
+		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
 
 		Boolean b = null;
-		if (condition == "true") {
+		if (condition.equals("true")) {
 			b = true;
-		} else if (condition == "false") {
+		} else if (condition.equals("false")) {
 			b = false;
 		}
 
@@ -104,9 +103,9 @@ public class TransactionDao {
 		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
 		
 		Boolean b = null;
-		if(condition == "true"){
+		if (condition.equals("true")) {
 			b = true;
-		}else if(condition == "false"){
+		} else if (condition.equals("false")) {
 			b = false;
 		}
 		

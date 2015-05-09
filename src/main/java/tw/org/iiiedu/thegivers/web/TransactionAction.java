@@ -133,13 +133,10 @@ public class TransactionAction extends ActionSupport {
 		int conditionCount;
 		conditionCount = service.getByConditionCount(condition);
 		
-		System.out.println(conditionCount);
 		
 		Map<String, Integer> map = new HashMap<>();
 		map.put("conditionCount", conditionCount);
 		String jsonStr = JSONObject.toJSONString(map);
-//		Gson gson = new Gson();
-//		String jsonStr = gson.toJson(conditionCount);
 		
 		inputStream = new ByteArrayInputStream(
 				jsonStr.getBytes(StandardCharsets.UTF_8));
@@ -151,11 +148,9 @@ public class TransactionAction extends ActionSupport {
 	public String transactionDetail() {
 		
 		List<TransactionDetailModel> list;
-		if (condition == null) {
+		if (condition == null || condition.isEmpty()) {
 			list = service.getPerPage(thisPage, pageAmount);
-			System.out.println("HAHAHA");
 		} else {
-			System.out.println("condition=" + condition);
 			list = service.getByCondition(condition, thisPage, pageAmount);
 			
 		}
