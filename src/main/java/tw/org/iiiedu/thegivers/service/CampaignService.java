@@ -62,9 +62,7 @@ public class CampaignService {
 	}
 
 	public boolean update(CampaignModel cm) {
-//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.update(cm); 
-//		tx.commit();
 		if (b) {
 			return true;
 		} else {

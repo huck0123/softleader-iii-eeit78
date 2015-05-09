@@ -37,10 +37,6 @@ public class CampaignAction extends ActionSupport implements
 	@Autowired
 	private TransactionService transactionService;
 
-
-
-	
-
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -55,37 +51,35 @@ public class CampaignAction extends ActionSupport implements
 
 	public String selectByAllCondition() throws Exception {
 
-
 		System.out.println(campaignForm.getId());
-		if(campaignForm.getPageNum() == null){campaignForm.setPageNum(0);}
-		if(campaignForm.getPageSize() == null){campaignForm.setPageSize(6);}
+		if (campaignForm.getPageNum() == null) {
+			campaignForm.setPageNum(0);
+		}
+		if (campaignForm.getPageSize() == null) {
+			campaignForm.setPageSize(6);
+		}
 		List campaigns = campaignService.getByAllCondition(campaignForm);
 
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);
 
-		
 		inputStream = new ByteArrayInputStream(
 				json.getBytes(StandardCharsets.UTF_8));
-		
+
 		return "selectByAllCondition";
 	}
-	
-	public String selectByAllConditionCount() throws Exception {
 
+	public String selectByAllConditionCount() throws Exception {
 
 		Long count = campaignService.getByAllConditionCount(campaignForm);
 
+		inputStream = new ByteArrayInputStream(count.toString().getBytes(
+				StandardCharsets.UTF_8));
 
-		
-		inputStream = new ByteArrayInputStream(
-				count.toString().getBytes(StandardCharsets.UTF_8));
-		
 		return "selectByAllConditionCount";
 	}
 
 	public String insert() throws Exception {
-
 
 		CampaignModel cm = new CampaignModel();
 		RaiserModel rm = (RaiserModel) request.getSession().getAttribute(
@@ -104,24 +98,53 @@ public class CampaignAction extends ActionSupport implements
 		cm.setType(campaignForm.getType());
 		cm.setVedioUrl(campaignForm.getVedioUrl());
 
-
 		campaignService.insert(cm);
 		return "insert";
 	}
 
-	public String selectGiverCountByCampaignId(){
-		
-Integer count = transactionService.getCountByCampaignId(campaignForm.getId());
+	public String selectGiverCountByCampaignId() {
 
+		Integer count = transactionService.getCountByCampaignId(campaignForm
+				.getId());
 
-		
-		inputStream = new ByteArrayInputStream(
-				count.toString().getBytes(StandardCharsets.UTF_8));
-		
+		inputStream = new ByteArrayInputStream(count.toString().getBytes(
+				StandardCharsets.UTF_8));
+
 		return "selectCampaignGiverCount";
 	}
-	
-	
+
+	public String ban() {
+		if (campaignForm == null) {
+			return "ban";
+		}
+		List<String> list = campaignForm.getCheckbox();
+		if (list.size() > 0) {
+			for (int i = 0; i < list.size(); i++) {
+				CampaignModel cm = campaignService.getById(Integer
+						.parseInt(list.get(i)));
+				cm.setValid(false);
+				campaignService.update(cm);
+			}
+		}
+		return "ban";
+	}
+
+	public String unban() {
+		if (campaignForm == null) {
+			return "unban";
+		}
+		List<String> list = campaignForm.getCheckbox();
+		if (list.size() > 0) {
+			for (int i = 0; i < list.size(); i++) {
+				CampaignModel cm = campaignService.getById(Integer
+						.parseInt(list.get(i)));
+				cm.setValid(true);
+				campaignService.update(cm);
+			}
+		}
+		return "unban";
+	}
+
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

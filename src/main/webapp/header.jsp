@@ -65,6 +65,8 @@
 										</c:if>
 										<c:if test="${admin != null}">
 										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
+										<li><a href="<c:url value='/raiser/raiserShow'/>">管理團體資訊</a></li>
+										<li><a href="<c:url value='/campaign/campaignAdmin'/>">管理活動</a></li>
 										<li><a href="<c:url value='/donate/transactionDetail'/>">顯示所有交易紀錄</a></li>
 										</c:if>
 										<li class="divider"></li>
@@ -194,6 +196,7 @@
 										<c:if test="${admin != null}">
 										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
 										<li><a href="<c:url value='/raiser/raiserShow'/>">管理團體資訊</a></li>
+										<li><a href="<c:url value='/campaign/campaignAdmin'/>">管理活動</a></li>
 										<li><a href="<c:url value='/donate/transactionDetail'/>">顯示所有交易紀錄</a></li>
 										</c:if>
 										<li class="divider"></li>
