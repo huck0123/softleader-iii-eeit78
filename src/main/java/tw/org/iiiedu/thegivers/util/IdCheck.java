@@ -1,5 +1,6 @@
 package tw.org.iiiedu.thegivers.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,6 +77,5 @@ public class IdCheck {
 			return false;
 		}
 	}
-
 
 }

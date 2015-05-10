@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.hibernate.HibernateException;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,13 +203,26 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public String conditionCount(){
 		int count = service.getByConditionCount(condition);
 		
+		Map<String,Integer> map = new HashMap<>();
+		map.put("condition", count);
 		
-		return null;
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "giverDetailCount";
 	}
 	
 	//捐款人資料
 	public String giverDetail(){
-		return null;
+		List<GiverModel> list = service.getByCondition(condition, thisPage, pageAmount);
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(list);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "giverDetail";
 	}
 	
 	//Select All  ----deprecated----

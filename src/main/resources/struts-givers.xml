@@ -19,14 +19,24 @@
 		</action>
 		
 		<action name="giverSelect" class="giverAction">
-			<result type="stream" name="selectAll">
-				<param name="contentType">text/html</param>
-				<param name="inputName">inputStream</param>
-			</result>
 			<result type="stream" name="select">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result type="stream" name="conditionCount">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<result type="stream" name="giverDetail">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<!-- 		deprecated -->
+			<result type="stream" name="selectAll">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<!-- 		deprecated -->
 			<result type="stream" name="getPerPage" >
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
