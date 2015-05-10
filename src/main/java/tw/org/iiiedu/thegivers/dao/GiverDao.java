@@ -3,9 +3,9 @@ package tw.org.iiiedu.thegivers.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -78,7 +78,7 @@ public class GiverDao {
 		return count;
 	}
 
-	// 頁次 pageNum為第幾頁,一頁5筆
+	// 頁次 pageNum為第幾頁,一頁5筆  -----deprecated-----
 	public List<GiverModel> getPerPage(int pageNum) {
 		Criteria criteria = getSession().createCriteria(GiverModel.class)
 				.setFirstResult((pageNum - 1) * 5).setMaxResults(5);
@@ -86,14 +86,59 @@ public class GiverDao {
 		return models;
 	}
 
-	// 名字收尋 unfinish
-	// public GiverModel getByName(String name){
-	// Criteria criteria = getSession().createCriteria(GiverModel.class);
-	// criteria.add(Restrictions.eq("account", bean.getAccount()).ignoreCase());
-	// GiverModel model = (GiverModel) criteria.list().iterator().next();
-	//
-	// }
-
+	//條件收尋筆數
+	public int getByConditionCount(String condition, int pageNum, int pageAmount){
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		
+		Boolean b = null;
+		if(condition.equals("true")){
+			b = true;
+		}else if(condition.equals("false")){
+			b = false;
+		}
+		
+		Disjunction or = Restrictions.disjunction();
+		or.add(Restrictions.like("account", "%"+condition+"%"));
+		or.add(Restrictions.like("name", "%"+condition+"%"));
+		or.add(Restrictions.like("familyName", "%"+condition+"%"));
+		or.add(Restrictions.like("address", "%"+condition+"%"));
+		or.add(Restrictions.like("email", "%"+condition+"%"));
+		or.add(Restrictions.eq("tel", condition));
+		or.add(Restrictions.eq("valid", b));
+	
+		criteria.add(or).setProjection(Projections.rowCount());
+		int conditionCount = ((Long) criteria.uniqueResult()).intValue();
+		return conditionCount;
+		
+	}
+	
+	//條件收尋
+	public List<GiverModel> getByCondition(String condition, int pageNum, int pageAmount){
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		
+		Boolean b = null;
+		if(condition.equals("true")){
+			b = true;
+		}else if(condition.equals("false")){
+			b = false;
+		}
+		
+		Disjunction or = Restrictions.disjunction();
+		or.add(Restrictions.like("account", "%"+condition+"%"));
+		or.add(Restrictions.like("name", "%"+condition+"%"));
+		or.add(Restrictions.like("familyName", "%"+condition+"%"));
+		or.add(Restrictions.like("address", "%"+condition+"%"));
+		or.add(Restrictions.like("email", "%"+condition+"%"));
+		or.add(Restrictions.eq("tel", condition));
+		or.add(Restrictions.eq("valid", b));
+		
+		List<GiverModel> models = criteria.add(or)
+				.setFirstResult((pageNum-1) * pageAmount)
+				.setMaxResults(pageAmount).addOrder(Order.asc("id")).list();
+		
+		return models;
+	}
+	
 	// 更新資料
 	public void update(GiverModel bean) {
 		getSession().update(bean);
@@ -105,62 +150,62 @@ public class GiverDao {
 		getSession().delete(accouont);
 	}
 
-	// 條件收尋筆數
-	public int getByAllConditionCount(String account, String name,
-			String familyName, String tel, String email) {
-		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		if (account != null) {
-			criteria.add(Restrictions.like("account", "%" + account + "%")
-					.ignoreCase());
-		}
-		if (name != null) {
-			criteria.add(Restrictions.eq("name", name));
-		}
-		if (familyName != null) {
-			criteria.add(Restrictions.eq("familyName", familyName));
-		}
-		if (tel != null) {
-			criteria.add(Restrictions.eq("tel", tel));
-		}
-		if (email != null) {
-			criteria.add(Restrictions.eq("email", email));
-		}
-
-		int count = ((Long) criteria.setProjection(
-				Projections.rowCount()).uniqueResult()).intValue();
-
-		return count;
-	}
-
-	// 條件收尋
-	public List<GiverModel> getByAllCondition(String account, String name,
-			String familyName, String tel, String email, Integer pageNum,
-			Integer pageSize) {
-
-		Criteria criteria = getSession().createCriteria(GiverModel.class);
-		if (account != null) {
-			criteria.add(Restrictions.like("account", "%" + account + "%")
-					.ignoreCase());
-		}
-		if (name != null) {
-			criteria.add(Restrictions.eq("name", name));
-		}
-		if (familyName != null) {
-			criteria.add(Restrictions.eq("familyName", familyName));
-		}
-		if (tel != null) {
-			criteria.add(Restrictions.eq("tel", tel));
-		}
-		if (email != null) {
-			criteria.add(Restrictions.eq("email", email));
-		}
-
-		// criteria.add(Restrictions.eq("show", true));
-
-		List<GiverModel> models = criteria.setFirstResult(pageNum * pageSize)
-				.setMaxResults(pageSize).list();
-
-		return models;
-	}
+//	// 條件收尋筆數   -----deprecated-----
+//	public int getByAllConditionCount(String account, String name,
+//			String familyName, String tel, String email) {
+//		Criteria criteria = getSession().createCriteria(GiverModel.class);
+//		if (account != null) {
+//			criteria.add(Restrictions.like("account", "%" + account + "%")
+//					.ignoreCase());
+//		}
+//		if (name != null) {
+//			criteria.add(Restrictions.eq("name", name));
+//		}
+//		if (familyName != null) {
+//			criteria.add(Restrictions.eq("familyName", familyName));
+//		}
+//		if (tel != null) {
+//			criteria.add(Restrictions.eq("tel", tel));
+//		}
+//		if (email != null) {
+//			criteria.add(Restrictions.eq("email", email));
+//		}
+//
+//		int count = ((Long) criteria.setProjection(
+//				Projections.rowCount()).uniqueResult()).intValue();
+//
+//		return count;
+//	}
+//
+//	// 條件收尋    -----deprecated-----
+//	public List<GiverModel> getByAllCondition(String account, String name,
+//			String familyName, String tel, String email, Integer pageNum,
+//			Integer pageSize) {
+//
+//		Criteria criteria = getSession().createCriteria(GiverModel.class);
+//		if (account != null) {
+//			criteria.add(Restrictions.like("account", "%" + account + "%")
+//					.ignoreCase());
+//		}
+//		if (name != null) {
+//			criteria.add(Restrictions.eq("name", name));
+//		}
+//		if (familyName != null) {
+//			criteria.add(Restrictions.eq("familyName", familyName));
+//		}
+//		if (tel != null) {
+//			criteria.add(Restrictions.eq("tel", tel));
+//		}
+//		if (email != null) {
+//			criteria.add(Restrictions.eq("email", email));
+//		}
+//
+//		// criteria.add(Restrictions.eq("show", true));
+//
+//		List<GiverModel> models = criteria.setFirstResult(pageNum * pageSize)
+//				.setMaxResults(pageSize).list();
+//
+//		return models;
+//	}
 
 }

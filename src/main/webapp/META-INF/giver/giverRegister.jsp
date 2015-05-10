@@ -105,7 +105,7 @@ b {
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="送出">
+							<td><input type="submit" value="送出" id="submit">
 								<input type="reset" value="清除" ></td>
 						</tr>
 					</table>
@@ -122,23 +122,33 @@ b {
 
 	//驗證帳號
 	$('input[name="form.account"]').on("blur", function(){
+		$('#account').empty();
 		var thisAccount = $(this).val();
 		$.post(url, {'thisAccount' : thisAccount}, function(data) {
 			data = JSON.parse(data);
 			if (data != null) {
+				$('#submit').prop("disabled",true);
 				$('#account').text("帳號已被註冊");
+				return;
 			}
+			$('#submit').prop("disabled",false);
+			
 		});
 	});
 
 	//驗證手機
 	$('input[name="form.tel"]').on("blur", function(){
+		$('#tel').empty();
 		var tel = $(this).val();
 		//驗證是否為10個整數
-		re = /[\d]{10}/;
+		re = /^[\d]{10}$/;
 		if(!re.test(tel)){
+			$('#submit').prop("disabled",true);
 			$('#tel').text("請輸入正確的手機號碼");
+			return;
 		}
+		$('#submit').prop("disabled",false);
+		
 	});
 	
 	//驗證身分
@@ -146,6 +156,8 @@ b {
 
 	//身分證驗證
 	function checkId(){
+		
+		$('#idNumber').empty();
 		var Id = $(this).val();
 		var str="ABCDEFGHJKLMNPQRSTUVXYWZIO";
 		A1 = new Array(1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3);
@@ -154,14 +166,16 @@ b {
 		var sum = 0;
 		Id = Id.toUpperCase();
 
-		if(Id.length != 10){
+		if(Id.length != 10 ){
+			$('#submit').prop("disabled",true);
 			$('#idNumber').text("請輸入正確的身分證");
-			return false;
+			return;
 		}
 		
 		if(str.indexOf(Id.charAt(0)) == -1){
+			$('#submit').prop("disabled",true);
 			$('#idNumber').text("請輸入正確的身分證");
-			return false;
+			return;
 		}
 		sum = A1[str.indexOf(Id.charAt(0))];
 		sum += A2[str.indexOf(Id.charAt(0))] * arr[0];
@@ -170,9 +184,11 @@ b {
 			sum += Id.charAt(i)*arr[i];
 		}
 		if(sum%10 != 0){
+			$('#submit').prop("disabled",true);
 			$('#idNumber').text("請輸入正確的身分證");
+			return;
 		}
-		
+		$('#submit').prop("disabled",false);
 	}
 
 	

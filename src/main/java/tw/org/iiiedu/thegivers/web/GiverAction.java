@@ -178,7 +178,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "select";
 	}
 
-	//Select All
+	//Select All  ----deprecated----
 	public String selectAll() throws UnsupportedEncodingException{
 		List<GiverModel> list = service.getAll();
 		
@@ -191,7 +191,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		
 	}
 
-	//抓某頁的資料
+	//抓某頁的資料     -----deprecated-----
 	public String getPerPage(){
 		List<GiverModel> models = service.getPerPage(thisPage);
 		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX{}",models);

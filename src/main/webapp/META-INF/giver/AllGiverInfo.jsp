@@ -141,6 +141,9 @@ tr th {
 		//選擇第幾頁
 		$('select').on("change", function(){
 			$(this).prop("disabled",true);
+			$('#before').prop("disabled", true);
+			$('#after').prop("disabled", true);
+			
 			$('#tbdy').empty();
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp},getData);
@@ -150,6 +153,9 @@ tr th {
 		//上一頁
 		function before(){
 			$('#before').prop("disabled", true);
+			$('#after').prop("disabled", true);
+			$('#select').prop("disabled", true);
+			
 			var thisPage = $('select').val();
 			if(thisPage > 1){
 				thisPage--;
@@ -163,12 +169,15 @@ tr th {
 		//下一頁
 		function after() {
 			$('#after').prop("disabled", true);
+			$('#before').prop("disabled", true);
+			$('#select').prop("disabled", true);
+			
 			var thisPage = $('select').val();
 			if(thisPage < giverCount ){
 				thisPage++;
 				
 				$('select').val(thisPage);
-				$('#tbdy').children().remove();
+				$('#tbdy').empty();
 				$.post(url,{'thisPage':thisPage},getData);
 			}
 		};

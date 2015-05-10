@@ -61,25 +61,38 @@ public class GiverService {
 		return count;
 	}
 	
-	//頁次
+	//頁次   -----deprecated-----
 	public List<GiverModel> getPerPage(int pageNum){
 		List<GiverModel> result = giverDao.getPerPage(pageNum);
 		return result;
 	}
 	
 	//條件收尋筆數
-	public int getByAllConditionCount(String account, String name, String familyName
-			, String tel, String email){
-		int count = giverDao.getByAllConditionCount(account, name, familyName, tel, email);
+	public int getByConditionCount(String condition, int pageNum, int pageAmount){
+		int count = giverDao.getByConditionCount(condition, pageNum, pageAmount);
 		return count;
 	}
 	
 	//條件收尋
-	public List<GiverModel> getByAllCondition(String account, String name, String familyName
-			, String tel, String email, Integer pageNum, Integer pageSize){
-		List<GiverModel> models = giverDao.getByAllCondition(account, name, familyName,  tel, email, pageNum, pageSize);
+	public List<GiverModel> getByCondition(String condition, int pageNum, int pageAmount){
+		List<GiverModel> models = giverDao.getByCondition(condition, pageNum, pageAmount);
 		return models;
 	}
+	
+	
+//	//條件收尋筆數    -----deprecated-----
+//	public int getByAllConditionCount(String account, String name, String familyName
+//			, String tel, String email){
+//		int count = giverDao.getByAllConditionCount(account, name, familyName, tel, email);
+//		return count;
+//	}
+//	
+//	//條件收尋    -----deprecated-----
+//	public List<GiverModel> getByAllCondition(String account, String name, String familyName
+//			, String tel, String email, Integer pageNum, Integer pageSize){
+//		List<GiverModel> models = giverDao.getByAllCondition(account, name, familyName,  tel, email, pageNum, pageSize);
+//		return models;
+//	}
 	
 	//更新資料
 	public void update(GiverModel model){
