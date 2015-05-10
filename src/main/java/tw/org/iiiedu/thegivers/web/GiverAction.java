@@ -42,6 +42,8 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	private GiverForm form;
 	private GiverModel model;
 	private int thisPage;
+	private int pageAmount;
+	private String condition; 
 	private String thisAccount;
 	private boolean valid;
 
@@ -65,6 +67,22 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		this.thisPage = thisPage;
 	}
 	
+	public int getPageAmount() {
+		return pageAmount;
+	}
+
+	public void setPageAmount(int pageAmount) {
+		this.pageAmount = pageAmount;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	public String getThisAccount() {
 		return thisAccount;
 	}
@@ -178,6 +196,19 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "select";
 	}
 
+	//捐款人條件收尋筆數
+	public String conditionCount(){
+		int count = service.getByConditionCount(condition);
+		
+		
+		return null;
+	}
+	
+	//捐款人資料
+	public String giverDetail(){
+		return null;
+	}
+	
 	//Select All  ----deprecated----
 	public String selectAll() throws UnsupportedEncodingException{
 		List<GiverModel> list = service.getAll();

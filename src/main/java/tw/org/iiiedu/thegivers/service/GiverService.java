@@ -68,8 +68,8 @@ public class GiverService {
 	}
 	
 	//條件收尋筆數
-	public int getByConditionCount(String condition, int pageNum, int pageAmount){
-		int count = giverDao.getByConditionCount(condition, pageNum, pageAmount);
+	public int getByConditionCount(String condition){
+		int count = giverDao.getByConditionCount(condition);
 		return count;
 	}
 	

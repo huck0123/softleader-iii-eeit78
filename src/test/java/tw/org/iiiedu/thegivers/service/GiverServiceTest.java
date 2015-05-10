@@ -37,7 +37,7 @@ public class GiverServiceTest extends GenericTest {
 	
 	@Test
 	public void testGetByCondition(){
-		List<GiverModel> list = giverService.getByCondition("true", 1, 30);
+		List<GiverModel> list = giverService.getByCondition("0912146789", 1, 30);
 		Iterator<GiverModel> i = list.iterator();
 		while(i.hasNext()){
 			System.out.println(i.next());
@@ -46,7 +46,7 @@ public class GiverServiceTest extends GenericTest {
 	
 	@Test
 	public void testGetByConditionCount(){
-		int i = giverService.getByConditionCount("true", 1, 10);
+		int i = giverService.getByConditionCount("0912146789", 1, 10);
 		System.out.println(i);
 	}
 	

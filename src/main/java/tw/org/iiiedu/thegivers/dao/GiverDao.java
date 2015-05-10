@@ -87,7 +87,7 @@ public class GiverDao {
 	}
 
 	//條件收尋筆數
-	public int getByConditionCount(String condition, int pageNum, int pageAmount){
+	public int getByConditionCount(String condition){
 		Criteria criteria = getSession().createCriteria(GiverModel.class);
 		
 		Boolean b = null;
