@@ -2,7 +2,9 @@ package tw.org.iiiedu.thegivers.form;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CampaignForm {
 	
@@ -37,6 +39,18 @@ public class CampaignForm {
 	private Integer pageNum;
 	
 	private Integer pageSize;
+	
+	private List<String> checkbox;
+	
+	
+
+	public List<String> getCheckbox() {
+		return checkbox;
+	}
+
+	public void setCheckbox(List<String> checkbox) {
+		this.checkbox = checkbox;
+	}
 
 	public Integer getPageNum() {
 		return pageNum;
