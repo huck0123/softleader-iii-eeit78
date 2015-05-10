@@ -23,7 +23,7 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
-			<result type="stream" name="conditionCount">
+			<result type="stream" name="giverDetailCount">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>

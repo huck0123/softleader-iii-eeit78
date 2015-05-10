@@ -46,7 +46,7 @@ public class GiverServiceTest extends GenericTest {
 	
 	@Test
 	public void testGetByConditionCount(){
-		int i = giverService.getByConditionCount("0912146789", 1, 10);
+		int i = giverService.getByConditionCount("0912146789");
 		System.out.println(i);
 	}
 	

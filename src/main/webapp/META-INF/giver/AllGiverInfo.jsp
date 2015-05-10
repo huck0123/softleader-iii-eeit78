@@ -32,10 +32,21 @@ tr th {
 	<jsp:include page="../../header.jsp" />
 
 	<div class="container panel alert">
-		<button id="before" onclick="before()">上一頁</button>
-		<select></select>
-		<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
-		<button id="after" onclick="after()">下一頁</button>
+		<div class="row">
+			<div class="col-md-3">
+				<select id="pageAmount"></select>顯示筆數(預設5筆)
+			</div>
+			<div class="col-md-6">				
+				<button id="before" onclick="before()">上一頁</button>
+				<select id="page"></select>
+				<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
+				<button id="after" onclick="after()">下一頁</button>
+			</div>
+			<div class="col-md-3">
+				<input type="text" id="condition"> <button onclick="search()">查詢</button>
+			</div>
+		</div>
+
 
 		<table class="table table-bordered">
 			<tr>
@@ -63,20 +74,86 @@ tr th {
 
 	<script>
 		
-		var giverCount = ${applicationScope.giverCount}/5;
+		var giverCount = ${applicationScope.giverCount};
 // 		console.log(${applicationScope.giverCount});
 	
-		var url = "${pageContext.request.contextPath}/giver/giverSelect!getPerPage";
+		var url = "${pageContext.request.contextPath}/giver/giverSelect!giverDetail";
+		var urlc = "${pageContext.request.contextPath}/giver/giverSelect!conditionCount";
 		var urlv = "${pageContext.request.contextPath}/giver/giverAction!valid";
 // 		console.log(${pageContext.request.contextPath})
+		var pageAmount;
+		var pageCount;
+		var condition = null;
 		
-		//建立select選單
-		for(var i=1; i<giverCount+1; i++){
-			$('select').append("<option value='"+ i +"'>"+ i +"</option>");	
+// 		//抓取條件收尋總筆數
+// 		$.post(urlc,{'condition':condition}, function(data){
+// 			data = JSON.parse(data);
+// 			pageAmount = data.condition;
+// 			console.log("bb"+pageAmount);
+// 		});
+
+		//讀取一頁顯示幾筆
+		$('#pageAmount').on("change", function(){
+			pageAmount = $(this).val();
+			onload();
+		});
+			
+		function onload(){
+			$('#tbdy').empty();
+			$('#page').empty();
+			
+			pageCount = giverCount/pageAmount;
+			
+			//建立page選單
+			for(var i=1; i<pageCount+1; i++){
+				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			}
+			thisPage = $('#page').val();
+			$.post(url, {'thisPage':thisPage, 'pageAmount':pageAmount, 'condition':condition},getData);
 		}
 		
-		//載入第一頁
-		$.post(url,{'thisPage':1},getData);
+		
+		load();
+		
+		function search(){
+			condition = $('#condition').val();	
+			$.post(urlc,{'condition':condition}, function(data){
+				data = JSON.parse(data);
+				giverCount = data.condition;
+				console.log("search"+giverCount);
+				load();
+			});
+		}
+		
+		
+		//初始載入
+		function load(){
+			$('#tbdy').empty();
+			$('#page').empty();
+			$('#pageAmount').empty();
+			
+			//建立一頁顯示幾筆選單
+			for(var i=1; i<=giverCount; i++){
+				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
+			}
+			
+			pageAmount = $('#pageAmount').val();
+			console.log("aa"+pageAmount)
+			pageCount = giverCount/pageAmount;
+			console.log(pageCount);
+			//建立page選單
+			for(var i=1; i<pageCount+1; i++){
+				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			}
+			
+			//載入第一頁
+			$.post(url,{'thisPage':1, 'pageAmount':pageAmount, 'condition':condition},getData);
+		}
+		
+		
+		
+		
+		
 		
 		
 		
@@ -98,7 +175,7 @@ tr th {
 						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
 // 						+ "<td>"+ obj.birth +"</td>" 
 						+ "<td>"+ "<input type='checkbox' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
-						+"</tr>");	
+						+ "</tr>");	
 				valid(obj.account, obj.valid);
 				
 				if(obj.headshot != null){
@@ -109,7 +186,7 @@ tr th {
 			
 			$('#before').prop("disabled", false);
 			$('#after').prop("disabled", false);
-			$('select').prop("disabled", false);
+			$('#page').prop("disabled", false);
 		};
 		
 		// 系統管理員管理giver驗證
@@ -139,30 +216,30 @@ tr th {
 		}
 		
 		//選擇第幾頁
-		$('select').on("change", function(){
+		$('#page').on("change", function(){
 			$(this).prop("disabled",true);
 			$('#before').prop("disabled", true);
 			$('#after').prop("disabled", true);
 			
 			$('#tbdy').empty();
 			var temp = $(this).val();
-			$.post(url,{'thisPage':temp},getData);
-// 			console.log(temp);
+			$.post(url,{'thisPage':temp, 'pageAmount':pageAmount, 'condition':condition},getData);
+			console.log(temp);
 		});
 		
 		//上一頁
 		function before(){
 			$('#before').prop("disabled", true);
 			$('#after').prop("disabled", true);
-			$('#select').prop("disabled", true);
+			$('#page').prop("disabled", true);
 			
-			var thisPage = $('select').val();
+			var thisPage = $('#page').val();
 			if(thisPage > 1){
 				thisPage--;
 				
-				$('select').val(thisPage);
+				$('#page').val(thisPage);
 				$('#tbdy').empty();
-				$.post(url,{'thisPage':thisPage},getData);
+				$.post(url,{'thisPage':thisPage, 'pageAmount':pageAmount, 'condition':condition},getData);
 			}
 		};
 		
@@ -170,15 +247,15 @@ tr th {
 		function after() {
 			$('#after').prop("disabled", true);
 			$('#before').prop("disabled", true);
-			$('#select').prop("disabled", true);
+			$('#page').prop("disabled", true);
 			
-			var thisPage = $('select').val();
-			if(thisPage < giverCount ){
+			var thisPage = $('#page').val();
+			if(thisPage < pageCount ){
 				thisPage++;
 				
-				$('select').val(thisPage);
+				$('#page').val(thisPage);
 				$('#tbdy').empty();
-				$.post(url,{'thisPage':thisPage},getData);
+				$.post(url,{'thisPage':thisPage, 'pageAmount':pageAmount, 'condition':condition},getData);
 			}
 		};
 		
