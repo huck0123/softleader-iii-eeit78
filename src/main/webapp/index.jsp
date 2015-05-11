@@ -138,6 +138,20 @@ padding:0px 30px 0px 30px;
 			</div>
 		</div>
 	</div>
+	
+	<div class="outer-wrapper">
+		<div class="inner-wrapper ">
+
+			<div id="raiserDiv" class="container" style="height:100%; border-bottom: 1px solid #EEEEEE">
+				<div class="blank-space10"></div>
+				<h2>關於我們</h2>
+				<div class="blank-space10"></div>
+				<div id="raiserRow" class="row">
+				<h4>TheGivers 致力於提供公益團體與民眾一個小額捐款的平台，讓每一分錢都可以用在需要的地方。</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -149,7 +163,8 @@ padding:0px 30px 0px 30px;
 
 <script>
 	loadCampaign();
-
+	loadRaiser();
+	
 	function loadCampaign() {
 
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
@@ -217,7 +232,8 @@ padding:0px 30px 0px 30px;
 	}
 	
 	
-	$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!selectAll", getData);
+	function loadRaiser(){
+		$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!selectAll", getData);
 
 		function getData(raisers) {
 			raisers = JSON.parse(raisers);
@@ -234,6 +250,9 @@ padding:0px 30px 0px 30px;
 				
 							});
 		}
+	}
+	
+	
 </script>
 
 </html>
