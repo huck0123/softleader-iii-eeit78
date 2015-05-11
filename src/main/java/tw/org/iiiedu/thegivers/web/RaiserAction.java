@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +73,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -126,8 +127,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String selectAll() {
 		List<RaiserModel> list = raiserService.getAll();
+		List<RaiserModel> list1 = new ArrayList<RaiserModel>();
+		for (RaiserModel rm : list) {
+			if (rm.isValid() != false) {
+				list1.add(rm);
+			}
+		}
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(list);
+		String jsonString = gson.toJson(list1);
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";
@@ -166,8 +173,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			rm.setVideoUrl(raiserForm.getVideoUrl());
 		}
 		try {
-			if (raiserForm.getLogo() != null) 
-			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+			if (raiserForm.getLogo() != null)
+				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -194,22 +201,28 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		boolean result = raiserService.valid(account, lock);
 		return null;
 	}
+	
+	public String getByAllConditionCount(){
+		Integer resultCount = raiserService.getByAllConditionCount(account,
+				name, contactPerson , lock);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(resultCount);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
 
-	public String  getByCondition(){
-		System.out.println(name);
-		System.out.println();
-		System.out.println();
-		Integer resultCount =raiserService.getByAllConditionCount(account, name, contactPerson);
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		List<RaiserModel> list = raiserService.getByAllCondition(account, name, contactPerson, page, 3);
+	public String getByCondition() {
+		System.out.println(account + "," + name + "," + contactPerson);
+		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
+				contactPerson, lock ,page,3);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(list);
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
-//		session.removeAttribute("resultCount");
-		session.setAttribute("resultCount", resultCount);
 		return "select";
 	}
+
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

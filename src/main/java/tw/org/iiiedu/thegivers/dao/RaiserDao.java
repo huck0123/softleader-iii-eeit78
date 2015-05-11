@@ -94,7 +94,7 @@ public class RaiserDao {
 	public List<RaiserModel> getAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class);
-		List<RaiserModel> result = criteria.list();
+		List<RaiserModel> result = criteria.addOrder(Order.asc("id")).list();
 		return result;
 	}
 
@@ -115,7 +115,7 @@ public class RaiserDao {
 	}
 
 	public Integer getByAllConditionCount(String account, String name,
-			String contactPerson) {
+			String contactPerson , boolean valid) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class);
 		if (account != null) {
@@ -128,15 +128,16 @@ public class RaiserDao {
 		if (contactPerson != null) {
 			criteria.add(Restrictions.like("contactPerson", "%" + contactPerson
 					+ "%"));
+		}if (!valid) {
+			criteria.add(Restrictions.eq("valid", true));
 		}
 		Integer conut = (int) (long) criteria.setProjection(Projections.rowCount())
 				.uniqueResult();
-
 		return conut;
 	}
 
 	public List<RaiserModel> getByAllCondition(String account, String name,
-			String contactPerson, Integer page, Integer pageSize) {
+			String contactPerson , boolean valid , Integer page, Integer pageSize) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class);
 		if (account != null) {
@@ -149,9 +150,9 @@ public class RaiserDao {
 		if (contactPerson != null) {
 			criteria.add(Restrictions.like("contactPerson", "%" + contactPerson
 					+ "%"));
+		}if (!valid) {
+			criteria.add(Restrictions.eq("valid", true));
 		}
-		// criteria.add(Restrictions.eq("show", true));
-
 		List list = criteria
 				.setFirstResult((page - 1) * pageSize)
 				.setMaxResults(pageSize).addOrder(Order.desc("id")).list();

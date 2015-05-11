@@ -38,17 +38,13 @@ body{
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
-				團體名稱 : 
-				<input type="text" size="20" placeholder="依名稱搜尋" id="textSch" class="searchtext"> 
+				<label for="textSch">團體名稱 :</label> 
+				<input type="text" size="20" placeholder="依名稱搜尋" value="" id="textSch" class="searchtext"> 
+				<input type="checkbox" name="chkbox" id="ChkBox" value="true" checked="checked"/>:包含黑名單
+			</div>
+			<div class="col-md-2">
 				<input type="button" name="searchbtn" value="查詢" id="btnSch" class="btn btn-default">
 			</div>
-			<div class="col-md-4">
-				<input type="button" name="clearbtn" value="清除查詢結果" id="btnClr"
-					class="btn btn-default"> <input type="button"
-					name="btnValidSch" value="依黑名單查詢" id="btnValidSch"
-					class="btn btn-default">
-			</div>
-			<div class="col-md-1"></div>
 		</div>
 		<br>
 		<div class="row">
@@ -68,18 +64,27 @@ body{
 				</table>
 			</div>
 			<div class="col-md-1"></div>
+		</div >
+		<div id="btnn" class="row">
+			<div class="col-md-5" style="text-align:right">
+				<input type="button" name="forward" value="上一頁" id="btnf"> 
+			</div>
+			<div class="col-md-1" style="text-align:right">
+				<input type="tel" name="now" size="1" value="1" id="btnw">
+			</div>
+			<div class="col-md-1" id="divMax" style="text-align:left"></div>
+			<div class="col-md-2" style="text-align:left">
+				<input type="button" name="next" value="下一頁" id="btnx"> 
+			</div>
+			<div class="col-md-3" style="text-align:left">
+				<a href="<c:url value='/index.jsp' />">回首頁</a> 
+			</div>
 		</div>
-		<div id="detail"></div>
-		<div id="btnn">
-			<input type="button" name="forward" value="上一頁" id="btnf"> <input
-				type="tel" name="now" size="1" value="1" id="btnw"> <div id="divMax"></div>
-				<input type="button" name="next" value="下一頁" id="btnx">
-				 <a	href="<c:url value='/index.jsp' />">回首頁</a>
-		</div>
+		<div id="detail"></div><br>
 	</div>
 	<script>
 		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!getByCondition";
-		$.post(url, getData);
+		$.post(url, {'lock' : $('#ChkBox').val()} ,getData);
 
 		var page = $("#btnw").val();
 		var Max = Math.ceil("${raiserCount}" / 3);
@@ -89,7 +94,6 @@ body{
 		//以下分頁用
 		//用數字輸入可搜尋頁數
 		$("#btnw").change(function() {
-			console.log("change")
 			if ($("#btnw").val() <= Max && $("#btnw").val() > 0) {
 				page = $("#btnw").val();
 			} else {
@@ -100,7 +104,7 @@ body{
 			test = true;
 			$('#tbody').children().remove();
 			$.post(url, {
-				'name' : $("#textSch").val(),'page' : page
+				'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 			}, getData);
 		});
 
@@ -113,7 +117,7 @@ body{
 				test = true;
 				$('#tbody').children().remove();
 				$.post(url, {
-					'name' : $("#textSch").val(),'page' : page
+					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 				}, getData);
 			}
 		});
@@ -127,7 +131,7 @@ body{
 				test = true;
 				$('#tbody').children().remove();
 				$.post(url, {
-					'name' : $("#textSch").val(),'page' : page
+					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 				}, getData);
 			}
 		});
@@ -157,7 +161,7 @@ body{
 								var lock = raiser.valid;
 
 								if (lock) {
-									var st1 = "<button id='btnStop"+raiser.id+"' class='btn btn-warning'><span class='glyphicon glyphicon-ban-circle' id='spanCk"+raiser.id+"'></span>　封鎖</button>";
+									var st1 = "<button id='btnStop"+raiser.id+"' class='btn btn-danger'><span class='glyphicon glyphicon-ban-circle' id='spanCk"+raiser.id+"'></span>　封鎖</button>";
 									stAll += "<td id='tdCk"+raiser.id+"'>"
 											+ st1 + "</td></tr>";
 								} else {
@@ -255,7 +259,7 @@ body{
 																"#btnStop"
 																		+ raiser.id)
 																.removeClass(
-																		"btn btn-warning")
+																		"btn btn-danger")
 																.addClass(
 																		'btn btn-success')
 																.text("解除封鎖");
@@ -276,7 +280,7 @@ body{
 																.removeClass(
 																		"btn btn-success")
 																.addClass(
-																		'btn btn-warning')
+																		'btn btn-danger')
 																.html(
 																		"<span class='glyphicon glyphicon-ban-circle' id='spanCk"+raiser.id+"'></span>　封鎖");
 													}
@@ -284,23 +288,28 @@ body{
 												});
 							});
 		};
-
 		//以下搜尋相關
-// 				$("#btnSch").click(function(){
-// 					$('#detail').children().remove();
-// 					test = true;
-// 					$('#tbody').children().remove();
-// 					$.post(url, {
-// 						'name' : $("#textSch").val(),'page' : page
-// 					}, getData);
-// 					console.log($("#textSch").val());
-// 					Max = Math.ceil("${resultCount}" / 3); 
-// 					$("#divMax").text("/" + Max + "\t");
-// 					console.log("${resultCount}");
-// 					$("#btnw").val("1");
-// 					page = 1;
-// 				});
+				$("#btnSch").click(function() {
+					$('#detail').children().remove();
+					test = true;
+					$('#tbody').children().remove();
+					$("#btnw").val("1");
+					page = 1;
+					$.post("/softleader-iii-eeit78/raiser/raiserSelectAll!getByAllConditionCount" , {
+						'name' : $("#textSch").val() , 'lock' : $('#ChkBox').val()
+						}, function(data){
+							Max = Math.ceil(data/ 3);
+							$("#divMax").text("/" + Max + "\t");
+						});
+					$.post(url,{
+						'name' : $("#textSch").val(),'page' : page , 'lock' : $('#ChkBox').val()
+					}, getData);
+				});
 		
+		
+				$('#ChkBox').change(function(){
+				    $(this).val($(this).prop('checked'))
+				});
 	</script>
 
 </body>
