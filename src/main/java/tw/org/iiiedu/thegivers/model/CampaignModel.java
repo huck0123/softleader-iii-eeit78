@@ -9,8 +9,9 @@ public class CampaignModel {
 
 	private String name;
 
-	private Integer raiserId;
-
+//	private Integer raiserId;
+	private RaiserModel raiserModel;
+	
 	private Integer goal;
 
 	private Timestamp startDate;
@@ -33,6 +34,18 @@ public class CampaignModel {
 	
 	private byte[] image;
 
+	
+	
+	@Override
+	public String toString() {
+		return "CampaignModel [id=" + id + ", name=" + name + ", raiserModel="
+				+ raiserModel + ", goal=" + goal + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", currentFund=" + currentFund
+				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
+				+ detail + ", show=" + show + ", valid=" + valid
+				+ ", location=" + location + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -49,12 +62,13 @@ public class CampaignModel {
 		this.name = name;
 	}
 
-	public Integer getRaiserId() {
-		return raiserId;
+
+	public RaiserModel getRaiserModel() {
+		return raiserModel;
 	}
 
-	public void setRaiserId(Integer raiserId) {
-		this.raiserId = raiserId;
+	public void setRaiserModel(RaiserModel raiserModel) {
+		this.raiserModel = raiserModel;
 	}
 
 	public Integer getGoal() {

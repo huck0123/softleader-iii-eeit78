@@ -99,6 +99,7 @@ function load(){
 
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
+				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
 				var p1 = $('<p>' + value.detail+ '</p>');
 
 				var percent = value.currentFund/ value.goal * 100;
@@ -137,7 +138,7 @@ function load(){
 							+ value.id+ '&name='+ value.name;
 					a.attr('href', url);
 					a.appendTo(p2);
-					captionDiv.append(h3).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+					captionDiv.append(h3).append(p).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
 					imageA.appendTo(thumbnailDiv);
 					captionDiv.appendTo(thumbnailDiv);
 					thumbnailDiv.appendTo(colDiv);

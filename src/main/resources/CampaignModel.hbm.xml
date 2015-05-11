@@ -11,9 +11,15 @@
 		<property name="name" type="java.lang.String">
 			<column name="NAME" />
 		</property>
-		<property name="raiserId" type="java.lang.Integer">
-			<column name="RAISER_ID" />
-		</property>
+<!-- 		
+		<property name="raiserId" type="java.lang.Integer"> 
+ 			<column name="RAISER_ID" /> 
+ 		</property> 
+ -->
+ 		<many-to-one name="raiserModel" column="raiser_id"
+				class="tw.org.iiiedu.thegivers.model.RaiserModel" cascade="all" outer-join="true">
+		</many-to-one>
+ 		
 		<property name="goal" type="java.lang.Integer">
 			<column name="GOAL" />
 		</property>
@@ -23,7 +29,7 @@
 		<property name="endDate" type="java.sql.Timestamp">
 			<column name="END_DATE" />
 		</property>
-		<property name="currentFund" type="java.lang.Integer">
+		<property name="currentFund" type="java.lang.Integer" insert="false">
 			<column name="CURRENT_FUND" />
 		</property>
 		<property name="type" type="java.lang.String">
@@ -38,7 +44,7 @@
 		<property name="show" type="java.lang.Boolean">
 			<column name="SHOW" />
 		</property>
-		<property name="valid" type="java.lang.Boolean">
+		<property name="valid" type="java.lang.Boolean" insert="false">
 			<column name="VALID" />
 		</property>
 		<property name="location" type="java.lang.String">

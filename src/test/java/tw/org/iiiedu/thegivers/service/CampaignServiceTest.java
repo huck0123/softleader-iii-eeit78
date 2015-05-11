@@ -10,12 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tw.org.iiiedu.thegivers.GenericTest;
 import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
+import tw.org.iiiedu.thegivers.model.RaiserModel;
 
 
 public class CampaignServiceTest extends GenericTest {
 
 	@Autowired
 	private CampaignService campaignService;
+	@Autowired 
+	private RaiserService raiserService;
 	
 
 //	@Test
@@ -39,7 +42,7 @@ public class CampaignServiceTest extends GenericTest {
 		cm.setGoal(222);
 		cm.setLocation("台北市大安區資策會");
 		cm.setName("資策會募款");
-		cm.setRaiserId(1);
+		cm.setRaiserModel(raiserService.getByAccount("GreenPeace"));
 		cm.setShow(true);
 		cm.setValid(true);
 		cm.setType("資訊募款");
@@ -50,8 +53,8 @@ public class CampaignServiceTest extends GenericTest {
 	@Test
 	public void testUpdate() {
 		CampaignModel cm = new CampaignModel();
+		RaiserModel rm = raiserService.getByAccount("GreenPeace");
 		String name = "xxxx";
-		cm.setId(4);
 		cm.setCurrentFund(1000);
 		cm.setStartDate(new Timestamp(System.currentTimeMillis()));
 		cm.setDetail("募款");
@@ -60,7 +63,7 @@ public class CampaignServiceTest extends GenericTest {
 		cm.setGoal(222);
 		cm.setLocation("台北市大安區資策會");
 		cm.setName(name);
-		cm.setRaiserId(3);
+		cm.setRaiserModel(rm);
 		cm.setShow(true);
 		cm.setValid(true);
 		cm.setType("資訊募款");

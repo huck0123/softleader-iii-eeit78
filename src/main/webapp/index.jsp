@@ -95,6 +95,12 @@ html, body {
 display: inline-block;
 padding:0px 30px 0px 30px;
 }
+#cover-content{
+font-weight:bold;
+text-shadow:0px 0px 10px black;
+color: white;
+/* -webkit-text-stroke: 1px red; */
+}
 </style>
 </head>
 
@@ -108,9 +114,9 @@ padding:0px 30px 0px 30px;
 		</div>
 		<div class="cover-tr-wrapper">
 			<div class="cover-td-wrapper">
-				<div class="container">
-					<h2>改變，從你我開始！</h2>
-					<p>TheGivers是一開放募款平台，為公益團體提供更多的管道募款</p>
+				<div id="cover-content" class="container">
+					<h2 style="margin-bottom: 20px">改變，從你我開始</h2>
+					<h4 style="margin-bottom: 20px">讓每一分錢變得更有意義！</h4>
 					<a class="btn btn-default" href="#campaignDiv">查看活動</a>
 				</div>
 			</div>
@@ -148,7 +154,7 @@ padding:0px 30px 0px 30px;
 				<h2>關於我們</h2>
 				<div class="blank-space10"></div>
 				<div id="raiserRow" class="row">
-				<h4>TheGivers 致力於提供公益團體與民眾一個小額捐款的平台，讓每一分錢都可以用在需要的地方。</h4>
+				<h4>TheGivers 致力於提供公益團體與民眾一個小額捐款的平台，期望讓每一分錢都可以用在需要的地方。</h4>
 				</div>
 			</div>
 		</div>
@@ -184,6 +190,7 @@ padding:0px 30px 0px 30px;
 
 						var captionDiv = $('<div class="caption"></div>');
 						var h3 = $('<h3>' + value.name+ '</h3>');
+						var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
 						var p1 = $('<p>' + value.detail+ '</p>');
 
 						var percent = value.currentFund/ value.goal * 100;
@@ -222,7 +229,7 @@ padding:0px 30px 0px 30px;
 									+ value.id+ '&name='+ value.name;
 							a.attr('href', url);
 							a.appendTo(p2);
-							captionDiv.append(h3).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+							captionDiv.append(h3).append(p).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
 							imageA.appendTo(thumbnailDiv);
 							captionDiv.appendTo(thumbnailDiv);
 							thumbnailDiv.appendTo(colDiv);

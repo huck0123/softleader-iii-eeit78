@@ -204,7 +204,7 @@
 		</div>
 	</div>
 	<div class="collapse" id="collapseExample"
-		style="background-color: #EEEEEE; text-align: left; padding: 15px 15px 30px 25px">
+		style="background-color: #EEEEEE; text-align: left; padding: 15px 15px 30px 25px;">
 		<h2 style="padding-left: 15px">登入您的帳號</h2>
 		<div id="search2" class="row" style="padding: 15px 0px 0px 0px">
 
@@ -231,7 +231,7 @@
 						class="btn btn-primary">公益團體註冊</a>
 				</p>
 				<p>立即以公益團體身分註冊，讓愛心多一個管道投遞。</p>
-				<p>我們會在收到您的申請時，先以電話確認，並當面訪談。簽妥同意書即開通您的帳號。</p>
+				<p>我們會在收到您的申請時，先以電話確認，並當面訪談，簽妥同意書即開通您的帳號。</p>
 			</div>
 
 		</div>

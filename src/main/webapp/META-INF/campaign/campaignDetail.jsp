@@ -78,7 +78,7 @@ function load(){
 			value = data[0];
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>'+value.name+'</h3>');
-				var raiserP = $('<p>由<span style="font-size:20px">'+value.id+'</span>發起</p>');
+				var raiserP = $('<p>由<span style="font-size:20px">'+value.raiserModel.name+'</span>發起</p>');
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
