@@ -93,7 +93,8 @@ public class CampaignAction extends ActionSupport implements
 		}
 		cm.setLocation(campaignForm.getLocation());
 		cm.setName(campaignForm.getName());
-		cm.setRaiserId(rm.getId());
+		cm.setCurrentFund(0);
+		cm.setRaiserModel(rm);
 		cm.setStartDate(campaignForm.getStartDate());
 		cm.setType(campaignForm.getType());
 		cm.setVedioUrl(campaignForm.getVedioUrl());

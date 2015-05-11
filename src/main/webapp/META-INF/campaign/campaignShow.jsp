@@ -17,25 +17,41 @@
 	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
-.thumbnail {text-align: justify;}
+html, body {
+	width: 100%;
+	height: 100%;
+}
 
+.thumbnail {
+	text-align: justify;
+	margin:10% 8% 10% 8%;
+}
+
+.blank-space5 {
+	width: 100%;
+	height: 5%;
+}
 </style>
 </head>
 <body id="body">
 
 <jsp:include page="/header.jsp" />
 
-
+	<div class="blank-space5"></div>
 
 
 	依名稱蒐尋：
 	<input type="text" id="nameSearch">
-	<button id="btn1">Click</button> <button id="btn2">返回活動列表</button>
+	<button id="btn1">Click</button>
+	<button id="btn2">返回活動列表</button>
 	<div class="container" id="div1"></div>
+	<div class="blank-space5"></div>
 	<div class="container" id="showColumn">
-	<div id="row" class=row></div>
+		<div id="campaignRow" class=row></div>
 	</div>
+
 
 
 
@@ -69,34 +85,64 @@ function load(){
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val()},function(data){
 			data = JSON.parse(data);
- 					$('#row').empty();
+ 					$('#campaignRow').empty();
 			$(data).each(function(index,value){
-				var rowDiv = $('#row');
-				var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
+				var rowDiv = $('#campaignRow');
+				var colDiv = $('<div class="col-sm-12 col-md-4"></div>');
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
-				
-				var str = arrayBufferToBase64(value.image); 
+
+				var str = arrayBufferToBase64(value.image);
 				var image = $('<img src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
-				
-				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
-				
+				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
+
 				var captionDiv = $('<div class="caption"></div>');
-				var h3 = $('<h3>'+value.name+'</h3>');
-				var p1 = $('<p>'+ value.detail+'</p>');
-				var p2 = $('<p></p>');
-				var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
-				var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
-				a.attr('href',url);
-				a.appendTo(p2);
-				h3.appendTo(captionDiv);
-				p1.appendTo(captionDiv);
-				p2.appendTo(captionDiv);
-				imageA.appendTo(thumbnailDiv);
-				captionDiv.appendTo(thumbnailDiv);
-				thumbnailDiv.appendTo(colDiv);
-				colDiv.appendTo(rowDiv);
+				var h3 = $('<h3>' + value.name+ '</h3>');
+				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
+				var p1 = $('<p>' + value.detail+ '</p>');
+
+				var percent = value.currentFund/ value.goal * 100;
+				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+						+ value.location
+						+ ' <span class="glyphicon glyphicon-tag"></span> '
+						+ value.type + ' </p>');
+				var progressDiv = $('<div class="progress"></div>');
+				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'+ percent + '%"></div>');
+				progressBarDiv.appendTo(progressDiv);
+
+				var otherInfoDiv = $('<div class="row"></div>');
+				var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span> 進度<br/>'
+												+ formatFloat(percent,2) + '%</div>');
+				var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span> 已募得<br/>'
+												+ value.currentFund+ '</div>');
+				var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span> 捐款數<br/></div>');
+
+				$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
+					{'campaignForm.id' : value.id},function(data) {
+						childDiv3.append(data);})
+
+					var today = (new Date()).getTime();
+
+					var d = (new Date(value.endDate)).getTime();
+					console.log(value.endDate);
+					var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+					var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span> 倒數日<br/>'
+							+ remain+ '<br/></div>');
+
+					otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
+
+					var p2 = $('<p></p>');
+					var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
+					var url = '${pageContext.request.contextPath}/donate/donate?id='
+							+ value.id+ '&name='+ value.name;
+					a.attr('href', url);
+					a.appendTo(p2);
+					captionDiv.append(h3).append(p).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+					imageA.appendTo(thumbnailDiv);
+					captionDiv.appendTo(thumbnailDiv);
+					thumbnailDiv.appendTo(colDiv);
+					colDiv.appendTo(rowDiv);
 			})
 		})
 	})}
@@ -115,43 +161,133 @@ function makeFunction(j){return function(){
 			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
- 		$('#row').empty();
+ 		$('#campaignRow').empty();
 		$(data).each(function(index,value){
-			var rowDiv = $('#row');
-			var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
+			var rowDiv = $('#campaignRow');
+			var colDiv = $('<div class="col-sm-12 col-md-4"></div>');
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
-			
-			var str = arrayBufferToBase64(value.image); 
-			var image = $('<img  src="data:image/png;base64,' + str +'"/>');
+
+			var str = arrayBufferToBase64(value.image);
+			var image = $('<img src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
-			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+value.id);
-			
+			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
+
 			var captionDiv = $('<div class="caption"></div>');
-			var h3 = $('<h3>'+value.name+'</h3>');
-			var p1 = $('<p>'+ value.detail+'</p>');
-			var p2 = $('<p></p>');
-			var a = $('<a href="" class="btn btn-primary" role="button">我要捐款</a>');
-			var url = '${pageContext.request.contextPath}/donate/donate?id='+value.id+'&name='+value.name;
-			a.attr('href',url);
-			
-			a.appendTo(p2);
-			h3.appendTo(captionDiv);
-			p1.appendTo(captionDiv);
-			p2.appendTo(captionDiv);
-			imageA.appendTo(thumbnailDiv);
-			captionDiv.appendTo(thumbnailDiv);
-			thumbnailDiv.appendTo(colDiv);
-			colDiv.appendTo(rowDiv);
+			var h3 = $('<h3>' + value.name+ '</h3>');
+			var p1 = $('<p>' + value.detail+ '</p>');
+
+			var percent = value.currentFund/ value.goal * 100;
+			var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+					+ value.location
+					+ ' <span class="glyphicon glyphicon-tag"></span> '
+					+ value.type + ' </p>');
+			var progressDiv = $('<div class="progress"></div>');
+			var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'+ percent + '%"></div>');
+			progressBarDiv.appendTo(progressDiv);
+
+			var otherInfoDiv = $('<div class="row"></div>');
+			var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span> 進度<br/>'
+											+ formatFloat(percent,2) + '%</div>');
+			var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span> 已募得<br/>'
+											+ value.currentFund+ '</div>');
+			var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span> 捐款數<br/></div>');
+
+			$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
+				{'campaignForm.id' : value.id},function(data) {
+					childDiv3.append(data);})
+
+				var today = (new Date()).getTime();
+
+				var d = (new Date(value.endDate)).getTime();
+				console.log(value.endDate);
+				var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+				var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span> 倒數日<br/>'
+						+ remain+ '<br/></div>');
+
+				otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
+
+				var p2 = $('<p></p>');
+				var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
+				var url = '${pageContext.request.contextPath}/donate/donate?id='
+						+ value.id+ '&name='+ value.name;
+				a.attr('href', url);
+				a.appendTo(p2);
+				captionDiv.append(h3).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+				imageA.appendTo(thumbnailDiv);
+				captionDiv.appendTo(thumbnailDiv);
+				thumbnailDiv.appendTo(colDiv);
+				colDiv.appendTo(rowDiv);
 		})
 	})
 
 }}
 
 
-function goDetail(campaignModel){
+function loadCampaign() {
 
-	
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+			{'campaignForm.pageSize' : 3,},function(data) {
+				data = JSON.parse(data);
+				$(data).each(function(index, value) {
+					var rowDiv = $('#campaignRow');
+					var colDiv = $('<div class="col-sm-12 col-md-4"></div>');
+					var thumbnailDiv = $('<div class="thumbnail"></div>');
+
+					var str = arrayBufferToBase64(value.image);
+					var image = $('<img src="data:image/png;base64,' + str +'"/>');
+					var imageA = $('<a></a>');
+					image.appendTo(imageA);
+					imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
+
+					var captionDiv = $('<div class="caption"></div>');
+					var h3 = $('<h3>' + value.name+ '</h3>');
+					var p1 = $('<p>' + value.detail+ '</p>');
+
+					var percent = value.currentFund/ value.goal * 100;
+					var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+							+ value.location
+							+ ' <span class="glyphicon glyphicon-tag"></span> '
+							+ value.type + ' </p>');
+					var progressDiv = $('<div class="progress"></div>');
+					var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'+ percent + '%"></div>');
+					progressBarDiv.appendTo(progressDiv);
+
+					var otherInfoDiv = $('<div class="row"></div>');
+					var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span> 進度<br/>'
+													+ formatFloat(percent,2) + '%</div>');
+					var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span> 已募得<br/>'
+													+ value.currentFund+ '</div>');
+					var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span> 捐款數<br/></div>');
+
+					$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
+						{'campaignForm.id' : value.id},function(data) {
+							childDiv3.append(data);})
+
+						var today = (new Date()).getTime();
+
+						var d = (new Date(value.endDate)).getTime();
+						console.log(value.endDate);
+						var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+						var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span> 倒數日<br/>'
+								+ remain+ '<br/></div>');
+
+						otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
+
+						var p2 = $('<p></p>');
+						var a = $('<a href="" class="btn btn-primary" role="button">立即捐款</a>');
+						var url = '${pageContext.request.contextPath}/donate/donate?id='
+								+ value.id+ '&name='+ value.name;
+						a.attr('href', url);
+						a.appendTo(p2);
+						captionDiv.append(h3).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+						imageA.appendTo(thumbnailDiv);
+						captionDiv.appendTo(thumbnailDiv);
+						thumbnailDiv.appendTo(colDiv);
+						colDiv.appendTo(rowDiv);
+
+										})
+					})
 }
 
 

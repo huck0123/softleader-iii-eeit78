@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,12 +67,17 @@ public class CampaignDao {
 	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
+		Disjunction or = Restrictions.disjunction();
+		criteria.createAlias("raiserModel", "a");
 		if (campaignForm.getId() != null) {
 			criteria.add(Restrictions.like("id", campaignForm.getId()));
 		}
 		if (campaignForm.getName() != null) {
-			criteria.add(Restrictions.like("name",
+			or.add(Restrictions.like("name",
 					"%" + campaignForm.getName() + "%").ignoreCase());
+			or.add(Restrictions.like("a.name",
+					"%" + campaignForm.getName() + "%").ignoreCase());
+			criteria.add(or);
 		}
 		if (campaignForm.getType() != null) {
 			criteria.add(Restrictions.eq("type", campaignForm.getType()));
@@ -89,17 +95,20 @@ public class CampaignDao {
 	}
 
 	public List<CampaignModel> getByAllCondition(CampaignForm campaignForm) {
-		System.out.println(campaignForm.getId());
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
+		Disjunction or = Restrictions.disjunction();
+		criteria.createAlias("raiserModel", "a");
 		if (campaignForm.getId() != null) {
 			System.out.println(campaignForm.getId());
 			criteria.add(Restrictions.eq("id", campaignForm.getId()));
 		} else {
 			if (campaignForm.getName() != null) {
-				System.out.println(campaignForm.getName());
-				criteria.add(Restrictions.like("name",
+				or.add(Restrictions.like("name",
 						"%" + campaignForm.getName() + "%").ignoreCase());
+				or.add(Restrictions.like("a.name",
+						"%" + campaignForm.getName() + "%").ignoreCase());
+				criteria.add(or);
 			}
 			if (campaignForm.getType() != null) {
 				criteria.add(Restrictions.eq("type", campaignForm.getType()));

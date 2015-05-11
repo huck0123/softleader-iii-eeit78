@@ -120,8 +120,6 @@ body {
 		#collapseExample {
 		position: fixed;
 		width: 100%;
-		padding-left: 0px;
- 		padding-right: 0px; 
 	}
 	#collapseExample div{margin:0px;
 }
@@ -158,8 +156,7 @@ body {
 		position: fixed;
 		width: 1200px;
 		z-index: 99;
-				padding-left: 0px;
- 		padding-right: 0px; 
+
 	}
 	
 }
