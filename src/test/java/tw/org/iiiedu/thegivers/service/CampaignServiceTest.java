@@ -16,6 +16,7 @@ public class CampaignServiceTest extends GenericTest {
 
 	@Autowired
 	private CampaignService campaignService;
+	
 
 //	@Test
 //	public void testGetAll() {
