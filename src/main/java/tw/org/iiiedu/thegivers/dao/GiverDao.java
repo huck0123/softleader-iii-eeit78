@@ -103,7 +103,7 @@ public class GiverDao {
 		or.add(Restrictions.like("familyName", "%"+condition+"%"));
 		or.add(Restrictions.like("address", "%"+condition+"%"));
 		or.add(Restrictions.like("email", "%"+condition+"%"));
-		or.add(Restrictions.eq("tel", condition));
+		or.add(Restrictions.like("tel", "%"+condition+"%"));
 		or.add(Restrictions.eq("valid", b));
 	
 		criteria.add(or).setProjection(Projections.rowCount());
@@ -129,7 +129,7 @@ public class GiverDao {
 		or.add(Restrictions.like("familyName", "%"+condition+"%"));
 		or.add(Restrictions.like("address", "%"+condition+"%"));
 		or.add(Restrictions.like("email", "%"+condition+"%"));
-		or.add(Restrictions.eq("tel", condition));
+		or.add(Restrictions.like("tel", "%"+condition+"%"));
 		or.add(Restrictions.eq("valid", b));
 		
 		List<GiverModel> models = criteria.add(or)
@@ -138,6 +138,23 @@ public class GiverDao {
 		
 		return models;
 	}
+	
+	//身分證收尋
+	public GiverModel getByIdNumber(String idNumber){
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		List<GiverModel> list =  criteria.add(
+				Restrictions.eq("idNumber", idNumber)).list();
+		GiverModel model;
+		
+		if(list.size() > 0){
+			model = list.get(0);
+			return model;
+		}else{
+			return null;
+		}
+		
+	}
+	
 	
 	// 更新資料
 	public void update(GiverModel bean) {

@@ -119,7 +119,8 @@ b {
 
 <script>
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!select";
-
+	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
+	
 	//驗證帳號
 	$('input[name="form.account"]').on("blur", function(){
 		$('#account').empty();
@@ -188,7 +189,17 @@ b {
 			$('#idNumber').text("請輸入正確的身分證");
 			return;
 		}
-		$('#submit').prop("disabled",false);
+		
+		$.post(urli, {"form.id_number":Id}, function(data){
+			data = JSON.parse(data);
+			if(data.IdNumber){
+				$('#idNumber').text("此身分證已被使用");
+				$('#submit').prop("disabled",true);
+				return;
+			}
+			$('#submit').prop("disabled",false);
+		})
+		
 	}
 
 	

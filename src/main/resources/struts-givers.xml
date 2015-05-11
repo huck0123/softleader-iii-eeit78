@@ -31,6 +31,10 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result type="stream" name="selectByIdNumber">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 			<!-- 		deprecated -->
 			<result type="stream" name="selectAll">
 				<param name="contentType">text/html</param>

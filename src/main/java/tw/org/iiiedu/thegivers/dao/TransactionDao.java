@@ -73,7 +73,8 @@ public class TransactionDao {
 	// 取出條件收尋的紀錄筆數
 	public int getByConditionCount(String condition) {
 		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
-
+		criteria.createAlias("campaignModel", "model");
+		
 		Boolean b = null;
 		if (condition.equals("true")) {
 			b = true;
@@ -84,11 +85,11 @@ public class TransactionDao {
 		// 方法一
 		Disjunction or = Restrictions.disjunction();
 		or.add(Restrictions.like("cardType", "%" + condition + "%").ignoreCase());
-		or.add(Restrictions.eq("cardNo", condition));
+		or.add(Restrictions.like("cardNo", "%" + condition + "%"));
 		or.add(Restrictions.like("cardHolder", "%" + condition + "%").ignoreCase());
 		or.add(Restrictions.like("cardHolderEmail", "%" + condition + "%").ignoreCase());
 		or.add(Restrictions.eq("credit", b));
-		or.add(Restrictions.like("cardType", "%" + condition + "%").ignoreCase());
+		or.add(Restrictions.like("model.name", "%" + condition + "%").ignoreCase());
 		criteria.add(or).setProjection(Projections.rowCount());
 		int conditionCount = ((Long) criteria.uniqueResult()).intValue();
 		
@@ -99,8 +100,8 @@ public class TransactionDao {
 	//取出條件收尋的紀錄
 	public List<TransactionDetailModel> getByCondition(String condition,
 			int pageNum, int pageAmount) {
-		
 		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
+		criteria.createAlias("campaignModel", "model");
 		
 		Boolean b = null;
 		if (condition.equals("true")) {
@@ -112,10 +113,11 @@ public class TransactionDao {
 		//方法一
 		Disjunction or = Restrictions.disjunction();
 		or.add(Restrictions.like("cardType", "%"+condition+"%").ignoreCase());
-		or.add(Restrictions.eq("cardNo", condition));
+		or.add(Restrictions.like("cardNo", "%" + condition + "%"));
 		or.add(Restrictions.like("cardHolder", "%"+condition+"%").ignoreCase());
 		or.add(Restrictions.like("cardHolderEmail", "%"+condition+"%").ignoreCase());
 		or.add(Restrictions.eq("credit", b));
+		or.add(Restrictions.like("model.name", "%"+condition+"%").ignoreCase());
 		List<TransactionDetailModel> models = criteria.add(or)
 				.setFirstResult((pageNum - 1) * pageAmount)
 				.setMaxResults(pageAmount).addOrder(Order.asc("id")).list();

@@ -79,6 +79,15 @@ public class GiverService {
 		return models;
 	}
 	
+	//身分證收尋
+	public boolean getByIdNumber(String idNumber){
+		GiverModel model = giverDao.getByIdNumber(idNumber);
+		if(model == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	
 //	//條件收尋筆數    -----deprecated-----
 //	public int getByAllConditionCount(String account, String name, String familyName

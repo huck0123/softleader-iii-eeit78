@@ -111,19 +111,19 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
 
 		//驗證身分證
-		IdCheck check = new IdCheck(form.getId_number() ,form.isGender());
+		IdCheck check = new IdCheck(form.getId_number().trim() ,form.isGender());
 		if(check.IdVerify() == false){
 			return FAIL;				
 		}
 		
 		model = new GiverModel();
 		log.debug("++++++++++++++++++++++++++++++++++++++++++++giverAction insert++++++++++++++++++++++++++++++++++++++ {}", giverCount);
-		model.setAccount(form.getAccount());
-		model.setAddress(form.getAddress());
+		model.setAccount(form.getAccount().trim());
+		model.setAddress(form.getAddress().trim());
 		model.setBirth(new Timestamp(form.getBirth().getTime()));
-		model.setEmail(form.getEmail());
-		model.setFamilyName(form.getFamilyName());
-		model.setName(form.getName());
+		model.setEmail(form.getEmail().trim());
+		model.setFamilyName(form.getFamilyName().trim());
+		model.setName(form.getName().trim());
 		model.setGender(form.isGender());
 		model.setGetInfo(form.isGet_info());
 
@@ -257,7 +257,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
 
 		//驗證身分證
-		IdCheck check = new IdCheck(form.getId_number() ,form.isGender());
+		IdCheck check = new IdCheck(form.getId_number().trim() ,form.isGender());
 		if(check.IdVerify() == false){
 			return FAIL;				
 		}
@@ -265,12 +265,12 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		model = new GiverModel();
 		
 		model.setId(temp.getId());
-		model.setAccount(temp.getAccount());
-		model.setAddress(form.getAddress());
+		model.setAccount(temp.getAccount().trim());
+		model.setAddress(form.getAddress().trim());
 		model.setBirth(temp.getBirth());
-		model.setEmail(form.getEmail());
-		model.setFamilyName(form.getFamilyName());
-		model.setName(form.getName());
+		model.setEmail(form.getEmail().trim());
+		model.setFamilyName(form.getFamilyName().trim());
+		model.setName(form.getName().trim());
 		model.setGender(temp.isGender());
 		model.setGetInfo(form.isGet_info());
 
@@ -287,9 +287,9 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		}else{
 			model.setHeadshot(temp.getHeadshot());
 		}
-		model.setIdNumber(temp.getIdNumber());
-		model.setPasswd(form.getPasswd());
-		model.setTel(form.getTel());
+		model.setIdNumber(temp.getIdNumber().trim());
+		model.setPasswd(form.getPasswd().trim());
+		model.setTel(form.getTel().trim());
 		model.setValid(true);
 		
 		try{
@@ -312,7 +312,22 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return null;
 	}
 	
+	//ID收尋
+	public String selectByIdNumber(){
+		boolean b = service.getByIdNumber(form.getId_number().trim());
+		Map<String, Boolean> map = new HashMap<>();
+		if(b == true){
+			map.put("IdNumber", true);
+		}else{
+			map.put("IdNumber", false);
+		}
 	
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "selectByIdNumber";
+	}
 	
 	
 	@Override

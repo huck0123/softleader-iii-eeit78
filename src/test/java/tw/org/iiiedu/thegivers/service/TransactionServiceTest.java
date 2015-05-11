@@ -16,18 +16,18 @@ public class TransactionServiceTest extends GenericTest{
 	
 	@Test
 	public void testGetByConditionCount(){
-		int count = service.getByConditionCount("false");
+		int count = service.getByConditionCount("木復育");
 		System.out.println(count);
 	}
 	
-//	@Test
-//	public void testGetByCondition(){
-//		List<TransactionDetailModel> list = service.getByCondition("false",1,5);
-//		Iterator<TransactionDetailModel> i = list.iterator();
-//		while(i.hasNext()){
-//			System.out.println(i.next());
-//		}
-//	}
+	@Test
+	public void testGetByCondition(){
+		List<TransactionDetailModel> list = service.getByCondition("木復育",1,50);
+		Iterator<TransactionDetailModel> i = list.iterator();
+		while(i.hasNext()){
+			System.out.println(i.next());
+		}
+	}
 	
 //	@Test
 //	public void testInsert() {

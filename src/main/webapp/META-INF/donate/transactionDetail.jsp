@@ -39,7 +39,8 @@ tr th {
 				<button id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
-				<input type="text" id="condition"> <button onclick="search()">查詢</button>
+				<input type="text" id="condition"> 
+<!-- 				<button onclick="search()">查詢</button> -->
 			</div>
 		</div>
 		
@@ -73,7 +74,7 @@ tr th {
 		var pageCount;
 		var condition;
 		
-		function search(){
+		$('#condition').keyup(function(){
 			condition = $('#condition').val();
 			$.post(urlc,{'condition':condition},function(data){
 				
@@ -81,13 +82,25 @@ tr th {
 				transactionCount = data.conditionCount;
 				load();
 			});
-		}
+		});
+		
+		
+		
+		//收尋      ---------deprecated---------
+// 		function search(){
+// 			condition = $('#condition').val();
+// 			$.post(urlc,{'condition':condition},function(data){
+				
+// 				data = JSON.parse(data);
+// 				transactionCount = data.conditionCount;
+// 				load();
+// 			});
+// 		}
 		
 		load();
 		
 		//初始載入頁面
 		function load(){
-			$('#tbdy').empty();
 			$('#pageAmount').empty();
 			$('#page').empty();
 			
@@ -132,7 +145,6 @@ tr th {
 		//讀取使用者每頁顯示幾筆資料之值
 		$('#pageAmount').on("change", function(){
 			$(this).prop("disabled",true);
-			$('#tbdy').empty();
 // 			pageAmount = $(this).val();
 			onload();
 			var thisPage = $('#page').val();			
@@ -150,6 +162,7 @@ tr th {
 		};
 		
 		function getData(data){
+			$('#tbdy').empty();
 			data = JSON.parse(data);
 			$.each(data, function(index,obj){				
 				$(tbdy).append("<tr>"
@@ -215,7 +228,6 @@ tr th {
 				thisPage--;
 				
 				$('#page').val(thisPage);
-				$('#tbdy').empty();
 				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
 			}
 		};
@@ -228,7 +240,6 @@ tr th {
 				thisPage++;
 				
 				$('#page').val(thisPage);
-				$('#tbdy').empty();
 				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
 			}
 		};

@@ -35,19 +35,24 @@ public class GiverServiceTest extends GenericTest {
 //		}
 //	}
 	
-	@Test
-	public void testGetByCondition(){
-		List<GiverModel> list = giverService.getByCondition("0912146789", 1, 30);
-		Iterator<GiverModel> i = list.iterator();
-		while(i.hasNext()){
-			System.out.println(i.next());
-		}
-	}
+//	@Test
+//	public void testGetByCondition(){
+//		List<GiverModel> list = giverService.getByCondition("0912146789", 1, 30);
+//		Iterator<GiverModel> i = list.iterator();
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//	}
+//	
+//	@Test
+//	public void testGetByConditionCount(){
+//		int i = giverService.getByConditionCount("0912146789");
+//		System.out.println(i);
+//	}
 	
 	@Test
-	public void testGetByConditionCount(){
-		int i = giverService.getByConditionCount("0912146789");
-		System.out.println(i);
+	public void testGetByIdNumber(){
+		System.out.println(giverService.getByIdNumber("S129547631"));
 	}
 	
 //	@Test

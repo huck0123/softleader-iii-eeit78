@@ -43,7 +43,8 @@ tr th {
 				<button id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
-				<input type="text" id="condition"> <button onclick="search()">查詢</button>
+				<input type="text" id="condition"> 
+<!-- 				<button onclick="search()">查詢</button> -->
 			</div>
 		</div>
 
@@ -84,22 +85,71 @@ tr th {
 		var pageAmount;
 		var pageCount;
 		var condition = null;
+						
+		load();
 		
-// 		//抓取條件收尋總筆數
-// 		$.post(urlc,{'condition':condition}, function(data){
-// 			data = JSON.parse(data);
-// 			pageAmount = data.condition;
-// 			console.log("bb"+pageAmount);
-// 		});
+		
+		//初始載入
+		function load(){
+			$('#page').empty();
+			$('#pageAmount').empty();
+			
+			//建立一頁顯示幾筆選單
+			for(var i=1; i<=giverCount; i++){
+				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
+			}
+			
+			if(giverCount >= 5){
+				//預設一頁五筆
+				$('#pageAmount').val(5);
+			}else{
+				$('#pageAmount').val(giverCount);
+			}
+			
+			pageAmount = $('#pageAmount').val();
+			pageCount = giverCount/pageAmount;
 
-		//讀取一頁顯示幾筆
+			//建立page選單
+			for(var i=1; i<pageCount+1; i++){
+				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			}
+			
+			//載入第一頁
+			$.post(url,{'thisPage':1, 'pageAmount':pageAmount, 'condition':condition},getData);
+		}
+		
+		//條件收尋
+		$('#condition').keyup(function(){
+			condition = $('#condition').val();	
+			//抓取條件收尋總筆數
+			$.post(urlc,{'condition':condition}, function(data){
+				data = JSON.parse(data);
+				giverCount = data.condition;
+				load();
+			});
+		});
+
+		
+// 		//條件收尋     ------deprecated--------
+// 		function search(){
+// 			condition = $('#condition').val();	
+			
+// 			//抓取條件收尋總筆數
+// 			$.post(urlc,{'condition':condition}, function(data){
+// 				data = JSON.parse(data);
+// 				giverCount = data.condition;
+// 				console.log("search"+giverCount);
+// 				load();
+// 			});
+// 		}
+		
+		//一頁顯示筆數
 		$('#pageAmount').on("change", function(){
 			pageAmount = $(this).val();
 			onload();
 		});
 			
 		function onload(){
-			$('#tbdy').empty();
 			$('#page').empty();
 			
 			pageCount = giverCount/pageAmount;
@@ -113,51 +163,12 @@ tr th {
 		}
 		
 		
-		load();
-		
-		function search(){
-			condition = $('#condition').val();	
-			$.post(urlc,{'condition':condition}, function(data){
-				data = JSON.parse(data);
-				giverCount = data.condition;
-				console.log("search"+giverCount);
-				load();
-			});
-		}
-		
-		
-		//初始載入
-		function load(){
-			$('#tbdy').empty();
-			$('#page').empty();
-			$('#pageAmount').empty();
-			
-			//建立一頁顯示幾筆選單
-			for(var i=1; i<=giverCount; i++){
-				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
-			}
-			
-			pageAmount = $('#pageAmount').val();
-			console.log("aa"+pageAmount)
-			pageCount = giverCount/pageAmount;
-			console.log(pageCount);
-			//建立page選單
-			for(var i=1; i<pageCount+1; i++){
-				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
-			}
-			
-			//載入第一頁
-			$.post(url,{'thisPage':1, 'pageAmount':pageAmount, 'condition':condition},getData);
-		}
-		
-		
-		
-		
 		
 		
 		
 		
 		function getData(data){
+			$('#tbdy').empty();
 			data = JSON.parse(data);
 // 			console.log(data)
 			$.each(data,function(index,obj){
@@ -221,7 +232,6 @@ tr th {
 			$('#before').prop("disabled", true);
 			$('#after').prop("disabled", true);
 			
-			$('#tbdy').empty();
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp, 'pageAmount':pageAmount, 'condition':condition},getData);
 			console.log(temp);
@@ -238,7 +248,6 @@ tr th {
 				thisPage--;
 				
 				$('#page').val(thisPage);
-				$('#tbdy').empty();
 				$.post(url,{'thisPage':thisPage, 'pageAmount':pageAmount, 'condition':condition},getData);
 			}
 		};
@@ -254,7 +263,6 @@ tr th {
 				thisPage++;
 				
 				$('#page').val(thisPage);
-				$('#tbdy').empty();
 				$.post(url,{'thisPage':thisPage, 'pageAmount':pageAmount, 'condition':condition},getData);
 			}
 		};

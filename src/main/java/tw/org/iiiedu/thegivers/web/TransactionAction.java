@@ -110,10 +110,10 @@ public class TransactionAction extends ActionSupport {
 
 		model.setGiverId(form.getGiverId());
 		model.setAmount(form.getAmount());
-		model.setCardType(form.getCardType());
-		model.setCardNo(form.getCardNo());
-		model.setCardHolder(form.getCardHolder());
-		model.setCardHolderEmail(form.getCardHolderEmail());
+		model.setCardType(form.getCardType().trim());
+		model.setCardNo(form.getCardNo().trim());
+		model.setCardHolder(form.getCardHolder().trim());
+		model.setCardHolderEmail(form.getCardHolderEmail().trim());
 		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 
 		try{
