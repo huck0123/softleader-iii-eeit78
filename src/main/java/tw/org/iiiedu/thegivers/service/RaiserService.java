@@ -75,16 +75,17 @@ public class RaiserService {
 	}
 
 	public Integer getByAllConditionCount(String account, String name,
-			String contactPerson) {
+			String contactPerson, boolean valid) {
 		Integer count = raiserDao.getByAllConditionCount(account, name,
-				contactPerson);
+				contactPerson, valid);
 		return count;
 	}
 
 	public List<RaiserModel> getByAllCondition(String account, String name,
-			String contactPerson, Integer pageNum, Integer pageSize) {
+			String contactPerson, boolean valid, Integer pageNum,
+			Integer pageSize) {
 		List<RaiserModel> result = raiserDao.getByAllCondition(account, name,
-				contactPerson, pageNum, pageSize);
+				contactPerson, valid, pageNum, pageSize);
 		return result;
 	}
 
@@ -93,8 +94,8 @@ public class RaiserService {
 		return result;
 	}
 
-	public boolean valid(String account,boolean valid){
-		boolean	result = raiserDao.check(account, valid);
+	public boolean valid(String account, boolean valid) {
+		boolean result = raiserDao.check(account, valid);
 		return result;
 	}
 }
