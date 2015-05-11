@@ -29,7 +29,7 @@
 		<property name="endDate" type="java.sql.Timestamp">
 			<column name="END_DATE" />
 		</property>
-		<property name="currentFund" type="java.lang.Integer" insert="false">
+		<property name="currentFund" type="java.lang.Integer">
 			<column name="CURRENT_FUND" />
 		</property>
 		<property name="type" type="java.lang.String">
