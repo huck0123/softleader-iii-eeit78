@@ -179,7 +179,14 @@ public class TransactionAction extends ActionSupport {
 	
 	//giver歷史資料
 	public String giverDetail(){
-		return null;
+		List<TransactionDetailModel> tdm = service.getByGiverId(thisId);
+		if(tdm.size() != 0){
+			Gson gson = new Gson();
+			String jsonStr = gson.toJson(tdm);
+			inputStream = new ByteArrayInputStream(
+					jsonStr.getBytes(StandardCharsets.UTF_8));
+		}
+		return "allHistory";	
 	}
 	
 	
