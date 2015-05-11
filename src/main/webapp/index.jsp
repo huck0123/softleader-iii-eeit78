@@ -37,6 +37,7 @@ html, body {
 
 .thumbnail {
 	text-align: left;
+		margin:10% 8% 10% 8%;
 }
 
 .cover-table-wrapper {
