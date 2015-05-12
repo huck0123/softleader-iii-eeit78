@@ -35,15 +35,19 @@ b {
 	<jsp:include page="../../header.jsp" />
 
 	<div class="container panel alert">
-		<h2>捐款會員註冊</h2>
 		<div class="row">
 			<div class="col-md-2"></div>
 
 			<div class="col-md-8">
+				<h2>捐款會員註冊</h2>
 				<form
 					action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 					method="post" enctype="multipart/form-data">
-					<table class="table table-striped">
+					<table class="table">
+						<colgroup>
+							 <col span="1" style="background-color:#ADADAD">
+   							 <col style="background-color:#F0F0F0">
+						</colgroup>
 						<tr>
 							<td><label for="">帳號:<b>*</b></label></td>
 							<td><input type="text" name="form.account"
@@ -51,8 +55,13 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">密碼:<b>*</b></label></td>
-							<td><input type="password" name="form.passwd" value=""
+							<td><input type="password" name="form.passwd" value="" id="passwd1"
 								required="required"></td>
+						</tr>
+						<tr>
+							<td><label for="">密碼確認:<b>*</b></label></td>
+							<td><input type="password" value=""	id="passwd2"
+							 required="required"><b id="password2"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">姓:<b>*</b></label></td>
@@ -101,10 +110,10 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">照片:</label></td>
-							<td><input type="file" name="form.headshot" value=""></td>
+							<td><input type="file" name="form.headshot" value="" id="headshot"></td>
 						</tr>
 						<tr>
-							<td></td>
+							<td><img src="" id="img" style="weight:50px; height:50px;"></td>
 							<td><input type="submit" class="btn btn-default" value="送出" id="submit">
 								<input type="reset" class="btn btn-default" value="清除" ></td>
 						</tr>
@@ -115,6 +124,7 @@ b {
 		</div>
 	</div>
 
+	
 </body>
 
 <script>
@@ -137,6 +147,21 @@ b {
 		});
 	});
 
+	//確認密碼驗證
+	$('#passwd2').on("keyup", function(){
+		if(passwd1.value != passwd2.value){
+			$('#submit').prop("disabled",true);
+			$('#password2').text("密碼不符");
+			return;
+		}else{
+			$('#password2').empty();
+			$('#submit').prop("disabled",false);
+		}
+	});
+	
+	
+	
+	
 	//驗證手機
 	$('input[name="form.tel"]').on("blur", function(){
 		$('#tel').empty();
@@ -152,7 +177,7 @@ b {
 		
 	});
 	
-	//驗證身分
+	//驗證身分證
 	$('input[name="form.id_number"]').on("blur",checkId);
 
 	//身分證驗證
@@ -202,6 +227,23 @@ b {
 		
 	}
 
+	//驗證圖片
+	$('#headshot').on("change",function(){
+		readFile();
+	})
+
+	function readFile(){
+	    var file = headshot.files[0]; 
+	    if(!/image\/\w+/.test(file.type)){ 
+	        alert("檔案請放圖片！"); 
+	        return; 
+	    } 
+	    var reader = new FileReader(); 
+	    reader.readAsDataURL(file); 
+	    reader.onload = function(){ 
+	        $('#img').attr("src",reader.result);
+	    } 
+	} 
 	
 </script>
 
