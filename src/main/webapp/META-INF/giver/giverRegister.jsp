@@ -19,7 +19,7 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 
 <style>
-label b{
+label>b{
 	color: red;
 	font-size: 150%;
 }
@@ -43,7 +43,7 @@ b {
 				<form
 					action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 					method="post" enctype="multipart/form-data">
-					<table class="table">
+					<table class="table table-striped">
 						<tr>
 							<td><label for="">帳號:<b>*</b></label></td>
 							<td><input type="text" name="form.account"
@@ -105,8 +105,8 @@ b {
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="送出" id="submit">
-								<input type="reset" value="清除" ></td>
+							<td><input type="submit" class="btn btn-default" value="送出" id="submit">
+								<input type="reset" class="btn btn-default" value="清除" ></td>
 						</tr>
 					</table>
 				</form>
