@@ -62,6 +62,7 @@ public class CampaignService {
 	}
 
 	public boolean update(CampaignModel cm) {
+		System.out.println("service: "+cm.getValid());
 		boolean b = campaignDao.update(cm); 
 		if (b) {
 			return true;

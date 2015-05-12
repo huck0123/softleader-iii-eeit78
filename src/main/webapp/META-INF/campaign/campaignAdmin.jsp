@@ -26,7 +26,7 @@
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
-	<form action="/softleader-iii-eeit78/campaign/campaignAction!ban">
+	<form action="/softleader-iii-eeit78/campaign/campaignAction" method="post">
 		<div class="container panel alert">
 
 			<select id="selectPageSize">
@@ -41,10 +41,11 @@
 			<button type="button" id="before">上一頁</button>
 			<span id="pageShow"></span>
 			<button type="button" id="after">下一頁</button>
-			<input type="submit" value="加入黑名單">
-			</button>
-			<input type="submit" value="解除黑名單">
-			</button>
+			<input type="submit" value="加入黑名單" name="method:ban">
+
+			<input type="submit" value="解除黑名單" name="method:unban">
+
+
 			<table class="table table-bordered">
 				<tr>
 					<th>活動圖片</th>

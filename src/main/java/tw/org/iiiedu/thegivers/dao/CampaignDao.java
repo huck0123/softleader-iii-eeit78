@@ -145,6 +145,7 @@ public class CampaignDao {
 
 		Session session = sessionFactory.getCurrentSession();
 		try {
+			System.out.println("dao: "+cm.getValid());
 			session.update(cm);
 			return true;
 		} catch (Exception e) {
