@@ -145,7 +145,17 @@ body {
 		padding-left: 0;
 		padding-right: 0:
 	}
+	.left-side {
+    float: none;
+    display: table-cell;
 
+}
+
+.right-side {
+    float: none;
+    display: table-cell;
+    border-bottom: silver 1px solid;
+}
 }
 
 @media ( min-width : 1200px) {
@@ -159,4 +169,15 @@ body {
 
 	}
 	
+	.left-side {
+    float: none;
+    display: table-cell;
+
+}
+
+.right-side {
+    float: none;
+    display: table-cell;
+    border-bottom: silver 1px solid;
+}
 }

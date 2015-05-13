@@ -36,8 +36,8 @@ html, body {
 }
 
 .thumbnail {
-	text-align: left;
-		margin:10% 8% 10% 8%;
+	text-align: justify;
+ 	margin:0 8% 10% 8%; 
 }
 
 .cover-table-wrapper {
@@ -70,7 +70,6 @@ html, body {
 }
 
 .outer-wrapper {
-
 	padding-top:60px;
 	width: 100%;
 	min-height: 100%;
@@ -131,7 +130,7 @@ margin-right: 0px;
 		</div>
 	</div>
 
-	<div id="campaignDiv" class="outer-wrapper" style="border-bottom: 1px solid #EEEEEE; overflow:auto">
+	<div id="campaignDiv" class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE; overflow:auto">
 		<div class="inner-wrapper">
 			<div  class="container" style="height:100%;">
 
@@ -188,7 +187,7 @@ margin-right: 0px;
 						var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 						var str = arrayBufferToBase64(value.image);
-						var image = $('<img src="data:image/png;base64,' + str +'"/>');
+						var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
 						var imageA = $('<a></a>');
 						image.appendTo(imageA);
 						imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
