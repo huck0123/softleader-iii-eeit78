@@ -26,7 +26,7 @@ html, body {
 
 .thumbnail {
 	text-align: justify;
-	margin:10% 8% 10% 8%;
+ 	margin:0 8% 10% 8%; 
 }
 
 .blank-space5 {
@@ -40,6 +40,7 @@ padding-right: 0px;
 margin-left: 0px;
 margin-right: 0px;
 }
+.col-md-4{height: 760px}
 </style>
 </head>
 <body id="body">
@@ -99,7 +100,7 @@ function load(){
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -107,7 +108,7 @@ function load(){
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
 				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-				var p1 = $('<p><pre>' + value.detail+ '</pre></p');
+				var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '</pre></p>');
 
 				var percent = value.currentFund/ value.goal * 100;
 				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
@@ -175,14 +176,14 @@ function makeFunction(j){return function(){
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 			var str = arrayBufferToBase64(value.image);
-			var image = $('<img src="data:image/png;base64,' + str +'"/>');
+			var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
 			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
 
 			var captionDiv = $('<div class="caption"></div>');
 			var h3 = $('<h3>' + value.name+ '</h3>');
-			var p1 = $('<p><pre>' + value.detail+ '</pre></p>');
+			var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '</pre></p>');
 
 			var percent = value.currentFund/ value.goal * 100;
 			var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
@@ -242,14 +243,14 @@ function loadCampaign() {
 					var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 					var str = arrayBufferToBase64(value.image);
-					var image = $('<img src="data:image/png;base64,' + str +'"/>');
+					var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
 					var imageA = $('<a></a>');
 					image.appendTo(imageA);
 					imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
 
 					var captionDiv = $('<div class="caption"></div>');
 					var h3 = $('<h3>' + value.name+ '</h3>');
-					var p1 = $('<p><pre>' + value.detail+ '</pre></p');
+					var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '</pre></p>');
 
 					var percent = value.currentFund/ value.goal * 100;
 					var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '

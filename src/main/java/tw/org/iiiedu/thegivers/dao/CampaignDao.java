@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,11 @@ public class CampaignDao {
 	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
+		
 		Disjunction or = Restrictions.disjunction();
 		criteria.createAlias("raiserModel", "a");
+		
+		
 		if (campaignForm.getId() != null) {
 			criteria.add(Restrictions.like("id", campaignForm.getId()));
 		}
@@ -118,7 +122,8 @@ public class CampaignDao {
 			}
 		}
 		// criteria.add(Restrictions.eq("show", true));
-
+		criteria.addOrder(Order.desc("lastModify"));
+		
 		List campaignModels = criteria
 				.setFirstResult(
 						campaignForm.getPageNum() * campaignForm.getPageSize())

@@ -244,7 +244,7 @@
 	// function for popping out head
 	$(document).ready(function() {
 		$(window).scroll(function() {
-			$('.in').removeClass("in");
+// 			$('.in').removeClass("in");
 			if ($(window).scrollTop() > 99) {
 				console.log($(window).scrollTop());
 				$('#headerFixed').slideDown();
