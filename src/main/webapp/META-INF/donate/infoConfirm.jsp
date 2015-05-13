@@ -26,28 +26,34 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<h3>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h3>
-				<form
-					action="/softleader-iii-eeit78/donate/donateAction!donate.action"
-					method="post">
+				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
+				<form action="/softleader-iii-eeit78/donate/donateAction!donate.action"	method="post">
 					<div>
 						<h3>捐款資訊</h3>
 					</div>
 					<table class="table">
+						<colgroup>
+							 <col span="1" style="background-color:#ADADAD">
+   							 <col style="background-color:#F0F0F0; ">
+   							 <col style="background-color:#F0F0F0; width:150px;">
+						</colgroup>
 						<tr>
 							<td><label for="">捐款活動名稱:</label></td>
 							<td><input type="hidden" name="form.campaignName"
 								value="${param.campaignName }">${param.campaignName }</td>
+							<td></td>
 						</tr>
 						<tr style="display: none">
 							<td>捐款活動ID</td>
 							<td><input type="text" name="form.campaignId"
 								value="${param.campaignId }"></td>
+							<td></td>
 						</tr>
 						<tr style="display: none">
 							<td>捐款人ID</td>
 							<td><input type="text" name="form.giverId"
 								value="${sessionScope.giver.id }"></td>
+							<td></td>
 						</tr>
 						<!-- 					<tr> -->
 						<!-- 						<td><label for="">捐款人IP</label></td> -->
@@ -57,6 +63,7 @@
 							<td><label for="">捐款金額:</label></td>
 							<td><input type="hidden" name="form.amount"
 								value="${param.amount }">${param.amount }</td>
+							<td></td>
 						</tr>
 					</table>
 					<div>
@@ -67,6 +74,7 @@
 							<td><label for="">卡別:</label></td>
 							<td><input type="hidden" name="form.cardType"
 								value="${param.cardType }">${param.cardType }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">卡號:</label></td>
@@ -74,17 +82,20 @@
 								value="${param.cardNo_1 }${param.cardNo_2 }${param.cardNo_3 }${param.cardNo_4 }">
 								${param.cardNo_1 }-${param.cardNo_ }-${param.cardNo_3 }-${param.cardNo_4 }
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">有效期限:</label></td>
 							<td><input type="hidden" name="form.cardDeadline"
 								value="${param.month }${param.year }">${param.month }月${param.year }年
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">驗證碼:</label></td>
 							<td><input type="hidden" name="form.cardCheck"
 								value="${param.cardCheck }">${param.cardCheck }(卡片簽名處末三碼)</td>
+							<td></td>
 						</tr>
 					</table>
 					<div>
@@ -95,25 +106,30 @@
 							<td><label for="">持卡人姓名:</label></td>
 							<td><input type="hidden" name="form.cardHolder"
 								value="${param.cardHolder }">${param.cardHolder }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">生日:</label></td>
 							<td><input type="hidden" name="form.cardHolderBirth"
 								value="${param.cardHolderBirth }" style="height: 30px;">${param.cardHolderBirth }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">持卡人手機:</label></td>
 							<td><input type="hidden" name="form.cardHolderPhone"
 								value="${param.cardHolderPhone }">${param.cardHolderPhone }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">持卡人信箱:</label></td>
 							<td><input type="hidden" name="form.cardHolderEmail"
 								value="${param.cardHolderEmail }">${param.cardHolderEmail }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td></td>
 							<td><input type="submit" value="確認">
+							<td></td>
 						</tr>
 					</table>
 				</form>

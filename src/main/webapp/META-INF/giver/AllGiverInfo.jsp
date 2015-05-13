@@ -95,7 +95,7 @@ tr th {
 			$('#pageAmount').empty();
 			
 			//建立一頁顯示幾筆選單
-			for(var i=1; i<=giverCount; i++){
+			for(var i=1; i<=giverCount; i*=5){
 				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
 			}
 			
@@ -163,10 +163,6 @@ tr th {
 		}
 		
 		
-		
-		
-		
-		
 		function getData(data){
 			$('#tbdy').empty();
 			data = JSON.parse(data);
@@ -216,12 +212,10 @@ tr th {
 					$.post(urlv, { 'thisAccount':account, 'valid':false});
 					$(this).val("false").val();
 					$('.'+account).text("false");
-// 					console.log(false);
 				}else{
 					$.post(urlv, { 'thisAccount':account, 'valid':true});
 					$(this).val("true").val();
 					$('.'+account).text("true");
-// 					console.log(true);
 				}
 			})
 		}
@@ -229,8 +223,6 @@ tr th {
 		//選擇第幾頁
 		$('#page').on("change", function(){
 			$(this).prop("disabled",true);
-			$('#before').prop("disabled", true);
-			$('#after').prop("disabled", true);
 			
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp, 'pageAmount':pageAmount, 'condition':condition},getData);
@@ -240,8 +232,6 @@ tr th {
 		//上一頁
 		function before(){
 			$('#before').prop("disabled", true);
-			$('#after').prop("disabled", true);
-			$('#page').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage > 1){
@@ -255,8 +245,6 @@ tr th {
 		//下一頁
 		function after() {
 			$('#after').prop("disabled", true);
-			$('#before').prop("disabled", true);
-			$('#page').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage < pageCount ){

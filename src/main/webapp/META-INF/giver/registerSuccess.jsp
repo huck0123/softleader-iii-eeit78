@@ -20,78 +20,121 @@
 <script src="/softleader-iii-eeit78/js/giver.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 
+<style>
+.modal {
+  position: fixed;
+  top: 200px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+</style>
 </head>
 <body id="body">
 	
 	<jsp:include page="../../header.jsp" />
 	
-	<h2>註冊成功</h2>
+	<h2>${success }成功</h2>
 
 	<div class="container">
-		<div>
-			<img src="" class="img-circle" id="headshot"
-				style="width: 80px; height: 80px">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div>
+					<a href="#" data-toggle="modal" data-target="#myModal">
+						<img src="" class="img-thumbnail" id="img"
+							style="width: 100px; height: 100px">
+					</a>
+				</div>
+				<table class="table">
+					<colgroup>
+						<col span="1" style="background-color: #ADADAD">
+						<col style="background-color: #F0F0F0">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td>帳號:</td>
+							<td>${sessionScope.giver.account }</td>
+						</tr>
+						<tr>
+							<td>密碼</td>
+							<td>**********</td>
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
+						</tr>
+						<tr>
+							<td>性別</td>
+							<td id="gender"></td>
+						</tr>
+						<tr>
+							<td>身分證號碼</td>
+							<td>${sessionScope.giver.idNumber }</td>
+						</tr>
+						<tr>
+							<td>手機號碼</td>
+							<td>${sessionScope.giver.tel }</td>
+						</tr>
+						<tr>
+							<td>地址</td>
+							<td>${sessionScope.giver.address }</td>
+						</tr>
+						<tr>
+							<td>email</td>
+							<td>${sessionScope.giver.email }</td>
+						</tr>
+						<tr>
+							<td>獲得資訊</td>
+							<td id="getInfo"></td>
+						</tr>
+						<tr>
+							<td>生日</td>
+							<td><span></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
-		<table class="table table-bordered">
-			<tbody>
-				<tr>
-					<td>帳號:</td>
-					<td>${sessionScope.giver.account }</td>
-				</tr>
-				<tr>
-					<td>密碼</td>
-					<td>${sessionScope.giver.passwd }</td>
-				</tr>
-				<tr>
-					<td>姓名</td>
-					<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
-				</tr>
-				<tr>
-					<td>性別</td>
-					<td id="gender"></td>
-				</tr>
-				<tr>
-					<td>身分證號碼</td>
-					<td>${sessionScope.giver.idNumber }</td>
-				</tr>
-				<tr>
-					<td>手機號碼</td>
-					<td>${sessionScope.giver.tel }</td>
-				</tr>
-				<tr>
-					<td>地址</td>
-					<td>${sessionScope.giver.address }</td>
-				</tr>
-				<tr>
-					<td>email</td>
-					<td>${sessionScope.giver.email }</td>
-				</tr>
-				<tr>
-					<td>獲得資訊</td>
-					<td id="getInfo"></td>
-				</tr>
-				<tr>
-					<td>生日</td>
-					<td>${sessionScope.giver.birth }</td>
-				</tr>
-			</tbody>
-		</table>
+	</div>
+
+	 <!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+    	<div class="modal-dialog">
+      			<!-- Modal content-->
+	   		<div class="modal-content">
+       			<div class="modal-body">
+					<img src="" id="img1">
+	       		</div>
+    		</div>
+    	</div>
 	</div>
 
 	<script>
 	
 		function getInformation() {
-			$('#gender').text(gender(${sessionScope.giver.gender}));
-			$('#getInfo').text(getInfo(${sessionScope.giver.getInfo}));
+			$('#gender').text(gender('${sessionScope.giver.gender}'));
+			$('#getInfo').text(getInfo('${sessionScope.giver.getInfo}'));
 
 			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){
-// 				console.log(data);
 				data = JSON.parse(data);
+				var date = data.birth;
+				var d = new Date(date);
+				var birth = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate();
+				$('span').text(birth);
+				
 				var str = arrayBufferToBase64(data.headshot); 
-				$('#headshot').attr("src","data:image/png;base64," + str);
+				$('#img').attr("src","data:image/png;base64," + str);
+				$('#img1').attr("src","data:image/png;base64," + str);
 			}
 			$.post(url, {'thisAccount': thisAccount }, getData);
 

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,7 +20,8 @@ import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
 public class LoginAction extends ActionSupport {
-
+	protected Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private GiverService giverService;
 	@Autowired 
@@ -62,10 +65,16 @@ public class LoginAction extends ActionSupport {
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
 		if (gm != null) {
+			if(!gm.isValid()){
+				ServletActionContext.getRequest().setAttribute("wrongLogin",
+						"帳號已被封鎖");
+				return "login";
+			}
 			session.setAttribute("giver", gm);
 			try { // *工作2: 看看有無來源網頁 (-如有:則重導之)
 				String location = (String) session.getAttribute("location");
-				System.out.println("location(LoginHandler)=" + location);
+//				System.out.println("location(LoginHandler)=" + location);
+				log.debug("loginAction----location:{}---GiverModel:{}",location, gm);
 				if (location != null) {
 					session.removeAttribute("location");
 					HttpServletResponse response = ServletActionContext
