@@ -36,8 +36,8 @@ html, body {
 }
 
 .thumbnail {
-	text-align: left;
-		margin:10% 8% 10% 8%;
+	text-align: justify;
+ 	margin:0 8% 10% 8%; 
 }
 
 .cover-table-wrapper {
@@ -70,7 +70,7 @@ html, body {
 }
 
 .outer-wrapper {
-	height: 100%;
+	padding-top:60px;
 	width: 100%;
 	min-height: 100%;
 	display: table;
@@ -101,6 +101,13 @@ text-shadow:0px 0px 10px black;
 color: white;
 /* -webkit-text-stroke: 1px red; */
 }
+pre {background-color: white;
+border: white;
+padding-left: 0px;
+padding-right: 0px;
+margin-left: 0px;
+margin-right: 0px;
+}
 </style>
 </head>
 
@@ -123,22 +130,19 @@ color: white;
 		</div>
 	</div>
 
-	<div class="outer-wrapper">
-		<div class="inner-wrapper ">
-			<div id="campaignDiv" class="container" style="height:100%; border-bottom: 1px solid #EEEEEE">
-				<div class="blank-space10"></div>
+	<div id="campaignDiv" class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE; overflow:auto">
+		<div class="inner-wrapper">
+			<div  class="container" style="height:100%;">
+
 				<h2>現正進行</h2>
-				<div class="blank-space10"></div>
-				<div id="campaignRow"></div>
+				<div id="campaignRow" class="row"></div>
 			</div>
 		</div>
 	</div>
 
-	<div class="outer-wrapper">
+	<div id="raiserDiv" class="outer-wrapper"  style="height:100%; border-bottom: 1px solid #EEEEEE">
 		<div class="inner-wrapper ">
-
-			<div id="raiserDiv" class="container" style="height:100%; border-bottom: 1px solid #EEEEEE">
-				<div class="blank-space10"></div>
+			<div class="container" style="height:100%;">
 				<h2>參與團體</h2>
 				<div class="blank-space10"></div>
 				<div id="raiserRow" class="row"></div>
@@ -146,10 +150,10 @@ color: white;
 		</div>
 	</div>
 	
-	<div class="outer-wrapper">
+	<div class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE">
 		<div class="inner-wrapper ">
 
-			<div id="raiserDiv" class="container" style="height:100%; border-bottom: 1px solid #EEEEEE">
+			<div id="raiserDiv" class="container" ">
 				<div class="blank-space10"></div>
 				<h2>關於我們</h2>
 				<div class="blank-space10"></div>
@@ -183,7 +187,7 @@ color: white;
 						var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 						var str = arrayBufferToBase64(value.image);
-						var image = $('<img src="data:image/png;base64,' + str +'"/>');
+						var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
 						var imageA = $('<a></a>');
 						image.appendTo(imageA);
 						imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -191,7 +195,7 @@ color: white;
 						var captionDiv = $('<div class="caption"></div>');
 						var h3 = $('<h3>' + value.name+ '</h3>');
 						var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-						var p1 = $('<p>' + value.detail+ '</p>');
+						var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '...</pre></p>');
 
 						var percent = value.currentFund/ value.goal * 100;
 						var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '

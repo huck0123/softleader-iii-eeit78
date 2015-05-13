@@ -33,6 +33,8 @@ public class CampaignModel {
 	private String location;
 	
 	private byte[] image;
+	
+	private Timestamp lastModify;
 
 	
 	
@@ -157,6 +159,14 @@ public class CampaignModel {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public Timestamp getLastModify() {
+		return lastModify;
+	}
+
+	public void setLastModify(Timestamp lastModify) {
+		this.lastModify = lastModify;
 	}
 
 	

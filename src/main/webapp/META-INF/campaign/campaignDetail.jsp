@@ -17,6 +17,8 @@
 	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
+
 <style>
 #sideDiv{
 text-align: left;
@@ -25,22 +27,24 @@ vertical-align: top;
 height:100%;}
 .row-table{ display:table;}
 
+.row{margin:0px;}
 
 .row-table {
     display: table;
+    width: 100%;
 }
 
-.left-side {
-    float: none;
-    display: table-cell;
+/* .left-side { */
+/*     float: none; */
+/*     display: table-cell; */
 
-}
+/* } */
 
-.right-side {
-    float: none;
-    display: table-cell;
-    border-bottom: silver 1px solid;
-}
+/* .right-side { */
+/*     float: none; */
+/*     display: table-cell; */
+/*     border-bottom: silver 1px solid; */
+/* } */
 
 strong { font-size: 46px;}
 </style>
@@ -57,6 +61,29 @@ strong { font-size: 46px;}
 
 	</div>
 
+<nav class="navbar navbar-default" style="height:80px; margin-top: 40px; display:table; width: 100%">
+  <div class="container" style="display:table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header"">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" style="float: right;">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</nav>
 
 </body>
 
@@ -78,18 +105,18 @@ function load(){
 			value = data[0];
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>'+value.name+'</h3>');
-				var raiserP = $('<p>由<span style="font-size:20px">'+value.raiserModel.name+'</span>發起</p>');
+				var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
 
 				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
-				var vedioDiv = $('<div class="col-md-8 left-side"></div>');
+				var vedioDiv = $('<div class="col-sm-8 col-md-8 left-side"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/y4RjHV8YY_c'+'"></iframe>');
+				var iframe = $('<iframe src="'+value.vedioUrl+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
-				var sideDiv = $('<div id="sideDiv" class="col-md-4 right-side"></div>');
+				var sideDiv = $('<div id="sideDiv" class="col-sm-4 col-md-4 right-side"></div>');
 				var giverP = $('<p>已有<strong id="giverStrong"></strong>人支持</p>');
 				var moneyP = $('<p>已募得<strong>'+commafy(value.currentFund)+'</strong>元/'+commafy(value.goal)+'元</p>');
 				var d = new Date(value.endDate);

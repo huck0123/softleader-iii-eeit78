@@ -29,7 +29,7 @@ public class CampaignService {
 		List<CampaignModel> list1 = new ArrayList<>();
 		
 		list1 = campaignDao.getAll(pageNum,pageSize);
-		System.out.println("campaignservice" + list1);
+
 //		tx.commit();
 		if (list1 != null) {
 
@@ -62,7 +62,7 @@ public class CampaignService {
 	}
 
 	public boolean update(CampaignModel cm) {
-		System.out.println("service: "+cm.getValid());
+
 		boolean b = campaignDao.update(cm); 
 		if (b) {
 			return true;

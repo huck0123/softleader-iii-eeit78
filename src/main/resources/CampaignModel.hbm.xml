@@ -53,5 +53,8 @@
 		<property name="image" type="binary">
 			<column name="image" />
 		</property>
+		<property name="lastModify" type="java.sql.Timestamp" insert="false">
+			<column name="last_modify" />
+		</property>
 	</class>
 </hibernate-mapping>
