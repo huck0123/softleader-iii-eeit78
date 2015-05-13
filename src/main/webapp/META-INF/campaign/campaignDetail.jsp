@@ -78,7 +78,7 @@ function load(){
 			value = data[0];
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>'+value.name+'</h3>');
-				var raiserP = $('<p>由<span style="font-size:20px">'+value.raiserModel.name+'</span>發起</p>');
+				var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
@@ -86,7 +86,7 @@ function load(){
 				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
 				var vedioDiv = $('<div class="col-md-8 left-side"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/y4RjHV8YY_c'+'"></iframe>');
+				var iframe = $('<iframe src="'+value.vedioUrl+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
 				var sideDiv = $('<div id="sideDiv" class="col-md-4 right-side"></div>');

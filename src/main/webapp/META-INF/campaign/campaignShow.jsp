@@ -33,6 +33,13 @@ html, body {
 	width: 100%;
 	height: 5%;
 }
+pre {background-color: white;
+border: white;
+padding-left: 0px;
+padding-right: 0px;
+margin-left: 0px;
+margin-right: 0px;
+}
 </style>
 </head>
 <body id="body">
@@ -100,7 +107,7 @@ function load(){
 				var captionDiv = $('<div class="caption"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
 				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-				var p1 = $('<p>' + value.detail+ '</p>');
+				var p1 = $('<p><pre>' + value.detail+ '</pre></p');
 
 				var percent = value.currentFund/ value.goal * 100;
 				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
@@ -175,7 +182,7 @@ function makeFunction(j){return function(){
 
 			var captionDiv = $('<div class="caption"></div>');
 			var h3 = $('<h3>' + value.name+ '</h3>');
-			var p1 = $('<p>' + value.detail+ '</p>');
+			var p1 = $('<p><pre>' + value.detail+ '</pre></p>');
 
 			var percent = value.currentFund/ value.goal * 100;
 			var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
@@ -242,7 +249,7 @@ function loadCampaign() {
 
 					var captionDiv = $('<div class="caption"></div>');
 					var h3 = $('<h3>' + value.name+ '</h3>');
-					var p1 = $('<p>' + value.detail+ '</p>');
+					var p1 = $('<p><pre>' + value.detail+ '</pre></p');
 
 					var percent = value.currentFund/ value.goal * 100;
 					var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '

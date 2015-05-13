@@ -100,7 +100,6 @@ public class CampaignDao {
 		Disjunction or = Restrictions.disjunction();
 		criteria.createAlias("raiserModel", "a");
 		if (campaignForm.getId() != null) {
-			System.out.println(campaignForm.getId());
 			criteria.add(Restrictions.eq("id", campaignForm.getId()));
 		} else {
 			if (campaignForm.getName() != null) {
@@ -124,7 +123,6 @@ public class CampaignDao {
 				.setFirstResult(
 						campaignForm.getPageNum() * campaignForm.getPageSize())
 				.setMaxResults(campaignForm.getPageSize()).list();
-		System.out.println(campaignModels);
 		return campaignModels;
 	}
 
@@ -145,7 +143,6 @@ public class CampaignDao {
 
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			System.out.println("dao: "+cm.getValid());
 			session.update(cm);
 			return true;
 		} catch (Exception e) {
