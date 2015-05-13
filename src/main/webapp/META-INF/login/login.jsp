@@ -50,32 +50,31 @@ body {
 			action="<c:url value='/login/loginAction.action' />" method="post">
 			<h2 class="form-signin-heading">請登入</h2>
 			<label for="" class="sr-only">帳號</label> 
-			<input type="text"	class="form-control" placeholder="帳號" required autofocus> 
+			<input type="text" class="form-control" name="account" placeholder="帳號" required > 
 			<label	for="" class="sr-only">Password</label> 
-			<input type="password"	class="form-control" placeholder="Password" required>
+			<input type="password"	class="form-control" name="passwd" placeholder="Password" required>
 			<div class="checkbox"></div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
 
 
-
-			<!-- 		<table> -->
-			<!-- 			<tr> -->
-			<!-- 				<td>ID :</td> -->
-			<!-- 				<td><input type="text" name="account" -->
-			<%-- 					value="${param.account}"></td> --%>
-			<%-- 				<td><span class="error">${errors.account}</span></td> --%>
-			<!-- 			</tr> -->
-			<!-- 			<tr> -->
-			<!-- 				<td>PWD :</td> -->
-			<!-- 				<td><input type="text" name="passwd" -->
-			<%-- 					value="${param.passwd}"></td> --%>
-			<%-- 				<td><span class="error">${errors.passwd}</span></td> --%>
-			<!-- 			</tr> -->
-			<!-- 			<tr> -->
-			<!-- 				<td></td> -->
-			<!-- 				<td align="right"><input type="submit" value="Login"></td> -->
-			<!-- 			</tr> -->
-			<!-- 		</table> -->
+<!-- 					<table> -->
+<!-- 						<tr> -->
+<!-- 							<td>ID :</td> -->
+<!-- 							<td><input type="text" name="account" -->
+<%-- 								value="${param.account}"></td> --%>
+<%-- 							<td><span class="error">${errors.account}</span></td> --%>
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td>PWD :</td> -->
+<!-- 							<td><input type="text" name="passwd" -->
+<%-- 								value="${param.passwd}"></td> --%>
+<%-- 							<td><span class="error">${errors.passwd}</span></td> --%>
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td></td> -->
+<!-- 							<td align="right"><input type="submit" value="Login"></td> -->
+<!-- 						</tr> -->
+<!-- 					</table> -->
 		</form>
 	</div>
 	${wrongLogin}

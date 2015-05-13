@@ -57,7 +57,7 @@ public class LoginAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		
+	
 		GiverModel gm = giverService.login(account,passwd);
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
