@@ -20,7 +20,7 @@ body {
 	text-align: left;
 }
 </style>
-<title>${raiserSelf.account}123</title>
+<title>${raiserSelf.account}</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
@@ -52,7 +52,7 @@ body {
 		</div>
 	</div>
 	<script>
-		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
+		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
 		$.post(url, {
 			"account" : "${raiserSelf.account}"
 		}, getData, "json");

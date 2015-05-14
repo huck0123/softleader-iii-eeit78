@@ -88,7 +88,7 @@ body{
 		<div id="detail"></div><br>
 	</div>
 	<script>
-		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!getByCondition";
+		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getByCondition";
 		$.post(url, {'lock' : $('#ChkBox').val()} ,getData);
 
 		var page = $("#btnw").val();
@@ -254,7 +254,7 @@ body{
 					$('#tbody').children().remove();
 					$("#btnw").val("1");
 					page = 1;
-					$.post("/softleader-iii-eeit78/raiser/raiserSelectAll!getByAllConditionCount" , {
+					$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!getByAllConditionCount" , {
 						'name' : $("#textSch").val() , 'lock' : $('#ChkBox').val()
 						}, function(data){
 							Max = Math.ceil(data/ 5);
@@ -270,7 +270,7 @@ body{
 				    $(this).val($(this).prop('checked'))
 				});
 				
-				var url2 = "/softleader-iii-eeit78/raiser/raiserSelectAll!checkInformation";
+				var url2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkInformation";
 					$("#btnStop").click(function(){
 					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-remove");;
 					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
