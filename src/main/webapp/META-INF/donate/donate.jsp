@@ -67,12 +67,10 @@ b {
 							<td><input type="text" name="amount" required="required"></td>
 							<td><b id="amount"></b></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td><input type="submit" value="下一步" id="submit"></td>
-							<td></td>
-						</tr>
 					</table>
+					<div>
+						<input type="submit" class="btn btn-primary btn-lg" value="下一步" id="submit">
+					</div>
 				</form>
 			</div>
 			<div class="col-md-2"></div>

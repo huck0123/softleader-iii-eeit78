@@ -15,7 +15,7 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-<%-- <script src="/softleader-iii-eeit78/js/giver.js"></script> --%>
+<%-- <script src="/softleader-iii-eeit78/js/useful.js"></script> --%>
 
 <style>
 tr th {
@@ -34,12 +34,13 @@ tr th {
 				<select id="pageAmount"></select>顯示筆數(預設5筆)
 			</div>
 			<div class="col-md-6">
-				<button id="before" onclick="before()">上一頁</button>
+				<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
 				<select id="page"></select>
-				<button id="after" onclick="after()">下一頁</button>
+				<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
 				<input type="text" id="condition"> 
+				<span class="glyphicon glyphicon-search"></span>
 <!-- 				<button onclick="search()">查詢</button> -->
 			</div>
 		</div>
@@ -178,9 +179,9 @@ tr th {
 						+"</tr>");	
 				valid(obj.id, obj.credit);
 
-				$('#before').prop("disabled", false);
-				$('#after').prop("disabled", false);
-				$('#page').prop("disabled", false);
+// 				$('#before').prop("disabled", false);
+// 				$('#after').prop("disabled", false);
+// 				$('#page').prop("disabled", false);
 				$('#pageAmount').prop("disabled", false);
 			})
 			
@@ -214,7 +215,7 @@ tr th {
 
 		//選擇第幾頁
 		$('#page').on("change", function(){
-			$(this).prop("disabled",true);
+// 			$(this).prop("disabled",true);
 			$('#tbdy').empty();
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp,'pageAmount':pageAmount,'condition':condition},getData);
@@ -222,7 +223,7 @@ tr th {
 
 		//上一頁
 		function before(){
-			$('#before').prop("disabled", true);
+// 			$('#before').prop("disabled", true);
 			var thisPage = $('#page').val();
 			if(thisPage > 1){
 				thisPage--;
@@ -234,7 +235,7 @@ tr th {
 
 		//下一頁
 		function after() {
-			$('#after').prop("disabled", true);
+// 			$('#after').prop("disabled", true);
 			var thisPage = $('#page').val();
 			if(thisPage < pageCount ){
 				thisPage++;

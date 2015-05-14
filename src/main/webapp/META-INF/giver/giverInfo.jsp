@@ -50,88 +50,95 @@ b {
 			<div class="col-md-2"></div>
 
 			<div class="col-md-8">
-				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好</h2>
-				<div>
-					<a href="#" data-toggle="modal" data-target="#myModal">
-						<img src="" class="img-thumbnail" id="img"
-							style="width: 100px; height: 100px">
-					</a>
-				</div>
+				<div class="thumbnail">
+					<h2>會員資料修改</h2>
+					<div>
+						<a href="#" data-toggle="modal" data-target="#myModal"> 
+							<img src="" class="img-thumbnail" id="img"
+								style="width: 100px; height: 100px">
+						</a>
+					</div>
 
-				<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
-					method="post" enctype="multipart/form-data">
-					<table class="table">
-						<colgroup>
-							<col span="1" style="background-color: #ADADAD">
-							<col style="background-color: #F0F0F0">
-						</colgroup>
-						<tr>
-							<td><label for="">帳號:</label></td>
-							<td><input type="text" name="form.account"
-								value="${sessionScope.giver.account }" required="required"></td>
-						</tr>
-						<tr>
-							<td><label for="">密碼:</label></td>
-							<td>
-								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myPasswd">修改密碼</button>
-								<input type="password" name="form.passwd" value="" id="passwd" style="display: none">
-							</td>
-						</tr>
-						<tr>
-							<td><label for="">姓:</label></td>
-							<td><input type="text" name="form.familyName"
-								value="${sessionScope.giver.familyName }"></td>
-						</tr>
-						<tr>
-							<td><label for="">名字:</label></td>
-							<td><input type="text" name="form.name"
-								value="${sessionScope.giver.name }"></td>
-						</tr>
-						<tr>
-							<td><label for="">性別:</label></td>
-							<td id="gender"></td>
-						</tr>
-						<tr>
-							<td><label for="">身分證字號:</label></td>
-							<td>${sessionScope.giver.idNumber }</td>
-						</tr>
-						<tr>
-							<td><label for="">手機:</label></td>
-							<td><input type="text" name="form.tel"
-								value="${sessionScope.giver.tel }"></td>
-						</tr>
-						<tr>
-							<td><label for="">住址:</label></td>
-							<td><input type="text" name="form.address"
-								value="${sessionScope.giver.address }"></td>
-						</tr>
-						<tr>
-							<td><label for="">Email:</label></td>
-							<td><input type="email" name="form.email"
-								value="${sessionScope.giver.email }"></td>
-						</tr>
-						<tr>
-							<td><label for="">是否獲得資訊:</label></td>
-							<td><input type="radio" name="form.get_info" value="true"
-								id="getInfo1"><label for="getInfo1">是</label>
-								<input type="radio" name="form.get_info" value="false"
-								id="getInfo2"><label for="getInfo2">否</label>
-							</td>
-						</tr>
-						<tr>
-							<td><label for="">生日:</label></td>
-							<td><span></span></td>
-						</tr>
-						<tr>
-							<td><label for="">照片:</label></td>
-							<td><input type="file" name="form.headshot" value="" id="headshot"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><input type="submit" class="btn btn-default" value="送出"></td>
-						</tr>
-					</table>
-				</form>
+					<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
+						method="post" enctype="multipart/form-data">
+						<table class="table">
+							<colgroup>
+								<col span="1" style="background-color: #ADADAD">
+								<col style="background-color: #F0F0F0">
+							</colgroup>
+							<tr>
+								<td><label for="">帳號:</label></td>
+								<td>${sessionScope.giver.account }</td>
+							</tr>
+							<tr>
+								<td><label for="">密碼:</label></td>
+								<td>
+									<button type="button" class="btn btn-default"
+										data-toggle="modal" data-target="#myPasswd">修改密碼</button> 
+									<input type="password" name="form.passwd" value="" id="passwd"
+										style="display: none">
+								</td>
+							</tr>
+							<tr>
+								<td><label for="">姓:</label></td>
+								<td><input type="text" name="form.familyName" value=""></td>
+							</tr>
+							<tr>
+								<td><label for="">名字:</label></td>
+								<td><input type="text" name="form.name"	value=""></td>
+							</tr>
+							<tr>
+								<td><label for="">性別:</label></td>
+								<td id="gender"></td>
+							</tr>
+							<tr>
+								<td><label for="">身分證字號:</label></td>
+								<td>${sessionScope.giver.idNumber }</td>
+							</tr>
+							<tr>
+								<td><label for="">手機:</label></td>
+								<td><input type="text" name="form.tel" value=""></td>
+							</tr>
+							<tr>
+								<td><label for="">住址:</label></td>
+								<td><input type="text" name="form.address" value=""></td>
+							</tr>
+							<tr>
+								<td><label for="">Email:</label></td>
+								<td><input type="email" name="form.email" value=""></td>
+							</tr>
+							<tr>
+								<td><label for="">是否獲得資訊:</label></td>
+								<td>
+<!-- 									<div class="btn-group" data-toggle="buttons"> -->
+										<label class="btn btn-default">
+											<input type="radio" name="form.get_info" value="true" id="getInfo1">是
+										</label>
+										<label class="btn btn-default">
+											<input type="radio" name="form.get_info" value="false" id="getInfo2">否
+										</label>
+<!-- 									</div> -->
+								</td>
+							</tr>
+							<tr>
+								<td><label for="">生日:</label></td>
+								<td><span></span></td>
+							</tr>
+							<tr>
+								<td><label for="">照片:</label></td>
+								<td>
+									<label class="btn btn-success">更換照片
+										<input type="file" name="form.headshot"	accept="image/*"
+									 		id="headshot" style="display:none;">
+									 </label>
+								</td>
+							</tr>
+						</table>
+						<div>
+							<input type="submit" class="btn btn-primary" value="送出">
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -143,7 +150,7 @@ b {
       			<!-- Modal content-->
 	   		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1">
+					<img src="" id="img1" style="weight:400px; height:400px;">
 	       		</div>
     		</div>
     	</div>
@@ -174,14 +181,14 @@ b {
 			$('#passwd').val($('#password1').val());
 		});
 		
-// 		$('#password2').on("keyup", function(){
-// 			if(password1.value != password2.value){
-// 				$('#save').prop("disabled", true);
+		$('#password2').on("keyup", function(){
+			if(password1.value != password2.value){
+				$('#save').prop("disabled", true);
 // 				$('#passwd').text("密碼不符");
-// 			}else{
-// 				$('#save').prop("disabled", false);
-// 			}
-// 		});
+			}else{
+				$('#save').prop("disabled", false);
+			}
+		});
 	
 	
 	</script>
@@ -190,26 +197,48 @@ b {
 
 		var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			
-		function getInformation(){
-			$('#gender').text(gender('${sessionScope.giver.gender}'));
-			
-			var getInfo = ${sessionScope.giver.getInfo};
-			if(getInfo){
-				$('#getInfo1').prop("checked", true);
+		//判斷是否為null
+		function undefinedCheck(data){
+			if(data == undefined){
+				data = null;
+				return data;
 			}else{
-				$('#getInfo2').prop("checked", true);
+				return data;
 			}
+		};
+		
+		function getInformation(){
 			
 			function getData(data){
 				data = JSON.parse(data);
+				console.log(data);
+				$('input[name="form.familyName"]').val(data.familyName);
+				$('input[name="form.name"]').val(data.name);
+				$('input[name="form.tel"]').val(data.tel);
+				$('input[name="form.address"]').val(data.address);
+				$('input[name="form.email"]').val(data.email);
+				$('#gender').text(gender(data.gender));
+				
+				var getInfo = data.getInfo;
+				if(getInfo){
+					$('#getInfo1').prop("checked", true);
+				}else{
+					$('#getInfo2').prop("checked", true);
+				}
+				
 				var date = data.birth;
 				var d = new Date(date);
 				var birth = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate();
 				$('span').text(birth);
 				
-				var str = arrayBufferToBase64(data.headshot); 
-				$('#img').attr("src","data:image/png;base64," + str);
-				$('#img1').attr("src","data:image/png;base64," + str);
+				if(undefinedCheck(data.headshot) == null){
+					$('#img').attr("src","../pictures/headshot.jpg");
+					$('#img1').attr("src","../pictures/headshot.jpg");
+				}else{
+					var str = arrayBufferToBase64(data.headshot); 
+					$('#img').attr("src","data:image/png;base64," + str);
+					$('#img1').attr("src","data:image/png;base64," + str);
+				}
 			}
 			$.post(url, {'thisAccount': '${sessionScope.giver.account}' }, getData);
 		}
@@ -217,15 +246,21 @@ b {
 				
 		//驗證圖片
 		$('#headshot').on("change",function(){
-			readFile();
+			var file = headshot.files[0];
+			console.log(file);
+			if(file != null){
+				readFile(file);
+			}else{
+				$('#img').attr("src","../pictures/headshot.jpg");
+				$('#img1').attr("src","../pictures/headshot.jpg");
+			}
 		})
 
-		function readFile(){
-		    var file = headshot.files[0]; 
-		    if(!/image\/\w+/.test(file.type)){ 
-		        alert("檔案請放圖片！"); 
-		        return; 
-		    } 
+		function readFile(file){
+// 		    if(!/image\/\w+/.test(file.type)){ 
+// 		        alert("檔案請放圖片！"); 
+// 		        return; 
+// 		    } 
 		    var reader = new FileReader();
 		    reader.readAsDataURL(file); 
 		    reader.onload = function(){ 

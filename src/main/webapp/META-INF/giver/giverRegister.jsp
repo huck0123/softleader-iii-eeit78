@@ -51,6 +51,7 @@ b {
 			<div class="col-md-2"></div>
 
 			<div class="col-md-8">
+			<div class="thumbnail">
 				<h2>捐款會員註冊</h2>
 				<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 					method="post" enctype="multipart/form-data">
@@ -92,10 +93,15 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">性別:<b>*</b></label></td>
-							<td><input type="radio" name="form.gender" value="true" id="male">
-								<label for="male">男</label>
-								<input type="radio" name="form.gender" value="false" id="female">
-								<label for="female">女</label>
+							<td>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-default">
+										<input type="radio" name="form.gender" value="true" >男
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" name="form.gender" value="false" >女
+									</label>
+								</div>
 							</td>
 							<td></td>
 						</tr>
@@ -125,10 +131,15 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">是否獲得資訊:</label></td>
-							<td><input type="radio" name="form.get_info" value="true" id="getInfo1" checked="checked">
-								<label for="getInfo1">是</label>
-								<input type="radio" name="form.get_info" value="false" id="getInfo2">
-								<label for="getInfo2">否</label>
+							<td>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-default">
+										<input type="radio" name="form.get_info" value="true" id="getInfo1" checked="checked">是
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" name="form.get_info" value="false" id="getInfo2">否
+									</label>
+								</div>
 							</td>
 							<td></td>
 						</tr>
@@ -140,23 +151,30 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">照片:</label></td>
-							<td><input type="file" name="form.headshot" value="" id="headshot"></td>
+							<td>
+								<label class="btn btn-success">更換照片
+									<input type="file" name="form.headshot"	accept="image/*"
+								 		id="headshot" style="display:none;">
+								</label>
+							</td>
 							<td></td>
 						</tr>
 						<tr>
+							<td></td>
 							<td>
 								<a href="#" data-toggle="modal" data-target="#myModal">
 									<img src="" id="img" style="weight:70px; height:70px;">
 								</a>
 							</td>
-							<td>
-								<input type="submit" class="btn btn-default" value="送出" id="submit">
-								<input type="reset" class="btn btn-default" value="清除" >
-							</td>
 							<td></td>
 						</tr>
 					</table>
+					<div>
+						<input type="submit" class="btn btn-primary" value="送出" id="submit">
+						<input type="reset" class="btn btn-primary" value="清除" >
+					</div>
 				</form>
+			</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -169,7 +187,7 @@ b {
    	  			<!-- Modal content-->
       		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1">
+					<img src="" id="img1" style="weight:400px; height:400px;">
         		</div>
    			</div>
    		</div>

@@ -71,7 +71,7 @@ b {
 						</tr>
 					</table>
 					</div>
-
+	
 					<div>
 						<h3>信用卡資料</h3>
 					<table class="table">
@@ -93,10 +93,10 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">卡號:<b>*</b></label></td>
-							<td><input type="text" class="card" name="cardNo_1" value="" id="cardNo_1" required="required">-
-								<input type="text" class="card" name="cardNo_2" value="" id="cardNo_2" required="required">-
-								<input type="text" class="card" name="cardNo_3" value="" id="cardNo_3" required="required">-
-								<input type="text" class="card" name="cardNo_4" value="" id="cardNo_4" required="required">
+							<td><input type="text" class="card" name="cardNo_1" value="" required="required">-
+								<input type="text" class="card" name="cardNo_2" value="" required="required">-
+								<input type="text" class="card" name="cardNo_3" value="" required="required">-
+								<input type="text" class="card" name="cardNo_4" value="" required="required">
 							</td>
 							<td></td>
 						</tr>
@@ -115,14 +115,14 @@ b {
 						</tr>
 					</table>
 					</div>
-
+<br><br><br><br>
 					<div>
 						<h3>持卡人資料</h3>
 					<table class="table">
 						<colgroup>
 							 <col span="1" style="background-color:#ADADAD">
    							 <col style="background-color:#F0F0F0; ">
-   							 <col style="background-color:#F0F0F0; width:150px;">
+   							 <col style="background-color:#F0F0F0; width:250px;">
 						</colgroup>
 						<tr>
 							<td><label for="">持卡人姓名:<b>*</b></label></td>
@@ -138,20 +138,18 @@ b {
 						</tr>
 						<tr>
 							<td><label for="">持卡人手機:<b>*</b></label></td>
-							<td><input type="text" name="cardHolderPhone" required="required"><b id="tel"></b></td>
-							<td></td>
+							<td><input type="text" name="cardHolderPhone" required="required"></td>
+							<td><b id="tel"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">持卡人信箱:<b>*</b></label></td>
-							<td><input type="email" name="cardHolderEmail" required="required"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><input type="submit" value="下一步" id="submit">
+							<td><input type="email" name="cardHolderEmail" id="holderEmail" required="required"></td>
 							<td></td>
 						</tr>
 					</table>
+					</div>
+					<div>
+						<input type="submit" class="btn btn-primary btn-lg" value="下一步" id="submit">
 					</div>
 				</form>
 			</div>
@@ -184,15 +182,34 @@ b {
 		}
 		$('#submit').prop("disabled",false);
 	})
+
+	nextFocus();
 	
-	$('#cardNo_1').on("blur", function(){
-		console.log($(this).val());
-		
-		
-	});
-// 	var cardNo_2 = $('#cardNo_2').val();
-// 	var cardNo_3 = $('#cardNo_3').val();
-// 	var cardNo_4 = $('#cardNo_4').val();
+	//focus欄位
+	function nextFocus(){
+		$('input[name="cardNo_1"]').on("keyup", function(){
+			if($(this).val().length == 4){
+				$('input[name="cardNo_2"]').focus();
+			}
+		});
+		$('input[name="cardNo_2"]').on("keyup", function(){
+			if($(this).val().length == 4){
+				$('input[name="cardNo_3"]').focus();
+			}
+		});
+		$('input[name="cardNo_3"]').on("keyup", function(){
+			if($(this).val().length == 4){
+				$('input[name="cardNo_4"]').focus();
+			}
+		});
+		$('input[name="cardCheck"]').on("keyup", function(){
+			if($(this).val().length == 3){
+				$('input[name="cardHolder"]').focus();
+			}
+		})
+	}
+	
+	
 	
 	
 </script>

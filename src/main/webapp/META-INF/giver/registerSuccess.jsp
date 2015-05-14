@@ -45,60 +45,62 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div>
-					<a href="#" data-toggle="modal" data-target="#myModal">
-						<img src="" class="img-thumbnail" id="img"
-							style="width: 100px; height: 100px">
-					</a>
+				<div class="thumbnail">
+					<div>
+						<a href="#" data-toggle="modal" data-target="#myModal">
+							<img src="" class="img-thumbnail" id="img"
+								style="width: 100px; height: 100px">
+						</a>
+					</div>
+					<table class="table">
+						<colgroup>
+							<col span="1" style="background-color: #ADADAD">
+							<col style="background-color: #F0F0F0">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td>帳號:</td>
+								<td>${sessionScope.giver.account }</td>
+							</tr>
+							<tr>
+								<td>密碼</td>
+								<td>**********</td>
+							</tr>
+							<tr>
+								<td>姓名</td>
+								<td id="name"></td>
+							</tr>
+							<tr>
+								<td>性別</td>
+								<td id="gender"></td>
+							</tr>
+							<tr>
+								<td>身分證號碼</td>
+								<td>${sessionScope.giver.idNumber }</td>
+							</tr>
+							<tr>
+								<td>手機號碼</td>
+								<td id="phone"></td>
+							</tr>
+							<tr>
+								<td>地址</td>
+								<td id="address"></td>
+							</tr>
+							<tr>
+								<td>email</td>
+								<td id="email"></td>
+							</tr>
+							<tr>
+								<td>獲得資訊</td>
+								<td id="getInfo"></td>
+							</tr>
+							<tr>
+								<td>生日</td>
+								<td><span></span></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<table class="table">
-					<colgroup>
-						<col span="1" style="background-color: #ADADAD">
-						<col style="background-color: #F0F0F0">
-					</colgroup>
-					<tbody>
-						<tr>
-							<td>帳號:</td>
-							<td>${sessionScope.giver.account }</td>
-						</tr>
-						<tr>
-							<td>密碼</td>
-							<td>**********</td>
-						</tr>
-						<tr>
-							<td>姓名</td>
-							<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
-						</tr>
-						<tr>
-							<td>性別</td>
-							<td id="gender"></td>
-						</tr>
-						<tr>
-							<td>身分證號碼</td>
-							<td>${sessionScope.giver.idNumber }</td>
-						</tr>
-						<tr>
-							<td>手機號碼</td>
-							<td>${sessionScope.giver.tel }</td>
-						</tr>
-						<tr>
-							<td>地址</td>
-							<td>${sessionScope.giver.address }</td>
-						</tr>
-						<tr>
-							<td>email</td>
-							<td>${sessionScope.giver.email }</td>
-						</tr>
-						<tr>
-							<td>獲得資訊</td>
-							<td id="getInfo"></td>
-						</tr>
-						<tr>
-							<td>生日</td>
-							<td><span></span></td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -110,7 +112,7 @@
       			<!-- Modal content-->
 	   		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1">
+					<img src="" id="img1" style="weight:400px; height:400px;">
 	       		</div>
     		</div>
     	</div>
@@ -118,23 +120,44 @@
 
 	<script>
 	
+		//判斷是否為null
+		function undefinedCheck(data){
+			if(data == undefined){
+				data = null;
+				return data;
+			}else{
+				return data;
+			}
+		};
+	
 		function getInformation() {
-			$('#gender').text(gender('${sessionScope.giver.gender}'));
-			$('#getInfo').text(getInfo('${sessionScope.giver.getInfo}'));
 
 			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){
 				data = JSON.parse(data);
+
+				$('#name').text(data.familyName + data.name);
+				$('#phone').text(data.tel);
+				$('#address').text(data.address);
+				$('#email').text(data.email);
+				$('#gender').text(gender(data.gender));
+				$('#getInfo').text(getInfo(data.getInfo));
+				
 				var date = data.birth;
 				var d = new Date(date);
 				var birth = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate();
 				$('span').text(birth);
 				
-				var str = arrayBufferToBase64(data.headshot); 
-				$('#img').attr("src","data:image/png;base64," + str);
-				$('#img1').attr("src","data:image/png;base64," + str);
+				if(undefinedCheck(data.headshot) == null){
+					$('#img').attr("src","../pictures/headshot.jpg");
+					$('#img1').attr("src","../pictures/headshot.jpg");
+				}else{
+					var str = arrayBufferToBase64(data.headshot); 
+					$('#img').attr("src","data:image/png;base64," + str);
+					$('#img1').attr("src","data:image/png;base64," + str);
+				}
 			}
 			$.post(url, {'thisAccount': thisAccount }, getData);
 
