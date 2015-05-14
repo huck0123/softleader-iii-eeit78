@@ -154,7 +154,6 @@ body {
 .right-side {
     float: none;
     display: table-cell;
-    border-bottom: silver 1px solid;
 }
 }
 
@@ -169,7 +168,7 @@ body {
 
 	}
 	
-	.left-side {
+.left-side {
     float: none;
     display: table-cell;
 
@@ -178,6 +177,5 @@ body {
 .right-side {
     float: none;
     display: table-cell;
-    border-bottom: silver 1px solid;
 }
 }

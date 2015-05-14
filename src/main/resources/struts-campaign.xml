@@ -8,7 +8,7 @@
 	<package name="campaignPackage" namespace="/campaign" extends="user-defined">
 	<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
 		<global-results>
-			<result name="login">/META-INF/login/raiserLogin.jsp</result>
+			<result name="login">/META-INF/login/login.jsp</result>
 		</global-results>
 		<action name="loginAction" class="loginAction">
 			<interceptor-ref name="defaultStack" /> 
