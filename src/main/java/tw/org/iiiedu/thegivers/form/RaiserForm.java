@@ -17,15 +17,7 @@ public class RaiserForm {
 	private File logo;
 	private String detail;
 	private String videoUrl;
-	@Override
-	public String toString() {
-		return "RaiserForm [id=" + id + ", account=" + account + ", passwd="
-				+ passwd + ", name=" + name + ", tel=" + tel
-				+ ", contactPerson=" + contactPerson + ", contactTel="
-				+ contactTel + ", email=" + email + ", address=" + address
-				+ ", logo=" + logo + ", detail=" + detail + ", videoUrl="
-				+ videoUrl + "]";
-	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -98,10 +90,4 @@ public class RaiserForm {
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
 	}
-	
-	
-
-	
-	
-
 }

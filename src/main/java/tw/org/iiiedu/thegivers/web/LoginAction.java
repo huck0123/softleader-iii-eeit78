@@ -91,6 +91,11 @@ public class LoginAction extends ActionSupport {
 		
 		RaiserModel rm = raiserService.login(account,passwd);
 		if (rm != null) {
+			if(!rm.isValid()){
+				ServletActionContext.getRequest().setAttribute("wrongLogin",
+						"帳號已被封鎖");
+				return "login";
+			}
 			session.setAttribute("raiser", rm);
 			try { // *工作2: 看看有無來源網頁 (-如有:則重導之)
 				String location = (String) session.getAttribute("location");
