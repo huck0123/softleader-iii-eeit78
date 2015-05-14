@@ -182,7 +182,7 @@ function load(){
 				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
 				var vedioDiv = $('<div class="col-sm-8 col-md-8 left-side"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+value.vedioUrl+'"></iframe>');
+				var iframe = $('<iframe src="'+value.vedioUrl+'?showinfo=0'+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
 				var sideDiv = $('<div id="sideDiv" class="col-sm-4 col-md-4 right-side"></div>');
@@ -231,39 +231,6 @@ function load(){
 
 		})
 	}
-
-function makeFunction(j){return function(){
-	$.post('',
-			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
-				data = JSON.parse(data);
-				currentPage=j;
- 		$('#row').empty();
-		$(data).each(function(index,value){
-			var rowDiv = $('#row');
-			var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
-			var thumbnailDiv = $('<div class="thumbnail"></div>');
-			
-			var str = arrayBufferToBase64(value.image); 
-			var image = $('<img  src="data:image/png;base64,' + str +'"/>');
-			image.on('click',function(){goDetail(value)});
-			
-			var captionDiv = $('<div class="caption"></div>');
-			var h3 = $('<h3>'+value.name+'</h3>');
-			var p1 = $('<p>'+ value.detail+'</p>');
-			var p2 = $('<p></p>');
-			var a = $('<a href="#" class="btn btn-primary" role="button">我要捐款</a>')
-			a.appendTo(p2);
-			h3.appendTo(captionDiv);
-			p1.appendTo(captionDiv);
-			p2.appendTo(captionDiv);
-			image.appendTo(thumbnailDiv);
-			captionDiv.appendTo(thumbnailDiv);
-			thumbnailDiv.appendTo(colDiv);
-			colDiv.appendTo(rowDiv);
-		})
-	})
-
-}}
 
 
 
