@@ -10,8 +10,8 @@
 
 		<div class="row">
 			<div class="col-md-2 ">
-				<h2 class="header-brand">
-					<a href="<c:url value='/index.jsp'/>">TheGivers</a>
+				<h2 class="header-brand" >
+					<a style="color: white; text-decoration: none" href="<c:url value='/index.jsp'/>">TheGivers</a>
 				</h2>
 			</div>
 			<div class="col-md-8 ">
@@ -36,7 +36,8 @@
 
 
 
-						<li><a href=""><img class="header-pic"
+						<li><a data-toggle="collapse" data-target="#collapseSearch1"
+								aria-expanded="false" aria-controls="collapseSearch1"><img class="header-pic"
 								src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
 						<c:if test="${raiser ==null && giver ==null && admin ==null}">
 							<li><a data-toggle="collapse" data-target="#collapse1"
@@ -84,9 +85,31 @@
 			</div>
 
 		</div>
+		
+			<div class="collapse" id="collapseSearch1">
+
+			<div class="row">
+
+				<div id="custom-search-input">
+					<div class="input-group col-md-10 col-md-offset-1"
+						style="padding: 30px">
+						<input type="text" class="form-control input-lg"
+							placeholder="請輸入關鍵字" id="nameSearch" /> <span
+							class="input-group-btn">
+							<button class="btn btn-info btn-lg" type="button" id="btn1">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+
+			</div>
+
+	</div>
+	
 		<div class="collapse" id="collapse1"
-			style="background-color: #EEEEEE; text-align: left; padding: 15px 15px 30px 60px">
-			<div id="search1" class="row" style="padding: 15px 0px 0px 0px">
+			style="background-color: #EEEEEE; text-align: left; padding-left:60px">
+			<div id="search1" class="row" style="padding: 15px 0px 0px 0px ; margin: 30px">
 				<h2 style="padding-left: 15px">登入您的帳號</h2>
 				<div class="col-md-6 col-sm-6">
 					<p>
@@ -133,7 +156,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<h2 class="header-brand">
-					<a href="<c:url value='/index.jsp'/>">TheGivers</a>
+					<a style="text-decoration: none; color: limegreen;" href="<c:url value='/index.jsp'/>">TheGivers</a>
 				</h2>
 			</div>
 			<div class="col-md-8">
@@ -159,7 +182,9 @@
 				<nav class="navbar margin-bottom0">
 					<ul class="nav navbar-nav header-nav">
 
-						<li><a href=""><img class="header-pic"
+						<li><a data-toggle="collapse" data-target="#collapseSearch2"
+							aria-expanded="false" aria-controls="collapseSearch2"><img
+								class="header-pic"
 								src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
 
 						<c:if test="${raiser ==null && giver ==null && admin ==null}">
@@ -203,10 +228,35 @@
 			</div>
 		</div>
 	</div>
-	<div class="collapse" id="collapseExample"
-		style="background-color: #EEEEEE; text-align: left; padding: 15px 15px 30px 25px;">
+	
+	<div class="collapse" id="collapseSearch2">
+		<div class="container">
+			<div class="row">
+
+				<div id="custom-search-input" style="color:grey">
+					<div class="input-group col-md-10 col-md-offset-1"
+						style="padding: 30px">
+						<input type="text" class="form-control input-lg"
+							placeholder="請輸入關鍵字" id="nameSearch" /> <span
+							class="input-group-btn">
+							<button class="btn btn-info btn-lg" type="button" id="btn1">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+  	<div class="collapse" id="collapseExample"
+		style="background-color: #EEEEEE; text-align: left; padding-left:25px;">
 		<h2 style="padding-left: 15px">登入您的帳號</h2>
-		<div id="search2" class="row" style="padding: 15px 0px 0px 0px">
+		<div id="search2" class="row" style="padding: 15px 0px 0px 0px; margin-bottom: 30px">
 
 			<div class="col-md-6 col-sm-6">
 				<p>
@@ -220,7 +270,7 @@
 			</div>
 
 			<div class="col-md-6 col-sm-6"
-				style="border-left: 1px black solid; padding-left: 30px">
+				style="border-left: 1px silver solid; padding-left: 30px">
 				<p>
 					<a href="<c:url value='/giver/giverRegister'/>"
 						class="btn btn-primary">一般會員註冊</a>

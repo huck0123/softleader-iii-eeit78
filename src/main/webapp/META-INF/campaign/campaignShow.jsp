@@ -41,12 +41,11 @@ margin-left: 0px;
 margin-right: 0px;
 }
 .col-md-4{height: 760px}
-
+/*
 #custom-search-input{
     padding: 3px;
     border: solid 1px #E4E4E4;
     border-radius: 6px;
-    background-color: #fff;
 }
 
 #custom-search-input input{
@@ -72,7 +71,7 @@ margin-right: 0px;
 
 #custom-search-input .glyphicon-search{
     font-size: 23px;
-}
+} */
 a:hover{cursor: pointer;}
 </style>
 </head>

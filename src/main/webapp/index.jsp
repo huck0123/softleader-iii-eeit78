@@ -37,7 +37,7 @@ html, body {
 
 .thumbnail {
 	text-align: justify;
- 	margin:0 8% 10% 8%; 
+ 	margin:30px 8% 10% 8%; 
 }
 
 .cover-table-wrapper {
@@ -153,12 +153,12 @@ margin-right: 0px;
 	<div class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE">
 		<div class="inner-wrapper ">
 
-			<div id="raiserDiv" class="container" ">
+			<div id="aboutUs" class="container" ">
 				<div class="blank-space10"></div>
 				<h2>關於我們</h2>
 				<div class="blank-space10"></div>
-				<div id="raiserRow" class="row">
-				<h4>TheGivers 致力於提供公益團體與民眾一個小額捐款的平台，期望讓每一分錢都可以用在需要的地方。</h4>
+				<div class="row">
+				<h4>TheGivers 致力於提供公益團體與民眾一個捐款平台，期望讓每一分錢都能夠用在需要的地方。</h4>
 				</div>
 			</div>
 		</div>
