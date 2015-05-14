@@ -37,29 +37,29 @@ public class GiverHistoryService {
 	public Set<GiverHistoryModel> loadByAllCondition(GiverHistoryAllConditionModel allCondition){
 		Set<GiverHistoryModel> result = new TreeSet<GiverHistoryModel>();
 		
-		if(allCondition.getCampaign_id() != null){
-			List<GiverHistoryModel> searchById = giverHistoryDao
-					.getByCampaign_id(allCondition.getGiver_id(), allCondition.getCampaign_id());
-			if(searchById.size()>0){
-				for(GiverHistoryModel g:searchById){
-					result.add(g);
-				}
-			}
-		}
-		if(allCondition.getCampaign_name() != null){
-			List<CampaignModel> searchByName = giverHistoryDao
-					.getByCampaign_name(allCondition.getGiver_id(), allCondition.getCampaign_name());
-			if(searchByName.size()>0){
-				for(CampaignModel c:searchByName){
-					List<GiverHistoryModel> searchById = giverHistoryDao.getByCampaign_id(allCondition.getGiver_id(), c.getId());
-						if(searchById.size()>0){
-							for(GiverHistoryModel g:searchById){
-								result.add(g);
-							}
-						}
-				}
-			}
-		}
+//		if(allCondition.getCampaign_id() != null){
+//			List<GiverHistoryModel> searchById = giverHistoryDao
+//					.getByCampaign_id(allCondition.getGiver_id(), allCondition.getCampaign_id());
+//			if(searchById.size()>0){
+//				for(GiverHistoryModel g:searchById){
+//					result.add(g);
+//				}
+//			}
+//		}
+//		if(allCondition.getCampaign_name() != null){
+//			List<CampaignModel> searchByName = giverHistoryDao
+//					.getByCampaign_name(allCondition.getGiver_id(), allCondition.getCampaign_name());
+//			if(searchByName.size()>0){
+//				for(CampaignModel c:searchByName){
+//					List<GiverHistoryModel> searchById = giverHistoryDao.getByCampaign_id(allCondition.getGiver_id(), c.getId());
+//						if(searchById.size()>0){
+//							for(GiverHistoryModel g:searchById){
+//								result.add(g);
+//							}
+//						}
+//				}
+//			}
+//		}
 		if(allCondition.getMinAmount() != null || allCondition.getMaxAmount() != null){
 			giverHistoryAllConditionModel.makeDefaultAmount(allCondition);
 			List<GiverHistoryModel> searchByAmount = giverHistoryDao

@@ -15,8 +15,7 @@ public class GiverHistoryAllConditionModel {
 	public Timestamp BEFORE_DATE = new Timestamp(new Date().getTime());
 	public Timestamp AFTER_DATE = new Timestamp(new Date(0).getTime());
 	private Integer giver_id = null;
-	private Integer campaign_id = null;
-	private String campaign_name = null;
+	private String keyword = null;
 	private Integer minAmount = null;
 	private Integer maxAmount = null;
 	private Integer pageNumber = null;
@@ -31,17 +30,11 @@ public class GiverHistoryAllConditionModel {
 	public void setGiver_id(Integer giver_id) {
 		this.giver_id = giver_id;
 	}
-	public Integer getCampaign_id() {
-		return campaign_id;
+	public String getKeyword() {
+		return keyword;
 	}
-	public void setCampaign_id(Integer campaign_id) {
-		this.campaign_id = campaign_id;
-	}
-	public String getCampaign_name() {
-		return campaign_name;
-	}
-	public void setCampaign_name(String campaign_name) {
-		this.campaign_name = campaign_name;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public Integer getMinAmount() {
 		return minAmount;

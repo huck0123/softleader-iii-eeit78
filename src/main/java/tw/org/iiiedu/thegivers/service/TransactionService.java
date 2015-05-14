@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tw.org.iiiedu.thegivers.dao.TransactionDao;
 import tw.org.iiiedu.thegivers.model.CampaignModel;
+import tw.org.iiiedu.thegivers.model.GiverHistoryAllConditionModel;
 import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 
 @Service
@@ -52,6 +53,12 @@ public class TransactionService {
 	public List<TransactionDetailModel> getByGiverId(int gId){
 		
 		List<TransactionDetailModel> models = dao.getByGiverId(gId);
+		return models;
+	}
+	
+	// 取出某giverId的所有藉由條件查詢的交易紀錄
+	public List<TransactionDetailModel> getByIdAndCondition(GiverHistoryAllConditionModel allCondition){
+		List<TransactionDetailModel> models = dao.getByIdAndCondition(allCondition);
 		return models;
 	}
 	

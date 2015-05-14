@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.org.iiiedu.thegivers.model.CampaignModel;
+import tw.org.iiiedu.thegivers.model.GiverHistoryAllConditionModel;
 import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 
 @Repository
@@ -20,6 +21,8 @@ public class TransactionDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	GiverHistoryAllConditionModel giverHistoryAllConditionModel;
 
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -166,6 +169,45 @@ public class TransactionDao {
 		}
 	}
 
+	//藉由條件取出某giverId的所有交易紀錄
+	@SuppressWarnings("unchecked")
+	public List<TransactionDetailModel> getByIdAndCondition(GiverHistoryAllConditionModel allCondition){
+		
+		Criteria criteria = getSession().createCriteria(TransactionDetailModel.class);
+		Disjunction or = Restrictions.disjunction();
+		criteria.createAlias("campaignModel", "a");
+		criteria.createAlias("a.raiserModel", "b");	
+		
+		criteria.add(Restrictions.eq("giverId", allCondition.getGiver_id()));
+		
+		if(allCondition.getKeyword() != null){
+			or.add(Restrictions.like("a.name", "%" + allCondition.getKeyword() + "%"));
+			or.add(Restrictions.like("b.name", "%" + allCondition.getKeyword() + "%"));
+			criteria.add(or);
+//			criteria.createCriteria("campaignModel")
+//					.add(Restrictions.like("name", "%" + allCondition.getKeyword() + "%"));
+//			criteria.createCriteria("campaignModel").createCriteria("raiserModel")
+//					.add(Restrictions.like("name", "%" + allCondition.getKeyword() + "%"));
+		}
+		if(allCondition.getMinAmount() != null || allCondition.getMaxAmount() != null){
+			giverHistoryAllConditionModel.makeDefaultAmount(allCondition);
+			criteria.add(Restrictions.le("amount", allCondition.getMaxAmount()))
+					.add(Restrictions.ge("amount", allCondition.getMinAmount()));
+		}
+		if(allCondition.getBeforeDate() != null || allCondition.getAfterDate() != null){
+			giverHistoryAllConditionModel.makeDefaultDate(allCondition);
+			criteria.add(Restrictions.between("date", allCondition.getAfterDate(), allCondition.getBeforeDate()));
+		}
+		if(allCondition.getPageNumber() == null || allCondition.getPageSize() == null){
+			giverHistoryAllConditionModel.makeDefaultPage(allCondition);
+		}
+		
+		List<TransactionDetailModel> transactionDetailModel = criteria
+				.setFirstResult(allCondition.getPageNumber() * allCondition.getPageSize())
+				.setMaxResults(allCondition.getPageSize()).addOrder(Order.asc("id")).list();
+		return transactionDetailModel;
+	}
+	
 	// 更新
 	public void update(TransactionDetailModel model) {
 

@@ -29,6 +29,13 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		
+		<action name="giverDetailAllHistoryByCondition" class="transactionAction">
+			<result type="stream" name="allHistoryByCondition">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 
 		<action name="*">
 			<result>/META-INF/donate/{1}.jsp</result>

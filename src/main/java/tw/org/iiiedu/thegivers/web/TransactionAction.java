@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.form.TransactionDetailForm;
+import tw.org.iiiedu.thegivers.model.GiverHistoryAllConditionModel;
 import tw.org.iiiedu.thegivers.model.TransactionDetailModel;
 import tw.org.iiiedu.thegivers.service.TransactionService;
 
@@ -34,6 +35,7 @@ public class TransactionAction extends ActionSupport {
 	private ServletContext context;
 	private TransactionDetailForm form;
 	private TransactionDetailModel model;
+	private GiverHistoryAllConditionModel allCondition;
 	private InputStream inputStream;
 	private int thisPage;
 	private int pageAmount;
@@ -97,9 +99,14 @@ public class TransactionAction extends ActionSupport {
 	public void setCredit(boolean credit) {
 		this.credit = credit;
 	}
+	public GiverHistoryAllConditionModel getAllCondition() {
+		return allCondition;
+	}
 
-	
-	
+	public void setAllCondition(GiverHistoryAllConditionModel allCondition) {
+		this.allCondition = allCondition;
+	}
+
 	//insert
 	public String donate(){
 		context = ServletActionContext.getServletContext();
@@ -189,6 +196,18 @@ public class TransactionAction extends ActionSupport {
 		return "allHistory";	
 	}
 	
+	//giver條件歷史資料
+	public String giverDetailByCondition(){
+		List<TransactionDetailModel> tdm = service.getByIdAndCondition(allCondition);
+//		System.out.println(tdm);
+		if(tdm.size() != 0){
+			Gson gson = new Gson();
+			String jsonStr = gson.toJson(tdm);
+			inputStream = new ByteArrayInputStream(
+					jsonStr.getBytes(StandardCharsets.UTF_8));
+		}
+		return "allHistoryByCondition";
+	}
 	
 	
 }

@@ -88,24 +88,24 @@ public class RaiserHistoryDao {
 //			criteria = session.createCriteria(CampaignModel.class)
 //					.add(Restrictions.like("name", "%" + allCondition.getCampaign_name() + "%"));
 //		}
-		
-		if(allCondition.getCampaign_id() != null){
-			criteria.add(Restrictions.eq("campaign_id", allCondition.getCampaign_id()));
-		}
-		if(allCondition.getCampaign_name() != null){
-			criteria.createCriteria("CampaignModel.class")
-					.add(Restrictions.like("name", "%" + allCondition.getCampaign_name() + "%"));
-		}
-		if(allCondition.getMinAmount() != null || allCondition.getMaxAmount() != null){
-			giverHistoryAllConditionModel.makeDefaultAmount(allCondition);
-			criteria.add(Restrictions.lt("amount", allCondition.getMaxAmount()))
-					.add(Restrictions.gt("amount", allCondition.getMinAmount()));
-		}
-		if(allCondition.getBeforeDate() != null || allCondition.getAfterDate() != null){
-			giverHistoryAllConditionModel.makeDefaultDate(allCondition);
-			criteria.add(Restrictions.between("date", allCondition.getAfterDate(), allCondition.getBeforeDate()));
-		}
-		
+//		
+//		if(allCondition.getCampaign_id() != null){
+//			criteria.add(Restrictions.eq("campaign_id", allCondition.getCampaign_id()));
+//		}
+//		if(allCondition.getCampaign_name() != null){
+//			criteria.createCriteria("CampaignModel.class")
+//					.add(Restrictions.like("name", "%" + allCondition.getCampaign_name() + "%"));
+//		}
+//		if(allCondition.getMinAmount() != null || allCondition.getMaxAmount() != null){
+//			giverHistoryAllConditionModel.makeDefaultAmount(allCondition);
+//			criteria.add(Restrictions.lt("amount", allCondition.getMaxAmount()))
+//					.add(Restrictions.gt("amount", allCondition.getMinAmount()));
+//		}
+//		if(allCondition.getBeforeDate() != null || allCondition.getAfterDate() != null){
+//			giverHistoryAllConditionModel.makeDefaultDate(allCondition);
+//			criteria.add(Restrictions.between("date", allCondition.getAfterDate(), allCondition.getBeforeDate()));
+//		}
+//		
 		return (Integer)criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 }
