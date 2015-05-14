@@ -271,14 +271,14 @@ body{
 				});
 				
 				var url2 = "/softleader-iii-eeit78/raiser/raiserSelectAll!checkInformation";
-				$("#btnStop").click(function(){
-				console.log(	$("#chbox:checked").parent().parent().children())
+					$("#btnStop").click(function(){
+					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-remove");;
 					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
 						 		 'lock' : false},
 					getData,"json");
 				});
 				$("#btnunVil").click(function(){
-					$("#chbox:checked").parent().parent().children( "#spanCk" ).removeClass().addClass("glyphicon glyphicon-ok");
+					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-ok");
 					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
 						 		 'lock' : true},
 					getData,"json");
