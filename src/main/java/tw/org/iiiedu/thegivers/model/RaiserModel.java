@@ -18,18 +18,6 @@ public class RaiserModel {
 	private boolean valid;
 	private String videoUrl;
 	
-	
-	
-	@Override
-	public String toString() {
-		return "RaiserModel [id=" + id + ", account=" + account + ", passwd="
-				+ passwd + ", name=" + name + ", tel=" + tel
-				+ ", contactPerson=" + contactPerson + ", contactTel="
-				+ contactTel + ", email=" + email + ", address=" + address
-				+ ", logo=" + Arrays.toString(logo) + ", detail=" + detail
-				+ ", valid=" + valid + ", videoUrl=" + videoUrl + "]";
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -109,5 +97,4 @@ public class RaiserModel {
 		this.videoUrl = videoUrl;
 	}
 
-	
 }

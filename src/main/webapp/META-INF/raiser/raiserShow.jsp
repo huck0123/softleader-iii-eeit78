@@ -42,8 +42,12 @@ body{
 				<input type="text" size="20" placeholder="依名稱搜尋" value="" id="textSch" class="searchtext"> 
 				<input type="checkbox" name="chkbox" id="ChkBox" value="true" checked="checked"/>:包含黑名單
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<input type="button" name="searchbtn" value="查詢" id="btnSch" class="btn btn-default">
+			</div>
+			<div class="col-md-4">
+				<input type="button" name="vilhbtn" value="加入黑名單" id="btnStop" class="btn btn-default">
+				<input type="button" name="Unvilbtn" value="解除黑名單" id="btnunVil" class="btn btn-default">
 			</div>
 		</div>
 		<br>
@@ -54,10 +58,11 @@ body{
 					<tr>
 						<th style="width: 10px"></th>
 						<th>帳號</th>
-						<th style="width: 150px">團體名稱</th>
-						<th style="width: 100px">電話</th>
+						<th style="width: 200px">團體名稱</th>
+						<th style="width: 140px">電話</th>
 						<th>信箱</th>
-						<th>黑名單</th>
+						<th style="width: 50px">黑名單</th>
+						<th style="width: 10px"></th>
 					</tr>
 					<tbody id="tbody">
 					</tbody>
@@ -67,14 +72,14 @@ body{
 		</div >
 		<div id="btnn" class="row">
 			<div class="col-md-5" style="text-align:right">
-				<input type="button" name="forward" value="上一頁" id="btnf"> 
+				<input type="button" class="btn btn-default" name="forward" value="上一頁" id="btnf"> 
 			</div>
 			<div class="col-md-1" style="text-align:right">
 				<input type="tel" name="now" size="1" value="1" id="btnw">
 			</div>
 			<div class="col-md-1" id="divMax" style="text-align:left"></div>
 			<div class="col-md-2" style="text-align:left">
-				<input type="button" name="next" value="下一頁" id="btnx"> 
+				<input type="button" class="btn btn-default" name="next" value="下一頁" id="btnx"> 
 			</div>
 			<div class="col-md-3" style="text-align:left">
 				<a href="<c:url value='/index.jsp' />">回首頁</a> 
@@ -87,7 +92,7 @@ body{
 		$.post(url, {'lock' : $('#ChkBox').val()} ,getData);
 
 		var page = $("#btnw").val();
-		var Max = Math.ceil("${raiserCount}" / 3);
+		var Max = Math.ceil("${raiserCount}" / 5);
 		$("#divMax").text("/" + Max + "\t");
 		var test = true;
 
@@ -148,26 +153,26 @@ body{
 								var srclogo = arrayBufferToBase64(raiser.logo);
 
 								var stAll = "<tr><td id='test'><span id='spanpic"+raiser.id+"' class='glyphicon glyphicon-folder-close spanpic' ></span></td>"
-										+ "<td>"
+										+ "<td id='account'>"
 										+ raiser.account
-										+ "</td>"
+										+ " </td>"
 										+ "<td>"
 										+ raiser.name
-										+ "</td>"
+										+ " </td>"
 										+ "<td>"
 										+ raiser.tel
-										+ "</td>"
-										+ "<td>" + raiser.email + "</td>";
+										+ " </td>"
+										+ "<td>" + raiser.email + " </td>";
 								var lock = raiser.valid;
 
 								if (lock) {
-									var st1 = "<button id='btnStop"+raiser.id+"' class='btn btn-danger'><span class='glyphicon glyphicon-ban-circle' id='spanCk"+raiser.id+"'></span>　封鎖</button>";
+									var st1 = "<span class='glyphicon glyphicon-ok' id='spanCk'></span>";
 									stAll += "<td id='tdCk"+raiser.id+"'>"
-											+ st1 + "</td></tr>";
+											+ st1 + "</td><td><input type='checkbox' id='chbox' style='text-align:center'></td></tr>";
 								} else {
-									var st2 = "<button id='btnStop"+raiser.id+"' class='btn btn-success'>解除封鎖</button>";
+									var st2 = "<span class='glyphicon glyphicon-remove' id='spanCk'></span>";
 									stAll += "<td id='tdCk"+raiser.id+"'>"
-											+ st2 + "</td></tr>";
+											+ st2 + "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center'></td></tr>";
 								}
 
 								$(tbody).prepend(stAll);
@@ -239,53 +244,7 @@ body{
 														test = true;
 													}
 												});
-								var url2 = "/softleader-iii-eeit78/raiser/raiserSelectAll!checkInformation";
-
-								$("#btnStop" + raiser.id)
-										.click(
-												function() {
-													if (lock) {
-														lock = false;
-														$
-																.post(
-																		url2,
-																		{
-																			'account' : raiser.account,
-																			'lock' : lock
-																		},
-																		getData,
-																		"json");
-														$(
-																"#btnStop"
-																		+ raiser.id)
-																.removeClass(
-																		"btn btn-danger")
-																.addClass(
-																		'btn btn-success')
-																.text("解除封鎖");
-													} else {
-														lock = true;
-														$
-																.post(
-																		url2,
-																		{
-																			'account' : raiser.account,
-																			'lock' : lock
-																		},
-																		getData,
-																		"json");
-														$(
-																"#btnStop"
-																		+ raiser.id)
-																.removeClass(
-																		"btn btn-success")
-																.addClass(
-																		'btn btn-danger')
-																.html(
-																		"<span class='glyphicon glyphicon-ban-circle' id='spanCk"+raiser.id+"'></span>　封鎖");
-													}
-
-												});
+								
 							});
 		};
 		//以下搜尋相關
@@ -298,7 +257,7 @@ body{
 					$.post("/softleader-iii-eeit78/raiser/raiserSelectAll!getByAllConditionCount" , {
 						'name' : $("#textSch").val() , 'lock' : $('#ChkBox').val()
 						}, function(data){
-							Max = Math.ceil(data/ 3);
+							Max = Math.ceil(data/ 5);
 							$("#divMax").text("/" + Max + "\t");
 						});
 					$.post(url,{
@@ -309,6 +268,20 @@ body{
 		
 				$('#ChkBox').change(function(){
 				    $(this).val($(this).prop('checked'))
+				});
+				
+				var url2 = "/softleader-iii-eeit78/raiser/raiserSelectAll!checkInformation";
+				$("#btnStop").click(function(){
+				console.log(	$("#chbox:checked").parent().parent().children())
+					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
+						 		 'lock' : false},
+					getData,"json");
+				});
+				$("#btnunVil").click(function(){
+					$("#chbox:checked").parent().parent().children( "#spanCk" ).removeClass().addClass("glyphicon glyphicon-ok");
+					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
+						 		 'lock' : true},
+					getData,"json");
 				});
 	</script>
 
