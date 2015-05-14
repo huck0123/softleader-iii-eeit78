@@ -76,7 +76,7 @@ body {
 <!-- 						</tr> -->
 <!-- 					</table> -->
 		</form>
+			<b style="color: red;">${wrongLogin}</b>
 	</div>
-	${wrongLogin}
 </body>
 </html>

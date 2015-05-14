@@ -51,7 +51,7 @@ public class CampaignAction extends ActionSupport implements
 
 	public String selectByAllCondition() throws Exception {
 
-		System.out.println(campaignForm.getId());
+
 		if (campaignForm.getPageNum() == null) {
 			campaignForm.setPageNum(0);
 		}
@@ -139,9 +139,9 @@ public class CampaignAction extends ActionSupport implements
 			for (int i = 0; i < list.size(); i++) {
 				CampaignModel cm = campaignService.getById(Integer
 						.parseInt(list.get(i)));
-				System.out.println("yyy: " + cm.getValid());
+
 				cm.setValid(true);
-				System.out.println("yyy: " + cm.getValid());
+
 				campaignService.update(cm);
 			}
 		}

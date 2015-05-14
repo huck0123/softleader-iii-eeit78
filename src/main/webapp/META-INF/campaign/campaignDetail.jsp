@@ -14,50 +14,119 @@
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/giver.css">
+
 	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
 #sideDiv{
 text-align: left;
-border-bottom: silver 1px solid;
 vertical-align: top;
 height:100%;}
 .row-table{ display:table;}
 
+.row{margin:0px;}
 
 .row-table {
     display: table;
+    width: 100%;
 }
 
-.left-side {
-    float: none;
-    display: table-cell;
-
-}
-
-.right-side {
-    float: none;
-    display: table-cell;
-    border-bottom: silver 1px solid;
-}
 
 strong { font-size: 46px;}
+pre {background-color: white;
+border: white;
+padding-left: 0px;
+padding-right: 0px;
+margin-left: 0px;
+margin-right: 0px;
+font-size: 16px;
+}
 </style>
 </head>
 <body id="body">
 
 	<jsp:include page="/header.jsp" />
 
-	依名稱蒐尋：
-	<input type="text" id="nameSearch">
-	
-
 	<div class="container" id="showColumn">
 
 	</div>
+	<div class="container">
+		<nav class="navbar navbar-default"
+			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
+			<div class="container"
+				style="display: table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#nav2" style="float: right;">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+				</div>
 
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="nav2">
+					<ul class="nav navbar-nav">
+						<li ><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
+						<li ><a href="#" id="tab2">評論</a></li>
 
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+	</div>
+
+<div class="container" id="tabPageDiv">
+<div class=row id="detailRowDiv">
+<div class="col-md-8 col-md-offset-2" id="detailDiv" style="text-align: justify;">
+</div>
+</div>
+
+<div id="commentDiv" style="display: none">
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+<p>comment</p>
+</div>
+</div>
 </body>
 
 
@@ -69,6 +138,27 @@ var currentPage = 0;
 
 load();
 
+$('#tab1').on('click',function(evt){
+	evt.preventDefault();
+	$('#nav2 *, .active').removeClass("active");
+	$('#tab1').parent().addClass('active');
+	$('#tabPageDiv>div').hide();
+	$('#detailRowDiv').slideDown();
+});
+
+
+
+$('#tab2').on('click',function(evt){
+	evt.preventDefault();
+	$('#nav2 *, .active').removeClass("active");
+	$('#tab2').parent().addClass('active');
+	$('#tabPageDiv>div').hide();
+	$('#commentDiv').slideDown();
+
+});
+
+
+
 function load(){
 	
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
@@ -78,18 +168,18 @@ function load(){
 			value = data[0];
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>'+value.name+'</h3>');
-				var raiserP = $('<p>由<span style="font-size:20px">'+value.raiserModel.name+'</span>發起</p>');
+				var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
 				titleP.appendTo(rowDiv1);
 				raiserP.appendTo(rowDiv1);
 				rowDiv1.appendTo($('#showColumn'));
 
 				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
-				var vedioDiv = $('<div class="col-md-8 left-side"></div>');
+				var vedioDiv = $('<div class="col-sm-8 col-md-8 left-side"></div>');
 				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-				var iframe = $('<iframe src="'+'http://www.youtube.com/embed/y4RjHV8YY_c'+'"></iframe>');
+				var iframe = $('<iframe src="'+value.vedioUrl+'?showinfo=0'+'"></iframe>');
 				iframeDiv.appendTo(vedioDiv);
 				iframe.appendTo(iframeDiv);
-				var sideDiv = $('<div id="sideDiv" class="col-md-4 right-side"></div>');
+				var sideDiv = $('<div id="sideDiv" class="col-sm-4 col-md-4 right-side"></div>');
 				var giverP = $('<p>已有<strong id="giverStrong"></strong>人支持</p>');
 				var moneyP = $('<p>已募得<strong>'+commafy(value.currentFund)+'</strong>元/'+commafy(value.goal)+'元</p>');
 				var d = new Date(value.endDate);
@@ -130,60 +220,12 @@ function load(){
 							$('#giverStrong').text(data);
 						})
 
-				
+				$('#detailDiv').append('<pre>'+value.detail+'</pre>');
 				
 
 		})
 	}
 
-	$('#btn1').on('click',function(){
-		
-	});
-	
-
-
-function makeFunction(j){return function(){
-	$.post('',
-			{'campaignForm.pageNum':j,'campaignForm.name':$('#nameSearch').val()},function(data){
-				data = JSON.parse(data);
-				currentPage=j;
- 		$('#row').empty();
-		$(data).each(function(index,value){
-			var rowDiv = $('#row');
-			var colDiv = $('<div class="col-sm-6 col-md-4"></div>');
-			var thumbnailDiv = $('<div class="thumbnail"></div>');
-			
-			var str = arrayBufferToBase64(value.image); 
-			var image = $('<img  src="data:image/png;base64,' + str +'"/>');
-			image.on('click',function(){goDetail(value)});
-			
-			var captionDiv = $('<div class="caption"></div>');
-			var h3 = $('<h3>'+value.name+'</h3>');
-			var p1 = $('<p>'+ value.detail+'</p>');
-			var p2 = $('<p></p>');
-			var a = $('<a href="#" class="btn btn-primary" role="button">我要捐款</a>')
-			a.appendTo(p2);
-			h3.appendTo(captionDiv);
-			p1.appendTo(captionDiv);
-			p2.appendTo(captionDiv);
-			image.appendTo(thumbnailDiv);
-			captionDiv.appendTo(thumbnailDiv);
-			thumbnailDiv.appendTo(colDiv);
-			colDiv.appendTo(rowDiv);
-		})
-	})
-
-}}
-
-
-function goDetail(campaignModel){
-	console.log("modelName" + campaignModel.name);
-	$('#div1').empty();
-	$('#row').empty();
-	var child = $('<p></p>');
-	child.text(campaignModel.id +", "+campaignModel.name);
-	child.appendTo($('#row'));
-}
 
 
 function arrayBufferToBase64( buffer ) {

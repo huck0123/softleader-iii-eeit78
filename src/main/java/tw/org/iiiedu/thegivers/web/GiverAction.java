@@ -150,6 +150,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				giverCount++;				//資料筆數+1
 				context.setAttribute("giverCount", giverCount);
 				request.getSession().setAttribute("giver", model);    //註冊成功時，將資料丟進model
+				request.getSession().setAttribute("success", "註冊會員資料");
 				log.debug("++++++++++++++++++++++++++++++++++++++giverInsert+++++++++++++++++++++++++++++++++++ {}+++{}", model,form);
 				return "insert";
 			} else {
@@ -256,12 +257,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 //		GiverModel temp = service.getByAccount(temp1.getAccount());
 		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
 
-		//驗證身分證
-		IdCheck check = new IdCheck(form.getId_number().trim() ,form.isGender());
-		if(check.IdVerify() == false){
-			return FAIL;				
-		}
-		
+			
 		model = new GiverModel();
 		
 		model.setId(temp.getId());
@@ -285,15 +281,22 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;
 			}
 		}else{
-			model.setHeadshot(temp.getHeadshot());
+			model.setHeadshot(null);
 		}
 		model.setIdNumber(temp.getIdNumber().trim());
-		model.setPasswd(form.getPasswd().trim());
+		
+		if(form.getPasswd().trim().length() == 0){
+			model.setPasswd(temp.getPasswd());
+		}else{
+			model.setPasswd(form.getPasswd());
+		}
+		
 		model.setTel(form.getTel().trim());
 		model.setValid(true);
 		
 		try{
 			service.update(model);
+			request.getSession().setAttribute("success", "更新會員資料");
 		}catch(Exception e){
 			return "updateFail";
 		}

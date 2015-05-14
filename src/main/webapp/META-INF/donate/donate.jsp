@@ -37,32 +37,40 @@ b {
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<h3>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h3>
+				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
 				<form action="<c:url value='/donate/billInfo'/>" method="post">
 					<table class="table">
+						<colgroup>
+							 <col span="1" style="background-color:#ADADAD">
+   							 <col style="background-color:#F0F0F0; ">
+   							 <col style="background-color:#F0F0F0; width:150px;">
+						</colgroup>
 						<tr>
 							<td><label for="">捐款活動名稱:</label></td>
 							<td><input type="hidden" name="campaignName"
 								value="${param.name }">${param.name }</td>
+							<td></td>
 						</tr>
 						<tr style="display: none">
 							<td><label for="">捐款活動Id:</label></td>
 							<td><input type="text" name="campaignId"
 								value="${param.id }"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">捐款人姓名:</label></td>
 							<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">捐款金額:<b>*</b></label></td>
-							<td><input type="text" name="amount" required="required"><b
-								id="amount"></b></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="下一步" id="submit"></td>
+							<td><input type="text" name="amount" required="required"></td>
+							<td><b id="amount"></b></td>
 						</tr>
 					</table>
+					<div>
+						<input type="submit" class="btn btn-primary btn-lg" value="下一步" id="submit">
+					</div>
 				</form>
 			</div>
 			<div class="col-md-2"></div>

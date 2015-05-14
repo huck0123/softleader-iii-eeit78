@@ -27,6 +27,18 @@ label>b{
 b {
 	color: red;	
 }
+.modal {
+  position: fixed;
+  top: 200px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
 </style>
 
 </head>
@@ -39,91 +51,147 @@ b {
 			<div class="col-md-2"></div>
 
 			<div class="col-md-8">
+			<div class="thumbnail">
 				<h2>捐款會員註冊</h2>
-				<form
-					action='/softleader-iii-eeit78/giver/giverAction!insert.action'
+				<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 					method="post" enctype="multipart/form-data">
 					<table class="table">
 						<colgroup>
 							 <col span="1" style="background-color:#ADADAD">
    							 <col style="background-color:#F0F0F0">
+   							 <col style="background-color:#F0F0F0; width:100px;">
 						</colgroup>
 						<tr>
 							<td><label for="">帳號:<b>*</b></label></td>
 							<td><input type="text" name="form.account"
-								value="${param.form.account }" required="required"><b id="account"></b></td>
+								value="${param.form.account }" required="required"></td>
+							<td><b id="account"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">密碼:<b>*</b></label></td>
 							<td><input type="password" name="form.passwd" value="" id="passwd1"
 								required="required"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">密碼確認:<b>*</b></label></td>
 							<td><input type="password" value=""	id="passwd2"
-							 required="required"><b id="password2"></b></td>
+							 	required="required"></td>
+							 <td><b id="password2"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">姓:<b>*</b></label></td>
 							<td><input type="text" name="form.familyName"
 								value="${param.form.familyName }"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">名字:<b>*</b></label></td>
 							<td><input type="text" name="form.name"
 								value="${param.form.name }"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">性別:<b>*</b></label></td>
-							<td><input type="radio" name="form.gender" value="true">男
-								<input type="radio" name="form.gender" value="false">女</td>
+							<td>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-default">
+										<input type="radio" name="form.gender" value="true" >男
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" name="form.gender" value="false" >女
+									</label>
+								</div>
+							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">身分證字號:<b>*</b></label></td>
 							<td><input type="text" name="form.id_number"
-								value="${param.form.id_number }"><b id="idNumber"></b></td>
+								value="${param.form.id_number }"></td>
+							<td><b id="idNumber"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">手機:<b>*</b></label></td>
 							<td><input type="text" name="form.tel"
-								value="${param.form.tel }"><b id="tel"></b></td>
+								value="${param.form.tel }"></td>
+							<td><b id="tel"></b></td>
 						</tr>
 						<tr>
 							<td><label for="">住址:</label></td>
 							<td><input type="text" name="form.address"
 								value="${param.form.address }"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">Email:<b>*</b></label></td>
 							<td><input type="email" name="form.email"
 								value="${param.form.email }"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">是否獲得資訊:</label></td>
-							<td><input type="radio" name="form.get_info" value="true" checked="checked">是
-								<input type="radio" name="form.get_info" value="false">否</td>
+							<td>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-default">
+										<input type="radio" name="form.get_info" value="true" id="getInfo1" checked="checked">是
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" name="form.get_info" value="false" id="getInfo2">否
+									</label>
+								</div>
+							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">生日:</label></td>
 							<td><input type="date" name="form.birth" value=""
-								required="required" style="height: 30px;"></td>
+								 style="height: 30px;"></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><label for="">照片:</label></td>
-							<td><input type="file" name="form.headshot" value="" id="headshot"></td>
+							<td>
+								<label class="btn btn-success">更換照片
+									<input type="file" name="form.headshot"	accept="image/*"
+								 		id="headshot" style="display:none;">
+								</label>
+							</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td><img src="" id="img" style="weight:50px; height:50px;"></td>
-							<td><input type="submit" class="btn btn-default" value="送出" id="submit">
-								<input type="reset" class="btn btn-default" value="清除" ></td>
+							<td></td>
+							<td>
+								<a href="#" data-toggle="modal" data-target="#myModal">
+									<img src="" id="img" style="weight:70px; height:70px;">
+								</a>
+							</td>
+							<td></td>
 						</tr>
 					</table>
+					<div>
+						<input type="submit" class="btn btn-primary" value="送出" id="submit">
+						<input type="reset" class="btn btn-primary" value="清除" >
+					</div>
 				</form>
+			</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
+		
+		
 	</div>
-
+			 <!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+   		<div class="modal-dialog">
+   	  			<!-- Modal content-->
+      		<div class="modal-content">
+       			<div class="modal-body">
+					<img src="" id="img1" style="weight:400px; height:400px;">
+        		</div>
+   			</div>
+   		</div>
+    </div>
 	
 </body>
 
@@ -238,10 +306,11 @@ b {
 	        alert("檔案請放圖片！"); 
 	        return; 
 	    } 
-	    var reader = new FileReader(); 
+	    var reader = new FileReader();
 	    reader.readAsDataURL(file); 
 	    reader.onload = function(){ 
 	        $('#img').attr("src",reader.result);
+	        $('#img1').attr("src",reader.result);
 	    } 
 	} 
 	

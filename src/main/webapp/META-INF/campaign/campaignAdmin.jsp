@@ -81,6 +81,7 @@ var currentPage =0;
 load();
 
 function load(){
+	//如果不隨便給個參數呼叫Ajax，則campaignForm實體就不會被struts2做出來，搜尋就會失敗。 
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
 			{'campaignForm.page':currentPage},function(data){
 		totalCount = data;
@@ -99,7 +100,7 @@ function tbdyAppend(){
 			$(tbdy).append("<tr>"
 					+ "<td><img src='' id='"+value.id+"' class='thumbnail' style='width: 80px; height: 80px'></td>"
 					+ "<td>"+ value.name +"</td>"
-					+ "<td>"+ value.raiserId +"</td>" 
+					+ "<td>"+ value.raiserModel.name +"</td>" 
 					+ "<td>"+ value.currentFund +"</td>" 
 					+ "<td>"+ value.endDate +"</td>" 
 					+ "<td>"+ value.location +"</td>" 

@@ -37,13 +37,14 @@ tr th {
 				<select id="pageAmount"></select>顯示筆數(預設5筆)
 			</div>
 			<div class="col-md-6">				
-				<button id="before" onclick="before()">上一頁</button>
+				<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
 				<select id="page"></select>
 				<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
-				<button id="after" onclick="after()">下一頁</button>
+				<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
 				<input type="text" id="condition"> 
+                <span class="glyphicon glyphicon-search"></span>
 <!-- 				<button onclick="search()">查詢</button> -->
 			</div>
 		</div>
@@ -95,7 +96,7 @@ tr th {
 			$('#pageAmount').empty();
 			
 			//建立一頁顯示幾筆選單
-			for(var i=1; i<=giverCount; i++){
+			for(var i=1; i<=giverCount; i*=5){
 				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
 			}
 			
@@ -163,10 +164,6 @@ tr th {
 		}
 		
 		
-		
-		
-		
-		
 		function getData(data){
 			$('#tbdy').empty();
 			data = JSON.parse(data);
@@ -195,9 +192,9 @@ tr th {
 				}
 			});
 			
-			$('#before').prop("disabled", false);
-			$('#after').prop("disabled", false);
-			$('#page').prop("disabled", false);
+// 			$('#before').prop("disabled", false);
+// 			$('#after').prop("disabled", false);
+// 			$('#page').prop("disabled", false);
 		};
 		
 		// 系統管理員管理giver驗證
@@ -216,21 +213,17 @@ tr th {
 					$.post(urlv, { 'thisAccount':account, 'valid':false});
 					$(this).val("false").val();
 					$('.'+account).text("false");
-// 					console.log(false);
 				}else{
 					$.post(urlv, { 'thisAccount':account, 'valid':true});
 					$(this).val("true").val();
 					$('.'+account).text("true");
-// 					console.log(true);
 				}
 			})
 		}
 		
 		//選擇第幾頁
 		$('#page').on("change", function(){
-			$(this).prop("disabled",true);
-			$('#before').prop("disabled", true);
-			$('#after').prop("disabled", true);
+// 			$(this).prop("disabled",true);
 			
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp, 'pageAmount':pageAmount, 'condition':condition},getData);
@@ -239,9 +232,7 @@ tr th {
 		
 		//上一頁
 		function before(){
-			$('#before').prop("disabled", true);
-			$('#after').prop("disabled", true);
-			$('#page').prop("disabled", true);
+// 			$('#before').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage > 1){
@@ -254,9 +245,7 @@ tr th {
 		
 		//下一頁
 		function after() {
-			$('#after').prop("disabled", true);
-			$('#before').prop("disabled", true);
-			$('#page').prop("disabled", true);
+// 			$('#after').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage < pageCount ){

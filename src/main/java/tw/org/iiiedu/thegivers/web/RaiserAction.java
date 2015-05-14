@@ -198,7 +198,12 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String checkInformation() {
-		boolean result = raiserService.valid(account, lock);
+		String[] str = account.split(" ");
+		for(int n = 0 ; n < str.length; n++){
+			if(n % 4 == 0){
+				boolean result = raiserService.valid(str[n], lock);
+			}
+		}
 		return null;
 	}
 	
@@ -213,9 +218,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String getByCondition() {
-		System.out.println(account + "," + name + "," + contactPerson);
 		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
-				contactPerson, lock ,page,3);
+				contactPerson, lock ,page,5);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(list);
 		inputStream = new ByteArrayInputStream(
