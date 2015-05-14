@@ -251,7 +251,9 @@ margin-right: 0px;
 			raisers = JSON.parse(raisers);
 			$(raisers).each(function(index, raiser) {
 				var span = $('<span class="logo-span"></span>');
-				var a = $('<a href=""></a>');
+				var a = $("<a href='<c:url value='/raiser/raiserAction!select?account="
+						+ raiser.account
+						+ "'/>'></a>");
 				var srclogo = arrayBufferToBase64(raiser.logo);
 				var strimg = $("<img src='' style='width:150px'>");
 				strimg.attr("src","data:image/png;base64," + srclogo);
