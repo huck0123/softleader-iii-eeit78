@@ -14,13 +14,11 @@
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/giver.css">
-	<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/jquery-ui.min.css">
+
 	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
-<script src="/softleader-iii-eeit78/js/jquery-ui.min.js"></script>
 <style>
 #sideDiv{
 text-align: left;
@@ -50,10 +48,6 @@ font-size: 16px;
 <body id="body">
 
 	<jsp:include page="/header.jsp" />
-
-	依名稱蒐尋：
-	<input type="text" id="nameSearch">
-	
 
 	<div class="container" id="showColumn">
 
