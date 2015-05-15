@@ -41,7 +41,8 @@
 			<button type="button" id="before">上一頁</button>
 			<span id="pageShow"></span>
 			<button type="button" id="after">下一頁</button>
-			<input type="submit" value="加入黑名單" name="method:ban">
+			<button type="submit" name="method:ban">加入黑名單</button>
+<!-- 			<input type="submit" value="加入黑名單" name="method:ban"> -->
 
 			<input type="submit" value="解除黑名單" name="method:unban">
 
