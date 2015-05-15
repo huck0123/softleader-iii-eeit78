@@ -7,7 +7,7 @@
 	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
 
 		<action name="raiserAction" class="raiserAction">
-			<result name="insert" type="redirect">/index.jsp</result>
+			<result name="insert" type="redirect">/raiser/raiserRegister2.action</result>
 			<result name="update" type="redirect">/raiser/raiserUpdate.action</result>
 			<result name="error" type="redirect">/META-INF/raiser/raiserRegister.jsp
 			</result>

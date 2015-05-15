@@ -106,7 +106,6 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 		rm = raiserService.register(rm);
 		if (rm != null) {
-			session.setAttribute("raiser", rm);
 			return "insert";
 		} else {
 			return "error";

@@ -40,7 +40,13 @@ padding-right: 0px;
 margin-left: 0px;
 margin-right: 0px;
 }
+@media{
+.col-md-4{height:auto;}
+}
+
+@media ( min-width : 1200px){
 .col-md-4{height: 760px}
+}
 /*
 #custom-search-input{
     padding: 3px;
@@ -87,9 +93,9 @@ a:hover{cursor: pointer;}
 				<div id="custom-search-input">
 					<div class="input-group col-md-12">
 						<input type="text" class="form-control input-lg"
-							placeholder="請輸入關鍵字" id="nameSearch" /> <span
+							placeholder="請輸入關鍵字" id="nameSearch3" /> <span
 							class="input-group-btn">
-							<button class="btn btn-info btn-lg" type="button" id="btn1">
+							<button class="btn btn-info btn-lg" type="button" id="btn11">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</span>
@@ -216,8 +222,9 @@ function load(){
 		})
 	})}
 
-	$('#btn1').on('click',function(){
-		location.href = 'http://localhost:8080/softleader-iii-eeit78/campaign/campaignShow?nameSearch='+$('#nameSearch').val()+'&page=0';
+	$('#btn11').on('click',function(){
+		console.log("hihi");
+		location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='+$('#nameSearch3').val()+'&page=0';
 	});
 	
 
