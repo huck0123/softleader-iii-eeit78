@@ -10,7 +10,7 @@
 <!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <!--      <link rel="icon" href="../../favicon.ico"> -->
-<title>Insert title here</title>
+<title>The Givers</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -207,11 +207,11 @@ margin-right: 0px;
 						progressBarDiv.appendTo(progressDiv);
 
 						var otherInfoDiv = $('<div class="row"></div>');
-						var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span> 進度<br/>'
+						var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span><br/> 進度<br/>'
 														+ formatFloat(percent,2) + '%</div>');
-						var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span> 已募得<br/>'
+						var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span><br/>已募得<br/>'
 														+ value.currentFund+ '</div>');
-						var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span> 捐款數<br/></div>');
+						var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span><br/>捐款數<br/></div>');
 
 						$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
 							{'campaignForm.id' : value.id},function(data) {
@@ -222,7 +222,7 @@ margin-right: 0px;
 							var d = (new Date(value.endDate)).getTime();
 							console.log(value.endDate);
 							var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
-							var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span> 倒數日<br/>'
+							var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 									+ remain+ '<br/></div>');
 
 							otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);

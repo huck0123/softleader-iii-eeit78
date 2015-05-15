@@ -21,7 +21,7 @@
 
 
 						<li class="margin-both10"><a
-							href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
+							href="<c:url value='/campaign/campaignShow'/>">募款活動</a></li>
 						<li class="margin-both10"><a
 							href="<c:url value='/raiser/raiserCheck'/>">參與團體</a></li>
 						<li class="margin-both10"><a href="">關於我們</a></li>
@@ -168,7 +168,7 @@
 
 
 						<li class="margin-both10"><a
-							href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
+							href="<c:url value='/campaign/campaignShow'/>">募款活動</a></li>
 						<li class="margin-both10"><a
 							href="<c:url value='/raiser/raiserCheck'/>">參與團體</a></li>
 						<li class="margin-both10"><a href="">關於我們</a></li>
