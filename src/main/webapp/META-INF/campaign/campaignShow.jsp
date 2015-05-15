@@ -40,7 +40,13 @@ padding-right: 0px;
 margin-left: 0px;
 margin-right: 0px;
 }
+@media{
+.col-md-4{height:auto;}
+}
+
+@media ( min-width : 1200px){
 .col-md-4{height: 760px}
+}
 /*
 #custom-search-input{
     padding: 3px;

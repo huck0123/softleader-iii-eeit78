@@ -14,11 +14,11 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
@@ -26,7 +26,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
 <style type="text/css">
@@ -108,6 +108,8 @@ padding-right: 0px;
 margin-left: 0px;
 margin-right: 0px;
 }
+
+
 </style>
 </head>
 
@@ -130,7 +132,7 @@ margin-right: 0px;
 		</div>
 	</div>
 
-	<div id="campaignDiv" class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE; overflow:auto">
+	<div id="campaignDiv" class="outer-wrapper" style="border-bottom: 1px solid #EEEEEE; overflow:auto">
 		<div class="inner-wrapper">
 			<div  class="container" style="height:100%;">
 
@@ -140,12 +142,12 @@ margin-right: 0px;
 		</div>
 	</div>
 
-	<div id="raiserDiv" class="outer-wrapper"  style="height:100%; border-bottom: 1px solid #EEEEEE">
+	<div id="raiserDiv" class="outer-wrapper"  style=" border-bottom: 1px solid #EEEEEE; overflow:auto">
 		<div class="inner-wrapper ">
 			<div class="container" style="height:100%;">
 				<h2>參與團體</h2>
-				<div class="blank-space10"></div>
-				<div id="raiserRow" class="row"></div>
+
+				<div id="raiserRow" class="row" style="margin: 30px 0px 30px 0px"></div>
 			</div>
 		</div>
 	</div>
