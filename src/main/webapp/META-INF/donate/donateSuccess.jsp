@@ -19,7 +19,7 @@
 	<jsp:include page="../../header.jsp" />
 
 
-	捐款成功 捐款資訊如下...
+	<h3>捐款成功</h3>
 
 </body>
 </html>

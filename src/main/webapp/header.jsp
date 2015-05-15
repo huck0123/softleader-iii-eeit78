@@ -61,9 +61,9 @@
 									</c:if>
 									<c:if test="${giver != null}">
 										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
+											href="<c:url value='/giver/giverInfo'/>">會員專區</a></li>
+<!-- 										<li><a role="menuitem" -->
+<!-- 											href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li> -->
 									</c:if>
 									<c:if test="${admin != null}">
 										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
@@ -208,9 +208,9 @@
 									</c:if>
 									<c:if test="${giver != null}">
 										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
+											href="<c:url value='/giver/giverInfo'/>">會員專區</a></li>
+<!-- 										<li><a role="menuitem" -->
+<!-- 											href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li> -->
 									</c:if>
 									<c:if test="${admin != null}">
 										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>

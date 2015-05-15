@@ -43,7 +43,7 @@ tr th {
 				<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
 			</div>
 			<div class="col-md-3">
-				<input type="text" id="condition"> 
+				<input type="text" class="form-control" id="condition" placeholder="請輸入搜尋條件"> 
                 <span class="glyphicon glyphicon-search"></span>
 <!-- 				<button onclick="search()">查詢</button> -->
 			</div>
