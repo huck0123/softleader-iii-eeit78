@@ -27,7 +27,7 @@ b {
 }
 .modal {
   position: fixed;
-  top: 200px;
+  top: 100px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -171,7 +171,7 @@ b {
 					<input type="password" id="password2">
 	       		</div>
 	       		 <div class="modal-footer">
-	       		 	<button type="button" class="btn btn-primary" data-dismiss="modal" id="save">儲存密碼</button>
+	       		 	<button type="button" class="btn btn-primary" data-dismiss="modal" id="save" disabled="disabled">儲存密碼</button>
 	       		 </div>
     		</div>
     	</div>

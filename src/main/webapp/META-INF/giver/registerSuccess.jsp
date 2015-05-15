@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>註冊成功</title>
+<title>${success }成功</title>
 
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <style>
 .modal {
   position: fixed;
-  top: 200px;
+  top: 100px;
   right: 0;
   bottom: 0;
   left: 0;

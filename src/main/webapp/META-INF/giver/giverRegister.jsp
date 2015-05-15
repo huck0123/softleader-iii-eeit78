@@ -29,7 +29,7 @@ b {
 }
 .modal {
   position: fixed;
-  top: 200px;
+  top: 100px;
   right: 0;
   bottom: 0;
   left: 0;

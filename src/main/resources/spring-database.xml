@@ -46,7 +46,7 @@ The only reason for chancing this setting is if you want to use JTA managed tran
 				<value>RaiserModel.hbm.xml</value>
 				<value>CampaignModel.hbm.xml</value>
 <!-- 				<value>GiverHistoryModel.hbm.xml</value> -->
-				<value>RaiserHistoryModel.hbm.xml</value>
+<!-- 				<value>RaiserHistoryModel.hbm.xml</value> -->
 				<value>TransactionDetailModel.hbm.xml</value>
 			</list>
 		</property>

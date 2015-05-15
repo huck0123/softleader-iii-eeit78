@@ -281,7 +281,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;
 			}
 		}else{
-			model.setHeadshot(null);
+			model.setHeadshot(temp.getHeadshot());
 		}
 		model.setIdNumber(temp.getIdNumber().trim());
 		

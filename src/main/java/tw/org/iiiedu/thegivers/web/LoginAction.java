@@ -61,7 +61,7 @@ public class LoginAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 	
-		GiverModel gm = giverService.login(account,passwd);
+		GiverModel gm = giverService.login(account.trim(),passwd);
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
 		if (gm != null) {
@@ -89,7 +89,7 @@ public class LoginAction extends ActionSupport {
 		} 
 		
 		
-		RaiserModel rm = raiserService.login(account,passwd);
+		RaiserModel rm = raiserService.login(account.trim(),passwd);
 		if (rm != null) {
 			if(!rm.isValid()){
 				ServletActionContext.getRequest().setAttribute("wrongLogin",
@@ -114,7 +114,7 @@ public class LoginAction extends ActionSupport {
 		} 
 		
 		
-		AdminModel am = adminService.login(account,passwd);
+		AdminModel am = adminService.login(account.trim(),passwd);
 		if (am != null) {
 			session.setAttribute("admin", am);
 			try { // *工作2: 看看有無來源網頁 (-如有:則重導之)
