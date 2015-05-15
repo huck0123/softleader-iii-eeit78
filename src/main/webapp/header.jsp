@@ -94,9 +94,9 @@
 					<div class="input-group col-md-10 col-md-offset-1"
 						style="padding: 30px">
 						<input type="text" class="form-control input-lg"
-							placeholder="請輸入關鍵字" id="nameSearch" /> <span
+							placeholder="請輸入關鍵字" id="nameSearchHeaderFixed" /> <span
 							class="input-group-btn">
-							<button class="btn btn-info btn-lg" type="button" id="btn1">
+							<button class="btn btn-info btn-lg" type="button" id="btnHeaderFixed">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</span>
@@ -237,9 +237,9 @@
 					<div class="input-group col-md-10 col-md-offset-1"
 						style="padding: 30px">
 						<input type="text" class="form-control input-lg"
-							placeholder="請輸入關鍵字" id="nameSearch" /> <span
+							placeholder="請輸入關鍵字" id="nameSearchHeader" /> <span
 							class="input-group-btn">
-							<button class="btn btn-info btn-lg" type="button" id="btn1">
+							<button class="btn btn-info btn-lg" type="button" id="btnHeader">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</span>
@@ -292,6 +292,13 @@
 
 <script>
 	// function for popping out head
+	
+	$('#btnHeader').on('click',function(){
+		location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='+$('#nameSearchHeader').val()+'&page=0';
+	});
+	$('#btnHeaderFixed').on('click',function(){
+		location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='+$('#nameSearchHeaderFixed').val()+'&page=0';
+	});
 	$(document).ready(function() {
 		$(window).scroll(function() {
 // 			$('.in').removeClass("in");
