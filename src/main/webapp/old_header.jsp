@@ -91,12 +91,12 @@
 			<div class="row">
 
 				<div id="custom-search-input">
-					<div class="input-group col-md-10 col-md-offset-1"
+					<div class="input-group col-md-9 col-md-offset-5"
 						style="padding: 30px">
 						<input type="text" class="form-control input-lg"
-							placeholder="請輸入關鍵字" id="nameSearchHeaderFixed" /> <span
+							placeholder="請輸入關鍵字"/> <span
 							class="input-group-btn">
-							<button class="btn btn-info btn-lg" type="button" id="btnHeaderFixed">
+							<button class="btn btn-info btn-lg" type="button">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</span>

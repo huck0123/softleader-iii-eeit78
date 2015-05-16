@@ -10,34 +10,27 @@
 <!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <!--      <link rel="icon" href="../../favicon.ico"> -->
-<title>The Givers</title>
-
-<!-- Latest compiled and minified CSS -->
+<title>The Givers</title>	
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-
-<!-- Optional theme -->
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css"> -->
 <style type="text/css">
 html, body {
+	text-align: center;
 	width: 100%;
 	height: 100%;
 }
 
 .thumbnail {
 	text-align: justify;
- 	margin:30px 8% 10% 8%; 
+	margin: 30px;
 }
 
 .cover-table-wrapper {
@@ -51,6 +44,7 @@ html, body {
 	display: table-row;
 	vertical-align: middle;
 }
+
 .cover-td-wrapper {
 	display: table-cell;
 	vertical-align: middle;
@@ -70,7 +64,7 @@ html, body {
 }
 
 .outer-wrapper {
-	padding-top:60px;
+	padding-top: 60px;
 	width: 100%;
 	min-height: 100%;
 	display: table;
@@ -91,25 +85,26 @@ html, body {
 	height: 5%;
 }
 
-.logo-span{
-display: inline-block;
-padding:0px 30px 0px 30px;
-}
-#cover-content{
-font-weight:bold;
-text-shadow:0px 0px 10px black;
-color: white;
-/* -webkit-text-stroke: 1px red; */
-}
-pre {background-color: white;
-border: white;
-padding-left: 0px;
-padding-right: 0px;
-margin-left: 0px;
-margin-right: 0px;
+.logo-span {
+	display: inline-block;
+	padding: 0px 30px 0px 30px;
 }
 
+#cover-content {
+	font-weight: bold;
+	text-shadow: 0px 0px 10px black;
+	color: white;
+	/* -webkit-text-stroke: 1px red; */
+}
 
+pre {
+	background-color: white;
+	border: white;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
 </style>
 </head>
 
@@ -117,10 +112,11 @@ margin-right: 0px;
 
 	<div class="background-div"></div>
 
+	<jsp:include page="/header.jsp" />
+
+
 	<div class="cover-table-wrapper">
-		<div style="display: table-row; height: 0px;">
-			<jsp:include page="/header.jsp" />
-		</div>
+		<div style="display: table-row; height: 0px;"></div>
 		<div class="cover-tr-wrapper">
 			<div class="cover-td-wrapper">
 				<div id="cover-content" class="container">
@@ -132,9 +128,10 @@ margin-right: 0px;
 		</div>
 	</div>
 
-	<div id="campaignDiv" class="outer-wrapper" style="border-bottom: 1px solid #EEEEEE; overflow:auto">
+	<div id="campaignDiv" class="outer-wrapper"
+		style="border-bottom: 1px solid #EEEEEE; overflow: auto">
 		<div class="inner-wrapper">
-			<div  class="container" style="height:100%;">
+			<div class="container" style="height: 100%;">
 
 				<h2>現正進行</h2>
 				<div id="campaignRow" class="row"></div>
@@ -142,25 +139,27 @@ margin-right: 0px;
 		</div>
 	</div>
 
-	<div id="raiserDiv" class="outer-wrapper"  style=" border-bottom: 1px solid #EEEEEE; overflow:auto">
+	<div id="raiserDiv" class="outer-wrapper"
+		style="border-bottom: 1px solid #EEEEEE; overflow: auto">
 		<div class="inner-wrapper ">
-			<div class="container" style="height:100%;">
+			<div class="container" style="height: 100%;">
 				<h2>參與團體</h2>
 
 				<div id="raiserRow" class="row" style="margin: 30px 0px 30px 0px"></div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="outer-wrapper" style="height:100%; border-bottom: 1px solid #EEEEEE">
+
+	<div class="outer-wrapper"
+		style="height: 100%; border-bottom: 1px solid #EEEEEE">
 		<div class="inner-wrapper ">
 
-			<div id="aboutUs" class="container" ">
+			<div id="aboutUs" class="container"">
 				<div class="blank-space10"></div>
 				<h2>關於我們</h2>
 				<div class="blank-space10"></div>
 				<div class="row">
-				<h4>TheGivers 致力於提供公益團體與民眾一個捐款平台，期望讓每一分錢都能夠用在需要的地方。</h4>
+					<h4>TheGivers 致力於提供公益團體與民眾一個捐款平台，期望讓每一分錢都能夠用在需要的地方。</h4>
 				</div>
 			</div>
 		</div>
