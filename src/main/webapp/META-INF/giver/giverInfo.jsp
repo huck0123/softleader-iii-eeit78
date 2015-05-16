@@ -41,6 +41,7 @@ b {
 </style>
 
 </head>
+
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
@@ -52,12 +53,12 @@ b {
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="#giverUpdate">會員資料修改</a></li>
+					<li><a href="#giverUpdate">會員資料修改</a></li>
 					<li><a href="#giverHistory">捐款紀錄</a></li>
 				</ul>
 				
 				<div class="tab-content">
-					<div class="panel alert tab-pane fade in active" id="giverUpdate">
+					<div class="panel alert tab-pane fade" id="giverUpdate">
 						<div class="thumbnail">
 							<h2>會員資料修改</h2>
 							<div>
@@ -188,6 +189,12 @@ b {
     	</div>
 	</div>
 	<script>
+		//會員資料修改 or 會員捐款資訊
+		if("${param.giverTabs}" == 1){
+			$('.nav-tabs a[href="#giverUpdate"]').tab('show');
+		}else if("${param.giverTabs}" == 2){
+			$('.nav-tabs a[href="#giverHistory"]').tab('show');
+		}
 		
 		//tab
 		$(".nav-tabs a").click(function(){
