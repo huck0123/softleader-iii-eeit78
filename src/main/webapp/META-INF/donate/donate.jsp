@@ -27,50 +27,71 @@ b {
 }
 </style>
 
-<title>捐贈流程</title>
+<title>捐款</title>
 
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container panel alert">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
-				<form action="<c:url value='/donate/billInfo'/>" method="post">
-					<table class="table">
-						<colgroup>
-							 <col span="1" style="background-color:#ADADAD">
-   							 <col style="background-color:#F0F0F0; ">
-   							 <col style="background-color:#F0F0F0; width:150px;">
-						</colgroup>
-						<tr>
-							<td><label for="">捐款活動名稱:</label></td>
-							<td><input type="hidden" name="campaignName"
-								value="${param.name }">${param.name }</td>
-							<td></td>
-						</tr>
-						<tr style="display: none">
-							<td><label for="">捐款活動Id:</label></td>
-							<td><input type="text" name="campaignId"
-								value="${param.id }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">捐款人姓名:</label></td>
-							<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">捐款金額:<b>*</b></label></td>
-							<td><input type="text" name="amount" required="required"></td>
-							<td><b id="amount"></b></td>
-						</tr>
-					</table>
-					<div>
-						<input type="submit" class="btn btn-primary btn-lg" value="下一步" id="submit">
+				
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a href="#donate">捐款金額</a></li>
+					<li><a href="#billInfo">信用卡資訊</a></li>
+					<li><a href="#infoConfirm">捐款資訊確認</a></li>
+				</ul>
+				<form action="<c:url value='/donate/donateAction!donate.action'/>" method="post">
+
+					<div class="tab-content">
+						<div class="panel alert tab-pane fade in active" id="donate">
+							<div>
+								<table class="table">
+									<colgroup>
+										<col span="1" style="background-color: #ADADAD">
+										<col style="background-color: #F0F0F0;">
+										<col style="background-color: #F0F0F0; width: 150px;">
+									</colgroup>
+									<tr>
+										<td><label for="">捐款活動名稱:</label></td>
+										<td><input type="hidden" name="form.campaignName"
+											value="${param.name }">${param.name }</td>
+										<td></td>
+									</tr>
+									<tr style="display: none">
+										<td><label for="">捐款活動Id:</label></td>
+										<td><input type="text" name="form.campaignId"
+											value="${param.id }"></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><label for="">捐款人姓名:</label></td>
+										<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><label for="">捐款金額:<b>*</b></label></td>
+										<td><input type="text" name="form.amount" required="required"></td>
+										<td><b id="amount"></b></td>
+									</tr>
+								</table>
+							</div>
+							<div>
+								<a class="btn btn-primary" id="donateBtn" >下一步</a>
+							</div>
+						</div>
+
+						<jsp:include page="billInfo.jsp" />
+						<jsp:include page="infoConfirm.jsp" />
+
+
 					</div>
+
+
+
 				</form>
 			</div>
 			<div class="col-md-2"></div>
@@ -82,8 +103,18 @@ b {
 
 <script>
 	
+	//tab
+// 	$('.nav-tabs a').click(function(){
+// 	    $(this).tab('show');
+// 	});
+	
+	//下一步
+	$('#donateBtn').on('click', function(){
+		$('.nav-tabs a[href="#billInfo"]').tab('show');
+	});
+	
 	//驗證捐款金額
-	$('input[name="amount"]').on("blur", function() {
+	$('input[name="form.amount"]').on("blur", function() {
 		$('#amount').empty();
 		var amount = $(this).val();
 		re = /[\d]/;

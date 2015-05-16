@@ -161,7 +161,7 @@ b {
       			<!-- Modal content-->
 	   		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1" style="weight:400px; height:400px;">
+					<img src="" id="img1" style="weight:70%; height:70%;">
 	       		</div>
     		</div>
     	</div>
@@ -229,7 +229,6 @@ b {
 			
 			function getData(data){
 				data = JSON.parse(data);
-				console.log(data);
 				$('input[name="form.familyName"]').val(data.familyName);
 				$('input[name="form.name"]').val(data.name);
 				$('input[name="form.tel"]').val(data.tel);
