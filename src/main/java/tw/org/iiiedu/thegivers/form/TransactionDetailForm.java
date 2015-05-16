@@ -5,22 +5,22 @@ import java.sql.Timestamp;
 public class TransactionDetailForm {
 
 	private Integer id;
-	private Integer giverId;
-	private Integer campaignId;
-	private Integer amount;
-	private Timestamp date;
-	private String cardType;
+	private Integer giverId;//
+	private Integer campaignId;//
+	private Integer amount;//
+	private Timestamp date;//
+	private String cardType;//
 	private String cardNo;
-	private String cardHolder;
-	private String cardHolderEmail;
+	private String cardHolder;//
+	private String cardHolderEmail;//
 	private boolean credit;
 	private String ip;
 	
-	private String campaignName;
+	private String campaignName;//
 	private String cardCheck;
 	private String cardDeadline;
-	private String cardHolderBirth;
-	private String cardHolderPhone;
+	private String cardHolderBirth;//
+	private String cardHolderPhone;//
 
 	
 

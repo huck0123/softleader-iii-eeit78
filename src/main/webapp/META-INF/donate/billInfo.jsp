@@ -3,18 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+
 
 <style>
 .card {
@@ -31,136 +20,128 @@ b {
 }
 </style>
 
-<title>請輸入信用卡資訊</title>
 
-</head>
-<body id="body">
-	<jsp:include page="../../header.jsp" />
-
-	<div class="container panel alert">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
-				<form action="/softleader-iii-eeit78/donate/infoConfirm"
-					method="post">
-					<div>
-					<table class="table" style="display: none">
-						<colgroup>
-							 <col span="1" style="background-color:#ADADAD">
-   							 <col style="background-color:#F0F0F0; ">
-   							 <col style="background-color:#F0F0F0; width:150px;">
-						</colgroup>
-						<tr>
-							<td>捐款活動名稱</td>
-							<td><input type="text" name="campaignName"
-								value="${param.campaignName }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>捐款活動ID</td>
-							<td><input type="text" name="campaignId"
-								value="${param.campaignId }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>捐款金額</td>
-							<td><input type="text" name="amount"
-								value="${param.amount }"></td>
-							<td></td>
-						</tr>
-					</table>
-					</div>
-	
-					<div>
-						<h3>信用卡資料</h3>
-					<table class="table">
-						<colgroup>
-							 <col span="1" style="background-color:#ADADAD">
-   							 <col style="background-color:#F0F0F0; ">
-   							 <col style="background-color:#F0F0F0; width:150px;">
-						</colgroup>
-						<tr>
-							<td><label for="">卡別:<b>*</b></label></td>
-							<td><select name="cardType" required="required">
-									<option>VISA</option>
-									<option>JCB</option>
-									<option>MasterCard</option>
-									<option>銀聯卡</option>
-									<option>美國運通</option>
-								</select></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">卡號:<b>*</b></label></td>
-							<td><input type="text" class="card" name="cardNo_1" value="" required="required">-
-								<input type="text" class="card" name="cardNo_2" value="" required="required">-
-								<input type="text" class="card" name="cardNo_3" value="" required="required">-
-								<input type="text" class="card" name="cardNo_4" value="" required="required">
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">有效期限:<b>*</b></label></td>
-							<td>
-								<select name="month" id="month" required="required"></select>月
-							 	<select name="year" id="year" required="required"></select>年</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">驗證碼:<b>*</b></label></td>
-							<td><input type="text" class="card" name="cardCheck"
-								value="" required="required">(卡片簽名處末三碼)</td>
-							<td></td>
-						</tr>
-					</table>
-					</div>
-<br><br><br><br>
-					<div>
-						<h3>持卡人資料</h3>
-					<table class="table">
-						<colgroup>
-							 <col span="1" style="background-color:#ADADAD">
-   							 <col style="background-color:#F0F0F0; ">
-   							 <col style="background-color:#F0F0F0; width:250px;">
-						</colgroup>
-						<tr>
-							<td><label for="">持卡人姓名:<b>*</b></label></td>
-							<td><input type="text" name="cardHolder"
-								value="${param.cardHolder }" required="required"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">生日:<b>*</b></label></td>
-							<td><input type="date" name="cardHolderBirth"
-								style="height: 30px;" required="required"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">持卡人手機:<b>*</b></label></td>
-							<td><input type="text" name="cardHolderPhone" required="required"></td>
-							<td><b id="tel"></b></td>
-						</tr>
-						<tr>
-							<td><label for="">持卡人信箱:<b>*</b></label></td>
-							<td><input type="email" name="cardHolderEmail" id="holderEmail" required="required"></td>
-							<td></td>
-						</tr>
-					</table>
-					</div>
-					<div>
-						<input type="submit" class="btn btn-primary btn-lg" value="下一步" id="submit">
-					</div>
-				</form>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
+<div class="panel alert tab-pane fade" id="billInfo">
+	<div>
+		<h3>信用卡資料</h3>
+		<table class="table">
+			<colgroup>
+				<col span="1" style="background-color: #ADADAD">
+				<col style="background-color: #F0F0F0;">
+				<col style="background-color: #F0F0F0; width: 150px;">
+			</colgroup>
+			<tr>
+				<td><label for="">卡別:<b>*</b></label></td>
+				<td><select name="form.cardType" required="required">
+						<option>VISA</option>
+						<option>JCB</option>
+						<option>MasterCard</option>
+						<option>銀聯卡</option>
+						<option>美國運通</option>
+					</select></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label for="">卡號:<b>*</b></label></td>
+				<td><input type="text" class="card" name="cardNo_1" value="" required="required">- 
+					<input type="text" class="card"	name="cardNo_2" value="" required="required">- 
+					<input type="text" class="card" name="cardNo_3" value="" required="required">- 
+					<input type="text" class="card" name="cardNo_4" value="" required="required">
+					<input type="text" name="form.cardNo" value="" style="display: none"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label for="">有效期限:<b>*</b></label></td>
+				<td><select name="month" id="month" required="required"></select>月
+					<select name="year" id="year" required="required"></select>年</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label for="">驗證碼:<b>*</b></label></td>
+				<td><input type="text" class="card" name="form.cardCheck" value=""
+					required="required">(卡片簽名處末三碼)</td>
+				<td></td>
+			</tr>
+		</table>
 	</div>
+	<br>
+	<br>
+	<div>
+		<h3>持卡人資料</h3>
+		<table class="table">
+			<colgroup>
+				<col span="1" style="background-color: #ADADAD">
+				<col style="background-color: #F0F0F0;">
+				<col style="background-color: #F0F0F0; width: 250px;">
+			</colgroup>
+			<tr>
+				<td><label for="">持卡人姓名:<b>*</b></label></td>
+				<td><input type="text" name="form.cardHolder"
+					value="${param.cardHolder }" required="required"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label for="">生日:<b>*</b></label></td>
+				<td><input type="date" name="form.cardHolderBirth"
+					style="height: 30px;" required="required"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label for="">持卡人手機:<b>*</b></label></td>
+				<td><input type="text" name="form.cardHolderPhone"
+					required="required"></td>
+				<td><b id="tel"></b></td>
+			</tr>
+			<tr>
+				<td><label for="">持卡人信箱:<b>*</b></label></td>
+				<td><input type="email" name="form.cardHolderEmail" id="holderEmail"
+					required="required"></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<a class="btn btn-primary" id="billInfoBack" >上一步</a>
+		<a class="btn btn-primary" id="billInfoBtn" >下一步</a>
+	</div>
+</div>
+<script>
 
-</body>
+	$('input[name="cardNo_4"]').on("keyup", function() {
+		if ($(this).val().length == 4) {
+			$('input[name="form.cardNo"]').val($('input[name="cardNo_1"]').val()
+					+$('input[name="cardNo_2"]').val()
+					+$('input[name="cardNo_3"]').val()
+					+$('input[name="cardNo_4"]').val());
+			console.log("haha");
+			$(this).prop('disabled',true);
+		}
+	});
+	
+	//donate.jsp
+	$('#billInfoBack').on('click', function(){
+		//上一步
+		$('.nav-tabs a[href="#donate"]').tab('show');
+	});
+	
+	//infoConfirm.jsp
+	$('#billInfoBtn').on('click', function(){
+		$('#infoAmount').text($('input[name="form.amount"]').val());
+		$('#infoCardHolder').text($('input[name="form.cardHolder"]').val());
+		$('#infoCardType').text($('select[name="form.cardType"]').val());
+		$('#infoCardNo').text($('input[name="cardNo_1"]').val()
+				+$('input[name="cardNo_2"]').val()
+				+$('input[name="cardNo_3"]').val()
+				+$('input[name="cardNo_4"]').val());
+		
+		//下一步
+		$('.nav-tabs a[href="#infoConfirm"]').tab('show');
+	});
+	
+	
+</script>
 
 <script>
-	
 	for (var i = 1; i <= 12; i++) {
 		$('#month').append("<option value='"+ i +"'>" + i + "</option>");
 	}
@@ -168,50 +149,45 @@ b {
 	for (var i = 2015; i <= 2030; i++) {
 		$('#year').append("<option value='"+ i +"'>" + i + "</option>");
 	}
-	
+
 	//驗證手機
-	$('input[name="cardHolderPhone"]').on("blur",function(){
+	$('input[name="cardHolderPhone"]').on("blur", function() {
 		$('#tel').empty();
 		var tel = $(this).val();
 		//驗證是否為10個整數
 		re = /^[\d]{10}$/;
-		if(!re.test(tel)){
-			$('#submit').prop("disabled",true);
+		if (!re.test(tel)) {
+			$('#submit').prop("disabled", true);
 			$('#tel').text("請輸入正確的手機號碼");
 			return;
 		}
-		$('#submit').prop("disabled",false);
+		$('#submit').prop("disabled", false);
 	})
 
 	nextFocus();
-	
+
 	//focus欄位
-	function nextFocus(){
-		$('input[name="cardNo_1"]').on("keyup", function(){
-			if($(this).val().length == 4){
+	function nextFocus() {
+		$('input[name="cardNo_1"]').on("keyup", function() {
+			if ($(this).val().length == 4) {
 				$('input[name="cardNo_2"]').focus();
 			}
 		});
-		$('input[name="cardNo_2"]').on("keyup", function(){
-			if($(this).val().length == 4){
+		$('input[name="cardNo_2"]').on("keyup", function() {
+			if ($(this).val().length == 4) {
 				$('input[name="cardNo_3"]').focus();
 			}
 		});
-		$('input[name="cardNo_3"]').on("keyup", function(){
-			if($(this).val().length == 4){
+		$('input[name="cardNo_3"]').on("keyup", function() {
+			if ($(this).val().length == 4) {
 				$('input[name="cardNo_4"]').focus();
 			}
 		});
-		$('input[name="cardCheck"]').on("keyup", function(){
-			if($(this).val().length == 3){
-				$('input[name="cardHolder"]').focus();
+		$('input[name="form.cardCheck"]').on("keyup", function() {
+			if ($(this).val().length == 3) {
+				$('input[name="form.cardHolder"]').focus();
 			}
 		})
 	}
-	
-	
-	
-	
 </script>
 
-</html>

@@ -297,6 +297,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		try{
 			service.update(model);
 			request.getSession().setAttribute("success", "更新會員資料");
+			request.getSession().setAttribute("giver", model);
 		}catch(Exception e){
 			return "updateFail";
 		}
