@@ -55,10 +55,9 @@ html, body {
 
 .background-div {
 	z-index: -9999;
-	background-image: url("pictures/bulb.jpeg");
+	background-image: url("pictures/rsz_thanks.jpg");
 	background-size: cover;
 	top: 0;
-	opacity: 0.7;
 	height: 100%;
 	width: 100%;
 	min-height: 100%;
@@ -131,19 +130,18 @@ pre {
 		</div>
 	</div>
 
-	<div id="campaignDiv" style="border-bottom: 1px solid #EEEEEE">
+	<div id="campaignDiv" >
 		<div>
-			<div class="container" style="height: 100%;">
+			<div class="container" style="height: 100%;border-bottom: 1px solid silver; overflow: auto">
 				<h2 style="margin:100px 0px 0px 0px ">現正進行</h2>
 				<div id="campaignRow" class="row"></div>
 			</div>
 		</div>
 	</div>
 
-	<div id="raiserDiv" 
-		style="border-bottom: 1px solid #EEEEEE; overflow: auto">
+	<div id="raiserDiv">
 		<div>
-			<div class="container" >
+			<div class="container" style="border-bottom: 1px solid silver">
 				<h2 style="margin:100px 0px 0px 0px ">參與團體</h2>
 				<div id="raiserRow" class="row" style="margin: 30px 0px 30px 0px"></div>
 			</div>
