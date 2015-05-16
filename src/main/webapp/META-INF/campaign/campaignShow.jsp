@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
+<html id="body">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The Givers 募款活動</title>
@@ -19,75 +19,39 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
-html, body {
-	width: 100%;
-	height: 100%;
-}
-
 .thumbnail {
 	text-align: justify;
- 	margin:0 8% 10% 8%; 
+	margin: 30px;
 }
 
-.blank-space5 {
-	width: 100%;
-	height: 5%;
-}
-pre {background-color: white;
-border: white;
-padding-left: 0px;
-padding-right: 0px;
-margin-left: 0px;
-margin-right: 0px;
-}
-@media{
-.col-md-4{height:auto;}
+pre {
+	background-color: white;
+	border: white;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
-@media ( min-width : 1200px){
-.col-md-4{height: 760px}
-}
-/*
-#custom-search-input{
-    padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
+@media {
+	.col-md-4 {
+		height: auto;
+	}
 }
 
-#custom-search-input input{
-    border: 0;
-    box-shadow: none;
+@media ( min-width : 1200px) {
+	.col-md-4 {
+		height: 760px
+	}
 }
-
-#custom-search-input button{
-    margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;
+a:hover {
+	cursor: pointer;
 }
-
-#custom-search-input button:hover{
-    border: 0;
-    box-shadow: none;
-    border-left: solid 1px #ccc;
-}
-
-#custom-search-input .glyphicon-search{
-    font-size: 23px;
-} */
-a:hover{cursor: pointer;}
 </style>
 </head>
-<body id="body">
-
+<body>
 <jsp:include page="/header.jsp" />
-
-	<div class="blank-space5"></div>
-
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 		<div class="row">
 			<div class="col-md-4" style="height: auto; margin-left: 30px">
 				<div id="custom-search-input">
@@ -106,7 +70,7 @@ a:hover{cursor: pointer;}
 	</div>
 
 
-	<div class="container">
+	<div class="container" >
 		<nav>
 			<ul class="pagination">
 			<li><a id="before" aria-label="Previous"><spanaria-hidden="true">&laquo;</span></a></li>
@@ -119,7 +83,7 @@ a:hover{cursor: pointer;}
 		</nav>
 	</div>
 
-	<div class="container" id="showColumn">
+	<div class="container" id="showColumn" style="border-top: 1px silver solid;"">
 		<div id="campaignRow" class=row></div>
 	</div>
 
