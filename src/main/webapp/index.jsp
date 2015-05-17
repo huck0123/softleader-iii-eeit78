@@ -132,7 +132,7 @@ pre {
 
 	<div id="campaignDiv" >
 		<div>
-			<div class="container" style="height: 100%;border-bottom: 1px solid silver; overflow: auto">
+			<div class="container" style="height: 100%;border-bottom: 1px solid silver;">
 				<h2 style="margin:100px 0px 0px 0px ">現正進行</h2>
 				<div id="campaignRow" class="row"></div>
 			</div>
@@ -263,6 +263,11 @@ pre {
 		}
 	}
 	
+	$('a[href^="#campaignDiv"]').click(function() {
+		$('html, body').animate(
+			{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
+				return false;
+			});
 	
 </script>
 

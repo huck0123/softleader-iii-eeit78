@@ -301,25 +301,15 @@ ul.nav {
 								});
 
 						// function for moving smoothly to anchor
-						$('a[href^="#"]').click(
-								function() {
-									$('html, body').animate(
-											{
-												scrollTop : $(
-														$.attr(this, 'href'))
-														.offset().top
-											}, 600, 'easeInOutExpo');
+						$('a[href^="#body"]').click(function() {
+							$('html, body').animate(
+								{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 									return false;
 								});
 
-						$('#header-search-btn')
-								.on(
-										'click',
-										function() {
-											location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='
-													+ $('#header-name-search')
-															.val() + '&page=0';
-										});
+						$('#header-search-btn').on('click',function() {
+							location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='
+													+ $('#header-name-search').val() + '&page=0';});
 					});
 </script>
 
