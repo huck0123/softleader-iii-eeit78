@@ -19,6 +19,21 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/giver.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script>
+	//AllGiverInfo || raiserShow || campaignAdmin || transactionDetail
+	$(document).ready(function(){
+		if("${param.adminTabs}" == 1){
+			$('.nav-tabs a[href="#AllgiverInfo"]').tab('show');
+		}else if("${param.adminTabs}" == 2){
+			$('.nav-tabs a[href="#raiserShow"]').tab('show');
+		}else if("${param.adminTabs}" == 3){
+			$('.nav-tabs a[href="#campaignAdmin"]').tab('show');
+		}else if("${param.adminTabs}" == 4){
+			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
+		}
+	})
+	
+</script>
 
 <style>
 tr th {
@@ -32,14 +47,14 @@ tr th {
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="active"><a href="#AllgiverInfo">所有捐款人資訊</a></li>
+			<li><a href="#AllgiverInfo">所有捐款人資訊</a></li>
 			<li><a href="#raiserShow">管理團體資訊</a></li>
 			<li><a href="#campaignAdmin">管理活動</a></li>
 			<li><a href="#transactionDetail">顯示所有交易紀錄</a></li>
 		</ul>
 		<div class="tab-content">
 		
-			<div class="panel alert tab-pane fade in active" id="AllgiverInfo">
+			<div class="panel alert tab-pane fade" id="AllgiverInfo">
 				<div class="row">
 					<div class="col-md-3">
 						<select id="pageAmount"></select>顯示筆數(預設5筆)
@@ -89,10 +104,23 @@ tr th {
 	</div>
 
 	<script>
+		
+// 		//AllGiverInfo || raiserShow || campaignAdmin || transactionDetail
+// 		if("${param.adminTabs}" == 1){
+// 			$('.nav-tabs a[href="#AllgiverInfo"]').tab('show');
+// 		}else if("${param.adminTabs}" == 2){
+// 			$('.nav-tabs a[href="#raiserShow"]').tab('show');
+// 		}else if("${param.adminTabs}" == 3){
+// 			$('.nav-tabs a[href="#campaignAdmin"]').tab('show');
+// 		}else if("${param.adminTabs}" == 4){
+// 			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
+// 		}
+	
 		//tab
 		$('.nav-tabs a').click(function(){
 		    $(this).tab('show');
 		});
+		
 	</script>
 
 	<script>

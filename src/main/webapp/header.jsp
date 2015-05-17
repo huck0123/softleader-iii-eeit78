@@ -196,10 +196,10 @@ ul.nav {
 											href="<c:url value='/giver/giverInfo?giverTabs=2'/>">捐款紀錄</a></li>
 									</c:if>
 									<c:if test="${admin != null}">
-										<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
-										<li><a href="<c:url value='/raiser/raiserShow'/>">管理團體資訊</a></li>
-										<li><a href="<c:url value='/campaign/campaignAdmin'/>">管理活動</a></li>
-										<li><a href="<c:url value='/donate/transactionDetail'/>">顯示所有交易紀錄</a></li>
+										<li><a href="<c:url value='/giver/AllGiverInfo?adminTabs=1'/>">顯示所有捐款人資訊</a></li>
+										<li><a href="<c:url value='/giver/AllGiverInfo?adminTabs=2'/>">管理團體資訊</a></li>
+										<li><a href="<c:url value='/giver/AllGiverInfo?adminTabs=3'/>">管理活動</a></li>
+										<li><a href="<c:url value='/giver/AllGiverInfo?adminTabs=4'/>">顯示所有交易紀錄</a></li>
 									</c:if>
 									<li class="divider"></li>
 									<li><a role="menuitem"
