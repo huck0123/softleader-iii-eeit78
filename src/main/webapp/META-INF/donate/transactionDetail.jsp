@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-<%-- <script src="/softleader-iii-eeit78/js/useful.js"></script> --%>
+
 
 <style>
 tr th {
@@ -23,23 +8,20 @@ tr th {
 }
 </style>
 
-<title>交易明細</title>
-</head>
-<body id="body">
-	<jsp:include page="../../header.jsp" />
+<div class="panel alert tab-pane fade" id="transactionDetail">
 
-	<div class="container panel alert">
+<!-- 	<div class="panel alert"> -->
 		<div class="row">
 			<div class="col-md-3">
-				<select id="pageAmount"></select>顯示筆數(預設5筆)
+				<select id="transactionDetailPageAmount"></select>顯示筆數(預設5筆)
 			</div>
 			<div class="col-md-6">
-				<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
-				<select id="page"></select>
-				<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+				<button class="btn btn-primary" id="transactionBefore" onclick="transactionBefore()">上一頁</button>
+				<select id="transactionDetailPage"></select>
+				<button class="btn btn-primary" id="transactionAfter" onclick="transactionAfter()">下一頁</button>
 			</div>
 			<div class="col-md-3">
-				<input type="text" class="form-control" id="condition" placeholder="請輸入搜尋條件"> 
+				<input type="text" class="form-control" id="transactionCondition" placeholder="請輸入搜尋條件"> 
 <!-- 				<button onclick="search()">查詢</button> -->
 			</div>
 		</div>
@@ -57,30 +39,30 @@ tr th {
 				<th>是否收到帳款</th>
 			</tr>
 
-			<tbody id="tbdy">
+			<tbody id="transactionDetail_tbdy">
 
 			</tbody>
 		</table>
-
-	</div>
+<!-- 	</div> -->
+</div>
 
 	<script>
 		
 		var transactionCount = ${applicationScope.transactionCount}; //交易總筆數
-		var url = "${pageContext.request.contextPath}/donate/transactionDetailAction!transactionDetail";
-		var urlc = "${pageContext.request.contextPath}/donate/transactionDetailAction!conditionCount";
-		var urlv = "${pageContext.request.contextPath}/donate/transactionDetailAction!credit";
-		var pageAmount;
-		var pageCount;
-		var condition;
+		var transactionDetail_url = "${pageContext.request.contextPath}/donate/transactionDetailAction!transactionDetail";
+		var transactionDetail_urlc = "${pageContext.request.contextPath}/donate/transactionDetailAction!conditionCount";
+		var transactionDetail_urlv = "${pageContext.request.contextPath}/donate/transactionDetailAction!credit";
+		var transactionDetailPageAmount;
+		var transactionDetailPageCount;
+		var transactionCondition;
 		
-		$('#condition').keyup(function(){
-			condition = $('#condition').val();
-			$.post(urlc,{'condition':condition},function(data){
+		$('#transactionCondition').keyup(function(){
+			transactionCondition = $('#transactionCondition').val();
+			$.post(transactionDetail_urlc,{'condition':transactionCondition},function(data){
 				
 				data = JSON.parse(data);
 				transactionCount = data.conditionCount;
-				load();
+				transactionLoad();
 			});
 		});
 		
@@ -88,67 +70,66 @@ tr th {
 		
 		//收尋      ---------deprecated---------
 // 		function search(){
-// 			condition = $('#condition').val();
-// 			$.post(urlc,{'condition':condition},function(data){
+// 			transactionCondition = $('#condition').val();
+// 			$.post(transactionDetail_urlc,{'condition':transactionCondition},function(data){
 				
 // 				data = JSON.parse(data);
 // 				transactionCount = data.conditionCount;
-// 				load();
+// 				transactionLoad();
 // 			});
 // 		}
 		
-		load();
+		transactionLoad();
 		
 		//初始載入頁面
-		function load(){
-			$('#pageAmount').empty();
-			$('#page').empty();
+		function transactionLoad(){
+			$('#transactionDetailPageAmount').empty();
+			$('#transactionDetailPage').empty();
 			
 			//建立每頁幾筆資料選單
 			for(var i=1; i<=transactionCount; i++){
-				$('#pageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
+				$('#transactionDetailPageAmount').append("<option value='"+ i +"'>"+ i +"</option>");
 			}
 			
 			//預設一頁五筆
 			if(transactionCount>=5){
-				$('#pageAmount').val(5);  
+				$('#transactionDetailPageAmount').val(5);  
 			}else{
-				$('#pageAmount').val(transactionCount);
+				$('#transactionDetailPageAmount').val(transactionCount);
 			}
-			pageAmount = $('#pageAmount').val();
-			pageCount = transactionCount/pageAmount;
+			transactionDetailPageAmount = $('#transactionDetailPageAmount').val();
+			transactionDetailPageCount = transactionCount/transactionDetailPageAmount;
 			
 			//建立select選單
-			for(var i=1; i<pageCount+1; i++){
-				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			for(var i=1; i<transactionDetailPageCount+1; i++){
+				$('#transactionDetailPage').append("<option value='"+ i +"'>"+ i +"</option>");	
 			}
 
 			//載入第一頁
-			$.post(url,{'thisPage':1,'pageAmount':pageAmount,'condition':condition}, getData);
+			$.post(transactionDetail_url,{'thisPage':1,'pageAmount':transactionDetailPageAmount,'condition':transactionCondition}, transactionGetData);
 		}
 		
-		function onload(){
+		function transactionOnload(){
 
-			pageAmount = $('#pageAmount').val();
-			pageCount = transactionCount/pageAmount;
+			transactionDetailPageAmount = $('#transactionDetailPageAmount').val();
+			transactionDetailPageCount = transactionCount/transactionDetailPageAmount;
 			
 			//清除page select選單
-			$('#page').empty();
+			$('#transactionDetailPage').empty();
 			
 			//建立page select選單
-			for(var i=1; i<pageCount+1; i++){
-				$('#page').append("<option value='"+ i +"'>"+ i +"</option>");	
+			for(var i=1; i<transactionDetailPageCount+1; i++){				$('#transactionDetailPage').append("<option value='"+ i +"'>"+ i +"</option>");	
 			}
 		
 		}
 		
 		//讀取使用者每頁顯示幾筆資料之值
-		$('#pageAmount').on("change", function(){
+		$('#transactionDetailPageAmount').on("change", function(){
 			$(this).prop("disabled",true);
-// 			pageAmount = $(this).val();
-			onload();
-			var thisPage = $('#page').val();			
-			$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition}, getData);
+// 			transactionDetailPageAmount = $(this).val();
+			transactionOnload();
+			var thisPage = $('#transactionDetailPage').val();			
+			$.post(transactionDetail_url,{'thisPage':thisPage,'pageAmount':transactionDetailPageAmount,'condition':transactionCondition}, transactionGetData);
 		});
 
 		//判斷是否為null
@@ -161,11 +142,11 @@ tr th {
 			}
 		};
 		
-		function getData(data){
-			$('#tbdy').empty();
+		function transactionGetData(data){
+			$('#transactionDetail_tbdy').empty();
 			data = JSON.parse(data);
 			$.each(data, function(index,obj){				
-				$(tbdy).append("<tr>"
+				$(transactionDetail_tbdy).append("<tr>"
 						+"<td>"+ undefinedCheck(obj.giverId) +"</td>"
 						+"<td>"+ obj.campaignModel.name +"</td>"
 						+"<td>"+ obj.amount +"</td>"
@@ -178,10 +159,10 @@ tr th {
 						+"</tr>");	
 				valid(obj.id, obj.credit);
 
-// 				$('#before').prop("disabled", false);
-// 				$('#after').prop("disabled", false);
+// 				$('#transactionBefore').prop("disabled", false);
+// 				$('#transactionAfter').prop("disabled", false);
 // 				$('#page').prop("disabled", false);
-				$('#pageAmount').prop("disabled", false);
+				$('#transactionDetailPageAmount').prop("disabled", false);
 			})
 			
 		};
@@ -200,11 +181,11 @@ tr th {
 			$('#'+id).on('change', function(){
 				var temp = $(this).val();
 				if(temp == "true"){
-					$.post(urlv, { 'thisId':id, 'credit':false});
+					$.post(transactionDetail_urlv, { 'thisId':id, 'credit':false});
 					$(this).val("false");
 					$('.'+id).text("false");
 				}else{
-					$.post(urlv, { 'thisId':id, 'credit':true});
+					$.post(transactionDetail_urlv, { 'thisId':id, 'credit':true});
 					$(this).val("true");
 					$('.'+id).text("true");
 				}
@@ -213,34 +194,34 @@ tr th {
 		
 
 		//選擇第幾頁
-		$('#page').on("change", function(){
+		$('#transactionDetailPage').on("change", function(){
 // 			$(this).prop("disabled",true);
-			$('#tbdy').empty();
+			$('#transactionDetail_tbdy').empty();
 			var temp = $(this).val();
-			$.post(url,{'thisPage':temp,'pageAmount':pageAmount,'condition':condition},getData);
+			$.post(transactionDetail_url,{'thisPage':temp,'pageAmount':transactionDetailPageAmount,'condition':transactionCondition},transactionGetData);
 		});
 
 		//上一頁
-		function before(){
-// 			$('#before').prop("disabled", true);
-			var thisPage = $('#page').val();
+		function transactionBefore(){
+// 			$('#transactionBefore').prop("disabled", true);
+			var thisPage = $('#transactionDetailPage').val();
 			if(thisPage > 1){
 				thisPage--;
 				
-				$('#page').val(thisPage);
-				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
+				$('#transactionDetailPage').val(thisPage);
+				$.post(transactionDetail_url,{'thisPage':thisPage,'pageAmount':transactionDetailPageAmount,'condition':transactionCondition},transactionGetData);
 			}
 		};
 
 		//下一頁
-		function after() {
-// 			$('#after').prop("disabled", true);
-			var thisPage = $('#page').val();
-			if(thisPage < pageCount ){
+		function transactionAfter() {
+// 			$('#transactionAfter').prop("disabled", true);
+			var thisPage = $('#transactionDetailPage').val();
+			if(thisPage < transactionDetailPageCount ){
 				thisPage++;
 				
-				$('#page').val(thisPage);
-				$.post(url,{'thisPage':thisPage,'pageAmount':pageAmount,'condition':condition},getData);
+				$('#transactionDetailPage').val(thisPage);
+				$.post(transactionDetail_url,{'thisPage':thisPage,'pageAmount':transactionDetailPageAmount,'condition':transactionCondition},transactionGetData);
 			}
 		};
 		
