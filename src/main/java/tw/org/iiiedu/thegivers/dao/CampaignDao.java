@@ -120,6 +120,10 @@ public class CampaignDao {
 				criteria.add(Restrictions.eq("location",
 						campaignForm.getLocation()));
 			}
+			if(campaignForm.getValid()!=null){
+				criteria.add(Restrictions.eq("valid",
+						campaignForm.getValid()));
+			}
 		}
 		// criteria.add(Restrictions.eq("show", true));
 		criteria.addOrder(Order.desc("lastModify"));

@@ -23,10 +23,10 @@
 			<button type="button" id="campaignAdminBefore">上一頁</button>
 			<span id="pageShow"></span>
 			<button type="button" id="campaignAdminAfter">下一頁</button>
-			<button type="submit" name="method:ban">加入黑名單</button>
+			<button type="button" id="validate">解除黑名單</button>
 			<!-- 			<input type="submit" value="加入黑名單" name="method:ban"> -->
 
-			<input type="submit" value="解除黑名單" name="method:unban">
+			<input type="button" value="加入黑名單" id="invalidate">
 
 
 			<table class="table table-bordered">
@@ -72,7 +72,8 @@ function load(){
 		pageShowAppend();
 		tbdyAppend();
 	})}
-
+	
+//把資料放入tbdy
 function tbdyAppend(){
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val(), 'campaignForm.pageSize':pageSize},function(data){
@@ -98,11 +99,13 @@ function tbdyAppend(){
 	})	
 }
 
+//顯示頁碼
 function pageShowAppend(){
 	$('#pageShow').empty();
 	$('#pageShow').append('<input type="text" id="nowPage" style="width:20px;" value="'+(currentPage+1)+'"/>').append(' / '+totalPage);
 }
 
+//下一頁
 function campaignAdminAfter(){
 	if(currentPage+1 < totalPage){
 		currentPage++;
@@ -111,7 +114,7 @@ function campaignAdminAfter(){
 	tbdyAppend();
 }
 $('#campaignAdminAfter').on('click', campaignAdminAfter);
-
+//上一頁
 function campaignAdminBefore(){
 	if(currentPage > 0){
 		currentPage--;
@@ -121,8 +124,8 @@ function campaignAdminBefore(){
 }
 $('#campaignAdminBefore').on('click', campaignAdminBefore);
 
+//設定每頁筆數
 $('#selectPageSize').on('change',load);
-
 function setPageSize(){
 	if($('#selectPageSize').val()==="all"){
 		pageSize = totalCount;
@@ -131,5 +134,19 @@ function setPageSize(){
 	}
 }
 
+//加入黑名單
+$('#invalidate').on('click',ban);
+function ban(){
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!ban',
+			{'campaignForm.ban':$('#campaignAdmin_tbdy input:checkbox:checked').serialize()},function(data){
+				tbdyAppend();
+})}
+//解除黑名單
+$('#validate').on('click',unban);
+function unban(){
+	$.post('/softleader-iii-eeit78/campaign/campaignAction!unban',
+			{'campaignForm.ban':$('#campaignAdmin_tbdy input:checkbox:checked').serialize()},function(data){
+				tbdyAppend()
+})}
 </script>
 </html>

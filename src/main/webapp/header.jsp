@@ -278,7 +278,7 @@ ul.nav {
 					function() {
 						$(window).scroll(
 								function() {
-									if ($(window).scrollTop() > 99) {
+									if ($(window).scrollTop() > 1) {
 										$('#header-wrapper').stop().addClass(
 												'scroll-header');
 										$('#to-top').stop().show(500);

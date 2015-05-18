@@ -163,14 +163,15 @@ public class CampaignAction extends ActionSupport implements
 	}
 
 	public String ban() {
-		if (campaignForm == null) {
+		if (campaignForm.getBan() == null) {
 			return "ban";
 		}
-		List<String> list = campaignForm.getCheckbox();
-		if (list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
+		String[] strArr = campaignForm.getBan().split("&");
+		if (strArr.length > 0) {
+			for (int i = 0; i < strArr.length; i++) {
+				String id = strArr[i].substring(strArr[i].lastIndexOf("=")+1);
 				CampaignModel cm = campaignService.getById(Integer
-						.parseInt(list.get(i)));
+						.parseInt(id));
 				cm.setValid(false);
 				campaignService.update(cm);
 			}
@@ -179,17 +180,16 @@ public class CampaignAction extends ActionSupport implements
 	}
 
 	public String unban() {
-		if (campaignForm == null) {
+		if (campaignForm.getBan() == null) {
 			return "unban";
 		}
-		List<String> list = campaignForm.getCheckbox();
-		if (list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
+		String[] strArr = campaignForm.getBan().split("&");
+		if (strArr.length > 0) {
+			for (int i = 0; i < strArr.length; i++) {
+				String id = strArr[i].substring(strArr[i].lastIndexOf("=")+1);
 				CampaignModel cm = campaignService.getById(Integer
-						.parseInt(list.get(i)));
-
+						.parseInt(id));
 				cm.setValid(true);
-
 				campaignService.update(cm);
 			}
 		}

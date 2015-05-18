@@ -42,6 +42,8 @@ public class CampaignForm {
 	
 	private List<String> checkbox;
 	
+	private String ban;
+	
 	private Integer duration;
 	
 	
@@ -200,6 +202,14 @@ public class CampaignForm {
 				+ ", location=" + location + ", image=" + image + ", pageNum="
 				+ pageNum + ", pageSize=" + pageSize + ", checkbox=" + checkbox
 				+ ", duration=" + duration + "]";
+	}
+
+	public String getBan() {
+		return ban;
+	}
+
+	public void setBan(String ban) {
+		this.ban = ban;
 	}
 
 	
