@@ -102,31 +102,58 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		this.valid = valid;
 	}
 	
-	
+	//電話regex
+	String telRegex = "^09[\\d]{8}$";
 
+	//密碼regex
+	String passRegex = "^[\\dA-Za-z\\S]{6,30}$";
+//	String passRegex1 = "[\\d]{1,}";
+//	String passRegex2 = "[A-Za-z]{1,}";
+//	String passRegex3 = "[\\S]{1,}";
+	
 	//註冊帳號
 	public String insert() {
 
 		context = request.getSession().getServletContext();
 		Integer giverCount = (Integer) context.getAttribute("giverCount");
 
-		//驗證身分證
-		IdCheck check = new IdCheck(form.getId_number().trim() ,form.isGender());
-		if(check.IdVerify() == false){
-			return FAIL;				
-		}
-		
 		model = new GiverModel();
 		log.debug("++++++++++++++++++++++++++++++++++++++++++++giverAction insert++++++++++++++++++++++++++++++++++++++ {}", giverCount);
-		model.setAccount(form.getAccount().trim());
-		model.setAddress(form.getAddress().trim());
-		model.setBirth(new Timestamp(form.getBirth().getTime()));
-		model.setEmail(form.getEmail().trim());
-		model.setFamilyName(form.getFamilyName().trim());
-		model.setName(form.getName().trim());
-		model.setGender(form.isGender());
-		model.setGetInfo(form.isGet_info());
+		try{
+			model.setAccount(form.getAccount().trim());
+			model.setAddress(form.getAddress().trim());
+			model.setBirth(new Timestamp(form.getBirth().getTime()));
+			model.setEmail(form.getEmail().trim());
+			model.setFamilyName(form.getFamilyName().trim());
+			model.setName(form.getName().trim());
+			model.setGender(form.isGender());
+			model.setGetInfo(form.isGet_info());
+			model.setIdNumber(form.getId_number());
 
+			//驗證身分證
+			IdCheck check = new IdCheck(form.getId_number().trim() ,form.isGender());
+			if(check.IdVerify() == false){
+				return FAIL;				
+			}
+			//驗證密碼
+			if(form.getPasswd().matches(passRegex)){
+				model.setPasswd(form.getPasswd());
+			}else{
+				return FAIL;
+			}
+			//驗證電話
+			if(form.getTel().matches(telRegex)){
+				model.setTel(form.getTel());
+			}else{
+				return FAIL;
+			}
+			model.setValid(true);
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			return FAIL;
+		}
+		
 		if(form.getHeadshot() != null){
 			try {
 				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
@@ -138,11 +165,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;
 			}
 		}
-		
-		model.setIdNumber(form.getId_number());
-		model.setPasswd(form.getPasswd());
-		model.setTel(form.getTel());
-		model.setValid(true);
 		
 		try {
 			model = service.register(model);
@@ -159,8 +181,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return FAIL;
-		}
-		
+		} 
 		
 	}
 	

@@ -37,7 +37,9 @@ b {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-
+body { 
+ 	background-color: #D2E9FF; 
+}
 </style>
 
 </head>
@@ -62,8 +64,8 @@ b {
 						<div class="thumbnail">
 							<h2>會員資料修改</h2>
 							<div>
-								<a href="#" data-toggle="modal" data-target="#myModal"> <img
-									src="" class="img-thumbnail" id="img"
+								<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
+								<img src="" class="img-thumbnail" id="img"
 									style="width: 100px; height: 100px">
 								</a>
 							</div>
@@ -134,10 +136,14 @@ b {
 									</tr>
 									<tr>
 										<td><label for="">照片:</label></td>
-										<td><label class="btn btn-success">更換照片 <input
-												type="file" name="form.headshot" accept="image/*"
+										<td><label class="btn btn-success">更換照片 
+											<input type="file" name="form.headshot" accept="image/*"
 												id="headshot" style="display: none;">
-										</label></td>
+											</label>
+											<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
+												<img src="" id="img2" style="weight: 100px; height: 100px;">
+											</a>
+										</td>
 									</tr>
 								</table>
 								<div>
@@ -275,8 +281,8 @@ b {
 			if(file != null){
 				readFile(file);
 			}else{
-				$('#img').attr("src","../pictures/headshot.jpg");
 				$('#img1').attr("src","../pictures/headshot.jpg");
+				$('#img2').attr("src","../pictures/headshot.jpg");
 			}
 		})
 
@@ -288,8 +294,8 @@ b {
 		    var reader = new FileReader();
 		    reader.readAsDataURL(file); 
 		    reader.onload = function(){ 
-		    	$('#img').attr("src",reader.result);
-		        $('#img1').attr("src",reader.result);
+		    	$('#img1').attr("src",reader.result);
+		        $('#img2').attr("src",reader.result);
 		    } 
 		} 
 	</script>
