@@ -5,9 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style type="text/css">
+/*general setting*/
 .container {
 	padding: 0px;
 }
+a:hover{cursor: pointer;}
+/*general setting*/
+
 /*nav properties start*/
 .scroll-header {
 	position: fixed;

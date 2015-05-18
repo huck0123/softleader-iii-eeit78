@@ -20,77 +20,55 @@
 
 
 		<div class="container">
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<table class="table table-hover">
-						<tr style="height: 30px">
-							<td>活動名稱：</td>
-							<td><input type="text" name="campaignForm.name"
-								value="${param.name}"></td>
-							<td><span class="error">${errors.id}</span></td>
-						</tr>
-						<tr>
-							<td><input type="file" name="campaignForm.image"
-								label="活動圖片：">
-							</file></td>
-							<td></td>
-							<td></td>
-							<!-- 				<td>活動圖片：</td> -->
-							<!-- 				<td><input type="file" name="campaignForm.image" /></td> -->
-							<%-- 				<td><span class="error">${errors.id}</span></td> --%>
-						</tr>
-						<tr>
-							<td>目標金額：</td>
-							<td><input type="text" name="campaignForm.goal"
-								value="${param.goal}"></td>
-							<td><span class="error">${errors.id}</span></td>
-						</tr>
-						<tr>
-							<td>開始日期 :</td>
-							<td><input type="text" name="campaignForm.startDate"
-								value="${param.startDate}"></td>
-							<td><span class="error">${errors.price}</span></td>
-						</tr>
-						<tr>
-							<td>結束日期 :</td>
-							<td><input type="text" name="campaignForm.endDate"
-								value="${param.endDate}"></td>
-							<td><span class="error">${errors.make}</span></td>
-						</tr>
-						<tr>
-							<td>類型 :</td>
-							<td><input type="text" name="campaignForm.type"
-								value="${param.type}"></td>
-							<td><span class="error">${errors.expire}</span></td>
-						</tr>
-						<tr>
-							<td>影片連結:</td>
-							<td><input type="text" name="campaignForm.vedioUrl"
-								value="${param.vedioUrl}"></td>
-							<td><span class="error">${errors.expire}</span></td>
-						</tr>
-						<tr>
-							<td>地區 :</td>
-							<td><input type="text" name="campaignForm.location"
-								value="${param.location}"></td>
-							<td><span class="error">${errors.expire}</span></td>
-						</tr>
-						<tr>
-							<td>活動詳情:</td>
-							<td><textarea name="campaignForm.detail">${param.detail}</textarea></td>
-							<td><span class="error">${errors.expire}</span></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><input type="submit" value="送出" /></td>
-							<td><button type="button" id="btn1" name="填上資料" />Fill</td>
-						</tr>
-
-					</table>
-				</div>
-				<div class="col-md-2"></div>
+			<div class="form-group">
+				<label for="campaign-name-input">活動名稱：</label> <input type="text"
+					class="form-control" name="campaignForm.name"
+					id="campaign-name-input" placeholder="請輸入活動名稱">
 			</div>
+
+			<div class="form-group">
+				<label for="campaign-image-input">活動圖片：</label> <input type="file"
+					class="form-control" name="campaignForm.image"
+					id="campaign-image-input" placeholder="請上傳圖片">
+			</div>
+			<div class="form-group">
+				<label for="campaign-goal-input">目標金額：</label> <input type="text"
+					class="form-control" name="campaignForm.goal"
+					id="campaign-goal-input" placeholder="請輸入目標金額">
+			</div>
+			<div class="form-group">
+				<label for="campaign-duration-input">活動天數：</label> <input
+					type="text" class="form-control" name="campaignForm.duration"
+					id="campaign-duration-input" placeholder="請輸入活動天數">
+			</div>
+			<div class="form-group">
+				<label for="campaign-type-input">類型：</label> <input type="text"
+					class="form-control" name="campaignForm.type"
+					id="campaign-type-input" placeholder="請輸入活動類型">
+			</div>
+			<div class="form-group">
+				<label for="campaign-location-input">地區 :</label> <input type="text"
+					class="form-control" name="campaignForm.location"
+					id="campaign-location-input" placeholder="請輸入活動地點">
+			</div>
+
+			<div class="form-group">
+				<label for="campaign-vedioUrl-input">影片連結:</label> <input
+					type="text" class="form-control" name="campaignForm.vedioUrl"
+					id="campaign-vedioUrl-input" placeholder="請輸入影片連結">
+			</div>
+			<div class="form-group">
+				<label for="campaign-detail-input">活動詳情:</label>
+				<textarea id="campaign-detail-input" name="campaignForm.detail"
+					class="form-control" rows="10">${param.detail}</textarea>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">送出</button>
+				</div>
+			</div>
+
 		</div>
 	</form>
 

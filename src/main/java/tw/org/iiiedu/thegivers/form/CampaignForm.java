@@ -42,6 +42,8 @@ public class CampaignForm {
 	
 	private List<String> checkbox;
 	
+	private Integer duration;
+	
 	
 
 	public List<String> getCheckbox() {
@@ -178,6 +180,26 @@ public class CampaignForm {
 
 	public void setImage(File image) {
 		this.image = image;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
+	@Override
+	public String toString() {
+		return "CampaignForm [id=" + id + ", name=" + name + ", raiserId="
+				+ raiserId + ", goal=" + goal + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", currentFund=" + currentFund
+				+ ", type=" + type + ", vedioUrl=" + vedioUrl + ", detail="
+				+ detail + ", show=" + show + ", valid=" + valid
+				+ ", location=" + location + ", image=" + image + ", pageNum="
+				+ pageNum + ", pageSize=" + pageSize + ", checkbox=" + checkbox
+				+ ", duration=" + duration + "]";
 	}
 
 	
