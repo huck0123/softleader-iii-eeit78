@@ -216,7 +216,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return "select";
 	}
 
-	public String getByCondition() {
+	public String getRaiserCondition() {
 		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
 				contactPerson, lock ,page,5);
 		Gson gson = new Gson();
