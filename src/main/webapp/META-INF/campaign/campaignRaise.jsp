@@ -14,7 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="tab-pane fade" id="campaignRaise">
 	<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
 		method="post" enctype="multipart/form-data">
 
@@ -93,7 +93,7 @@
 			</div>
 		</div>
 	</form>
-
+</div>
 </body>
 <script>
 	btn1.addEventListener("click", fill);
