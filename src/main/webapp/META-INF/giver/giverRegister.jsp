@@ -39,6 +39,9 @@ b {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
+body { 
+ 	background-color: #D2E9FF; 
+}
 </style>
 
 </head>
@@ -48,135 +51,116 @@ b {
 
 	<div class="container panel alert">
 		<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-4"></div>
 
-			<div class="col-md-8">
-			<div class="thumbnail">
+			<div class="col-md-4">
+<!-- 			<div class="thumbnail"> -->
 				<h2>捐款會員註冊</h2>
-				<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
-					method="post" enctype="multipart/form-data">
-					<table class="table">
-						<colgroup>
-							 <col span="1" style="background-color:#ADADAD">
-   							 <col style="background-color:#F0F0F0">
-   							 <col style="background-color:#F0F0F0; width:100px;">
-						</colgroup>
-						<tr>
-							<td><label for="">帳號:<b>*</b></label></td>
-							<td><input type="text" name="form.account"
-								value="${param.form.account }" required="required"></td>
-							<td><b id="account"></b></td>
-						</tr>
-						<tr>
-							<td><label for="">密碼:<b>*</b></label></td>
-							<td><input type="password" name="form.passwd" value="" id="passwd1"
-								required="required"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">密碼確認:<b>*</b></label></td>
-							<td><input type="password" value=""	id="passwd2"
-							 	required="required"></td>
-							 <td><b id="password2"></b></td>
-						</tr>
-						<tr>
-							<td><label for="">姓:<b>*</b></label></td>
-							<td><input type="text" name="form.familyName"
-								value="${param.form.familyName }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">名字:<b>*</b></label></td>
-							<td><input type="text" name="form.name"
-								value="${param.form.name }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">性別:<b>*</b></label></td>
-							<td>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-default">
-										<input type="radio" name="form.gender" value="true" >男
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="form.gender" value="false" >女
-									</label>
-								</div>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">身分證字號:<b>*</b></label></td>
-							<td><input type="text" name="form.id_number"
-								value="${param.form.id_number }"></td>
-							<td><b id="idNumber"></b></td>
-						</tr>
-						<tr>
-							<td><label for="">手機:<b>*</b></label></td>
-							<td><input type="text" name="form.tel"
-								value="${param.form.tel }"></td>
-							<td><b id="tel"></b></td>
-						</tr>
-						<tr>
-							<td><label for="">住址:</label></td>
-							<td><input type="text" name="form.address"
-								value="${param.form.address }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">Email:<b>*</b></label></td>
-							<td><input type="email" name="form.email"
-								value="${param.form.email }"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">是否獲得資訊:</label></td>
-							<td>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-default">
-										<input type="radio" name="form.get_info" value="true" id="getInfo1" checked="checked">是
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="form.get_info" value="false" id="getInfo2">否
-									</label>
-								</div>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">生日:</label></td>
-							<td><input type="date" name="form.birth" value=""
-								 style="height: 30px;"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td><label for="">照片:</label></td>
-							<td>
-								<label class="btn btn-success">更換照片
-									<input type="file" name="form.headshot"	accept="image/*"
-								 		id="headshot" style="display:none;">
+				<div style="padding-top:50px">
+					<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
+						method="post" enctype="multipart/form-data">
+	
+						<div class="form-group">
+							<label for="">帳號:<b>*</b></label> 
+							<input type="text" class="form-control" name="form.account"
+								value="${param.form.account }" required="required" autofocus>
+							<b id="account"></b>
+						</div>
+						<div class="form-group">
+							<label for="">密碼:<b>*</b></label> 
+							<input type="password" class="form-control" name="form.passwd" id="passwd1"
+								data-toggle="tooltip" data-placement="top" 
+								title="密碼至少6位，至多30位，必須有英文、數字" required="required">
+							<b id="password1"></b>
+						</div>
+						<div class="form-group">
+							<label for="">密碼確認:<b>*</b></label> 
+							<input type="password" class="form-control" id="passwd2" required="required">
+							<b id="password2"></b>
+						</div>
+						<div class="form-group">
+							<label for="">姓:<b>*</b></label> 
+							<input type="text" class="form-control" name="form.familyName"
+								value="${param.form.familyName }">
+						</div>
+						<div class="form-group">
+							<label for="">名字:<b>*</b></label> 
+							<input type="text" class="form-control" name="form.name" value="${param.form.name }">
+						</div>
+						<div class="form-group">
+							<label for="">性別:<b>*</b></label>
+						</div>
+						<div class="form-group">
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default"> 
+								<input type="radio"	name="form.gender" value="true">男
+								</label> <label class="btn btn-default"> 
+								<input type="radio" name="form.gender" value="false">女
 								</label>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-								<a href="#" data-toggle="modal" data-target="#myModal">
-									<img src="" id="img" style="weight:70px; height:70px;">
-								</a>
-							</td>
-							<td></td>
-						</tr>
-					</table>
-					<div>
-						<input type="submit" class="btn btn-primary" value="送出" id="submit">
-						<input type="reset" class="btn btn-primary" value="清除" >
-					</div>
-				</form>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="">身分證字號:<b>*</b></label> 
+							<input type="text" class="form-control" name="form.id_number"
+								value="${param.form.id_number }">
+							<b id="idNumber"></b>
+						</div>
+						<div class="form-group">
+							<label for="">手機:<b>*</b></label> <input type="text"
+								class="form-control" name="form.tel" value="${param.form.tel }">
+							<b id="tel"></b>
+						</div>
+						<div class="form-group">
+							<label for="">住址:</label> 
+							<input type="text" class="form-control"
+								name="form.address" value="${param.form.address }">
+						</div>
+						<div class="form-group">
+							<label for="">Email:<b>*</b></label> 
+							<input type="email"	class="form-control" name="form.email"
+								value="${param.form.email }">
+						</div>
+						<div class="form-group">
+							<label for="">是否獲得資訊:</label>
+						</div>
+						<div class="form-group">
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default"> 
+								<input type="radio"	name="form.get_info" value="true" id="getInfo1"
+									checked="checked">是
+								</label> 
+								<label class="btn btn-default"> 
+								<input type="radio"	name="form.get_info" value="false" id="getInfo2">否
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="">生日:</label> 
+							<input type="date" class="form-control"
+								name="form.birth" value="" style="height: 30px;">
+						</div>
+						<div class="form-group">
+							<label for="">照片:</label> 
+							<label class="btn btn-success">上傳照片
+								<input type="file" name="form.headshot" accept="image/*"
+									id="headshot" style="display: none;">
+							</label>
+						</div>
+						<div class="form-group">
+							<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
+								<img src="" id="img" style="weight: 100px; height: 100px;">
+							</a>
+						</div>
+					
+						<div>
+							<input type="submit" class="btn btn-primary" value="送出" id="submit">
+							<input type="reset" class="btn btn-primary" value="清除" >
+						</div>
+					</form>
+				</div>
 			</div>
-			</div>
-			<div class="col-md-2"></div>
+<!-- 			</div> -->
+			<div class="col-md-4"></div>
 		</div>
 		
 		
@@ -194,6 +178,12 @@ b {
     </div>
 	
 </body>
+
+<script>
+$(function() {
+	$('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 
 <script>
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!select";
@@ -215,6 +205,23 @@ b {
 		});
 	});
 
+	//驗證密碼
+	$('#passwd1').on("blur", function(){
+		var re = /^[\dA-Za-z\S]{6,30}$/;
+		var re1 = /[\d]{1,}/;
+		var re2 = /[A-Za-z]{1,}/;
+		var re3 = /[\S]{1,}/;
+		$('#submit').prop("disabled",true);
+		$('#password1').text("密碼格式錯誤");
+		
+		if(re.test(passwd1.value) && re1.test(passwd1.value) 
+				&& re2.test(passwd1.value) && re3.test(passwd1.value)){
+			$('#password1').empty();
+			$('#submit').prop("disabled",false);
+		}
+			
+	});
+	
 	//確認密碼驗證
 	$('#passwd2').on("keyup", function(){
 		if(passwd1.value != passwd2.value){
@@ -227,15 +234,12 @@ b {
 		}
 	});
 	
-	
-	
-	
 	//驗證手機
 	$('input[name="form.tel"]').on("blur", function(){
 		$('#tel').empty();
 		var tel = $(this).val();
 		//驗證是否為10個整數
-		re = /^[\d]{10}$/;
+		re = /^09[\d]{8}$/;
 		if(!re.test(tel)){
 			$('#submit').prop("disabled",true);
 			$('#tel').text("請輸入正確的手機號碼");

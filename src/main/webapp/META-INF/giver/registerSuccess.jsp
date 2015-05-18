@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="Refresh" content="3; URL=/softleader-iii-eeit78/index.jsp"> -->
 <title>${success }成功</title>
 
 <link rel="stylesheet"
@@ -33,6 +34,9 @@
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
+body { 
+ 	background-color: #D2E9FF; 
+}
 </style>
 </head>
 <body id="body">
@@ -47,7 +51,7 @@
 			<div class="col-md-8">
 				<div class="thumbnail">
 					<div>
-						<a href="#" data-toggle="modal" data-target="#myModal">
+						<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大">
 							<img src="" class="img-thumbnail" id="img"
 								style="width: 100px; height: 100px">
 						</a>
@@ -63,39 +67,39 @@
 								<td>${sessionScope.giver.account }</td>
 							</tr>
 							<tr>
-								<td>密碼</td>
+								<td>密碼:</td>
 								<td>**********</td>
 							</tr>
 							<tr>
-								<td>姓名</td>
+								<td>姓名:</td>
 								<td id="name"></td>
 							</tr>
 							<tr>
-								<td>性別</td>
+								<td>性別:</td>
 								<td id="gender"></td>
 							</tr>
 							<tr>
-								<td>身分證號碼</td>
+								<td>身分證號碼:</td>
 								<td>${sessionScope.giver.idNumber }</td>
 							</tr>
 							<tr>
-								<td>手機號碼</td>
+								<td>手機號碼:</td>
 								<td id="phone"></td>
 							</tr>
 							<tr>
-								<td>地址</td>
+								<td>地址:</td>
 								<td id="address"></td>
 							</tr>
 							<tr>
-								<td>email</td>
+								<td>email:</td>
 								<td id="email"></td>
 							</tr>
 							<tr>
-								<td>獲得資訊</td>
+								<td>獲得資訊:</td>
 								<td id="getInfo"></td>
 							</tr>
 							<tr>
-								<td>生日</td>
+								<td>生日:</td>
 								<td><span></span></td>
 							</tr>
 						</tbody>
