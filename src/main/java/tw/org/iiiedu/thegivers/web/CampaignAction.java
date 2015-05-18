@@ -2,16 +2,23 @@ package tw.org.iiiedu.thegivers.web;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.dao.CampaignDao;
@@ -26,7 +33,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CampaignAction extends ActionSupport implements
-		ServletRequestAware {
+		ServletRequestAware{
 
 	private InputStream inputStream;
 
@@ -80,13 +87,55 @@ public class CampaignAction extends ActionSupport implements
 	}
 
 	public String insert() throws Exception {
+		//驗證campaignForm資料
+		Map<String,String> errorsMap = new HashMap<>();
+		request.setAttribute("errors", errorsMap);
+		if(campaignForm.getName().trim() == null || campaignForm.getName().trim().length()==0){
+		errorsMap.put("name", "活動名稱請勿留白");
+		} 
 
+		if(campaignForm.getGoal() == null){
+		errorsMap.put("goal", "目標金額請勿留白");
+		} else if(campaignForm.getGoal() <0){
+		errorsMap.put("goal", "請填入正確金額");
+		}
+		
+		if(campaignForm.getImage() == null){
+		errorsMap.put("image", "請上傳圖片");
+		}
+		
+		if(campaignForm.getDuration() == null){
+		errorsMap.put("duration", "活動天數請勿留白");
+		}
+		
+		if(campaignForm.getType().trim() == null || campaignForm.getType().trim().length()==0 ){
+		errorsMap.put("type", "類型請勿留白");
+		}
+		
+		if(campaignForm.getLocation().trim() == null || campaignForm.getLocation().trim().length()==0 ){
+		errorsMap.put("location", "地點請勿留白");
+		}
+		
+		if(campaignForm.getVedioUrl().trim() == null || campaignForm.getVedioUrl().trim().length()==0 ){
+		errorsMap.put("vedioUrl", "影片聯結請勿留白");
+		}
+		
+		if(campaignForm.getDetail().trim() == null || campaignForm.getDetail().trim().length()==0 ){
+		errorsMap.put("detail", "活動詳情請勿留白");
+		}
+		
+		if(errorsMap.size()>0){
+		return "input";
+		}
+
+		
 		CampaignModel cm = new CampaignModel();
 		RaiserModel rm = (RaiserModel) request.getSession().getAttribute(
 				"raiser");
 		cm.setGoal(campaignForm.getGoal());
 		cm.setDetail(campaignForm.getDetail());
-		cm.setEndDate(campaignForm.getEndDate());
+		cm.setStartDate(new Timestamp(new java.util.Date().getTime()));
+		cm.setEndDate(new Timestamp(cm.getStartDate().getTime()+campaignForm.getDuration()*24*3600*1000));
 		if (campaignForm.getImage() != null) {
 			cm.setImage(IOUtils.toByteArray(new FileInputStream(campaignForm
 					.getImage())));
@@ -95,7 +144,6 @@ public class CampaignAction extends ActionSupport implements
 		cm.setName(campaignForm.getName());
 		cm.setCurrentFund(0);
 		cm.setRaiserModel(rm);
-		cm.setStartDate(campaignForm.getStartDate());
 		cm.setType(campaignForm.getType());
 		cm.setVedioUrl(campaignForm.getVedioUrl());
 
@@ -152,5 +200,11 @@ public class CampaignAction extends ActionSupport implements
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+	
 
+
+
+
+
+	
 }
