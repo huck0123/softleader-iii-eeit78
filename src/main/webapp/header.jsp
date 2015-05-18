@@ -5,9 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style type="text/css">
+/*general setting*/
 .container {
 	padding: 0px;
 }
+a:hover{cursor: pointer;}
+/*general setting*/
+
 /*nav properties start*/
 .scroll-header {
 	position: fixed;
@@ -183,11 +187,11 @@ ul.nav {
 								<ul class="dropdown-menu" role="menu">
 									<c:if test="${raiser != null}">
 										<li><a role="menuitem"
-											href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=1'/>">修改團體資訊</a></li>
 										<li><a role="menuitem"
-											href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=2'/>">查看活動紀錄</a></li>
 										<li><a role="menuitem"
-											href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=3'/>">發起活動</a></li>
 									</c:if>
 									<c:if test="${giver != null}">
 										<li><a role="menuitem"
@@ -274,7 +278,7 @@ ul.nav {
 					function() {
 						$(window).scroll(
 								function() {
-									if ($(window).scrollTop() > 99) {
+									if ($(window).scrollTop() > 1) {
 										$('#header-wrapper').stop().addClass(
 												'scroll-header');
 										$('#to-top').stop().show(500);
