@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
 <head>
 <link rel="stylesheet"
@@ -16,6 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 .divForAllRaiser {
+	background-color:#FFC670;
 	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5) inset ,inset 1px 1px 4px 2px rgba(20%,20%,40%,0.5);
 }
 .ForAllRaiser{
@@ -43,7 +44,7 @@ box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5)
 		</div>
 	</div>
 	<script>
-		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!selectAll"
+		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!selectAll"
 		$.post(url, getData);
 
 		function getData(raisers) {
@@ -52,7 +53,7 @@ box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5)
 					.each(
 							function(index, raiser) {
 								var srclogo = arrayBufferToBase64(raiser.logo);
-								var strimg = "<img src='' class='img-thumbnail ForAllRaiser' id='logo"+raiser.id+"' style='width:150px; height:120px'>";
+								var strimg = "<img src='' class='img-thumbnail ForAllRaiser' id='logo"+raiser.id+"' style='width:180px; height:165px'>";
 								var strhref = "<a href='${pageContext.request.contextPath}/raiser/raiserAction!select?account="
 										+ raiser.account
 										+ "'>"

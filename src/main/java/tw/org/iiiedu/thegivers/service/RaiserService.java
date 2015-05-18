@@ -63,6 +63,14 @@ public class RaiserService {
 		return null;
 	}
 
+	public RaiserModel getByName(String name) {
+		RaiserModel rm = raiserDao.getByName(name);
+		if (rm != null) {
+			return rm;
+		}
+		return null;
+	}
+	
 	public List<RaiserModel> getAll() {
 		List<RaiserModel> result = raiserDao.getAll();
 		return result;

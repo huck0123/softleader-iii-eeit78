@@ -127,13 +127,13 @@ body {
 							</div>
 						</div>
 					</div>
+					<jsp:include page="raiserHistory.jsp" />
+					<jsp:include page="/META-INF/campaign/campaignRaise.jsp" />
 				</div>
 				<div class="col-md-2"></div>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="raiserHistory.jsp" />
-	<jsp:include page="/META-INF/campaign/campaignRaise.jsp" />
 	<script>
 		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
 		$.post(url, {
@@ -144,17 +144,17 @@ body {
 			$('#logo').attr("src", "data:image/png;base64," + str);
 
 		}
-		
-		$(".nav-tabs a").click(function(){
-		    $(this).tab('show');
+
+		$(".nav-tabs a").click(function() {
+			$(this).tab('show');
 		});
-		
-		$(document).ready(function(){
-			if("${param.raiserTabs}" == 1){
+
+		$(document).ready(function() {
+			if ("${param.raiserTabs}" == 1) {
 				$('.nav-tabs a[href="#raiserUpdate"]').tab('show');
-			}else if("${param.raiserTabs}" == 2){
+			} else if ("${param.raiserTabs}" == 2) {
 				$('.nav-tabs a[href="#raiserHistory"]').tab('show');
-			}else if("${param.raiserTabs}" == 3){
+			} else if ("${param.raiserTabs}" == 3) {
 				$('.nav-tabs a[href="#campaignRaise"]').tab('show');
 			}
 		})
