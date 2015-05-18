@@ -65,7 +65,7 @@ body {
 							<h2>會員資料修改</h2>
 							<div>
 								<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
-								<img src="" class="img-thumbnail" id="img"
+								<img src="" class="img-thumbnail" id="img1"
 									style="width: 100px; height: 100px">
 								</a>
 							</div>
@@ -140,8 +140,8 @@ body {
 											<input type="file" name="form.headshot" accept="image/*"
 												id="headshot" style="display: none;">
 											</label>
-											<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
-												<img src="" id="img2" style="weight: 100px; height: 100px;">
+											<a href="#" data-toggle="modal" data-target="#myModal1" title="點擊放大"> 
+												<img src="" id="img2" style="dispaly:none; weight: 100px; height: 100px;">
 											</a>
 										</td>
 									</tr>
@@ -168,7 +168,19 @@ body {
       			<!-- Modal content-->
 	   		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1" style="weight:70%; height:70%;">
+					<img src="" id="img_1" style="weight:50%; height:50%;">
+	       		</div>
+    		</div>
+    	</div>
+	</div>
+
+	<!-- myModal1 -->
+  	<div class="modal fade" id="myModal1" role="dialog">
+    	<div class="modal-dialog">
+      			<!-- Modal content-->
+	   		<div class="modal-content">
+       			<div class="modal-body">
+					<img src="" id="img_2" style="weight:50%; height:50%;">
 	       		</div>
     		</div>
     	</div>
@@ -242,6 +254,7 @@ body {
 			
 			function getData(data){
 				data = JSON.parse(data);
+				console.log(data);
 				$('input[name="form.familyName"]').val(data.familyName);
 				$('input[name="form.name"]').val(data.name);
 				$('input[name="form.tel"]').val(data.tel);
@@ -262,12 +275,12 @@ body {
 				$('span').text(birth);
 				
 				if(undefinedCheck(data.headshot) == null){
-					$('#img').attr("src","../pictures/headshot.jpg");
 					$('#img1').attr("src","../pictures/headshot.jpg");
+					$('#img_1').attr("src","../pictures/headshot.jpg");
 				}else{
 					var str = arrayBufferToBase64(data.headshot); 
-					$('#img').attr("src","data:image/png;base64," + str);
 					$('#img1').attr("src","data:image/png;base64," + str);
+					$('#img_1').attr("src","data:image/png;base64," + str);
 				}
 			}
 			$.post(url, {'thisAccount': '${sessionScope.giver.account}' }, getData);
@@ -281,8 +294,8 @@ body {
 			if(file != null){
 				readFile(file);
 			}else{
-				$('#img1').attr("src","../pictures/headshot.jpg");
 				$('#img2').attr("src","../pictures/headshot.jpg");
+				$('#img_2').attr("src","../pictures/headshot.jpg");
 			}
 		})
 
@@ -294,8 +307,8 @@ body {
 		    var reader = new FileReader();
 		    reader.readAsDataURL(file); 
 		    reader.onload = function(){ 
-		    	$('#img1').attr("src",reader.result);
-		        $('#img2').attr("src",reader.result);
+		    	$('#img2').attr("src",reader.result);
+		        $('#img_2').attr("src",reader.result);
 		    } 
 		} 
 	</script>
