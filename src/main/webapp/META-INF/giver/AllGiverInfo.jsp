@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>所有捐款人資訊</title>
+<title>管理員專區</title>
 
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
@@ -19,6 +19,21 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/giver.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script>
+	//AllGiverInfo || raiserShow || campaignAdmin || transactionDetail
+	$(document).ready(function(){
+		if("${param.adminTabs}" == 1){
+			$('.nav-tabs a[href="#AllgiverInfo"]').tab('show');
+		}else if("${param.adminTabs}" == 2){
+			$('.nav-tabs a[href="#raiserShow"]').tab('show');
+		}else if("${param.adminTabs}" == 3){
+			$('.nav-tabs a[href="#campaignAdmin"]').tab('show');
+		}else if("${param.adminTabs}" == 4){
+			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
+		}
+	})
+	
+</script>
 
 <style>
 tr th {
@@ -30,49 +45,83 @@ tr th {
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
+	<div class="container">
+		<ul class="nav nav-tabs" role="tablist">
+			<li><a href="#AllgiverInfo">所有捐款人資訊</a></li>
+			<li><a href="#raiserShow">管理團體資訊</a></li>
+			<li><a href="#campaignAdmin">管理活動</a></li>
+			<li><a href="#transactionDetail">顯示所有交易紀錄</a></li>
+		</ul>
+		<div class="tab-content">
+		
+			<div class="panel alert tab-pane fade" id="AllgiverInfo">
+				<div class="row">
+					<div class="col-md-3">
+						<select id="pageAmount"></select>顯示筆數(預設5筆)
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
+						<select id="page"></select>
+						<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
+						<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+					</div>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="condition"
+							placeholder="請輸入搜尋條件">
+						<!-- 				<button onclick="search()">查詢</button> -->
+					</div>
+				</div>
 
-	<div class="container panel alert">
-		<div class="row">
-			<div class="col-md-3">
-				<select id="pageAmount"></select>顯示筆數(預設5筆)
+
+				<table class="table table-bordered">
+					<tr>
+						<th>大頭貼</th>
+						<th>帳號</th>
+						<!-- 				<th>密碼</th> -->
+						<th>姓</th>
+						<th>名字</th>
+						<th>性別</th>
+						<!-- 				<th>身分證號碼</th> -->
+						<th>手機號碼</th>
+						<th>地址</th>
+						<th>email</th>
+						<th>獲得資訊</th>
+						<th>validate</th>
+						<!-- 				<th>生日</th> -->
+					</tr>
+					<tbody id="tbdy">
+
+
+					</tbody>
+				</table>
 			</div>
-			<div class="col-md-6">				
-				<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
-				<select id="page"></select>
-				<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
-				<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
-			</div>
-			<div class="col-md-3">
-				<input type="text" id="condition"> 
-                <span class="glyphicon glyphicon-search"></span>
-<!-- 				<button onclick="search()">查詢</button> -->
-			</div>
+			
+			<jsp:include page="/META-INF/raiser/raiserShow.jsp" />
+			<jsp:include page="/META-INF/campaign/campaignAdmin.jsp" />
+			<jsp:include page="/META-INF/donate/transactionDetail.jsp" />
+			
 		</div>
-
-
-		<table class="table table-bordered">
-			<tr>
-				<th>大頭貼</th>
-				<th>帳號</th>
-				<!-- 				<th>密碼</th> -->
-				<th>姓</th>
-				<th>名字</th>
-				<th>性別</th>
-				<!-- 				<th>身分證號碼</th> -->
-				<th>手機號碼</th>
-				<th>地址</th>
-				<th>email</th>
-				<th>獲得資訊</th>
-				<th>validate</th>
-				<!-- 				<th>生日</th> -->
-			</tr>
-			<tbody id="tbdy">
-
-
-			</tbody>
-		</table>
 	</div>
 
+	<script>
+		
+// 		//AllGiverInfo || raiserShow || campaignAdmin || transactionDetail
+// 		if("${param.adminTabs}" == 1){
+// 			$('.nav-tabs a[href="#AllgiverInfo"]').tab('show');
+// 		}else if("${param.adminTabs}" == 2){
+// 			$('.nav-tabs a[href="#raiserShow"]').tab('show');
+// 		}else if("${param.adminTabs}" == 3){
+// 			$('.nav-tabs a[href="#campaignAdmin"]').tab('show');
+// 		}else if("${param.adminTabs}" == 4){
+// 			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
+// 		}
+	
+		//tab
+		$('.nav-tabs a').click(function(){
+		    $(this).tab('show');
+		});
+		
+	</script>
 
 	<script>
 		

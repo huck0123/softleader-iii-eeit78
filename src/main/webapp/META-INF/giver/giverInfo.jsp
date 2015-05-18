@@ -41,116 +41,128 @@ b {
 </style>
 
 </head>
+
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container panel alert">
+	<div class="container">
+		<h2>會員專區</h2>
+
 		<div class="row">
 			<div class="col-md-2"></div>
-
 			<div class="col-md-8">
-				<div class="thumbnail">
-					<h2>會員資料修改</h2>
-					<div>
-						<a href="#" data-toggle="modal" data-target="#myModal"> 
-							<img src="" class="img-thumbnail" id="img"
-								style="width: 100px; height: 100px">
-						</a>
-					</div>
+				<ul class="nav nav-tabs" role="tablist">
+					<li><a href="#giverUpdate">會員資料修改</a></li>
+					<li><a href="#giverHistory">捐款紀錄</a></li>
+				</ul>
+				
+				<div class="tab-content">
+					<div class="panel alert tab-pane fade" id="giverUpdate">
+						<div class="thumbnail">
+							<h2>會員資料修改</h2>
+							<div>
+								<a href="#" data-toggle="modal" data-target="#myModal"> <img
+									src="" class="img-thumbnail" id="img"
+									style="width: 100px; height: 100px">
+								</a>
+							</div>
 
-					<form action='/softleader-iii-eeit78/giver/giverAction!update.action'
-						method="post" enctype="multipart/form-data">
-						<table class="table">
-							<colgroup>
-								<col span="1" style="background-color: #ADADAD">
-								<col style="background-color: #F0F0F0">
-							</colgroup>
-							<tr>
-								<td><label for="">帳號:</label></td>
-								<td>${sessionScope.giver.account }</td>
-							</tr>
-							<tr>
-								<td><label for="">密碼:</label></td>
-								<td>
-									<button type="button" class="btn btn-default"
-										data-toggle="modal" data-target="#myPasswd">修改密碼</button> 
-									<input type="password" name="form.passwd" value="" id="passwd"
-										style="display: none">
-								</td>
-							</tr>
-							<tr>
-								<td><label for="">姓:</label></td>
-								<td><input type="text" name="form.familyName" value=""></td>
-							</tr>
-							<tr>
-								<td><label for="">名字:</label></td>
-								<td><input type="text" name="form.name"	value=""></td>
-							</tr>
-							<tr>
-								<td><label for="">性別:</label></td>
-								<td id="gender"></td>
-							</tr>
-							<tr>
-								<td><label for="">身分證字號:</label></td>
-								<td>${sessionScope.giver.idNumber }</td>
-							</tr>
-							<tr>
-								<td><label for="">手機:</label></td>
-								<td><input type="text" name="form.tel" value=""></td>
-							</tr>
-							<tr>
-								<td><label for="">住址:</label></td>
-								<td><input type="text" name="form.address" value=""></td>
-							</tr>
-							<tr>
-								<td><label for="">Email:</label></td>
-								<td><input type="email" name="form.email" value=""></td>
-							</tr>
-							<tr>
-								<td><label for="">是否獲得資訊:</label></td>
-								<td>
-<!-- 									<div class="btn-group" data-toggle="buttons"> -->
-										<label class="btn btn-default">
-											<input type="radio" name="form.get_info" value="true" id="getInfo1">是
-										</label>
-										<label class="btn btn-default">
-											<input type="radio" name="form.get_info" value="false" id="getInfo2">否
-										</label>
-<!-- 									</div> -->
-								</td>
-							</tr>
-							<tr>
-								<td><label for="">生日:</label></td>
-								<td><span></span></td>
-							</tr>
-							<tr>
-								<td><label for="">照片:</label></td>
-								<td>
-									<label class="btn btn-success">更換照片
-										<input type="file" name="form.headshot"	accept="image/*"
-									 		id="headshot" style="display:none;">
-									 </label>
-								</td>
-							</tr>
-						</table>
-						<div>
-							<input type="submit" class="btn btn-primary" value="送出">
+							<form
+								action='/softleader-iii-eeit78/giver/giverAction!update.action'
+								method="post" enctype="multipart/form-data">
+								<table class="table">
+									<colgroup>
+										<col span="1" style="background-color: #ADADAD">
+										<col style="background-color: #F0F0F0">
+									</colgroup>
+									<tr>
+										<td><label for="">帳號:</label></td>
+										<td>${sessionScope.giver.account }</td>
+									</tr>
+									<tr>
+										<td><label for="">密碼:</label></td>
+										<td>
+											<button type="button" class="btn btn-default"
+												data-toggle="modal" data-target="#myPasswd">修改密碼</button> <input
+											type="password" name="form.passwd" value="" id="passwd"
+											style="display: none">
+										</td>
+									</tr>
+									<tr>
+										<td><label for="">姓:</label></td>
+										<td><input type="text" name="form.familyName" value=""></td>
+									</tr>
+									<tr>
+										<td><label for="">名字:</label></td>
+										<td><input type="text" name="form.name" value=""></td>
+									</tr>
+									<tr>
+										<td><label for="">性別:</label></td>
+										<td id="gender"></td>
+									</tr>
+									<tr>
+										<td><label for="">身分證字號:</label></td>
+										<td>${sessionScope.giver.idNumber }</td>
+									</tr>
+									<tr>
+										<td><label for="">手機:</label></td>
+										<td><input type="text" name="form.tel" value=""></td>
+									</tr>
+									<tr>
+										<td><label for="">住址:</label></td>
+										<td><input type="text" name="form.address" value=""></td>
+									</tr>
+									<tr>
+										<td><label for="">Email:</label></td>
+										<td><input type="email" name="form.email" value=""></td>
+									</tr>
+									<tr>
+										<td><label for="">是否獲得資訊:</label></td>
+										<td>
+											<!-- 									<div class="btn-group" data-toggle="buttons"> -->
+											<label class="btn btn-default"> <input type="radio"
+												name="form.get_info" value="true" id="getInfo1">是
+										</label> <label class="btn btn-default"> <input type="radio"
+												name="form.get_info" value="false" id="getInfo2">否
+										</label> <!-- 									</div> -->
+										</td>
+									</tr>
+									<tr>
+										<td><label for="">生日:</label></td>
+										<td><span></span></td>
+									</tr>
+									<tr>
+										<td><label for="">照片:</label></td>
+										<td><label class="btn btn-success">更換照片 <input
+												type="file" name="form.headshot" accept="image/*"
+												id="headshot" style="display: none;">
+										</label></td>
+									</tr>
+								</table>
+								<div>
+									<input type="submit" class="btn btn-primary" value="送出">
+								</div>
+							</form>
 						</div>
-					</form>
+					</div>
+					<jsp:include page="giverHistory.jsp" />
+
 				</div>
 			</div>
 			<div class="col-md-2"></div>
+
 		</div>
 	</div>
-	
-	 <!-- myModal -->
+
+
+	<!-- myModal -->
   	<div class="modal fade" id="myModal" role="dialog">
     	<div class="modal-dialog">
       			<!-- Modal content-->
 	   		<div class="modal-content">
        			<div class="modal-body">
-					<img src="" id="img1" style="weight:400px; height:400px;">
+					<img src="" id="img1" style="weight:70%; height:70%;">
 	       		</div>
     		</div>
     	</div>
@@ -177,6 +189,19 @@ b {
     	</div>
 	</div>
 	<script>
+		//會員資料修改 or 會員捐款資訊
+		if("${param.giverTabs}" == 1){
+			$('.nav-tabs a[href="#giverUpdate"]').tab('show');
+		}else if("${param.giverTabs}" == 2){
+			$('.nav-tabs a[href="#giverHistory"]').tab('show');
+		}
+		
+		//tab
+		$(".nav-tabs a").click(function(){
+		    $(this).tab('show');
+		});
+		
+		//modal
 		$('#save').on("click", function(){
 			$('#passwd').val($('#password1').val());
 		});
@@ -211,7 +236,6 @@ b {
 			
 			function getData(data){
 				data = JSON.parse(data);
-				console.log(data);
 				$('input[name="form.familyName"]').val(data.familyName);
 				$('input[name="form.name"]').val(data.name);
 				$('input[name="form.tel"]').val(data.tel);

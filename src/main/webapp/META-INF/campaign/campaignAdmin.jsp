@@ -1,33 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>活動列表</title>
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/giver.css">
-	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-<script src="/softleader-iii-eeit78/js/useful.js"></script>
+
 <style>
 .thumbnail {text-align: justify;}
 
 </style>
-</head>
-<body id="body">
 
-	<jsp:include page="../../header.jsp" />
-	<form action="/softleader-iii-eeit78/campaign/campaignAction" method="post">
-		<div class="container panel alert">
+<div class="tab-pane fade" id="campaignAdmin">
+	<div class="container panel alert">
+		<form action="/softleader-iii-eeit78/campaign/campaignAction"
+			method="post">
 
 			<select id="selectPageSize">
 				<option value="5" selected>5</option>
@@ -37,11 +19,12 @@
 				<option value="100">100</option>
 				<option value="all">全部</option>
 			</select>
-			
-			<button type="button" id="before">上一頁</button>
+
+			<button type="button" id="campaignAdminBefore">上一頁</button>
 			<span id="pageShow"></span>
-			<button type="button" id="after">下一頁</button>
-			<input type="submit" value="加入黑名單" name="method:ban">
+			<button type="button" id="campaignAdminAfter">下一頁</button>
+			<button type="submit" name="method:ban">加入黑名單</button>
+			<!-- 			<input type="submit" value="加入黑名單" name="method:ban"> -->
 
 			<input type="submit" value="解除黑名單" name="method:unban">
 
@@ -58,17 +41,16 @@
 					<th>validate</th>
 					<th></th>
 				</tr>
-				<tbody id="tbdy">
+				<tbody id="campaignAdmin_tbdy">
 
 
 				</tbody>
 			</table>
-	</form>
+		</form>
 	</div>
+</div>
 
 
-
-</body>
 
 
 <script>
@@ -95,9 +77,9 @@ function tbdyAppend(){
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':currentPage,'campaignForm.name':$('#nameSearch').val(), 'campaignForm.pageSize':pageSize},function(data){
 		data = JSON.parse(data);
-					$('#tbdy').empty();
+					$('#campaignAdmin_tbdy').empty();
 		$(data).each(function(index,value){
-			$(tbdy).append("<tr>"
+			$('#campaignAdmin_tbdy').append("<tr>"
 					+ "<td><img src='' id='"+value.id+"' class='thumbnail' style='width: 80px; height: 80px'></td>"
 					+ "<td>"+ value.name +"</td>"
 					+ "<td>"+ value.raiserModel.name +"</td>" 
@@ -121,23 +103,23 @@ function pageShowAppend(){
 	$('#pageShow').append('<input type="text" id="nowPage" style="width:20px;" value="'+(currentPage+1)+'"/>').append(' / '+totalPage);
 }
 
-function after(){
+function campaignAdminAfter(){
 	if(currentPage+1 < totalPage){
 		currentPage++;
 	}
 	pageShowAppend();
 	tbdyAppend();
 }
-$('#after').on('click', after);
+$('#campaignAdminAfter').on('click', campaignAdminAfter);
 
-function before(){
+function campaignAdminBefore(){
 	if(currentPage > 0){
 		currentPage--;
 	}
 	pageShowAppend();
 	tbdyAppend();
 }
-$('#before').on('click', before);
+$('#campaignAdminBefore').on('click', campaignAdminBefore);
 
 $('#selectPageSize').on('change',load);
 

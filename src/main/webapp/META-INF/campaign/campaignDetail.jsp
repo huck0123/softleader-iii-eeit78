@@ -43,10 +43,6 @@ margin-left: 0px;
 margin-right: 0px;
 font-size: 16px;
 }
-
-#commentDiv{
-	text-align:left;
-}
 </style>
 </head>
 <body id="body">
@@ -85,54 +81,6 @@ font-size: 16px;
 		</nav>
 	</div>
 
-<div class="container" id="tabPageDiv">
-<div class=row id="detailRowDiv">
-<div class="col-md-8 col-md-offset-2" id="detailDiv" style="text-align: justify;">
-</div>
-</div>
-
-<div id="commentDiv" style="display:none">
-	<div class="col-md-6 col-md-offset-3">
-	<h3>我要留言</h3>
-		<div class="col-md-2">
-			<img alt="暫無照片" src="../pictures/noPicture.jpg" style="width:100%">
-		</div>
-		<div class="col-md-10">
-			<textarea class="form-control" rows="4"></textarea>
-			<label class="checkbox-inline">
-  				<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言
-			</label>
-			<button type="button" class="btn btn-success btn-xs" onclick="loadByForm();" style="width:50px">確定</button>
-			<button type="button" class="btn btn-warning btn-xs" onclick="cleanForm();" style="width:50px">取消</button>
-		</div>
-	</div>
-	<div class="col-md-6 col-md-offset-3"><hr/>
-		<div class="col-md-2">
-			<img alt="暫無照片" src="../pictures/noPicture.jpg" style="width:100%">
-		</div>
-		<div class="col-md-10">
-			<div>
-				<span class="col-md-2">giverId</span><label class="col-md-1">於</label><span class="col-md-2">2015/03/01</span>
-			</div><br/>
-			<div>
-				說得太好了
-			</div>
-			<span>按讚數目</span>
-			<div class="col-md-offset-1">
-				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-			</div>
-			<div class="col-md-offset-1">
-				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-			</div>
-			<div class="col-md-offset-1">
-				<button type="button" class="btn btn-info btn-xs" style="width:70px">
-  					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 回覆
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
 	<div class="container" id="tabPageDiv">
 		<div class=row id="detailRowDiv">
 			<div class="col-md-8 col-md-offset-2" id="detailDiv"

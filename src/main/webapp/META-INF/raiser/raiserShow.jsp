@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="BIG5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-<script src="/softleader-iii-eeit78/js/useful.js"></script>
+
 <style>
 th {
 	width: 200px;
@@ -26,13 +14,8 @@ body{
 	text-align: left;
 }
 </style>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>管理者-所有團體資訊</title>
 
-
-</head>
-<body id="body">
-	<jsp:include page="../../header.jsp" />
+<div class="tab-pane fade" id="raiserShow">
 
 	<div class="container">
 		<div class="row">
@@ -87,6 +70,8 @@ body{
 		</div>
 		<div id="detail"></div><br>
 	</div>
+</div>	
+
 	<script>
 		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getByCondition";
 		$.post(url, {'lock' : $('#ChkBox').val()} ,getData);
@@ -285,4 +270,3 @@ body{
 				});
 	</script>
 
-</body>

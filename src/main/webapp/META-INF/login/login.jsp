@@ -50,7 +50,7 @@ body {
 			action="<c:url value='/login/loginAction.action' />" method="post">
 			<h2 class="form-signin-heading">請登入</h2>
 			<label for="" class="sr-only">帳號</label> 
-			<input type="text" class="form-control" name="account" placeholder="帳號" required > 
+			<input type="text" class="form-control" name="account" placeholder="帳號" required autofocus> 
 			<label	for="" class="sr-only">Password</label> 
 			<input type="password"	class="form-control" name="passwd" placeholder="Password" required>
 			<div class="checkbox"></div>

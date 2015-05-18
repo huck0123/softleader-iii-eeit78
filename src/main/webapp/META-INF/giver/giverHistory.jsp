@@ -3,21 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>捐贈者歷史紀錄</title>
 
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" 
-	href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <style>
 th, td{
 	text-align:center;
@@ -26,12 +12,9 @@ form{
 	text-align:left;
 }
 </style>
-</head>
 
-<body id="body">
-	<jsp:include page="../../header.jsp" />
-<div class="container">
-	<div class="col-md-8 col-md-offset-2">
+<div class="tab-pane fade" id="giverHistory">
+<!-- 	<div class="col-md-8 col-md-offset-2"> -->
 		<h3>複合查詢系統</h3><br />
 		<div>
 			<form class="form-horizontal">		
@@ -66,9 +49,9 @@ form{
 		<br />
 		<button type="button" class="btn btn-primary" onclick="loadByForm();">送出篩選</button>
 		<button type="button" class="btn btn-warning" onclick="cleanForm();">清除條件</button>
-	</div>
+<!-- 	</div> -->
 
-	<div class="col-md-8 col-md-offset-2">
+<!-- 	<div class="col-md-8 col-md-offset-2"> -->
 		<br /><hr /><br />
 		<h3 style="display:inline-block;">${sessionScope.giver.name}您好，您的捐款紀錄如下</h3>
 		<button type="button" class="btn btn-success btn-xs" onclick="showAll();">顯示所有紀錄</button><br /><br />
@@ -86,7 +69,7 @@ form{
 			</tbody>
 		</table>
 		<div id="noData"></div>
-	</div>
+<!-- 	</div> -->
 </div>
 <script>
 	var url1 = '${pageContext.request.contextPath}/donate/giverDetailAllHistory!giverDetail';
@@ -130,5 +113,3 @@ form{
 		loadByForm();
 	}
 </script>
-</body>
-</html>
