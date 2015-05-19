@@ -52,7 +52,7 @@ body {
 			<label for="" class="sr-only">帳號</label> 
 			<input type="text" class="form-control" name="account" placeholder="帳號" required autofocus> 
 			<label	for="" class="sr-only">Password</label> 
-			<input type="password"	class="form-control" name="passwd" placeholder="Password" required>
+			<input type="password"	class="form-control" name="passwd" placeholder="Password" >
 			<div class="checkbox"></div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
 

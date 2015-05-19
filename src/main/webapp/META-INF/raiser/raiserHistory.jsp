@@ -1,12 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body id="body">
+	<div class="tab-pane fade" id="raiserHistory">
+			<h3>複合查詢系統</h3>
+			<br />
+			<div>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="keyword" class="col-sm-3 control-label">關鍵字搜尋</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="keyword"
+								placeholder="輸入活動名稱 、類型、及地點">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="minAmount" class="col-sm-3 control-label">依金額範圍</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="minAmount"
+								placeholder="輸入較小金額">
+						</div>
+						<label for="maxAmount" class="col-sm-1 control-label">到</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="maxAmount"
+								placeholder="輸入較大金額">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="afterDate" class="col-sm-3 control-label">依日期範圍</label>
+						<div class="col-sm-4">
+							<input type="datetime-local" class="form-control" id="afterDate"
+								placeholder="選擇較小日期">
+						</div>
+						<label for="beforeDate" class="col-sm-1 control-label">到</label>
+						<div class="col-sm-4">
+							<input type="datetime-local" class="form-control" id="beforeDate"
+								placeholder="選擇較大日期">
+						</div>
+					</div>
+				</form>
+			</div>
+			<br />
+			<button type="button" class="btn btn-primary" onclick="loadByForm();">送出篩選</button>
+			<button type="button" class="btn btn-warning" onclick="cleanForm();">清除條件</button>
 
+			<div>
+				<br />
+				<hr />
+				<br />
+				<h3 style="display: inline-block;">${raiser.name}您好，您曾發起過的活動紀錄如下</h3>
+				<button type="button" class="btn btn-success btn-xs"
+					onclick="showAll();">顯示所有紀錄</button>
+				<br /> <br />
+				<table id="resultTable" class="table table-hover">
+					<thead>
+						<tr>
+							<th>活動名稱</th>
+							<th>活動類型</th>
+							<th>活動地點</th>
+							<th>目標金額</th>
+							<th>當前金額</th>
+							<th>發起時間</th>
+							<th>截止日期</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<script>
+		var url1 = '${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition';
+		$.post(url1, {
+			'campaignForm.name' : "${raiser.name}"
+		}, getData);
+		function getData(data) {
+			$(data).each(
+					function(index, campaign) {
+						$(tbody).append(
+								"<tr><td>" + campaign.name + "</td>" + "<td>"
+										+ campaign.type + "</td>" + "<td>"
+										+ campaign.location + "</td>" + "<td>"
+										+ campaign.goal + "</td>" + "<td>"
+										+ campaign.currentFund + "</td>"
+										+ "<td>" + campaign.startDate + "</td>"
+										+ "<td>" + campaign.endDate
+										+ "</td></tr>");
+					})
+		}
+	</script>
 </body>
 </html>

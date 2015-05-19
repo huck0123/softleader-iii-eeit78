@@ -11,11 +11,10 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <style>
 body {
 	text-align: left;
@@ -24,7 +23,6 @@ body {
 <title>團體-更新帳號</title>
 </head>
 <body id="body">
-
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
 		<h2 style="text-align: center">活動專區</h2>
@@ -127,13 +125,13 @@ body {
 							</div>
 						</div>
 					</div>
+					<jsp:include page="raiserHistory.jsp" />
+					<jsp:include page="/META-INF/campaign/campaignRaise.jsp" />
 				</div>
 				<div class="col-md-2"></div>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="raiserHistory.jsp" />
-	<jsp:include page="/META-INF/campaign/campaignRaise.jsp" />
 	<script>
 		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
 		$.post(url, {
@@ -144,17 +142,17 @@ body {
 			$('#logo').attr("src", "data:image/png;base64," + str);
 
 		}
-		
-		$(".nav-tabs a").click(function(){
-		    $(this).tab('show');
+
+		$(".nav-tabs a").click(function() {
+			$(this).tab('show');
 		});
-		
-		$(document).ready(function(){
-			if("${param.raiserTabs}" == 1){
+
+		$(document).ready(function() {
+			if ("${param.raiserTabs}" == 1) {
 				$('.nav-tabs a[href="#raiserUpdate"]').tab('show');
-			}else if("${param.raiserTabs}" == 2){
+			} else if ("${param.raiserTabs}" == 2) {
 				$('.nav-tabs a[href="#raiserHistory"]').tab('show');
-			}else if("${param.raiserTabs}" == 3){
+			} else if ("${param.raiserTabs}" == 3) {
 				$('.nav-tabs a[href="#campaignRaise"]').tab('show');
 			}
 		})
