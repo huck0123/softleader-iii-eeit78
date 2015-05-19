@@ -11,7 +11,7 @@
 		<property name="account" type="java.lang.String">
 			<column name="ACCOUNT" />
 		</property>
-		<property name="passwd" type="java.lang.String">
+		<property name="passwd" type="binary">
 			<column name="PASSWD" />
 		</property>
 		<property name="name" type="java.lang.String">

@@ -9,7 +9,7 @@ public class GiverModel {
 	
 	private String account;
 	
-	private String passwd;
+	private byte[] passwd;
 	
 	private String name;
 	
@@ -33,6 +33,9 @@ public class GiverModel {
 	
 	private boolean valid;
 
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -49,11 +52,11 @@ public class GiverModel {
 		this.account = account;
 	}
 
-	public String getPasswd() {
+	public byte[] getPasswd() {
 		return passwd;
 	}
 
-	public void setPasswd(String passwd) {
+	public void setPasswd(byte[] passwd) {
 		this.passwd = passwd;
 	}
 
@@ -145,15 +148,17 @@ public class GiverModel {
 		this.valid = valid;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "GiverModel [id=" + id + ", account=" + account + ", passwd="
-				+ passwd + ", name=" + name + ", familyName=" + familyName
-				+ ", gender=" + gender + ", idNumber=" + idNumber + ", tel="
-				+ tel + ", address=" + address + ", email=" + email
-				+ ", getInfo=" + getInfo + ", birth=" + birth + ", valid="
-				+ valid + "]";
+		return "GiverModel [id=" + id + ", account=" + account + ", name="
+				+ name + ", familyName=" + familyName + ", gender=" + gender
+				+ ", idNumber=" + idNumber + ", tel=" + tel + ", address="
+				+ address + ", email=" + email + ", getInfo=" + getInfo
+				+ ", birth=" + birth + ", valid=" + valid + "]";
 	}
+
 
 	
 	

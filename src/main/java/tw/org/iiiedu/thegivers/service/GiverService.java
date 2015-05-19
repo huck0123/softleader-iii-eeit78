@@ -1,14 +1,14 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.org.iiiedu.thegivers.dao.GiverDao;
-import tw.org.iiiedu.thegivers.model.AdminModel;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 
 @Service
@@ -23,10 +23,20 @@ public class GiverService {
 		if (passwd != null && passwd.length() != 0) {
 
 			GiverModel gm = giverDao.getByAccount(account);
-
+			byte[] password = null;
+			
 			if (gm != null) {
-				String pass = gm.getPasswd(); // 資料庫抓出
-				if (passwd.equals(pass)) {
+				try {
+					MessageDigest md = MessageDigest.getInstance("MD5");
+					password = md.digest(passwd.getBytes());
+					
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				byte[] pass = gm.getPasswd(); // 資料庫抓出
+				if (Arrays.equals(password, pass)) {
 					return gm;
 				}
 			}
