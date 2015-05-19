@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 				session.setAttribute("insertErrorACC", "帳號已存在");
 			}
 			rm.setAccount(raiserForm.getAccount());
-			rm.setPasswd(raiserForm.getPasswd());
+			MessageDigest md=MessageDigest.getInstance("MD5");
+			rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
 			if (raiserService.getByName(raiserForm.getName()) != null) {
 				session.setAttribute("insertErrorNAME", "此團體已註冊");
 			}
@@ -159,10 +162,12 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public String update() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		RaiserModel rm = (RaiserModel) session.getAttribute("raiser");
+		try{
 		rm.setId(raiserForm.getId());
 		rm.setAccount(raiserForm.getAccount());
 		if (raiserForm.getPasswd() != null) {
-			rm.setPasswd(raiserForm.getPasswd());
+			MessageDigest md=MessageDigest.getInstance("MD5");
+			rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
 		}
 		if (raiserForm.getName() != null) {
 			rm.setName(raiserForm.getName());
@@ -188,17 +193,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		if (raiserForm.getVideoUrl() != null) {
 			rm.setVideoUrl(raiserForm.getVideoUrl());
 		}
-		try {
-			if (raiserForm.getLogo() != null)
-				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		if (raiserForm.getLogo() != null)
+			rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+		
 		rm = raiserService.dataUpdate(rm);
-		if (rm != null) {
-			session.setAttribute("raiser", rm);
+		session.setAttribute("raiser", rm);
 			return "update";
-		} else {
+		} catch (Exception e1) {
+			session.setAttribute("updateErrorMSG", "更新帳號失敗,請更正您的資料");
 			return "error";
 		}
 	}

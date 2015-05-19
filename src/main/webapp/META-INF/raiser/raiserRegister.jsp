@@ -149,6 +149,7 @@
 	<script>
 		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
+		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!select";
 		$("#account").change(function() {
 			$("#chkAcc").text("")
 			$.post(raiserRegisCheckUrl1, {
@@ -158,8 +159,15 @@
 					$("#chkAcc").text("帳號已存在")
 				}
 			}, "json")
+				
+			$.post(giverurl, {
+			'thisAccount' : $(this).val()
+			}, function(data) {
+			data = JSON.parse(data);
+			if (data != null) {
+					$("#chkAcc").text("帳號已存在")
+			}
 		})
-
 		$("#inputpw2").blur(function() {
 			$("#chkPw2").text("")
 			if ($(this).val() != $("#inputpw").val()) {

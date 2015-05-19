@@ -29,8 +29,8 @@ body{
 				<input type="button" name="searchbtn" value="查詢" id="btnSch" class="btn btn-default">
 			</div>
 			<div class="col-md-4">
-				<input type="button" name="vilhbtn" value="加入黑名單" id="btnStop" class="btn btn-default">
-				<input type="button" name="Unvilbtn" value="解除黑名單" id="btnunVil" class="btn btn-default">
+				<input type="button" name="Unvilbtn" value="啟用帳號" id="btnunVil" class="btn btn-default">
+				<input type="button" name="vilhbtn" value="封鎖帳號" id="btnStop" class="btn btn-default">
 			</div>
 		</div>
 		<br>
@@ -44,7 +44,7 @@ body{
 						<th style="width: 200px">團體名稱</th>
 						<th style="width: 140px">電話</th>
 						<th>信箱</th>
-						<th style="width: 50px">黑名單</th>
+						<th style="width: 100px">帳號是否啟用</th>
 						<th style="width: 10px"></th>
 					</tr>
 					<tbody id="tbody">

@@ -11,11 +11,10 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <style>
 body {
 	text-align: left;
@@ -24,7 +23,6 @@ body {
 <title>團體-更新帳號</title>
 </head>
 <body id="body">
-
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
 		<h2 style="text-align: center">活動專區</h2>
