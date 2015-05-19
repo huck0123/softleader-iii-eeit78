@@ -132,7 +132,7 @@ pre {
 		</div>
 	</div>
 
-	<div id="campaignDiv" >
+	<div id="campaignDiv" style="background-color: #f2f2f2">
 		<div>
 			<div class="container" style="height: 100%;border-bottom: 1px solid silver;">
 				<h2 style="margin:100px 0px 0px 0px ">現正進行</h2>
@@ -151,7 +151,7 @@ pre {
 	</div>
 
 	<div class="outer-wrapper"
-		style="height: 100%; border-bottom: 1px solid #EEEEEE">
+		style="height: 100%; border-bottom: 1px solid #EEEEEE; background-color: #f2f2f2">
 		<div class="inner-wrapper ">
 
 			<div id="aboutUs" class="container"">
