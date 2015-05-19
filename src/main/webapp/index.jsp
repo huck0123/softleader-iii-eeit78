@@ -22,14 +22,11 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <!-- <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css"> -->
 <style type="text/css">
-
 html, body {
 	text-align: center;
 	width: 100%;
 	height: 100%;
 }
-
-
 
 .thumbnail {
 	text-align: justify;
@@ -107,6 +104,11 @@ pre {
 	margin-left: 0px;
 	margin-right: 0px;
 }
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
 </style>
 </head>
 
@@ -164,10 +166,7 @@ pre {
 	</div>
 
 
-
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
+	<jsp:include page="/footer.jsp" />
 </body>
 
 

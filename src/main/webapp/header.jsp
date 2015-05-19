@@ -26,6 +26,7 @@ a:hover{cursor: pointer;}
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 	text-align: left;
+	top:0;
 	z-index: 9999;
 	width: 100%
 }
@@ -144,7 +145,9 @@ ul.nav {
 .collapse-login-scroll {
 	width: 100%
 }
+
 </style>
+<div id="top-anchor" style="top: 0; position: absolute;"></div>
 <div id="header-wrapper">
 	<div class="container">
 		<nav id="nav-header"
@@ -210,7 +213,7 @@ ul.nav {
 										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
 								</ul></li>
 						</c:if>
-						<li id="to-top" style="display: none;"><a href="#body"><img
+						<li id="to-top" style="display: none;"><a href="#top-anchor"><img
 								class="header-pic opacity60"
 								src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
 					</ul>
@@ -305,7 +308,7 @@ ul.nav {
 								});
 
 						// function for moving smoothly to anchor
-						$('a[href^="#body"]').click(function() {
+						$('a[href^="#top-anchor"]').click(function() {
 							$('html, body').animate(
 								{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 									return false;
