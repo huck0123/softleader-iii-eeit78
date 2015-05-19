@@ -14,12 +14,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="tab-pane fade" id="campaignRaise">
-	<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
-		method="post" enctype="multipart/form-data">
-
-
-		<div class="container">
+	<div class="tab-pane fade" id="campaignRaise">
+		<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
+			method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="campaign-name-input">活動名稱：</label> <input type="text"
 					class="form-control" name="campaignForm.name"
@@ -67,10 +64,8 @@
 					<button type="submit" class="btn btn-default">送出</button>
 				</div>
 			</div>
-
-		</div>
-	</form>
-</div>
+		</form>
+	</div>
 </body>
 <script>
 	btn1.addEventListener("click", fill);

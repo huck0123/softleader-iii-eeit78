@@ -6,7 +6,7 @@ public class RaiserModel {
 
 	private int id;
 	private String account;
-	private String passwd;
+	private byte[] passwd;
 	private String name;
 	private String tel;
 	private String contactPerson;
@@ -30,10 +30,10 @@ public class RaiserModel {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getPasswd() {
+	public byte[] getPasswd() {
 		return passwd;
 	}
-	public void setPasswd(String passwd) {
+	public void setPasswd(byte[] passwd) {
 		this.passwd = passwd;
 	}
 	public String getName() {

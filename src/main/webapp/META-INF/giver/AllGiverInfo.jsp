@@ -32,7 +32,8 @@
 			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
 		}
 	})
-	
+// console.log('${pageContext.request.userPrincipal }');	
+// console.log('${pageContext.request.remoteUser }');	
 </script>
 
 <style>
