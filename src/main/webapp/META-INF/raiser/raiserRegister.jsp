@@ -27,7 +27,7 @@
 			<div class="col-md-8">
 				<form action="<c:url value='/raiser/raiserAction!insert' />"
 					method="post" enctype="multipart/form-data" class="form-horizontal">
-
+					<div style="height:50px">${insertErrorMSG}</div>
 					<div class="form-group">
 						<label for="account" class="col-sm-2 control-label">帳號:</label>
 						<div class="col-sm-7">
@@ -141,7 +141,7 @@
 							<button type="reset" class="btn btn-default">清除資料</button>
 						</div>
 					</div>
-					<div>${insertErrorMSG}</div>
+					<div style="height:200px"></div>
 				</form>
 			</div>
 		</div>
@@ -151,29 +151,35 @@
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
 		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!select";
 		$("#account").change(function() {
-			$("#chkAcc").text("")
+			$("#chkAcc").text("");
+			if($(this).val().toUpperCase() == "ADMIN"){
+				$("#chkAcc").text("帳號已存在");
+			}
+			
 			$.post(raiserRegisCheckUrl1, {
 				"account" : $(this).val()
 			}, function(data) {
 				if (data != null) {
-					$("#chkAcc").text("帳號已存在")
+					$("#chkAcc").text("帳號已存在");
 				}
-			}, "json")
-				
+			}, "json");
+
 			$.post(giverurl, {
-			'thisAccount' : $(this).val()
+				'thisAccount' : $(this).val()
 			}, function(data) {
-			data = JSON.parse(data);
-			if (data != null) {
-					$("#chkAcc").text("帳號已存在")
-			}
-		})
+				data = JSON.parse(data);
+				if (data != null) {
+					$("#chkAcc").text("帳號已存在");
+				}
+			});
+		});
+
 		$("#inputpw2").blur(function() {
 			$("#chkPw2").text("")
 			if ($(this).val() != $("#inputpw").val()) {
 				$("#chkPw2").text("密碼不相符")
 			}
-		})
+		});
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
@@ -184,7 +190,7 @@
 					$("#chkName").text("此團體已註冊")
 				}
 			}, "json")
-		})
+		});
 
 		$("#logo")
 				.change(
@@ -195,11 +201,12 @@
 								reader.onload = function(event) {
 									$("#chkLogo")
 											.append(
-													"<img src='"+event.target.result+"' style='weight:50px; height:50px;'>")
+													"<img src='"+event.target.result
+							+"' style='weight:50px; height:50px;'>");
 								}
 							}
 							reader.readAsDataURL(file);
-						})
+						});
 	</script>
 </body>
 </html>
