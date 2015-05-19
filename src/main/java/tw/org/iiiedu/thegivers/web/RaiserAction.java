@@ -259,6 +259,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getRaiserHistory() {
 		CampaignForm campaignForm = new CampaignForm();
+		campaignForm.setPageNum(0);
+		campaignForm.setPageSize(6);
 		campaignForm.setName(name);
 		List<CampaignModel> cm = campaignService
 				.getByAllCondition(campaignForm);
