@@ -343,7 +343,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return null;
 	}
 	
-	//ID收尋
+	//ID收尋      -----deprecated-----
 	public String selectByIdNumber(){
 		boolean b = service.getByIdNumber(form.getId_number().trim());
 		Map<String, Boolean> map = new HashMap<>();
