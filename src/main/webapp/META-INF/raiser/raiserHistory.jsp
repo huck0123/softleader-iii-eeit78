@@ -90,6 +90,7 @@
 		function getData(data) {
 			$(data).each(
 					function(index, campaign) {
+						console.log(index +"," +campaign)
 						$("#tbodyRH").append(
 								"<tr><td>" + campaign.name + "</td>" + "<td>"
 										+ campaign.type + "</td>" + "<td>"
