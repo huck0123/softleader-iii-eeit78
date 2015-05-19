@@ -30,7 +30,7 @@ html, body {
 
 .thumbnail {
 	text-align: justify;
-	margin: 30px;
+	margin: 20px;
 }
 
 .cover-table-wrapper {
