@@ -25,8 +25,7 @@
 
 			<div class="form-group">
 				<label for="campaign-image-input">活動圖片：</label> <input type="file"
-					class="form-control" name="campaignForm.image"
-					id="campaign-image-input" placeholder="請上傳圖片">
+					name="campaignForm.image" id="campaign-image-input" placeholder="請上傳圖片">
 			</div>
 			<div class="form-group">
 				<label for="campaign-goal-input">目標金額：</label> <input type="text"
