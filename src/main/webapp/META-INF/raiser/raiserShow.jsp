@@ -47,7 +47,7 @@ body{
 						<th style="width: 100px">帳號是否啟用</th>
 						<th style="width: 10px"></th>
 					</tr>
-					<tbody id="tbody">
+					<tbody id="tbodyRS">
 					</tbody>
 				</table>
 			</div>
@@ -68,7 +68,7 @@ body{
 				<a href="<c:url value='/index.jsp' />">回首頁</a> 
 			</div>
 		</div>
-		<div id="detail"></div><br>
+		<div id="detailRS"></div><br>
 	</div>
 </div>	
 
@@ -90,9 +90,9 @@ body{
 				$("#btnw").val("1");
 				page = 1;
 			}
-			$('#detail').children().remove();
+			$('#detailRS').children().remove();
 			test = true;
-			$('#tbody').children().remove();
+			$('#tbodyRS').children().remove();
 			$.post(RaiserShowUrl1, {
 				'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 			}, RaiserShowgetData);
@@ -103,9 +103,9 @@ body{
 			if ($("#btnw").val() > 1) {
 				page--;
 				$("#btnw").val(page);
-				$('#detail').children().remove();
+				$('#detailRS').children().remove();
 				test = true;
-				$('#tbody').children().remove();
+				$('#tbodyRS').children().remove();
 				$.post(RaiserShowUrl1, {
 					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 				}, RaiserShowgetData);
@@ -117,9 +117,9 @@ body{
 			if ($("#btnw").val() < Max) {
 				page++;
 				$("#btnw").val(page);
-				$('#detail').children().remove();
+				$('#detailRS').children().remove();
 				test = true;
-				$('#tbody').children().remove();
+				$('#tbodyRS').children().remove();
 				$.post(RaiserShowUrl1, {
 					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
 				}, RaiserShowgetData);
@@ -159,14 +159,14 @@ body{
 											+ st2 + "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center'></td></tr>";
 								}
 
-								$(tbody).prepend(stAll);
+								$('#tbodyRS').prepend(stAll);
 								$("#test")
 										.click(
 												function() {
 													if (test) {
 														test = false;
 
-														var str = "<img src='' class='img-thumbnail' id='logo' style='width:80px; height:80px'>";
+														var str = "<img src='' class='img-thumbnail' id='logoRS' style='width:80px; height:80px'>";
 
 														$(
 																"#spanpic"
@@ -175,9 +175,9 @@ body{
 																		"glyphicon glyphicon-folder-close")
 																.addClass(
 																		"glyphicon glyphicon-folder-open");
-														$("#detail").children()
+														$("#detailRS").children()
 																.remove();
-														$("#detail")
+														$("#detailRS")
 																.append(
 																		"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>"
 																				+ str
@@ -211,14 +211,14 @@ body{
 																				+ raiser.detail
 																				+ "</div></div>");
 
-														$("#logo")
+														$("#logoRS")
 																.attr(
 																		"src",
 																		"data:image/png;base64,"
 																				+ srclogo);
 
 													} else {
-														$("#detail").children()
+														$("#detailRS").children()
 																.remove();
 														$(".spanpic")
 																.removeClass(
@@ -233,9 +233,9 @@ body{
 		};
 		//以下搜尋相關
 				$("#btnSch").click(function() {
-					$('#detail').children().remove();
+					$('#detailRS').children().remove();
 					test = true;
-					$('#tbody').children().remove();
+					$('#tbodyRS').children().remove();
 					$("#btnw").val("1");
 					page = 1;
 					$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!getByAllConditionCount" , {

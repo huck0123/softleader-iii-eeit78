@@ -18,8 +18,11 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.form.RaiserForm;
+import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.RaiserModel;
+import tw.org.iiiedu.thegivers.service.CampaignService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
 import com.google.gson.Gson;
@@ -28,6 +31,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	@Autowired
 	RaiserService raiserService;
+	@Autowired
+	private CampaignService campaignService;
 
 	private RaiserForm raiserForm;
 	private RaiserModel rm;
@@ -245,6 +250,19 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return "select";
 	}
 
+	
+	public String getRaiserHistory() {
+		CampaignForm campaignForm = new CampaignForm();
+		campaignForm.setName(name);
+		List<CampaignModel> cm = campaignService.getByAllCondition(campaignForm);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(cm);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
+	
+	
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

@@ -12,7 +12,7 @@
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>團體發起活動紀錄</title>
 </head>
 <body id="body">
 	<div class="tab-pane fade" id="raiserHistory">
@@ -21,33 +21,33 @@
 			<div>
 				<form class="form-horizontal">
 					<div class="form-group">
-						<label for="keyword" class="col-sm-3 control-label">關鍵字搜尋</label>
+						<label for="keywordRH" class="col-sm-3 control-label">關鍵字搜尋</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="keyword"
+							<input type="text" class="form-control" id="keywordRH"
 								placeholder="輸入活動名稱 、類型、及地點">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="minAmount" class="col-sm-3 control-label">依金額範圍</label>
+						<label for="minAmountRH" class="col-sm-3 control-label">依金額範圍</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="minAmount"
+							<input type="text" class="form-control" id="minAmountRH"
 								placeholder="輸入較小金額">
 						</div>
-						<label for="maxAmount" class="col-sm-1 control-label">到</label>
+						<label for="maxAmountRH" class="col-sm-1 control-label">到</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" id="maxAmount"
+							<input type="text" class="form-control" id="maxAmountRH"
 								placeholder="輸入較大金額">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="afterDate" class="col-sm-3 control-label">依日期範圍</label>
+						<label for="afterDateRH" class="col-sm-3 control-label">依日期範圍</label>
 						<div class="col-sm-4">
-							<input type="datetime-local" class="form-control" id="afterDate"
+							<input type="datetime-local" class="form-control" id="afterDateRH"
 								placeholder="選擇較小日期">
 						</div>
-						<label for="beforeDate" class="col-sm-1 control-label">到</label>
+						<label for="beforeDateRH" class="col-sm-1 control-label">到</label>
 						<div class="col-sm-4">
-							<input type="datetime-local" class="form-control" id="beforeDate"
+							<input type="datetime-local" class="form-control" id="beforeDateRH"
 								placeholder="選擇較大日期">
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 				<button type="button" class="btn btn-success btn-xs"
 					onclick="showAll();">顯示所有紀錄</button>
 				<br /> <br />
-				<table id="resultTable" class="table table-hover">
+				<table id="resultTableRH" class="table table-hover">
 					<thead>
 						<tr>
 							<th>活動名稱</th>
@@ -77,20 +77,20 @@
 							<th>截止日期</th>
 						</tr>
 					</thead>
-					<tbody id="tbody">
+					<tbody id="tbodyRH">
 					</tbody>
 				</table>
 			</div>
 		</div>
 	<script>
-		var url1 = '${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition';
-		$.post(url1, {
-			'campaignForm.name' : "${raiser.name}"
+		var urlForRaiserHistory = '${pageContext.request.contextPath}/raiser/raiserSelectAll!getRaiserHistory';
+		$.post(urlForRaiserHistory, {
+			"name" : "${raiser.name}"
 		}, getData);
 		function getData(data) {
 			$(data).each(
 					function(index, campaign) {
-						$(tbody).append(
+						$("#tbodyRH").append(
 								"<tr><td>" + campaign.name + "</td>" + "<td>"
 										+ campaign.type + "</td>" + "<td>"
 										+ campaign.location + "</td>" + "<td>"
