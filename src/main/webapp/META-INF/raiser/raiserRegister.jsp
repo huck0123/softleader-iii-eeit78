@@ -27,91 +27,110 @@
 			<div class="col-md-8">
 				<form action="<c:url value='/raiser/raiserAction!insert' />"
 					method="post" enctype="multipart/form-data" class="form-horizontal">
-
+					<div style="height:50px">${insertErrorMSG}</div>
 					<div class="form-group">
 						<label for="account" class="col-sm-2 control-label">帳號:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="account"
-								name="raiserForm.account">
+								name="raiserForm.account" value="${form.account }"
+								required="required">
 						</div>
+						<div class="col-sm-3" id="chkAcc">${insertErrorACC}</div>
 					</div>
 
 					<div class="form-group">
 						<label for="inputpw" class="col-sm-2 control-label">密碼:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="password" class="form-control" id="inputpw"
 								name="raiserForm.passwd" required="required">
 						</div>
+						<div class="col-sm-3">${insertErrorPSW}</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputpw" class="col-sm-2 control-label">確認密碼:</label>
+						<div class="col-sm-7">
+							<input type="password" class="form-control" id="inputpw2"
+								required="required">
+						</div>
+						<div class="col-sm-3" id="chkPw2"></div>
 					</div>
 
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">團體名稱:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="name"
-								name="raiserForm.name" required="required">
+								name="raiserForm.name" value="${form.name}" required="required">
 						</div>
+						<div class="col-sm-3" id="chkName">${insertErrorNAME}</div>
 					</div>
 
 					<div class="form-group">
 						<label for="tel" class="col-sm-2 control-label">電話:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="tel"
-								name="raiserForm.tel">
+								name="raiserForm.tel" value="${form.tel}" required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="cname" class="col-sm-2 control-label">連絡人姓名:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="cname"
-								name="raiserForm.contactPerson">
+								name="raiserForm.contactPerson" value="${form.contactPerson}"
+								required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="ctel" class="col-sm-2 control-label">連絡人電話:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="tel" class="form-control" id="ctel"
-								name="raiserForm.contactTel">
+								name="raiserForm.contactTel" value="${form.contactTel}"
+								required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="mail" class="col-sm-2 control-label">信箱:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="email" class="form-control" id="mail"
-								name="raiserForm.email">
+								name="raiserForm.email" value="${form.email}"
+								required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="add" class="col-sm-2 control-label">地址:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="add"
-								name="raiserForm.address">
+								name="raiserForm.address" value="${form.address}"
+								required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-2 control-label">圖標:</label>
-						<div class="col-sm-10">
-							<input type="file" name="raiserForm.logo" value=>
+						<div class="col-sm-7">
+							<input type="file" name="raiserForm.logo" id="logo"
+								required="required" accept="image/*">
 						</div>
+						<div class="col-sm-3" id="chkLogo"></div>
 					</div>
 
 					<div class="form-group">
 						<label for="del" class="col-sm-2 control-label">團體介紹:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<textarea rows="4" cols="50" class="form-control" id="del"
-								name="raiserForm.detail"></textarea>
+								name="raiserForm.detail">${form.detail}</textarea>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="vdl" class="col-sm-2 control-label">團體短片:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-7">
 							<input type="url" class="form-control" id="vdl"
-								name="raiserForm.videoUrl">
+								name="raiserForm.videoUrl" value="${form.videoUrl}">
 						</div>
 					</div>
 
@@ -121,15 +140,73 @@
 							<button type="submit" class="btn btn-default">確定送出</button>
 							<button type="reset" class="btn btn-default">清除資料</button>
 						</div>
-						<div class="col-md-4">
-							<a href="<c:url value='/index.jsp' />">回首頁</a>
-						</div>
 					</div>
-
+					<div style="height:200px"></div>
 				</form>
 			</div>
-			<div class="col-md-2"></div>
 		</div>
 	</div>
+	<script>
+		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
+		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
+		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!select";
+		$("#account").change(function() {
+			$("#chkAcc").text("");
+			if($(this).val().toUpperCase() == "ADMIN"){
+				$("#chkAcc").text("帳號已存在");
+			}
+			
+			$.post(raiserRegisCheckUrl1, {
+				"account" : $(this).val()
+			}, function(data) {
+				if (data != null) {
+					$("#chkAcc").text("帳號已存在");
+				}
+			}, "json");
+
+			$.post(giverurl, {
+				'thisAccount' : $(this).val()
+			}, function(data) {
+				data = JSON.parse(data);
+				if (data != null) {
+					$("#chkAcc").text("帳號已存在");
+				}
+			});
+		});
+
+		$("#inputpw2").blur(function() {
+			$("#chkPw2").text("")
+			if ($(this).val() != $("#inputpw").val()) {
+				$("#chkPw2").text("密碼不相符")
+			}
+		});
+
+		$("#name").blur(function() {
+			$("#chkName").text("")
+			$.post(raiserRegisCheckUrl2, {
+				"name" : $(this).val()
+			}, function(data) {
+				if (data != null) {
+					$("#chkName").text("此團體已註冊")
+				}
+			}, "json")
+		});
+
+		$("#logo")
+				.change(
+						function() {
+							var file = logo.files[0];
+							if (file) {
+								var reader = new FileReader();
+								reader.onload = function(event) {
+									$("#chkLogo")
+											.append(
+													"<img src='"+event.target.result
+							+"' style='weight:50px; height:50px;'>");
+								}
+							}
+							reader.readAsDataURL(file);
+						});
+	</script>
 </body>
 </html>

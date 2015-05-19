@@ -26,29 +26,31 @@ body {
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-2">
-				<img src='' class='img-thumbnail' id='logo'
-					style='width: 200px; height: 200px'>
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<br> <img src='' class='img-thumbnail' id='logo'
+					style='width: 250px; height: 230px'>
 				<h1>${raiserSelf.name}</h1>
-				${raiserSelf.address} <br> ${raiserSelf.tel} <br>
-				${raiserSelf.email} <br> ${raiserSelf.contactPerson} <br>
-				${raiserSelf.contactTel} <br> ${raiserSelf.videoUrl} <br>
+				<h5>地址:${raiserSelf.address}</h5>
+				<h5>電話:${raiserSelf.tel}</h5>
+				<h5>信箱:${raiserSelf.email}</h5>
+				<h5>連絡人姓名:${raiserSelf.contactPerson}</h5>
+				<h5>連絡人電話:${raiserSelf.contactTel}</h5>
+			</div>
+			<div class="col-md-5">
+				<h3 style="text-align: center">團體短片</h3>
+				<iframe src="${raiserSelf.videoUrl}"
+					style="width: 470px; height: 360px"></iframe>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				<br> ${raiserSelf.detail} <br>
+		<div class="row" style="height:800px">
+			<div class="col-md-4"></div>
+			<div class="col-md-5">
+				<h3 style="text-align: center">團體介紹</h3>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${raiserSelf.detail}
 			</div>
-			<div class="col-md-3"></div>
-		</div>
-		<br>
-		<div style="text-align: center;">
-			<a href="<c:url value='/index.jsp' />">回首頁</a>
+			<div class="col-md-4"></div>
 		</div>
 	</div>
 	<script>

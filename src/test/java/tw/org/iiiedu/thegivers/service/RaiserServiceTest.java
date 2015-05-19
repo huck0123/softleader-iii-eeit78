@@ -2,6 +2,8 @@ package tw.org.iiiedu.thegivers.service;
 
 import static org.junit.Assert.*;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,18 +19,18 @@ public class RaiserServiceTest extends GenericTest {
 	@Autowired
 	private RaiserService raiserService;
 	
-	@Test
-	public void testLogin() {
-		assertTrue(raiserService.login("greenpeace", "password")!=null);
-	}
+//	@Test
+//	public void testLogin() throws NoSuchAlgorithmException {
+//		assertTrue(raiserService.login("chiayidogood", "password")!=null);
+//	}
 	
-	@Test
-	public void testGetByAccount(){
-		RaiserModel rm = raiserService.getByAccount("greenpeace");
-		
-		System.out.println(rm);
-	}
-	
+//	@Test
+//	public void testGetByAccount(){
+//		RaiserModel rm = raiserService.getByAccount("greenpeace");
+//		
+//		System.out.println(rm);
+//	}
+//	
 //	@Test
 //	public void testRegister(){
 //		RaiserModel rm = new RaiserModel();
@@ -48,34 +50,36 @@ public class RaiserServiceTest extends GenericTest {
 //	}
 
 	@Test
-	public void testDataUpdate(){
-		RaiserModel rm = raiserService.getByAccount("chigi");
-		rm.setContactPerson("JianYian");
+	public void testDataUpdate() throws NoSuchAlgorithmException{
+		RaiserModel rm = raiserService.getByAccount("GreenPeace");
+		MessageDigest md=MessageDigest.getInstance("MD5");
+		String pwd = "password";
+		rm.setPasswd(md.digest(pwd.getBytes()));
 		rm = raiserService.dataUpdate(rm);
 		System.out.println(rm);
 	}
-	@Test
-	public void testGetAll(){
-		List<RaiserModel> list = raiserService.getAll();
-		
-		System.out.println(list.get(0));
-	}
-	
-	@Test
-	public void testGetCount(){
-		int i = raiserService.getCount();
-		System.out.println(i);
-	}
-	
-	@Test
-	public void testGetPerPage(){
-		List<RaiserModel> list = raiserService.getPerPage(1);
-		
-		Iterator<RaiserModel> i = list.iterator();
-		
-		while(i.hasNext()){
-			System.out.println(i.next());
-		}
-			
-	}
+//	@Test
+//	public void testGetAll(){
+//		List<RaiserModel> list = raiserService.getAll();
+//		
+//		System.out.println(list.get(0));
+//	}
+//	
+//	@Test
+//	public void testGetCount(){
+//		int i = raiserService.getCount();
+//		System.out.println(i);
+//	}
+//	
+//	@Test
+//	public void testGetPerPage(){
+//		List<RaiserModel> list = raiserService.getPerPage(1);
+//		
+//		Iterator<RaiserModel> i = list.iterator();
+//		
+//		while(i.hasNext()){
+//			System.out.println(i.next());
+//		}
+//			
+//	}
 }

@@ -19,9 +19,11 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
+html,body{
+height: 100%}
 .thumbnail {
 	text-align: justify;
-	margin: 30px;
+	margin: 20px;
 }
 
 pre {
@@ -47,13 +49,26 @@ pre {
 a:hover {
 	cursor: pointer;
 }
+.row{
+margin-left: 0px;
+margin-right: 0px;
+}
+#conditionSearchDiv{
+display: table;
+background-color: #FFEEEE;
+min-height:30%;
+border-top: 1px silver solid;
+border-bottom: 1px silver solid;
+text-align: center;
+}
 </style>
 </head>
 <body>
 <jsp:include page="/header.jsp" />
-	<div class="container" style="margin-top: 20px">
-		<div class="row">
-			<div class="col-md-4" style="height: auto; margin-left: 30px">
+
+	<div id="conditionSearchDiv" class="container">
+		<div class="row" style="display: table-row; vertical-align: middle;">
+			<div style="display:inline-block; width:40%;">
 				<div id="custom-search-input">
 					<div class="input-group col-md-12">
 						<input type="text" class="form-control input-lg"
@@ -66,6 +81,23 @@ a:hover {
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row" style="display: table-row; vertical-align: middle;">
+		<div class="form-group">
+        <label class="col-xs-3 control-label">Favorite color</label>
+        <div class="col-xs-5 selectContainer">
+            <select name="colors" class="form-control" multiple title="Choose 2-4 colors">
+                <option value="black">Black</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="orange">Orange</option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+                <option value="white">White</option>
+            </select>
+        </div>
+    </div>
+
 		</div>
 	</div>
 
@@ -83,7 +115,7 @@ a:hover {
 		</nav>
 	</div>
 
-	<div class="container" id="showColumn" style="border-top: 1px silver solid;"">
+	<div class="container" id="showColumn">
 		<div id="campaignRow" class=row></div>
 	</div>
 

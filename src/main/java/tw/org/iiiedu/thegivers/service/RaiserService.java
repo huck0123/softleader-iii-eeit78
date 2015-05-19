@@ -1,5 +1,8 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -20,7 +23,7 @@ public class RaiserService {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public RaiserModel login(String account, String passwd) {
+	public RaiserModel login(String account, String passwd) throws NoSuchAlgorithmException {
 
 		// Transaction tx =
 		// sessionFactory.getCurrentSession().beginTransaction();
@@ -28,10 +31,10 @@ public class RaiserService {
 
 			RaiserModel rm = raiserDao.getByAccount(account);
 			// tx.commit();
-
 			if (rm != null) {
-				String pass = rm.getPasswd(); // 資料庫抓出：byte[]
-				if (passwd.equals(pass)) {
+				MessageDigest md=MessageDigest.getInstance("MD5");
+				byte[] pass = rm.getPasswd(); // 資料庫抓出：byte[]
+				if (Arrays.equals(md.digest(passwd.getBytes()),pass)) {
 					return rm;
 				}
 			}
@@ -63,6 +66,14 @@ public class RaiserService {
 		return null;
 	}
 
+	public RaiserModel getByName(String name) {
+		RaiserModel rm = raiserDao.getByName(name);
+		if (rm != null) {
+			return rm;
+		}
+		return null;
+	}
+	
 	public List<RaiserModel> getAll() {
 		List<RaiserModel> result = raiserDao.getAll();
 		return result;

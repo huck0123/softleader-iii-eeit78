@@ -30,65 +30,56 @@ public class RaiserDao {
 	SessionFactory sessionFactory;
 
 	public RaiserModel getByAccount(String account) {
-
 		RaiserModel result = null;
-
 		Session session = sessionFactory.getCurrentSession();
-
 		try {
 			Iterator raiserModels = session.createCriteria(RaiserModel.class)
 					.add(Restrictions.eq("account", account).ignoreCase())
 					.list().iterator();
-
 			if (raiserModels.hasNext()) {
-
 				result = (RaiserModel) raiserModels.next();
 			}
-
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
 		return result;
-
 	}
 
 	public RaiserModel insertAccount(RaiserModel rm) {
 		Session session = sessionFactory.getCurrentSession();
-		try {
-			session.save(rm);
-			return rm;
-		} catch (Exception e) {
-			System.out.println("新增帳號失敗");
-			e.printStackTrace();
-			return null;
-		}
+		session.save(rm);
+		return rm;
 	}
 
 	public RaiserModel update(RaiserModel rm) {
 		RaiserModel result = null;
 		Session session = sessionFactory.getCurrentSession();
-		try {
-			session.update(rm);
-			return rm;
-		} catch (Exception e) {
-			System.out.println("資料更新發生錯誤");
-			e.printStackTrace();
-			return null;
-		}
+		session.update(rm);
+		return rm;
 	}
 
 	public RaiserModel getById(int id) {
 		RaiserModel result = null;
 		Session session = sessionFactory.getCurrentSession();
+		result = (RaiserModel) session.get(RaiserModel.class, id);
+		return result;
+	}
+	
+	public RaiserModel getByName(String name){
+		RaiserModel result = null;
+		Session session = sessionFactory.getCurrentSession();
 		try {
-			result = (RaiserModel) session.get(RaiserModel.class, id);
-			return result;
+			Iterator raiserModels = session.createCriteria(RaiserModel.class)
+					.add(Restrictions.eq("name", name).ignoreCase())
+					.list().iterator();
+			if (raiserModels.hasNext()) {
+				result = (RaiserModel) raiserModels.next();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("查無此人");
 		}
-		return null;
+		return result;
 	}
 
 	public List<RaiserModel> getAll() {
@@ -115,7 +106,7 @@ public class RaiserDao {
 	}
 
 	public Integer getByAllConditionCount(String account, String name,
-			String contactPerson , boolean valid) {
+			String contactPerson, boolean valid) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class);
 		if (account != null) {
@@ -128,16 +119,17 @@ public class RaiserDao {
 		if (contactPerson != null) {
 			criteria.add(Restrictions.like("contactPerson", "%" + contactPerson
 					+ "%"));
-		}if (!valid) {
+		}
+		if (!valid) {
 			criteria.add(Restrictions.eq("valid", true));
 		}
-		Integer conut = (int) (long) criteria.setProjection(Projections.rowCount())
-				.uniqueResult();
+		Integer conut = (int) (long) criteria.setProjection(
+				Projections.rowCount()).uniqueResult();
 		return conut;
 	}
 
 	public List<RaiserModel> getByAllCondition(String account, String name,
-			String contactPerson , boolean valid , Integer page, Integer pageSize) {
+			String contactPerson, boolean valid, Integer page, Integer pageSize) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(RaiserModel.class);
 		if (account != null) {
@@ -150,17 +142,17 @@ public class RaiserDao {
 		if (contactPerson != null) {
 			criteria.add(Restrictions.like("contactPerson", "%" + contactPerson
 					+ "%"));
-		}if (!valid) {
+		}
+		if (!valid) {
 			criteria.add(Restrictions.eq("valid", true));
 		}
-		List list = criteria
-				.setFirstResult((page - 1) * pageSize)
+		List list = criteria.setFirstResult((page - 1) * pageSize)
 				.setMaxResults(pageSize).addOrder(Order.desc("id")).list();
 
 		return list;
 	}
-	
-	public boolean check(String account , boolean valid){
+
+	public boolean check(String account, boolean valid) {
 		Session session = sessionFactory.getCurrentSession();
 		RaiserModel rm = this.getByAccount(account);
 		rm.setValid(valid);

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 
 <style>
 th {
@@ -21,16 +21,16 @@ body{
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
-				<label for="textSch">¹ÎÅé¦WºÙ :</label> 
-				<input type="text" size="20" placeholder="¨Ì¦WºÙ·j´M" value="" id="textSch" class="searchtext"> 
-				<input type="checkbox" name="chkbox" id="ChkBox" value="true" checked="checked"/>:¥]§t¶Â¦W³æ
+				<label for="textSch">åœ˜é«”åç¨± :</label> 
+				<input type="text" size="20" placeholder="ä¾åç¨±æœå°‹" value="" id="textSch" class="searchtext"> 
+				<input type="checkbox" name="chkbox" id="ChkBox" value="true" checked="checked"/>:åŒ…å«é»‘åå–®
 			</div>
 			<div class="col-md-1">
-				<input type="button" name="searchbtn" value="¬d¸ß" id="btnSch" class="btn btn-default">
+				<input type="button" name="searchbtn" value="æŸ¥è©¢" id="btnSch" class="btn btn-default">
 			</div>
 			<div class="col-md-4">
-				<input type="button" name="vilhbtn" value="¥[¤J¶Â¦W³æ" id="btnStop" class="btn btn-default">
-				<input type="button" name="Unvilbtn" value="¸Ñ°£¶Â¦W³æ" id="btnunVil" class="btn btn-default">
+				<input type="button" name="Unvilbtn" value="å•Ÿç”¨å¸³è™Ÿ" id="btnunVil" class="btn btn-default">
+				<input type="button" name="vilhbtn" value="å°é–å¸³è™Ÿ" id="btnStop" class="btn btn-default">
 			</div>
 		</div>
 		<br>
@@ -40,14 +40,14 @@ body{
 				<table class="table table-condensed table-bordered">
 					<tr>
 						<th style="width: 10px"></th>
-						<th>±b¸¹</th>
-						<th style="width: 200px">¹ÎÅé¦WºÙ</th>
-						<th style="width: 140px">¹q¸Ü</th>
-						<th>«H½c</th>
-						<th style="width: 50px">¶Â¦W³æ</th>
+						<th>å¸³è™Ÿ</th>
+						<th style="width: 200px">åœ˜é«”åç¨±</th>
+						<th style="width: 140px">é›»è©±</th>
+						<th>ä¿¡ç®±</th>
+						<th style="width: 100px">å¸³è™Ÿæ˜¯å¦å•Ÿç”¨</th>
 						<th style="width: 10px"></th>
 					</tr>
-					<tbody id="tbody">
+					<tbody id="tbodyRS">
 					</tbody>
 				</table>
 			</div>
@@ -55,34 +55,31 @@ body{
 		</div >
 		<div id="btnn" class="row">
 			<div class="col-md-5" style="text-align:right">
-				<input type="button" class="btn btn-default" name="forward" value="¤W¤@­¶" id="btnf"> 
+				<input type="button" class="btn btn-default" name="forward" value="ä¸Šä¸€é " id="btnf"> 
 			</div>
 			<div class="col-md-1" style="text-align:right">
 				<input type="tel" name="now" size="1" value="1" id="btnw">
 			</div>
 			<div class="col-md-1" id="divMax" style="text-align:left"></div>
 			<div class="col-md-2" style="text-align:left">
-				<input type="button" class="btn btn-default" name="next" value="¤U¤@­¶" id="btnx"> 
-			</div>
-			<div class="col-md-3" style="text-align:left">
-				<a href="<c:url value='/index.jsp' />">¦^­º­¶</a> 
+				<input type="button" class="btn btn-default" name="next" value="ä¸‹ä¸€é " id="btnx"> 
 			</div>
 		</div>
-		<div id="detail"></div><br>
+		<div id="detailRS"></div><br>
 	</div>
 </div>	
 
 	<script>
-		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getByCondition";
-		$.post(url, {'lock' : $('#ChkBox').val()} ,getData);
+		var RaiserShowUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getRaiserCondition";
+		$.post(RaiserShowUrl1, {'lock' : $('#ChkBox').val()} ,RaiserShowgetData);
 
 		var page = $("#btnw").val();
 		var Max = Math.ceil("${raiserCount}" / 5);
 		$("#divMax").text("/" + Max + "\t");
 		var test = true;
 
-		//¥H¤U¤À­¶¥Î
-		//¥Î¼Æ¦r¿é¤J¥i·j´M­¶¼Æ
+		//ä»¥ä¸‹åˆ†é ç”¨
+		//ç”¨æ•¸å­—è¼¸å…¥å¯æœå°‹é æ•¸
 		$("#btnw").change(function() {
 			if ($("#btnw").val() <= Max && $("#btnw").val() > 0) {
 				page = $("#btnw").val();
@@ -90,45 +87,44 @@ body{
 				$("#btnw").val("1");
 				page = 1;
 			}
-			$('#detail').children().remove();
+			$('#detailRS').children().remove();
 			test = true;
-			$('#tbody').children().remove();
-			$.post(url, {
+			$('#tbodyRS').children().remove();
+			$.post(RaiserShowUrl1, {
 				'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
-			}, getData);
+			}, RaiserShowgetData);
 		});
 
-		//ÂI¤W¤@­¶
+		//é»ä¸Šä¸€é 
 		$("#btnf").click(function() {
 			if ($("#btnw").val() > 1) {
 				page--;
 				$("#btnw").val(page);
-				$('#detail').children().remove();
+				$('#detailRS').children().remove();
 				test = true;
-				$('#tbody').children().remove();
-				$.post(url, {
+				$('#tbodyRS').children().remove();
+				$.post(RaiserShowUrl1, {
 					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
-				}, getData);
+				}, RaiserShowgetData);
 			}
 		});
 
-		//ÂI¤U¤@­¶
+		//é»ä¸‹ä¸€é 
 		$("#btnx").click(function() {
 			if ($("#btnw").val() < Max) {
 				page++;
 				$("#btnw").val(page);
-				$('#detail').children().remove();
+				$('#detailRS').children().remove();
 				test = true;
-				$('#tbody').children().remove();
-				$.post(url, {
+				$('#tbodyRS').children().remove();
+				$.post(RaiserShowUrl1, {
 					'name' : $("#textSch").val(),'page' : page ,'lock' : $('#ChkBox').val()
-				}, getData);
+				}, RaiserShowgetData);
 			}
 		});
 
-		//Åã¥Ü³¡¤À¤º®eÂI¿ï¹Ï¦¡Åã¥Ü¥ş³¡¤º®e
-		function getData(data) {
-
+		//é¡¯ç¤ºéƒ¨åˆ†å…§å®¹é»é¸åœ–å¼é¡¯ç¤ºå…¨éƒ¨å…§å®¹
+		function RaiserShowgetData(data) {
 			data = JSON.parse(data);
 
 			$(data)
@@ -160,14 +156,14 @@ body{
 											+ st2 + "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center'></td></tr>";
 								}
 
-								$(tbody).prepend(stAll);
+								$('#tbodyRS').prepend(stAll);
 								$("#test")
 										.click(
 												function() {
 													if (test) {
 														test = false;
 
-														var str = "<img src='' class='img-thumbnail' id='logo' style='width:80px; height:80px'>";
+														var str = "<img src='' class='img-thumbnail' id='logoRS' style='width:80px; height:80px'>";
 
 														$(
 																"#spanpic"
@@ -176,50 +172,50 @@ body{
 																		"glyphicon glyphicon-folder-close")
 																.addClass(
 																		"glyphicon glyphicon-folder-open");
-														$("#detail").children()
+														$("#detailRS").children()
 																.remove();
-														$("#detail")
+														$("#detailRS")
 																.append(
 																		"<div class='row'><div class='col-md-3'></div><div class='col-md-6'>"
 																				+ str
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹Î Åé  ±b ¸¹:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>åœ˜ é«”  å¸³ è™Ÿ:ã€€"
 																				+ raiser.account
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹Î Åé  ¦W ºÙ:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>åœ˜ é«”  å ç¨±:ã€€"
 																				+ raiser.name
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹Î Åé  ¹q ¸Ü:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>åœ˜ é«”  é›» è©±:ã€€"
 																				+ raiser.tel
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>Ápµ¸¤H©m¦W:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>è¯çµ¡äººå§“å:ã€€"
 																				+ raiser.contactPerson
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>Ápµ¸¤H¹q¸Ü:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>è¯çµ¡äººé›»è©±:ã€€"
 																				+ raiser.contactTel
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹q ¤l  «H ½c:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>é›» å­  ä¿¡ ç®±:ã€€"
 																				+ raiser.email
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹Î Åé  ¦a §}:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>åœ˜ é«”  åœ° å€:ã€€"
 																				+ raiser.address
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>¹Î Åé  µu ¤ù:¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-6'>åœ˜ é«”  çŸ­ ç‰‡:ã€€"
 																				+ raiser.videoUrl
 																				+ "</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-8'>¹Î Åé  ¸ê °T:</div><div class='col-md-3'></div></div>"
-																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-5'>¡@¡@"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-8'>åœ˜ é«”  è³‡ è¨Š:</div><div class='col-md-3'></div></div>"
+																				+ "<div class='row'><div class='col-md-3'></div><div class='col-md-5'>ã€€ã€€"
 																				+ raiser.detail
 																				+ "</div></div>");
 
-														$("#logo")
+														$("#logoRS")
 																.attr(
 																		"src",
 																		"data:image/png;base64,"
 																				+ srclogo);
 
 													} else {
-														$("#detail").children()
+														$("#detailRS").children()
 																.remove();
 														$(".spanpic")
 																.removeClass(
@@ -232,11 +228,11 @@ body{
 								
 							});
 		};
-		//¥H¤U·j´M¬ÛÃö
+		//ä»¥ä¸‹æœå°‹ç›¸é—œ
 				$("#btnSch").click(function() {
-					$('#detail').children().remove();
+					$('#detailRS').children().remove();
 					test = true;
-					$('#tbody').children().remove();
+					$('#tbodyRS').children().remove();
 					$("#btnw").val("1");
 					page = 1;
 					$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!getByAllConditionCount" , {
@@ -245,9 +241,9 @@ body{
 							Max = Math.ceil(data/ 5);
 							$("#divMax").text("/" + Max + "\t");
 						});
-					$.post(url,{
+					$.post(RaiserShowUrl1,{
 						'name' : $("#textSch").val(),'page' : page , 'lock' : $('#ChkBox').val()
-					}, getData);
+					}, RaiserShowgetData);
 				});
 		
 		
@@ -255,18 +251,18 @@ body{
 				    $(this).val($(this).prop('checked'))
 				});
 				
-				var url2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkInformation";
+				var RaiserShowUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkInformation";
 					$("#btnStop").click(function(){
 					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-remove");;
-					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
+					$.post(RaiserShowUrl2,{'account' : $("#chbox:checked").parent().parent().text(),
 						 		 'lock' : false},
-					getData,"json");
+						 		RaiserShowgetData,"json");
 				});
 				$("#btnunVil").click(function(){
 					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-ok");
-					$.post(url2,{'account' : $("#chbox:checked").parent().parent().text(),
+					$.post(RaiserShowUrl2,{'account' : $("#chbox:checked").parent().parent().text(),
 						 		 'lock' : true},
-					getData,"json");
+						 		RaiserShowgetData,"json");
 				});
 	</script>
 

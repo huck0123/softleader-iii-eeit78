@@ -4,11 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,9 +18,12 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import tw.org.iiiedu.thegivers.form.CampaignForm;
 import tw.org.iiiedu.thegivers.form.RaiserForm;
-import tw.org.iiiedu.thegivers.model.GiverModel;
+import tw.org.iiiedu.thegivers.model.CampaignModel;
 import tw.org.iiiedu.thegivers.model.RaiserModel;
+import tw.org.iiiedu.thegivers.service.CampaignService;
+import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.service.RaiserService;
 
 import com.google.gson.Gson;
@@ -27,7 +31,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	@Autowired
-	RaiserService raiserService;
+	private RaiserService raiserService;
+	@Autowired
+	private CampaignService campaignService;
+	@Autowired
+	private GiverService giverService;
 
 	private RaiserForm raiserForm;
 	private RaiserModel rm;
@@ -82,34 +90,59 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		this.name = name;
 	}
 
-	public String insert() throws Exception {
+	public String insert() {
 		RaiserModel rm = new RaiserModel();
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		rm.setAccount(raiserForm.getAccount());
-		rm.setPasswd(raiserForm.getPasswd());
-		rm.setName(raiserForm.getName());
-		rm.setTel(raiserForm.getTel());
-		rm.setContactPerson(raiserForm.getContactPerson());
-		rm.setContactTel(raiserForm.getContactTel());
-		rm.setEmail(raiserForm.getEmail());
-
+		session.removeAttribute("insertErrorACC");
+		session.removeAttribute("insertErrorNAME");
+		session.removeAttribute("insertErrorPSW");
+		session.removeAttribute("insertErrorMSG");
 		try {
+			rm.setAccount(raiserForm.getAccount());
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
+			rm.setName(raiserForm.getName());
+			rm.setTel(raiserForm.getTel());
+			rm.setContactPerson(raiserForm.getContactPerson());
+			rm.setContactTel(raiserForm.getContactTel());
+			rm.setEmail(raiserForm.getEmail());
 			if (raiserForm.getLogo() != null)
 				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		rm.setAddress(raiserForm.getAddress());
-		rm.setDetail(raiserForm.getDetail());
-		rm.setVideoUrl(raiserForm.getVideoUrl());
-
-		rm = raiserService.register(rm);
-		if (rm != null) {
+			rm.setAddress(raiserForm.getAddress());
+			rm.setDetail(raiserForm.getDetail());
+			rm.setVideoUrl(raiserForm.getVideoUrl());
+			session.setAttribute("form", rm);
+			if (raiserService.getByAccount(raiserForm.getAccount()) != null
+					|| raiserForm.getAccount().equalsIgnoreCase("admin")
+					|| giverService.getByAccount(raiserForm.getAccount()) != null) {
+				session.setAttribute("insertErrorACC", "帳號已存在");
+				throw new Exception();
+			}
+			if (raiserForm.getPasswd().trim().length() == 0) {
+				session.setAttribute("insertErrorPSW", "密碼不符合規定");
+				throw new Exception();
+			}
+			if (raiserService.getByName(raiserForm.getName()) != null) {
+				session.setAttribute("insertErrorNAME", "此團體已註冊");
+				throw new Exception();
+			}
+			rm = raiserService.register(rm);
+			session.removeAttribute("form");
 			return "insert";
-		} else {
+		} catch (Exception e1) {
+			session.setAttribute("insertErrorMSG", "註冊帳號失敗,請更正您的資料");
 			return "error";
 		}
+	}
+
+	public String checkName() {
+		rm = raiserService.getByName(name);
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(rm);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		return "select";
 	}
 
 	public String select() {
@@ -117,7 +150,6 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(rm);
-
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		session.setAttribute("raiserSelf", rm);
@@ -142,46 +174,45 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public String update() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		RaiserModel rm = (RaiserModel) session.getAttribute("raiser");
-		rm.setId(raiserForm.getId());
-		rm.setAccount(raiserForm.getAccount());
-		if (raiserForm.getPasswd() != null) {
-			rm.setPasswd(raiserForm.getPasswd());
-		}
-		if (raiserForm.getName() != null) {
-			rm.setName(raiserForm.getName());
-		}
-		if (raiserForm.getTel() != null) {
-			rm.setTel(raiserForm.getTel());
-		}
-		if (raiserForm.getContactPerson() != null) {
-			rm.setContactPerson(raiserForm.getContactPerson());
-		}
-		if (raiserForm.getContactTel() != null) {
-			rm.setContactTel(raiserForm.getContactTel());
-		}
-		if (raiserForm.getEmail() != null) {
-			rm.setEmail(raiserForm.getEmail());
-		}
-		if (raiserForm.getAddress() != null) {
-			rm.setAddress(raiserForm.getAddress());
-		}
-		if (raiserForm.getDetail() != null) {
-			rm.setDetail(raiserForm.getDetail());
-		}
-		if (raiserForm.getVideoUrl() != null) {
-			rm.setVideoUrl(raiserForm.getVideoUrl());
-		}
 		try {
+			rm.setId(raiserForm.getId());
+			rm.setAccount(raiserForm.getAccount());
+			if (raiserForm.getPasswd() != null) {
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
+			}
+			if (raiserForm.getName() != null) {
+				rm.setName(raiserForm.getName());
+			}
+			if (raiserForm.getTel() != null) {
+				rm.setTel(raiserForm.getTel());
+			}
+			if (raiserForm.getContactPerson() != null) {
+				rm.setContactPerson(raiserForm.getContactPerson());
+			}
+			if (raiserForm.getContactTel() != null) {
+				rm.setContactTel(raiserForm.getContactTel());
+			}
+			if (raiserForm.getEmail() != null) {
+				rm.setEmail(raiserForm.getEmail());
+			}
+			if (raiserForm.getAddress() != null) {
+				rm.setAddress(raiserForm.getAddress());
+			}
+			if (raiserForm.getDetail() != null) {
+				rm.setDetail(raiserForm.getDetail());
+			}
+			if (raiserForm.getVideoUrl() != null) {
+				rm.setVideoUrl(raiserForm.getVideoUrl());
+			}
 			if (raiserForm.getLogo() != null)
 				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		rm = raiserService.dataUpdate(rm);
-		if (rm != null) {
+
+			rm = raiserService.dataUpdate(rm);
 			session.setAttribute("raiser", rm);
 			return "update";
-		} else {
+		} catch (Exception e1) {
+			session.setAttribute("updateErrorMSG", "更新帳號失敗,請更正您的資料");
 			return "error";
 		}
 	}
@@ -198,17 +229,17 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String checkInformation() {
 		String[] str = account.split(" ");
-		for(int n = 0 ; n < str.length; n++){
-			if(n % 4 == 0){
+		for (int n = 0; n < str.length; n++) {
+			if (n % 4 == 0) {
 				boolean result = raiserService.valid(str[n], lock);
 			}
 		}
 		return null;
 	}
-	
-	public String getByAllConditionCount(){
+
+	public String getByAllConditionCount() {
 		Integer resultCount = raiserService.getByAllConditionCount(account,
-				name, contactPerson , lock);
+				name, contactPerson, lock);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(resultCount);
 		inputStream = new ByteArrayInputStream(
@@ -216,11 +247,25 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return "select";
 	}
 
-	public String getByCondition() {
+	public String getRaiserCondition() {
 		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
-				contactPerson, lock ,page,5);
+				contactPerson, lock, page, 5);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(list);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
+
+	public String getRaiserHistory() {
+		CampaignForm campaignForm = new CampaignForm();
+		campaignForm.setPageNum(0);
+		campaignForm.setPageSize(6);
+		campaignForm.setName(name);
+		List<CampaignModel> cm = campaignService
+				.getByAllCondition(campaignForm);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(cm);
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";

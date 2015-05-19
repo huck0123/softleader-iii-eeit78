@@ -1,9 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Iterator;
-import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +48,10 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(i);
 //	}
 	
-	@Test
-	public void testGetByIdNumber(){
-		System.out.println(giverService.getByIdNumber("S129547631"));
-	}
+//	@Test
+//	public void testGetByIdNumber(){
+//		System.out.println(giverService.getByIdNumber("S129547631"));
+//	}
 	
 //	@Test
 //	public void testGetCount(){
@@ -93,13 +91,16 @@ public class GiverServiceTest extends GenericTest {
 //	}
 	
 //	@Test
-//	public void testUpdate(){
-//		GiverModel model = giverService.getByAccount("kitty");
-//		System.out.println(model);
-//		model.setEmail("Hellokitty@gmail.com");
+//	public void testUpdate() throws NoSuchAlgorithmException{
+//		GiverModel model = giverService.getByAccount("Amanda");
+//		byte[] b = MessageDigest.getInstance("MD5").digest("password".getBytes());
+//		model.setPasswd(b);
 //		giverService.update(model);
-//		model = giverService.getByAccount("kitty");
-//		System.out.println(model);
+//		b = model.getPasswd();
+//		int i;
+//		for(i=0; i<b.length; i++){
+//			System.out.print(b[i]);
+//		}
 //	}
 	
 //	@Test

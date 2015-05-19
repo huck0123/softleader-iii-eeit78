@@ -4,532 +4,172 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
-<head>
-
-<style>
-.fTitle {
-	color: #FFFFFF;
-	font-size: 24px;
-}
-
-.linkWord {
-	color: #F75000;
-	font-size: 16px;
-}
-
-.date {
-	color: orange;
-}
-#footer{
-	position: relative;
-}
-</style>
-
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="pingback" href="http://www.socialcops.org/xmlrpc.php" />
-<link rel="shortcut icon" type="image/x-icon"
-	href="http://socialcops.wpengine.netdna-cdn.com/wp-content/uploads/2014/08/16.png">
-<link rel="apple-touch-icon"
-	href="http://socialcops.wpengine.netdna-cdn.com/wp-content/uploads/2014/08/16.png" />
-<link
-	href='http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,500,200|Lato:200,300,400,600,800|Oxygen:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Lato:200,300,400,600,700,800|Oxygen:200,300,400,600,700,800|Lato:200,300,400,600,700,800&subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
-<link rel="canonical" href="http://www.socialcops.org/" />
-<link rel="author" href="https://plus.google.com/105357087621746626066" />
-<link rel="publisher"
-	href="https://plus.google.com/+SocialcopsOrg/about" />
-<link rel="stylesheet"
-	href="http://www.socialcops.org/wp-content/cache/scripts/cbd58eef9b2b0f5dc8a9b6990413a230.css"
-	type="text/css" media="all" />
-	
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-<script src="/softleader-iii-eeit78/js/useful.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
-	
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <style type="text/css">
-.ssba {
-	
+.footer-wrapper {
+	width: 100%;
+	text-align: center;
+	display: table;
+	background-color: rgb(23, 23, 23);
+	font-size: 16px;
+	padding-top: 0px;
 }
 
-.ssba img {
-	width: 40px !important;
-	padding: 4px;
-	border: 0;
-	box-shadow: none !important;
-	display: inline !important;
-	vertical-align: middle;
+.footer-wrapper a {
+	color: white;
 }
 
-.ssba, .ssba a {
+.footer-wrapper .row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.footer-brand {
+	display: inline-block;
+	color: orangered;
+	border-radius: 10px;
+	width: 60%;
+	padding: 10px 0px 5px 0px;
+	margin-bottom: 0px;
+	font-stretch: extra-expanded;
+	border-radius: 10px;
+}
+
+.footer-content {
+	color: white;
+}
+
+.footer-wrapper ul {
+	padding-left: 0px
+}
+
+.footer-wrapper li {
+	list-style: none;
+}
+
+.footer-wrapper li a {
 	text-decoration: none;
-	background: none;
-	font-size: 12px;
 }
+/* footer social icons starts*/
+ul.social-network {
+	list-style: none;
+	display: inline;
+	margin-left: 0 !important;
+	padding: 0;
+}
+
+ul.social-network li {
+	display: inline;
+	margin: 0 5px;
+}
+
+.social-network a.icoRss:hover {
+	background-color: #F56505;
+}
+
+.social-network a.icoFacebook:hover {
+	background-color: #3B5998;
+}
+
+.social-network a.icoTwitter:hover {
+	background-color: #33ccff;
+}
+
+.social-network a.icoGoogle:hover {
+	background-color: #BD3518;
+}
+
+.social-network a.icoVimeo:hover {
+	background-color: #0590B8;
+}
+
+.social-network a.icoLinkedin:hover {
+	background-color: #007bb7;
+}
+
+.social-circle li a {
+	background-color: rgba(255, 255, 255, 0.1);
+	display: inline-block;
+	position: relative;
+	margin: 0 auto 0 auto;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+.social-circle li i {
+	margin: 0;
+	line-height: 50px;
+	text-align: center;
+	color: #fff;
+}
+/* footer social icons ends*/
 </style>
-<meta name="generator"
-	content="Powered by Visual Composer - drag and drop page builder for WordPress." />
-<style type="text/css" data-type="vc-custom-css">
-.q_icon_with_title .icon_text_holder .icon_title {
-	font-weight: 800;
-}
-
-p {
-	text-align: justify;
-}
-
-.mail-chimp {
-	background: #ffd800 !important;
-	border: none !important;
-	font-family: 'Lato', sans-serif;
-}
-
-.mail-chimp:hover {
-	background: #ffd800 !important;
-	border: none !important;
-	font-family: 'Lato', sans-serif;
-}
-</style>
-
-
-<meta charset="utf-8">
-<!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!--     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<!--      <link rel="icon" href="../../favicon.ico"> -->
-<title>Insert title here</title>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
-<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
-
-</head>
-
-<body id="body">
-
-	<!-- headerFixed start -->
-
-	<div>
-		<div id="headerFixed" class="headerFixed">
-
+<div class="footer-wrapper">
+	<div class="footer-content">
+		<div class="container">
 			<div class="row">
-				<div class="col-md-2 ">
-					<h2 class="header-brand">TheGivers</h2>
+				<div class="col-md-4 col-md-offset-1">
+					<h1 class="footer-brand">TheGivers</h1>
+					<p class="ul-header">分享我們</p>
+					<ul class="social-network social-circle">
+						<li><a target="_blank"
+							href="http://www.facebook.com/share.php?u=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							class="icoFacebook" title="Facebook"><i
+								class="fa fa-facebook"></i></a></li>
+						<li><a target="_blank"
+							href="http://twitter.com/home/?status=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+						<li><a target="_blank"
+							href="https://plus.google.com/share?url=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							class="icoGoogle" title="Google +"><i
+								class="fa fa-google-plus"></i></a></li>
+						<li><a target="_blank"
+							href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:8080/softleader-iii-eeit78/index.jsp&title=The%20Givers&summary=The%20Givers.%0AMake%20every%20penny%20meaningful.&source="
+							class="icoLinkedin" title="Linkedin"><i
+								class="fa fa-linkedin"></i></a></li>
+					</ul>
 				</div>
-				<div class="col-md-8 ">
-					<nav class="navbar margin-bottom0">
-
-						<ul class="nav navbar-nav header-nav">
-
-							<li class="margin-both10"><a href="">關於我們</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
-							<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
-						</ul>
-					</nav>
+				<div class="col-md-2 visible-md-block visible-lg-block"
+					style="margin-top: 30px; text-align: left;">
+					<p>快速連結</p>
+					<ul>
+						<li><a href="<c:url value='/giver/giverRegister'/>">加入會員</a></li>
+						<li><a href="<c:url value='/raiser/raiserRegister'/>">團體申請</a></li>
+						<li><a href="<c:url value='/campaign/campaignShow'/>">募款活動</a></li>
+						<li><a href="<c:url value='/raiser/raiserCheck'/>">參與團體</a></li>
+					</ul>
 				</div>
-
-				<div class="col-md-2 ">
-					<nav class="navbar margin-bottom0">
-						<ul class="nav navbar-nav header-nav">
-
-
-
-							<li><a href=""><img class="header-pic"
-									src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
-							<c:if test="${raiser ==null && giver ==null && admin ==null}">
-								<li><a data-toggle="collapse" data-target="#collapse1"
-									aria-expanded="false" aria-controls="collapse1"> <img
-										class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
-							</c:if>
-
-							<c:if test="${raiser != null || giver != null || admin != null}">
-								<li><a class="dropdown-toggle" id="menu1"
-									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login3.png" /></a>
-									<ul class="dropdown-menu" role="menu">
-										<c:if test="${raiser != null}">
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
-										</c:if>
-										<c:if test="${giver != null}">
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
-										</c:if>
-										<c:if test="${admin != null}">
-											<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
-											<li></li>
-											<li>顯示所有交易紀錄</li>
-										</c:if>
-										<li class="divider"></li>
-										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
-									</ul></li>
-							</c:if>
-
-							<li><a href="#body"><img class="header-pic opacity60"
-									src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
-						</ul>
-					</nav>
-
+				<div class="col-md-3 visible-md-block visible-lg-block"
+					style="margin-top: 30px; text-align: left;">
+					<p class="ul-header">聯絡我們</p>
+					<ul>
+						<li><a href="#">關於我們</a></li>
+						<li>Email:TheGivers@gmail.com</li>
+						<li>地址:台北市大安區<br />復興南路一段390號2樓
+						</li>
+						<li><a style="color: orangered;" target="_blank"
+							href="https://www.google.com.tw/maps/preview#!q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BE%A9%E8%88%88%E5%8D%97%E8%B7%AF%E4%B8%80%E6%AE%B5%E8%B3%87%E7%AD%96%E6%9C%83-%E6%95%B8%E4%BD%8D%E6%95%99%E8%82%B2%E7%A0%94%E7%A9%B6%E6%89%80-%E8%B3%87%E8%A8%8A%E6%8A%80%E8%A1%93%E8%A8%93%E7%B7%B4%E4%B8%AD%E5%BF%83&amp;data=!4m15!2m14!1m13!1s0x3442abd379a5ec97%3A0xedc006d25a9e35df!3m8!1m3!1d4142!2d121.5449575!3d25.0427395!3m2!1i1270!2i880!4f13.1!4m2!3d25.033769!4d121.543398">
+								<i class="fa fa-map-marker"></i> 地圖
+						</a></li>
+					</ul>
 				</div>
 
-			</div>
-			<div class="collapse" id="collapse1">
-				<div id="search1" class="well row">
-
-					<div class="col-md-6"">
-						<div class="style="display:inline-block;">
-							<form action="<c:url value='/login/loginAction'/>" method="post">
-								<table>
-									<tr>
-										<td>ID :</td>
-										<td><input type="text" name="account"
-											value="${param.account}"></td>
-										<td><span class="error">${errors.account}</span></td>
-									</tr>
-									<tr>
-										<td>PWD :</td>
-										<td><input type="text" name="passwd"
-											value="${param.passwd}"></td>
-										<td><span class="error">${errors.passwd}</span></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td align="right"><input type="submit" value="Login"></td>
-									</tr>
-								</table>
-								${wrongLogin}
-							</form>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<p>
-							<a href="<c:url value='/giver/giverRegister'/>">註冊為捐款會員</a>
-						</p>
-						<p>
-							<a href="<c:url value='/raiser/raiserRegister'/>">進入團體申請帳號頁面</a>
-						</p>
-					</div>
-
-				</div>
-			</div>
-
-
-		</div>
-
-	</div>
-
-	<!-- header-fixed end -->
-
-
-
-
-	<!--  header start -->
-	<div class="container">
-		<div id="header" class="header">
-			<div class="row">
-				<div class="col-md-2">
-					<h2 class="header-brand">TheGivers</h2>
-				</div>
-				<div class="col-md-8">
-
-
-					<nav class="navbar margin-bottom0">
-
-						<ul class="nav navbar-nav header-nav">
-
-							<li class="margin-both10"><a href="">關於我們</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/campaign/campaignShow'/>">活動列表</a></li>
-							<li class="margin-both10"><a
-								href="<c:url value='/raiser/raiserShow'/>">參與團體</a></li>
-
-
-							<!-- 									<li class="margin-both10"><a href="#">新聞查詢</a></li> -->
-						</ul>
-
-					</nav>
-				</div>
-
-				<div class="col-md-2">
-					<nav class="navbar margin-bottom0">
-						<ul class="nav navbar-nav header-nav">
-
-							<li><a href=""><img class="header-pic"
-									src="/softleader-iii-eeit78/pictures/search-icon-hi.png" /></a></li>
-
-							<c:if test="${raiser ==null && giver ==null && admin ==null}">
-								<li><a data-toggle="collapse"
-									data-target="#collapseExample" aria-expanded="false"
-									aria-controls="collapseExample"> <img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login2.png" /></a></li>
-							</c:if>
-							<c:if test="${raiser != null || giver != null || admin != null}">
-								<li><a class="dropdown-toggle" id="menu1"
-									data-toggle="dropdown"><img class="header-pic"
-										src="/softleader-iii-eeit78/pictures/login3.png" /></a>
-									<ul class="dropdown-menu" role="menu">
-										<c:if test="${raiser != null}">
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
-											<li><a role="menuitem"
-												href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
-										</c:if>
-										<c:if test="${giver != null}">
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverInfo">修改會員資料</a></li>
-											<li><a role="menuitem"
-												href="/softleader-iii-eeit78/giver/giverHistory">捐款紀錄</a></li>
-										</c:if>
-										<c:if test="${admin != null}">
-											<li><a href="<c:url value='/giver/AllGiverInfo'/>">顯示所有捐款人資訊</a></li>
-											<li></li>
-											<li>顯示所有交易紀錄</li>
-										</c:if>
-										<li class="divider"></li>
-										<li><a role="menuitem"
-											href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
-									</ul></li>
-							</c:if>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-		<div class="collapse" id="collapseExample">
-			<div id="search2" class="well row">
-
-				<div class="col-md-6"">
-					<div class="style="display:inline-block;">
-						<form action="<c:url value='/login/loginAction'/>" method="post">
-							<table>
-								<tr>
-									<td>ID :</td>
-									<td><input type="text" name="account"
-										value="${param.account}"></td>
-									<td><span class="error">${errors.account}</span></td>
-								</tr>
-								<tr>
-									<td>PWD :</td>
-									<td><input type="text" name="passwd"
-										value="${param.passwd}"></td>
-									<td><span class="error">${errors.passwd}</span></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td align="right"><input type="submit" value="Login"></td>
-								</tr>
-							</table>
-							${wrongLogin}
-						</form>
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<p>
-						<a href="<c:url value='/giver/giverRegister'/>">註冊為捐款會員</a>
-					</p>
-					<p>
-						<a href="<c:url value='/raiser/raiserRegister'/>">進入團體申請帳號頁面</a>
-					</p>
-				</div>
 
 			</div>
 		</div>
-	</div>
-	<!-- header ends -->
-	<div class="container">
-	<div class="row" style="background-color:#FFAF60">
-		<div style="height:50px"></div>
-		<div class="col-md-2"></div>
-		<div class="col-md-8"><ul class="list-unstyled"><div class="row" id="raiserLogo"></div></ul></div>
-		<div class="col-md-2"></div>
+		<div class="row">
+			<p style="font-size: 14px; margin-top: 15px">
+				Copyright 2015 <i class="fa fa-copyright"></i>&nbsp;&nbsp;
+				|&nbsp;&nbsp; TheGivers
+			</p>
+		</div>
+
 	</div>
 </div>
-	<script>
 
-	</script>
-
-
-<!-- 	<div style="height: 3000px; background-color:yellow"></div> -->
-
-
-
-
-
-
-
-<footer class="uncover" id="footer">
-	<div class="footer_inner clearfix">
-		<div class="footer_top_holder">
-			<div class="container">
-				<div class="container_inner">
-					<div class="three_columns clearfix">
-						<div class="column1">
-							<div class="column_inner">
-
-
-								<div id="text-34" class="widget widget_text">
-									<div class="textwidget">
-										<a href="http://www.socialcops.org"><img
-											class="wp-image-16570 size-thumbnail aligncenter"
-											alt="" width="100" height="100" />THEGIVERS</a>
-									</div>
-								</div>
-								<div id="text-35" class="widget widget_text">
-									<h5></h5>
-									<div class="textwidget">
-										<div style="text-align: center;">
-											<span class='q_social_icon_holder circle_social'
-												data-hover-background-color=#000000 data-hover-color=#ffd649><a
-												href='https://www.facebook.com/SocialCops' target='_'><span
-													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
-														class='fa fa-facebook' style='color: #000000;'></i></span></a></span> <span
-												class='q_social_icon_holder circle_social'
-												data-hover-background-color=#000000 data-hover-color=#ffd649><a
-												href='https://twitter.com/Social_Cops' target='_'><span
-													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
-														class='fa fa-twitter' style='color: #000000;'></i></span></a></span><span
-												class='q_social_icon_holder circle_social'
-												data-hover-background-color=#000000 data-hover-color=#ffd649><a
-												href='http://instagram.com/SocialCops' target='_'><span
-													class='fa-stack fa-2x' style='background-color: #ffd649;'><i
-														class='fa fa-instagram' style='color: #000000;'></i></span></a></span><span
-												class='q_social_icon_holder circle_social'
-												data-hover-background-color=#000000 data-hover-color=#ffd649><a
-												href='https://www.linkedin.com/company/social-cops'
-												target='_'><span class='fa-stack fa-2x'
-													style='background-color: #ffd649;'><i
-														class='fa fa-linkedin' style='color: #000000;'></i></span></a></span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="recent-posts-2">
-							<h5 class="fTitle">Recent News About Us</h5>
-							<ul>
-								<li><a
-									href="http://www.socialcops.org/2014/12/17/child-labour-issue-end-new-law/"
-									class="linkWord">Raise fund for Nepal after the devastating
-										earthquake.</a> <span class="date">May 1, 2015</span></li>
-								<li><a
-									href="http://www.socialcops.org/2014/12/12/why-blaming-uber-is-not-enough/"
-									class="linkWord">Help this kid with his education after
-										deaths of his parents.</a> <span class="date">April 12,
-										2015</span></li>
-								<li><a
-									href="http://www.socialcops.org/2014/11/26/now-serving-dashboards-platters/"
-									class="linkWord">See how large the gap is between the rich
-										and the poor in India.</a> <span class="date">January 18,
-										2015</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-</body>
-<script>
-// $(document).ready(function(){
-// 	$(window).scroll(function(){
-// 		if ($(window).scrollTop() + $(window).height() <= $(document).height() - 500) {
-// 			$('#footer').slideUp();
-// 		} else {
-// 			$('#footer').slideDown();
-// 		}
-// 	});
-// });
-</script>
-<script>
-	// function for popping out head
-	$(document).ready(function() {
-		$(window).scroll(function() {
-			$('.in').removeClass("in");
-			if ($(window).scrollTop() > 99) {
-				console.log($(window).scrollTop());
-				$('#headerFixed').slideDown();
-				$('#header').addClass("vis-hidden");
-
-			} else {
-				console.log($(window).scrollTop());
-				$('#headerFixed').slideUp();
-				$('#header').removeClass("vis-hidden");
-
-			}
-		});
-
-		// function for moving smoothly to anchor
-		$('a[href^="#"]').click(function() {
-			$('html, body').animate({
-				scrollTop : $($.attr(this, 'href')).offset().top
-			}, 600, 'easeInOutExpo');
-			return false;
-		});
-
-	});
-	
-	var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!selectAll"
-		$.post(url, getData);
-
-		function getData(raisers) {
-			raisers = JSON.parse(raisers);
-			$(raisers)
-					.each(
-							function(index, raiser) {
-								var srclogo = arrayBufferToBase64(raiser.logo);
-								var strimg = "<img src='' class='img-thumbnail' id='logo"+raiser.id+"' style='width:200px; height:200px'>";
-								var strhref = "<a href='<c:url value='/raiser/raiserAction!select?account="
-										+ raiser.account
-										+ "'/>'>"
-										+ strimg
-										+ "</a>";
-								$("#raiserLogo").append(
-										"<div class='col-md-3' id='hover"+raiser.id+"'><li style='padding:5px'>"
-												+ strhref + "</li></div>");
-								$("#logo" + raiser.id).attr("src",
-										"data:image/png;base64," + srclogo);
-							});
-		}
-		
-		$("div[id^='hover']").on($(this).mouseenter(function(){
-			console.log("12345");
-		}))
-</script>
-</html>

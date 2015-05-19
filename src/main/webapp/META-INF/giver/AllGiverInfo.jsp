@@ -32,7 +32,8 @@
 			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
 		}
 	})
-	
+// console.log('${pageContext.request.userPrincipal }');	
+// console.log('${pageContext.request.remoteUser }');	
 </script>
 
 <style>
@@ -128,8 +129,8 @@ tr th {
 		var giverCount = ${applicationScope.giverCount};
 // 		console.log(${applicationScope.giverCount});
 	
-		var url = "${pageContext.request.contextPath}/giver/giverSelect!giverDetail";
-		var urlc = "${pageContext.request.contextPath}/giver/giverSelect!conditionCount";
+		var url = "${pageContext.request.contextPath}/giver/giverSelectByAdmin!giverDetail";
+		var urlc = "${pageContext.request.contextPath}/giver/giverSelectByAdmin!conditionCount";
 		var urlv = "${pageContext.request.contextPath}/giver/giverAction!valid";
 // 		console.log(${pageContext.request.contextPath})
 		var pageAmount;

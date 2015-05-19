@@ -4,10 +4,15 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <style type="text/css">
+/*general setting*/
 .container {
 	padding: 0px;
 }
+a:hover{cursor: pointer;}
+/*general setting*/
+
 /*nav properties start*/
 .scroll-header {
 	position: fixed;
@@ -22,6 +27,7 @@
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 	text-align: left;
+	top:0;
 	z-index: 9999;
 	width: 100%
 }
@@ -91,7 +97,7 @@ ul.nav {
 
 #nav-left li::before {
 	content: "";
-	width: 30%;
+	width: 100%;
 	height: 100%;
 	position: absolute;
 	border-bottom: 4px solid #EEEEEE;
@@ -118,6 +124,7 @@ ul.nav {
 	height: 20px
 }
 /* right nav properties end*/
+/* collapse part properties start*/
 #collapse-search {
 	position: fixed;
 	background-color: #EEEEEE;
@@ -140,7 +147,23 @@ ul.nav {
 .collapse-login-scroll {
 	width: 100%
 }
+/* collapse part properties end*/
+
+/*nav responsive settings start*/
+@media{
+#myNavbar li a{text-align: center;}
+}
+@media( min-width : 768px){
+#nav-left li::before {
+	content: "";
+	width: 30%;
+	height: 100%;
+	position: absolute;
+	border-bottom: 4px solid #EEEEEE;
+}
+/*nav responsive settings end*/
 </style>
+<div id="top-anchor" style="top: 0; position: absolute;"></div>
 <div id="header-wrapper">
 	<div class="container">
 		<nav id="nav-header"
@@ -183,11 +206,11 @@ ul.nav {
 								<ul class="dropdown-menu" role="menu">
 									<c:if test="${raiser != null}">
 										<li><a role="menuitem"
-											href="<c:url value='/raiser/raiserUpdate'/>">修改團體資訊</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=1'/>">修改團體資訊</a></li>
 										<li><a role="menuitem"
-											href="<c:url value='/raiser/raiserHistory'/>">查看活動紀錄</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=2'/>">查看活動紀錄</a></li>
 										<li><a role="menuitem"
-											href="<c:url value='/campaign/campaignRaise'/>">發起活動</a></li>
+											href="<c:url value='/raiser/raiserUpdate?raiserTabs=3'/>">發起活動</a></li>
 									</c:if>
 									<c:if test="${giver != null}">
 										<li><a role="menuitem"
@@ -206,7 +229,7 @@ ul.nav {
 										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
 								</ul></li>
 						</c:if>
-						<li id="to-top" style="display: none;"><a href="#body"><img
+						<li id="to-top" style="display: none;"><a href="#top-anchor"><img
 								class="header-pic opacity60"
 								src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
 					</ul>
@@ -274,7 +297,7 @@ ul.nav {
 					function() {
 						$(window).scroll(
 								function() {
-									if ($(window).scrollTop() > 99) {
+									if ($(window).scrollTop() > 1) {
 										$('#header-wrapper').stop().addClass(
 												'scroll-header');
 										$('#to-top').stop().show(500);
@@ -301,7 +324,7 @@ ul.nav {
 								});
 
 						// function for moving smoothly to anchor
-						$('a[href^="#body"]').click(function() {
+						$('a[href^="#top-anchor"]').click(function() {
 							$('html, body').animate(
 								{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 									return false;

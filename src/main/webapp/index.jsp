@@ -22,18 +22,15 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <!-- <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css"> -->
 <style type="text/css">
-
 html, body {
 	text-align: center;
 	width: 100%;
 	height: 100%;
 }
 
-
-
 .thumbnail {
 	text-align: justify;
-	margin: 30px;
+	margin: 20px;
 }
 
 .cover-table-wrapper {
@@ -107,6 +104,11 @@ pre {
 	margin-left: 0px;
 	margin-right: 0px;
 }
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
 </style>
 </head>
 
@@ -130,7 +132,7 @@ pre {
 		</div>
 	</div>
 
-	<div id="campaignDiv" >
+	<div id="campaignDiv" style="background-color: #f2f2f2">
 		<div>
 			<div class="container" style="height: 100%;border-bottom: 1px solid silver;">
 				<h2 style="margin:100px 0px 0px 0px ">現正進行</h2>
@@ -149,7 +151,7 @@ pre {
 	</div>
 
 	<div class="outer-wrapper"
-		style="height: 100%; border-bottom: 1px solid #EEEEEE">
+		style="height: 100%; border-bottom: 1px solid #EEEEEE; background-color: #f2f2f2">
 		<div class="inner-wrapper ">
 
 			<div id="aboutUs" class="container"">
@@ -164,10 +166,7 @@ pre {
 	</div>
 
 
-
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
-	<div style="width: 100%; height: 1000px;"></div>
+	<jsp:include page="/footer.jsp" />
 </body>
 
 

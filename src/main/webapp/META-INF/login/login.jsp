@@ -16,7 +16,7 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 
-<title>Insert title here</title>
+<title>登入</title>
 <style>
 body { 
  	background-color: #eee; 
@@ -52,7 +52,7 @@ body {
 			<label for="" class="sr-only">帳號</label> 
 			<input type="text" class="form-control" name="account" placeholder="帳號" required autofocus> 
 			<label	for="" class="sr-only">Password</label> 
-			<input type="password"	class="form-control" name="passwd" placeholder="Password" required>
+			<input type="password"	class="form-control" name="passwd" placeholder="Password" >
 			<div class="checkbox"></div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
 
