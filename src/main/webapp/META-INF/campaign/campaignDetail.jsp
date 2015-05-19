@@ -12,54 +12,60 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/giver.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
 
-	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
-#sideDiv{
-text-align: left;
-vertical-align: top;
-height:100%;}
-.row-table{ display:table;}
-
-.row{margin:0px;}
+#sideDiv {
+	text-align: left;
+	vertical-align: top;
+	height: 100%;
+}
 
 .row-table {
-    display: table;
-    width: 100%;
+	display: table;
 }
 
-
-strong { font-size: 46px;}
-pre {background-color: white;
-border: white;
-padding-left: 0px;
-padding-right: 0px;
-margin-left: 0px;
-margin-right: 0px;
-font-size: 16px;
+.row {
+	margin: 0px;
 }
 
-#commentDiv{
-	text-align:left;
-}
-.commentFont{
-	font-size:20px;
+.row-table {
+	display: table;
+	width: 100%;
 }
 
+strong {
+	font-size: 46px;
+}
+
+pre {
+	background-color: white;
+	border: white;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-size: 16px;
+}
+
+#commentDiv {
+	text-align: left;
+}
+
+.commentFont {
+	font-size: 20px;
+}
 </style>
 </head>
 <body id="body">
 
 	<jsp:include page="/header.jsp" />
 
-	<div class="container" id="showColumn">
-
-	</div>
+	<div class="container" id="showColumn"></div>
 	<div class="container">
 		<nav class="navbar navbar-default"
 			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
@@ -78,8 +84,8 @@ font-size: 16px;
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="nav2">
 					<ul class="nav navbar-nav">
-						<li ><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
-						<li ><a href="#" id="tab2">評論</a></li>
+						<li><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
+						<li><a href="#" id="tab2">評論</a></li>
 
 					</ul>
 				</div>
@@ -88,45 +94,40 @@ font-size: 16px;
 			<!-- /.container -->
 		</nav>
 	</div>
-<div class="container" id="tabPageDiv">
-<div class=row id="detailRowDiv">
-<div class="col-md-8 col-md-offset-2" id="detailDiv" style="text-align: justify;">
-</div>
-</div>
-	
-<div id="commentDiv" style="display:none">
-	<div class="col-md-6 col-md-offset-3">
-	<h3>我要留言</h3>
-		<div class="col-md-2">
-			<img alt="暫無照片" src="../pictures/noPicture.jpg" style="width:100%">
+	<div class="container" id="tabPageDiv">
+		<div class=row id="detailRowDiv">
+			<div class="col-md-8 col-md-offset-2" id="detailDiv"
+				style="text-align: justify;"></div>
 		</div>
-		<div class="col-md-10">
-			<textarea class="form-control" rows="4"></textarea>
-			<label class="checkbox-inline">
-  				<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言
-			</label>&nbsp;
-			<button type="button" class="btn btn-success btn-xs" onclick="loadByForm();" style="width:50px">確定</button>
-			<button type="button" class="btn btn-warning btn-xs" onclick="cleanForm();" style="width:50px">取消</button>
-		</div>
-	</div>
-	<div class="col-md-6 col-md-offset-3"><hr/>
-		<div class="col-md-2">
-			<img alt="暫無照片" src="../pictures/noPicture.jpg" style="width:100%">
-		</div>
-		<div class="col-md-10">
-			<p>giverId&nbsp;&nbsp;於&nbsp;&nbsp;2015/03/01</p>
-			<p>很有道理</p>
-			<button type="button" class="btn btn-info btn-xs" style="width:70px">
-  				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆
-			</button>
-			<span class="commentFont">15</span>&nbsp;&nbsp;
-			<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;
-			<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;
-			<a>查看所有回覆</a>
+
+		<div id="commentDiv" style="display: none">
+			<div>
+				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
+				<div class="col-md-6 col-md-offset-3" id="No_commentPlace">
+					<div>
+						<br />
+						<div class="col-md-2">
+							<img src="../pictures/noPicture.jpg" style="width: 100%">
+						</div>
+						<div class="col-md-10">
+							<textarea id="standardComment" class="form-control" rows="4"></textarea>
+							<button type="button" class="btn btn-success btn-xs"
+								onclick="launchNewComment();" style="width: 50px">確定</button>
+							<button type="button" class="btn btn-warning btn-xs"
+								onclick="cancelNewComment();" style="width: 50px">取消</button>
+							&nbsp;&nbsp;&nbsp; <label class="checkbox-inline"> <input
+								type="checkbox" id="inlineCheckbox1" value="option">匿名留言
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="col-md-6 col-md-offset-3" id="No_responsePlace"></div>
+			</div>
 		</div>
 	</div>
-</div>
-</div>
+
 	<div class="container" id="tabPageDiv">
 		<div class=row id="detailRowDiv">
 			<div class="col-md-8 col-md-offset-2" id="detailDiv"
@@ -149,40 +150,80 @@ font-size: 16px;
 			</div>
 		</div>
 	</div>
+
 </body>
 
-
 <script>
-var totalCount = 0;
+	var totalCount = 0;
+	//0是第一頁
+	var currentPage = 0;
+	var commentCurrentPage = 0;
+	var commentCampaignId;
+	load();
 
-//0是第一頁
-var currentPage = 0;
-
-var commentCurrentPage=0;
-
-
-load();
-loadComment()
-function loadComment(){
-// 	$.post('',{'campaignId':'xxx'},function(data) {
-
-		data = ['aaa','bbb']
-			$(data).each(function(index, value) {
-				$('#commentDiv').append(
-					'<div id="leaveComment" class="row" style="margin-top:20px">' +
-						'<div class="col-sm-1 col-sm-offset-1">'+
-							'<img width="60px" src='+'xx'+'">'+
-						'</div>'+
-						'<div class="col-sm-8" style="text-align: left">'+
-							'<p>'+'xxxx'+'</p>'+
-						'</div>'+
-					'</div>');
-					
-			})
-
-// 		})
-
+	function loadComment(commentParam) {
+		$('#No_' + commentParam)
+				.append(
+						'<div class="col-md-11 col-md-offset-1"><br/>'
+								+ '<div class="col-md-2">'
+								+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+								+ '</div>'
+								+ '<div class="col-md-10">'
+								+ 	'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
+								+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam+ ');" style="width:50px">確定</button>&nbsp;'
+								+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment();" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+								+ 	'<label class="checkbox-inline">'
+								+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
+								+ 	'</label>' 
+								+ '</div>' + '</div>');
 	}
+
+	function showComment(data) {
+		if (data.replyId == 0) {
+			decideShowComment(data, 'responsePlace');
+		} else {
+			decideShowComment(data, data.replyId);
+		}
+	}
+
+	function decideShowComment(data, responseParam) {
+		$('#No_' + responseParam)
+				.append(
+						'<div id=No_'+data.id+'><br/><hr/><br/>'
+								+ '<div class="col-md-2">'
+								+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+								+ '</div>'
+								+ '<div class="col-md-10" id="replyPlace">'
+								+ 	'<p>${giver.name}&nbsp;&nbsp;於&nbsp;&nbsp;'
+								+ 		data.commentTime
+								+ 	'</p>'
+								+ 	'<p>'
+								+ 		data.commentary
+								+ 	'</p>'
+								+ 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id+ ');">'
+								+ 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
+								+ 	'</button>&nbsp;&nbsp;&nbsp;'
+								+ 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
+								+ 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
+								+ 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
+								+ 	'<a>查看所有回覆</a>' 
+								+ '</div>' + '</div>');
+	}
+
+	// 	$.post('',{'campaignId':'xxx'},function(data) {
+	// 		data = ['aaa','bbb']
+	// 			$(data).each(function(index, value) {
+	// 				$('#commentDiv').append(
+	// 					'<div id="leaveComment" class="row" style="margin-top:20px">' +
+	// 						'<div class="col-sm-1 col-sm-offset-1">'+
+	// 							'<img width="60px" src='+'xx'+'">'+
+	// 						'</div>'+
+	// 						'<div class="col-sm-8" style="text-align: left">'+
+	// 							'<p>'+'xxxx'+'</p>'+
+	// 						'</div>'+
+	// 					'</div>');				
+	// 			})
+	// 		})
 
 	$('#tab1').on('click', function(evt) {
 		evt.preventDefault();
@@ -202,7 +243,6 @@ function loadComment(){
 	});
 
 	function load() {
-
 		$
 				.post(
 						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
@@ -213,6 +253,7 @@ function loadComment(){
 
 							data = JSON.parse(data);
 							value = data[0];
+							commentCampaignId = value.id;
 							var rowDiv1 = $('<div  class="row"></div>');
 							var titleP = $('<h3>' + value.name + '</h3>');
 							var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '
@@ -286,7 +327,7 @@ function loadComment(){
 
 						})
 	}
-
+	
 	function arrayBufferToBase64(buffer) {
 		var binary = '';
 		var bytes = new Uint8Array(buffer);
@@ -296,7 +337,7 @@ function loadComment(){
 		}
 		return window.btoa(binary);
 	}
-
+	
 	function commafy(num) {
 		num = num + "";
 		var re = /(-?\d+)(\d{3})/
@@ -304,6 +345,28 @@ function loadComment(){
 			num = num.replace(re, "$1,$2")
 		}
 		return num;
+	}
+
+	var newCommentUrl = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
+	
+	function launchNewComment() {
+		$.getJSON(newCommentUrl, {
+			'form.campaignId' : commentCampaignId,
+			'form.giverId' : "${giver.id}",
+			'form.replyId' : 0,
+			'form.commentary' : $('#standardComment').val(),
+			'form.anonymous' : "false"
+		}, showComment);
+	}
+	
+	function sendNewComment(replyId) {
+		$.getJSON(newCommentUrl, {
+			'form.campaignId' : commentCampaignId,
+			'form.giverId' : "${giver.id}",
+			'form.replyId' : replyId,
+			'form.commentary' : $('#' + replyId).val(),
+			'form.anonymous' : "false"
+		}, showComment);
 	}
 </script>
 </html>

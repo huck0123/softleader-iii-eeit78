@@ -4,19 +4,21 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.Gson;
 
 import tw.org.iiiedu.thegivers.form.CampaignCommentForm;
 import tw.org.iiiedu.thegivers.model.CampaignCommentModel;
 import tw.org.iiiedu.thegivers.service.CampaignCommentService;
+
+import com.google.gson.Gson;
 
 public class CampaignCommentAction {
 	
 	@Autowired
 	private CampaignCommentService campaignCommentService;
 	
+	private CampaignCommentModel model;
 	private CampaignCommentForm form;
 	private InputStream inputStream;
 	
@@ -40,9 +42,21 @@ public class CampaignCommentAction {
 		this.inputStream = inputStream;
 	}
 	
-	public String newComment(){
+	
+	public CampaignCommentModel transferToModel(CampaignCommentForm form){
+		model = new CampaignCommentModel();
+		model.setCampaignId(form.getCampaignId());
+		model.setGiverId(form.getGiverId());
+		model.setReplyId(form.getReplyId());
+		model.setCommentary(form.getCommentary());
+		model.setAnonymous(form.getAnonymous());
+		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		
-		CampaignCommentModel model = campaignCommentService.writeComment(form);
+		return model;
+	}
+	public String newComment(){
+		CampaignCommentModel model = campaignCommentService.writeComment(transferToModel(form));
+		model = campaignCommentService.getLostColumn(model.getId());
 		String data = new Gson().toJson(model);
 		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
 		

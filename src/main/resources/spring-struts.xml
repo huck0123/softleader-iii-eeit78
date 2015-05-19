@@ -28,6 +28,7 @@
 	<bean id="giverHistoryAction" class="tw.org.iiiedu.thegivers.web.GiverHistoryAction" scope="prototype"/>
 	<bean id="raiserAction" class="tw.org.iiiedu.thegivers.web.RaiserAction" scope="prototype"/>
 	<bean id="transactionAction" class="tw.org.iiiedu.thegivers.web.TransactionAction" scope="prototype"/>
+	<bean id="campaignCommentAction" class="tw.org.iiiedu.thegivers.web.CampaignCommentAction" scope="prototype"></bean>
 	
 	
 	<!-- 此頁提供 xxxxAction的程式碼位置-->
