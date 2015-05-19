@@ -97,7 +97,7 @@ ul.nav {
 
 #nav-left li::before {
 	content: "";
-	width: 30%;
+	width: 100%;
 	height: 100%;
 	position: absolute;
 	border-bottom: 4px solid #EEEEEE;
@@ -124,6 +124,7 @@ ul.nav {
 	height: 20px
 }
 /* right nav properties end*/
+/* collapse part properties start*/
 #collapse-search {
 	position: fixed;
 	background-color: #EEEEEE;
@@ -146,7 +147,21 @@ ul.nav {
 .collapse-login-scroll {
 	width: 100%
 }
+/* collapse part properties end*/
 
+/*nav responsive settings start*/
+@media{
+#myNavbar li a{text-align: center;}
+}
+@media( min-width : 768px){
+#nav-left li::before {
+	content: "";
+	width: 30%;
+	height: 100%;
+	position: absolute;
+	border-bottom: 4px solid #EEEEEE;
+}
+/*nav responsive settings end*/
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
 <div id="header-wrapper">
