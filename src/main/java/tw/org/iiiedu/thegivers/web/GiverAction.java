@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -137,7 +139,9 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			}
 			//驗證密碼
 			if(form.getPasswd().matches(passRegex)){
-				model.setPasswd(form.getPasswd());
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] b = md.digest(form.getPasswd().getBytes());
+				model.setPasswd(b);
 			}else{
 				return FAIL;
 			}
@@ -273,7 +277,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	}
 	
 	//更新資料
-	public String update(){
+	public String update() throws NoSuchAlgorithmException{
 		GiverModel temp = (GiverModel) request.getSession().getAttribute("giver");
 //		GiverModel temp = service.getByAccount(temp1.getAccount());
 		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
@@ -309,7 +313,9 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		if(form.getPasswd().trim().length() == 0){
 			model.setPasswd(temp.getPasswd());
 		}else{
-			model.setPasswd(form.getPasswd());
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] b = md.digest(form.getPasswd().getBytes());
+			model.setPasswd(b);
 		}
 		
 		model.setTel(form.getTel().trim());
