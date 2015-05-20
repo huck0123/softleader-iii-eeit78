@@ -21,5 +21,11 @@ public class CampaignTypeModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "CampaignTypeModel [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 }
