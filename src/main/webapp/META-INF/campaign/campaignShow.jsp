@@ -23,8 +23,9 @@ html,body{
 height: 100%}
 .thumbnail {
 	text-align: justify;
-	margin: 20px;
+	margin: 15px;
 }
+
 
 pre {
 	background-color: white;
@@ -33,19 +34,10 @@ pre {
 	padding-right: 0px;
 	margin-left: 0px;
 	margin-right: 0px;
+	position: relative; /*沒設relative的話會沒反應*/
 }
 
-@media {
-	.col-md-4 {
-		height: auto;
-	}
-}
 
-@media ( min-width : 1200px) {
-	.col-md-4 {
-		height: 760px
-	}
-}
 a:hover {
 	cursor: pointer;
 }
@@ -55,11 +47,18 @@ margin-right: 0px;
 }
 #conditionSearchDiv{
 display: table;
-background-color: #FFEEEE;
 min-height:30%;
-border-top: 1px silver solid;
-border-bottom: 1px silver solid;
 text-align: center;
+}
+.innerCaption{
+height: 220px;
+overflow: hidden;
+margin-bottom: -40px;
+}
+.makeShadow{
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 50%);
+	position:relative; /*因為pre已經設relative了，若這邊沒設的話，會被pre蓋過去*/
+	padding-top: 50px;
 }
 </style>
 </head>
@@ -82,7 +81,7 @@ text-align: center;
 				</div>
 			</div>
 		</div>
-		<div class="row" style="display: table-row; vertical-align: middle;">
+<!--  		<div class="row" style="display: table-row; vertical-align: middle;">
 		<div class="form-group">
         <label class="col-xs-3 control-label">Favorite color</label>
         <div class="col-xs-5 selectContainer">
@@ -100,7 +99,7 @@ text-align: center;
 
 		</div>
 	</div>
-
+-->
 
 	<div class="container" >
 		<nav>
@@ -164,18 +163,20 @@ function load(){
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
-
-				var captionDiv = $('<div class="caption"></div>');
+				
+				var outerCaptionDiv =$('<div class="caption"></div>');
+				var captionDiv = $('<div class="innerCaption"></div>');
+				var captionLower = $('<div class="captionLower"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
 				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-				var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '...</pre></p>');
+				var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
 
 				var percent = value.currentFund/ value.goal * 100;
-				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+				var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '
 						+ value.location
 						+ ' <span class="glyphicon glyphicon-tag"></span> '
 						+ value.type + ' </p>');
@@ -184,11 +185,11 @@ function load(){
 				progressBarDiv.appendTo(progressDiv);
 
 				var otherInfoDiv = $('<div class="row"></div>');
-				var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span><br/>進度<br/>'
+				var childDiv1 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-stats"></span><br/>進度<br/>'
 												+ formatFloat(percent,2) + '%</div>');
-				var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span><br/>已募得<br/>'
+				var childDiv2 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-heart"></span><br/>已募得<br/>'
 												+ value.currentFund+ '</div>');
-				var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span><br/>捐款數<br/></div>');
+				var childDiv3 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-user"></span><br/>捐款數<br/></div>');
 
 				$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
 					{'campaignForm.id' : value.id},function(data) {
@@ -198,7 +199,7 @@ function load(){
 
 					var d = (new Date(value.endDate)).getTime();
 					var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
-					var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+					var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 							+ remain+ '<br/></div>');
 
 					otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
@@ -209,9 +210,11 @@ function load(){
 							+ value.id+ '&name='+ value.name;
 					a.attr('href', url);
 					a.appendTo(p2);
-					captionDiv.append(h3).append(p).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+					outerCaptionDiv.append(captionDiv).append(captionLower);
+					captionLower.append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+					captionDiv.append(h3).append(p).append(p1);
 					imageA.appendTo(thumbnailDiv);
-					captionDiv.appendTo(thumbnailDiv);
+					outerCaptionDiv.appendTo(thumbnailDiv);
 					thumbnailDiv.appendTo(colDiv);
 					colDiv.appendTo(rowDiv);
 			})
@@ -236,18 +239,20 @@ function makeFunction(j){return function(){
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 			var str = arrayBufferToBase64(value.image);
-			var image = $('<img width="100%" src="data:image/png;base64,' + str +'"/>');
+			var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
 			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
-
-			var captionDiv = $('<div class="caption"></div>');
+			
+			var outerCaptionDiv =$('<div class="caption"></div>');
+			var captionDiv = $('<div class="innerCaption"></div>');
+			var captionLower = $('<div class="captionLower"></div>');
 			var h3 = $('<h3>' + value.name+ '</h3>');
 			var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-			var p1 = $('<p><pre>' + value.detail.substring(0,100)+ '...</pre></p>');
+			var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
 
 			var percent = value.currentFund/ value.goal * 100;
-			var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+			var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '
 					+ value.location
 					+ ' <span class="glyphicon glyphicon-tag"></span> '
 					+ value.type + ' </p>');
@@ -256,11 +261,11 @@ function makeFunction(j){return function(){
 			progressBarDiv.appendTo(progressDiv);
 
 			var otherInfoDiv = $('<div class="row"></div>');
-			var childDiv1 = $('<div class="col-md-3"><span class="glyphicon glyphicon-stats"></span><br/>進度<br/>'
+			var childDiv1 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-stats"></span><br/>進度<br/>'
 											+ formatFloat(percent,2) + '%</div>');
-			var childDiv2 = $('<div class="col-md-3"><span class="glyphicon glyphicon-heart"></span><br/>已募得<br/>'
+			var childDiv2 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-heart"></span><br/>已募得<br/>'
 											+ value.currentFund+ '</div>');
-			var childDiv3 = $('<div class="col-md-3"><span class="glyphicon glyphicon-user"></span><br/>捐款數<br/></div>');
+			var childDiv3 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-user"></span><br/>捐款數<br/></div>');
 
 			$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
 				{'campaignForm.id' : value.id},function(data) {
@@ -269,9 +274,8 @@ function makeFunction(j){return function(){
 				var today = (new Date()).getTime();
 
 				var d = (new Date(value.endDate)).getTime();
-
 				var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
-				var childDiv4 = $('<div class="col-md-3"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ remain+ '<br/></div>');
 
 				otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
@@ -282,9 +286,11 @@ function makeFunction(j){return function(){
 						+ value.id+ '&name='+ value.name;
 				a.attr('href', url);
 				a.appendTo(p2);
-				captionDiv.append(h3).append(p).append(p1).append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+				outerCaptionDiv.append(captionDiv).append(captionLower);
+				captionLower.append(otherInfo).append(progressDiv).append(otherInfoDiv).append(p2);
+				captionDiv.append(h3).append(p).append(p1);
 				imageA.appendTo(thumbnailDiv);
-				captionDiv.appendTo(thumbnailDiv);
+				outerCaptionDiv.appendTo(thumbnailDiv);
 				thumbnailDiv.appendTo(colDiv);
 				colDiv.appendTo(rowDiv);
 		})

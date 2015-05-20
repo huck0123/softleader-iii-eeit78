@@ -164,6 +164,7 @@ ul.nav {
 /*nav responsive settings end*/
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
+<div id="header-holder" style="display: none; height:71px"></div>
 <div id="header-wrapper">
 	<div class="container">
 		<nav id="nav-header"
@@ -308,6 +309,7 @@ ul.nav {
 										$('#collapse-part').removeClass(
 												'container');
 										$('#collapse-login').addClass('collapse-login-scroll');
+										$('#header-holder').stop().show();
 									} else {
 										$('#header-wrapper').stop()
 												.removeClass('scroll-header');
@@ -320,6 +322,7 @@ ul.nav {
 												'container');
 										$('#collapse-login')
 												.removeClass('collapse-login-scroll');
+										$('#header-holder').stop().hide();
 									}
 								});
 
