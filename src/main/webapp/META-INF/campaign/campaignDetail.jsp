@@ -164,7 +164,7 @@ pre {
 	function loadComment(commentParam) {
 		$('#No_' + commentParam)
 				.append(
-						'<div class="col-md-11 col-md-offset-1"><br/>'
+						'<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1"><hr/>'
 								+ '<div class="col-md-2">'
 								+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
 								+ '</div>'
@@ -175,41 +175,45 @@ pre {
 								+ 	'<label class="checkbox-inline">'
 								+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
 								+ 	'</label>' 
-								+ '</div>' + '</div>');
+								+ '</div>' + '<hr/></div>');
 	}
-
 	function showComment(data) {
 		if (data.replyId == 0) {
 			decideShowComment(data, 'responsePlace');
 		} else {
+			$('#temp_' + data.replyId).remove();
 			decideShowComment(data, data.replyId);
 		}
 	}
-
 	function decideShowComment(data, responseParam) {
-		$('#No_' + responseParam)
-				.append(
-						'<div id=No_'+data.id+'><br/><hr/><br/>'
-								+ '<div class="col-md-2">'
-								+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
-								+ '</div>'
-								+ '<div class="col-md-10" id="replyPlace">'
-								+ 	'<p>${giver.name}&nbsp;&nbsp;於&nbsp;&nbsp;'
-								+ 		data.commentTime
-								+ 	'</p>'
-								+ 	'<p>'
-								+ 		data.commentary
-								+ 	'</p>'
-								+ 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id+ ');">'
-								+ 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
-								+ 	'</button>&nbsp;&nbsp;&nbsp;'
-								+ 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
-								+ 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
-								+ 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
-								+ 	'<a>查看所有回覆</a>' 
-								+ '</div>' + '</div>');
+		if(responseParam != 'responsePlace'){
+			$('#No_' + responseParam).append(fixedContent(data));
+			$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
+		}else{
+			$('#No_' + responseParam).prepend(fixedContent(data));
+		}
 	}
-
+	function fixedContent(data){
+		return '<div id="No_'+data.id+'"><br/><hr/>'
+			 + '<div class="col-md-2">'
+			 + 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+		 	 + '</div>'
+			 + '<div class="col-md-10" id="replyPlace">'
+			 + 	'<p>${giver.name}&nbsp;&nbsp;於&nbsp;&nbsp;'
+			 + 		data.commentTime
+			 + 	'</p>'
+			 + 	'<p>'
+			 + 		data.commentary
+			 + 	'</p>'
+			 + 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id+ ');">'
+			 + 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
+			 + 	'</button>&nbsp;&nbsp;&nbsp;'
+			 + 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
+			 + 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
+			 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
+			 + 	'<a>查看所有回覆</a>' 
+			 + '</div>' + '<br/><hr/></div>';
+	}
 	// 	$.post('',{'campaignId':'xxx'},function(data) {
 	// 		data = ['aaa','bbb']
 	// 			$(data).each(function(index, value) {
@@ -367,6 +371,10 @@ pre {
 			'form.commentary' : $('#' + replyId).val(),
 			'form.anonymous' : "false"
 		}, showComment);
+	}
+	
+	function loadAllComment(){
+		
 	}
 </script>
 </html>
