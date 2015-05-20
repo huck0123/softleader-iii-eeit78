@@ -17,16 +17,27 @@
 		
 		<action name="giverAction" class="giverAction">
 			<result name="insert" type="redirect">/giver/registerSuccess</result>
-			<result name="update" type="redirect">/giver/registerSuccess</result>
 			<result name="success" type="">/index.jsp</result>
 			<result name="fail" type="">/META-INF/giver/giverRegister.jsp</result>
-			<result name="updateFail" type="">/META-INF/giver/giverInfo.jsp</result>
 <!-- 			<result name="input" type="">/META-INF/giver/giverRegister.jsp</result> -->
 		</action>
 		
-		<action name="giverSelect" class="giverAction">
-<!-- 			<interceptor-ref name="giverDefault"></interceptor-ref> -->
+		<action name="giverUpdate" class="giverAction">
+			<interceptor-ref name="giverDefault"></interceptor-ref>
+			<result name="update" type="redirect">/giver/registerSuccess</result>
+			<result name="updateFail" type="">/META-INF/giver/giverInfo.jsp</result>
+		</action>
+		
+		<action name="giverSelectByAccount" class="giverAction">
+			<interceptor-ref name="giverDefault"></interceptor-ref>
 			<result type="stream" name="select">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<action name="giverSelect" class="giverAction">
+			<result type="stream" name="checkAccount">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
