@@ -5,14 +5,21 @@
 
 <struts>
 
-	<package name="transactionPackage" namespace="/donate" extends="struts-default">
-
+	<package name="transactionPackage" namespace="/donate" extends="admin-Interceptor">
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="login" type="redirect">/login/login</result>
+		</global-results>
+		
+		
 		<action name="donateAction" class="transactionAction">
 			<result name="success" type="redirect">/donate/donateSuccess</result>
 			<result name="fail" type="redirect">/donate/donate</result>
 		</action>
 
 		<action name="transactionDetailAction" class="transactionAction">
+			<interceptor-ref name="adminDefault"></interceptor-ref>
 			<result type="stream" name="transactionDetail">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
