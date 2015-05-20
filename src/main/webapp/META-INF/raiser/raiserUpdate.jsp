@@ -26,7 +26,7 @@ body {
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
-		<h2 style="text-align: center">活動專區</h2>
+		<h2 style="text-align: center">團體專區</h2>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -158,5 +158,6 @@ body {
 			}
 		})
 	</script>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>

@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<title>Insert title here</title>
-</head>
-<body>
+
 	<div class="tab-pane fade" id="campaignRaise">
 		<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
 			method="post" enctype="multipart/form-data">
@@ -66,7 +53,7 @@
 			</div>
 		</form>
 	</div>
-</body>
+
 <script>
 	btn1.addEventListener("click", fill);
 
@@ -83,6 +70,3 @@
 
 	}
 </script>
-
-
-</html>

@@ -149,7 +149,7 @@
 	<script>
 		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
-		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!select";
+		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		$("#account").change(function() {
 			$("#chkAcc").text("");
 			if($(this).val().toUpperCase() == "ADMIN"){
@@ -165,10 +165,10 @@
 			}, "json");
 
 			$.post(giverurl, {
-				'thisAccount' : $(this).val()
+				'form.account' : $(this).val()
 			}, function(data) {
 				data = JSON.parse(data);
-				if (data != null) {
+				if (data.checkAccount == true) {
 					$("#chkAcc").text("帳號已存在");
 				}
 			});
@@ -208,5 +208,6 @@
 							reader.readAsDataURL(file);
 						});
 	</script>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>
