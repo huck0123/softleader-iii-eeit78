@@ -62,7 +62,6 @@ pre {
 </style>
 </head>
 <body id="body">
-
 	<jsp:include page="/header.jsp" />
 
 	<div class="container" id="showColumn"></div>
@@ -154,30 +153,34 @@ pre {
 </body>
 
 <script>
-	var totalCount = 0;
 	//0是第一頁
 	var currentPage = 0;
+	var totalCount = 0;
 	var commentCurrentPage = 0;
 	var commentCampaignId;
+	var loadAllCommentUrl = '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
+	var newCommentUrl =     '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
+	
 	load();
 
 	function loadComment(commentParam) {
 		$('#No_' + commentParam)
-				.append(
-						'<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1"><hr/>'
-								+ '<div class="col-md-2">'
-								+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
-								+ '</div>'
-								+ '<div class="col-md-10">'
-								+ 	'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
-								+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam+ ');" style="width:50px">確定</button>&nbsp;'
-								+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment();" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
-								+ 	'<label class="checkbox-inline">'
-								+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
-								+ 	'</label>' 
-								+ '</div>' + '<hr/></div>');
+			.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1"><hr/>'
+					+ '<div class="col-md-2">'
+					+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+					+ '</div>'
+					+ '<div class="col-md-10">'
+					+ 	'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
+					+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam+ ');" style="width:50px">確定</button>&nbsp;'
+					+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment();" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+					+ 	'<label class="checkbox-inline">'
+					+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
+					+ 	'</label>' 
+					+ '</div>' + '<hr/></div>');
 	}
+	
 	function showComment(data) {
+		console.log(456);
 		if (data.replyId == 0) {
 			decideShowComment(data, 'responsePlace');
 		} else {
@@ -185,6 +188,7 @@ pre {
 			decideShowComment(data, data.replyId);
 		}
 	}
+	
 	function decideShowComment(data, responseParam) {
 		if(responseParam != 'responsePlace'){
 			$('#No_' + responseParam).append(fixedContent(data));
@@ -193,6 +197,7 @@ pre {
 			$('#No_' + responseParam).prepend(fixedContent(data));
 		}
 	}
+	
 	function fixedContent(data){
 		return '<div id="No_'+data.id+'"><br/><hr/>'
 			 + '<div class="col-md-2">'
@@ -214,20 +219,12 @@ pre {
 			 + 	'<a>查看所有回覆</a>' 
 			 + '</div>' + '<br/><hr/></div>';
 	}
-	// 	$.post('',{'campaignId':'xxx'},function(data) {
-	// 		data = ['aaa','bbb']
-	// 			$(data).each(function(index, value) {
-	// 				$('#commentDiv').append(
-	// 					'<div id="leaveComment" class="row" style="margin-top:20px">' +
-	// 						'<div class="col-sm-1 col-sm-offset-1">'+
-	// 							'<img width="60px" src='+'xx'+'">'+
-	// 						'</div>'+
-	// 						'<div class="col-sm-8" style="text-align: left">'+
-	// 							'<p>'+'xxxx'+'</p>'+
-	// 						'</div>'+
-	// 					'</div>');				
-	// 			})
-	// 		})
+	
+	function showAllComment(datas){
+		$.each(datas, function(name, data){
+			showComment(data);
+		})
+	}
 
 	$('#tab1').on('click', function(evt) {
 		evt.preventDefault();
@@ -247,91 +244,76 @@ pre {
 	});
 
 	function load() {
-		$
-				.post(
-						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
-						{
-							'campaignForm.id' : "${param.id}"
-						},
-						function(data) {
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition', {
+			'campaignForm.id' : "${param.id}"}, function(data) {
+				data = JSON.parse(data);
+				value = data[0];
+				commentCampaignId = value.id;
+				
+				var rowDiv1 = $('<div  class="row"></div>');
+				var titleP = $('<h3>' + value.name + '</h3>');
+				var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '
+					+ value.raiserModel.name + '</p>');
+				titleP.appendTo(rowDiv1);
+				raiserP.appendTo(rowDiv1);
+				rowDiv1.appendTo($('#showColumn'));
 
-							data = JSON.parse(data);
-							value = data[0];
-							commentCampaignId = value.id;
-							var rowDiv1 = $('<div  class="row"></div>');
-							var titleP = $('<h3>' + value.name + '</h3>');
-							var raiserP = $('<p><span class="glyphicon glyphicon-pencil"></span> '
-									+ value.raiserModel.name + '</p>');
-							titleP.appendTo(rowDiv1);
-							raiserP.appendTo(rowDiv1);
-							rowDiv1.appendTo($('#showColumn'));
+				var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
+				var vedioDiv = $('<div class="col-sm-8 col-md-8 left-side"></div>');
+				var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
+				var iframe = $('<iframe src="' + value.vedioUrl
+					+ '?showinfo=0' + '"></iframe>');
+				iframeDiv.appendTo(vedioDiv);
+				iframe.appendTo(iframeDiv);
+				
+				var sideDiv = $('<div id="sideDiv" class="col-sm-4 col-md-4 right-side"></div>');
+				var giverP = $('<p>已有<strong id="giverStrong"></strong>人支持</p>');
+				var moneyP = $('<p>已募得<strong>'
+					+ commafy(value.currentFund)
+					+ '</strong>元/' + commafy(value.goal)
+					+ '元</p>');
+				var d = new Date(value.endDate);
+				var dateP = $('<p>於<strong>' + d.getFullYear()
+							+ '/' + d.getMonth() + '/' + d.getDate()
+							+ '</strong>結束</p>');
 
-							var rowDiv2 = $('<div id="rowDiv2" class="row row-table"></div>');
-							var vedioDiv = $('<div class="col-sm-8 col-md-8 left-side"></div>');
-							var iframeDiv = $('<div class="embed-responsive embed-responsive-16by9"></div>');
-							var iframe = $('<iframe src="' + value.vedioUrl
-									+ '?showinfo=0' + '"></iframe>');
-							iframeDiv.appendTo(vedioDiv);
-							iframe.appendTo(iframeDiv);
-							var sideDiv = $('<div id="sideDiv" class="col-sm-4 col-md-4 right-side"></div>');
-							var giverP = $('<p>已有<strong id="giverStrong"></strong>人支持</p>');
-							var moneyP = $('<p>已募得<strong>'
-									+ commafy(value.currentFund)
-									+ '</strong>元/' + commafy(value.goal)
-									+ '元</p>');
-							var d = new Date(value.endDate);
+				var percent = value.currentFund / value.goal * 100;
+				var progressDiv = $('<div class="progress"></div>');
+				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'
+							+ percent + '%"></div>');
 
-							var dateP = $('<p>於<strong>' + d.getFullYear()
-									+ '/' + d.getMonth() + '/' + d.getDate()
-									+ '</strong>結束</p>');
+				progressBarDiv.appendTo(progressDiv);
 
-							var percent = value.currentFund / value.goal * 100;
-							var progressDiv = $('<div class="progress"></div>');
-							var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'
-									+ percent + '%"></div>');
+				var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
+							+ value.location
+							+ ' <span class="glyphicon glyphicon-tag"></span> '
+							+ value.type
+							+ ' <span class="glyphicon glyphicon-stats"></span> '
+							+ percent + '%已完成</p>');
 
-							progressBarDiv.appendTo(progressDiv);
+				var url = '${pageContext.request.contextPath}/donate/donate?id='
+							+ value.id + '&name=' + value.name;
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				donateBtn.attr('href', url);
+				giverP.appendTo(sideDiv);
+				moneyP.appendTo(sideDiv);
+				dateP.appendTo(sideDiv);
+				otherInfo.appendTo(sideDiv);
+				progressDiv.appendTo(sideDiv);
+				donateBtn.appendTo(sideDiv);
+				vedioDiv.appendTo(rowDiv2);
+				sideDiv.appendTo(rowDiv2);
+				rowDiv2.appendTo($('#showColumn'));
 
-							var otherInfo = $('<p><span class="glyphicon glyphicon-map-marker"></span> '
-									+ value.location
-									+ ' <span class="glyphicon glyphicon-tag"></span> '
-									+ value.type
-									+ ' <span class="glyphicon glyphicon-stats"></span> '
-									+ percent + '%已完成</p>');
-
-							var url = '${pageContext.request.contextPath}/donate/donate?id='
-									+ value.id + '&name=' + value.name;
-							var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
-							donateBtn.attr('href', url);
-
-							giverP.appendTo(sideDiv);
-							moneyP.appendTo(sideDiv);
-							dateP.appendTo(sideDiv);
-							otherInfo.appendTo(sideDiv);
-							progressDiv.appendTo(sideDiv);
-							donateBtn.appendTo(sideDiv);
-							vedioDiv.appendTo(rowDiv2);
-							sideDiv.appendTo(rowDiv2);
-							rowDiv2.appendTo($('#showColumn'));
-
-							$
-									.post(
-											'/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId',
-											{
-												'campaignForm.id' : '${param.id}'
-											}, function(data) {
-												console
-														.log("getgiver: "
-																+ data);
-												$('#giverStrong').text(data);
-											})
-
-							$('#detailDiv').append(
-									'<pre>' + value.detail + '</pre>');
-
-						})
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId', {
+			'campaignForm.id' : '${param.id}'}, function(data) {
+				console.log("getgiver: " + data);
+				$('#giverStrong').text(data);})
+				$('#detailDiv').append('<pre>' + value.detail + '</pre>');
+				loadAllComment(commentCampaignId);
+		})
 	}
-	
+
 	function arrayBufferToBase64(buffer) {
 		var binary = '';
 		var bytes = new Uint8Array(buffer);
@@ -351,8 +333,6 @@ pre {
 		return num;
 	}
 
-	var newCommentUrl = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
-	
 	function launchNewComment() {
 		$.getJSON(newCommentUrl, {
 			'form.campaignId' : commentCampaignId,
@@ -372,12 +352,11 @@ pre {
 			'form.anonymous' : "false"
 		}, showComment);
 	}
-	
-	function loadAllComment(){
-		
+
+	function loadAllComment(commentCampaignId) {
+		$.getJSON(loadAllCommentUrl, {
+			'form.campaignId' : commentCampaignId
+		}, showAllComment);
 	}
 </script>
 </html>
-
-
-

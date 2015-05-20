@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,7 +42,8 @@ public class CampaignCommentDao {
 	public boolean delete(Integer id){
 		Session session = sessionFactory.getCurrentSession();
 		try{
-			CampaignCommentModel model = (CampaignCommentModel)session.createCriteria(CampaignCommentModel.class).add(Restrictions.eq("id", id));
+			CampaignCommentModel model = (CampaignCommentModel)session.createCriteria(CampaignCommentModel.class)
+					.add(Restrictions.eq("id", id));
 			session.delete(model);
 			return true;
 		}catch(Exception e){
@@ -50,9 +52,21 @@ public class CampaignCommentDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public CampaignCommentModel getById(Integer id){
 		Session session = sessionFactory.getCurrentSession();
-		List<CampaignCommentModel> model = session.createCriteria(CampaignCommentModel.class).add(Restrictions.eq("id", id)).list();
+		List<CampaignCommentModel> model = session.createCriteria(CampaignCommentModel.class)
+				.add(Restrictions.eq("id", id)).list();
 		return model.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CampaignCommentModel> getAll(Integer campaignId){
+		System.out.println("12345");
+		Session session = sessionFactory.getCurrentSession();
+		List<CampaignCommentModel> models = session.createCriteria(CampaignCommentModel.class)
+				.add(Restrictions.eq("campaignId", campaignId))
+				.addOrder(Order.asc("replyId")).addOrder(Order.asc("id")).list();
+		return models;
 	}
 }

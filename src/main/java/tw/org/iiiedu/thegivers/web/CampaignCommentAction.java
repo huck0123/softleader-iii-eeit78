@@ -3,6 +3,7 @@ package tw.org.iiiedu.thegivers.web;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,12 @@ public class CampaignCommentAction {
 		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
 		
 		return "leaveNewComment";
+	}
+	public String allComment(){
+		List<CampaignCommentModel> models = campaignCommentService.grabAllComment(form.getCampaignId());
+		String datas = new Gson().toJson(models);
+		inputStream = new ByteArrayInputStream(datas.getBytes(StandardCharsets.UTF_8));
+		
+		return "fetchAllComment";
 	}
 }

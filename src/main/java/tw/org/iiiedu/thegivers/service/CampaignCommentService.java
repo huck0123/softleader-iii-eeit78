@@ -1,5 +1,7 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,9 @@ public class CampaignCommentService {
 	
 	public CampaignCommentModel getLostColumn(Integer id){
 		return campaignCommentDao.getById(id);
+	}
+	
+	public List<CampaignCommentModel> grabAllComment(Integer campaignId){
+		return campaignCommentDao.getAll(campaignId);
 	}
 }
