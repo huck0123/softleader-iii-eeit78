@@ -162,9 +162,10 @@ body {
 <!-- 			</div> -->
 			<div class="col-md-4"></div>
 		</div>
-		
-		
 	</div>
+
+		<jsp:include page="/footer.jsp" />
+
 			 <!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
    		<div class="modal-dialog">

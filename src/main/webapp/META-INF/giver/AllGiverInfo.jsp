@@ -63,13 +63,11 @@ tr th {
 					<div class="col-md-6">
 						<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
 						<select id="page"></select>
-						<!-- 		<button onclick="nowPage()" value="1" id="page">本頁</button> -->
 						<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
 					</div>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="condition"
 							placeholder="請輸入搜尋條件">
-						<!-- 				<button onclick="search()">查詢</button> -->
 					</div>
 				</div>
 
@@ -78,17 +76,14 @@ tr th {
 					<tr>
 						<th>大頭貼</th>
 						<th>帳號</th>
-						<!-- 				<th>密碼</th> -->
 						<th>姓</th>
 						<th>名字</th>
 						<th>性別</th>
-						<!-- 				<th>身分證號碼</th> -->
 						<th>手機號碼</th>
 						<th>地址</th>
 						<th>email</th>
 						<th>獲得資訊</th>
 						<th>validate</th>
-						<!-- 				<th>生日</th> -->
 					</tr>
 					<tbody id="tbdy">
 
@@ -106,17 +101,6 @@ tr th {
 
 	<script>
 		
-// 		//AllGiverInfo || raiserShow || campaignAdmin || transactionDetail
-// 		if("${param.adminTabs}" == 1){
-// 			$('.nav-tabs a[href="#AllgiverInfo"]').tab('show');
-// 		}else if("${param.adminTabs}" == 2){
-// 			$('.nav-tabs a[href="#raiserShow"]').tab('show');
-// 		}else if("${param.adminTabs}" == 3){
-// 			$('.nav-tabs a[href="#campaignAdmin"]').tab('show');
-// 		}else if("${param.adminTabs}" == 4){
-// 			$('.nav-tabs a[href="#transactionDetail"]').tab('show');
-// 		}
-	
 		//tab
 		$('.nav-tabs a').click(function(){
 		    $(this).tab('show');
@@ -127,12 +111,10 @@ tr th {
 	<script>
 		
 		var giverCount = ${applicationScope.giverCount};
-// 		console.log(${applicationScope.giverCount});
 	
 		var url = "${pageContext.request.contextPath}/giver/giverSelectByAdmin!giverDetail";
 		var urlc = "${pageContext.request.contextPath}/giver/giverSelectByAdmin!conditionCount";
 		var urlv = "${pageContext.request.contextPath}/giver/giverAction!valid";
-// 		console.log(${pageContext.request.contextPath})
 		var pageAmount;
 		var pageCount;
 		var condition = null;
@@ -179,20 +161,6 @@ tr th {
 				load();
 			});
 		});
-
-		
-// 		//條件收尋     ------deprecated--------
-// 		function search(){
-// 			condition = $('#condition').val();	
-			
-// 			//抓取條件收尋總筆數
-// 			$.post(urlc,{'condition':condition}, function(data){
-// 				data = JSON.parse(data);
-// 				giverCount = data.condition;
-// 				console.log("search"+giverCount);
-// 				load();
-// 			});
-// 		}
 		
 		//一頁顯示筆數
 		$('#pageAmount').on("change", function(){
@@ -217,21 +185,17 @@ tr th {
 		function getData(data){
 			$('#tbdy').empty();
 			data = JSON.parse(data);
-// 			console.log(data)
 			$.each(data,function(index,obj){
 				$(tbdy).append("<tr>"
 						+ "<td><img src='' class='img-circle' id='"+ obj.id +"'	style='width: 80px; height: 80px'></td>"
 						+ "<td>"+ obj.account +"</td>"
-// 						+ "<td>" +obj.passwd +"</td>"
 						+ "<td>"+ obj.familyName +"</td>" 
 						+ "<td>"+ obj.name +"</td>" 
 						+ "<td>"+ gender(obj.gender) +"</td>" 
-// 						+ "<td>"+ obj.idNumber +"</td>" 
 						+ "<td>"+ obj.tel +"</td>" 
 						+ "<td>"+ obj.address +"</td>" 
 						+ "<td>"+ obj.email +"</td>" 
 						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
-// 						+ "<td>"+ obj.birth +"</td>" 
 						+ "<td>"+ "<input type='checkbox' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
 						+ "</tr>");	
 				valid(obj.account, obj.valid);
@@ -242,9 +206,6 @@ tr th {
 				}
 			});
 			
-// 			$('#before').prop("disabled", false);
-// 			$('#after').prop("disabled", false);
-// 			$('#page').prop("disabled", false);
 		};
 		
 		// 系統管理員管理giver驗證
@@ -273,16 +234,13 @@ tr th {
 		
 		//選擇第幾頁
 		$('#page').on("change", function(){
-// 			$(this).prop("disabled",true);
 			
 			var temp = $(this).val();
 			$.post(url,{'thisPage':temp, 'pageAmount':pageAmount, 'condition':condition},getData);
-			console.log(temp);
 		});
 		
 		//上一頁
 		function before(){
-// 			$('#before').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage > 1){
@@ -295,7 +253,6 @@ tr th {
 		
 		//下一頁
 		function after() {
-// 			$('#after').prop("disabled", true);
 			
 			var thisPage = $('#page').val();
 			if(thisPage < pageCount ){
@@ -313,62 +270,6 @@ tr th {
 		
 		
 		
-// 		function nowPage(){
-// 			var thisPage = $('#page').val();
-// 			$('#tbdy').children().remove();
-			
-// 			$.post(url,{'thisPage':thisPage},getData);
-// 		};
-		
-// 		nowPage();
-		
-// 		function before(){
-// 			var thisPage = $('#page').val();
-// 			if(thisPage > 1){
-// 				thisPage--;
-				
-// 				$('#page').val(thisPage);
-// 				$('#tbdy').children().remove();
-// 				$.post(url,{'thisPage':thisPage},getData);
-// 			}
-// 		};
-		
-
-// 		function after() {
-// 			var thisPage = $('#page').val();
-// 			if(thisPage < giverCount ){
-// 				thisPage++;
-				
-// 				$('#page').val(thisPage);
-// 				$('#tbdy').children().remove();
-// 				$.post(url,{'thisPage':thisPage},getData);
-// 			}
-// 		};
-		
-		
-		
-		 				                 <!--Ajax方法-->
-		// 		function load() {
-		// 			var xmlhttp;
-		// 			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-		// 				xmlhttp = new XMLHttpRequest();
-		// 			} else {// code for IE6, IE5
-		// 				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		// 			}
-
-		// 			var url = "http://localhost:8080/softleader-iii-eeit78/giver/giverSelect!selectAll";
-
-		// 			xmlhttp.open("get", url, true);
-		// 			xmlhttp.send();
-
-		// 			xmlhttp.onreadystatechange = function() {
-		// 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		// 					console.log($.getJSON())
-		// 					var JsonObject = JSON.parse(xmlhttp.responseText);
-		// 					console.log(JsonObject);//console
-		// 				}
-		// 			}
-		// 		}
 	</script>
 
 

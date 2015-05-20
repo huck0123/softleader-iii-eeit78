@@ -163,7 +163,8 @@ body {
 		</div>
 	</div>
 
-
+	<jsp:include page="/footer.jsp" />
+	
 	<!-- myModal -->
   	<div class="modal fade" id="myModal" role="dialog">
     	<div class="modal-dialog">
