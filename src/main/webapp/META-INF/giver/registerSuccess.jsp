@@ -136,7 +136,7 @@ body {
 	
 		function getInformation() {
 
-			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
+			var url = "/softleader-iii-eeit78/giver/giverSelectByAccount!select";
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){

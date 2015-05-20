@@ -190,62 +190,66 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		GiverModel temp = (GiverModel) request.getSession().getAttribute(
 				"giver");
 		log.debug(
-				"++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",
-				temp);
+				"++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {},{}",
+				temp.getAccount(),form.getAccount());
 
-		model = new GiverModel();
-
-		try {
-			model.setId(temp.getId());
-			model.setAccount(temp.getAccount().trim());
-			model.setAddress(form.getAddress().trim());
-			model.setBirth(temp.getBirth());
-			model.setEmail(form.getEmail().trim());
-			model.setFamilyName(form.getFamilyName().trim());
-			model.setName(form.getName().trim());
-			model.setGender(temp.isGender());
-			model.setGetInfo(form.isGet_info());
-			model.setTel(form.getTel().trim());
-			model.setValid(true);
-
-			model.setIdNumber(temp.getIdNumber().trim());
-
-			if (form.getPasswd().trim().length() == 0) {
-				model.setPasswd(temp.getPasswd());
-			} else {
-				// 驗證密碼
-				if (form.getPasswd().trim().matches(passRegex)) {
-					MessageDigest md = MessageDigest.getInstance("MD5");
-					byte[] b = md.digest(form.getPasswd().getBytes());
-					model.setPasswd(b);
+		if(temp.getAccount().equals(form.getAccount())){
+			model = new GiverModel();
+	
+			try {
+				model.setId(temp.getId());
+				model.setAccount(temp.getAccount().trim());
+				model.setAddress(form.getAddress().trim());
+				model.setBirth(temp.getBirth());
+				model.setEmail(form.getEmail().trim());
+				model.setFamilyName(form.getFamilyName().trim());
+				model.setName(form.getName().trim());
+				model.setGender(temp.isGender());
+				model.setGetInfo(form.isGet_info());
+				model.setTel(form.getTel().trim());
+				model.setValid(true);
+	
+				model.setIdNumber(temp.getIdNumber().trim());
+	
+				if (form.getPasswd().trim().length() == 0) {
+					model.setPasswd(temp.getPasswd());
 				} else {
-					return "updateFail";
+					// 驗證密碼
+					if (form.getPasswd().trim().matches(passRegex)) {
+						MessageDigest md = MessageDigest.getInstance("MD5");
+						byte[] b = md.digest(form.getPasswd().getBytes());
+						model.setPasswd(b);
+					} else {
+						return "updateFail";
+					}
 				}
+				
+				if (form.getHeadshot() != null) {
+					model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form
+							.getHeadshot())));
+				} else {
+					model.setHeadshot(temp.getHeadshot());
+				}
+	
+				service.update(model);
+				request.getSession().setAttribute("success", "更新會員資料");
+				request.getSession().setAttribute("giver", model);
+	
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+				return "updateFail";
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return "updateFail";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "updateFail";
 			}
-			
-			if (form.getHeadshot() != null) {
-				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form
-						.getHeadshot())));
-			} else {
-				model.setHeadshot(temp.getHeadshot());
-			}
-
-			service.update(model);
-			request.getSession().setAttribute("success", "更新會員資料");
-			request.getSession().setAttribute("giver", model);
-
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			return "updateFail";
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return "updateFail";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "updateFail";
+	
+			return "update";
+		} else {
+			return "login";
 		}
-
-		return "update";
 	}
 	
 	//select by account
@@ -284,9 +288,25 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "select";
 	}
 
+	//驗證帳號是否重複
+	public String selectAccount(){
+		model = service.getByAccount(form.getAccount());
+		Map<String, Boolean> map = new HashMap<>();
+		if(model == null){
+			map.put("checkAccount", false);
+		}else{
+			map.put("checkAccount", true);
+		}
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "checkAccount";
+	}
+	
+	
 	//驗證密碼是否正確
 	public String checkPassword(){
-		GiverModel model = service.login(form.getAccount(), form.getPasswd());
+		model = service.login(form.getAccount(), form.getPasswd());
 		Map<String,Boolean> map = new HashMap<>();
 		if(model == null){
 			map.put("checkPasswd", false);
