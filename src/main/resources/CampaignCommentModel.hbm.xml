@@ -5,33 +5,35 @@
 <hibernate-mapping>
 	<class name="tw.org.iiiedu.thegivers.model.CampaignCommentModel" table="campaign_comment">
 		<id name="id" type="java.lang.Integer">
+			<column name="id"></column>
+			<generator class="identity"></generator>
 		</id>
 		<property name="campaignId" type="java.lang.Integer">
-		
+			<column name="campaignId" />
 		</property>
 		<property name="giverId" type="java.lang.Integer">
-		
-		</property>
-		<property name="commentary" type="java.lang.String">
-		
-		</property>
-		<property name="commentTime" type="java.sql.Timestamp">
-		
-		</property>
-		<property name="anonymous" type="java.lang.Boolean">
-
+			<column name="giverId" />
 		</property>
 		<property name="replyId" type="java.lang.Integer">
-
+			<column name="replyId" />
 		</property>
-		<property name="like" type="java.lang.Integer">
-		
+		<property name="commentary" type="java.lang.String">
+			<column name="commentary" />
 		</property>
-		<property name="exposure" type="java.lang.Boolean">
-		
+		<property name="likeNumber" type="java.lang.Integer">
+			<column name="likeNumber" />
+		</property>
+		<property name="anonymous" type="java.lang.Boolean">
+			<column name="anonymous" />
+		</property>
+		<property name="integrity" type="java.lang.Boolean" insert="false">
+			<column name="integrity" />
+		</property>
+		<property name="commentTime" type="java.sql.Timestamp" insert="false">
+			<column name="commentTime" />
 		</property>
 		<property name="ip" type="java.lang.String">
-		
+			<column name="ip" />
 		</property>
 	</class>
 </hibernate-mapping>

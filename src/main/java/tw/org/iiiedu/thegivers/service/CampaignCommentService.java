@@ -1,18 +1,20 @@
 package tw.org.iiiedu.thegivers.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import tw.org.iiiedu.thegivers.dao.CampaignCommentDao;
 import tw.org.iiiedu.thegivers.form.CampaignCommentForm;
 import tw.org.iiiedu.thegivers.model.CampaignCommentModel;
 
+@Service
 public class CampaignCommentService {
 	
 	@Autowired
 	CampaignCommentDao campaignCommentDao;
 	
-	public CampaignCommentModel writeComment(CampaignCommentForm form){
-		Integer id = campaignCommentDao.insert(form);
+	public CampaignCommentModel writeComment(CampaignCommentModel model){
+		Integer id = campaignCommentDao.insert(model);
 		if(id != -1){
 			return campaignCommentDao.getById(id);
 		}else{
@@ -31,5 +33,9 @@ public class CampaignCommentService {
 	
 	public boolean deleteComment(Integer id){
 		return campaignCommentDao.delete(id);
+	}
+	
+	public CampaignCommentModel getLostColumn(Integer id){
+		return campaignCommentDao.getById(id);
 	}
 }

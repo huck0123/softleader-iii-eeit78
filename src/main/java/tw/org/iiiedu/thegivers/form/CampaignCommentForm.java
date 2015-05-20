@@ -11,7 +11,6 @@ public class CampaignCommentForm {
 	private String commentary;
 	private Boolean anonymous;
 	private Timestamp commentTime;
-	private String ip;
 	
 	
 	public Integer getId() {
@@ -55,12 +54,6 @@ public class CampaignCommentForm {
 	}
 	public void setCommentTime(Timestamp commentTime) {
 		this.commentTime = commentTime;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
 	}
 	
 }

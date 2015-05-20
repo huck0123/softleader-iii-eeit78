@@ -64,9 +64,6 @@ body{
 			<div class="col-md-2" style="text-align:left">
 				<input type="button" class="btn btn-default" name="next" value="下一頁" id="btnx"> 
 			</div>
-			<div class="col-md-3" style="text-align:left">
-				<a href="<c:url value='/index.jsp' />">回首頁</a> 
-			</div>
 		</div>
 		<div id="detailRS"></div><br>
 	</div>
