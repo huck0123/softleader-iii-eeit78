@@ -42,5 +42,6 @@
 			<h3>驗證完畢請進行登入使用您的帳號</h3>
 		</div>
 	</div>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>

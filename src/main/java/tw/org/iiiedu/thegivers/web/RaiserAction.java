@@ -45,6 +45,15 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private String account;
 	private String name;
 	private String contactPerson;
+	private CampaignForm campaignForm;
+	
+	public CampaignForm getCampaignForm() {
+		return campaignForm;
+	}
+
+	public void setCampaignForm(CampaignForm campaignForm) {
+		this.campaignForm = campaignForm;
+	}
 
 	public int getPage() {
 		return page;
@@ -258,10 +267,9 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	}
 
 	public String getRaiserHistory() {
-		CampaignForm campaignForm = new CampaignForm();
 		campaignForm.setPageNum(0);
 		campaignForm.setPageSize(6);
-		campaignForm.setName(name);
+		System.out.println("campaignForm.name = " + campaignForm.getName());
 		List<CampaignModel> cm = campaignService
 				.getByAllCondition(campaignForm);
 		Gson gson = new Gson();
@@ -271,6 +279,26 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return "select";
 	}
 
+	public String getRaiserHistoryByCondition(){
+		if(campaignForm.getName().length() == 0 || campaignForm.getName() ==null){
+			campaignForm.setName(null);
+		}
+		if(campaignForm.getType().length() == 0 || campaignForm.getType() ==null){
+			campaignForm.setType(null);
+		}
+		if(campaignForm.getLocation().length() == 0 || campaignForm.getLocation() ==null){
+			campaignForm.setLocation(null);
+		}
+		campaignForm.setPageNum(0);
+		campaignForm.setPageSize(6);
+		List<CampaignModel> cm = campaignService
+				.getByAllCondition(campaignForm);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(cm);
+		inputStream = new ByteArrayInputStream(
+				jsonString.getBytes(StandardCharsets.UTF_8));
+		return "select";
+	}
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

@@ -63,5 +63,6 @@ body {
 			$("#logo").attr("src", "data:image/png;base64," + srclogo);
 		}
 	</script>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>

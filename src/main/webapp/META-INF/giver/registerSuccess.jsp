@@ -109,6 +109,7 @@ body {
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+	<jsp:include page="/footer.jsp" />
 
 	 <!-- Modal -->
   	<div class="modal fade" id="myModal" role="dialog">
@@ -136,7 +137,7 @@ body {
 	
 		function getInformation() {
 
-			var url = "/softleader-iii-eeit78/giver/giverSelect!select";
+			var url = "/softleader-iii-eeit78/giver/giverSelectByAccount!select";
 			var thisAccount = "${sessionScope.giver.account}";
 			
 			function getData(data){

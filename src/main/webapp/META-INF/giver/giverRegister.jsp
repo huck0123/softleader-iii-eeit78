@@ -162,9 +162,10 @@ body {
 <!-- 			</div> -->
 			<div class="col-md-4"></div>
 		</div>
-		
-		
 	</div>
+
+		<jsp:include page="/footer.jsp" />
+
 			 <!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
    		<div class="modal-dialog">
@@ -187,7 +188,7 @@ $(function() {
 
 <script>
 	var raiserUrl = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
-	var url = "${pageContext.request.contextPath}/giver/giverSelect!select";
+	var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
 	
 	//驗證帳號
@@ -195,9 +196,9 @@ $(function() {
 		$('#account').empty();
 		var thisAccount = $(this).val();
 		//查看giver是否有相同的帳號
-		$.post(url, {'thisAccount' : thisAccount}, function(data) {
+		$.post(url, {'form.account' : thisAccount}, function(data) {
 			data = JSON.parse(data);
-			if (data != null) {
+			if (data.checkAccount == true) {
 				$('#submit').prop("disabled",true);
 				$('#account').text("帳號已被註冊");
 				return;

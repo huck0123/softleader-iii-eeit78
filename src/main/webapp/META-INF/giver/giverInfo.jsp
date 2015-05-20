@@ -71,7 +71,7 @@ body {
 							</div>
 
 							<form
-								action='/softleader-iii-eeit78/giver/giverAction!update.action'
+								action='/softleader-iii-eeit78/giver/giverUpdate!update.action'
 								method="post" enctype="multipart/form-data">
 								<table class="table">
 									<colgroup>
@@ -80,7 +80,9 @@ body {
 									</colgroup>
 									<tr>
 										<td><label for="">帳號:</label></td>
-										<td>${sessionScope.giver.account }</td>
+										<td><input type="text" name="form.account" value=${sessionScope.giver.account }
+												style="display: none">
+											${sessionScope.giver.account }</td>
 									</tr>
 									<tr>
 										<td><label for="">密碼:</label></td>
@@ -161,7 +163,8 @@ body {
 		</div>
 	</div>
 
-
+	<jsp:include page="/footer.jsp" />
+	
 	<!-- myModal -->
   	<div class="modal fade" id="myModal" role="dialog">
     	<div class="modal-dialog">
@@ -280,7 +283,7 @@ body {
 	
 	<script>
 
-		var url = "/softleader-iii-eeit78/giver/giverSelect!select";
+		var url = "/softleader-iii-eeit78/giver/giverSelectByAccount!select";
 			
 		//判斷是否為null
 		function undefinedCheck(data){

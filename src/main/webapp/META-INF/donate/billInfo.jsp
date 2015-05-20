@@ -147,18 +147,21 @@ b {
 		$('#year').append("<option value='"+ i +"'>" + i + "</option>");
 	}
 
+	//驗證生日
+	$('input[name="form.cardHolderBirth"]').on("blur", function(){
+		console.log("haha");
+	})
+	
 	//驗證手機
-	$('input[name="cardHolderPhone"]').on("blur", function() {
+	$('input[name="form.cardHolderPhone"]').on("blur", function() {
 		$('#tel').empty();
 		var tel = $(this).val();
 		//驗證是否為10個整數
 		re = /^[\d]{10}$/;
 		if (!re.test(tel)) {
-			$('#submit').prop("disabled", true);
 			$('#tel').text("請輸入正確的手機號碼");
 			return;
 		}
-		$('#submit').prop("disabled", false);
 	})
 
 	nextFocus();

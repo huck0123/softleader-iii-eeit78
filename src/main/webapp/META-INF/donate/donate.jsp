@@ -31,6 +31,7 @@ b {
 
 </head>
 <body id="body">
+
 	<jsp:include page="../../header.jsp" />
 
 	<div class="container">
@@ -40,9 +41,9 @@ b {
 				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
 				
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="#donate">捐款金額</a></li>
-					<li><a href="#billInfo">信用卡資訊</a></li>
-					<li><a href="#infoConfirm">捐款資訊確認</a></li>
+					<li class="active"><a href="#donate">Step1:捐款金額</a></li>
+					<li><a href="#billInfo">Step2:信用卡資訊</a></li>
+					<li><a href="#infoConfirm">Step3:捐款資訊確認</a></li>
 				</ul>
 				<form action="<c:url value='/donate/donateAction!donate.action'/>" method="post">
 
@@ -69,7 +70,7 @@ b {
 									</tr>
 									<tr>
 										<td><label for="">捐款人姓名:</label></td>
-										<td>${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
+										<td id="giverName">${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
 										<td></td>
 									</tr>
 									<tr>
@@ -90,14 +91,13 @@ b {
 
 					</div>
 
-
-
 				</form>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
 	</div>
 
+	<jsp:include page="/footer.jsp" />
 
 </body>
 
@@ -120,12 +120,10 @@ b {
 		re = /[\d]/;
 		for(var i=0; i<amount.length; i++){
 			if(!re.test(amount[i])){
-				$('#submit').prop("disabled",true);
 				$('#amount').text("請輸入正確金額");
 				return;
 			}
 		}
-		$('#submit').prop("disabled",false);
 	});
 </script>
 </html>
