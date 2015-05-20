@@ -20,6 +20,9 @@
 body {
 	text-align: left;
 }
+.errorClassForRaiser{
+	color:red
+}
 </style>
 <title>團體-更新帳號</title>
 </head>
@@ -67,6 +70,12 @@ body {
 									</div>
 
 									<div class="form-group">
+										<label for="inputpwChk">確認密碼</label> <input type="password"
+											class="form-control" id="inputpwChk" required="required">
+											<div id="chkPw2" class="errorClassForRaiser"></div>
+									</div>
+
+									<div class="form-group">
 										<label for="name">團體名稱</label> <input type="text"
 											class="form-control" id="name" name="raiserForm.name"
 											required="required" value="${raiser.name}">
@@ -110,7 +119,7 @@ body {
 
 									<div class="form-group">
 										<label for="del">團體介紹</label>
-										<textarea rows="4" cols="50" class="form-control" id="del"
+										<textarea rows="10" cols="50" class="form-control" id="del"
 											name="raiserForm.detail">${raiser.detail}</textarea>
 									</div>
 
@@ -157,6 +166,17 @@ body {
 				$('.nav-tabs a[href="#campaignRaise"]').tab('show');
 			}
 		})
+		
+		$("#inputpwChk").blur(function() {
+			$("#chkPw2").text("")
+			if ($(this).val() != $("#inputpw").val()) {
+				$("#chkPw2").text("密碼不相符")
+				$("#inputpw").val("");
+				$("#inputpwChk").val("");
+			}
+		});
+		
+		
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>
