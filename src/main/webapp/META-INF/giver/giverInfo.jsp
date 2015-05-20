@@ -140,7 +140,7 @@ body {
 											<input type="file" name="form.headshot" accept="image/*"
 												id="headshot" style="display: none;">
 											</label>
-											<a href="#" data-toggle="modal" data-target="#myModal1" title="點擊放大"> 
+											<a href="#" data-toggle="modal" data-target="#myModal1" title="點擊放大" id="changeHeadshot"> 
 												<img src="" id="img2" style="dispaly:none; weight: 100px; height: 100px;">
 											</a>
 										</td>
@@ -195,10 +195,12 @@ body {
 	   				<h3>修改密碼</h3>
 	   			</div>
        			<div class="modal-body">
-					<label for="password1">輸入密碼</label>
-					<input type="password" id="password1" autofocus><br><br>
-					<label for="password2">確認密碼</label>
-					<input type="password" id="password2">
+       				<label for="password0">輸入舊密碼</label>
+					<input type="password" id="password0" autofocus><br><b id="passwdMess0"></b><br>
+					<label for="password1">輸入新密碼</label>
+					<input type="password" id="password1" ><br><b id="passwdMess1"></b><br>
+					<label for="password2">確認新密碼</label>
+					<input type="password" id="password2"><br><b id="passwdMess2"></b>
 	       		</div>
 	       		 <div class="modal-footer">
 	       		 	<button type="button" class="btn btn-primary" data-dismiss="modal" id="save" disabled="disabled">儲存密碼</button>
@@ -220,20 +222,60 @@ body {
 		});
 		
 		//modal
-		$('#save').on("click", function(){
-			$('#passwd').val($('#password1').val());
-		});
+		function myModal(){
+			var checkPasswd_url = "/softleader-iii-eeit78/giver/giverSelect!checkPassword";
+			
+			$('#save').on("click", function(){
+				$('#passwd').val($('#password1').val());
+			});
+			$('#password1').prop('disabled',true);
+			$('#password2').prop('disabled',true);
+			$('#save').prop("disabled",true);
+			
+			$('#password0').on('blur', function(){
+				password = $(this).val();
+				console.log(password);
+				$.post(checkPasswd_url, {'form.account':'${sessionScope.giver.account}', 'form.passwd': password}, function(passwdData){
+					passwdData = JSON.parse(passwdData);
+					if(passwdData.checkPasswd == true){
+						$('#passwdMess0').empty();
+						$('#password1').prop('disabled',false);
+					}else{
+						$('#passwdMess0').text("密碼錯誤");
+						$('#save').prop("disabled",true);
+					}
+				})	
+			});
+			
+			$('#password1').on("blur", function(){
+				var re = /^[\dA-Za-z\S]{6,30}$/;
+				var re1 = /[\d]{1,}/;
+				var re2 = /[A-Za-z]{1,}/;
+				var re3 = /[\S]{1,}/;
+				
+				if(re.test(password1.value) && re1.test(password1.value) 
+						&& re2.test(password1.value) && re3.test(password1.value)){
+					$('#passwdMess1').empty();
+					$('#password2').prop('disabled',false);
+				}else{
+					$('#passwdMess1').text("密碼格式錯誤");
+					$('#save').prop("disabled",true);
+				}
+					
+			});
+			$('#password2').on("keyup", function(){
+				if(password1.value != password2.value){
+					$('#save').prop("disabled", true);
+					$('#passwdMess2').text("確認密碼不符");
+				}else{
+					$('#passwdMess2').empty();
+					$('#save').prop("disabled", false);
+				}
+			});
+			
+		}
+		myModal();
 		
-		$('#password2').on("keyup", function(){
-			if(password1.value != password2.value){
-				$('#save').prop("disabled", true);
-// 				$('#passwd').text("密碼不符");
-			}else{
-				$('#save').prop("disabled", false);
-			}
-		});
-	
-	
 	</script>
 	
 	<script>
@@ -251,10 +293,10 @@ body {
 		};
 		
 		function getInformation(){
+			$('#changeHeadshot').hide();
 			
 			function getData(data){
 				data = JSON.parse(data);
-				console.log(data);
 				$('input[name="form.familyName"]').val(data.familyName);
 				$('input[name="form.name"]').val(data.name);
 				$('input[name="form.tel"]').val(data.tel);
@@ -287,10 +329,11 @@ body {
 		}
 		getInformation();
 				
+		
 		//驗證圖片
 		$('#headshot').on("change",function(){
+			$('#changeHeadshot').show();
 			var file = headshot.files[0];
-			console.log(file);
 			if(file != null){
 				readFile(file);
 			}else{

@@ -164,6 +164,7 @@ ul.nav {
 /*nav responsive settings end*/
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
+<div id="header-holder" style="display: none; height:71px"></div>
 <div id="header-wrapper">
 	<div class="container">
 		<nav id="nav-header"
@@ -214,7 +215,7 @@ ul.nav {
 									</c:if>
 									<c:if test="${giver != null}">
 										<li><a role="menuitem"
-											href="<c:url value='/giver/giverInfo?giverTabs=1'/>">會員專區</a></li>
+											href="<c:url value='/giver/giverInfo?giverTabs=1'/>">會員資料修改</a></li>
 										<li><a role="menuitem"
 											href="<c:url value='/giver/giverInfo?giverTabs=2'/>">捐款紀錄</a></li>
 									</c:if>
@@ -308,6 +309,7 @@ ul.nav {
 										$('#collapse-part').removeClass(
 												'container');
 										$('#collapse-login').addClass('collapse-login-scroll');
+										$('#header-holder').stop().show();
 									} else {
 										$('#header-wrapper').stop()
 												.removeClass('scroll-header');
@@ -320,6 +322,7 @@ ul.nav {
 												'container');
 										$('#collapse-login')
 												.removeClass('collapse-login-scroll');
+										$('#header-holder').stop().hide();
 									}
 								});
 

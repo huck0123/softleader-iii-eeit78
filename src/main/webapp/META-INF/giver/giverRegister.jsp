@@ -186,6 +186,7 @@ $(function() {
 </script>
 
 <script>
+	var raiserUrl = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!select";
 	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
 	
@@ -193,7 +194,19 @@ $(function() {
 	$('input[name="form.account"]').on("blur", function(){
 		$('#account').empty();
 		var thisAccount = $(this).val();
+		//查看giver是否有相同的帳號
 		$.post(url, {'thisAccount' : thisAccount}, function(data) {
+			data = JSON.parse(data);
+			if (data != null) {
+				$('#submit').prop("disabled",true);
+				$('#account').text("帳號已被註冊");
+				return;
+			}
+			$('#submit').prop("disabled",false);
+			
+		});
+		//查看raiser是否有相同的帳號
+		$.post(raiserUrl, {'account' : thisAccount}, function(data) {
 			data = JSON.parse(data);
 			if (data != null) {
 				$('#submit').prop("disabled",true);

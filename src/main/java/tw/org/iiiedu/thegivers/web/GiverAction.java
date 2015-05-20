@@ -138,7 +138,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;				
 			}
 			//驗證密碼
-			if(form.getPasswd().matches(passRegex)){
+			if(form.getPasswd().trim().matches(passRegex)){
 				MessageDigest md = MessageDigest.getInstance("MD5");
 				byte[] b = md.digest(form.getPasswd().getBytes());
 				model.setPasswd(b);
@@ -152,41 +152,100 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				return FAIL;
 			}
 			model.setValid(true);
-
-		}catch (Exception e) {
-			e.printStackTrace();
-			return FAIL;
-		}
-		
-		if(form.getHeadshot() != null){
-			try {
+			if(form.getHeadshot() != null){
 				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				return FAIL;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return FAIL;
 			}
-		}
-		
-		try {
+			
 			model = service.register(model);
 			if (model != null) {
-				giverCount++;				//資料筆數+1
+				giverCount++; // 資料筆數+1
 				context.setAttribute("giverCount", giverCount);
-				request.getSession().setAttribute("giver", model);    //註冊成功時，將資料丟進model
+				request.getSession().setAttribute("giver", model); // 註冊成功時，將資料丟進model
 				request.getSession().setAttribute("success", "註冊會員資料");
-				log.debug("++++++++++++++++++++++++++++++++++++++giverInsert+++++++++++++++++++++++++++++++++++ {}+++{}", model,form);
+				log.debug(
+						"++++++++++++++++++++++++++++++++++++++giverInsert+++++++++++++++++++++++++++++++++++ {}+++{}",
+						model, form);
 				return "insert";
 			} else {
 				return FAIL;
 			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return FAIL;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return FAIL;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return FAIL;
-		} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return FAIL;
+		}
 		
+	}
+	
+	//更新資料
+	public String update() {
+		GiverModel temp = (GiverModel) request.getSession().getAttribute(
+				"giver");
+		log.debug(
+				"++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",
+				temp);
+
+		model = new GiverModel();
+
+		try {
+			model.setId(temp.getId());
+			model.setAccount(temp.getAccount().trim());
+			model.setAddress(form.getAddress().trim());
+			model.setBirth(temp.getBirth());
+			model.setEmail(form.getEmail().trim());
+			model.setFamilyName(form.getFamilyName().trim());
+			model.setName(form.getName().trim());
+			model.setGender(temp.isGender());
+			model.setGetInfo(form.isGet_info());
+			model.setTel(form.getTel().trim());
+			model.setValid(true);
+
+			model.setIdNumber(temp.getIdNumber().trim());
+
+			if (form.getPasswd().trim().length() == 0) {
+				model.setPasswd(temp.getPasswd());
+			} else {
+				// 驗證密碼
+				if (form.getPasswd().trim().matches(passRegex)) {
+					MessageDigest md = MessageDigest.getInstance("MD5");
+					byte[] b = md.digest(form.getPasswd().getBytes());
+					model.setPasswd(b);
+				} else {
+					return "updateFail";
+				}
+			}
+			
+			if (form.getHeadshot() != null) {
+				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form
+						.getHeadshot())));
+			} else {
+				model.setHeadshot(temp.getHeadshot());
+			}
+
+			service.update(model);
+			request.getSession().setAttribute("success", "更新會員資料");
+			request.getSession().setAttribute("giver", model);
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return "updateFail";
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return "updateFail";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "updateFail";
+		}
+
+		return "update";
 	}
 	
 	//select by account
@@ -225,6 +284,22 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "select";
 	}
 
+	//驗證密碼是否正確
+	public String checkPassword(){
+		GiverModel model = service.login(form.getAccount(), form.getPasswd());
+		Map<String,Boolean> map = new HashMap<>();
+		if(model == null){
+			map.put("checkPasswd", false);
+		}else{
+			map.put("checkPasswd", true);
+		}
+		
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "checkPassword";
+	}
+
 	//捐款人條件收尋筆數
 	public String conditionCount(){
 		int count = service.getByConditionCount(condition);
@@ -251,87 +326,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "giverDetail";
 	}
 	
-	//Select All  ----deprecated----
-	public String selectAll() throws UnsupportedEncodingException{
-		List<GiverModel> list = service.getAll();
-		
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(list);
-
-		inputStream = new ByteArrayInputStream(
-				jsonStr.getBytes(StandardCharsets.UTF_8));
-		return "selectAll";
-		
-	}
-
-	//抓某頁的資料     -----deprecated-----
-	public String getPerPage(){
-		List<GiverModel> models = service.getPerPage(thisPage);
-		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX{}",models);
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(models);
-		
-		inputStream = new ByteArrayInputStream(
-				jsonStr.getBytes(StandardCharsets.UTF_8));
-		return "getPerPage";
-	}
-	
-	//更新資料
-	public String update() throws NoSuchAlgorithmException{
-		GiverModel temp = (GiverModel) request.getSession().getAttribute("giver");
-//		GiverModel temp = service.getByAccount(temp1.getAccount());
-		log.debug("++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {}",temp);
-
-			
-		model = new GiverModel();
-		
-		model.setId(temp.getId());
-		model.setAccount(temp.getAccount().trim());
-		model.setAddress(form.getAddress().trim());
-		model.setBirth(temp.getBirth());
-		model.setEmail(form.getEmail().trim());
-		model.setFamilyName(form.getFamilyName().trim());
-		model.setName(form.getName().trim());
-		model.setGender(temp.isGender());
-		model.setGetInfo(form.isGet_info());
-
-		if(form.getHeadshot() != null){
-			try {
-				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				return FAIL;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return FAIL;
-			}
-		}else{
-			model.setHeadshot(temp.getHeadshot());
-		}
-		model.setIdNumber(temp.getIdNumber().trim());
-		
-		if(form.getPasswd().trim().length() == 0){
-			model.setPasswd(temp.getPasswd());
-		}else{
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] b = md.digest(form.getPasswd().getBytes());
-			model.setPasswd(b);
-		}
-		
-		model.setTel(form.getTel().trim());
-		model.setValid(true);
-		
-		try{
-			service.update(model);
-			request.getSession().setAttribute("success", "更新會員資料");
-			request.getSession().setAttribute("giver", model);
-		}catch(Exception e){
-			return "updateFail";
-		}
-		
-		return "update";
-	}
-	
 	//validate
 	public String valid(){
 		log.debug("=================GiverAction valid======================={},{}",thisAccount,valid);
@@ -343,7 +337,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return null;
 	}
 	
-	//ID收尋      -----deprecated-----
+	//身分證ID收尋    
 	public String selectByIdNumber(){
 		boolean b = service.getByIdNumber(form.getId_number().trim());
 		Map<String, Boolean> map = new HashMap<>();
@@ -360,6 +354,30 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "selectByIdNumber";
 	}
 	
+	//Select All  ----deprecated----
+	public String selectAll() throws UnsupportedEncodingException{
+		List<GiverModel> list = service.getAll();
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(list);
+		
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "selectAll";
+		
+	}
+	
+	//抓某頁的資料     -----deprecated-----
+	public String getPerPage(){
+		List<GiverModel> models = service.getPerPage(thisPage);
+		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX{}",models);
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(models);
+		
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		return "getPerPage";
+	}
 	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {

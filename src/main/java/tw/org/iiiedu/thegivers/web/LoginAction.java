@@ -61,6 +61,11 @@ public class LoginAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 	
+		HttpSession preSession = ServletActionContext.getRequest().getSession(false);
+		if(preSession != null){
+			preSession.invalidate();
+		}
+		
 		GiverModel gm = giverService.login(account.trim(),passwd);
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
