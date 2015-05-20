@@ -25,12 +25,15 @@
 		</action>
 		
 		<action name="giverSelect" class="giverAction">
-			<interceptor-ref name="giverDefault"></interceptor-ref>
+<!-- 			<interceptor-ref name="giverDefault"></interceptor-ref> -->
 			<result type="stream" name="select">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
-			<!-- 		deprecated -->
+			<result type="stream" name="checkPassword">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 			<result type="stream" name="selectByIdNumber">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
