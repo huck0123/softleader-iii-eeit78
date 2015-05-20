@@ -27,36 +27,13 @@
 							placeholder="輸入地點" style="text-align: left">
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="minAmountRH" class="col-sm-3 control-label">依金額範圍</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="minAmountRH"
-							placeholder="輸入較小金額">
-					</div>
-					<label for="maxAmountRH" class="col-sm-1 control-label">到</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="maxAmountRH"
-							placeholder="輸入較大金額">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="afterDateRH" class="col-sm-3 control-label">依日期範圍</label>
-					<div class="col-sm-4">
-						<input type="datetime-local" class="form-control" id="afterDateRH"
-							placeholder="選擇較小日期">
-					</div>
-					<label for="beforeDateRH" class="col-sm-1 control-label">到</label>
-					<div class="col-sm-4">
-						<input type="datetime-local" class="form-control"
-							id="beforeDateRH" placeholder="選擇較大日期">
-					</div>
-				</div>
 			</form>
 		</div>
 		<br />
-		<button type="button" class="btn btn-primary" onclick="loadByForm();">送出篩選</button>
-		<button type="button" class="btn btn-warning" onclick="cleanForm();">清除條件</button>
-
+		<div style="text-align: center">
+			<button type="button" class="btn btn-primary" onclick="loadByForm();">送出篩選</button>
+			<button type="button" class="btn btn-warning" onclick="cleanForm();">清除條件</button>
+		</div>
 		<div>
 			<br />
 			<hr />
@@ -171,8 +148,20 @@
 			$.post(urlll, {
 				"campaignForm.name" : $("#keywordRH").val(),
 				"campaignForm.type" : $("#keywordTypeRH").val(),
-				"campaignForm.location" : $("#keywordLocRH").val(),
-				"campaignForm.name" : $("#keywordRH").val(),
+				"campaignForm.location" : $("#keywordLocRH").val()
+			}, getData, "json")
+		}
+
+		function cleanForm() {
+			$("#keywordRH").val(null);
+			$("#keywordLocRH").val(null);
+			$("#keywordTypeRH").val(null);
+		}
+
+		function showAll() {
+			cleanForm();
+			$.post(urlForRaiserHistory, {
+				"name" : "${raiser.name}"
 			}, getData, "json")
 		}
 	</script>
