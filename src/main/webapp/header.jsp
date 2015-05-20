@@ -164,7 +164,10 @@ ul.nav {
 /*nav responsive settings end*/
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
-<div id="header-holder" style="display: none; height:71px"></div>
+<!-- 
+<div id="header-holder" style="display: none; height:71px"></div> 
+這一段看有沒有辦法動態設成header的高度，不然會跑掉
+-->
 <div id="header-wrapper">
 	<div class="container">
 		<nav id="nav-header"

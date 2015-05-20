@@ -15,7 +15,11 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
-
+<style>
+.errorClassForRaiser{
+	color:red
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>團體-註冊帳號</title>
 </head>
@@ -25,9 +29,10 @@
 		<div class="row" style="padding-top: 20px">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
+				<h2>公益團體註冊</h2>
 				<form action="<c:url value='/raiser/raiserAction!insert' />"
 					method="post" enctype="multipart/form-data" class="form-horizontal">
-					<div style="height:50px">${insertErrorMSG}</div>
+					<div style="height: 50px">${insertErrorMSG}</div>
 					<div class="form-group">
 						<label for="account" class="col-sm-2 control-label">帳號:</label>
 						<div class="col-sm-7">
@@ -35,7 +40,7 @@
 								name="raiserForm.account" value="${form.account }"
 								required="required">
 						</div>
-						<div class="col-sm-3" id="chkAcc">${insertErrorACC}</div>
+						<div class="col-sm-3" id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
 					</div>
 
 					<div class="form-group">
@@ -44,7 +49,7 @@
 							<input type="password" class="form-control" id="inputpw"
 								name="raiserForm.passwd" required="required">
 						</div>
-						<div class="col-sm-3">${insertErrorPSW}</div>
+						<div class="col-sm-3" class="errorClassForRaiser">${insertErrorPSW}</div>
 					</div>
 
 					<div class="form-group">
@@ -53,7 +58,7 @@
 							<input type="password" class="form-control" id="inputpw2"
 								required="required">
 						</div>
-						<div class="col-sm-3" id="chkPw2"></div>
+						<div class="col-sm-3" id="chkPw2" class="errorClassForRaiser"></div>
 					</div>
 
 					<div class="form-group">
@@ -62,7 +67,7 @@
 							<input type="text" class="form-control" id="name"
 								name="raiserForm.name" value="${form.name}" required="required">
 						</div>
-						<div class="col-sm-3" id="chkName">${insertErrorNAME}</div>
+						<div class="col-sm-3" id="chkName" class="errorClassForRaiser">${insertErrorNAME}</div>
 					</div>
 
 					<div class="form-group">
@@ -121,7 +126,7 @@
 					<div class="form-group">
 						<label for="del" class="col-sm-2 control-label">團體介紹:</label>
 						<div class="col-sm-7">
-							<textarea rows="4" cols="50" class="form-control" id="del"
+							<textarea rows="10" cols="50" class="form-control" id="del"
 								name="raiserForm.detail">${form.detail}</textarea>
 						</div>
 					</div>
@@ -141,7 +146,7 @@
 							<button type="reset" class="btn btn-default">清除資料</button>
 						</div>
 					</div>
-					<div style="height:200px"></div>
+					<div style="height: 200px"></div>
 				</form>
 			</div>
 		</div>
@@ -149,13 +154,13 @@
 	<script>
 		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
-		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!select";
+		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		$("#account").change(function() {
 			$("#chkAcc").text("");
-			if($(this).val().toUpperCase() == "ADMIN"){
+			if ($(this).val().toUpperCase() == "ADMIN") {
 				$("#chkAcc").text("帳號已存在");
 			}
-			
+
 			$.post(raiserRegisCheckUrl1, {
 				"account" : $(this).val()
 			}, function(data) {
@@ -165,10 +170,10 @@
 			}, "json");
 
 			$.post(giverurl, {
-				'thisAccount' : $(this).val()
+				'form.account' : $(this).val()
 			}, function(data) {
 				data = JSON.parse(data);
-				if (data != null) {
+				if (data.checkAccount == true) {
 					$("#chkAcc").text("帳號已存在");
 				}
 			});
@@ -208,5 +213,6 @@
 							reader.readAsDataURL(file);
 						});
 	</script>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>

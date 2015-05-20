@@ -20,13 +20,16 @@
 body {
 	text-align: left;
 }
+.errorClassForRaiser{
+	color:red
+}
 </style>
 <title>團體-更新帳號</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
-		<h2 style="text-align: center">活動專區</h2>
+		<h2 style="text-align: center">團體專區</h2>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -64,6 +67,12 @@ body {
 										<label for="inputpw">密碼</label> <input type="password"
 											class="form-control" id="inputpw" name="raiserForm.passwd"
 											required="required">
+									</div>
+
+									<div class="form-group">
+										<label for="inputpwChk">確認密碼</label> <input type="password"
+											class="form-control" id="inputpwChk" required="required">
+											<div id="chkPw2" class="errorClassForRaiser"></div>
 									</div>
 
 									<div class="form-group">
@@ -110,7 +119,7 @@ body {
 
 									<div class="form-group">
 										<label for="del">團體介紹</label>
-										<textarea rows="4" cols="50" class="form-control" id="del"
+										<textarea rows="10" cols="50" class="form-control" id="del"
 											name="raiserForm.detail">${raiser.detail}</textarea>
 									</div>
 
@@ -157,6 +166,18 @@ body {
 				$('.nav-tabs a[href="#campaignRaise"]').tab('show');
 			}
 		})
+		
+		$("#inputpwChk").blur(function() {
+			$("#chkPw2").text("")
+			if ($(this).val() != $("#inputpw").val()) {
+				$("#chkPw2").text("密碼不相符")
+				$("#inputpw").val("");
+				$("#inputpwChk").val("");
+			}
+		});
+		
+		
 	</script>
+	<jsp:include page="../../footer.jsp" />
 </body>
 </html>
