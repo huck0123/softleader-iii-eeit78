@@ -158,7 +158,7 @@ pre {
 	var totalCount = 0;
 	var commentCurrentPage = 0;
 	var commentCampaignId;
-	var loadPersonUrl =		'${pageContext.request.contextPath}/';
+	var loadPersonUrl =		'${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var newCommentUrl =     '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentUrl = '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
 	
@@ -204,7 +204,7 @@ pre {
 			 + 	'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
 		 	 + '</div>'
 			 + '<div class="col-md-10" id="replyPlace">'
-			 + 	'<p>'+loadPersonalInfo(data)+'&nbsp;&nbsp;於&nbsp;&nbsp;'
+			 + 	'<p>'+loadByPersonalId(data)+'&nbsp;&nbsp;於&nbsp;&nbsp;'
 			 + 		data.commentTime
 			 + 	'</p>'
 			 + 	'<p>'
@@ -218,15 +218,6 @@ pre {
 			 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
 			 + 	'<a>查看所有回覆</a>' 
 			 + '<br/><hr/></div>' + '</div>';
-	}
-	
-	function loadPersonalData(data){
-		var name = "未知的使用者";
-//		var photo = "../pictures/noPicture.jpg";
-		if(data.anonymous != 'true'){
-			name = loadByPersonalId(data.giverId);
-		}
-		return name;
 	}
 	
 	function showAllComment(datas){
@@ -372,13 +363,21 @@ pre {
 		}, showComment);
 	}
 	
-	function loadByPersonalId(giverId){
-		var URL = "/softleader-iii-eeit78/giver/giverSelect!selectHeadshot";
-		$.post(URL, {"form.id": giverId}, function(data){
-			data = JSON.parse(data);
-			console.log(data);
-		})
+	function loadByPersonalId(data){
+		if(data.anonymous != 'true'){
+			$.getJSON(loadPersonUrl, {"form.id" : data.giverId}, function(data){
+				return data.account;
+			});
+		}else{
+			return "未知的使用者";
+		}
 	}
+
+// 		if(data.headshot != null){
+// 			$('#img_' + data.id).attr("src", "data:image/png;base64," + arrayBufferToBase64(data.headshot));
+//	 	}else{
+// 			$('#img_' + data.id).attr("src", "../pictures/noPicture.jpg");
+// 		}
 
 	function loadAllComment(commentCampaignId) {
 		$.getJSON(loadAllCommentUrl, {
