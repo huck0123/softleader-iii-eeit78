@@ -4,26 +4,44 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<package name="raiserPackage" namespace="/raiser" extends="struts-default">
+	<package name="raiserPackage" namespace="/raiser"
+		extends="admin-Interceptor,raiser-Interceptor">
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+
+		<global-results>
+			<result name="login" type="redirect">/login/login</result>
+		</global-results>
 
 		<action name="raiserAction" class="raiserAction">
 			<result name="insert" type="redirect">/raiser/raiserRegister2.action
-			</result>
-			<result name="update" type="redirect">/raiser/raiserUpdate.action
 			</result>
 			<result name="error" type="redirect">/raiser/raiserRegister
 			</result>
 			<result name="select" type="redirect">/raiser/raiserForOne.action
 			</result>
+		</action>
 
-
-			<result name="getPerPage" type="stream">
+		<action name="raiserSelectForOne" class="raiserAction">
+			<result name="select" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
 
-		<action name="raiserSelectAll" class="raiserAction">
+		<action name="raiserUpdate" class="raiserAction">
+			<interceptor-ref name="raiserDefault"></interceptor-ref>
+			<result name="update" type="redirect">/raiser/raiserUpdate
+			</result>
+		</action>
+
+		<action name="raiserHistory" class="raiserAction">
+			<interceptor-ref name="raiserDefault"></interceptor-ref>
+			<result name="select" type="redirect">/raiser/raiserUpdate
+			</result>
+		</action>
+		
+		<action name="raiserShow" class="raiserAction">
+			<interceptor-ref name="adminDefault"></interceptor-ref>
 			<result name="select" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
