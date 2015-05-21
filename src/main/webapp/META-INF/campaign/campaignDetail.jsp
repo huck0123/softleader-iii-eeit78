@@ -244,6 +244,11 @@ pre {
 	});
 
 	function load() {
+		appendCampaignDetail();
+	}
+	
+	//將campaign detail所需的資料取出，並放好
+	function appendCampaignDetail(){
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition', {
 			'campaignForm.id' : "${param.id}"}, function(data) {
 				data = JSON.parse(data);
@@ -304,14 +309,19 @@ pre {
 				vedioDiv.appendTo(rowDiv2);
 				sideDiv.appendTo(rowDiv2);
 				rowDiv2.appendTo($('#showColumn'));
-
-		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId', {
-			'campaignForm.id' : '${param.id}'}, function(data) {
-				console.log("getgiver: " + data);
-				$('#giverStrong').text(data);})
 				$('#detailDiv').append('<pre>' + value.detail + '</pre>');
 				loadAllComment(commentCampaignId);
+				
+				appendGiverData();
 		})
+		
+	}
+	
+	//取得所需Giver資料，並放好
+	function appendGiverData(){
+		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId', {
+			'campaignForm.id' : '${param.id}'}, function(data) {
+				$('#giverStrong').text(data);})
 	}
 
 	function arrayBufferToBase64(buffer) {
