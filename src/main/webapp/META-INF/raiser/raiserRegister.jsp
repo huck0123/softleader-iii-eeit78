@@ -152,8 +152,8 @@
 		</div>
 	</div>
 	<script>
-		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
-		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkName";
+		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
+		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!checkName";
 		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		$("#account").change(function() {
 			$("#chkAcc").text("");

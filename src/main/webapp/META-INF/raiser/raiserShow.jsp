@@ -70,7 +70,7 @@ body{
 </div>	
 
 	<script>
-		var RaiserShowUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getRaiserCondition";
+		var RaiserShowUrl1 = "${pageContext.request.contextPath}/raiser/raiserShow!getRaiserCondition";
 		$.post(RaiserShowUrl1, {'lock' : $('#ChkBox').val()} ,RaiserShowgetData);
 
 		var page = $("#btnw").val();
@@ -235,7 +235,7 @@ body{
 					$('#tbodyRS').children().remove();
 					$("#btnw").val("1");
 					page = 1;
-					$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!getByAllConditionCount" , {
+					$.post("${pageContext.request.contextPath}/raiser/raiserShow!getByAllConditionCount" , {
 						'name' : $("#textSch").val() , 'lock' : $('#ChkBox').val()
 						}, function(data){
 							Max = Math.ceil(data/ 5);
@@ -251,7 +251,7 @@ body{
 				    $(this).val($(this).prop('checked'))
 				});
 				
-				var RaiserShowUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectAll!checkInformation";
+				var RaiserShowUrl2 = "${pageContext.request.contextPath}/raiser/raiserShow!checkInformation";
 					$("#btnStop").click(function(){
 					$("#chbox:checked").parent().parent().children("td").children("#spanCk").removeClass().addClass("glyphicon glyphicon-remove");;
 					$.post(RaiserShowUrl2,{'account' : $("#chbox:checked").parent().parent().text(),

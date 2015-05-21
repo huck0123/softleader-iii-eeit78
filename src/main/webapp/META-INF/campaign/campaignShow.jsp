@@ -65,9 +65,9 @@ margin-bottom: -40px;
 <body>
 <jsp:include page="/header.jsp" />
 
-	<div id="conditionSearchDiv" class="container">
+	<div id="conditionSearchDiv" class="container" >
 		<div class="row" style="display: table-row; vertical-align: middle;">
-			<div style="display:inline-block; width:40%;">
+			<div style="display: inline-block; width: 40%;">
 				<div id="custom-search-input">
 					<div class="input-group col-md-12">
 						<input type="text" class="form-control input-lg"
@@ -81,25 +81,9 @@ margin-bottom: -40px;
 				</div>
 			</div>
 		</div>
-<!--  		<div class="row" style="display: table-row; vertical-align: middle;">
-		<div class="form-group">
-        <label class="col-xs-3 control-label">Favorite color</label>
-        <div class="col-xs-5 selectContainer">
-            <select name="colors" class="form-control" multiple title="Choose 2-4 colors">
-                <option value="black">Black</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-                <option value="orange">Orange</option>
-                <option value="red">Red</option>
-                <option value="yellow">Yellow</option>
-                <option value="white">White</option>
-            </select>
-        </div>
-    </div>
-
-		</div>
+		<select id="campaign-type-input" class="form-control" name="campaignForm.type">
+</select>
 	</div>
--->
 
 	<div class="container" >
 		<nav>
@@ -114,13 +98,13 @@ margin-bottom: -40px;
 		</nav>
 	</div>
 
-	<div class="container" id="showColumn">
+	<div class="container" id="showColumn" style="min-height: 800px">
 		<div id="campaignRow" class=row></div>
 	</div>
 
 
 
-
+	<jsp:include page="/footer.jsp" />
 </body>
 
 
@@ -129,10 +113,8 @@ var totalCount = 0;
 var totalPage = 0;
 //0是第一頁
 var currentPage =0;
-var nameSearch= "";
-if("${param.nameSearch}"){nameSearch="${param.nameSearch}";}
-else{nameSearch = ""}
-if("$(param.page)"){currentPage="${param.page}"}else{currentPage=0;}
+var nameSearch="";
+var typeSearch="";
 var pageSize = 6;
 load();
 
@@ -140,7 +122,7 @@ function load(){
 
 
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-			{'campaignForm.name':nameSearch},function(data){
+			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch},function(data){
 		
 		totalCount = data;
 		totalPage = Math.ceil(totalCount / pageSize);
@@ -154,7 +136,9 @@ function load(){
 		}
 		
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
-				{'campaignForm.pageNum':currentPage,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize},function(data){
+				{'campaignForm.pageNum':currentPage,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,
+			'campaignForm.type':typeSearch},
+				 function(data){
 			data = JSON.parse(data);
  					$('#campaignRow').empty();
 			$(data).each(function(index,value){
@@ -221,15 +205,19 @@ function load(){
 		})
 	})}
 
-	$('#btn11').on('click',function(){
-		console.log("hihi");
-		location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='+$('#nameSearch3').val()+'&page=0';
-	});
-	
+	$('#btn11').on('click',filter);
+	$('#campaign-type-input').on('change',filter)
+	function filter(){
+		nameSearch=$('#nameSearch3').val();
+		typeSearch=$('#campaign-type-input').val();
+		currentPage =0;
+		console.log($('#campaign-type-input').val());
+		load();
+	}
 
 function makeFunction(j){return function(){
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
-			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize},function(data){
+			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
  		$('#campaignRow').empty();
@@ -325,6 +313,19 @@ function arrayBufferToBase64( buffer ) {
     }
     return window.btoa( binary );
 }
+
+appendType();
+function appendType(){
+	$.post('/softleader-iii-eeit78/campaign/campaignTypeAction!selectAll',
+			{},function(data){		
+				data = JSON.parse(data);
+				$('#campaign-type-input').append('<option>所有類型</option>');
+				$(data).each(function(index,value){
+					var child = $('<option>'+value.name+'</option>');
+					$('#campaign-type-input').append(child);
+				}) //each end
+	}) //post method end				
+} //appendType end
 
 </script>
 </html>

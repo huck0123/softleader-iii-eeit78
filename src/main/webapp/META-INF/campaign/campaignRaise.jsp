@@ -25,9 +25,13 @@
 					id="campaign-duration-input" placeholder="請輸入活動天數">
 			</div>
 			<div class="form-group">
-				<label for="campaign-type-input">類型：</label> <input type="text"
-					class="form-control" name="campaignForm.type"
-					id="campaign-type-input" placeholder="請輸入活動類型">
+				<label for="campaign-type-input">類型：</label>
+				<select id="campaign-type-input" class="form-control" name="campaignForm.type">
+
+</select>
+<!-- 				 <input type="text" -->
+<!-- 					class="form-control" name="campaignForm.type" -->
+<!-- 					id="campaign-type-input" placeholder="請輸入活動類型"> -->
 			</div>
 			<div class="form-group">
 				<label for="campaign-location-input">地區 :</label> <input type="text"
@@ -47,26 +51,24 @@
 			</div>
 
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">送出</button>
-				</div>
+
+					<button type="submit" class="btn btn-default" style="float: right;">送出</button>
+
 			</div>
 		</form>
 	</div>
 
 <script>
-	btn1.addEventListener("click", fill);
 
-	function fill() {
-		document.getElementsByName("campaignForm.name")[0].value = "testName";
-		document.getElementsByName("campaignForm.goal")[0].value = "90000"
-		document.getElementsByName("campaignForm.startDate")[0].value = "2014-02-06"
-		document.getElementsByName("campaignForm.endDate")[0].value = "2014-09-06"
-		document.getElementsByName("campaignForm.type")[0].value = "testType";
-		document.getElementsByName("campaignForm.location")[0].value = "testLocation";
-		document.getElementsByName("campaignForm.vedioUrl")[0].value = "testVedioUrl";
-		document.getElementsByName("campaignForm.location")[0].value = "testlocation";
-		document.getElementsByName("campaignForm.detail")[0].innerHtml = "testDetail";
-
-	}
+	appendType();
+	function appendType(){
+		$.post('/softleader-iii-eeit78/campaign/campaignTypeAction!selectAll',
+				{},function(data){		
+					data = JSON.parse(data);
+					$(data).each(function(index,value){
+						var child = $('<option>'+value.name+'</option>');
+						$('#campaign-type-input').append(child);
+						}) //each end
+					}) //post method end				
+	} //appendType end
 </script>
