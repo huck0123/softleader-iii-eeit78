@@ -67,7 +67,7 @@ margin-bottom: -40px;
 
 	<div id="conditionSearchDiv" class="container">
 		<div class="row" style="display: table-row; vertical-align: middle;">
-			<div style="display:inline-block; width:40%;">
+			<div style="display: inline-block; width: 40%;">
 				<div id="custom-search-input">
 					<div class="input-group col-md-12">
 						<input type="text" class="form-control input-lg"
@@ -81,25 +81,7 @@ margin-bottom: -40px;
 				</div>
 			</div>
 		</div>
-<!--  		<div class="row" style="display: table-row; vertical-align: middle;">
-		<div class="form-group">
-        <label class="col-xs-3 control-label">Favorite color</label>
-        <div class="col-xs-5 selectContainer">
-            <select name="colors" class="form-control" multiple title="Choose 2-4 colors">
-                <option value="black">Black</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-                <option value="orange">Orange</option>
-                <option value="red">Red</option>
-                <option value="yellow">Yellow</option>
-                <option value="white">White</option>
-            </select>
-        </div>
-    </div>
-
-		</div>
 	</div>
--->
 
 	<div class="container" >
 		<nav>
