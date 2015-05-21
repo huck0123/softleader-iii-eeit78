@@ -99,6 +99,14 @@ public class GiverService {
 		}
 	}
 	
+	// ID收尋
+	public GiverModel getById(int id) {
+
+		GiverModel model = giverDao.getById(id);
+		return model;
+
+	}
+	
 //	//條件收尋筆數    -----deprecated-----
 //	public int getByAllConditionCount(String account, String name, String familyName
 //			, String tel, String email){

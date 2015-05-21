@@ -106,7 +106,14 @@ public class TransactionAction extends ActionSupport {
 	public void setAllCondition(GiverHistoryAllConditionModel allCondition) {
 		this.allCondition = allCondition;
 	}
-
+	
+	//驗證金額
+	String regex_Amount = "^[\\d]+$";
+	//卡號驗證
+	String regex_CardNo = "^[\\d]{16}$";
+	//驗證碼驗證
+	String regex_checkCard = "^[\\d]{4}$";
+	
 	//insert
 	public String donate(){
 		context = ServletActionContext.getServletContext();
@@ -114,16 +121,23 @@ public class TransactionAction extends ActionSupport {
 				
 		log.debug("++++++++++++++++++++++++++++++donateAction++++++++++++form:{} transactionCount:{}",form,transactionCount);
 		model = new TransactionDetailModel();
-
-		model.setGiverId(form.getGiverId());
-		model.setAmount(form.getAmount());
-		model.setCardType(form.getCardType().trim());
-		model.setCardNo(form.getCardNo().trim());
-		model.setCardHolder(form.getCardHolder().trim());
-		model.setCardHolderEmail(form.getCardHolderEmail().trim());
-		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
-
 		try{
+			model.setGiverId(form.getGiverId());
+			if(form.getAmount() > 0){
+				model.setAmount(form.getAmount());
+			}else{
+				return "fail";
+			}
+			model.setCardType(form.getCardType().trim());
+			if(form.getCardNo().matches(regex_CardNo)){
+				model.setCardNo(form.getCardNo().trim());
+			}else{
+				return "fail";
+			}
+			model.setCardHolder(form.getCardHolder().trim());
+			model.setCardHolderEmail(form.getCardHolderEmail().trim());
+			model.setIp(ServletActionContext.getRequest().getRemoteAddr());
+		
 			service.insert(model, form.getCampaignId()); //Service insert接收兩參數
 			transactionCount++;
 			context.setAttribute("transactionCount", transactionCount);
@@ -131,7 +145,11 @@ public class TransactionAction extends ActionSupport {
 		}catch(HibernateException e){
 			e.printStackTrace();
 			return "fail";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "fail";
 		}
+		
 		return SUCCESS;
 	}
 	

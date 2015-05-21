@@ -41,7 +41,7 @@
 	
 	<div>
 		<a class="btn btn-primary" id="infoConfirmBack" >上一步</a>
-		<input type="submit" class="btn btn-success" value="確認送出">
+		<input type="submit" class="btn btn-success" id="infoSubmit" value="確認送出">
 	</div>
 </div>
 
