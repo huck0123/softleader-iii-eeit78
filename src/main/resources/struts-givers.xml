@@ -19,7 +19,6 @@
 			<result name="insert" type="redirect">/giver/registerSuccess</result>
 			<result name="success" type="">/index.jsp</result>
 			<result name="fail" type="">/META-INF/giver/giverRegister.jsp</result>
-<!-- 			<result name="input" type="">/META-INF/giver/giverRegister.jsp</result> -->
 		</action>
 		
 		<action name="giverUpdate" class="giverAction">
@@ -42,6 +41,10 @@
 				<param name="inputName">inputStream</param>
 			</result>
 			<result type="stream" name="checkPassword">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<result type="stream" name="selectHeadshot">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>

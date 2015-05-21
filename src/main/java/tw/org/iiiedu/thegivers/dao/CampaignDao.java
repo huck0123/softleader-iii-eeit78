@@ -72,22 +72,27 @@ public class CampaignDao {
 		Disjunction or = Restrictions.disjunction();
 		criteria.createAlias("raiserModel", "a");
 		
-		
 		if (campaignForm.getId() != null) {
-			criteria.add(Restrictions.like("id", campaignForm.getId()));
-		}
-		if (campaignForm.getName() != null) {
-			or.add(Restrictions.like("name",
-					"%" + campaignForm.getName() + "%").ignoreCase());
-			or.add(Restrictions.like("a.name",
-					"%" + campaignForm.getName() + "%").ignoreCase());
-			criteria.add(or);
-		}
-		if (campaignForm.getType() != null) {
-			criteria.add(Restrictions.eq("type", campaignForm.getType()));
-		}
-		if (campaignForm.getLocation() != null) {
-			criteria.add(Restrictions.eq("location", campaignForm.getLocation()));
+			criteria.add(Restrictions.eq("id", campaignForm.getId()));
+		} else {
+			if (campaignForm.getName() != null) {
+				or.add(Restrictions.like("name",
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
+				or.add(Restrictions.like("a.name",
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
+				criteria.add(or);
+			}
+			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0) {
+				criteria.add(Restrictions.eq("type", campaignForm.getType().trim()));
+			}
+			if (campaignForm.getLocation() != null) {
+				criteria.add(Restrictions.eq("location",
+						campaignForm.getLocation()));
+			}
+			if(campaignForm.getValid()!=null){
+				criteria.add(Restrictions.eq("valid",
+						campaignForm.getValid()));
+			}
 		}
 
 		// criteria.add(Restrictions.eq("show", true));
@@ -108,13 +113,13 @@ public class CampaignDao {
 		} else {
 			if (campaignForm.getName() != null) {
 				or.add(Restrictions.like("name",
-						"%" + campaignForm.getName() + "%").ignoreCase());
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				or.add(Restrictions.like("a.name",
-						"%" + campaignForm.getName() + "%").ignoreCase());
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				criteria.add(or);
 			}
-			if (campaignForm.getType() != null) {
-				criteria.add(Restrictions.eq("type", campaignForm.getType()));
+			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0 && !campaignForm.getType().trim().equals("所有類型")) {
+				criteria.add(Restrictions.eq("type", campaignForm.getType().trim()));
 			}
 			if (campaignForm.getLocation() != null) {
 				criteria.add(Restrictions.eq("location",

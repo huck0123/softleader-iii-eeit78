@@ -334,5 +334,12 @@ $(function() {
 	
 </script>
 
+<script>
+	var URL = "/softleader-iii-eeit78/giver/giverSelect!selectHeadshot";
+	$.post(URL, {"form.id": "1"}, function(data){
+		data = JSON.parse(data);
+		console.log(data);
+	})
 
+</script>
 </html>
