@@ -60,9 +60,7 @@ public class CampaignTypeAction extends ActionSupport implements
 	}
 
 	public String selectAll() throws Exception {
-		System.out.println("hihi");
 		List campaignTypeModels = campaignTypeService.getAll();
-		System.out.println(campaignTypeModels);
 		Gson gson = new Gson();
 		String json = gson.toJson(campaignTypeModels);
 

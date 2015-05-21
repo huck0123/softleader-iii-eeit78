@@ -27,11 +27,7 @@
 			<div class="form-group">
 				<label for="campaign-type-input">類型：</label>
 				<select id="campaign-type-input" class="form-control" name="campaignForm.type">
-  <option>環境保育</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
+
 </select>
 <!-- 				 <input type="text" -->
 <!-- 					class="form-control" name="campaignForm.type" -->
@@ -63,11 +59,16 @@
 	</div>
 
 <script>
-	btn1.addEventListener("click", fill);
 
+	appendType();
 	function appendType(){
-		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-				{},function(data){
-		
-	}
+		$.post('/softleader-iii-eeit78/campaign/campaignTypeAction!selectAll',
+				{},function(data){		
+					data = JSON.parse(data);
+					$(data).each(function(index,value){
+						var child = $('<option>'+value.name+'</option>');
+						$('#campaign-type-input').append(child);
+						}) //each end
+					}) //post method end				
+	} //appendType end
 </script>
