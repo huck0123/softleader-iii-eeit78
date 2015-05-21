@@ -187,7 +187,7 @@ $(function() {
 </script>
 
 <script>
-	var raiserUrl = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
+	var raiserUrl = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
 	

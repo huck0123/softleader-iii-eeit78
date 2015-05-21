@@ -54,7 +54,7 @@ body {
 		</div>
 	</div>
 	<script>
-		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
+		var url = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 		$.post(url, {
 			"account" : "${raiserSelf.account}"
 		}, getData, "json");
