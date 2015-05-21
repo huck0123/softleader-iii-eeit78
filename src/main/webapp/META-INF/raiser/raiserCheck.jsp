@@ -16,41 +16,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 .divForAllRaiser {
-	background-color:#FFC670;
-	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5) inset ,inset 1px 1px 4px 2px rgba(20%,20%,40%,0.5);
+	background-color: #FFC670;
+	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5) inset, inset 1px
+		1px 4px 2px rgba(20%, 20%, 40%, 0.5);
 }
-.ForAllRaiser{
-box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5) 
+
+.ForAllRaiser {
+	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5)
 }
 </style>
 <title>使用者-所有團體資訊</title>
-	<script>
-		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!selectAll"
-		$.post(url, getData ,"json");
-		function getData(raisers) {
-			$(raisers)
-					.each(
-							function(index, raiser) {
-								var srclogo = arrayBufferToBase64(raiser.logo);
-								var strimg = "<img src='' class='img-thumbnail ForAllRaiser' id='logo"+raiser.id+"' style='width:180px; height:165px'>";
-								var strhref = "<a href='${pageContext.request.contextPath}/raiser/raiserAction!select?account="
-										+ raiser.account
-										+ "'>"
-										+ strimg
-										+ "<br>" + raiser.name + "</a>";
-								$("#raiserLogo").prepend(
-										"<div class='col-md-3'><li style='padding:15px'>"
-												+ strhref + "</li></div>");
-								$("#logo" + raiser.id).attr("src",
-										"data:image/png;base64," + srclogo);
-							});
-		}
-	</script>
+<script>
+	var url = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!selectAll"
+	$.post(url, getData, "json");
+	function getData(raisers) {
+		$(raisers)
+				.each(
+						function(index, raiser) {
+							var srclogo = arrayBufferToBase64(raiser.logo);
+							var strimg = "<img src='' class='img-thumbnail ForAllRaiser' id='logo"+raiser.id+"' style='width:180px; height:165px'>";
+							var strhref = "<a href='${pageContext.request.contextPath}/raiser/raiserAction!select?account="
+									+ raiser.account
+									+ "'>"
+									+ strimg
+									+ "<br>"
+									+ raiser.name + "</a>";
+							$("#raiserLogo").prepend(
+									"<div class='col-md-3'><li style='padding:15px'>"
+											+ strhref + "</li></div>");
+							$("#logo" + raiser.id).attr("src",
+									"data:image/png;base64," + srclogo);
+						});
+	}
+</script>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 	<div class="container">
-	<br>
+		<br>
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">

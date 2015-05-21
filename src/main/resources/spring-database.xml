@@ -50,6 +50,7 @@ The only reason for chancing this setting is if you want to use JTA managed tran
 				<value>TransactionDetailModel.hbm.xml</value>
 				<value>CampaignCommentModel.hbm.xml</value>
 				<value>CampaignTypeModel.hbm.xml</value>
+				<value>CityModel.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

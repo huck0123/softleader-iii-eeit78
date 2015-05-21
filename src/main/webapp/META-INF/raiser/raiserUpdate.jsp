@@ -47,7 +47,7 @@ body {
 							</div>
 							<div class="col-md-8">
 								<form
-									action="<c:url value='/raiser/raiserAction!update.action' />"
+									action="<c:url value='/raiser/raiserUpdate!update.action' />"
 									method="post" enctype="multipart/form-data">
 
 									<div class="form-group">

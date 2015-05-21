@@ -60,7 +60,7 @@
 </div>
 <script>
 	//以下顯示相關
-	var urlForRaiserHistory = '${pageContext.request.contextPath}/raiser/raiserSelectAll!getRaiserHistory';
+	var urlForRaiserHistory = '${pageContext.request.contextPath}/raiser/raiserHistory!getRaiserHistory';
 	$.post(urlForRaiserHistory, {
 		"campaignForm.name" : "${raiser.name}"
 	}, getData, "json");
@@ -140,7 +140,7 @@
 	}
 
 	//以下搜尋相關
-	var urlRHcondition = "${pageContext.request.contextPath}/raiser/raiserSelectAll!getRaiserHistoryByCondition";
+	var urlRHcondition = "${pageContext.request.contextPath}/raiser/raiserHistory!getRaiserHistoryByCondition";
 	function loadByForm() {
 		$.post(urlRHcondition, {
 			"campaignForm.name" : $("#keywordRH").val(),

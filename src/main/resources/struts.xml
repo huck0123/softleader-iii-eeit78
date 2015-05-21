@@ -93,6 +93,20 @@
 		</interceptors>
 	
 	</package>
+	
+	<package name="raiser-Interceptor" abstract="true" extends="struts-default">
+		<interceptors>
+			<!--定義一個名為adminAuthentication的自定攔截器 -->
+			<interceptor class="tw.org.iiiedu.thegivers.interceptor.RaiserAuthentication"
+				name="raiserAuthentication" />
+			<!--定義一個驗證登入的攔截器堆疊 -->
+			<interceptor-stack name="raiserDefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="raiserAuthentication" />
+			</interceptor-stack>
+		</interceptors>
+	
+	</package>
 
 
 <!-- 	<package name="default" namespace="/" extends="struts-default"> -->

@@ -63,7 +63,6 @@ public class CampaignAction extends ActionSupport implements
 		if (campaignForm.getPageSize() == null) {
 			campaignForm.setPageSize(6);
 		}
-		System.out.println(campaignForm.getName() +" : "+ campaignForm.getType() + " : " + campaignForm.getLocation());
 		List campaigns = campaignService.getByAllCondition(campaignForm);
 		Gson gson = new Gson();
 		String json = gson.toJson(campaigns);

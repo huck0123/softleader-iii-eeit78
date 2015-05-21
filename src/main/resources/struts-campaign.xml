@@ -35,6 +35,20 @@
 			</result>
 		</action>
 		
+		<action name="campaignTypeAction" class="campaignTypeAction">
+			<result type="stream" name="selectAll">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<action name="cityAction" class="cityAction">
+			<result type="stream" name="selectAll">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
 		<action name="campaignRaise">
 			<interceptor-ref name="campaignDefault" />
 			<result>/META-INF/campaign/campaignRaise.jsp</result>

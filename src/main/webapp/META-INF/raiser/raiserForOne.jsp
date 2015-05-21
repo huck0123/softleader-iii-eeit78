@@ -54,11 +54,12 @@ body {
 		</div>
 	</div>
 	<script>
-		var url = "${pageContext.request.contextPath}/raiser/raiserSelectAll!select";
+		var url = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 		$.post(url, {
 			"account" : "${raiserSelf.account}"
 		}, getData, "json");
 		function getData(raiser) {
+			console.log(raiser);
 			var srclogo = arrayBufferToBase64(raiser.logo);
 			$("#logo").attr("src", "data:image/png;base64," + srclogo);
 		}
