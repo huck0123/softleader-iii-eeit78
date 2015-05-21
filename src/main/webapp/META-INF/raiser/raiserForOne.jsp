@@ -59,6 +59,7 @@ body {
 			"account" : "${raiserSelf.account}"
 		}, getData, "json");
 		function getData(raiser) {
+			console.log(raiser);
 			var srclogo = arrayBufferToBase64(raiser.logo);
 			$("#logo").attr("src", "data:image/png;base64," + srclogo);
 		}
