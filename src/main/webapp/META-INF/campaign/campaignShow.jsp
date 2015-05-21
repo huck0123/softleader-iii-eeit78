@@ -65,7 +65,7 @@ margin-bottom: -40px;
 <body>
 <jsp:include page="/header.jsp" />
 
-	<div id="conditionSearchDiv" class="container">
+	<div id="conditionSearchDiv" class="container" >
 		<div class="row" style="display: table-row; vertical-align: middle;">
 			<div style="display: inline-block; width: 40%;">
 				<div id="custom-search-input">
@@ -98,13 +98,13 @@ margin-bottom: -40px;
 		</nav>
 	</div>
 
-	<div class="container" id="showColumn">
+	<div class="container" id="showColumn" style="min-height: 800px">
 		<div id="campaignRow" class=row></div>
 	</div>
 
 
 
-
+	<jsp:include page="/footer.jsp" />
 </body>
 
 

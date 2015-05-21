@@ -82,7 +82,7 @@ public class CampaignDao {
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				criteria.add(or);
 			}
-			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0) {
+			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0 && !campaignForm.getType().trim().equals("所有類型")) {
 				criteria.add(Restrictions.eq("type", campaignForm.getType().trim()));
 			}
 			if (campaignForm.getLocation() != null) {

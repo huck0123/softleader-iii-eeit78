@@ -30,6 +30,7 @@
 	<bean id="transactionAction" class="tw.org.iiiedu.thegivers.web.TransactionAction" scope="prototype"/>
 	<bean id="campaignCommentAction" class="tw.org.iiiedu.thegivers.web.CampaignCommentAction" scope="prototype"></bean>
 	<bean id="campaignTypeAction" class="tw.org.iiiedu.thegivers.web.CampaignTypeAction" scope="prototype"></bean>
+	<bean id="cityAction" class="tw.org.iiiedu.thegivers.web.CityAction" scope="prototype"></bean>
 	
 	<!-- 此頁提供 xxxxAction的程式碼位置-->
 	<!-- 以下以demoAction為例:
