@@ -45,7 +45,7 @@ b {
 					<input type="text" class="card" name="cardNo_3" value="" required="required">- 
 					<input type="text" class="card" name="cardNo_4" value="" required="required">
 					<input type="text" name="form.cardNo" value="" style="display: none"></td>
-				<td></td>
+				<td><b id="cardNo"></b></td>
 			</tr>
 			<tr>
 				<td><label for="">有效期限:<b>*</b></label></td>
@@ -57,7 +57,7 @@ b {
 				<td><label for="">驗證碼:<b>*</b></label></td>
 				<td><input type="text" class="card" name="form.cardCheck" value=""
 					required="required">(卡片簽名處末三碼)</td>
-				<td></td>
+				<td><b id="cardCheck"></b></td>
 			</tr>
 		</table>
 	</div>
@@ -81,7 +81,7 @@ b {
 				<td><label for="">生日:<b>*</b></label></td>
 				<td><input type="date" name="form.cardHolderBirth"
 					style="height: 30px;" required="required"></td>
-				<td></td>
+				<td><b id="checkBirth"></b></td>
 			</tr>
 			<tr>
 				<td><label for="">持卡人手機:<b>*</b></label></td>
@@ -103,15 +103,28 @@ b {
 	</div>
 </div>
 <script>
-
+	//驗證卡號
 	$('input[name="cardNo_4"]').on("keyup", function() {
 		if ($(this).val().length == 4) {
+			var tempCardNo = $('input[name="cardNo_1"]').val()
+									+$('input[name="cardNo_2"]').val()
+									+$('input[name="cardNo_3"]').val()
+									+$('input[name="cardNo_4"]').val()
+			re = /[\d]/;
+			for(var i=0; i<tempCardNo.length; i++){
+				if(!re.test(tempCardNo[i])){
+					$('#cardNo').text("請輸入數字");
+					$('#infoSubmit').prop("disabled", true);
+					return;
+				}else{
+					$('#cardNo').empty();
+					$('#infoSubmit').prop("disabled", false);
+				}
+			}
 			$('input[name="form.cardNo"]').val($('input[name="cardNo_1"]').val()
 					+$('input[name="cardNo_2"]').val()
 					+$('input[name="cardNo_3"]').val()
 					+$('input[name="cardNo_4"]').val());
-			console.log("haha");
-			$(this).prop('disabled',true);
 		}
 	});
 	
@@ -149,8 +162,44 @@ b {
 
 	//驗證生日
 	$('input[name="form.cardHolderBirth"]').on("blur", function(){
-		console.log("haha");
-	})
+		var birth = new Date($(this).val());
+		var nowDate = new Date();
+		if(nowDate.getFullYear()-birth.getFullYear() > 18){
+			$('#checkBirth').empty();
+			$('#infoSubmit').prop("disabled", false);
+			console.log("已滿18歲");
+			return;
+		}else if(nowDate.getFullYear()-birth.getFullYear() == 18){
+			if(birth.getMonth() < nowDate.getMonth()){
+				$('#checkBirth').empty();
+				$('#infoSubmit').prop("disabled", false);
+				console.log("已滿18");
+				return;
+			}else if(birth.getMonth() == nowDate.getMonth()){
+				if(birth.getDate() <= nowDate.getDate()){
+					$('#checkBirth').empty();
+					$('#infoSubmit').prop("disabled", false);
+					console.log("已滿18");
+					return;
+				}else{
+					$('#checkBirth').text("未滿18");
+					$('#infoSubmit').prop("disabled", true);
+					console.log("未滿18");
+					return;
+				}
+			}else{
+				$('#checkBirth').text("未滿18");
+				$('#infoSubmit').prop("disabled", true);
+				console.log("未滿18");
+				return;
+			}
+		}else{
+			$('#checkBirth').text("未滿18");
+			$('#infoSubmit').prop("disabled", true);
+			console.log("未滿18");
+			return;
+		}
+	});
 	
 	//驗證手機
 	$('input[name="form.cardHolderPhone"]').on("blur", function() {
@@ -160,7 +209,10 @@ b {
 		re = /^[\d]{10}$/;
 		if (!re.test(tel)) {
 			$('#tel').text("請輸入正確的手機號碼");
+			$('#infoSubmit').prop("disabled", true);
 			return;
+		}else{
+			$('#infoSubmit').prop("disabled", false);
 		}
 	})
 
@@ -184,10 +236,22 @@ b {
 			}
 		});
 		$('input[name="form.cardCheck"]').on("keyup", function() {
-			if ($(this).val().length == 3) {
-				$('input[name="form.cardHolder"]').focus();
+			var tempCardCheck = $(this).val(); 
+			if (tempCardCheck.length == 3) {
+				re = /^[\d]{3}$/;
+					if(!re.test(tempCardCheck)){
+						$('#cardCheck').empty();
+						$('#cardCheck').text("請輸入數字");
+						$('#infoSubmit').prop("disabled", true);
+						return;
+					}else{
+						$('#cardCheck').empty();
+						$('input[name="form.cardHolder"]').focus();
+						$('#infoSubmit').prop("disabled", false);
+					}
+			}else{
+				$('#infoSubmit').prop("disabled", true);
 			}
 		})
 	}
 </script>
-

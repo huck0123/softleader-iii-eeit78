@@ -17,6 +17,9 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 
 <style>
+html, body{
+	height: 100%;
+}
 label b {
 	color: red;
 	font-size: 150%;
@@ -34,7 +37,7 @@ b {
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container">
+	<div class="container" style="height:70%;">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -121,6 +124,10 @@ b {
 		for(var i=0; i<amount.length; i++){
 			if(!re.test(amount[i])){
 				$('#amount').text("請輸入正確金額");
+				$('#infoSubmit').prop("disabled", true);
+				return;
+			}else{
+				$('#infoSubmit').prop("disabled", false);
 				return;
 			}
 		}
