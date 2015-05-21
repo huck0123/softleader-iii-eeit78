@@ -37,7 +37,7 @@
 						<label for="account" class="col-sm-2 control-label">帳號:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="account"
-								name="raiserForm.account" value="${form.account }"
+								name="raiserForm.account" value="${form.account }" placeholder="請輸入帳號"
 								required="required">
 						</div>
 						<div class="col-sm-3" id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
@@ -46,7 +46,7 @@
 					<div class="form-group">
 						<label for="inputpw" class="col-sm-2 control-label">密碼:</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw"
+							<input type="password" class="form-control" id="inputpw" placeholder="請輸入密碼"
 								name="raiserForm.passwd" required="required">
 						</div>
 						<div class="col-sm-3" class="errorClassForRaiser">${insertErrorPSW}</div>
@@ -55,7 +55,7 @@
 					<div class="form-group">
 						<label for="inputpw" class="col-sm-2 control-label">確認密碼:</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw2"
+							<input type="password" class="form-control" id="inputpw2" placeholder="再輸入一次密碼"
 								required="required">
 						</div>
 						<div class="col-sm-3" id="chkPw2" class="errorClassForRaiser"></div>
@@ -65,7 +65,7 @@
 						<label for="name" class="col-sm-2 control-label">團體名稱:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="name"
-								name="raiserForm.name" value="${form.name}" required="required">
+								name="raiserForm.name" value="${form.name}" placeholder="請注意,同一團體不可重複註冊!!" required="required">
 						</div>
 						<div class="col-sm-3" id="chkName" class="errorClassForRaiser">${insertErrorNAME}</div>
 					</div>
@@ -74,14 +74,14 @@
 						<label for="tel" class="col-sm-2 control-label">電話:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="tel"
-								name="raiserForm.tel" value="${form.tel}" required="required">
+								name="raiserForm.tel" value="${form.tel}" placeholder="註冊成功後將進行電話認證" required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="cname" class="col-sm-2 control-label">連絡人姓名:</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="cname"
+							<input type="text" class="form-control" id="cname" placeholder="請輸入連絡人姓名,稍後將進行電話認證"
 								name="raiserForm.contactPerson" value="${form.contactPerson}"
 								required="required">
 						</div>
@@ -91,7 +91,7 @@
 						<label for="ctel" class="col-sm-2 control-label">連絡人電話:</label>
 						<div class="col-sm-7">
 							<input type="tel" class="form-control" id="ctel"
-								name="raiserForm.contactTel" value="${form.contactTel}"
+								name="raiserForm.contactTel" value="${form.contactTel}" placeholder="註冊成功後將進行電話認證"
 								required="required">
 						</div>
 					</div>
@@ -100,7 +100,7 @@
 						<label for="mail" class="col-sm-2 control-label">信箱:</label>
 						<div class="col-sm-7">
 							<input type="email" class="form-control" id="mail"
-								name="raiserForm.email" value="${form.email}"
+								name="raiserForm.email" value="${form.email}" placeholder="請輸入信箱"
 								required="required">
 						</div>
 					</div>
@@ -108,7 +108,7 @@
 					<div class="form-group">
 						<label for="add" class="col-sm-2 control-label">地址:</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="add"
+							<input type="text" class="form-control" id="add" placeholder="請輸入團體地址"
 								name="raiserForm.address" value="${form.address}"
 								required="required">
 						</div>
@@ -134,7 +134,7 @@
 					<div class="form-group">
 						<label for="vdl" class="col-sm-2 control-label">團體短片:</label>
 						<div class="col-sm-7">
-							<input type="url" class="form-control" id="vdl"
+							<input type="url" class="form-control" id="vdl" placeholder="請輸入嵌入影片網址"
 								name="raiserForm.videoUrl" value="${form.videoUrl}">
 						</div>
 					</div>

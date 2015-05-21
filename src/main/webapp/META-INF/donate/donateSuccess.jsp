@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="refresh" content="3; url=/softleader-iii-eeit78/index.jsp" />
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -23,7 +24,7 @@ html, body{
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-<div style="height:55%;">
+<div style="height:70%;">
 	<br><br><br><br>
 	<h1>捐款成功</h1>
 	<br>

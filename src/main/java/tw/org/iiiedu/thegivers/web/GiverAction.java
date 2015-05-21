@@ -303,6 +303,21 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "checkAccount";
 	}
 	
+	//用ID收尋帳號跟照片
+	public String  selectHeadshot(){
+		model = service.getById(form.getId());
+		
+		GiverModel tempGM = new GiverModel();
+		tempGM.setId(model.getId());
+		tempGM.setAccount(model.getAccount());
+		tempGM.setHeadshot(model.getHeadshot());
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(tempGM);
+		inputStream = new ByteArrayInputStream(jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "selectHeadshot";
+	}
 	
 	//驗證密碼是否正確
 	public String checkPassword(){

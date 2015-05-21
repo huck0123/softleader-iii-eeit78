@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <meta http-equiv="Refresh" content="3; URL=/softleader-iii-eeit78/index.jsp"> -->
+<meta http-equiv="Refresh" content="3; URL=/softleader-iii-eeit78/index.jsp">
 <title>${success }成功</title>
 
 <link rel="stylesheet"
