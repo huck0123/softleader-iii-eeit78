@@ -46,6 +46,7 @@ public class CampaignCommentAction {
 	
 	public CampaignCommentModel transferToModel(CampaignCommentForm form){
 		model = new CampaignCommentModel();
+		model.setId(form.getId());
 		model.setCampaignId(form.getCampaignId());
 		model.setGiverId(form.getGiverId());
 		model.setReplyId(form.getReplyId());
@@ -57,7 +58,7 @@ public class CampaignCommentAction {
 	}
 	public String newComment(){
 		CampaignCommentModel model = campaignCommentService.writeComment(transferToModel(form));
-		model = campaignCommentService.getLostColumn(model.getId());
+		model = campaignCommentService.getByModelId(model.getId());
 		String data = new Gson().toJson(model);
 		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
 		
@@ -69,5 +70,14 @@ public class CampaignCommentAction {
 		inputStream = new ByteArrayInputStream(datas.getBytes(StandardCharsets.UTF_8));
 		
 		return "fetchAllComment";
+	}
+	public String replyComment(){
+		System.out.println("uuu");
+		System.out.println(transferToModel(form).getId());
+		CampaignCommentModel model = campaignCommentService.getByModelId(transferToModel(form).getId());
+		String data = new Gson().toJson(model);
+		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+		
+		return "findReplyComment";
 	}
 }

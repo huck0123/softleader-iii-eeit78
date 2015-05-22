@@ -106,14 +106,14 @@ pre {
 					<div>
 						<br />
 						<div class="col-md-2">
-							<img src="../pictures/noPicture.jpg" style="width: 100%">
+							<img id="img_0" src="../pictures/noPicture.jpg" style="width: 100%">
 						</div>
 						<div class="col-md-10">
 							<textarea id="standardComment" class="form-control" rows="4"></textarea>
 							<button type="button" class="btn btn-success btn-xs"
 								onclick="launchNewComment();" style="width: 50px">確定</button>
 							<button type="button" class="btn btn-warning btn-xs"
-								onclick="cancelNewComment();" style="width: 50px">取消</button>
+								onclick="cleanNewComment();" style="width: 50px">取消</button>
 							&nbsp;&nbsp;&nbsp; <label class="checkbox-inline"> <input
 								type="checkbox" id="inlineCheckbox1" value="option">匿名留言
 							</label>
@@ -159,72 +159,111 @@ pre {
 	var totalCount = 0;
 	var commentCurrentPage = 0;
 	var commentCampaignId;
-	var loadPersonUrl =		'${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
-	var newCommentUrl =     '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
-	var loadAllCommentUrl = '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
+	var loadPersonUrl =		  '${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
+	var newCommentUrl =       '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
+	var loadAllCommentUrl =   '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
+	var findReplyCommentUrl = '${pageContext.request.contextPath}/campaignComment/actReplyComment!replyComment';
 	
 	load();
 
 	function loadComment(commentParam) {
-		$('#No_' + commentParam)
-			.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1">'
+		console.log("${giver}");
+		if("${giver}"){
+			$('#No_' + commentParam)
+				.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1">'
 					+ '<div class="col-md-2">'
-					+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+					+ 	'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
 					+ '</div>'
 					+ '<div class="col-md-10">'
 					+ 	'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
-					+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam+ ');" style="width:50px">確定</button>&nbsp;'
-					+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment();" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+					+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam +');" style="width:50px">確定</button>&nbsp;'
+					+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment('+ commentParam +');" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
 					+ 	'<label class="checkbox-inline">'
 					+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
 					+ 	'</label>' 
 					+ '<hr/></div>' + '</div>');
-	}
-	
-	function showComment(data) {
-		if (data.replyId == 0) {
-			decidePosition(data, 'responsePlace');
-		} else {
-			$('#temp_' + data.replyId).remove();
-			decidePosition(data, data.replyId);
-		}
-	}
-	
-	function decidePosition(data, responseParam) {
-		if(responseParam != 'responsePlace'){
-			$('#No_' + responseParam).append(fixedContent(data));
-			$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
+			showUserPhoto("temp");
 		}else{
-			$('#No_' + responseParam).prepend(fixedContent(data));
+			alert("請先登入或註冊後再留言");
 		}
-	}
-	
-	function fixedContent(data){
-		return '<br/><hr/><div id="No_'+data.id+'">'
-			 + '<div class="col-md-2">'
-			 + 	'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
-		 	 + '</div>'
-			 + '<div class="col-md-10" id="replyPlace">'
-			 + 	'<p>'+loadByPersonalId(data)+'&nbsp;&nbsp;於&nbsp;&nbsp;'
-			 + 		data.commentTime
-			 + 	'</p>'
-			 + 	'<p>'
-			 + 		data.commentary
-			 + 	'</p>'
-			 + 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id+ ');">'
-			 + 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
-			 + 	'</button>&nbsp;&nbsp;&nbsp;'
-			 + 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
-			 + 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
-			 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
-			 + 	'<a>查看所有回覆</a>' 
-			 + '<br/><hr/></div>' + '</div>';
 	}
 	
 	function showAllComment(datas){
 		$.each(datas, function(name, data){
 			showComment(data);
 		})
+	}
+	
+	function showComment(data) {
+		if (data.replyId == 0) {
+			customize(data, 'responsePlace');
+		} else {
+			cancelNewComment(data.replyId);
+			customize(data, data.replyId);
+		}
+	}
+	
+	function showUserPhoto(imgId){
+		$.getJSON(loadPersonUrl, {"form.id" : "${giver.id}"}, function(dataJSON){
+			decidePhoto(imgId, dataJSON.headshot);
+		});
+	}
+	
+	function customize(data, responseParam){
+ 		if(data.anonymous == false){
+			$.getJSON(loadPersonUrl, {"form.id" : data.giverId}, function(dataJSON){
+				decidePosition(data, dataJSON.account, responseParam);
+			 	decidePhoto(data.id, dataJSON.headshot);
+			});
+ 		}else{
+ 			decidePosition(data, "未知的使用者", responseParam);
+ 		}
+	}
+	
+	function decidePosition(data, account, responseParam){
+		if(responseParam != 'responsePlace'){
+	 		$('#No_' + responseParam).append(fixedContent(data, account));
+	 		if(data.replyId != 0){
+	 			console.log("def");
+	 			console.log(data.replyId);
+				$.getJSON(findReplyCommentUrl, {"form.id" : data.replyId}, function(replyJSON){
+		 			console.log("abc");
+					if(replyJSON.replyId == 0){
+						$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
+		 			}
+				});
+	 		}
+		}else{
+	 		$('#No_' + responseParam).prepend(fixedContent(data, account));
+		}
+	}
+	
+	function decidePhoto(id, photoParam){
+		if(photoParam != null){
+			$('#img_' + id).attr("src", "data:image/png;base64," + arrayBufferToBase64(photoParam));
+		}
+	}
+	
+	function fixedContent(data, personalAccount) {
+		return '<br/><hr/><div id="No_'+data.id+'">'
+		 + '<div class="col-md-2">'
+		 + 	'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
+	 	 + '</div>'
+		 + '<div class="col-md-10" id="replyPlace">'
+		 + 	'<p>'+personalAccount+'&nbsp;&nbsp;於&nbsp;&nbsp;'
+		 + 		data.commentTime
+		 + 	'</p>'
+		 + 	'<p>'
+		 + 		data.commentary
+		 + 	'</p>'
+		 + 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id +');">'
+		 + 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
+		 + 	'</button>&nbsp;&nbsp;&nbsp;'
+		 + 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
+		 + 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
+		 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
+		 + 	'<a>查看所有回覆</a>' 
+		 + '<br/><hr/></div>' + '</div>';
 	}
 
 	$('#tab1').on('click', function(evt) {
@@ -322,7 +361,9 @@ pre {
 	function appendGiverData(){
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectGiverCountByCampaignId', {
 			'campaignForm.id' : '${param.id}'}, function(data) {
-				$('#giverStrong').text(data);})
+				$('#giverStrong').text(data);	
+			showUserPhoto(0);
+		})
 	}
 
 	function arrayBufferToBase64(buffer) {
@@ -354,6 +395,10 @@ pre {
 		}, showComment);
 	}
 	
+	function cleanNewComment(){
+		$('#standardComment').val("");
+	}
+	
 	function sendNewComment(replyId) {
 		$.getJSON(newCommentUrl, {
 			'form.campaignId' : commentCampaignId,
@@ -364,22 +409,10 @@ pre {
 		}, showComment);
 	}
 	
-	function loadByPersonalId(data){
-		if(data.anonymous != 'true'){
-			$.getJSON(loadPersonUrl, {"form.id" : data.giverId}, function(data){
-				return data.account;
-			});
-		}else{
-			return "未知的使用者";
-		}
+	function cancelNewComment(replyId){
+		$('#temp_' + replyId).remove();
 	}
-
-// 		if(data.headshot != null){
-// 			$('#img_' + data.id).attr("src", "data:image/png;base64," + arrayBufferToBase64(data.headshot));
-//	 	}else{
-// 			$('#img_' + data.id).attr("src", "../pictures/noPicture.jpg");
-// 		}
-
+	
 	function loadAllComment(commentCampaignId) {
 		$.getJSON(loadAllCommentUrl, {
 			'form.campaignId' : commentCampaignId
