@@ -29,6 +29,8 @@ import tw.org.iiiedu.thegivers.form.GiverForm;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.util.IdCheck;
+import tw.org.iiiedu.thegivers.util.NewPassword;
+import tw.org.iiiedu.thegivers.util.SendEmail;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
@@ -387,6 +389,29 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 				jsonStr.getBytes(StandardCharsets.UTF_8));
 		
 		return "selectByIdNumber";
+	}
+	
+	//忘記密碼
+	public String newPassword() {
+		model = service.getByAccount(form.getAccount());
+
+		NewPassword newPasswd = new NewPassword();
+		String password = newPasswd.createPassword();
+		SendEmail send = new SendEmail("teyushen@gmail.com", password);
+		send.email();
+		
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
+		byte[] b = md.digest(password.getBytes());
+		model.setPasswd(b);
+		service.update(model);
+
+		return null;
 	}
 	
 	//Select All  ----deprecated----
