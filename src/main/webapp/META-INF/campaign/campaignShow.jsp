@@ -83,6 +83,12 @@ margin-bottom: -40px;
 		</div>
 		<select id="campaign-type-input" class="form-control" name="campaignForm.type">
 </select>
+		<select id="campaign-onGoing-input" class="form-control" name="campaignForm.onGoing">
+		<option>現正進行</option>
+		<option>募款結束</option>
+		<option>所有活動</option>
+</select>
+		
 	</div>
 
 	<div class="container" >
@@ -114,7 +120,8 @@ var totalPage = 0;
 //0是第一頁
 var currentPage =0;
 var nameSearch="";
-var typeSearch="";
+var typeSearch="所有類型";
+var onGoing="現正進行";
 var pageSize = 6;
 load();
 
@@ -122,7 +129,7 @@ function load(){
 
 
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch},function(data){
+			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
 		
 		totalCount = data;
 		totalPage = Math.ceil(totalCount / pageSize);
@@ -137,7 +144,7 @@ function load(){
 		
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,
-			'campaignForm.type':typeSearch},
+			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},
 				 function(data){
 			data = JSON.parse(data);
  					$('#campaignRow').empty();
@@ -207,17 +214,18 @@ function load(){
 
 	$('#btn11').on('click',filter);
 	$('#campaign-type-input').on('change',filter)
+	$('#campaign-onGoing-input').on('change',filter)
 	function filter(){
 		nameSearch=$('#nameSearch3').val();
 		typeSearch=$('#campaign-type-input').val();
 		currentPage =0;
-		console.log($('#campaign-type-input').val());
+		onGoing=$('#campaign-onGoing-input').val();
 		load();
 	}
 
 function makeFunction(j){return function(){
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
-			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch},function(data){
+			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
  		$('#campaignRow').empty();
