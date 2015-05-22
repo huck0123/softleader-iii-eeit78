@@ -397,7 +397,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 
 		NewPassword newPasswd = new NewPassword();
 		String password = newPasswd.createPassword();
-		SendEmail send = new SendEmail("teyushen@gmail.com", password);
+		SendEmail send = new SendEmail(model.getEmail(), password);
 		send.email();
 		
 		MessageDigest md;

@@ -15,10 +15,10 @@ public class GiverServiceTest extends GenericTest {
 //		System.out.println(giverService.getById(1));
 //	}
 	
-	@Test
-	public void testLogin() {
-		System.out.println(giverService.login("jerry0123", "password"));
-	}
+//	@Test
+//	public void testLogin() {
+//		System.out.println(giverService.login("jerry0123", "password"));
+//	}
 	
 //	@Test 
 //	public void testGetByAccount(){
