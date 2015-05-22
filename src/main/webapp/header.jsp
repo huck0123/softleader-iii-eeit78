@@ -296,8 +296,8 @@ ul.nav {
 
 
 <script>
-	$(document)
-			.ready(
+	$(document).ready(
+	
 					function() {
 						$(window).scroll(
 								function() {
@@ -339,6 +339,12 @@ ul.nav {
 						$('#header-search-btn').on('click',function() {
 							location.href = '/softleader-iii-eeit78/campaign/campaignShow?nameSearch='
 													+ $('#header-name-search').val() + '&page=0';});
+						
+						$(window).on('resize',function(){
+								$('#to-top').attr('style',{});
+							})
+
+						
 					});
 </script>
 

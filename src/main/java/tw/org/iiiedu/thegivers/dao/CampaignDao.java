@@ -68,30 +68,42 @@ public class CampaignDao {
 	public Long getByAllConditionCount(CampaignForm campaignForm) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
-		
+
 		Disjunction or = Restrictions.disjunction();
 		criteria.createAlias("raiserModel", "a");
-		
+
 		if (campaignForm.getId() != null) {
 			criteria.add(Restrictions.eq("id", campaignForm.getId()));
 		} else {
 			if (campaignForm.getName() != null) {
 				or.add(Restrictions.like("name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
+				System.out.println("namename" + campaignForm.getName());
+				or.add(Restrictions.like("location",
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				or.add(Restrictions.like("a.name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				criteria.add(or);
 			}
-			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0) {
-				criteria.add(Restrictions.eq("type", campaignForm.getType().trim()));
+			if (campaignForm.getType() != null
+					&& campaignForm.getType().trim().length() > 0
+					&& !campaignForm.getType().trim().equals("所有類型")) {
+				criteria.add(Restrictions.eq("type", campaignForm.getType()
+						.trim()));
 			}
 			if (campaignForm.getLocation() != null) {
 				criteria.add(Restrictions.eq("location",
 						campaignForm.getLocation()));
 			}
-			if(campaignForm.getValid()!=null){
-				criteria.add(Restrictions.eq("valid",
-						campaignForm.getValid()));
+			if (campaignForm.getValid() != null) {
+				criteria.add(Restrictions.eq("valid", campaignForm.getValid()));
+			}
+			if (campaignForm.getOnGoing() != null
+					&& campaignForm.getOnGoing().trim().equals("現正進行")) {
+				criteria.add(Restrictions.ge("endDate", new Timestamp(new java.util.Date().getTime())));
+			} else if (campaignForm.getOnGoing() != null
+					&& campaignForm.getOnGoing().trim().equals("募款結束")) {
+				criteria.add(Restrictions.lt("endDate", new Timestamp(new java.util.Date().getTime())));
 			}
 		}
 
@@ -114,25 +126,37 @@ public class CampaignDao {
 			if (campaignForm.getName() != null) {
 				or.add(Restrictions.like("name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
+				System.out.println("namename" + campaignForm.getName());
+				or.add(Restrictions.like("location",
+						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				or.add(Restrictions.like("a.name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				criteria.add(or);
 			}
-			if (campaignForm.getType() != null && campaignForm.getType().trim().length()>0 && !campaignForm.getType().trim().equals("所有類型")) {
-				criteria.add(Restrictions.eq("type", campaignForm.getType().trim()));
+			if (campaignForm.getType() != null
+					&& campaignForm.getType().trim().length() > 0
+					&& !campaignForm.getType().trim().equals("所有類型")) {
+				criteria.add(Restrictions.eq("type", campaignForm.getType()
+						.trim()));
 			}
 			if (campaignForm.getLocation() != null) {
 				criteria.add(Restrictions.eq("location",
 						campaignForm.getLocation()));
 			}
-			if(campaignForm.getValid()!=null){
-				criteria.add(Restrictions.eq("valid",
-						campaignForm.getValid()));
+			if (campaignForm.getValid() != null) {
+				criteria.add(Restrictions.eq("valid", campaignForm.getValid()));
+			}
+			if (campaignForm.getOnGoing() != null
+					&& campaignForm.getOnGoing().trim().equals("現正進行")) {
+				criteria.add(Restrictions.ge("endDate", new Timestamp(new java.util.Date().getTime())));
+			} else if (campaignForm.getOnGoing() != null
+					&& campaignForm.getOnGoing().trim().equals("募款結束")) {
+				criteria.add(Restrictions.lt("endDate", new Timestamp(new java.util.Date().getTime())));
 			}
 		}
 		// criteria.add(Restrictions.eq("show", true));
 		criteria.addOrder(Order.desc("lastModify"));
-		
+
 		List campaignModels = criteria
 				.setFirstResult(
 						campaignForm.getPageNum() * campaignForm.getPageSize())
