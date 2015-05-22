@@ -107,9 +107,9 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		session.removeAttribute("insertErrorPSW");
 		session.removeAttribute("insertErrorMSG");
 		try {
-			rm.setAccount(raiserForm.getAccount());
+			rm.setAccount(raiserForm.getAccount().trim());
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
+			rm.setPasswd(md.digest(raiserForm.getPasswd().trim().getBytes()));
 			rm.setName(raiserForm.getName());
 			rm.setTel(raiserForm.getTel());
 			rm.setContactPerson(raiserForm.getContactPerson());
@@ -187,10 +187,10 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		session.removeAttribute("updateErrorNAME");
 		try {
 			rm.setId(raiserForm.getId());
-			rm.setAccount(raiserForm.getAccount());
+			rm.setAccount(raiserForm.getAccount().trim());
 			if (raiserForm.getPasswd() != null) {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
+				rm.setPasswd(md.digest(raiserForm.getPasswd().trim().getBytes()));
 			}
 			if (raiserForm.getName() != null  && raiserService.getByName(rm.getName()) == null) {
 				rm.setName(raiserForm.getName());

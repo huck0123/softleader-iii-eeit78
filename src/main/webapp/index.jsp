@@ -259,7 +259,7 @@ margin-bottom: -40px;
 	
 	
 	function loadRaiser(){
-		$.post("${pageContext.request.contextPath}/raiser/raiserSelectAll!selectAll", getData);
+		$.post("${pageContext.request.contextPath}/raiser/raiserSelectForOne!selectAll", getData);
 
 		function getData(raisers) {
 			raisers = JSON.parse(raisers);

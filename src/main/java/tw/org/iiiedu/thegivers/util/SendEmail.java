@@ -14,6 +14,10 @@ public class SendEmail {
 	private String email;
 	private String newPassword;
 	
+	public SendEmail(){
+		
+	}
+	
 	public SendEmail(String email, String newPassword){
 		this.email = email;
 		this.newPassword = newPassword;
