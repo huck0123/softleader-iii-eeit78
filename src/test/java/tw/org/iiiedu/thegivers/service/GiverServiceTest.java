@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.GenericTest;
 import tw.org.iiiedu.thegivers.model.GiverModel;
-import tw.org.iiiedu.thegivers.test.DennisTest2;
 
 public class GiverServiceTest extends GenericTest {
 
