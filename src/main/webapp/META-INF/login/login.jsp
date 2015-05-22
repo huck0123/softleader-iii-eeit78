@@ -18,9 +18,45 @@
 
 <title>登入</title>
 <style>
-body { 
- 	background-color: #eee; 
-} 
+body {
+	background-color: #eee;
+}
+
+.card-container.card {
+	width: 350px;
+	padding: 60px 40px;
+}
+
+.card {
+	background-color: #F7F7F7;
+	padding: 20px 25px 30px;
+	margin: 0 auto 25px;
+	margin-top: 100px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+	width: 130px;
+	height: 130px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.profile-name-card {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 0;
+	min-height: 1em;
+}
 
 .form-signin {
 	max-width: 330px;
@@ -36,8 +72,21 @@ body {
 	box-sizing: border-box;
 	padding: 10px;
 	font-size: 16px;
+	margin-bottom: 10px;
 }
 
+.modal {
+	position: fixed;
+	top: 100px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1050;
+	display: none;
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
+	outline: 0;
+}
 </style>
 </head>
 <body id="body">
@@ -46,37 +95,61 @@ body {
 <!-- 	<p>this is login.jsp</p> -->
 	
 	<div class="container">
-		<form class="form-signin"
-			action="<c:url value='/login/loginAction.action' />" method="post">
-			<h2 class="form-signin-heading">請登入</h2>
-			<label for="" class="sr-only">帳號</label> 
-			<input type="text" class="form-control" name="account" placeholder="帳號" required autofocus> 
-			<label	for="" class="sr-only">Password</label> 
-			<input type="password"	class="form-control" name="passwd" placeholder="Password" >
-			<div class="checkbox"></div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
-
-
-<!-- 					<table> -->
-<!-- 						<tr> -->
-<!-- 							<td>ID :</td> -->
-<!-- 							<td><input type="text" name="account" -->
-<%-- 								value="${param.account}"></td> --%>
-<%-- 							<td><span class="error">${errors.account}</span></td> --%>
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td>PWD :</td> -->
-<!-- 							<td><input type="text" name="passwd" -->
-<%-- 								value="${param.passwd}"></td> --%>
-<%-- 							<td><span class="error">${errors.passwd}</span></td> --%>
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td></td> -->
-<!-- 							<td align="right"><input type="submit" value="Login"></td> -->
-<!-- 						</tr> -->
-<!-- 					</table> -->
-		</form>
+		<div class="card card-container">
+			<form class="form-signin" action="<c:url value='/login/loginAction.action' />" method="post">
+				<img id="profile-img" class="profile-img-card" src="../pictures/headshot1.png" />
+				<p id="profile-name" class="profile-name-card"></p>
+				
+				<h2 class="form-signin-heading">請登入</h2>
+				
+				<input type="text" class="form-control" name="account" placeholder="帳號" required autofocus> 
+				<input type="password"	class="form-control" name="passwd" placeholder="Password" >
+				
+				<div class="checkbox"></div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
+				<br>
+				<a href="#" data-toggle="modal" data-target="#newPassword">忘記密碼</a>
+			</form>
 			<b style="color: red;">${wrongLogin}</b>
+			
+		</div>
 	</div>
+	
+<%-- 	<jsp:include page="/footer.jsp" /> --%>
+	
+	 <!-- newPassword Modal -->
+	<div class="modal fade" id="newPassword" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h3>我們將會根據您當初註冊時的email送出新密碼給您</h3><br>
+	        <p>(僅能用於捐款者，慈善團體帳號需電話確認)
+	      </div>
+	      <div class="modal-body">
+	      	<br>
+	      	<label for="">您的帳號</label>
+	        <input type="text" id="yourAccount" autofocus>
+	        <br><br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="forgetPasswd">確認送出</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<script>
+		
+		//送出Email
+		$('#forgetPasswd').on('click', function(){
+			var account = $('#yourAccount').val();
+			$.ajax("/softleader-iii-eeit78/giver/giverAction!newPassword?form.account=" + account);
+		});
+		
+	</script>
+	
+	
 </body>
 </html>

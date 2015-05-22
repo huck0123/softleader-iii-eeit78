@@ -30,16 +30,22 @@
 
 		<action name="raiserUpdate" class="raiserAction">
 			<interceptor-ref name="raiserDefault"></interceptor-ref>
-			<result name="update" type="redirect">/raiser/raiserUpdate
+			<result name="update" type="redirect">/raiser/raiserUpdate?raiserTabs=1
+			</result>
+			<result name="error" type="redirect">/raiser/raiserUpdate?raiserTabs=1
+			</result>
+			<result>/META-INF/raiser/raiserUpdate.jsp
 			</result>
 		</action>
 
 		<action name="raiserHistory" class="raiserAction">
 			<interceptor-ref name="raiserDefault"></interceptor-ref>
-			<result name="select" type="redirect">/raiser/raiserUpdate
+			<result name="select" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
 			</result>
 		</action>
-		
+
 		<action name="raiserShow" class="raiserAction">
 			<interceptor-ref name="adminDefault"></interceptor-ref>
 			<result name="select" type="stream">

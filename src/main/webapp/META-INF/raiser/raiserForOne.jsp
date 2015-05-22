@@ -33,7 +33,7 @@ body {
 				<h1>${raiserSelf.name}</h1>
 				<h5>地址:${raiserSelf.address}</h5>
 				<h5>電話:${raiserSelf.tel}</h5>
-				<h5 id="mailForRaiser">信箱:${raiserSelf.email}　</h5>
+				<h5 id="mailForRaiser">信箱:${raiserSelf.email}</h5>
 				<h5>連絡人姓名:${raiserSelf.contactPerson}</h5>
 				<h5>連絡人電話:${raiserSelf.contactTel}</h5>
 			</div>
@@ -64,10 +64,11 @@ body {
 			$("#logo").attr("src", "data:image/png;base64," + srclogo);
 		}
 
-		if ("${giver.name}" || "${raiser.name}" && "${raiser.name}"!="${raiserSelf.name}") {
+		if ("${giver.name}" || "${raiser.name}" || "${admin}"
+				&& "${raiser.name}" != "${raiserSelf.name}") {
 			$("#mailForRaiser")
 					.append(
-							"<a	href='mailto:${raiserSelf.name}<${raiserSelf.email}>?Subject=來自TheGivers使用者${giver.familyName}${giver.name}${raiser.name}(id:${giver.account}${raiser.account})寄給您的信&body=您好,我是${raiser.name}${giver.familyName}${giver.name},我在TheGivers網站上看到有關你們團體的消息,想請問您...'><span class='glyphicon glyphicon-envelope'></span></a>")
+							"<a	href='mailto:${raiserSelf.name}<${raiserSelf.email}>?Subject=來自TheGivers使用者${giver.familyName}${giver.name}${raiser.name}${admin.account}(id:${giver.account}${raiser.account}${admin.account})寄給您的信&body=您好,我是${raiser.name}${giver.familyName}${giver.name},我在TheGivers網站上看到有關你們團體的消息,想請問您...'>　<span class='glyphicon glyphicon-envelope'></span></a>")
 		}
 	</script>
 	<jsp:include page="../../footer.jsp" />

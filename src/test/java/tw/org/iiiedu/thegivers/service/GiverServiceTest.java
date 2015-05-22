@@ -1,23 +1,19 @@
 package tw.org.iiiedu.thegivers.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.org.iiiedu.thegivers.GenericTest;
-import tw.org.iiiedu.thegivers.model.GiverModel;
 
 public class GiverServiceTest extends GenericTest {
 
 	@Autowired
 	private GiverService giverService;
 
-	@Test
-	public void testGetById(){
-		System.out.println(giverService.getById(1));
-	}
+//	@Test
+//	public void testGetById(){
+//		System.out.println(giverService.getById(1));
+//	}
 	
 //	@Test
 //	public void testLogin() {
@@ -97,14 +93,14 @@ public class GiverServiceTest extends GenericTest {
 	
 //	@Test
 //	public void testUpdate() throws NoSuchAlgorithmException{
-//		GiverModel model = giverService.getByAccount("Amanda");
+//		GiverModel model = giverService.getByAccount("jerry0123");
 //		byte[] b = MessageDigest.getInstance("MD5").digest("password".getBytes());
 //		model.setPasswd(b);
 //		giverService.update(model);
 //		b = model.getPasswd();
 //		int i;
 //		for(i=0; i<b.length; i++){
-//			System.out.print(b[i]);
+//			System.out.print("xxx"+b[i]);
 //		}
 //	}
 	
