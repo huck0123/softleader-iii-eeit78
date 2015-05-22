@@ -159,14 +159,15 @@ pre {
 	var totalCount = 0;
 	var commentCurrentPage = 0;
 	var commentCampaignId;
-	var loadAllCommentUrl = '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
+	var loadPersonUrl =		'${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var newCommentUrl =     '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
+	var loadAllCommentUrl = '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
 	
 	load();
 
 	function loadComment(commentParam) {
 		$('#No_' + commentParam)
-			.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1"><hr/>'
+			.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1">'
 					+ '<div class="col-md-2">'
 					+ 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
 					+ '</div>'
@@ -177,20 +178,19 @@ pre {
 					+ 	'<label class="checkbox-inline">'
 					+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
 					+ 	'</label>' 
-					+ '</div>' + '<hr/></div>');
+					+ '<hr/></div>' + '</div>');
 	}
 	
 	function showComment(data) {
-		console.log(456);
 		if (data.replyId == 0) {
-			decideShowComment(data, 'responsePlace');
+			decidePosition(data, 'responsePlace');
 		} else {
 			$('#temp_' + data.replyId).remove();
-			decideShowComment(data, data.replyId);
+			decidePosition(data, data.replyId);
 		}
 	}
 	
-	function decideShowComment(data, responseParam) {
+	function decidePosition(data, responseParam) {
 		if(responseParam != 'responsePlace'){
 			$('#No_' + responseParam).append(fixedContent(data));
 			$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
@@ -200,12 +200,12 @@ pre {
 	}
 	
 	function fixedContent(data){
-		return '<div id="No_'+data.id+'"><br/><hr/>'
+		return '<br/><hr/><div id="No_'+data.id+'">'
 			 + '<div class="col-md-2">'
-			 + 	'<img src="../pictures/noPicture.jpg" style="width:100%">'
+			 + 	'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
 		 	 + '</div>'
 			 + '<div class="col-md-10" id="replyPlace">'
-			 + 	'<p>${giver.name}&nbsp;&nbsp;於&nbsp;&nbsp;'
+			 + 	'<p>'+loadByPersonalId(data)+'&nbsp;&nbsp;於&nbsp;&nbsp;'
 			 + 		data.commentTime
 			 + 	'</p>'
 			 + 	'<p>'
@@ -218,7 +218,7 @@ pre {
 			 + 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
 			 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
 			 + 	'<a>查看所有回覆</a>' 
-			 + '</div>' + '<br/><hr/></div>';
+			 + '<br/><hr/></div>' + '</div>';
 	}
 	
 	function showAllComment(datas){
@@ -311,9 +311,9 @@ pre {
 				sideDiv.appendTo(rowDiv2);
 				rowDiv2.appendTo($('#showColumn'));
 				$('#detailDiv').append('<pre>' + value.detail + '</pre>');
-				loadAllComment(commentCampaignId);
 				
 				appendGiverData();
+				loadAllComment(commentCampaignId);
 		})
 		
 	}
@@ -363,11 +363,29 @@ pre {
 			'form.anonymous' : "false"
 		}, showComment);
 	}
+	
+	function loadByPersonalId(data){
+		if(data.anonymous != 'true'){
+			$.getJSON(loadPersonUrl, {"form.id" : data.giverId}, function(data){
+				return data.account;
+			});
+		}else{
+			return "未知的使用者";
+		}
+	}
+
+// 		if(data.headshot != null){
+// 			$('#img_' + data.id).attr("src", "data:image/png;base64," + arrayBufferToBase64(data.headshot));
+//	 	}else{
+// 			$('#img_' + data.id).attr("src", "../pictures/noPicture.jpg");
+// 		}
 
 	function loadAllComment(commentCampaignId) {
 		$.getJSON(loadAllCommentUrl, {
 			'form.campaignId' : commentCampaignId
 		}, showAllComment);
 	}
+	
+	
 </script>
 </html>

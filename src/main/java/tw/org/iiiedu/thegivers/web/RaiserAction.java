@@ -46,7 +46,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private String name;
 	private String contactPerson;
 	private CampaignForm campaignForm;
-	
+
 	public CampaignForm getCampaignForm() {
 		return campaignForm;
 	}
@@ -183,6 +183,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public String update() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		RaiserModel rm = (RaiserModel) session.getAttribute("raiser");
+		session.removeAttribute("updateErrorPSW");
+		session.removeAttribute("updateErrorNAME");
 		try {
 			rm.setId(raiserForm.getId());
 			rm.setAccount(raiserForm.getAccount());
@@ -190,7 +192,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 				MessageDigest md = MessageDigest.getInstance("MD5");
 				rm.setPasswd(md.digest(raiserForm.getPasswd().getBytes()));
 			}
-			if (raiserForm.getName() != null) {
+			if (raiserForm.getName() != null  && raiserService.getByName(rm.getName()) == null) {
 				rm.setName(raiserForm.getName());
 			}
 			if (raiserForm.getTel() != null) {
@@ -217,11 +219,24 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			if (raiserForm.getLogo() != null)
 				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
 
+			if (raiserForm.getPasswd().trim().length() == 0) {
+				session.setAttribute("updateErrorPSW", "密碼不符合規定");
+				throw new Exception();
+			}
+			if (raiserService.getByName(raiserForm.getName()) != null
+					&& !rm.getName().equalsIgnoreCase(raiserForm.getName())) {
+				
+				System.out.println(raiserForm.getName() + ":::" + rm.getName());
+				session.setAttribute("updateErrorNAME", "此團體已註冊");
+				throw new Exception();
+			}
+
 			rm = raiserService.dataUpdate(rm);
 			session.setAttribute("raiser", rm);
+			session.setAttribute("updateRaiserMSG", "帳號更新成功");
 			return "update";
 		} catch (Exception e1) {
-			session.setAttribute("updateErrorMSG", "更新帳號失敗,請更正您的資料");
+			session.setAttribute("updateRaiserMSG", "帳號更新失敗,請更正您的資料");
 			return "error";
 		}
 	}
@@ -269,7 +284,6 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	public String getRaiserHistory() {
 		campaignForm.setPageNum(0);
 		campaignForm.setPageSize(6);
-		System.out.println("campaignForm.name = " + campaignForm.getName());
 		List<CampaignModel> cm = campaignService
 				.getByAllCondition(campaignForm);
 		Gson gson = new Gson();
@@ -279,14 +293,17 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		return "select";
 	}
 
-	public String getRaiserHistoryByCondition(){
-		if(campaignForm.getName().length() == 0 || campaignForm.getName() ==null){
+	public String getRaiserHistoryByCondition() {
+		if (campaignForm.getName().length() == 0
+				|| campaignForm.getName() == null) {
 			campaignForm.setName(null);
 		}
-		if(campaignForm.getType().length() == 0 || campaignForm.getType() ==null){
+		if (campaignForm.getType().length() == 0
+				|| campaignForm.getType() == null) {
 			campaignForm.setType(null);
 		}
-		if(campaignForm.getLocation().length() == 0 || campaignForm.getLocation() ==null){
+		if (campaignForm.getLocation().length() == 0
+				|| campaignForm.getLocation() == null) {
 			campaignForm.setLocation(null);
 		}
 		campaignForm.setPageNum(0);
@@ -299,6 +316,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";
 	}
+
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

@@ -46,6 +46,10 @@ public class CampaignForm {
 	
 	private Integer duration;
 	
+	private String Order;
+	
+	private String onGoing;
+	
 	
 
 	public List<String> getCheckbox() {
@@ -210,6 +214,22 @@ public class CampaignForm {
 
 	public void setBan(String ban) {
 		this.ban = ban;
+	}
+
+	public String getOrder() {
+		return Order;
+	}
+
+	public void setOrder(String order) {
+		Order = order;
+	}
+
+	public String getOnGoing() {
+		return onGoing;
+	}
+
+	public void setOnGoing(String onGoing) {
+		this.onGoing = onGoing;
 	}
 
 	
