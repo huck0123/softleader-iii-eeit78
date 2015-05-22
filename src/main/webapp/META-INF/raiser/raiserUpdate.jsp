@@ -44,6 +44,7 @@ body {
 							<div class="col-md-4">
 								<img src='' class='img-thumbnail' id='logo'
 									style='width: 200px; height: 200px'>
+									<div class="errorClassForRaiser">${updateRaiserMSG}</div>
 							</div>
 							<div class="col-md-8">
 								<form
@@ -67,6 +68,7 @@ body {
 										<label for="inputpw">密碼</label> <input type="password"
 											class="form-control" id="inputpw" name="raiserForm.passwd"
 											required="required">
+											<div class="errorClassForRaiser">${updateErrorPSW}</div>
 									</div>
 
 									<div class="form-group">
@@ -79,6 +81,7 @@ body {
 										<label for="name">團體名稱</label> <input type="text"
 											class="form-control" id="name" name="raiserForm.name"
 											required="required" value="${raiser.name}">
+											<div class="errorClassForRaiser">${updateErrorNAME}</div>
 									</div>
 
 									<div class="form-group">
@@ -143,7 +146,7 @@ body {
 		</div>
 	</div>
 	<script>
-		var url = "/softleader-iii-eeit78/raiser/raiserSelectAll!select";
+		var url = "/softleader-iii-eeit78/raiser/raiserSelectForOne!select";
 		$.post(url, {
 			"account" : "${raiser.account}"
 		}, getdata, "json");
@@ -171,7 +174,6 @@ body {
 			$("#chkPw2").text("")
 			if ($(this).val() != $("#inputpw").val()) {
 				$("#chkPw2").text("密碼不相符")
-				$("#inputpw").val("");
 				$("#inputpwChk").val("");
 			}
 		});
