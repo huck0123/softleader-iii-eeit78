@@ -39,9 +39,7 @@ b {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-body { 
- 	background-color: #D2E9FF; 
-}
+
 </style>
 
 </head>

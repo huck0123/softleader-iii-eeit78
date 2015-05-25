@@ -19,7 +19,7 @@
 <title>登入</title>
 <style>
 body {
-	background-color: #eee;
+	background-color: #006000;
 }
 
 .card-container.card {
@@ -28,7 +28,7 @@ body {
 }
 
 .card {
-	background-color: #F7F7F7;
+	background-color: #eee;
 	padding: 20px 25px 30px;
 	margin: 0 auto 25px;
 	margin-top: 100px;
@@ -87,6 +87,9 @@ body {
 	-webkit-overflow-scrolling: touch;
 	outline: 0;
 }
+body{
+	background-image: url("http://image2.wangchao.net.cn/bbs/1368318862902.jpg");
+}
 </style>
 </head>
 <body id="body">
@@ -106,6 +109,12 @@ body {
 				<input type="password"	class="form-control" name="passwd" placeholder="Password" >
 				
 				<div class="checkbox"></div>
+				<div style="padding:20px;">
+					<img src="/softleader-iii-eeit78/login/loginIdentity!IdentityImage" id="identityImage">
+					<br><br>
+					<input type="text" class="form-control" name="identityString">
+					<a class="btn btn-default" id="changeImage">更換圖形驗證</a>
+				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
 				<br>
 				<a href="#" data-toggle="modal" data-target="#newPassword">忘記密碼</a>
@@ -147,6 +156,17 @@ body {
 			var account = $('#yourAccount').val();
 			$.ajax("/softleader-iii-eeit78/giver/giverAction!newPassword?form.account=" + account);
 		});
+
+		
+		
+		$('#changeImage').on('click',function(){
+			$.ajax("/softleader-iii-eeit78/login/loginIdentity!IdentityImage").done(function(){
+				$('#identityImage').attr("src","/softleader-iii-eeit78/login/loginIdentity!IdentityImage");
+			});
+		});
+			
+		
+		
 		
 	</script>
 	
