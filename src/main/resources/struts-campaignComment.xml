@@ -17,5 +17,11 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		<action name="actReplyComment" class="campaignCommentAction">
+			<result name="findReplyComment" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 	</package>
 </struts>

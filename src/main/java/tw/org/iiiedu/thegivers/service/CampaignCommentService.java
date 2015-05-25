@@ -37,7 +37,7 @@ public class CampaignCommentService {
 		return campaignCommentDao.delete(id);
 	}
 	
-	public CampaignCommentModel getLostColumn(Integer id){
+	public CampaignCommentModel getByModelId(Integer id){
 		return campaignCommentDao.getById(id);
 	}
 	
