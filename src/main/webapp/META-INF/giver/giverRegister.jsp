@@ -196,7 +196,7 @@ $(function() {
 		//查看giver是否有相同的帳號
 		$.post(url, {'form.account' : thisAccount}, function(data) {
 			data = JSON.parse(data);
-			if (data.checkAccount == true) {
+			if (data.checkAccount) {
 				$('#submit').prop("disabled",true);
 				$('#account').text("帳號已被註冊");
 				return;

@@ -112,11 +112,9 @@ public class LoginAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-
+		int i = 0;
+		
 		HttpSession preSession = ServletActionContext.getRequest().getSession(false);
-		if(!preSession.getAttribute("identityString").equals(identityString)){
-			return "login";
-		}
 		if(preSession.getAttribute("giver") != null || preSession.getAttribute("raiser") != null ||
 				preSession.getAttribute("admin") != null){
 			preSession.invalidate();
@@ -125,10 +123,22 @@ public class LoginAction extends ActionSupport {
 		GiverModel gm = giverService.login(account.trim(),passwd);
 		HttpSession session = ServletActionContext.getRequest()
 				.getSession();
+		if(preSession.getAttribute("identityFail") == null){
+			session.setAttribute("identityFail", 0);
+		}else{
+			i = (int) preSession.getAttribute("identityFail");
+			if(i >= 3){
+				if(!preSession.getAttribute("identityString").equals(identityString)){
+					return "login";
+				}
+			}
+		}
+		
 		if (gm != null) {
 			if(!gm.isValid()){
 				ServletActionContext.getRequest().setAttribute("wrongLogin",
 						"帳號已被封鎖");
+				session.setAttribute("identityFail", ++i);
 				return "login";
 			}
 			session.setAttribute("giver", gm);
@@ -155,12 +165,13 @@ public class LoginAction extends ActionSupport {
 			if(!rm.isValid()){
 				ServletActionContext.getRequest().setAttribute("wrongLogin",
 						"帳號已被封鎖");
+				session.setAttribute("identityFail", ++i);
 				return "login";
 			}
 			session.setAttribute("raiser", rm);
 			try { // *工作2: 看看有無來源網頁 (-如有:則重導之)
 				String location = (String) session.getAttribute("location");
-				System.out.println("location(LoginHandler)=" + location);
+//				System.out.println("location(LoginHandler)=" + location);
 				if (location != null) {
 					session.removeAttribute("location");
 					HttpServletResponse response = ServletActionContext
@@ -180,7 +191,7 @@ public class LoginAction extends ActionSupport {
 			session.setAttribute("admin", am);
 			try { // *工作2: 看看有無來源網頁 (-如有:則重導之)
 				String location = (String) session.getAttribute("location");
-				System.out.println("location(LoginHandler)=" + location);
+//				System.out.println("location(LoginHandler)=" + location);
 				if (location != null) {
 					session.removeAttribute("location");
 					HttpServletResponse response = ServletActionContext
@@ -196,6 +207,7 @@ public class LoginAction extends ActionSupport {
 		
 			ServletActionContext.getRequest().setAttribute("wrongLogin",
 					"wrong account or password");
+			session.setAttribute("identityFail", ++i);
 			return "login";
 			
 	}

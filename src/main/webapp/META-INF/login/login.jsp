@@ -18,9 +18,6 @@
 
 <title>登入</title>
 <style>
-body {
-	background-color: #006000;
-}
 
 .card-container.card {
 	width: 350px;
@@ -87,10 +84,22 @@ body {
 	-webkit-overflow-scrolling: touch;
 	outline: 0;
 }
+b{
+	color: red;
+}
 body{
 	background-image: url("http://image2.wangchao.net.cn/bbs/1368318862902.jpg");
 }
 </style>
+<script>
+	$(document).ready(function(){
+		console.log('${sessionScope.identityFail}')
+		if('${sessionScope.identityFail}' >= 3){
+			$('#identityDiv').show();
+		}
+	});
+</script>
+
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
@@ -109,11 +118,11 @@ body{
 				<input type="password"	class="form-control" name="passwd" placeholder="Password" >
 				
 				<div class="checkbox"></div>
-				<div style="padding:20px;">
+				<div id="identityDiv" style="padding:10px; display:none;">
 					<img src="/softleader-iii-eeit78/login/loginIdentity!IdentityImage" id="identityImage">
 					<br><br>
 					<input type="text" class="form-control" name="identityString">
-					<a class="btn btn-default" id="changeImage">更換圖形驗證</a>
+					<a class="btn btn-default" id="changeImage">更換驗證圖形</a>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
 				<br>
@@ -139,34 +148,53 @@ body{
 	      	<br>
 	      	<label for="">您的帳號</label>
 	        <input type="text" id="yourAccount" autofocus>
-	        <br><br>
+	      	<br>
+	      	<b id="message"></b>
+	        <br>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="forgetPasswd">確認送出</button>
+	        <button type="button" class="btn btn-primary" id="forgetPasswd" disabled>確認送出</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	
 	<script>
+		var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		
+		//判斷帳號
+		$('#yourAccount').on('keyup', function(){
+			var thisAccount = $(this).val();
+			//查看giver是否有相同的帳號
+			$.post(url, {'form.account' : thisAccount}, function(data) {
+				data = JSON.parse(data);
+				if (!data.checkAccount) {
+					$('#forgetPasswd').prop("disabled",true);
+					$('#message').empty().text("此帳號不存在");
+					return;
+				}else{
+					$('#forgetPasswd').prop("disabled",false);
+					$('#message').empty();
+				}
+				
+			});
+		});
+	
 		//送出Email
 		$('#forgetPasswd').on('click', function(){
 			var account = $('#yourAccount').val();
+			$('#message').text('已寄信到您的信箱');
 			$.ajax("/softleader-iii-eeit78/giver/giverAction!newPassword?form.account=" + account);
 		});
-
 		
-		
+		//更換驗證圖形
 		$('#changeImage').on('click',function(){
 			$.ajax("/softleader-iii-eeit78/login/loginIdentity!IdentityImage").done(function(){
 				$('#identityImage').attr("src","/softleader-iii-eeit78/login/loginIdentity!IdentityImage");
 			});
 		});
 			
-		
-		
 		
 	</script>
 	
