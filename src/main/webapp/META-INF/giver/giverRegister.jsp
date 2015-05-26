@@ -39,8 +39,8 @@ b {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-body { 
- 	background-color: #D2E9FF; 
+body{
+	background-color:#FFFAF0;
 }
 </style>
 
@@ -49,7 +49,7 @@ body {
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container panel alert">
+	<div class="container panel alert" style="background-color:#FFFAF0">
 		<div class="row">
 			<div class="col-md-4"></div>
 
@@ -198,7 +198,7 @@ $(function() {
 		//查看giver是否有相同的帳號
 		$.post(url, {'form.account' : thisAccount}, function(data) {
 			data = JSON.parse(data);
-			if (data.checkAccount == true) {
+			if (data.checkAccount) {
 				$('#submit').prop("disabled",true);
 				$('#account').text("帳號已被註冊");
 				return;
