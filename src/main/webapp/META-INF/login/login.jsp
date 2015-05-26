@@ -90,6 +90,8 @@ b{
 body{
 	background-image: url("http://image2.wangchao.net.cn/bbs/1368318862902.jpg");
 }
+.row{margin-left:0px;
+margin-right:0px;}
 </style>
 <script>
 	$(document).ready(function(){
@@ -159,6 +161,8 @@ body{
 	    </div>
 	  </div>
 	</div>
+	
+		<jsp:include page="/footer2.jsp" />
 	
 	<script>
 		var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
