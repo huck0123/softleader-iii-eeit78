@@ -26,67 +26,67 @@ public class CampaignServiceTest extends GenericTest {
 //		assertTrue(campaignService.getAll() != null);
 //	}
 
-	@Test
-	public void testGetById() {
-		assertTrue(campaignService.getById(1) != null);
-	}
-
-	@Test
-	public void testInsert() {
-		CampaignModel cm = new CampaignModel();
-		cm.setCurrentFund(1000);
-		cm.setStartDate(new Timestamp(System.currentTimeMillis()));
-		cm.setDetail("募款");
-		cm.setEndDate(new Timestamp(System.currentTimeMillis()
-				+ (3600 * 24 * 30)));
-		cm.setGoal(222);
-		cm.setLocation("台北市大安區資策會");
-		cm.setName("資策會募款");
-		cm.setRaiserModel(raiserService.getByAccount("GreenPeace"));
-		cm.setShow(true);
-		cm.setValid(true);
-		cm.setType("資訊募款");
-		cm.setVedioUrl("http://docs.oracle.com/javase/8/docs/api/");
-		assertTrue(campaignService.insert(cm));
-	}
-
-	@Test
-	public void testUpdate() {
-		CampaignModel cm = new CampaignModel();
-		RaiserModel rm = raiserService.getByAccount("GreenPeace");
-		String name = "xxxx";
-		cm.setCurrentFund(1000);
-		cm.setStartDate(new Timestamp(System.currentTimeMillis()));
-		cm.setDetail("募款");
-		cm.setEndDate(new Timestamp(System.currentTimeMillis()
-				+ (3600 * 24 * 30)));
-		cm.setGoal(222);
-		cm.setLocation("台北市大安區資策會");
-		cm.setName(name);
-		cm.setRaiserModel(rm);
-		cm.setShow(true);
-		cm.setValid(true);
-		cm.setType("資訊募款");
-		cm.setVedioUrl("http://docs.oracle.com/javase/8/docs/api/");
-		campaignService.update(cm);
-		System.out.println(campaignService.getById(4));
-		assertTrue(campaignService.getById(4).getName().equals(name));
-	}
-
-	 @Test 
-	 public void getByAllConditionCount(){
-		 CampaignForm cf = new CampaignForm();
-		 assertTrue(campaignService.getByAllConditionCount(cf)>0);
-	
-	 }
-	 
-	 @Test
-	 public void getByAllCondition(){
-		 CampaignForm cf = new CampaignForm();
-		 cf.setId(23);
-		 System.out.println("hahaha"+campaignService.getByAllCondition(cf));
-		 assertTrue(campaignService.getByAllCondition(cf).size()>0);
-	 }
+//	@Test
+//	public void testGetById() {
+//		assertTrue(campaignService.getById(1) != null);
+//	}
+//
+//	@Test
+//	public void testInsert() {
+//		CampaignModel cm = new CampaignModel();
+//		cm.setCurrentFund(1000);
+//		cm.setStartDate(new Timestamp(System.currentTimeMillis()));
+//		cm.setDetail("募款");
+//		cm.setEndDate(new Timestamp(System.currentTimeMillis()
+//				+ (3600 * 24 * 30)));
+//		cm.setGoal(222);
+//		cm.setLocation("台北市大安區資策會");
+//		cm.setName("資策會募款");
+//		cm.setRaiserModel(raiserService.getByAccount("GreenPeace"));
+//		cm.setShow(true);
+//		cm.setValid(true);
+//		cm.setType("資訊募款");
+//		cm.setVedioUrl("http://docs.oracle.com/javase/8/docs/api/");
+//		assertTrue(campaignService.insert(cm));
+//	}
+//
+//	@Test
+//	public void testUpdate() {
+//		CampaignModel cm = new CampaignModel();
+//		RaiserModel rm = raiserService.getByAccount("GreenPeace");
+//		String name = "xxxx";
+//		cm.setCurrentFund(1000);
+//		cm.setStartDate(new Timestamp(System.currentTimeMillis()));
+//		cm.setDetail("募款");
+//		cm.setEndDate(new Timestamp(System.currentTimeMillis()
+//				+ (3600 * 24 * 30)));
+//		cm.setGoal(222);
+//		cm.setLocation("台北市大安區資策會");
+//		cm.setName(name);
+//		cm.setRaiserModel(rm);
+//		cm.setShow(true);
+//		cm.setValid(true);
+//		cm.setType("資訊募款");
+//		cm.setVedioUrl("http://docs.oracle.com/javase/8/docs/api/");
+//		campaignService.update(cm);
+//		System.out.println(campaignService.getById(4));
+//		assertTrue(campaignService.getById(4).getName().equals(name));
+//	}
+//
+//	 @Test 
+//	 public void getByAllConditionCount(){
+//		 CampaignForm cf = new CampaignForm();
+//		 assertTrue(campaignService.getByAllConditionCount(cf)>0);
+//	
+//	 }
+//	 
+//	 @Test
+//	 public void getByAllCondition(){
+//		 CampaignForm cf = new CampaignForm();
+//		 cf.setId(23);
+//		 System.out.println("hahaha"+campaignService.getByAllCondition(cf));
+//		 assertTrue(campaignService.getByAllCondition(cf).size()>0);
+//	 }
 	
 //
 //	 @Test
@@ -94,11 +94,27 @@ public class CampaignServiceTest extends GenericTest {
 //	 assertTrue(campaignService.delete(3));
 //	 }
 	 
-	 @Test
-	 public void testGetByCampaignName() {
-	 assertTrue(campaignService.getByCampaignName("")!=null);
-	 System.out.println(campaignService.getByCampaignName(""));
-	 }
+//	 @Test
+//	 public void testGetByCampaignName() {
+//	 assertTrue(campaignService.getByCampaignName("")!=null);
+//	 System.out.println(campaignService.getByCampaignName(""));
+//	 }
+	
+//	@Test
+//	public void testGetHighestGoal(){
+//		System.out.println(campaignService.getHighestGoal());
+//	}
+	
+//	@Test
+//	public void testGetCurrentFund(){
+//		System.out.println(campaignService.getHighestCurrentFund());
+//	}
+	
+//	@Test
+//	public void testGetCampaignCount(){
+//		System.out.println(campaignService.getCampaignCount());
+//	}
+		
 	
 	// @Test
 	// public void testGetByLocation() {

@@ -107,6 +107,22 @@ public class CampaignService {
 		
 		return campaignDao.getByAllConditionCount(campaignForm);
 	}
+	
+	// 募款額最高的活動
+	public int getHighestGoal(){
+		return campaignDao.getHighestGoal();
+	}
+	
+	//捐款金額最高的活動
+	public int getHighestCurrentFund() {
+		return campaignDao.getHighestCurrentFund();
+	}
+	
+	//現有活動數量
+	public int getCampaignCount() {
+		return campaignDao.getCampaignCount();
+	}
+	
 //	public List<CampaignModel> getByLocation(String location) {
 //		List<CampaignModel> list2 = new ArrayList<>();
 //		list2 = campaignDao.getByLocation(location);

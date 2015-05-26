@@ -100,10 +100,12 @@ public class CampaignDao {
 			}
 			if (campaignForm.getOnGoing() != null
 					&& campaignForm.getOnGoing().trim().equals("現正進行")) {
-				criteria.add(Restrictions.ge("endDate", new Timestamp(new java.util.Date().getTime())));
+				criteria.add(Restrictions.ge("endDate", new Timestamp(
+						new java.util.Date().getTime())));
 			} else if (campaignForm.getOnGoing() != null
 					&& campaignForm.getOnGoing().trim().equals("募款結束")) {
-				criteria.add(Restrictions.lt("endDate", new Timestamp(new java.util.Date().getTime())));
+				criteria.add(Restrictions.lt("endDate", new Timestamp(
+						new java.util.Date().getTime())));
 			}
 		}
 
@@ -148,10 +150,12 @@ public class CampaignDao {
 			}
 			if (campaignForm.getOnGoing() != null
 					&& campaignForm.getOnGoing().trim().equals("現正進行")) {
-				criteria.add(Restrictions.ge("endDate", new Timestamp(new java.util.Date().getTime())));
+				criteria.add(Restrictions.ge("endDate", new Timestamp(
+						new java.util.Date().getTime())));
 			} else if (campaignForm.getOnGoing() != null
 					&& campaignForm.getOnGoing().trim().equals("募款結束")) {
-				criteria.add(Restrictions.lt("endDate", new Timestamp(new java.util.Date().getTime())));
+				criteria.add(Restrictions.lt("endDate", new Timestamp(
+						new java.util.Date().getTime())));
 			}
 		}
 		// criteria.add(Restrictions.eq("show", true));
@@ -240,6 +244,48 @@ public class CampaignDao {
 		return null;
 	}
 
+	// 募款額最高的活動
+	public int getHighestGoal() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(CampaignModel.class);
+
+		int highestGoal = (int) criteria
+				.add(Restrictions.eq("valid", true))
+				.add(Restrictions.gt("endDate", new Timestamp(
+						(new java.util.Date()).getTime())))
+				.setProjection(Projections.max("goal")).uniqueResult();
+
+		return highestGoal;
+	}
+	
+	//捐款金額最高的活動
+	public int getHighestCurrentFund(){
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(CampaignModel.class);
+		
+		int highestCurrentFund = (int) criteria
+				.add(Restrictions.eq("valid", true))
+				.add(Restrictions.gt("endDate", new Timestamp(
+						(new java.util.Date()).getTime())))
+				.setProjection(Projections.max("currentFund")).uniqueResult();
+		
+		return highestCurrentFund;
+	}
+
+	//現有活動數量
+	public int getCampaignCount(){
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(CampaignModel.class);
+		
+		int campaignCount = ((Long) criteria
+				.add(Restrictions.eq("valid", true))
+				.add(Restrictions.gt("endDate", new Timestamp(
+						(new java.util.Date()).getTime())))
+				.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		
+		return campaignCount;
+	}
+	
 	//
 	// public List<CampaignModel> getByLocation(String location) {
 	//
