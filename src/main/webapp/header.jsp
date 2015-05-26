@@ -162,6 +162,8 @@ ul.nav {
 	border-bottom: 4px solid #EEEEEE;
 }
 /*nav responsive settings end*/
+
+.bottom-shadow{box-shadow: 0px 1px 2px 0px rgba(200,200,200,0.9)}
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
 <!-- 
@@ -169,7 +171,7 @@ ul.nav {
 這一段看有沒有辦法動態設成header的高度，不然會跑掉
 -->
 <div id="header-wrapper">
-	<div class="container">
+	<div id="header-container" class="container bottom-shadow">
 		<nav id="nav-header"
 			class="navbar navbar-default navbar-header-custom">
 			<div class="container-fluid">
@@ -313,6 +315,8 @@ ul.nav {
 												'container');
 										$('#collapse-login').addClass('collapse-login-scroll');
 										$('#header-holder').stop().show();
+										$('#header-container').removeClass(
+										'bottom-shadow');
 									} else {
 										$('#header-wrapper').stop()
 												.removeClass('scroll-header');
@@ -326,6 +330,8 @@ ul.nav {
 										$('#collapse-login')
 												.removeClass('collapse-login-scroll');
 										$('#header-holder').stop().hide();
+										$('#header-container').addClass(
+										'bottom-shadow');
 									}
 								});
 
