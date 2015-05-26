@@ -43,6 +43,14 @@
 		</action>
 	</package>
 
+	<package name="utilPackage" namespace="/util" extends="struts-default">
+		<action name="utilAction" class="utilAction">
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
 	
 <!-- 	<package name="raiserPackage" namespace="/raiser" extends="struts-default"> -->
 
