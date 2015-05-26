@@ -59,6 +59,8 @@ pre {
 .commentFont {
 	font-size: 20px;
 }
+
+		
 </style>
 </head>
 <body id="body">
@@ -102,20 +104,22 @@ pre {
 		<div id="commentDiv" style="display: none">
 			<div>
 				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
-				<div class="col-md-6 col-md-offset-3" id="No_commentPlace">
-					<div>
+				<div class="col-md-6 col-md-offset-3" id="No_commentPlace">					
+					<div>							
 						<br />
-						<div class="col-md-2">
+						<div class="col-md-2">							
 							<img id="img_0" src="../pictures/noPicture.jpg" style="width: 100%">
 						</div>
-						<div class="col-md-10">
+						<div class="col-md-10" id="mustLoginHere">						
 							<textarea id="standardComment" class="form-control" rows="4"></textarea>
 							<button type="button" class="btn btn-success btn-xs"
-								onclick="launchNewComment();" style="width: 50px">確定</button>
+								onclick="launchNewComment();" style="width: 50px">確定
+							</button>							
 							<button type="button" class="btn btn-warning btn-xs"
-								onclick="cleanNewComment();" style="width: 50px">取消</button>
-							&nbsp;&nbsp;&nbsp; <label class="checkbox-inline"> <input
-								type="checkbox" id="inlineCheckbox1" value="option">匿名留言
+								onclick="cleanNewComment();" style="width: 50px">取消
+							</button>&nbsp;&nbsp;&nbsp;
+							<label class="checkbox-inline">
+								<input type="checkbox" id="checkAnonymous" value="option">匿名留言
 							</label>
 						</div>
 					</div>
@@ -158,7 +162,9 @@ pre {
 	var currentPage = 0;
 	var totalCount = 0;
 	var commentCurrentPage = 0;
+	var produceKey = null;
 	var commentCampaignId;
+	
 	var loadPersonUrl =		  '${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var newCommentUrl =       '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentUrl =   '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
@@ -166,23 +172,34 @@ pre {
 	
 	load();
 
+
 	function loadComment(commentParam) {
-		console.log("${giver}");
 		if("${giver}"){
-			$('#No_' + commentParam)
-				.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1">'
-					+ '<div class="col-md-2">'
-					+ 	'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
-					+ '</div>'
-					+ '<div class="col-md-10">'
-					+ 	'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
-					+ 	'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam +');" style="width:50px">確定</button>&nbsp;'
-					+ 	'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment('+ commentParam +');" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
-					+ 	'<label class="checkbox-inline">'
-					+ 		'<input type="checkbox" id="inlineCheckbox1" value="option">匿名留言'
-					+ 	'</label>' 
-					+ '<hr/></div>' + '</div>');
-			showUserPhoto("temp");
+			if(produceKey == null){
+				produceKey = "temp_" + commentParam;
+				$('#No_' + commentParam)
+					.append('<div id="temp_'+commentParam+'" class="col-md-11 col-md-offset-1" style="margin-top:16px;margin-bottom:16px">'
+						+ 		'<div class="col-md-2">'
+						+ 			'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
+						+ 		'</div>'
+						+ 		'<div class="col-md-10">'
+						+ 			'<textarea id='+commentParam+' class="form-control" rows="4"></textarea>'
+						+ 			'<button type="button" class="btn btn-success btn-xs" onclick="sendNewComment('+ commentParam +');" style="width:50px">確定</button>&nbsp;'
+						+ 			'<button type="button" class="btn btn-warning btn-xs" onclick="cancelNewComment('+ commentParam +');" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;'
+						+ 			'<label class="checkbox-inline">'
+						+ 				'<input type="checkbox" id="tempCheck_'+commentParam+'" value="option">匿名留言'
+						+ 			'</label>' 
+						+ 		'</div>'
+						+ 	'</div>');
+				showUserPhoto("temp");
+			}else{
+				if(confirm("是否放棄前一個未完成的留言?")){
+					$('#' + produceKey).remove();
+					produceKey = null;
+					loadComment(commentParam);
+				}else{
+				}
+			}
 		}else{
 			alert("請先登入或註冊後再留言");
 		}
@@ -197,7 +214,7 @@ pre {
 	function showComment(data) {
 		if (data.replyId == 0) {
 			customize(data, 'responsePlace');
-		} else {
+		}else{
 			cancelNewComment(data.replyId);
 			customize(data, data.replyId);
 		}
@@ -222,17 +239,39 @@ pre {
 	
 	function decidePosition(data, account, responseParam){
 		if(responseParam != 'responsePlace'){
-	 		$('#No_' + responseParam).append(fixedContent(data, account));
-	 		if(data.replyId != 0){
-	 			console.log("def");
-	 			console.log(data.replyId);
-				$.getJSON(findReplyCommentUrl, {"form.id" : data.replyId}, function(replyJSON){
-		 			console.log("abc");
-					if(replyJSON.replyId == 0){
-						$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
-		 			}
-				});
-	 		}
+			$.getJSON(findReplyCommentUrl, {"form.id" : responseParam}, function(replyJSON){
+				if(replyJSON.replyId == 0){
+					$('#No_' + responseParam).append(fixedContent(data, account));
+		 		}else{
+		 			$('#No_' + replyJSON.replyId).append(fixedContent(data, account));
+		 		}
+				if(replyJSON.anonymous == true){
+ 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : 未知的使用者</p>");
+ 				}else{
+ 					$.getJSON(loadPersonUrl, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
+ 						document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+ 					});
+ 				}
+				$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
+			});		
+			
+// 			$('#No_' + responseParam).append(fixedContent(data, account));
+// 	 		if(data.replyId != 0){
+// 				$.getJSON(findReplyCommentUrl, {"form.id" : data.replyId}, function(replyJSON){
+// 					if(replyJSON.replyId == 0){
+// 						$('#No_' + data.id).attr("class", "col-md-11 col-md-offset-1");
+// 		 			}else{
+// 		 				if(replyJSON.anonymous == true){
+// 		 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : 未知的使用者</p>");
+// 		 				}else{
+// 		 					$.getJSON(loadPersonUrl, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
+// 		 						document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+// 		 					});
+// 		 				}
+// 		 			}
+// 				});
+// 	 		}
+
 		}else{
 	 		$('#No_' + responseParam).prepend(fixedContent(data, account));
 		}
@@ -245,25 +284,26 @@ pre {
 	}
 	
 	function fixedContent(data, personalAccount) {
-		return '<br/><hr/><div id="No_'+data.id+'">'
-		 + '<div class="col-md-2">'
-		 + 	'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
-	 	 + '</div>'
-		 + '<div class="col-md-10" id="replyPlace">'
-		 + 	'<p>'+personalAccount+'&nbsp;&nbsp;於&nbsp;&nbsp;'
-		 + 		data.commentTime
-		 + 	'</p>'
-		 + 	'<p>'
-		 + 		data.commentary
-		 + 	'</p>'
-		 + 	'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id +');">'
-		 + 		'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
-		 + 	'</button>&nbsp;&nbsp;&nbsp;'
-		 + 	'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
-		 + 	'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
-		 + 	'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
-		 + 	'<a>查看所有回覆</a>' 
-		 + '<br/><hr/></div>' + '</div>';
+		return '<div id="No_'+data.id+'" style="margin-top:16px;margin-bottom:16px">'
+		 + 			'<div class="col-md-2">'
+		 + 				'<img id="img_'+data.id+'" src="../pictures/noPicture.jpg" style="width:100%">'
+	 	 + 			'</div>'
+		 + 			'<div class="col-md-10" id="replyPlace">'
+		 + 				'<p>'+personalAccount+'&nbsp;&nbsp;於&nbsp;&nbsp;'
+		 + 					data.commentTime
+		 + 				'</p>'
+		 + 				'<p id="p_'+data.id+'">'
+		 + 					data.commentary
+		 + 				'</p>'
+		 + 				'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="loadComment('+ data.id +');">'
+		 + 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
+		 + 				'</button>&nbsp;&nbsp;&nbsp;'
+		 + 				'<span class="commentFont">15</span>&nbsp;&nbsp;&nbsp;'
+		 + 				'<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;'
+		 + 				'<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;'
+		 + 				'<a>查看所有回覆</a>' 
+		 + 			'</div>'
+		 + 	   '</div>';
 	}
 
 	$('#tab1').on('click', function(evt) {
@@ -281,6 +321,14 @@ pre {
 		$('#tabPageDiv>div').hide();
 		$('#commentDiv').slideDown();
 
+	});
+	
+	$('#mustLoginHere').on('click',function(){
+		if("${giver}"){
+		}else{
+			alert("請先登入或註冊後再留言");
+			$('#standardComment').blur();
+		}
 	});
 
 	function load() {
@@ -318,6 +366,7 @@ pre {
 					+ '</strong>元/' + commafy(value.goal)
 					+ '元</p>');
 				var d = new Date(value.endDate);
+				
 				var dateP = $('<p>於<strong>' + d.getFullYear()
 							+ '/' + d.getMonth() + '/' + d.getDate()
 							+ '</strong>結束</p>');
@@ -354,7 +403,6 @@ pre {
 				appendGiverData();
 				loadAllComment(commentCampaignId);
 		})
-		
 	}
 	
 	//取得所需Giver資料，並放好
@@ -386,13 +434,17 @@ pre {
 	}
 
 	function launchNewComment() {
-		$.getJSON(newCommentUrl, {
-			'form.campaignId' : commentCampaignId,
-			'form.giverId' : "${giver.id}",
-			'form.replyId' : 0,
-			'form.commentary' : $('#standardComment').val(),
-			'form.anonymous' : "false"
-		}, showComment);
+		if($('#standardComment').val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			$.getJSON(newCommentUrl, {
+				'form.campaignId' : commentCampaignId,
+				'form.giverId' : "${giver.id}",
+				'form.replyId' : 0,
+				'form.commentary' : $('#standardComment').val(),
+				'form.anonymous' : $('#checkAnonymous').prop('checked')
+			}, showComment);
+		}
 	}
 	
 	function cleanNewComment(){
@@ -400,16 +452,22 @@ pre {
 	}
 	
 	function sendNewComment(replyId) {
-		$.getJSON(newCommentUrl, {
-			'form.campaignId' : commentCampaignId,
-			'form.giverId' : "${giver.id}",
-			'form.replyId' : replyId,
-			'form.commentary' : $('#' + replyId).val(),
-			'form.anonymous' : "false"
-		}, showComment);
+		produceKey = null;
+		if($('#' + replyId).val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			$.getJSON(newCommentUrl, {
+				'form.campaignId' : commentCampaignId,
+				'form.giverId' : "${giver.id}",
+				'form.replyId' : replyId,
+				'form.commentary' : $('#' + replyId).val(),
+				'form.anonymous' : $('#tempCheck_' + replyId).prop('checked')
+			}, showComment);
+		}
 	}
 	
 	function cancelNewComment(replyId){
+		produceKey = null;
 		$('#temp_' + replyId).remove();
 	}
 	
@@ -418,7 +476,6 @@ pre {
 			'form.campaignId' : commentCampaignId
 		}, showAllComment);
 	}
-	
-	
+
 </script>
 </html>
