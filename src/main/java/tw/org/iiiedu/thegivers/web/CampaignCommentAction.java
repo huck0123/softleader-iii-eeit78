@@ -66,6 +66,7 @@ public class CampaignCommentAction {
 	}
 	public String allComment(){
 		List<CampaignCommentModel> models = campaignCommentService.grabAllComment(form.getCampaignId());
+		System.out.println(models);
 		String datas = new Gson().toJson(models);
 		inputStream = new ByteArrayInputStream(datas.getBytes(StandardCharsets.UTF_8));
 		
