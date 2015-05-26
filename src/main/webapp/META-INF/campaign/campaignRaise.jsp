@@ -47,7 +47,7 @@
 			<div class="form-group">
 				<label for="campaign-detail-input">活動詳情:</label>
 				<textarea id="campaign-detail-input" name="campaignForm.detail"
-					class="form-control" rows="10">${param.detail}</textarea>
+					class="form-control">${param.detail}</textarea>
 			</div>
 
 			<div class="form-group">
@@ -57,8 +57,17 @@
 			</div>
 		</form>
 	</div>
+<script src="/softleader-iii-eeit78/ckeditor/ckeditor.js" type="text/javascript"></script>
 
 <script>
+
+
+
+CKEDITOR.replace( 'campaign-detail-input', {
+    language: 'zh',
+    height: '350px',
+    removeButtons: 'Source,Maximize,Anchor',
+});
 
 	appendType();
 	function appendType(){
