@@ -15,14 +15,12 @@
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-.divForAllRaiser {
-	background-color: #FFC670;
-	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5) inset, inset 1px
-		1px 4px 2px rgba(20%, 20%, 40%, 0.5);
+.raiser-wrapper{
+
 }
 
 .ForAllRaiser {
-	box-shadow: 4px 4px 12px 2px rgba(20%, 20%, 40%, 0.5)
+	
 }
 </style>
 <title>使用者-所有團體資訊</title>
@@ -51,21 +49,27 @@
 </script>
 </head>
 <body id="body">
-	<jsp:include page="../../header.jsp" />
-	<div class="container">
-		<br>
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10">
+
+
+		<jsp:include page="../../header.jsp" />
+		
+		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:left; color:orangered; padding-left: 20px;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">參與團體</h1>
+				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即認識更多參與我們的公益團體</p>
+			</div>
+
+
+	</div>
+	<div class="raiser-wrapper" style="margin-top: 20px; margin-bottom: 30px">
+		<div class="container" style=" background-color: #f2f2f2; padding-top:30px;padding-bottom: 20px">
+			<div class="row">
 				<div class="divForAllRaiser">
-					<br>
-					<h2>所有參與團體</h2>
 					<ul class="list-unstyled">
 						<div class="row" id="raiserLogo"></div>
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-1"></div>
 		</div>
 	</div>
 	<jsp:include page="../../footer.jsp" />

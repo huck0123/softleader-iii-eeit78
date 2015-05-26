@@ -28,7 +28,7 @@
 	background-color: #eee;
 	padding: 20px 25px 30px;
 	margin: 0 auto 25px;
-	margin-top: 100px;
+	margin-top: 80px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -88,8 +88,10 @@ b{
 	color: red;
 }
 body{
-	background-image: url("http://image2.wangchao.net.cn/bbs/1368318862902.jpg");
+	background-color: white;
 }
+.row{margin-left:0px;
+margin-right:0px;}
 </style>
 <script>
 	$(document).ready(function(){
@@ -159,6 +161,8 @@ body{
 	    </div>
 	  </div>
 	</div>
+	
+		<jsp:include page="/footer2.jsp" />
 	
 	<script>
 		var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
