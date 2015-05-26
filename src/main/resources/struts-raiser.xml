@@ -30,9 +30,9 @@
 
 		<action name="raiserUpdate" class="raiserAction">
 			<interceptor-ref name="raiserDefault"></interceptor-ref>
-			<result name="update" >/raiser/raiserUpdate?raiserTabs=1
+			<result name="update" type="redirect">/raiser/raiserUpdate?raiserTabs=1
 			</result>
-			<result name="error" >/raiser/raiserUpdate?raiserTabs=1
+			<result name="error" type="redirect">/raiser/raiserUpdate?raiserTabs=1
 			</result>
 			<result>/META-INF/raiser/raiserUpdate.jsp
 			</result>

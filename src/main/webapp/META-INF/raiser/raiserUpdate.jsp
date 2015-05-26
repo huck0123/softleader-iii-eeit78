@@ -44,7 +44,7 @@ body {
 							<div class="col-md-4">
 								<img src='' class='img-thumbnail' id='logo'
 									style='width: 200px; height: 200px'>
-									<div class="errorClassForRaiser">${updateRaiserMSG}</div>
+									<div class="errorClassForRaiser" id="updateRaiserMSG">${updateRaiserMSG}</div>
 							</div>
 							<div class="col-md-8">
 								<form
