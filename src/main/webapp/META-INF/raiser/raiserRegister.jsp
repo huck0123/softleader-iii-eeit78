@@ -16,8 +16,25 @@
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
-.errorClassForRaiser{
-	color:red
+.errorClassForRaiser {
+	color: red
+}
+
+.code {
+	background-image: url(/softleader-iii-eeit78/pictures/code.jpg);
+	font-family: Arial;
+	font-style: italic;
+	color: Red;
+	border: 0;
+	padding: 2px 3px;
+	letter-spacing: 3px;
+	font-weight: bolder;
+	cursor: pointer;
+	text-align: center;
+}
+
+.unchanged {
+	border: 0;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,8 +54,8 @@
 						<label for="account" class="col-sm-2 control-label">帳號:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="account"
-								name="raiserForm.account" value="${form.account }" placeholder="請輸入帳號"
-								required="required">
+								name="raiserForm.account" value="${form.account }"
+								placeholder="請輸入帳號" required="required">
 						</div>
 						<div class="col-sm-3" id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
 					</div>
@@ -46,8 +63,8 @@
 					<div class="form-group">
 						<label for="inputpw" class="col-sm-2 control-label">密碼:</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw" placeholder="請輸入密碼"
-								name="raiserForm.passwd" required="required">
+							<input type="password" class="form-control" id="inputpw"
+								placeholder="請輸入密碼" name="raiserForm.passwd" required="required">
 						</div>
 						<div class="col-sm-3" class="errorClassForRaiser">${insertErrorPSW}</div>
 					</div>
@@ -55,8 +72,8 @@
 					<div class="form-group">
 						<label for="inputpw" class="col-sm-2 control-label">確認密碼:</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw2" placeholder="再輸入一次密碼"
-								required="required">
+							<input type="password" class="form-control" id="inputpw2"
+								placeholder="再輸入一次密碼" required="required">
 						</div>
 						<div class="col-sm-3" id="chkPw2" class="errorClassForRaiser"></div>
 					</div>
@@ -65,7 +82,8 @@
 						<label for="name" class="col-sm-2 control-label">團體名稱:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="name"
-								name="raiserForm.name" value="${form.name}" placeholder="請注意,同一團體不可重複註冊!!" required="required">
+								name="raiserForm.name" value="${form.name}"
+								placeholder="請注意,同一團體不可重複註冊!!" required="required">
 						</div>
 						<div class="col-sm-3" id="chkName" class="errorClassForRaiser">${insertErrorNAME}</div>
 					</div>
@@ -74,16 +92,17 @@
 						<label for="tel" class="col-sm-2 control-label">電話:</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" id="tel"
-								name="raiserForm.tel" value="${form.tel}" placeholder="註冊成功後將進行電話認證" required="required">
+								name="raiserForm.tel" value="${form.tel}"
+								placeholder="註冊成功後將進行電話認證" required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="cname" class="col-sm-2 control-label">連絡人姓名:</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="cname" placeholder="請輸入連絡人姓名,稍後將進行電話認證"
-								name="raiserForm.contactPerson" value="${form.contactPerson}"
-								required="required">
+							<input type="text" class="form-control" id="cname"
+								placeholder="請輸入連絡人姓名,稍後將進行電話認證" name="raiserForm.contactPerson"
+								value="${form.contactPerson}" required="required">
 						</div>
 					</div>
 
@@ -91,8 +110,8 @@
 						<label for="ctel" class="col-sm-2 control-label">連絡人電話:</label>
 						<div class="col-sm-7">
 							<input type="tel" class="form-control" id="ctel"
-								name="raiserForm.contactTel" value="${form.contactTel}" placeholder="註冊成功後將進行電話認證"
-								required="required">
+								name="raiserForm.contactTel" value="${form.contactTel}"
+								placeholder="註冊成功後將進行電話認證" required="required">
 						</div>
 					</div>
 
@@ -100,17 +119,17 @@
 						<label for="mail" class="col-sm-2 control-label">信箱:</label>
 						<div class="col-sm-7">
 							<input type="email" class="form-control" id="mail"
-								name="raiserForm.email" value="${form.email}" placeholder="請輸入信箱"
-								required="required">
+								name="raiserForm.email" value="${form.email}"
+								placeholder="請輸入信箱" required="required">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="add" class="col-sm-2 control-label">地址:</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="add" placeholder="請輸入團體地址"
-								name="raiserForm.address" value="${form.address}"
-								required="required">
+							<input type="text" class="form-control" id="add"
+								placeholder="請輸入團體地址" name="raiserForm.address"
+								value="${form.address}" required="required">
 						</div>
 					</div>
 
@@ -134,15 +153,31 @@
 					<div class="form-group">
 						<label for="vdl" class="col-sm-2 control-label">團體短片:</label>
 						<div class="col-sm-7">
-							<input type="url" class="form-control" id="vdl" placeholder="請輸入嵌入影片網址"
-								name="raiserForm.videoUrl" value="${form.videoUrl}">
+							<input type="url" class="form-control" id="vdl"
+								placeholder="請輸入嵌入影片網址" name="raiserForm.videoUrl"
+								value="${form.videoUrl}">
 						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="vdl" class="col-sm-2 control-label">驗證碼:</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="validCode"
+								placeholder="請輸入驗證碼" />
+						</div>
+						<div class="col-sm-2">
+							<input type="text" readonly="readonly" id="checkCode"
+								class="code form-control" />
+						</div>
+						<div class="col-sm-3" id="chkValidcode"
+							class="errorClassForRaiser"></div>
 					</div>
 
 					<div class="row" style="padding-top: 20px">
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
-							<button type="submit" class="btn btn-default">確定送出</button>
+							<button type="submit" id="submitForRaiserRegister"
+								class="btn btn-default" disabled="disabled">確定送出</button>
 							<button type="reset" class="btn btn-default">清除資料</button>
 						</div>
 					</div>
@@ -194,7 +229,7 @@
 				if (data != null) {
 					$("#chkName").text("此團體已註冊")
 				}
-			}, "json")
+			}, "json");
 		});
 
 		$("#logo")
@@ -212,6 +247,46 @@
 							}
 							reader.readAsDataURL(file);
 						});
+
+		//以下驗證碼相關
+		//產生
+		createForJsp();
+		function createForJsp() {
+			code = createCode();
+			$("#checkCode").val(code)
+			$("#checkCode").click(function() {
+				code = createCode();
+				if ($("#checkCode")) {
+					{
+						$(this).val(code);
+						$(this).blur();
+					}
+				}
+			});
+		}
+		//驗證
+		$("#validCode").blur(
+				function() {
+					var inputCode = $("#validCode").val();
+					if (inputCode.length <= 0) {
+						$("#chkValidcode").text("請輸入驗證碼！");
+					} else if (inputCode.toUpperCase() != code) {
+						$("#chkValidcode").text("驗證碼輸入錯誤！");
+						createForJsp();
+					} else {
+						$("#chkValidcode").text("正確");
+					}
+					//如果上述資料驗證都沒錯才能送出
+					if ($("#chkValidcode").text().length == 2
+							&& $("#chkName").text().length <= 0
+							&& $("#name").val()
+							&& $("#chkPw2").text().length <= 0
+							&& $("#inputpw").val()
+							&& $("#chkAcc").text().length <= 0
+							&& $("#account").val()) {
+						$("#submitForRaiserRegister").removeAttr('disabled');
+					}
+				});
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>
