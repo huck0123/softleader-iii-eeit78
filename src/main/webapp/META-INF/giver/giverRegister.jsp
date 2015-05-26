@@ -39,7 +39,9 @@ b {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-
+body{
+	background-color:#FFFAF0;
+}
 </style>
 
 </head>
@@ -47,7 +49,7 @@ b {
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container panel alert">
+	<div class="container panel alert" style="background-color:#FFFAF0">
 		<div class="row">
 			<div class="col-md-4"></div>
 
