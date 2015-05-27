@@ -20,12 +20,6 @@
 		<property name="commentary" type="java.lang.String">
 			<column name="commentary" />
 		</property>
-		<property name="likeNumber" type="java.lang.Integer">
-			<column name="likeNumber" />
-		</property>
-		<property name="anonymous" type="java.lang.Boolean">
-			<column name="anonymous" />
-		</property>
 		<property name="integrity" type="java.lang.Boolean" insert="false">
 			<column name="integrity" />
 		</property>

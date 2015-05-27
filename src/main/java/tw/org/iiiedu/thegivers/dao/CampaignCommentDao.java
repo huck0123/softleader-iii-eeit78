@@ -66,7 +66,15 @@ public class CampaignCommentDao {
 		Session session = sessionFactory.getCurrentSession();
 		List<CampaignCommentModel> models = session.createCriteria(CampaignCommentModel.class)
 				.add(Restrictions.eq("campaignId", campaignId))
-				.addOrder(Order.asc("replyId")).addOrder(Order.asc("id")).list();
+				.add(Restrictions.eq("replyId", 0))
+				.list();
+		List<CampaignCommentModel> models2 = session.createCriteria(CampaignCommentModel.class)
+				.add(Restrictions.eq("campaignId", campaignId))
+				.add(Restrictions.ne("replyId", 0))
+				.list();
+		for(int i=0 ; i<models2.size() ; i++){
+			models.add(models2.get(i));
+		}
 		return models;
 	}
 }

@@ -51,7 +51,6 @@ public class CampaignCommentAction {
 		model.setGiverId(form.getGiverId());
 		model.setReplyId(form.getReplyId());
 		model.setCommentary(form.getCommentary());
-		model.setAnonymous(form.getAnonymous());
 		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		
 		return model;
@@ -66,15 +65,12 @@ public class CampaignCommentAction {
 	}
 	public String allComment(){
 		List<CampaignCommentModel> models = campaignCommentService.grabAllComment(form.getCampaignId());
-		System.out.println(models);
 		String datas = new Gson().toJson(models);
 		inputStream = new ByteArrayInputStream(datas.getBytes(StandardCharsets.UTF_8));
 		
 		return "fetchAllComment";
 	}
 	public String replyComment(){
-		System.out.println("uuu");
-		System.out.println(transferToModel(form).getId());
 		CampaignCommentModel model = campaignCommentService.getByModelId(transferToModel(form).getId());
 		String data = new Gson().toJson(model);
 		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
