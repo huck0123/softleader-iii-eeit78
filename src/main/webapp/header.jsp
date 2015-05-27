@@ -29,7 +29,7 @@ a:hover{cursor: pointer;}
 	text-align: left;
 	top:0;
 	z-index: 9999;
-	width: 100%
+	width: 100%;
 }
 
 .navbar-header-custom {
@@ -191,7 +191,7 @@ ul.nav {
 					<ul id="nav-left" class="nav navbar-nav">
 						<li><a href="<c:url value='/campaign/campaignShow'/>">募款活動</a></li>
 						<li><a href="<c:url value='/raiser/raiserCheck'/>">參與團體</a></li>
-						<li><a href="<c:url value='/util/statChart'/>">關於我們</a></li>
+						<li><a href="<c:url value='/util/statChart_map'/>">統計圖表</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a data-toggle="collapse" data-target="#collapse-search"

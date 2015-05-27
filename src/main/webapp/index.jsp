@@ -134,7 +134,7 @@ margin-bottom: -40px;
 
 
 	<div class="cover-table-wrapper">
-		<div style="display: table-row; height: 0px;"></div>
+
 		<div class="cover-tr-wrapper">
 			<div class="cover-td-wrapper">
 				<div id="cover-content" class="container">
