@@ -77,6 +77,7 @@ body {
 											class="form-control" id="inputpw" name="raiserForm.passwd"
 											required="required" disabled="disabled">
 										<div class="errorClassForRaiser">${updateErrorPSW}</div>
+										<div id="chkPw1" class="errorClassForRaiser"></div>
 									</div>
 
 									<div class="form-group">
@@ -90,7 +91,7 @@ body {
 										<label for="name">團體名稱</label> <input type="text"
 											class="form-control" id="name" name="raiserForm.name"
 											required="required" value="${raiser.name}">
-										<div class="errorClassForRaiser">${updateErrorNAME}</div>
+										<div id="chkName" class="errorClassForRaiser">${updateErrorNAME}</div>
 									</div>
 
 									<div class="form-group">
@@ -127,8 +128,13 @@ body {
 									</div>
 
 									<div class="form-group">
-										<label>圖標</label> <input type="file" class="form-control"
-											name="raiserForm.logo" value="${raiser.logo}">
+										<label>圖標</label>
+										<div>
+											<input type="file" class="form-control"
+												name="raiserForm.logo" id="logo" accept="image/*"
+												onchange="changePic(this)">
+										</div>
+										<div id="chkLogo"></div>
 									</div>
 
 									<div class="form-group">
@@ -141,7 +147,7 @@ body {
 										<label for="vdl">團體短片</label> <input type="url"
 											class="form-control" id="vdl" name="raiserForm.videoUrl"
 											value="${raiser.videoUrl}">
-										<iframe src="${raiser.videoUrl}"
+										<iframe src="${raiser.videoUrl}" id="vdlPre"
 											style="width: 470px; height: 400px"></iframe>
 									</div>
 									<button type="submit" class="btn btn-default">確定送出</button>
@@ -182,14 +188,6 @@ body {
 			}
 		});
 
-		$("#inputpwChk").blur(function() {
-			$("#chkPw2").text("")
-			if ($(this).val() != $("#inputpw").val()) {
-				$("#chkPw2").text("密碼不相符")
-				$("#inputpwChk").val("");
-			}
-		});
-
 		var urlRaiserForCheckPWD = "/softleader-iii-eeit78/raiser/raiserSelectForOne!forCheckPSW";
 
 		$("#inputpwOld").blur(function() {
@@ -206,6 +204,55 @@ body {
 				}
 			});
 		});
+
+		$("#inputpw").blur(function() {
+			$("#chkPw1").text("");
+			raiserPSWCk = /^(?=.*[a-zA-Z])(?=.*\d).{6,30}$/
+			if (!raiserPSWCk.test($(this).val())) {
+				$("#chkPw1").text("密碼不符合格式")
+			}
+		});
+
+		$("#inputpwChk").blur(function() {
+			$("#chkPw2").text("");
+			if ($(this).val() != $("#inputpw").val()) {
+				$("#chkPw2").text("密碼不相符");
+				$("#inputpwChk").val("");
+			}
+		});
+
+		var raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!checkName";
+
+		$("#name").blur(function() {
+			$("#chkName").text("")
+			$.post(raiserRegisCheckUrl2, {
+				"name" : $(this).val(),
+				"account" : "${raiser.account}"
+			}, function(data) {
+				console.log(data)
+				if (data == 2) {
+					$("#chkName").text("此團體已註冊")
+				}
+			}, "json");
+		});
+		function changePic(input) {
+			console.log(111)
+			var file = input.files[0];
+			if (file != null) {
+				var reader = new FileReader();
+				reader.onload = function(event) {
+					$("#chkLogo")
+							.append(
+									"<img src='"+event.target.result
+					+"' style='weight:100px; height:100px;'>");
+				}
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+		
+		$("#vdl").change(function(){
+			$("#vdlPre").attr("src" ,$(this).val())
+		})
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>

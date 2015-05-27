@@ -19,7 +19,11 @@
 .errorClassForRaiser {
 	color: red
 }
-label{line-height: 30px;}
+
+label {
+	line-height: 30px;
+}
+
 .code {
 	background-image: url(/softleader-iii-eeit78/pictures/code.jpg);
 	font-family: Arial;
@@ -39,38 +43,43 @@ label{line-height: 30px;}
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:grey;">
-				<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
-				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
-			</div>
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px;">
+		<div class="row" style="text-align: center; color: grey;">
+			<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
+			<p
+				style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
+		</div>
 	</div>
 
 
-	<div class="container" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top:20px; margin-bottom: 20px;">
-		<div class="row" >
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top: 20px; margin-bottom: 20px;">
+		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<div style="padding-top: 50px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-	
-					<div style="height: 50px">${insertErrorMSG}</div>
-					<div class="errorClassForRaiser">*號為必填欄位</div>
+
+						<div style="height: 50px">${insertErrorMSG}</div>
+						<div class="errorClassForRaiser">*號為必填欄位</div>
 						<div class="form-group">
 							<label for="account">帳號 : *</label> <input type="text"
 								class="form-control" id="account" name="raiserForm.account"
-								value="${form.account }" placeholder="請輸入帳號，須為英文開頭，不限大小寫" required="required" autofocus="autofocus">
+								value="${form.account }" placeholder="請輸入帳號，須為英文開頭，不限大小寫"
+								required="required" autofocus="autofocus">
 
 							<div id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
 						</div>
 
 						<div class="form-group">
 							<label for="inputpw">密碼 : *</label> <input type="password"
-								class="form-control" id="inputpw" placeholder="請輸入密碼，須為英數混合且為6-30字"
-								name="raiserForm.passwd" required="required">
+								class="form-control" id="inputpw"
+								placeholder="請輸入密碼，須為英數混合且為6-30字" name="raiserForm.passwd"
+								required="required">
 
-							<div class="errorClassForRaiser">${insertErrorPSW}</div>
+							<div id="chkPw1" class="errorClassForRaiser">${insertErrorPSW}</div>
 						</div>
 
 						<div class="form-group">
@@ -110,6 +119,7 @@ label{line-height: 30px;}
 									name="raiserForm.contactPerson" value="${form.contactPerson}"
 									required="required">
 							</div>
+							<div id="chkCname" class="errorClassForRaiser"></div>
 						</div>
 
 						<div class="form-group">
@@ -117,9 +127,10 @@ label{line-height: 30px;}
 							<div>
 								<input type="tel" class="form-control" id="ctel"
 									name="raiserForm.contactTel" value="${form.contactTel}"
-									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機" required="required">
+									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機
+									" required="required">
 							</div>
-								<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
+							<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
 						</div>
 
 						<div class="form-group">
@@ -129,6 +140,7 @@ label{line-height: 30px;}
 									name="raiserForm.email" value="${form.email}"
 									placeholder="請輸入信箱" required="required">
 							</div>
+							<div id="chkMail" class="errorClassForRaiser"></div>
 						</div>
 
 						<div class="form-group">
@@ -138,6 +150,7 @@ label{line-height: 30px;}
 									placeholder="請輸入團體地址" name="raiserForm.address"
 									value="${form.address}" required="required">
 							</div>
+							<div id="chkAdd" class="errorClassForRaiser"></div>
 						</div>
 
 						<div class="form-group">
@@ -163,6 +176,8 @@ label{line-height: 30px;}
 								<input type="url" class="form-control" id="vdl"
 									placeholder="請輸入嵌入影片網址" name="raiserForm.videoUrl"
 									value="${form.videoUrl}">
+								<iframe src="" id="vdlPre"
+									style="display: none; width: 470px; height: 400px"></iframe>
 							</div>
 						</div>
 
@@ -181,14 +196,10 @@ label{line-height: 30px;}
 							<div id="chkValidcode" class="errorClassForRaiser"></div>
 						</div>
 
-
-
-
-
-					</form>
-											<button type="submit" id="submitForRaiserRegister"
+						<button type="submit" id="submitForRaiserRegister"
 							class="btn btn-default" disabled="disabled">確定送出</button>
 						<button type="reset" class="btn btn-default">清除資料</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -197,16 +208,19 @@ label{line-height: 30px;}
 		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!checkName";
 		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
+		$("#account").blur(function() {
+			if ($(this).val().length == 0) {
+				$("#chkAcc").text("請輸入帳號");
+			}
+		});
 		$("#account").change(function() {
 			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
-			if($(this).val().length == 0){
-				$("#chkAcc").text("請輸入帳號")
-			}
+
 			if (!$(this).val().match(raiserACCChk)) {
 				$("#chkAcc").text("帳號不符合格式")
 			}
-				
+
 			if ($(this).val().toUpperCase() == "ADMIN") {
 				$("#chkAcc").text("帳號已存在");
 			}
@@ -227,23 +241,25 @@ label{line-height: 30px;}
 					$("#chkAcc").text("帳號已存在");
 				}
 			});
+
 		});
 
 		$("#inputpw").blur(function() {
 			$("#chkPw1").text("")
-			if($(this).val().length == 0){
-				$("#chkAcc").text("請輸入密碼")
-			}
-			var raiserPSWCk = "^.[A-Za-z0-9]{6,30}"
-			if (!$(this).val().match(raiserPSWCk)) {
-				$("#chkPw1").text("密碼不符合格式")
+			if ($(this).val().length == 0) {
+				$("#chkPw1").text("請輸入密碼")
+			} else {
+				raiserPSWCk = /^(?=.*[a-zA-Z])(?=.*\d).{6,30}$/
+				if (!raiserPSWCk.test($(this).val())) {
+					$("#chkPw1").text("密碼不符合格式")
+				}
 			}
 		});
-		
+
 		$("#inputpw2").blur(function() {
 			$("#chkPw2").text("")
-			if($(this).val().length == 0){
-				$("#chkAcc").text("請輸入相同密碼")
+			if ($(this).val().length == 0) {
+				$("#chkPw2").text("請輸入相同密碼")
 			}
 			if ($(this).val() != $("#inputpw").val()) {
 				$("#chkPw2").text("密碼不相符")
@@ -252,20 +268,53 @@ label{line-height: 30px;}
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
-			if($(this).val().length == 0){
-				$("#chkAcc").text("請輸入團體名稱")
+			if ($(this).val().length == 0) {
+				$("#chkName").text("請輸入團體名稱")
 			}
 			$.post(raiserRegisCheckUrl2, {
 				"name" : $(this).val()
 			}, function(data) {
-				if (data != null) {
+				if (data == 2) {
 					$("#chkName").text("此團體已註冊")
 				}
 			}, "json");
 		});
 
-		
-		
+		$("#tel").blur(function() {
+			$("#chkTel1").text("");
+			if ($(this).val().length == 0) {
+				$("#chkTel1").text("請輸入正確格式的電話號碼")
+			}
+		});
+
+		$("#cname").blur(function() {
+			$("#chkCname").text("");
+			if ($(this).val().length == 0) {
+				$("#chkCname").text("請輸入連絡人姓名")
+			}
+		});
+
+		$("#ctel").blur(function() {
+			$("#chkTel2").text("");
+			if ($(this).val().length == 0) {
+				$("#chkTel2").text("請輸入正確格式的連絡人電話")
+			}
+		});
+
+		$("#add").blur(function() {
+			$("#chkAdd").text("");
+			if ($(this).val().length == 0) {
+				$("#chkAdd").text("請輸入團體地址")
+			}
+		});
+
+		$("#mail").blur(function() {
+			$("#chkMail").text("");
+			if ($(this).val().length == 0) {
+				$("#chkMail").text("請輸入正確格式的信箱")
+			}
+		});
+
 		$("#logo")
 				.change(
 						function() {
@@ -321,6 +370,10 @@ label{line-height: 30px;}
 						$("#submitForRaiserRegister").removeAttr('disabled');
 					}
 				});
+
+		$("#vdl").change(function() {
+			$("#vdlPre").show().attr("src", $(this).val())
+		})
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>
