@@ -135,7 +135,6 @@ margin-right:0px;}
 		</div>
 	</div>
 	
-<%-- 	<jsp:include page="/footer.jsp" /> --%>
 	
 	 <!-- newPassword Modal -->
 	<div class="modal fade" id="newPassword" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -199,7 +198,7 @@ margin-right:0px;}
 			});
 		});
 			
-		$.ajax("/softleader-iii-eeit78/util/utilAction!util");
+		
 	</script>
 	
 	

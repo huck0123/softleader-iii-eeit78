@@ -37,7 +37,7 @@ b {
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container" style="height:70%;">
+	<div class="container" style="min-height:70%;">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">

@@ -33,7 +33,7 @@
 						function(index, raiser) {
 							var srclogo = arrayBufferToBase64(raiser.logo);
 							var strimg = "<img src='' class='img-thumbnail ForAllRaiser' id='logo"+raiser.id+"' style='width:180px; height:165px'>";
-							var strhref = "<a href='${pageContext.request.contextPath}/raiser/raiserAction!select?account="
+							var strhref = "<a style='font-size: 16px;' href='${pageContext.request.contextPath}/raiser/raiserAction!select?account="
 									+ raiser.account
 									+ "'>"
 									+ strimg
@@ -54,7 +54,7 @@
 		<jsp:include page="../../header.jsp" />
 		
 		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:left; color:orangered; padding-left: 20px;">
+			<div class="row" style="text-align:center; color:	gray; padding-left: 20px;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">參與團體</h1>
 				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即認識更多參與我們的公益團體</p>
 			</div>

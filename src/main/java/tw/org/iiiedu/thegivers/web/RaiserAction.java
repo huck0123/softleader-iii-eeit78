@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -106,6 +108,8 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		session.removeAttribute("insertErrorNAME");
 		session.removeAttribute("insertErrorPSW");
 		session.removeAttribute("insertErrorMSG");
+		session.removeAttribute("insertErrorTEL1");
+		session.removeAttribute("insertErrorTEL2");
 		try {
 			rm.setAccount(raiserForm.getAccount().trim());
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -133,6 +137,18 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			}
 			if (raiserService.getByName(raiserForm.getName()) != null) {
 				session.setAttribute("insertErrorNAME", "此團體已註冊");
+				throw new Exception();
+			}
+			String phone = "(\\([0-9]*\\)[0-9]{4}-[0-9]{4})|([0-9]{10})";
+			Pattern p = Pattern.compile(phone);
+			Matcher m1 = p.matcher(raiserForm.getTel());
+			if (!m1.matches()) {
+				session.setAttribute("insertErrorTEL1", "電話號碼不符格式");
+				throw new Exception();
+			}
+			Matcher m2 = p.matcher(raiserForm.getContactTel());
+			if (!m2.matches()) {
+				session.setAttribute("insertErrorTEL2", "連絡人電話號碼不符格式");
 				throw new Exception();
 			}
 			rm = raiserService.register(rm);
@@ -190,9 +206,11 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			rm.setAccount(raiserForm.getAccount().trim());
 			if (raiserForm.getPasswd() != null) {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				rm.setPasswd(md.digest(raiserForm.getPasswd().trim().getBytes()));
+				rm.setPasswd(md
+						.digest(raiserForm.getPasswd().trim().getBytes()));
 			}
-			if (raiserForm.getName() != null  && raiserService.getByName(rm.getName()) == null) {
+			if (raiserForm.getName() != null
+					&& raiserService.getByName(rm.getName()) == null) {
 				rm.setName(raiserForm.getName());
 			}
 			if (raiserForm.getTel() != null) {
@@ -225,9 +243,21 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			}
 			if (raiserService.getByName(raiserForm.getName()) != null
 					&& !rm.getName().equalsIgnoreCase(raiserForm.getName())) {
-				
+
 				System.out.println(raiserForm.getName() + ":::" + rm.getName());
 				session.setAttribute("updateErrorNAME", "此團體已註冊");
+				throw new Exception();
+			}
+			String phone = "(\\([0-9]*\\)[0-9]{4}-[0-9]{4})|([0-9]{10})";
+			Pattern p = Pattern.compile(phone);
+			Matcher m1 = p.matcher(raiserForm.getTel());
+			if (!m1.matches()) {
+				session.setAttribute("updateErrorTEL1", "電話號碼不符格式");
+				throw new Exception();
+			}
+			Matcher m2 = p.matcher(raiserForm.getContactTel());
+			if (!m2.matches()) {
+				session.setAttribute("updateErrorTEL2", "連絡人電話號碼不符格式");
 				throw new Exception();
 			}
 
@@ -315,6 +345,25 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		inputStream = new ByteArrayInputStream(
 				jsonString.getBytes(StandardCharsets.UTF_8));
 		return "select";
+	}
+
+	public String forCheckPSW() throws NoSuchAlgorithmException {
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		session.removeAttribute("checkForRaiserPSW");
+		rm = raiserService.login(account, raiserForm.getPasswd());
+		if (rm != null) {
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(1);
+			inputStream = new ByteArrayInputStream(
+					jsonString.getBytes(StandardCharsets.UTF_8));
+			return "select";
+		} else {
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(2);
+			inputStream = new ByteArrayInputStream(
+					jsonString.getBytes(StandardCharsets.UTF_8));
+			return "select";
+		}
 	}
 
 	@Override
