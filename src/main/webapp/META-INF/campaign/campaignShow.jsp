@@ -12,20 +12,20 @@
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="/softleader-iii-eeit78/css/giver.css">
-	<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
 <style>
-html,body{
-height: 100%}
+html, body {
+	height: 100%
+}
+
 .thumbnail {
 	text-align: justify;
 	margin: 15px;
 }
-
 
 pre {
 	background-color: white;
@@ -37,74 +37,111 @@ pre {
 	position: relative; /*沒設relative的話會沒反應*/
 }
 
-
 a:hover {
 	cursor: pointer;
 }
-.row{
-margin-left: 0px;
-margin-right: 0px;
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
 }
-#conditionSearchDiv{
-display: table;
-min-height:30%;
-text-align: center;
+
+
+.innerCaption {
+	height: 220px;
+	overflow: hidden;
+	margin-bottom: -40px;
 }
-.innerCaption{
-height: 220px;
-overflow: hidden;
-margin-bottom: -40px;
-}
-.makeShadow{
-  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 50%);
-	position:relative; /*因為pre已經設relative了，若這邊沒設的話，會被pre蓋過去*/
+
+.makeShadow {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 50%);
+	position: relative; /*因為pre已經設relative了，若這邊沒設的話，會被pre蓋過去*/
 	padding-top: 50px;
+}
+
+#showColumn {
+	min-height: 800px;
+	margin-bottom: 20px;
 }
 </style>
 </head>
 <body>
-<jsp:include page="/header.jsp" />
+	<jsp:include page="/header.jsp" />
 
-	<div id="conditionSearchDiv" class="container" >
-		<div class="row" style="display: table-row; vertical-align: middle;">
-			<div style="display: inline-block; width: 40%;">
-				<div id="custom-search-input">
-					<div class="input-group col-md-12">
-						<input type="text" class="form-control input-lg"
-							placeholder="請輸入關鍵字" id="nameSearch3" /> <span
-							class="input-group-btn">
-							<button class="btn btn-info btn-lg" type="button" id="btn11">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</span>
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 26px;margin-bottom: 16px;">
+		<div class="row" style="text-align: center; color: grey;">
+			<h1 style="margin-top: 30px; font-weight: bolder;">募款活動</h1>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6" style="margin-bottom: 16px;">
+					<div
+						style="display: inline-block; width: 100%; vertical-align: middle;">
+						<div id="custom-search-input">
+							<div class="input-group col-md-12">
+								<input type="text" class="form-control input-lg"
+									placeholder="請輸入關鍵字" id="nameSearch3" /> <span
+									class="input-group-btn">
+									<button class="btn btn-info btn-lg" type="button" id="btn11">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-3" style="margin-bottom: 16px;">
+					<div
+						style="display: inline-block; width: 100%; vertical-align: middle;">
+						<select id="campaign-type-input" class="form-control"
+							name="campaignForm.type">
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3" style="margin-bottom: 16px;">
+					<div
+						style="display: inline-block; width: 100%; vertical-align: middle;">
+						<select id="campaign-onGoing-input" class="form-control"
+							name="campaignForm.onGoing">
+							<option>現正進行</option>
+							<option>募款結束</option>
+							<option>所有活動</option>
+						</select>
 					</div>
 				</div>
 			</div>
 		</div>
-		<select id="campaign-type-input" class="form-control" name="campaignForm.type">
-</select>
-		<select id="campaign-onGoing-input" class="form-control" name="campaignForm.onGoing">
-		<option>現正進行</option>
-		<option>募款結束</option>
-		<option>所有活動</option>
-</select>
-		
 	</div>
 
-	<div class="container" >
+
+
+
+
+
+	</div>
+
+	<div class="container">
 		<nav>
 			<ul class="pagination">
-			<li><a id="before" aria-label="Previous"><spanaria-hidden="true">&laquo;</span></a></li>
+				<li><a id="before" aria-label="Previous"><spanaria-hidden="true">&laquo;</span></a></li>
 			</ul>
 			<ul id="navigation" class="pagination">
 			</ul>
 			<ul class="pagination">
-			<li><a id="after" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				<li><a id="after" aria-label="Next"> <span
+						aria-hidden="true">&raquo;</span></a></li>
 			</ul>
 		</nav>
 	</div>
 
-	<div class="container" id="showColumn" style="min-height: 800px">
+	<div class="container" id="showColumn">
 		<div id="campaignRow" class=row></div>
 	</div>
 
