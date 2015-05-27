@@ -63,6 +63,7 @@ a:hover {
 	min-height: 800px;
 	margin-bottom: 20px;
 }
+.pagination{margin:8px 0px;}
 </style>
 </head>
 <body>

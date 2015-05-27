@@ -64,7 +64,7 @@ body{
 
 			<div class="col-md-4">
 <!-- 			<div class="thumbnail"> -->
-				<div style="padding-top:50px; text-align: left;">
+				<div style="padding-top:36px; text-align: left;">
 					<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 						method="post" enctype="multipart/form-data">
 	
