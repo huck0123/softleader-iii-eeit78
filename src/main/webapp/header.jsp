@@ -29,7 +29,7 @@ a:hover{cursor: pointer;}
 	text-align: left;
 	top:0;
 	z-index: 9999;
-	width: 100%
+	width: 100%;
 }
 
 .navbar-header-custom {
