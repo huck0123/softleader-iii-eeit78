@@ -129,10 +129,7 @@ pre {
 						</button>							
 						<button type="button" class="btn btn-warning btn-xs"
 								onclick="confirmCleanNewComment();" style="width: 50px">清除
-						</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="checkbox-inline">
-							<input type="checkbox" id="anonymousOrNot" value="option">匿名留言
-						</label>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -192,6 +189,7 @@ pre {
 	function loadComment(datas){
 		$.each(datas, function(name, data){
 			assignFinalFixedPlace(data);
+			console.log(data);
 		})
 	}
 	
@@ -203,12 +201,12 @@ pre {
 		}
 	});
 	
-	$('a[id^="a_"]').on('click', function(){
-		console.log("aaaaa");
-		var id = $(this).prop('id');
-		id = id.substring(2);
-		$('#sub_' + id).slideToggle();
-	});
+// 	$('a[id^="a_"]').on('click', function(){
+// 		console.log("aaaaa");
+// 		var id = $(this).prop('id');
+// 		id = id.substring(2);
+// 		$('#sub_' + id).slideToggle();
+// 	});
 	
 	function startNewComment() {
 		if(confirm("確定送出留言嗎?")){
@@ -219,8 +217,7 @@ pre {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : '${giver.id}',
 					'form.replyId' : 0,
-					'form.commentary' : $('#mainCommentPlace').val(),
-					'form.anonymous' : $('#anonymousOrNot').prop('checked')
+					'form.commentary' : $('#mainCommentPlace').val()
 				}, assignFinalFixedPlace);
 			}
 		}else{
@@ -250,10 +247,7 @@ pre {
 					+ 			'<div class="col-md-10">'
 					+ 				'<textarea id="' + replyParam + '" class="form-control" rows="4" style="margin-bottom:4px"></textarea>'
 					+ 				'<button type="button" class="btn btn-success btn-xs" onclick="startNewReply(' + replyParam + ');" style="width:50px">確定</button>&nbsp;'
-					+ 				'<button type="button" class="btn btn-warning btn-xs" onclick="confirmCancelNewReply(' + replyParam + ');" style="width:50px">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-					+ 				'<label class="checkbox-inline">'
-					+ 					'<input type="checkbox" id="temp_anonymousOrNot' + replyParam + '" value="option">匿名留言'
-					+ 				'</label>' 
+					+ 				'<button type="button" class="btn btn-warning btn-xs" onclick="confirmCancelNewReply(' + replyParam + ');" style="width:50px">取消</button>'
 					+ 			'</div>'
 					+ 		'</div>');
 				showUserPhoto("temp");
@@ -280,8 +274,7 @@ pre {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : "${giver.id}",
 					'form.replyId' : replyId,
-					'form.commentary' : $('#' + replyId).val(),
-					'form.anonymous' : $('#temp_anonymousOrNot' + replyId).prop('checked')
+					'form.commentary' : $('#' + replyId).val()
 				}, assignFinalFixedPlace);
 			}
 		}else{
@@ -303,53 +296,87 @@ pre {
 	function assignFinalFixedPlace(data) {
 		if (data.replyId == 0) {
 			cleanNewComment();
-			showUserAccountOrNot(data, 'mainShownCommentPlace');
+			showUserAccount(data, 'mainShownCommentPlace');
 		}else{
 			cancelNewReply(data.replyId);
-			showUserAccountOrNot(data, data.replyId);
+			showUserAccount(data, data.replyId);
 		}
 	}
 	
-	function showUserAccountOrNot(data, placeParam){
- 		if(data.anonymous){
- 			controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
- 		}else{
+	function showUserAccount(data, placeParam){
 			$.getJSON(getUserAccountURL, {"form.id" : data.giverId}, function(dataJSON){
 				controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
 			});
- 		}
+			
+//  		if(data.anonymous){
+//  			controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
+//  		}else{
+//  		}
 	}
 	
 	function controlCommentOrReplyDetails(data, account, headshot, placeParam){
-		if(placeParam != 'mainShownCommentPlace'){
+		if(placeParam == 'mainShownCommentPlace'){
+	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
+	 		substantiatePhoto(data.id, headshot);
+		}else{
 			$.getJSON(getReplyURL, {"form.id" : placeParam}, function(replyJSON){
 				if(replyJSON.replyId == 0){
 					$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
 		 		}else{
 		 			$('#sub_' + replyJSON.replyId).append(showCommentOrReplyContent(data, account));
+		 			$('#btn_' + data.id).attr("disabled", "disabled");
 		 		}
 				
-				if(replyJSON.anonymous){
- 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : 未知的使用者</p>");
- 				}else{
- 					$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
- 						document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
- 					});
- 				}
+ 				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
+ 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+ 				});
 				
 				$('#a_' + data.id).remove();
 				substantiatePhoto(data.id, headshot);
 			});
-		}else{
-	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
-	 		substantiatePhoto(data.id, headshot);
+			
+// 				if(replyJSON.anonymous){
+//  				document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : 未知的使用者</p>");
+//  			}else{
+//  			}
+
+
+// 			var countTheFormer = 0;
+// 			var theFormer;
+// 			var pendingId;
+// 			var pendingReplyId = placeParam;
+//			
+// 			do{
+// 				$.getJSON(getReplyURL, {"form.id" : pendingReplyId}, function(replyJSON){
+// 					pendingId = replyJSON.id;
+// 					pendingReplyId = replyJSON.replyId;
+// 					console.log(pendingReplyId);
+// 					countTheFormer++;
+// 					if(countTheFormer == 1){
+// 						theFormer = replyJSON;
+// 					}
+// 				});
+// 			}while(pendingReplyId != 0);
+//			
+// 			$('#sub_' + pendingId).append(showCommentOrReplyContent(data, account));
+//			
+// 			if(theFormer.anonymous){
+// 				document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : 未知的使用者</p>");
+// 			}else{
+// 				$.getJSON(getUserAccountURL, {"form.id" : theFormer.giverId}, function(theFormerJSON){
+// 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + theFormerJSON.account + "</p>");
+// 				});
+// 			}
+//			
+// 			$('#a_' + data.id).remove();
+// 			substantiatePhoto(data.id, headshot);
 		}
 	}
 	
 	function showCommentOrReplyContent(data, userAccount) {
 		var date = new Date(data.commentTime);
 		var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
-		
+
 		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:120px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
 		+ 			'<div class="col-md-2">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
@@ -357,13 +384,13 @@ pre {
 		+ 			'<div class="col-md-10" id="replyPlace">'
 		+ 				'<p>' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
 		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
-		+ 				'<button type="button" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
+		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
-		+ 				'<a id="a_' + data.id + '">查看所有回覆</a>' 
+		+               '<a id="a_' + data.id + '" data-toggle="collapse" data-target="#sub_' + data.id + '">查看所有回覆</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
-		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
+		+      '<div id="sub_' + data.id + '" class="collapse in" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
 	}
 	
 	function substantiatePhoto(id, imgParam){

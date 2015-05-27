@@ -9,7 +9,6 @@ public class CampaignCommentForm {
 	private Integer giverId;
 	private Integer replyId;
 	private String commentary;
-	private Boolean anonymous;
 	private Timestamp commentTime;
 	
 	
@@ -42,12 +41,6 @@ public class CampaignCommentForm {
 	}
 	public void setCommentary(String commentary) {
 		this.commentary = commentary;
-	}
-	public Boolean getAnonymous() {
-		return anonymous;
-	}
-	public void setAnonymous(Boolean anonymous) {
-		this.anonymous = anonymous;
 	}
 	public Timestamp getCommentTime() {
 		return commentTime;

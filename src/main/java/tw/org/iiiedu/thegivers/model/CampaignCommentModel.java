@@ -9,8 +9,6 @@ public class CampaignCommentModel {
 	private Integer giverId;
 	private Integer replyId;
 	private String commentary;
-	private Integer likeNumber;
-	private Boolean anonymous;
 	private Boolean integrity;
 	private Timestamp commentTime;
 	private String ip;
@@ -45,18 +43,6 @@ public class CampaignCommentModel {
 	}
 	public void setCommentary(String commentary) {
 		this.commentary = commentary;
-	}
-	public Integer getLikeNumber() {
-		return likeNumber;
-	}
-	public void setLikeNumber(Integer likeNumber) {
-		this.likeNumber = likeNumber;
-	}
-	public Boolean getAnonymous() {
-		return anonymous;
-	}
-	public void setAnonymous(Boolean anonymous) {
-		this.anonymous = anonymous;
 	}
 	public Boolean getIntegrity() {
 		return integrity;
