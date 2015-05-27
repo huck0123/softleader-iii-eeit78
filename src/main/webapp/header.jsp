@@ -163,7 +163,7 @@ ul.nav {
 }
 /*nav responsive settings end*/
 
-.bottom-shadow{box-shadow: 1px 1px 2px 2px rgba(200,200,200,0.9)}
+.bottom-shadow{box-shadow: 0px 1px 2px 2px rgba(200,200,200,0.9)}
 </style>
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
 <!-- 
@@ -191,7 +191,7 @@ ul.nav {
 					<ul id="nav-left" class="nav navbar-nav">
 						<li><a href="<c:url value='/campaign/campaignShow'/>">募款活動</a></li>
 						<li><a href="<c:url value='/raiser/raiserCheck'/>">參與團體</a></li>
-						<li><a href="#">關於我們</a></li>
+						<li><a href="<c:url value='/util/statChart'/>">關於我們</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a data-toggle="collapse" data-target="#collapse-search"

@@ -40,7 +40,6 @@ b {
   outline: 0;
 }
 body{
-	background-color:#FFFAF0;
 }
 </style>
 
@@ -49,14 +48,23 @@ body{
 
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container panel alert" style="background-color:#FFFAF0">
+		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:center; color:grey;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">會員註冊</h1>
+				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，取得TheGivers提供的更多功能</p>
+			</div>
+
+
+	</div>
+
+
+	<div class="container panel alert" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px">
 		<div class="row">
 			<div class="col-md-4"></div>
 
 			<div class="col-md-4">
 <!-- 			<div class="thumbnail"> -->
-				<h2>捐款會員註冊</h2>
-				<div style="padding-top:50px">
+				<div style="padding-top:50px; text-align: left;">
 					<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 						method="post" enctype="multipart/form-data">
 	
@@ -87,9 +95,9 @@ body{
 							<label for="">名字:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.name" value="${param.form.name }">
 						</div>
-						<div class="form-group">
+
 							<label for="">性別:<b>*</b></label>
-						</div>
+
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
@@ -120,9 +128,9 @@ body{
 							<input type="email"	class="form-control" name="form.email"
 								value="${param.form.email }">
 						</div>
-						<div class="form-group">
+
 							<label for="">是否獲得資訊:</label>
-						</div>
+
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
@@ -160,7 +168,7 @@ body{
 				</div>
 			</div>
 <!-- 			</div> -->
-			<div class="col-md-4"></div>
+
 		</div>
 	</div>
 
