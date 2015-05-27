@@ -99,7 +99,7 @@ label{line-height: 30px;}
 									name="raiserForm.tel" value="${form.tel}"
 									placeholder="註冊成功後將進行電話認證，格式為(02)1234-5677" required="required">
 							</div>
-							<div class="col-sm-3" id="chkTel1" class="errorClassForRaiser">${insertErrorTEL1}</div>
+							<div id="chkTel1" class="errorClassForRaiser">${insertErrorTEL1}</div>
 						</div>
 
 						<div class="form-group">
@@ -119,7 +119,7 @@ label{line-height: 30px;}
 									name="raiserForm.contactTel" value="${form.contactTel}"
 									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機" required="required">
 							</div>
-								<div class="col-sm-3" id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
+								<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
 						</div>
 
 						<div class="form-group">
@@ -200,6 +200,9 @@ label{line-height: 30px;}
 		$("#account").change(function() {
 			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入帳號")
+			}
 			if (!$(this).val().match(raiserACCChk)) {
 				$("#chkAcc").text("帳號不符合格式")
 			}
@@ -228,6 +231,9 @@ label{line-height: 30px;}
 
 		$("#inputpw").blur(function() {
 			$("#chkPw1").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入密碼")
+			}
 			var raiserPSWCk = "^.[A-Za-z0-9]{6,30}"
 			if (!$(this).val().match(raiserPSWCk)) {
 				$("#chkPw1").text("密碼不符合格式")
@@ -236,6 +242,9 @@ label{line-height: 30px;}
 		
 		$("#inputpw2").blur(function() {
 			$("#chkPw2").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入相同密碼")
+			}
 			if ($(this).val() != $("#inputpw").val()) {
 				$("#chkPw2").text("密碼不相符")
 			}
@@ -243,6 +252,9 @@ label{line-height: 30px;}
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入團體名稱")
+			}
 			$.post(raiserRegisCheckUrl2, {
 				"name" : $(this).val()
 			}, function(data) {
@@ -252,6 +264,8 @@ label{line-height: 30px;}
 			}, "json");
 		});
 
+		
+		
 		$("#logo")
 				.change(
 						function() {
