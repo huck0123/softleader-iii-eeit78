@@ -19,7 +19,7 @@
 .errorClassForRaiser {
 	color: red
 }
-
+label{line-height: 30px;}
 .code {
 	background-image: url(/softleader-iii-eeit78/pictures/code.jpg);
 	font-family: Arial;
@@ -42,147 +42,157 @@
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-	<div class="container">
-		<div class="row" style="padding-top: 20px">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h2>公益團體註冊</h2>
-				<form action="<c:url value='/raiser/raiserAction!insert' />"
-					method="post" enctype="multipart/form-data" class="form-horizontal">
-					<div style="height: 50px">${insertErrorMSG}</div>
-					<div class="form-group">
-						<label for="account" class="col-sm-2 control-label">帳號:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="account"
-								name="raiserForm.account" value="${form.account }"
-								placeholder="請輸入帳號" required="required">
-						</div>
-						<div class="col-sm-3" id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
-					</div>
 
-					<div class="form-group">
-						<label for="inputpw" class="col-sm-2 control-label">密碼:</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw"
-								placeholder="請輸入密碼" name="raiserForm.passwd" required="required">
-						</div>
-						<div class="col-sm-3" class="errorClassForRaiser">${insertErrorPSW}</div>
-					</div>
+		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:center; color:grey;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
+				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
+			</div>
+	</div>
 
-					<div class="form-group">
-						<label for="inputpw" class="col-sm-2 control-label">確認密碼:</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="inputpw2"
-								placeholder="再輸入一次密碼" required="required">
-						</div>
-						<div class="col-sm-3" id="chkPw2" class="errorClassForRaiser"></div>
-					</div>
 
-					<div class="form-group">
-						<label for="name" class="col-sm-2 control-label">團體名稱:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="name"
-								name="raiserForm.name" value="${form.name}"
-								placeholder="請注意,同一團體不可重複註冊!!" required="required">
-						</div>
-						<div class="col-sm-3" id="chkName" class="errorClassForRaiser">${insertErrorNAME}</div>
-					</div>
+	<div class="container" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top:20px; margin-bottom: 20px;">
+		<div class="row" >
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div style="padding-top: 50px; text-align: left;">
+					<form action="<c:url value='/raiser/raiserAction!insert' />"
+						method="post" enctype="multipart/form-data">
 
-					<div class="form-group">
-						<label for="tel" class="col-sm-2 control-label">電話:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="tel"
-								name="raiserForm.tel" value="${form.tel}"
-								placeholder="註冊成功後將進行電話認證" required="required">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="cname" class="col-sm-2 control-label">連絡人姓名:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="cname"
-								placeholder="請輸入連絡人姓名,稍後將進行電話認證" name="raiserForm.contactPerson"
-								value="${form.contactPerson}" required="required">
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="ctel" class="col-sm-2 control-label">連絡人電話:</label>
-						<div class="col-sm-7">
-							<input type="tel" class="form-control" id="ctel"
-								name="raiserForm.contactTel" value="${form.contactTel}"
-								placeholder="註冊成功後將進行電話認證" required="required">
-						</div>
-					</div>
+						
+						<div class="form-group">
+							<label for="account">帳號:</label> <input type="text"
+								class="form-control" id="account" name="raiserForm.account"
+								value="${form.account }" placeholder="請輸入帳號" required="required">
 
-					<div class="form-group">
-						<label for="mail" class="col-sm-2 control-label">信箱:</label>
-						<div class="col-sm-7">
-							<input type="email" class="form-control" id="mail"
-								name="raiserForm.email" value="${form.email}"
-								placeholder="請輸入信箱" required="required">
+							<div id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="add" class="col-sm-2 control-label">地址:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="add"
-								placeholder="請輸入團體地址" name="raiserForm.address"
-								value="${form.address}" required="required">
-						</div>
-					</div>
+						<div class="form-group">
+							<label for="inputpw">密碼:</label> <input type="password"
+								class="form-control" id="inputpw" placeholder="請輸入密碼"
+								name="raiserForm.passwd" required="required">
 
-					<div class="form-group">
-						<label class="col-sm-2 control-label">圖標:</label>
-						<div class="col-sm-7">
-							<input type="file" name="raiserForm.logo" id="logo"
-								required="required" accept="image/*">
+							<div class="errorClassForRaiser">${insertErrorPSW}</div>
 						</div>
-						<div class="col-sm-3" id="chkLogo"></div>
-					</div>
 
-					<div class="form-group">
-						<label for="del" class="col-sm-2 control-label">團體介紹:</label>
-						<div class="col-sm-7">
-							<textarea rows="10" cols="50" class="form-control" id="del"
-								name="raiserForm.detail">${form.detail}</textarea>
+						<div class="form-group">
+							<label for="inputpw">確認密碼:</label>
+							<div>
+								<input type="password" class="form-control" id="inputpw2"
+									placeholder="再輸入一次密碼" required="required">
+							</div>
+							<div id="chkPw2" class="errorClassForRaiser"></div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="vdl" class="col-sm-2 control-label">團體短片:</label>
-						<div class="col-sm-7">
-							<input type="url" class="form-control" id="vdl"
-								placeholder="請輸入嵌入影片網址" name="raiserForm.videoUrl"
-								value="${form.videoUrl}">
+						<div class="form-group">
+							<label for="name">團體名稱:</label>
+							<div>
+								<input type="text" class="form-control" id="name"
+									name="raiserForm.name" value="${form.name}"
+									placeholder="請注意,同一團體不可重複註冊!!" required="required">
+							</div>
+							<div id="chkName" class="errorClassForRaiser">${insertErrorNAME}</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="vdl" class="col-sm-2 control-label">驗證碼:</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="validCode"
-								placeholder="請輸入驗證碼" />
+						<div class="form-group">
+							<label for="tel">電話:</label>
+							<div>
+								<input type="text" class="form-control" id="tel"
+									name="raiserForm.tel" value="${form.tel}"
+									placeholder="註冊成功後將進行電話認證" required="required">
+							</div>
 						</div>
-						<div class="col-sm-2">
-							<input type="text" readonly="readonly" id="checkCode"
-								class="code form-control" />
-						</div>
-						<div class="col-sm-3" id="chkValidcode"
-							class="errorClassForRaiser"></div>
-					</div>
 
-					<div class="row" style="padding-top: 20px">
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<button type="submit" id="submitForRaiserRegister"
-								class="btn btn-default" disabled="disabled">確定送出</button>
-							<button type="reset" class="btn btn-default">清除資料</button>
+						<div class="form-group">
+							<label for="cname">連絡人姓名:</label>
+							<div>
+								<input type="text" class="form-control" id="cname"
+									placeholder="請輸入連絡人姓名,稍後將進行電話認證"
+									name="raiserForm.contactPerson" value="${form.contactPerson}"
+									required="required">
+							</div>
 						</div>
-					</div>
-					<div style="height: 200px"></div>
-				</form>
+
+						<div class="form-group">
+							<label for="ctel">連絡人電話:</label>
+							<div>
+								<input type="tel" class="form-control" id="ctel"
+									name="raiserForm.contactTel" value="${form.contactTel}"
+									placeholder="註冊成功後將進行電話認證" required="required">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="mail">信箱:</label>
+							<div>
+								<input type="email" class="form-control" id="mail"
+									name="raiserForm.email" value="${form.email}"
+									placeholder="請輸入信箱" required="required">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="add">地址:</label>
+							<div>
+								<input type="text" class="form-control" id="add"
+									placeholder="請輸入團體地址" name="raiserForm.address"
+									value="${form.address}" required="required">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>圖標:</label>
+							<div>
+								<input type="file" name="raiserForm.logo" id="logo"
+									required="required" accept="image/*">
+							</div>
+							<div id="chkLogo"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="del">團體介紹:</label>
+							<div>
+								<textarea rows="10" cols="50" class="form-control" id="del"
+									name="raiserForm.detail">${form.detail}</textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="vdl">團體短片:</label>
+							<div>
+								<input type="url" class="form-control" id="vdl"
+									placeholder="請輸入嵌入影片網址" name="raiserForm.videoUrl"
+									value="${form.videoUrl}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div style="margin-bottom: 10px">
+								<input type="text" readonly="readonly" id="checkCode"
+									class="code form-control" />
+							</div>
+							<label for="vdl">驗證碼:</label>
+
+							<div>
+								<input type="text" class="form-control" id="validCode"
+									placeholder="請輸入驗證碼" />
+							</div>
+
+							<div id="chkValidcode" class="errorClassForRaiser"></div>
+						</div>
+
+
+
+
+
+					</form>
+											<button type="submit" id="submitForRaiserRegister"
+							class="btn btn-default" disabled="disabled">確定送出</button>
+						<button type="reset" class="btn btn-default">清除資料</button>
+				</div>
 			</div>
 		</div>
 	</div>

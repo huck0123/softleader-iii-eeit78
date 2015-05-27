@@ -64,7 +64,7 @@ body{
 
 			<div class="col-md-4">
 <!-- 			<div class="thumbnail"> -->
-				<div style="padding-top:50px">
+				<div style="padding-top:50px; text-align: left;">
 					<form action='/softleader-iii-eeit78/giver/giverAction!insert.action'
 						method="post" enctype="multipart/form-data">
 	
@@ -95,9 +95,9 @@ body{
 							<label for="">名字:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.name" value="${param.form.name }">
 						</div>
-						<div class="form-group">
+
 							<label for="">性別:<b>*</b></label>
-						</div>
+
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
@@ -128,9 +128,9 @@ body{
 							<input type="email"	class="form-control" name="form.email"
 								value="${param.form.email }">
 						</div>
-						<div class="form-group">
+
 							<label for="">是否獲得資訊:</label>
-						</div>
+
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
