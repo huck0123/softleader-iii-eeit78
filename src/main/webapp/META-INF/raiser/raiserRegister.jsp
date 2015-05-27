@@ -32,10 +32,6 @@ label{line-height: 30px;}
 	cursor: pointer;
 	text-align: center;
 }
-
-.unchanged {
-	border: 0;
-}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>團體-註冊帳號</title>
@@ -58,28 +54,27 @@ label{line-height: 30px;}
 				<div style="padding-top: 50px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-
-
-
-						
+	
+					<div style="height: 50px">${insertErrorMSG}</div>
+					<div class="errorClassForRaiser">*號為必填欄位</div>
 						<div class="form-group">
-							<label for="account">帳號:</label> <input type="text"
+							<label for="account">帳號 : *</label> <input type="text"
 								class="form-control" id="account" name="raiserForm.account"
-								value="${form.account }" placeholder="請輸入帳號" required="required">
+								value="${form.account }" placeholder="請輸入帳號，須為英文開頭，不限大小寫" required="required" autofocus="autofocus">
 
 							<div id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
 						</div>
 
 						<div class="form-group">
-							<label for="inputpw">密碼:</label> <input type="password"
-								class="form-control" id="inputpw" placeholder="請輸入密碼"
+							<label for="inputpw">密碼 : *</label> <input type="password"
+								class="form-control" id="inputpw" placeholder="請輸入密碼，須為英數混合且為6-30字"
 								name="raiserForm.passwd" required="required">
 
 							<div class="errorClassForRaiser">${insertErrorPSW}</div>
 						</div>
 
 						<div class="form-group">
-							<label for="inputpw">確認密碼:</label>
+							<label for="inputpw">確認密碼 : *</label>
 							<div>
 								<input type="password" class="form-control" id="inputpw2"
 									placeholder="再輸入一次密碼" required="required">
@@ -88,7 +83,7 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="name">團體名稱:</label>
+							<label for="name">團體名稱 : *</label>
 							<div>
 								<input type="text" class="form-control" id="name"
 									name="raiserForm.name" value="${form.name}"
@@ -98,16 +93,17 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="tel">電話:</label>
+							<label for="tel">電話 : *</label>
 							<div>
 								<input type="text" class="form-control" id="tel"
 									name="raiserForm.tel" value="${form.tel}"
-									placeholder="註冊成功後將進行電話認證" required="required">
+									placeholder="註冊成功後將進行電話認證，格式為(02)1234-5677" required="required">
 							</div>
+							<div id="chkTel1" class="errorClassForRaiser">${insertErrorTEL1}</div>
 						</div>
 
 						<div class="form-group">
-							<label for="cname">連絡人姓名:</label>
+							<label for="cname">連絡人姓名 : *</label>
 							<div>
 								<input type="text" class="form-control" id="cname"
 									placeholder="請輸入連絡人姓名,稍後將進行電話認證"
@@ -117,16 +113,17 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="ctel">連絡人電話:</label>
+							<label for="ctel">連絡人電話 : *</label>
 							<div>
 								<input type="tel" class="form-control" id="ctel"
 									name="raiserForm.contactTel" value="${form.contactTel}"
-									placeholder="註冊成功後將進行電話認證" required="required">
+									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機" required="required">
 							</div>
+								<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
 						</div>
 
 						<div class="form-group">
-							<label for="mail">信箱:</label>
+							<label for="mail">信箱 : *</label>
 							<div>
 								<input type="email" class="form-control" id="mail"
 									name="raiserForm.email" value="${form.email}"
@@ -135,7 +132,7 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="add">地址:</label>
+							<label for="add">地址 : *</label>
 							<div>
 								<input type="text" class="form-control" id="add"
 									placeholder="請輸入團體地址" name="raiserForm.address"
@@ -144,7 +141,7 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label>圖標:</label>
+							<label>圖標 : *</label>
 							<div>
 								<input type="file" name="raiserForm.logo" id="logo"
 									required="required" accept="image/*">
@@ -153,7 +150,7 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="del">團體介紹:</label>
+							<label for="del">團體介紹 :</label>
 							<div>
 								<textarea rows="10" cols="50" class="form-control" id="del"
 									name="raiserForm.detail">${form.detail}</textarea>
@@ -161,7 +158,7 @@ label{line-height: 30px;}
 						</div>
 
 						<div class="form-group">
-							<label for="vdl">團體短片:</label>
+							<label for="vdl">團體短片 :</label>
 							<div>
 								<input type="url" class="form-control" id="vdl"
 									placeholder="請輸入嵌入影片網址" name="raiserForm.videoUrl"
@@ -174,7 +171,7 @@ label{line-height: 30px;}
 								<input type="text" readonly="readonly" id="checkCode"
 									class="code form-control" />
 							</div>
-							<label for="vdl">驗證碼:</label>
+							<label for="vdl">驗證碼 : *</label>
 
 							<div>
 								<input type="text" class="form-control" id="validCode"
@@ -201,7 +198,15 @@ label{line-height: 30px;}
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!checkName";
 		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		$("#account").change(function() {
+			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入帳號")
+			}
+			if (!$(this).val().match(raiserACCChk)) {
+				$("#chkAcc").text("帳號不符合格式")
+			}
+				
 			if ($(this).val().toUpperCase() == "ADMIN") {
 				$("#chkAcc").text("帳號已存在");
 			}
@@ -224,8 +229,22 @@ label{line-height: 30px;}
 			});
 		});
 
+		$("#inputpw").blur(function() {
+			$("#chkPw1").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入密碼")
+			}
+			var raiserPSWCk = "^.[A-Za-z0-9]{6,30}"
+			if (!$(this).val().match(raiserPSWCk)) {
+				$("#chkPw1").text("密碼不符合格式")
+			}
+		});
+		
 		$("#inputpw2").blur(function() {
 			$("#chkPw2").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入相同密碼")
+			}
 			if ($(this).val() != $("#inputpw").val()) {
 				$("#chkPw2").text("密碼不相符")
 			}
@@ -233,6 +252,9 @@ label{line-height: 30px;}
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
+			if($(this).val().length == 0){
+				$("#chkAcc").text("請輸入團體名稱")
+			}
 			$.post(raiserRegisCheckUrl2, {
 				"name" : $(this).val()
 			}, function(data) {
@@ -242,6 +264,8 @@ label{line-height: 30px;}
 			}, "json");
 		});
 
+		
+		
 		$("#logo")
 				.change(
 						function() {
