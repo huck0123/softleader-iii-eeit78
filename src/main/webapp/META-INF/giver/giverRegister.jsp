@@ -146,7 +146,7 @@ body{
 							<label for="">生日:</label> 
 							<input type="date" class="form-control"
 								name="form.birth" value="" style="height: 30px;">
-								
+							<b id="birthday"></b>
 						</div>
 						<div class="form-group">
 							<label for="">照片:</label> 
@@ -156,7 +156,7 @@ body{
 							</label>
 						</div>
 						<div class="form-group">
-							<a href="#" data-toggle="modal" data-target="#myModal" title="點擊放大"> 
+							<a href="#" id="showHeadshot" data-toggle="modal" data-target="#myModal" title="點擊放大" style="display:none"> 
 								<img src="" id="img" style="weight: 100px; height: 100px;">
 							</a>
 						</div>
@@ -322,8 +322,23 @@ $(function() {
 		
 	}
 
+	//驗證生日
+	$('input[name="form.birth"]').on("blur", function(){
+		var birth = new Date($(this).val());
+		var now = new Date();
+		
+		if(birth > now){
+			$('#birthday').text("您還沒出生");
+			$('#submit').prop("disabled",true);
+		}else{
+			$('#birthday').empty();
+		}
+		$('#submit').prop("disabled",false);
+	});
+	
 	//驗證圖片
 	$('#headshot').on("change",function(){
+		$('#showHeadshot').show();
 		readFile();
 	})
 
