@@ -1,9 +1,13 @@
 package tw.org.iiiedu.thegivers.web;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +39,18 @@ public class UtilAction extends ActionSupport{
 	@Autowired
 	private CityService cityService;
 	
+	private InputStream inputStream;
+	
+	
+	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+
+
 	public String util(){
+		
 		System.out.println(campaignService.getHighestCurrentFund());  //捐款額最高的活動
 		System.out.println(campaignService.getHighestGoal());  //最高募款金額的活動
 		System.out.println(campaignService.getCampaignCount());  //活動數量
@@ -43,7 +58,7 @@ public class UtilAction extends ActionSupport{
 		System.out.println(giverService.getCount());  //giver人數
 		System.out.println(raiserService.getCount());  //raiser人數
 		
-		//活動分布筆數
+		//活動類型筆數
 		List<CampaignTypeModel> campaignTypeModels = campaignTypeService.getAll();
 		int campaignTypeNumber = campaignTypeModels.size();
 		
@@ -54,7 +69,7 @@ public class UtilAction extends ActionSupport{
 			int temp = campaignService.getByAllConditionCount(campaignForm).intValue();
 			map.put(campaignTypeModels.get(i).getName(), temp);
 		}
-		System.out.println(map); //活動分布筆數
+		System.out.println(map); //活動類型筆數
 		
 		//活動地點筆數
 		List<CityModel> cityModels = cityService.getAll();
@@ -68,6 +83,20 @@ public class UtilAction extends ActionSupport{
 			map1.put(cityModels.get(j).getName(),temp1);
 		}
 		System.out.println(map1); //活動地點筆數
+		
+		
+		Map<String, Object> statMap = new HashMap<>();
+		statMap.put("highestCurrentFund", campaignService.getHighestCurrentFund());
+		statMap.put("highestGoal", campaignService.getHighestGoal());
+		statMap.put("campaignCount", campaignService.getCampaignCount());
+		statMap.put("onlineCount", OnlineSessionListener.getCount());
+		statMap.put("giverCount", giverService.getCount());
+		statMap.put("raiserCount", raiserService.getCount());
+		statMap.put("typeCount", map);
+		statMap.put("cityCount", map1);
+		
+		String jsonStr = JSONObject.toJSONString(statMap);
+		inputStream = new ByteArrayInputStream(jsonStr.getBytes(StandardCharsets.UTF_8));
 		
 		return SUCCESS;
 	}
