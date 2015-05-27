@@ -146,6 +146,7 @@ body{
 							<label for="">生日:</label> 
 							<input type="date" class="form-control"
 								name="form.birth" value="" style="height: 30px;">
+								
 						</div>
 						<div class="form-group">
 							<label for="">照片:</label> 

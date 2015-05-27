@@ -40,9 +40,9 @@ body{
 	<div class="container-fluid" style="padding-top: 50px;">
 		<div class="row">
 			<div class="col-md-3 sidebar">
-				<ul class="nav nav-sidebar">
+				<ul class="nav nav-sidebar" style="background-color: #FFFFB9;">
 					<li>
-						<a href="${pageContext.request.contextPath }/util/statChart"><h4>圖表</h4></a>
+						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
 					</li>
 				</ul>
 				<ul class="nav nav-sidebar">
@@ -176,7 +176,7 @@ function taiwan(city) {
 
         title : {
             text : '活動區域分布比例',
-            style : { "color": "red", "fontSize": "22px" }
+            style : { "color": "red", "fontSize": "20px" }
         },
 
 //         subtitle : {
