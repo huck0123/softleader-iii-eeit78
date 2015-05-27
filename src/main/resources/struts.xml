@@ -50,6 +50,10 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		
+		<action name="*">
+			<result>/META-INF/statCharts/{1}.jsp</result>                      <!-- 沒有name屬性代表name="sucess" -->
+		</action>
 	</package>
 	
 <!-- 	<package name="raiserPackage" namespace="/raiser" extends="struts-default"> -->
