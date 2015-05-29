@@ -239,8 +239,12 @@ pre {
 		if('${giver}'){
 			if(produceKey == null){
 				produceKey = "temp_" + replyParam;
+				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
+					showAllReplies(replyParam);
+				}else{
+				}
 				$('#sub_' + replyParam)
-					.append('<div id="temp_' + replyParam + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
+					.prepend('<div id="temp_' + replyParam + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
 					+ 			'<div class="col-md-2">'
 					+ 				'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
 					+ 			'</div>'
@@ -254,6 +258,7 @@ pre {
 			}else{
 				if(confirm("是否放棄前一個未完成的留言?")){
 					$('#' + produceKey).remove();
+					showAllReplies(produceKey.substring(5));
 					produceKey = null;
 					growNewReplyPlace(replyParam);
 				}else{
@@ -270,6 +275,7 @@ pre {
 				alert("未輸入任何內容");
 			}else{
 				produceKey = null;
+				showAllReplies(replyId);
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : "${giver.id}",
@@ -284,6 +290,7 @@ pre {
 	function confirmCancelNewReply(replyId){
 		if(confirm("確定取消回覆嗎?")){
 			cancelNewReply(replyId);
+			showAllReplies(replyId);
 		}else{
 		}
 	}
@@ -294,12 +301,12 @@ pre {
 	}
 	
 	function assignFinalFixedPlace(data) {
-		if (data.replyId == 0) {
+		if (data.pendingId == 0) {
 			cleanNewComment();
 			showUserAccount(data, 'mainShownCommentPlace');
 		}else{
 			cancelNewReply(data.replyId);
-			showUserAccount(data, data.replyId);
+			showUserAccount(data, data.pendingId);
 		}
 	}
 	
@@ -318,21 +325,16 @@ pre {
 		if(placeParam == 'mainShownCommentPlace'){
 	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
 	 		substantiatePhoto(data.id, headshot);
+	 		showAllReplies(data.id);
 		}else{
-			$.getJSON(getReplyURL, {"form.id" : placeParam}, function(replyJSON){
-				if(replyJSON.replyId == 0){
-					$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
-		 		}else{
-		 			$('#sub_' + replyJSON.replyId).append(showCommentOrReplyContent(data, account));
-		 			$('#btn_' + data.id).attr("disabled", "disabled");
-		 		}
-				
+			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
+			$('#a_' + data.id).text("");
+			substantiatePhoto(data.id, headshot);
+			showAllReplies(data.id);
+			$.getJSON(getReplyURL, {"form.id" : data.replyId}, function(replyJSON){
  				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
  					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
  				});
-				
-				$('#a_' + data.id).remove();
-				substantiatePhoto(data.id, headshot);
 			});
 			
 // 				if(replyJSON.anonymous){
@@ -387,10 +389,10 @@ pre {
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
-		+               '<a id="a_' + data.id + '" data-toggle="collapse" data-target="#sub_' + data.id + '">查看所有回覆</a>'
+		+               '<a id="a_' + data.id + '" onclick="showAllReplies(' + data.id + ');">隱藏所有回覆</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
-		+      '<div id="sub_' + data.id + '" class="collapse in" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
+		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
 	}
 	
 	function substantiatePhoto(id, imgParam){
@@ -410,6 +412,18 @@ pre {
 			return '0' + timeParam;
 		}else{
 			return timeParam;
+		}
+	}
+	
+	function showAllReplies(id){
+		if($('#a_' + id).text() == "查看所有回覆"){
+			$('#sub_' + id).slideDown();
+			$('#a_' + id).text("隱藏所有回覆");
+		}else if($('#a_' + id).text() == "隱藏所有回覆"){
+			$('#sub_' + id).slideUp();
+			$('#a_' + id).text("查看所有回覆");
+		}else{
+			$('#sub_' + id).slideToggle();
 		}
 	}
 
@@ -467,7 +481,7 @@ pre {
 				var d = new Date(value.endDate);
 				
 				var dateP = $('<p>於<strong>' + d.getFullYear()
-							+ '/' + d.getMonth() + '/' + d.getDate()
+							+ '/' + d.getMonth()+1 + '/' + d.getDate()
 							+ '</strong>結束</p>');
 
 				var percent = value.currentFund / value.goal * 100;

@@ -17,11 +17,14 @@
 		<property name="replyId" type="java.lang.Integer">
 			<column name="replyId" />
 		</property>
+		<property name="pendingId" type="java.lang.Integer">
+			<column name="pendingId" />
+		</property>
+		<property name="pendingCount" type="java.lang.Integer">
+			<column name="pendingCount" />
+		</property>
 		<property name="commentary" type="java.lang.String">
 			<column name="commentary" />
-		</property>
-		<property name="integrity" type="java.lang.Boolean" insert="false">
-			<column name="integrity" />
 		</property>
 		<property name="commentTime" type="java.sql.Timestamp" insert="false">
 			<column name="commentTime" />

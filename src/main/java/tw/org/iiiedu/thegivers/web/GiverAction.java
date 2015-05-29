@@ -197,13 +197,10 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public String update() {
 		GiverModel temp = (GiverModel) request.getSession().getAttribute(
 				"giver");
-		log.debug(
-				"++++++++++++++++++++++++++++++++++++++ giver update ++++++++++++++++++++++++++++++++++++ {},{}",
-				temp.getAccount(),form.getAccount());
-
+		System.out.println("yyy"+form);
 		if(temp.getAccount().equals(form.getAccount())){
 			model = new GiverModel();
-	
+
 			try {
 				model.setId(temp.getId());
 				model.setAccount(temp.getAccount().trim());

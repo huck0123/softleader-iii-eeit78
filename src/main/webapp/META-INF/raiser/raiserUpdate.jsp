@@ -24,16 +24,32 @@ body {
 .errorClassForRaiser {
 	color: red
 }
+.tab-content {
+	border-bottom: 1px solid silver;
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+	margin-bottom: 20px;
+	padding-right: 28px;
+	padding-left: 28px;
+}
 </style>
 <title>團體-更新帳號</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
+	
+				<div class="container" style="background-color: #f2f2f2; margin-top: 20px; margin-bottom: 20px;">
+			<div class="row" style="text-align:center; color:darkslategrey;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">團體專區</h1>
+				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">世界因您的付出變得美好</p>
+			</div>
+	</div>
+	
 	<div class="container">
-		<h2 style="text-align: center">團體專區</h2>
+
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+
+			<div>
 				<ul class="nav nav-tabs" role="tablist">
 					<li><a href="#raiserUpdate">修改團體資訊</a></li>
 					<li><a href="#raiserHistory">查看活動紀錄</a></li>
@@ -43,19 +59,20 @@ body {
 					<div class="tab-pane fade" id="raiserUpdate">
 						<div class="row">
 							<div class="col-md-4">
+							<div style="padding-top: 36px; text-align: center">
 								<img src='' class='img-thumbnail' id='logo'
 									style='width: 200px; height: 200px'>
 								<div class="errorClassForRaiser" id="updateRaiserMSG">${updateRaiserMSG}</div>
+								</div>
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-6" style="padding-top: 36px; text-align: left;">
 								<form
 									action="<c:url value='/raiser/raiserUpdate!update.action' />"
 									method="post" enctype="multipart/form-data">
 
-									<div class="form-group">
 										<input type="text" style="display: none" class="form-control"
 											id="inputid" name="raiserForm.id" value="${raiser.id}">
-									</div>
+
 
 									<div class="form-group">
 										<label for="account">帳號</label> <input type="text"
@@ -147,8 +164,9 @@ body {
 										<label for="vdl">團體短片</label> <input type="url"
 											class="form-control" id="vdl" name="raiserForm.videoUrl"
 											value="${raiser.videoUrl}">
-										<iframe src="${raiser.videoUrl}" id="vdlPre"
-											style="width: 470px; height: 400px"></iframe>
+									</div>
+									<div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 20px">
+									<iframe src="${raiser.videoUrl}" id="vdlPre"></iframe>
 									</div>
 									<button type="submit" class="btn btn-default">確定送出</button>
 								</form>
@@ -158,7 +176,7 @@ body {
 					<jsp:include page="raiserHistory.jsp" />
 					<jsp:include page="/META-INF/campaign/campaignRaise.jsp" />
 				</div>
-				<div class="col-md-2"></div>
+
 			</div>
 		</div>
 	</div>

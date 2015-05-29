@@ -8,8 +8,9 @@ public class CampaignCommentModel {
 	private Integer campaignId;
 	private Integer giverId;
 	private Integer replyId;
+	private Integer pendingId;
+	private Integer pendingCount;
 	private String commentary;
-	private Boolean integrity;
 	private Timestamp commentTime;
 	private String ip;
 	
@@ -38,17 +39,23 @@ public class CampaignCommentModel {
 	public void setReplyId(Integer replyId) {
 		this.replyId = replyId;
 	}
+	public Integer getPendingId() {
+		return pendingId;
+	}
+	public void setPendingId(Integer pendingId) {
+		this.pendingId = pendingId;
+	}
+	public Integer getPendingCount() {
+		return pendingCount;
+	}
+	public void setPendingCount(Integer pendingCount) {
+		this.pendingCount = pendingCount;
+	}
 	public String getCommentary() {
 		return commentary;
 	}
 	public void setCommentary(String commentary) {
 		this.commentary = commentary;
-	}
-	public Boolean getIntegrity() {
-		return integrity;
-	}
-	public void setIntegrity(Boolean integrity) {
-		this.integrity = integrity;
 	}
 	public Timestamp getCommentTime() {
 		return commentTime;
