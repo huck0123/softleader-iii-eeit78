@@ -2,26 +2,27 @@
 	pageEncoding="BIG5"%>
 
 <div class="tab-pane fade" id="raiserHistory">
-	<h3>複合查詢系統</h3>
+
 	<br />
-	<div>
+	<br />
+	<div class="row">
 		<form class="form-horizontal">
 			<div class="form-group">
-				<label for="keywordRH" class="col-sm-3 control-label">關鍵字搜尋</label>
+				<label for="keywordRH" class="col-sm-2 control-label" style="text-align: center">關鍵字搜尋</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="keywordRH"
 						placeholder="輸入活動名稱 ">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="keywordTypeRH" class="col-sm-3 control-label">依類型查詢</label>
-				<div class="col-sm-3">
+				<label for="keywordTypeRH" class="col-sm-2 control-label" style="text-align: center">依類型查詢</label>
+				<div class="col-sm-4">
 					<input type="text" class="form-control" id="keywordTypeRH"
 						placeholder="輸入類型">
 				</div>
 				<label for="keywordLocRH" class="col-sm-2 control-label"
-					style="text-align: left">依地點查詢</label>
-				<div class="col-sm-4">
+					style="text-align: center">依地點查詢</label>
+				<div class="col-sm-3">
 					<input type="text" class="form-control" id="keywordLocRH"
 						placeholder="輸入地點" style="text-align: left">
 				</div>
@@ -33,14 +34,15 @@
 		<button type="button" class="btn btn-primary" onclick="loadByForm();">送出篩選</button>
 		<button type="button" class="btn btn-warning" onclick="cleanForm();">清除條件</button>
 	</div>
-	<div>
-		<br />
+	<div style="padding-bottom: 20px;">
+<br/>
 		<hr />
-		<br />
-		<h3 style="display: inline-block;">${raiser.name}您好，您曾發起過的活動紀錄如下</h3>
-		<button type="button" class="btn btn-success btn-xs"
-			onclick="showAll();">顯示所有紀錄</button>
-		<br /> <br />
+<br/>
+		<h3 style="text-align: center">${raiser.name}您好，您曾發起過的活動紀錄如下		<button type="button" class="btn btn-success btn-xs"
+			onclick="showAll();">顯示所有紀錄</button></h3>
+<br/>
+<br/>
+
 		<table id="resultTableRH" class="table table-hover">
 			<thead>
 				<tr>
@@ -57,7 +59,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div style="height:100px"></div>
+
 </div>
 <script>
 	//以下顯示相關

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-	<div class="tab-pane fade" id="campaignRaise">
+	<div class="tab-pane fade" id="campaignRaise" style="padding-top: 20px;padding-bottom: 20px;">
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 		<form action="/softleader-iii-eeit78/campaign/campaignAction!insert"
 			method="post" enctype="multipart/form-data">
 			<div class="form-group">
@@ -52,10 +55,12 @@
 
 			<div class="form-group">
 
-					<button type="submit" class="btn btn-default" style="float: right;">送出</button>
+					<button type="submit" class="btn btn-default" style="float:left;">送出</button>
 
 			</div>
-		</form>
+			
+		</form></div>
+		</div>
 	</div>
 <script src="/softleader-iii-eeit78/ckeditor/ckeditor.js" type="text/javascript"></script>
 
