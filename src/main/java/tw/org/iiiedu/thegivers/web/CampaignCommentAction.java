@@ -3,6 +3,7 @@ package tw.org.iiiedu.thegivers.web;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -51,8 +52,8 @@ public class CampaignCommentAction {
 		model.setGiverId(form.getGiverId());
 		model.setReplyId(form.getReplyId());
 		model.setCommentary(form.getCommentary());
+		model.setCommentTime(new Timestamp(new java.util.Date().getTime()));
 		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
-		
 		return model;
 	}
 	public String newComment(){

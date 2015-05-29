@@ -18,6 +18,16 @@ public class CampaignCommentService {
 	public CampaignCommentModel writeComment(CampaignCommentModel model){
 		Integer id = campaignCommentDao.insert(model);
 		if(id != -1){
+			if(model.getReplyId() == 0){
+				model.setPendingId(0);
+			}else{
+				CampaignCommentModel ccm = campaignCommentDao.getById(model.getReplyId());
+				if(ccm.getReplyId() == 0){
+					model.setPendingId(ccm.getId());
+				}else{
+					model.setPendingId(ccm.getPendingId());
+				}
+			}
 			return campaignCommentDao.getById(id);
 		}else{
 			return null;
