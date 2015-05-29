@@ -303,7 +303,7 @@ ul.nav {
 					function() {
 						$(window).scroll(
 								function() {
-									if ($(window).scrollTop() > 1) {
+									if ($(window).scrollTop() >= 50) {
 										$('#header-wrapper').stop().addClass(
 												'scroll-header');
 										$('#to-top').stop().show(500);
