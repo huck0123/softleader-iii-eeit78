@@ -1,5 +1,6 @@
 package tw.org.iiiedu.thegivers.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -155,7 +156,30 @@ public class GiverDao {
 		
 	}
 	
+	// giver男性年齡區間數量
+	public int getMaleAgeIntervalCount(Timestamp timeBegin, Timestamp timeEnd){
+		Criteria criteria = getSession().createCriteria(GiverModel.class);
+		
+		int ageIntervalCount = ((Long) criteria
+				.add(Restrictions.between("birth", timeBegin, timeEnd))
+				.add(Restrictions.eq("gender", true))
+				.setProjection(Projections.rowCount()).uniqueResult())
+				.intValue();
+		return ageIntervalCount;
+	}
 	
+	// giver女性年齡區間數量
+		public int getFemaleAgeIntervalCount(Timestamp timeBegin, Timestamp timeEnd){
+			Criteria criteria = getSession().createCriteria(GiverModel.class);
+			
+			int ageIntervalCount = ((Long) criteria
+					.add(Restrictions.between("birth", timeBegin, timeEnd))
+					.add(Restrictions.eq("gender", false))
+					.setProjection(Projections.rowCount()).uniqueResult())
+					.intValue();
+			return ageIntervalCount;
+		}
+
 	// 更新資料
 	public void update(GiverModel bean) {
 		getSession().update(bean);
@@ -167,6 +191,10 @@ public class GiverDao {
 		getSession().delete(accouont);
 	}
 
+	
+	
+	
+	
 //	// 條件收尋筆數   -----deprecated-----
 //	public int getByAllConditionCount(String account, String name,
 //			String familyName, String tel, String email) {

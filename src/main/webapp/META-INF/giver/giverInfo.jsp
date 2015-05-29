@@ -366,7 +366,7 @@ b {
 					'form.passwd' : password
 				}, function(passwdData) {
 					passwdData = JSON.parse(passwdData);
-					if (passwdData.checkPasswd == true) {
+					if (passwdData.checkPasswd) {
 						$('#passwdMess0').empty();
 						$('#password1').prop('disabled', false);
 					} else {

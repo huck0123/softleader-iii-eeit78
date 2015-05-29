@@ -2,9 +2,12 @@ package tw.org.iiiedu.thegivers.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -105,6 +108,18 @@ public class GiverService {
 		GiverModel model = giverDao.getById(id);
 		return model;
 
+	}
+	
+	// giver男性年齡區間數量
+	public int getMaleAgeIntervalCount(Timestamp timeBegin, Timestamp timeEnd) {
+
+		return giverDao.getMaleAgeIntervalCount(timeBegin, timeEnd);
+	}
+	
+	// giver女性年齡區間數量
+	public int getFemaleAgeIntervalCount(Timestamp timeBegin, Timestamp timeEnd) {
+
+		return giverDao.getFemaleAgeIntervalCount(timeBegin, timeEnd);
 	}
 	
 //	//條件收尋筆數    -----deprecated-----

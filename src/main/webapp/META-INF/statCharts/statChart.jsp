@@ -28,7 +28,7 @@
 }
 
 body{
- 	background-color: #DFFFDF; 
+/*  	background-color: #DFFFDF;  */
 }
 
 </style>
@@ -38,18 +38,16 @@ body{
 
 	<div class="container-fluid" style="padding-top: 50px;">
 		<div class="row">
-			<div class="col-md-3 sidebar">
-				<ul class="nav nav-sidebar" style="background-color: #FFFFB9;">
-					<li>
+			<div class="col-md-3 sidebar" style="padding-top: 50px;">
+				<ul class="nav nav-sidebar" style="position:fixed;">
+					<li style="background-color:#FFFFB9;">
 						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
 					</li>
-				</ul>
-				<ul class="nav nav-sidebar">
 					<li class="active">
 						<a href="#distribution1">活動類型分布比例</a>
 					</li>
 					<li>
-<!-- 						<a href="#distribution2">活動類型分布比例</a> -->
+						<a href="#distribution2">捐款註冊年齡分布</a>
 					</li>
 				</ul>
 			</div>
@@ -57,8 +55,12 @@ body{
 				<h1 class="page-header">統計圖表</h1>
 				<div id="distribution1">
 					<h2 class="sub-header">活動類型分布比例</h2><br>
-					<p>統計各個活動類型分布比例</p>
+					<p>目前本站所活動類型分布比例，</p>
 					<div id="type_distribution" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div id="distribution2" style="padding-top: 50px; padding-bottom: 50px;">
+					<h2 class="sub-header">捐款註冊年齡分布</h2><br>
+					<div id="age_distribution" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 				</div>
 				
 			</div>
@@ -67,7 +69,7 @@ body{
 	
 
 	
-	<jsp:include page="/footer2.jsp" />
+	<jsp:include page="/footer.jsp" />
 </body>
 <script>
 	
@@ -75,15 +77,25 @@ body{
 
 <script>
 
-$.post("/softleader-iii-eeit78/util/utilAction!util", getType);
-$.post("/softleader-iii-eeit78/util/utilAction!util", function(data){
-	data = JSON.parse(data);
-	console.log(data);
-});
+$.post("/softleader-iii-eeit78/util/utilAction!util", onload);
 
+//所有圖形載入點
+function onload(data){
+	getType(data);
+	ageDistribution(data);
+	$('text[text-anchor="end"]').hide();
+}
 
+//活動類型分布圖
 function getType(type) {
 	type = JSON.parse(type).typeCount;
+
+	//將 object物件轉成array
+	var keys = $.map( type, function( value, key ) {
+	  return [[key,value]];
+	});
+	
+	
 // 	console.log(type);
 // 	console.log(Object.keys(type))
 // 	console.log(type[Object.keys(type)[0]])
@@ -114,6 +126,7 @@ function getType(type) {
     // Build the chart
     $('#type_distribution').highcharts({
         chart: {
+        	backgroundColor: '',
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
@@ -123,7 +136,7 @@ function getType(type) {
             style : { "color": "red", "fontSize": "20px" }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: ': <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
             pie: {
@@ -140,15 +153,92 @@ function getType(type) {
         },
         series: [{
             type: 'pie',
-            name: '活動類型',
-            data: [
-                [Object.keys(type)[0],   type[Object.keys(type)[0]]/sum],  //兒福教育
-                [Object.keys(type)[1],   type[Object.keys(type)[1]]/sum],  //弱勢照護       
-                [Object.keys(type)[2],   type[Object.keys(type)[2]]/sum],  //環境保護
-                [Object.keys(type)[3],   type[Object.keys(type)[3]]/sum],  //婦幼關懷
-                [Object.keys(type)[4],   type[Object.keys(type)[4]]/sum]   //其他類型
-            ]
+//             name: '活動類型',
+            data: keys
+            	
+//             [
+//                 [Object.keys(type)[0],   type[Object.keys(type)[0]]/sum],  //兒福教育
+//                 [Object.keys(type)[1],   type[Object.keys(type)[1]]/sum],  //弱勢照護       
+//                 [Object.keys(type)[2],   type[Object.keys(type)[2]]/sum],  //環境保護
+//                 [Object.keys(type)[3],   type[Object.keys(type)[3]]/sum],  //婦幼關懷
+//                 [Object.keys(type)[4],   type[Object.keys(type)[4]]/sum]   //其他類型
+//             ]
         }]
+    });
+};
+
+//年齡分布圖型
+function ageDistribution(data) {
+	data = JSON.parse(data);
+	console.log(data);
+	
+	var maleArray = [ data.maleAgeInterval["0~9"],
+	  				data.maleAgeInterval["10~19"], data.maleAgeInterval["20~29"],
+	  				data.maleAgeInterval["30~39"], data.maleAgeInterval["40~49"],
+	  				data.maleAgeInterval["50~59"], data.maleAgeInterval["60~69"],
+	  				data.maleAgeInterval["70up"] ];
+
+  	var femaleArray = [ data.femaleAgeInterval["0~9"],
+  	   				data.femaleAgeInterval["10~19"], data.femaleAgeInterval["20~29"],
+  					data.femaleAgeInterval["30~39"], data.femaleAgeInterval["40~49"],
+  					data.femaleAgeInterval["50~59"], data.femaleAgeInterval["60~69"],
+  					data.femaleAgeInterval["70up"] ]; 
+	
+	
+    var categories = ['0-9', '10-19', '20-29', '30-39', '40-49',
+                      '50-59', '60-69','70+ '];
+    $(document).ready(function () {
+        $('#age_distribution').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '捐款註冊年齡分布',
+                style : { "color": "red", "fontSize": "20px" }
+            },
+            xAxis: [{
+                categories: categories,
+                reversed: false,
+                labels: {
+                    step: 1
+                }
+            }, { // mirror axis on right side
+                opposite: true,
+                reversed: false,
+                categories: categories,
+                linkedTo: 0,
+                labels: {
+                    step: 1
+                }
+            }],
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    formatter: function () {
+                        return (Math.abs(this.value) / 1) + '人';
+                    }
+                },
+                min: -10,
+                max: 10
+            },
+
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                        '人數: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                }
+            },
+
+            series: [{
+                name: '男性',
+                data: maleArray
+            }, {
+                name: '女性',
+                data: femaleArray
+            }]
+        });
     });
 };
 

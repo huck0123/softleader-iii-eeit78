@@ -1,5 +1,11 @@
 package tw.org.iiiedu.thegivers.service;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +16,22 @@ public class GiverServiceTest extends GenericTest {
 	@Autowired
 	private GiverService giverService;
 
+	@Test
+	public void testGetMaleAgeIntervalCount() throws ParseException{
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		Calendar rightNow = Calendar.getInstance();
+		int year = rightNow.get(Calendar.YEAR);
+		int month = rightNow.get(Calendar.MONTH)+1;
+		int date = rightNow.get(Calendar.DATE);
+		System.out.println(year);
+		
+		int a = giverService.getMaleAgeIntervalCount(
+//				new Timestamp(df.parse("05-21-2015").getTime()));
+				new Timestamp(df.parse(month + "-" + date + "-" + (year-30)).getTime()),
+				new Timestamp(df.parse(month + "-" + date + "-" + (year-20)).getTime()));
+		System.out.println(a);
+	}
+	
 //	@Test
 //	public void testGetById(){
 //		System.out.println(giverService.getById(1));

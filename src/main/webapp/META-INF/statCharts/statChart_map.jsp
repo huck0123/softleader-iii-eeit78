@@ -29,7 +29,7 @@
 }
 
 body{
- 	background-color: #C4E1FF; 
+/*  	background-color: #C4E1FF;  */
 }
 
 </style>
