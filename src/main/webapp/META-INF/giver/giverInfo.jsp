@@ -81,20 +81,29 @@ b {
 
 
 					<div class="row">
-						<div class="col-md-4"></div>
+						<div class="col-md-4">
+												<div style="padding-top: 36px;">
+							<a href="#" data-toggle="modal" data-target="#myModal"
+								title="點擊放大"> <img src="" class="img-thumbnail" id="img1"
+								style="width: 100px; height: 100px">
+							</a>
+						</div>
+						
+						</div>
 
 						<div class="col-md-4">
 							<!-- 			<div class="thumbnail"> -->
 							<div style="padding-top: 36px; text-align: left;">
 								<form
-									action='/softleader-iii-eeit78/giver/giverAction!insert.action'
-									method="post" enctype="multipart/form-data">
+									action='/softleader-iii-eeit78/giver/giverUpdate!update.action'
+								method="post" enctype="multipart/form-data">
 
 									<div class="form-group">
-										<label for="">帳號:<b>*</b></label> 
-										<input type="text" name="form.account" class="form-control"
-										value="${sessionScope.giver.account }" disabled>
-
+										<label for="">帳號:<b>*</b></label> <input type="text"
+											class="form-control"
+											value="${sessionScope.giver.account }" disabled> <input
+											type="text" name="form.account" class="form-control"
+											value="${sessionScope.giver.account }" style="display: none">
 									</div>
 									<div class="form-group">
 										<label for="">密碼:<b>*</b></label><br/>
@@ -106,26 +115,16 @@ b {
 									<div class="form-group"></div>
 									<div class="form-group">
 										<label for="">姓:<b>*</b></label> <input type="text"
-											class="form-control" name="form.familyName"
-											value="${param.form.familyName }">
+											class="form-control" name="form.familyName">
 									</div>
 									<div class="form-group">
 										<label for="">名字:<b>*</b></label> <input type="text"
-											class="form-control" name="form.name"
-											value="${param.form.name }">
+											class="form-control" name="form.name">
 									</div>
 
 									<label for="">性別:<b>*</b></label>
+									<p id="gender"></p>
 
-									<div class="form-group">
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-default"> <input type="radio"
-												name="form.gender" value="true">男
-											</label> <label class="btn btn-default"> <input type="radio"
-												name="form.gender" value="false">女
-											</label>
-										</div>
-									</div>
 									<div class="form-group">
 										<label for="">身分證字號:<b>*</b></label> <input type="text"
 											class="form-control" name="form.id_number"
@@ -133,35 +132,31 @@ b {
 									</div>
 									<div class="form-group">
 										<label for="">手機:<b>*</b></label> <input type="text"
-											class="form-control" name="form.tel"
-											value="${param.form.tel }"> <b id="tel"></b>
+											class="form-control" name="form.tel"> <b id="tel"></b>
 									</div>
 									<div class="form-group">
 										<label for="">住址:</label> <input type="text"
-											class="form-control" name="form.address"
-											value="${param.form.address }">
+											class="form-control" name="form.address">
 									</div>
 									<div class="form-group">
 										<label for="">Email:<b>*</b></label> <input type="email"
-											class="form-control" name="form.email"
-											value="${param.form.email }">
+											class="form-control" name="form.email">
 									</div>
 
 									<label for="">是否獲得資訊:</label>
 
 									<div class="form-group">
-										<div class="btn-group" data-toggle="buttons">
+
 											<label class="btn btn-default"> <input type="radio"
-												name="form.get_info" value="true" id="getInfo1"
-												checked="checked">是
-											</label> <label class="btn btn-default"> <input type="radio"
+												name="form.get_info" value="true" id="getInfo1">是
+										</label> <label class="btn btn-default"> <input type="radio"
 												name="form.get_info" value="false" id="getInfo2">否
-											</label>
-										</div>
+										</label>
+
 									</div>
 									<div class="form-group">
 										<label for="">生日:</label> <input type="text"
-											class="form-control" name="form.birth" value=""
+											class="form-control" name="form.birth"
 											style="height: 30px;" disabled>
 									</div>
 									<div class="form-group">
@@ -173,106 +168,20 @@ b {
 											title="點擊放大" id="changeHeadshot"> <img src="" id="img2"
 											style="dispaly: none; weight: 100px; height: 100px;">
 										</a>
+
 									</div>
 
 
 
 									<div>
 										<input type="submit" class="btn btn-primary" value="送出"
-											id="submit"> <input type="reset"
-											class="btn btn-primary" value="清除">
+											id="submit"> 
 									</div>
 								</form>
 							</div>
 						</div>
 						<!-- 			</div> -->
 
-					</div>
-
-
-
-
-					<div class="thumbnail">
-
-						<div>
-							<a href="#" data-toggle="modal" data-target="#myModal"
-								title="點擊放大"> <img src="" class="img-thumbnail" id="img1"
-								style="width: 100px; height: 100px">
-							</a>
-						</div>
-
-						<form
-							action='/softleader-iii-eeit78/giver/giverUpdate!update.action'
-							method="post" enctype="multipart/form-data">
-							<table class="table">
-								<colgroup>
-									<col span="1" style="background-color: #ADADAD">
-									<col style="background-color: #F0F0F0">
-								</colgroup>
-								<tr>
-									<td><label for="">帳號:</label></td>
-									<td><input type="text" name="form.account"
-										value=${sessionScope.giver.account } style="display: none">
-										${sessionScope.giver.account }</td>
-								</tr>
-								<tr>
-									<td><label for="">密碼:</label></td>
-									<td>
-										<button type="button" class="btn btn-default"
-											data-toggle="modal" data-target="#myPasswd">修改密碼</button> <input
-										type="password" name="form.passwd" value="" id="passwd"
-										style="display: none">
-									</td>
-								</tr>
-								<tr>
-									<td><label for="">姓:</label></td>
-									<td><input type="text" name="form.familyName" value=""></td>
-								</tr>
-								<tr>
-									<td><label for="">名字:</label></td>
-									<td><input type="text" name="form.name" value=""></td>
-								</tr>
-								<tr>
-									<td><label for="">性別:</label></td>
-									<td id="gender"></td>
-								</tr>
-								<tr>
-									<td><label for="">身分證字號:</label></td>
-									<td>${sessionScope.giver.idNumber }</td>
-								</tr>
-								<tr>
-									<td><label for="">手機:</label></td>
-									<td><input type="text" name="form.tel" value=""></td>
-								</tr>
-								<tr>
-									<td><label for="">住址:</label></td>
-									<td><input type="text" name="form.address" value=""></td>
-								</tr>
-								<tr>
-									<td><label for="">Email:</label></td>
-
-								</tr>
-								<tr>
-									<td><label for="">是否獲得資訊:</label></td>
-									<td>
-										<!-- 									<div class="btn-group" data-toggle="buttons"> -->
-										<label class="btn btn-default"> <input type="radio"
-											name="form.get_info" value="true" id="getInfo1">是
-									</label> <label class="btn btn-default"> <input type="radio"
-											name="form.get_info" value="false" id="getInfo2">否
-									</label> <!-- 									</div> -->
-									</td>
-								</tr>
-								<tr>
-									<td><label for="">生日:</label></td>
-									<td><span></span></td>
-								</tr>
-
-							</table>
-							<div>
-								<input type="submit" class="btn btn-primary" value="送出">
-							</div>
-						</form>
 					</div>
 				</div>
 				<jsp:include page="giverHistory.jsp" />
@@ -335,6 +244,7 @@ b {
 		</div>
 	</div>
 	<script>
+	
 		//會員資料修改 or 會員捐款資訊
 		if ("${param.giverTabs}" == 1) {
 			$('.nav-tabs a[href="#giverUpdate"]').tab('show');

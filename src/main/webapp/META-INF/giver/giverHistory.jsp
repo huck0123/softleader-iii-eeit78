@@ -19,27 +19,27 @@ form{
 		<div>
 			<form class="form-horizontal">		
 				<div class="form-group">
-    				<label for="keyword" class="col-sm-3 control-label">關鍵字搜尋</label>
+    				<label for="keyword" class="col-sm-2 control-label" style="text-align: center;">關鍵字搜尋</label>
     				<div class="col-sm-9">
       					<input type="text" class="form-control" id="keyword" placeholder="輸入活動名稱或發起團體">
     				</div>
   				</div>
 				<div class="form-group">
-    				<label for="minAmount" class="col-sm-3 control-label">依金額範圍</label>
+    				<label for="minAmount" class="col-sm-2 control-label" style="text-align: center;">依金額範圍</label>
     				<div class="col-sm-4">
       					<input type="text" class="form-control" id="minAmount" placeholder="輸入較小金額">
     				</div>
-    				<label for="maxAmount" class="col-sm-1 control-label">到</label>
+    				<label for="maxAmount" class="col-sm-1 control-label" style="text-align: center;">到</label>
        				<div class="col-sm-4">
       					<input type="text" class="form-control" id="maxAmount" placeholder="輸入較大金額">
     				</div>
   				</div>  				
 				<div class="form-group">
-    				<label for="afterDate" class="col-sm-3 control-label">依日期範圍</label>
+    				<label for="afterDate" class="col-sm-2 control-label" style="text-align: center;">依日期範圍</label>
     				<div class="col-sm-4">
       					<input type="datetime-local" class="form-control" id="afterDate" placeholder="選擇較小日期">
     				</div>
-    				<label for="beforeDate" class="col-sm-1 control-label">到</label>
+    				<label for="beforeDate" class="col-sm-1 control-label" style="text-align: center;">到</label>
        				<div class="col-sm-4">
       					<input type="datetime-local" class="form-control" id="beforeDate" placeholder="選擇較大日期">
     				</div>
