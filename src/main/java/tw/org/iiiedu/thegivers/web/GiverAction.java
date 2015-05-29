@@ -126,7 +126,13 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		try{
 			model.setAccount(form.getAccount().trim());
 			model.setAddress(form.getAddress().trim());
-			model.setBirth(new Timestamp(form.getBirth().getTime()));
+
+			if(form.getBirth().getTime() < (new java.util.Date()).getTime() ){
+				model.setBirth(new Timestamp(form.getBirth().getTime()));
+			}else{
+				return FAIL;
+			}
+			
 			model.setEmail(form.getEmail().trim());
 			model.setFamilyName(form.getFamilyName().trim());
 			model.setName(form.getName().trim());

@@ -156,7 +156,7 @@ body{
 											+ st2 + "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center'></td></tr>";
 								}
 
-								$('#tbodyRS').prepend(stAll);
+								$('#tbodyRS').append(stAll);
 								$("#test")
 										.click(
 												function() {
