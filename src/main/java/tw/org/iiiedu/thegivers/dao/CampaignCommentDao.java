@@ -28,10 +28,10 @@ public class CampaignCommentDao {
 		}
 	}
 	
-	public boolean update(CampaignCommentForm form){
+	public boolean update(CampaignCommentModel model){
 		Session session = sessionFactory.getCurrentSession();
 		try{
-			session.update(form);
+			session.update(model);
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

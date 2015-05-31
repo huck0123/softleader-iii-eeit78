@@ -170,13 +170,15 @@ pre {
 	var currentPage = 0;
 	var totalCount = 0;
 	var commentCurrentPage = 0;
-	var produceKey = null;
+	var permission = true;
 	var commentCampaignId;
 	
 	var recordCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentsURL =      '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
 	var getUserAccountURL =		  '${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var getReplyURL =             '${pageContext.request.contextPath}/campaignComment/actReplyComment!replyComment';
+	var alterCommentOrReplyURL =  '${pageContext.request.contextPath}/campaignComment/actRenewComment!renewComment';
+	var deleteCommentOrReplyURL =  '${pageContext.request.contextPath}/campaignComment/actDeleteComment!invalidComment';
 	
 	load();
 	
@@ -237,10 +239,11 @@ pre {
 	
 	function growNewReplyPlace(replyParam) {
 		if('${giver}'){
-			if(produceKey == null){
-				produceKey = "temp_" + replyParam;
+			if(permission){
+				permission = false;
+				$('#btn_' + replyParam).prop('disabled', true);
 				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
-					showAllReplies(replyParam);
+					showOrHideAllReplies(replyParam);
 				}else{
 				}
 				$('#sub_' + replyParam)
@@ -256,13 +259,7 @@ pre {
 					+ 		'</div>');
 				showUserPhoto("temp");
 			}else{
-				if(confirm("是否放棄前一個未完成的留言?")){
-					$('#' + produceKey).remove();
-					showAllReplies(produceKey.substring(5));
-					produceKey = null;
-					growNewReplyPlace(replyParam);
-				}else{
-				}
+				alert("請先完成或取消前一個留言再進行新的回覆");
 			}
 		}else{
 			alert("請先登入或註冊後再留言");
@@ -274,8 +271,13 @@ pre {
 			if($('#' + replyId).val().trim() == ""){
 				alert("未輸入任何內容");
 			}else{
-				produceKey = null;
-				showAllReplies(replyId);
+				permission = true;
+				$('#btn_' + replyId).prop('disabled', false);
+				$.getJSON(getReplyURL, {'form.id' : replyId}, function(data){
+					if(data.replyId != 0){
+						showOrHideAllReplies(replyId);
+					}
+				})
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : "${giver.id}",
@@ -290,13 +292,14 @@ pre {
 	function confirmCancelNewReply(replyId){
 		if(confirm("確定取消回覆嗎?")){
 			cancelNewReply(replyId);
-			showAllReplies(replyId);
+			permission = true;
+			$('#btn_' + replyId).prop('disabled', false);
+			showOrHideAllReplies(replyId);
 		}else{
 		}
 	}
 	
 	function cancelNewReply(replyId){
-		produceKey = null;
 		$('#temp_' + replyId).remove();
 	}
 	
@@ -324,13 +327,21 @@ pre {
 	function controlCommentOrReplyDetails(data, account, headshot, placeParam){
 		if(placeParam == 'mainShownCommentPlace'){
 	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
+	 		if('${giver.account}' != account){
+	 			$('#alt_' + data.id).text("");
+	 			$('#del_' + data.id).text("");
+	 		}
 	 		substantiatePhoto(data.id, headshot);
-	 		showAllReplies(data.id);
+	 		slideAllReplies(data.id);
 		}else{
 			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
 			$('#a_' + data.id).text("");
+	 		if('${giver.account}' != account){
+	 			$('#alt_' + data.id).text("");
+	 			$('#del_' + data.id).text("");
+	 		}
 			substantiatePhoto(data.id, headshot);
-			showAllReplies(data.id);
+			slideAllReplies(data.id);
 			$.getJSON(getReplyURL, {"form.id" : data.replyId}, function(replyJSON){
  				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
  					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
@@ -383,13 +394,15 @@ pre {
 		+ 			'<div class="col-md-2">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
 	 	+ 			'</div>'
-		+ 			'<div class="col-md-10" id="replyPlace">'
-		+ 				'<p>' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
+		+ 			'<div class="col-md-10" id="forAlt_' + data.id + '">'
+		+ 				'<p id="title_' + data.id + '">' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
 		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
-		+               '<a id="a_' + data.id + '" onclick="showAllReplies(' + data.id + ');">隱藏所有回覆</a>'
+		+               '<a id="a_' + data.id + '" onclick="slideAllReplies(' + data.id + ');">隱藏所有回覆</a>&nbsp;&nbsp;&nbsp;'
+		+               '<a id="alt_' + data.id + '" onclick="alterContent(' + data.id + ');">修改</a>&nbsp;&nbsp;&nbsp;'
+		+               '<a id="del_' + data.id + '" onclick="deleteContent(' + data.id + ');">刪除</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
 		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
@@ -415,7 +428,7 @@ pre {
 		}
 	}
 	
-	function showAllReplies(id){
+	function slideAllReplies(id){
 		if($('#a_' + id).text() == "查看所有回覆"){
 			$('#sub_' + id).slideDown();
 			$('#a_' + id).text("隱藏所有回覆");
@@ -424,6 +437,77 @@ pre {
 			$('#a_' + id).text("查看所有回覆");
 		}else{
 			$('#sub_' + id).slideToggle();
+		}
+	}
+	
+	function showOrHideAllReplies(id){
+		if($('#a_' + id).text() == "查看所有回覆"){
+			$('#sub_' + id).show();
+			$('#a_' + id).text("隱藏所有回覆");
+		}else if($('#a_' + id).text() == "隱藏所有回覆"){
+			$('#sub_' + id).hide();
+			$('#a_' + id).text("查看所有回覆");
+		}else{
+			$('#sub_' + id).toggle();
+		}
+	}
+	
+	function alterContent(id){
+		if(permission){
+			permission = false;
+			$('#forAlt_' + id).append('<div id="temp2_' + id + '">'
+							  +		  	 '<textarea id="' + id + '" class="form-control" rows="4" style="margin-bottom:4px"></textarea>'
+				          	  + 	  	 '<button type="button" class="btn btn-success btn-xs" onclick="sendAlteredReply(' + id + ');" style="width:50px">確定</button>&nbsp;'
+				          	  + 	  	 '<button type="button" class="btn btn-warning btn-xs" onclick="cancelAlteredReply(' + id + ');" style="width:50px">取消</button>'
+				          	  +       '</div>');
+			$('#' + id).val($('#p_' + id).text());
+			$('#p_' + id).hide(); $('#btn_' + id).hide(); $('#a_' + id).hide(); $('#alt_' + id).hide(); $('#del_' + id).hide();
+		}else{
+			alert("請先完成或取消前一個留言再進行修改");
+		}
+	}
+	
+	function sendAlteredReply(id){
+		if(confirm("確定送出修改嗎?")){
+			if($('#' + id).val().trim() == ""){
+				alert("未輸入任何內容");
+			}else{
+				permission = true;
+				$.getJSON(alterCommentOrReplyURL, {
+					'form.id' : id,
+					'form.commentary' : $('#' + id).val()
+				}, function(data){
+					var date = new Date(data.commentTime);
+					var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
+					$('#temp2_' + id).remove();
+					$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show();
+					$('#title_' + id).text("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
+					$('#p_' + id).text(data.commentary);
+				});
+			}
+		}else{
+		}
+	}
+	
+	function cancelAlteredReply(id){
+		if(confirm("確定取消修改內容嗎?")){
+			permission = true;
+			$('#temp2_' + id).remove();
+			$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show();
+		}else{
+		}
+	}
+	
+	function deleteContent(id){
+		if(confirm("確定刪除留言嗎?")){
+			$.getJSON(deleteCommentOrReplyURL, {
+				'form.id' : id
+			}, function(data){
+				$('#No_' + id).remove();
+				$('#sub_' + id).remove();
+				alert(data);
+			});
+		}else{
 		}
 	}
 

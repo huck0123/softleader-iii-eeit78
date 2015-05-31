@@ -34,10 +34,10 @@ public class CampaignCommentService {
 		}
 	}
 	
-	public CampaignCommentModel alterComment(CampaignCommentForm form){
-		boolean b = campaignCommentDao.update(form);
+	public CampaignCommentModel modifyComment(CampaignCommentModel model){
+		boolean b = campaignCommentDao.update(model);
 		if(b == true){
-			return campaignCommentDao.getById(form.getId());
+			return campaignCommentDao.getById(model.getId());
 		}else{
 			return null;
 		}

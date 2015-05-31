@@ -23,5 +23,17 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		<action name="actRenewComment" class="campaignCommentAction">
+			<result name="leaveRenewComment" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="actDeleteComment" class="campaignCommentAction">
+			<result name="deleteComment" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 	</package>
 </struts>
