@@ -16,12 +16,14 @@ public class OnlineSessionListener implements HttpSessionListener {
 
     public void sessionCreated(HttpSessionEvent arg0)  { 
     	OnlineSessionListener.count++;
+    	System.out.println(count);
     }
 
     public void sessionDestroyed(HttpSessionEvent arg0)  { 
     	if(OnlineSessionListener.count > 0){
     		OnlineSessionListener.count--;
     	}
+    	System.out.println(count);
     }
 	
 }

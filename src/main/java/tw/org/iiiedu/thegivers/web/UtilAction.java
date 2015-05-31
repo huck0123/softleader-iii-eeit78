@@ -63,7 +63,7 @@ public class UtilAction extends ActionSupport{
 		System.out.println(giverService.getCount());  //giver人數
 		System.out.println(raiserService.getCount());  //raiser人數
 		
-		//活動類型筆數
+		//活動類型及筆數
 		List<CampaignTypeModel> campaignTypeModels = campaignTypeService.getAll();
 		int campaignTypeNumber = campaignTypeModels.size();
 		
@@ -75,7 +75,7 @@ public class UtilAction extends ActionSupport{
 			map.put(campaignTypeModels.get(i).getName(), temp);
 		}
 		
-		//活動地點筆數
+		//活動地點及筆數
 		List<CityModel> cityModels = cityService.getAll();
 		int cityNumber = cityModels.size();
 		
@@ -97,7 +97,6 @@ public class UtilAction extends ActionSupport{
 		int year = rightNow.get(Calendar.YEAR);  //年
 		int month = rightNow.get(Calendar.MONTH)+1;  //月
 		int date = rightNow.get(Calendar.DATE);  //日
-		System.out.println(year+"  "+month+"  "+date);
 		
 		
 		try {
@@ -175,18 +174,16 @@ public class UtilAction extends ActionSupport{
 		}
 		
 		
-		
-		
 		//包成map丟到前端
 		Map<String, Object> statMap = new HashMap<>();
-		statMap.put("highestCurrentFund", campaignService.getHighestCurrentFund());
-		statMap.put("highestGoal", campaignService.getHighestGoal());
-		statMap.put("campaignCount", campaignService.getCampaignCount());
-		statMap.put("onlineCount", OnlineSessionListener.getCount());
-		statMap.put("giverCount", giverService.getCount());
-		statMap.put("raiserCount", raiserService.getCount());
-		statMap.put("typeCount", map);
-		statMap.put("cityCount", map1);
+		statMap.put("highestCurrentFund", campaignService.getHighestCurrentFund().getName());   //捐款額最高的活動
+		statMap.put("highestGoal", campaignService.getHighestGoal().getName());                 //最高募款金額的活動
+		statMap.put("campaignCount", campaignService.getCampaignCount());             			//活動數量
+		statMap.put("onlineCount", OnlineSessionListener.getCount());           			    //在線人數
+		statMap.put("giverCount", giverService.getCount());                     		        //giver人數
+		statMap.put("raiserCount", raiserService.getCount());           			            //raiser人數
+		statMap.put("typeCount", map);                                              		    //活動類型
+		statMap.put("cityCount", map1);                                       	 		        //活動地點及筆數
 		statMap.put("maleAgeInterval", map2);
 		statMap.put("femaleAgeInterval", map3);
 		
@@ -195,6 +192,7 @@ public class UtilAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
 	
 	
 }
