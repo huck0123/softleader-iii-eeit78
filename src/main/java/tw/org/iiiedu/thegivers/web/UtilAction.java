@@ -56,12 +56,12 @@ public class UtilAction extends ActionSupport{
 
 	public String util(){
 		
-		System.out.println(campaignService.getHighestCurrentFund());  //捐款額最高的活動
-		System.out.println(campaignService.getHighestGoal());  //最高募款金額的活動
-		System.out.println(campaignService.getCampaignCount());  //活動數量
-		System.out.println(OnlineSessionListener.getCount());  //在線人數
-		System.out.println(giverService.getCount());  //giver人數
-		System.out.println(raiserService.getCount());  //raiser人數
+//		System.out.println(campaignService.getHighestCurrentFund());  //捐款額最高的活動
+//		System.out.println(campaignService.getHighestGoal());  //最高募款金額的活動
+//		System.out.println(campaignService.getCampaignCount());  //活動數量
+//		System.out.println(OnlineSessionListener.getCount());  //在線人數
+//		System.out.println(giverService.getCount());  //giver人數
+//		System.out.println(raiserService.getCount());  //raiser人數
 		
 		//活動類型及筆數
 		List<CampaignTypeModel> campaignTypeModels = campaignTypeService.getAll();
@@ -177,7 +177,9 @@ public class UtilAction extends ActionSupport{
 		//包成map丟到前端
 		Map<String, Object> statMap = new HashMap<>();
 		statMap.put("highestCurrentFund", campaignService.getHighestCurrentFund().getName());   //捐款額最高的活動
+		statMap.put("highestCurrentFundID", campaignService.getHighestCurrentFund().getId());   //捐款額最高的活動ID
 		statMap.put("highestGoal", campaignService.getHighestGoal().getName());                 //最高募款金額的活動
+		statMap.put("highestGoalID", campaignService.getHighestGoal().getId());                   //最高募款金額的活動ID
 		statMap.put("campaignCount", campaignService.getCampaignCount());             			//活動數量
 		statMap.put("onlineCount", OnlineSessionListener.getCount());           			    //在線人數
 		statMap.put("giverCount", giverService.getCount());                     		        //giver人數

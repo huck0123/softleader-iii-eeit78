@@ -90,15 +90,15 @@ function onload(data){
 	
 	data = JSON.parse(data);
 	$('#marquee').html("<h1>本站在線人數:" + data.onlineCount
-					 + "募款金額最高的活動:" + data.highestCurrentFund
 					 + "捐款最的多活動:" + data.highestGoal
 					 + "本站捐款會員人數:" + data.giverCount
 					 + "本站慈善機構數量:" + data.raiserCount +"</h1>");
 	
-	$('#marquee1').html("<h4>募款金額最高的活動:" + data.highestCurrentFund
-						 + "捐款最的多活動:" + data.highestGoal
-						 + "目前活動數量:" + data.campaignCount
-				     	 +"</h4>");
+	$('#marquee1').html("<h4>募款金額最高的活動:" 
+	   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestCurrentFundID + "'>"+data.highestCurrentFund+"</a>"
+	   + "捐款最的多活動:" 
+	   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestGoalID + "'>"+data.highestGoal+"</a>"
+	   +"</h4>");
 }
 
 //活動類型分布圖
