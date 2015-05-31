@@ -49,6 +49,7 @@ body{
 					<li>
 						<a href="#distribution2">捐款註冊年齡分布</a>
 					</li>
+					
 				</ul>
 			</div>
 			<div class="col-md-9">
@@ -62,6 +63,8 @@ body{
 					<h2 class="sub-header">捐款註冊年齡分布</h2><br>
 					<div id="age_distribution" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 				</div>
+				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="marquee"></marquee>
+				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" id="marquee1"></marquee>
 				
 			</div>
 		</div>
@@ -84,6 +87,18 @@ function onload(data){
 	getType(data);
 	ageDistribution(data);
 	$('text[text-anchor="end"]').hide();
+	
+	data = JSON.parse(data);
+	$('#marquee').html("<h1>本站在線人數:" + data.onlineCount
+					 + "捐款最的多活動:" + data.highestGoal
+					 + "本站捐款會員人數:" + data.giverCount
+					 + "本站慈善機構數量:" + data.raiserCount +"</h1>");
+	
+	$('#marquee1').html("<h4>募款金額最高的活動:" 
+	   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestCurrentFundID + "'>"+data.highestCurrentFund+"</a>"
+	   + "捐款最的多活動:" 
+	   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestGoalID + "'>"+data.highestGoal+"</a>"
+	   +"</h4>");
 }
 
 //活動類型分布圖
@@ -101,23 +116,20 @@ function getType(type) {
 // 	console.log(type[Object.keys(type)[0]])
 // 	console.log(Object.keys(type).length)
 	
-	var sum = 0;
-	for(var i in type){
-		sum += type[i];
+// 	var sum = 0;
+// 	for(var i in type){
+// 		sum += type[i];
 // 		console.log(i);
 // 		console.log(type[i]);
-	}
+// 	}
 	
 	
-    // Make monochrome colors and set them as default for all pies
     Highcharts.getOptions().plotOptions.pie.colors = (function () {
         var colors = [],
             base = Highcharts.getOptions().colors[0],
             i;
 
         for (i = 0; i < 10; i += 1) {
-            // Start out with a darkened base color (negative brighten), and end
-            // up with a much brighter color
             colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
         }
         return colors;
@@ -153,16 +165,8 @@ function getType(type) {
         },
         series: [{
             type: 'pie',
-//             name: '活動類型',
             data: keys
             	
-//             [
-//                 [Object.keys(type)[0],   type[Object.keys(type)[0]]/sum],  //兒福教育
-//                 [Object.keys(type)[1],   type[Object.keys(type)[1]]/sum],  //弱勢照護       
-//                 [Object.keys(type)[2],   type[Object.keys(type)[2]]/sum],  //環境保護
-//                 [Object.keys(type)[3],   type[Object.keys(type)[3]]/sum],  //婦幼關懷
-//                 [Object.keys(type)[4],   type[Object.keys(type)[4]]/sum]   //其他類型
-//             ]
         }]
     });
 };
@@ -241,6 +245,7 @@ function ageDistribution(data) {
         });
     });
 };
+
 
 
 </script>

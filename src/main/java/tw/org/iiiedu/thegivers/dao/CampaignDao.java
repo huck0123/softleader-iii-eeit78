@@ -244,30 +244,31 @@ public class CampaignDao {
 		return null;
 	}
 
-	// 募款額最高的活動
-	public int getHighestGoal() {
+	// 募款額最高的活動 (有重複只抓一筆)
+	public CampaignModel getHighestGoal() {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
 
-		int highestGoal = (int) criteria
+		CampaignModel highestGoal = (CampaignModel) criteria
 				.add(Restrictions.eq("valid", true))
 				.add(Restrictions.gt("endDate", new Timestamp(
 						(new java.util.Date()).getTime())))
-				.setProjection(Projections.max("goal")).uniqueResult();
+				.addOrder(Order.desc("goal")).list().get(0);
 
 		return highestGoal;
 	}
 	
-	//捐款金額最高的活動
-	public int getHighestCurrentFund(){
+	//捐款金額最高的活動 (有重複只抓一筆)
+	public CampaignModel getHighestCurrentFund(){
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(CampaignModel.class);
 		
-		int highestCurrentFund = (int) criteria
+		CampaignModel highestCurrentFund =  (CampaignModel) criteria
 				.add(Restrictions.eq("valid", true))
 				.add(Restrictions.gt("endDate", new Timestamp(
 						(new java.util.Date()).getTime())))
-				.setProjection(Projections.max("currentFund")).uniqueResult();
+				.addOrder(Order.desc("currentFund")).list().get(0);
+		
 		
 		return highestCurrentFund;
 	}

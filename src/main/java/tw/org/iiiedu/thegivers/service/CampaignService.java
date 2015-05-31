@@ -109,12 +109,12 @@ public class CampaignService {
 	}
 	
 	// 募款額最高的活動
-	public int getHighestGoal(){
+	public CampaignModel getHighestGoal(){
 		return campaignDao.getHighestGoal();
 	}
 	
 	//捐款金額最高的活動
-	public int getHighestCurrentFund() {
+	public CampaignModel getHighestCurrentFund() {
 		return campaignDao.getHighestCurrentFund();
 	}
 	
