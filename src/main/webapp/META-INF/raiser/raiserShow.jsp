@@ -17,7 +17,7 @@ body{
 
 <div class="tab-pane fade" id="raiserShow">
 
-	<div class="container">
+	<div>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
@@ -34,9 +34,9 @@ body{
 			</div>
 		</div>
 		<br>
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10">
+		<div class="row" style="text-align: center">
+<div class="col-md-1"></div>
+			<div class="col-md-10" style="display: inline;">
 				<table class="table table-condensed table-bordered">
 					<tr>
 						<th style="width: 10px"></th>
@@ -51,7 +51,7 @@ body{
 					</tbody>
 				</table>
 			</div>
-			<div class="col-md-1"></div>
+
 		</div >
 		<div id="btnn" class="row">
 			<div class="col-md-5" style="text-align:right">

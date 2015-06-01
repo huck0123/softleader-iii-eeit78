@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <style type="text/css">
 /*general setting*/
 .container {
@@ -163,14 +163,15 @@ ul.nav {
 }
 /*nav responsive settings end*/
 
-.bottom-shadow{box-shadow: 0px 1px 2px 2px rgba(200,200,200,0.9)}
+.bottom-shadow{box-shadow: 0px 1px 3px 1px rgba(200,200,200,0.9)}
 </style>
+
 <div id="top-anchor" style="top: 0; position: absolute;"></div>
-<!-- 
-<div id="header-holder" style="display: none; height:71px"></div> 
-這一段看有沒有辦法動態設成header的高度，不然會跑掉
--->
+
+<div id="header-holder" style="display: none;"></div> 
+
 <div id="header-wrapper">
+
 	<div id="header-container" class="container bottom-shadow">
 		<nav id="nav-header"
 			class="navbar navbar-default navbar-header-custom">
@@ -235,9 +236,7 @@ ul.nav {
 										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
 								</ul></li>
 						</c:if>
-						<li id="to-top" style="display: none;"><a href="#top-anchor"><img
-								class="header-pic opacity60"
-								src="/softleader-iii-eeit78/pictures/back_to_top.png" /></a></li>
+						<li id="to-top" style="display: none;"><a href="#top-anchor"><i class="fa fa-arrow-up" style="color: silver; font-size: 20px"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -298,7 +297,11 @@ ul.nav {
 
 
 <script>
+var headerHeight = $('#header-wrapper').height();
+console.log(headerHeight);
+
 	$(document).ready(
+
 	
 					function() {
 						$(window).scroll(
@@ -314,7 +317,7 @@ ul.nav {
 										$('#collapse-part').removeClass(
 												'container');
 										$('#collapse-login').addClass('collapse-login-scroll');
-										$('#header-holder').stop().show();
+										$('#header-holder').stop().show().height(headerHeight);
 										$('#header-container').removeClass(
 										'bottom-shadow');
 									} else {
@@ -329,7 +332,7 @@ ul.nav {
 												'container');
 										$('#collapse-login')
 												.removeClass('collapse-login-scroll');
-										$('#header-holder').stop().hide();
+										$('#header-holder').stop().hide().height(0);
 										$('#header-container').addClass(
 										'bottom-shadow');
 									}
