@@ -1,5 +1,6 @@
 package tw.org.iiiedu.thegivers.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -39,12 +40,21 @@ public class CampaignCommentDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean delete(Integer id){
 		Session session = sessionFactory.getCurrentSession();
 		try{
 			CampaignCommentModel model = (CampaignCommentModel)session.createCriteria(CampaignCommentModel.class)
-					.add(Restrictions.eq("id", id));
+					.add(Restrictions.eq("id", id)).list().get(0);
 			session.delete(model);
+			
+			Iterator<CampaignCommentModel> models = session.createCriteria(CampaignCommentModel.class)
+					.add(Restrictions.eq("pendingId", id)).list().iterator();
+			while(models.hasNext()){
+				CampaignCommentModel temp = models.next();
+				session.delete(temp);
+			}
+			
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -189,14 +189,14 @@ pre {
 	}
 	
 	function loadComment(datas){
+		//console.log(datas);
 		$.each(datas, function(name, data){
 			assignFinalFixedPlace(data);
-			console.log(data);
-		})
+		});
 	}
 	
 	$('#mainCommentPlace').on('click', function(){
-		if("${giver}"){
+		if("${giver}" || "${raiser}" || "${admin}"){
 		}else{
 			alert("請先登入或註冊後再留言");
 			$('#mainCommentPlace').blur();
@@ -238,7 +238,7 @@ pre {
 	}
 	
 	function growNewReplyPlace(replyParam) {
-		if('${giver}'){
+		if("${giver}" || "${raiser}" || "${admin}"){
 			if(permission){
 				permission = false;
 				$('#btn_' + replyParam).prop('disabled', true);
@@ -305,46 +305,56 @@ pre {
 	
 	function assignFinalFixedPlace(data) {
 		if (data.pendingId == 0) {
-			cleanNewComment();
 			showUserAccount(data, 'mainShownCommentPlace');
+			cleanNewComment();
 		}else{
-			cancelNewReply(data.replyId);
 			showUserAccount(data, data.pendingId);
+			cancelNewReply(data.replyId);
 		}
 	}
 	
 	function showUserAccount(data, placeParam){
-			$.getJSON(getUserAccountURL, {"form.id" : data.giverId}, function(dataJSON){
-				controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
-			});
+		$.ajax({async : false,
+				dataType : "json",
+				url : getUserAccountURL,
+				data : {"form.id" : data.giverId},
+				success : function(dataJSON){
+					controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
+			  }});
 			
-//  		if(data.anonymous){
-//  			controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
-//  		}else{
-//  		}
+//  	if(data.anonymous){
+//  		controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
+//  	}else{
+//  	}
 	}
 	
 	function controlCommentOrReplyDetails(data, account, headshot, placeParam){
 		if(placeParam == 'mainShownCommentPlace'){
 	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
-	 		if('${giver.account}' != account){
-	 			$('#alt_' + data.id).text("");
-	 			$('#del_' + data.id).text("");
+	 		//console.log(data);
+	 		if(!'${admin}'){
+	 			if('${giver.account}' != account && '${raiser.account}' != account){
+	 				$('#alt_' + data.id).text("");
+	 				$('#del_' + data.id).text("");
+	 			}
 	 		}
 	 		substantiatePhoto(data.id, headshot);
 	 		slideAllReplies(data.id);
 		}else{
 			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
+			//console.log(data);
 			$('#a_' + data.id).text("");
-	 		if('${giver.account}' != account){
-	 			$('#alt_' + data.id).text("");
-	 			$('#del_' + data.id).text("");
-	 		}
+			if(!'${admin}'){
+	 			if('${giver.account}' != account && '${raiser.account}' != account){
+	 				$('#alt_' + data.id).text("");
+	 				$('#del_' + data.id).text("");
+	 			}
+			}
 			substantiatePhoto(data.id, headshot);
 			slideAllReplies(data.id);
 			$.getJSON(getReplyURL, {"form.id" : data.replyId}, function(replyJSON){
  				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
- 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+ 					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
  				});
 			});
 			
@@ -481,7 +491,7 @@ pre {
 					var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
 					$('#temp2_' + id).remove();
 					$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show();
-					$('#title_' + id).text("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
+					$('#title_' + id).html("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
 					$('#p_' + id).text(data.commentary);
 				});
 			}
@@ -503,9 +513,11 @@ pre {
 			$.getJSON(deleteCommentOrReplyURL, {
 				'form.id' : id
 			}, function(data){
-				$('#No_' + id).remove();
-				$('#sub_' + id).remove();
 				alert(data);
+				if(data == "刪除成功"){
+					$('#No_' + id).remove();
+					$('#sub_' + id).remove();
+				}
 			});
 		}else{
 		}
