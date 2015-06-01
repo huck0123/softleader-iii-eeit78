@@ -41,6 +41,11 @@ label>b {
 	color: red;
 	font-size: 150%;
 }
+#dropZone img {
+margin-top:20px;
+max-width:  100%;
+
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>團體-註冊帳號</title>
@@ -182,11 +187,11 @@ label>b {
 							<div>
 								<input type="file" name="raiserForm.logo" id="logo"
 									accept="image/*">
-								<div id="dropZone" ondragover="dragoverHandler(event)"
-									ondrop="dropHandler(event)">
-									<img id="dragpic"
-										src="/softleader-iii-eeit78/pictures/fileupdate.png">
-								</div>
+<!-- 								<div id="dropZone" ondragover="dragoverHandler(event)" -->
+<!-- 									ondrop="dropHandler(event)"> -->
+<!-- 									<img id="dragpic" -->
+<!-- 										src="/softleader-iii-eeit78/pictures/fileupdate.png"> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 
@@ -354,13 +359,15 @@ label>b {
 		$("#logo")
 				.change(
 						function() {
+							console.log($(this).val())
 							var file = logo.files[0];
-							console.log($(this).attr("name"))
 							if (file) {
 								var reader = new FileReader();
 								reader.onload = function(event) {
-									$("#dropZone").empty().append(
-											"<img src='" +event.target.result +  "' />");
+									$("#dropZone")
+											.empty()
+											.append(
+													"<img src='" +event.target.result +  "' />");
 								}
 							}
 							reader.readAsDataURL(file);
@@ -416,41 +423,27 @@ label>b {
 
 		//test
 
-		function dragoverHandler(e) {
-			e.preventDefault();
-			$("#dragpic").css("opacity", 0.6);
-		}
+// 		function dragoverHandler(e) {
+// 			e.preventDefault();
+// 			$("#dragpic").css("opacity", 0.6);
+// 		}
 
-		function dropHandler(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			var theFiles = e.dataTransfer.files;
-			console.log(theFiles[0].type);
-			for (var i = 0; i < theFiles.length; i++) {
-				var reader = new FileReader();
+// 		function dropHandler(e) {
+// 			e.preventDefault();
+// 			e.stopPropagation();
+// 			var theFiles = e.dataTransfer.files;
+// 			for (var i = 0; i < theFiles.length; i++) {
+// 				var reader = new FileReader();
+// 				reader.readAsDataURL(theFiles[i]);
+// 				reader.onload = function(e) { //callback
+// 					var fileContent = e.target.result;
+// 					$("#dropZone").empty().append(
+// 							"<img src='" +fileContent +  "' />");
+// 				}
+// 			}
 
-				reader.readAsDataURL(theFiles[i]);
-				reader.onload = function(e) { //callback
-					var fileContent = e.target.result;
-					$("#dropZone").empty().append(
-							"<img src='" +fileContent +  "' />");
-				}
-			}
-
-		}
-		// 				var formData = new window.FormData();
-		// 	            formData.append( 'pic', theFiles[0] );
-
-		// 	            var xhr = new XMLHttpRequest();
-		// 	            xhr.open( 'POST', '${pageContext.request.contextPath}/raiser/raiserAction!aaa' );
-		// 	            xhr.onload = function () {
-		// 	                if (xhr.status === 200) {
-		// 	                    alert('檔案上載成功!!');
-		// 	                } else {
-		// 	                    alert('檔案上載失敗!!');
-		// 	                }
-		// 	            };
-		// 	            xhr.send(formData);
+// 		}
+		
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>

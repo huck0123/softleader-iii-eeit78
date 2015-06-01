@@ -21,40 +21,50 @@
 <script src="http://code.highcharts.com/mapdata/countries/tw/tw-all.js"></script>
 
 <style>
+html, body{ height: 100%}
 #city_distribution {
-    height: 500px; 
+    min-height: 80%;  
     min-width: 310px; 
-    max-width: 800px; 
+/*     max-width: 800px;  */
     margin: 0px auto; 
 }
 
 body{
 /*  	background-color: #C4E1FF;  */
 }
-
+strong {
+	font-size: 36px;
+}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container-fluid" style="padding-top: 50px;">
+	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:center; color:darkslategray;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
+				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
+			</div>
+	</div>
+
+	<div class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-3 sidebar" style="padding-top: 50px;">
-				<ul class="nav nav-sidebar" style="position:fixed;">
+			<div class="col-md-3" >
+			<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
+				<ul class="nav nav-sidebar">
 					<li style="background-color: #FFFFB9;">
-						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
+					<li style="background-color:#FFFFB9;">
+						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
 					</li>
-					<li class="active">
-						<a href="#distribution1">活動區域分布統計</a>
+						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<h1 class="page-header" style="font-family:DFKai-sb">統計圖表</h1>
+				
 				<div id="distribution1">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動數量區域分布統計</h3><br>
+					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動位置分布圖</h3>
 					<div id="city_distribution"></div><br>
-					<p>藉由這個圖表迅速得知目前所有地區的活動數量</p>
 				</div>
 				
 			</div>
@@ -63,7 +73,7 @@ body{
 	
 
 	
-	<jsp:include page="/footer2.jsp" />
+	<jsp:include page="/footer.jsp" />
 </body>
 <script>
 	
@@ -176,7 +186,7 @@ function taiwan(city) {
 		},
     	
         title : {
-            text : '活動區域分布比例',
+            text : '',
             style : { "color": "red", "fontSize": "20px" }
         },
 
@@ -212,7 +222,16 @@ function taiwan(city) {
         }]
     });
 }
-
+//所有圖形載入點
+function onload(data){
+	getType(data);
+	ageDistribution(data);
+	$('text[text-anchor="end"]').hide();
+	
+	data = JSON.parse(data);
+	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
+					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+}
 </script>
 
 

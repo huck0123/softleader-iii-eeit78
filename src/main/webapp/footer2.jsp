@@ -13,9 +13,6 @@
 	display: table;
 	background-color: rgb(23, 23, 23);
 	font-size: 16px;
-	padding-top: 0px;
-	position: absolute;
-	bottom: 0px;
 	padding-top: 20px;
 }
 
