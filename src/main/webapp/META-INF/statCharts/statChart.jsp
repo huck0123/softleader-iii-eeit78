@@ -32,7 +32,7 @@ body{
 }
 
 strong {
-	font-size: 46px;
+	font-size: 36px;
 }
 @media{
 marquee{width: 100%}

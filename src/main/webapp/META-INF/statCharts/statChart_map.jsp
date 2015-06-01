@@ -32,7 +32,9 @@ html, body{ height: 100%}
 body{
 /*  	background-color: #C4E1FF;  */
 }
-
+strong {
+	font-size: 36px;
+}
 </style>
 </head>
 <body id="body">
