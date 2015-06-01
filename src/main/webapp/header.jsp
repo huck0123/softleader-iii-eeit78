@@ -248,7 +248,7 @@ ul.nav {
 				<div class="input-group col-md-8"
 					style="padding: 30px; margin: auto">
 					<input type="text" class="form-control input-lg"
-						placeholder="請輸入關鍵字" id="header-name-search" /> <span
+						placeholder="活動快搜" id="header-name-search" /> <span
 						class="input-group-btn">
 						<button class="btn btn-info btn-lg" type="button"
 							id="header-search-btn">
