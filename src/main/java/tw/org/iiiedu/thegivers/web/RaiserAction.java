@@ -51,7 +51,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private String name;
 	private String contactPerson;
 	private CampaignForm campaignForm;
-	
+	private int pagesizeForRaiserShow;
 //	private File pic;
 //	public File getPic() {
 //		return pic;
@@ -110,6 +110,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getPagesizeForRaiserShow() {
+		return pagesizeForRaiserShow;
+	}
+
+	public void setPagesizeForRaiserShow(int pagesizeForRaiserShow) {
+		this.pagesizeForRaiserShow = pagesizeForRaiserShow;
 	}
 
 	public String insert() {
@@ -337,7 +345,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getByAllConditionCount() {
 		Integer resultCount = raiserService.getByAllConditionCount(account,
-				name, contactPerson, lock);
+				name, contactPerson, true);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(resultCount);
 		inputStream = new ByteArrayInputStream(
@@ -347,7 +355,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getRaiserCondition() {
 		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
-				contactPerson, lock, page, 5);
+				contactPerson, true, page, pagesizeForRaiserShow);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(list);
 		inputStream = new ByteArrayInputStream(

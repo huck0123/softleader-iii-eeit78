@@ -100,7 +100,7 @@ function tbdyAppend(){
 					+ "<td>"+ value.location +"</td>" 
 					+ "<td>"+ value.type +"</td>" 
 					+ "<td>"+ value.valid +"</td>" 
-					+ "<td><input type='checkbox' name='campaignForm.checkbox' value='"+value.id+"'></td>" 
+					+ "<td><input type='checkbox' style='height:20px;width:20px' name='campaignForm.checkbox' value='"+value.id+"'></td>" 
 					+"</tr>");
 					
 			var str = arrayBufferToBase64(value.image); 
