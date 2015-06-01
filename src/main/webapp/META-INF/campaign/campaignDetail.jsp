@@ -577,7 +577,7 @@ pre {
 				var d = new Date(value.endDate);
 				
 				var dateP = $('<p>於<strong>' + d.getFullYear()
-							+ '/' + d.getMonth()+1 + '/' + d.getDate()
+							+ '/' + (d.getMonth()+1) + '/' + d.getDate()
 							+ '</strong>結束</p>');
 
 				var percent = value.currentFund / value.goal * 100;

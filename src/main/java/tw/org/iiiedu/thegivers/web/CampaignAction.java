@@ -193,6 +193,14 @@ public class CampaignAction extends ActionSupport implements
 		return "unban";
 	}
 
+	public String selectRaiserIdById(){
+		CampaignModel cm = campaignService.getById(campaignForm.getId());
+		Integer outputRaiserId = cm.getRaiserModel().getId();
+		inputStream = new ByteArrayInputStream(outputRaiserId.toString().getBytes(
+				StandardCharsets.UTF_8));
+		return "selectRaiserIdById";
+	}
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

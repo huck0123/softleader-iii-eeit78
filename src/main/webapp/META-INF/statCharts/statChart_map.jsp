@@ -21,42 +21,50 @@
 <script src="http://code.highcharts.com/mapdata/countries/tw/tw-all.js"></script>
 
 <style>
+html, body{ height: 100%}
 #city_distribution {
-    height: 500px; 
+    min-height: 80%;  
     min-width: 310px; 
-    max-width: 800px; 
+/*     max-width: 800px;  */
     margin: 0px auto; 
 }
 
 body{
 /*  	background-color: #C4E1FF;  */
 }
-
+strong {
+	font-size: 36px;
+}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container-fluid" style="padding-top: 50px;">
+	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:center; color:darkslategray;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
+				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
+			</div>
+	</div>
+
+	<div class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-3 sidebar">
-				<ul class="nav nav-sidebar" style="background-color: #FFFFB9;">
-					<li>
-						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
-					</li>
-				</ul>
+			<div class="col-md-3" >
+			<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
 				<ul class="nav nav-sidebar">
-					<li class="active">
-						<a href="#distribution1">活動區域分布統計</a>
+					<li style="background-color: #FFFFB9;">
+					<li style="background-color:#FFFFB9;">
+						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
+					</li>
+						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<h1 class="page-header">統計圖表</h1>
+				
 				<div id="distribution1">
-					<h2 class="sub-header">活動區域分布統計</h2><br>
-					<p>統計各個活動發起的地點</p>
-					<div id="city_distribution"></div>
+					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動位置分布圖</h3>
+					<div id="city_distribution"></div><br>
 				</div>
 				
 			</div>
@@ -65,7 +73,7 @@ body{
 	
 
 	
-	<jsp:include page="/footer2.jsp" />
+	<jsp:include page="/footer.jsp" />
 </body>
 <script>
 	
@@ -173,9 +181,12 @@ function taiwan(city) {
 
     // Initiate the chart
     $('#city_distribution').highcharts('Map', {
-
+		chart : {
+			backgroundColor: '#D2E9FF'
+		},
+    	
         title : {
-            text : '活動區域分布比例',
+            text : '',
             style : { "color": "red", "fontSize": "20px" }
         },
 
@@ -211,7 +222,16 @@ function taiwan(city) {
         }]
     });
 }
-
+//所有圖形載入點
+function onload(data){
+	getType(data);
+	ageDistribution(data);
+	$('text[text-anchor="end"]').hide();
+	
+	data = JSON.parse(data);
+	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
+					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+}
 </script>
 
 

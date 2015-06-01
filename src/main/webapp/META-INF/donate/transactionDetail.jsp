@@ -8,10 +8,10 @@ tr th {
 }
 </style>
 
-<div class="panel alert tab-pane fade" id="transactionDetail">
+<div class="tab-pane fade" id="transactionDetail">
 
 <!-- 	<div class="panel alert"> -->
-		<div class="row">
+		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-md-3">
 				<select id="transactionDetailPageAmount"></select>顯示筆數(預設5筆)
 			</div>

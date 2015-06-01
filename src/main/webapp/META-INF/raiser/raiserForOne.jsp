@@ -16,6 +16,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style type="text/css">
+html, body {
+	height: 100%;
+}
+
 body {
 	text-align: left;
 }
@@ -24,10 +28,10 @@ body {
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
-	<div class="container">
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
+	<div class="container" style="min-height:80%;margin-bottom: 20px; margin-top: 20px">
+		<div class="row" style="text-align: center">
+
+			<div class="col-md-4">
 				<br> <img src='' class='img-thumbnail' id='logo'
 					style='width: 250px; height: 230px'>
 				<h1>${raiserSelf.name}</h1>
@@ -37,22 +41,18 @@ body {
 				<h5>連絡人姓名:${raiserSelf.contactPerson}</h5>
 				<h5>連絡人電話:${raiserSelf.contactTel}</h5>
 			</div>
-			<div class="col-md-5">
-				<h3 style="text-align: center">團體短片</h3>
-				<iframe src="${raiserSelf.videoUrl}"
-					style="width: 470px; height: 360px"></iframe>
+			<div class="col-md-8">
+				<div class="embed-responsive embed-responsive-16by9"
+					style="margin-top: 22px;">
+					<iframe src="${raiserSelf.videoUrl}"></iframe>
+				</div>
+				<h3 style="text-align: center">團體簡介</h3>
+				<p style="font-size: 18px; text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${raiserSelf.detail}</p>
 			</div>
-			<div class="col-md-3"></div>
 		</div>
-		<div class="row" style="height: 800px">
-			<div class="col-md-4"></div>
-			<div class="col-md-5">
-				<h3 style="text-align: center">團體介紹</h3>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${raiserSelf.detail}
-			</div>
-			<div class="col-md-4"></div>
-		</div>
+
 	</div>
+
 	<script>
 		var url = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 		$.post(url, {
