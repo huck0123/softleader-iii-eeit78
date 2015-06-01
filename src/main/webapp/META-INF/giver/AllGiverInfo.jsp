@@ -40,12 +40,28 @@
 tr th {
 	text-align: center;
 }
+.tab-content {
+	border-bottom: 1px solid silver;
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+	margin-bottom: 20px;
+	padding-right: 28px;
+	padding-left: 28px;
+}
+td{vertical-align: middle;}
 </style>
 
 </head>
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
+	
+			<div class="container" style="background-color: #f2f2f2; margin-top: 20px; margin-bottom: 20px; padding-bottom: 15px">
+			<div class="row" style="text-align:center; color:	gray; padding-left: 20px;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">管理員專區</h1>
+			</div>
+	</div>
+	
 	<div class="container">
 		<ul class="nav nav-tabs" role="tablist">
 			<li><a href="#AllgiverInfo">所有捐款人資訊</a></li>
@@ -53,10 +69,10 @@ tr th {
 			<li><a href="#campaignAdmin">管理活動</a></li>
 			<li><a href="#transactionDetail">顯示所有交易紀錄</a></li>
 		</ul>
-		<div class="tab-content">
+		<div class="tab-content" style="padding-top: 20px;">
 		
-			<div class="panel alert tab-pane fade" id="AllgiverInfo">
-				<div class="row">
+			<div class="tab-pane fade" id="AllgiverInfo">
+				<div class="row" style="margin-bottom: 20px;">
 					<div class="col-md-3">
 						<select id="pageAmount"></select>顯示筆數(預設5筆)
 					</div>
