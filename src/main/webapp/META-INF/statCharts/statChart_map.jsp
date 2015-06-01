@@ -39,24 +39,22 @@ body{
 
 	<div class="container-fluid" style="padding-top: 50px;">
 		<div class="row">
-			<div class="col-md-3 sidebar">
-				<ul class="nav nav-sidebar" style="background-color: #FFFFB9;">
-					<li>
+			<div class="col-md-3 sidebar" style="padding-top: 50px;">
+				<ul class="nav nav-sidebar" style="position:fixed;">
+					<li style="background-color: #FFFFB9;">
 						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
 					</li>
-				</ul>
-				<ul class="nav nav-sidebar">
 					<li class="active">
 						<a href="#distribution1">活動區域分布統計</a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<h1 class="page-header">統計圖表</h1>
+				<h1 class="page-header" style="font-family:DFKai-sb">統計圖表</h1>
 				<div id="distribution1">
-					<h2 class="sub-header">活動區域分布統計</h2><br>
-					<p>統計各個活動發起的地點</p>
-					<div id="city_distribution"></div>
+					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動數量區域分布統計</h3><br>
+					<div id="city_distribution"></div><br>
+					<p>藉由這個圖表迅速得知目前所有地區的活動數量</p>
 				</div>
 				
 			</div>
@@ -173,7 +171,10 @@ function taiwan(city) {
 
     // Initiate the chart
     $('#city_distribution').highcharts('Map', {
-
+		chart : {
+			backgroundColor: '#D2E9FF'
+		},
+    	
         title : {
             text : '活動區域分布比例',
             style : { "color": "red", "fontSize": "20px" }

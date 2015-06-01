@@ -155,7 +155,9 @@ margin-bottom: -40px;
 			</div>
 		</div>
 	</div>
-
+	<!-- 	跑馬燈 -->
+	<div><marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" id="marquee1" ></marquee></div>
+	
 	<div id="raiserDiv">
 		<div>
 			<div class="container" style="border-bottom: 1px solid silver">
@@ -270,6 +272,15 @@ margin-bottom: -40px;
 			{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 				return false;
 			});
+// 	跑馬燈
+	$.post("/softleader-iii-eeit78/util/utilAction!util", function(data){
+		data = JSON.parse(data);
+		$('#marquee1').html("<h3>募款金額最高的活動:" 
+				   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestCurrentFundID + "'>"+data.highestCurrentFund+"</a>"
+				   + "&nbsp&nbsp&nbsp捐款最的多活動:" 
+				   + "<a href='/softleader-iii-eeit78/campaign/campaignDetail?id=" + data.highestGoalID + "'>"+data.highestGoal+"</a>"
+				   +"</h3>");
+	});
 	
 	//調整入板畫面會因header變成fixed造成長度變短的問題
 	var windowHeight = $(window).height();
