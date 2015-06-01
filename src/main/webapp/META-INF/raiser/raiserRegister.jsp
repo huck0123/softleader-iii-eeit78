@@ -41,6 +41,11 @@ label>b {
 	color: red;
 	font-size: 150%;
 }
+#dropZone img {
+margin-top:20px;
+max-width:  100%;
+
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>¹ÎÅé-µù¥U±b¸¹</title>

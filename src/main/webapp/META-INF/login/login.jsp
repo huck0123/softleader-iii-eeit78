@@ -18,7 +18,7 @@
 
 <title>登入</title>
 <style>
-
+html, body{height: 100%}
 .card-container.card {
 	width: 350px;
 	padding: 60px 40px;
@@ -108,7 +108,7 @@ margin-right:0px;}
 	
 <!-- 	<p>this is login.jsp</p> -->
 	
-	<div class="container">
+	<div class="container"  style="min-height: 90%">
 		<div class="card card-container">
 			<form class="form-signin" action="<c:url value='/login/loginAction.action' />" method="post">
 				<img id="profile-img" class="profile-img-card" src="../pictures/headshot1.png" />

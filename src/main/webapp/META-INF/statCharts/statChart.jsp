@@ -31,15 +31,32 @@ body{
 /*  	background-color: #DFFFDF;  */
 }
 
+strong {
+	font-size: 46px;
+}
+@media{
+marquee{width: 100%}
+}
+@media ( min-width : 992px) {
+marquee{width: 50%}
+}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container-fluid" style="padding-top: 50px;">
+	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
+			<div class="row" style="text-align:center; color:darkslategray;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
+				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
+			</div>
+	</div>
+
+	<div class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-3 sidebar" style="padding-top: 50px;">
-				<ul class="nav nav-sidebar" style="position:fixed;">
+			<div class="col-md-3">
+						<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
+				<ul class="nav nav-sidebar">
 					<li style="background-color:#FFFFB9;">
 						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
 					</li>
@@ -53,18 +70,18 @@ body{
 				</ul>
 			</div>
 			<div class="col-md-9">
-				<h1 class="page-header" style="font-family:DFKai-sb">統計圖表</h1>
+
 				<div id="distribution1">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動類型分布比例</h3><br>
-					<div id="type_distribution" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
-					<p>目前本站所活動類型的分布比例</p>
+					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動類型分布比例</h3>
+					<div id="type_distribution" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br>
+<!-- 					<p>目前本站所活動類型的分布比例</p> -->
 				</div>
-				<div id="distribution2" style="padding-top: 100px; padding-bottom: 50px;">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">捐款註冊年齡分布</h3><br>
-					<div id="age_distribution" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div><br>
-					<p>目前本站所有捐款會員的年齡層分布</p>
+				<div id="distribution2" style="margin-top: 60px; margin-bottom: 30px;">
+					<h3 class="sub-header" style="font-family:Microsoft JhengHei">捐款註冊年齡分布</h3>
+					<div id="age_distribution" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br>
+<!-- 					<p>目前本站所有捐款會員的年齡層分布</p> -->
 				</div>
-				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="7" id="marquee" style="font-family:DFKai-sb"></marquee>
+				
 				
 			</div>
 		</div>
@@ -89,9 +106,8 @@ function onload(data){
 	$('text[text-anchor="end"]').hide();
 	
 	data = JSON.parse(data);
-	$('#marquee').html("<h1>本站在線人數:" + data.onlineCount +"人"
-					 + "&nbsp&nbsp本站捐款會員人數:" + data.giverCount +"人"
-					 + "&nbsp&nbsp本站慈善機構數量:" + data.raiserCount +"</h1>");
+	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
+					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
 }
 
 //活動類型分布圖
@@ -137,7 +153,7 @@ function getType(type) {
             plotShadow: false
         },
         title: {
-            text: '活動類型分布比例',
+            text: '',
             style : { "color": "red", "fontSize": "20px" }
         },
         tooltip: {
@@ -191,7 +207,7 @@ function ageDistribution(data) {
                 type: 'bar'
             },
             title: {
-                text: '捐款註冊年齡分布',
+                text: '',
                 style : { "color": "red", "fontSize": "20px" }
             },
             xAxis: [{
