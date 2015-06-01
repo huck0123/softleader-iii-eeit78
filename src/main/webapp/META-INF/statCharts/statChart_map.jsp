@@ -35,44 +35,68 @@ body{
 strong {
 	font-size: 36px;
 }
+@media{
+marquee{width: 100%}
+.forSidebar{text-align: left;
+border-bottom: 1px silver solid;
+}
+}
+@media ( min-width : 992px) {
+marquee{width: 50%}
+.forSidebar{text-align: center;
+border-bottom: none;}
+}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:darkslategray;">
-				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
-				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
-			</div>
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px;">
+		<div class="row" style="text-align: center; color: darkslategray;">
+			<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
+			<marquee onMouseOver="this.stop()" onMouseOut="this.start()"
+				scrollamount="10" id="marquee" style="font-family: DFKai-sb"></marquee>
+		</div>
 	</div>
 
 	<div class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-3" >
-			<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
-				<ul class="nav nav-sidebar">
-					<li style="background-color: #FFFFB9;">
-					<li style="background-color:#FFFFB9;">
-						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
-					</li>
-						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
-					</li>
-				</ul>
+			<div class="col-md-3 forSidebar">
+				<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
+				<nav class="navbar" role="navigation">
+					<div>
+
+						<div>
+							<ul class="nav nav-stacked">
+								<li class="active"><a
+									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖<span
+										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
+								<li><a
+									href="/softleader-iii-eeit78/util/statChart#distribution1">活動類型圓餅圖<span
+										class="pull-right fa fa-pie-chart"></span></a></li>
+								<li><a
+									href="/softleader-iii-eeit78/util/statChart#distribution2">年齡分布橫條圖<span
+										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
 			</div>
 			<div class="col-md-9">
-				
+
 				<div id="distribution1">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動位置分布圖</h3>
-					<div id="city_distribution"></div><br>
+					<h2 class="sub-header" style="font-family: Microsoft JhengHei">活動位置分布圖</h2>
+					<div id="city_distribution"></div>
+					<br>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
-	
 
-	
+
+
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
@@ -222,15 +246,14 @@ function taiwan(city) {
         }]
     });
 }
+
+$.post("/softleader-iii-eeit78/util/utilAction!util", onload);
 //所有圖形載入點
 function onload(data){
-	getType(data);
-	ageDistribution(data);
-	$('text[text-anchor="end"]').hide();
-	
 	data = JSON.parse(data);
 	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
-					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+			 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+
 }
 </script>
 
