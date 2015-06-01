@@ -103,7 +103,6 @@ function getType(type) {
 	  return [[key,value]];
 	});
 	
-	
 // 	console.log(type);
 // 	console.log(Object.keys(type))
 // 	console.log(type[Object.keys(type)[0]])

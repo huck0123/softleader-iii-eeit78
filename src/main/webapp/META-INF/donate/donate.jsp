@@ -28,6 +28,13 @@ label b {
 b {
 	color: red;
 }
+.tab-content .row{
+ 	margin-top: 20px; 
+}
+.tab-content .col-md-3{
+/* 	background: #C4E1FF; */
+	color: #0080FF;
+}
 </style>
 
 <title>捐款</title>
@@ -39,8 +46,8 @@ b {
 
 	<div class="container" style="min-height:70%;">
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
 				<h2>${sessionScope.giver.familyName }${sessionScope.giver.name }您好!</h2>
 				
 				<ul class="nav nav-tabs" role="tablist">
@@ -52,39 +59,81 @@ b {
 
 					<div class="tab-content">
 						<div class="panel alert tab-pane fade in active" id="donate">
-							<div>
-								<table class="table">
-									<colgroup>
-										<col span="1" style="background-color: #ADADAD">
-										<col style="background-color: #F0F0F0;">
-										<col style="background-color: #F0F0F0; width: 150px;">
-									</colgroup>
-									<tr>
-										<td><label for="">捐款活動名稱:</label></td>
-										<td><input type="hidden" name="form.campaignName"
-											value="${param.name }">${param.name }</td>
-										<td></td>
-									</tr>
-									<tr style="display: none">
-										<td><label for="">捐款活動Id:</label></td>
-										<td><input type="text" name="form.campaignId"
-											value="${param.id }"></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><label for="">捐款人姓名:</label></td>
-										<td id="giverName">${sessionScope.giver.familyName }${sessionScope.giver.name }</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><label for="">捐款金額:<b>*</b></label></td>
-										<td><input type="text" name="form.amount" required="required"></td>
-										<td><b id="amount"></b></td>
-									</tr>
-								</table>
+							<div style="background: #f2f2f2">
+								<div class="row" style="padding-top:10px;">
+									<div class="col-md-3">
+										<label for="">捐款活動名稱:</label>
+									</div>
+									<div class="col-md-7">
+										<input type="hidden" name="form.campaignName"
+												value="${param.name }">${param.name }
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row" style="display: none">
+									<div class="col-md-3">
+										<label for="">捐款活動Id:</label>
+									</div>
+									<div class="col-md-7">
+										<input type="text" name="form.campaignId"
+											value="${param.id }">
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<label for="">捐款人姓名:</label>
+									</div>
+									<div class="col-md-7" id="giverName">
+										${sessionScope.giver.familyName }${sessionScope.giver.name }
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row" style="padding-bottom:10px;">
+									<div class="col-md-3">
+										<label for="">捐款金額:<b>*</b></label>
+									</div>
+									<div class="col-md-7">
+										<input type="text" name="form.amount" class="form-control" autofocus required="required">
+									</div>
+									<div class="col-md-2"><b id="amount"></b></div>
+								</div>
+								
+								
+							
+							
+<!-- 								<table class="table"> -->
+<%-- 									<colgroup> --%>
+<%-- 										<col span="1" style="background-color: #ADADAD"> --%>
+<%-- 										<col style="background-color: #F0F0F0;"> --%>
+<%-- 										<col style="background-color: #F0F0F0; width: 150px;"> --%>
+<%-- 									</colgroup> --%>
+<!-- 									<tr> -->
+<!-- 										<td><label for="">捐款活動名稱:</label></td> -->
+<!-- 										<td><input type="hidden" name="form.campaignName" -->
+<%-- 											value="${param.name }">${param.name }</td> --%>
+<!-- 										<td></td> -->
+<!-- 									</tr> -->
+<!-- 									<tr style="display: none"> -->
+<!-- 										<td><label for="">捐款活動Id:</label></td> -->
+<!-- 										<td><input type="text" name="form.campaignId" -->
+<%-- 											value="${param.id }"></td> --%>
+<!-- 										<td></td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td><label for="">捐款人姓名:</label></td> -->
+<%-- 										<td id="giverName">${sessionScope.giver.familyName }${sessionScope.giver.name }</td> --%>
+<!-- 										<td></td> -->
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<!-- 										<td><label for="">捐款金額:<b>*</b></label></td> -->
+<!-- 										<td><input type="text" name="form.amount" required="required"></td> -->
+<!-- 										<td><b id="amount"></b></td> -->
+<!-- 									</tr> -->
+<!-- 								</table> -->
 							</div>
-							<div>
-								<a class="btn btn-primary" id="donateBtn" >下一步</a>
+							<div class="row">
+								<a class="btn btn-primary" id="donateBtn">下一步</a>
 							</div>
 						</div>
 
@@ -96,7 +145,7 @@ b {
 
 				</form>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 		</div>
 	</div>
 
