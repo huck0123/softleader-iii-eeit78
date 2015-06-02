@@ -172,13 +172,15 @@ pre {
 	var commentCurrentPage = 0;
 	var permission = true;
 	var commentCampaignId;
+	var raiserId;
 	
 	var recordCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentsURL =      '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
 	var getUserAccountURL =		  '${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var getReplyURL =             '${pageContext.request.contextPath}/campaignComment/actReplyComment!replyComment';
 	var alterCommentOrReplyURL =  '${pageContext.request.contextPath}/campaignComment/actRenewComment!renewComment';
-	var deleteCommentOrReplyURL =  '${pageContext.request.contextPath}/campaignComment/actDeleteComment!invalidComment';
+	var deleteCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actDeleteComment!invalidComment';
+	var getRaiserIdURL =          '${pageContext.request.contextPath}/campaign/campaignAction!selectRaiserIdById'; 
 	
 	load();
 	
@@ -196,7 +198,7 @@ pre {
 	}
 	
 	$('#mainCommentPlace').on('click', function(){
-		if("${giver}" || "${raiser}" || "${admin}"){
+		if("${giver}" || "${raiser.id}" == raiserId || "${admin}"){
 		}else{
 			alert("請先登入或註冊後再留言");
 			$('#mainCommentPlace').blur();
@@ -238,7 +240,7 @@ pre {
 	}
 	
 	function growNewReplyPlace(replyParam) {
-		if("${giver}" || "${raiser}" || "${admin}"){
+		if("${giver}" || "${raiser.id}" == raiserId || "${admin}"){
 			if(permission){
 				permission = false;
 				$('#btn_' + replyParam).prop('disabled', true);
@@ -342,8 +344,12 @@ pre {
 	 		slideAllReplies(data.id);
 		}else{
 			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
+			$('#sign_' + placeParam).hide();
+			$('#sign_' + data.id).remove();
+			$('#count_' + placeParam).text(parseInt($('#count_' + placeParam).text())+1);
 			//console.log(data);
-			$('#a_' + data.id).text("");
+			$('#a_' + data.id).remove();
+			$('#count_' + data.id).remove();
 			if(!'${admin}'){
 	 			if('${giver.account}' != account && '${raiser.account}' != account){
 	 				$('#alt_' + data.id).text("");
@@ -410,12 +416,14 @@ pre {
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
-		+               '<a id="a_' + data.id + '" onclick="slideAllReplies(' + data.id + ');">隱藏所有回覆</a>&nbsp;&nbsp;&nbsp;'
+		+               '<a id="a_' + data.id + '" onclick="slideAllReplies(' + data.id + ');">隱藏所有回覆</a>&nbsp;&nbsp;'
+		+               '<span class="badge" id="count_' + data.id + '">0</span>&nbsp;&nbsp;&nbsp;&nbsp;'
 		+               '<a id="alt_' + data.id + '" onclick="alterContent(' + data.id + ');">修改</a>&nbsp;&nbsp;&nbsp;'
 		+               '<a id="del_' + data.id + '" onclick="deleteContent(' + data.id + ');">刪除</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
-		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
+		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;">'
+		+      '<p id="sign_' + data.id + '" style="padding:5px;margin:-5px 0px;font-size:40;background-color:#FFFFCE">&nbsp;&nbsp;&nbsp;查無回覆</p></div>';
 	}
 	
 	function substantiatePhoto(id, imgParam){
@@ -442,9 +450,13 @@ pre {
 		if($('#a_' + id).text() == "查看所有回覆"){
 			$('#sub_' + id).slideDown();
 			$('#a_' + id).text("隱藏所有回覆");
+			if(document.getElementById('sub_'+ id).getElementsByTagName('div').length == 0){
+				$('#sign_' + id).show();
+			}
 		}else if($('#a_' + id).text() == "隱藏所有回覆"){
 			$('#sub_' + id).slideUp();
 			$('#a_' + id).text("查看所有回覆");
+			$('#sign_' + id).hide();
 		}else{
 			$('#sub_' + id).slideToggle();
 		}
@@ -611,6 +623,9 @@ pre {
 				
 				appendGiverData();
 				loadAllComments(commentCampaignId);
+				$.getJSON(getRaiserIdURL, {'campaignForm.id' : commentCampaignId}, function(data){
+					raiserId = data;
+				})
 		})
 	}
 	
