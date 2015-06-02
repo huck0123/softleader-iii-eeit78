@@ -74,7 +74,6 @@ max-width:  100%;
 				<div style="padding-top: 36px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-
 						<div style="height: 50px">${insertErrorMSG}</div>
 						<div class="errorClassForRaiser">*號為必填欄位</div>
 
