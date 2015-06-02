@@ -156,7 +156,7 @@ margin-bottom: -40px;
 		</div>
 	</div>
 	<!-- 	跑馬燈 -->
-	<div><marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" id="marquee1" ></marquee></div>
+	<div><marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" scrollamount="10" id="marquee1" ></marquee></div>
 	
 	<div id="raiserDiv">
 		<div>
