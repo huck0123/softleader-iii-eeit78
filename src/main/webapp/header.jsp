@@ -236,7 +236,7 @@ ul.nav {
 										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
 								</ul></li>
 						</c:if>
-						<li id="to-top" style="display: none;"><a href="#top-anchor"><i class="fa fa-arrow-up" style="color: silver; font-size: 20px"></i></a></li>
+						<li id="to-top" style="display: none;"><a name="smooth" href="#top-anchor"><i class="fa fa-arrow-up" style="color: silver; font-size: 20px"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -300,46 +300,42 @@ ul.nav {
 var headerHeight = $('#header-wrapper').height();
 console.log(headerHeight);
 
-	$(document).ready(
-
-	
-					function() {
-						$(window).scroll(
-								function() {
-									if ($(window).scrollTop() > 100) {
-										$('#header-wrapper').stop().addClass(
-												'scroll-header');
-										$('#to-top').stop().show(500);
-										$('#nav-header').stop().addClass(
-												'navbar-header-custom-scroll');
-										$('#brand').stop().addClass(
-												'brand-scroll');
-										$('#collapse-part').removeClass(
-												'container');
-										$('#collapse-login').addClass('collapse-login-scroll');
-										$('#header-holder').stop().show().height(headerHeight);
-										$('#header-container').removeClass(
-										'bottom-shadow');
-									} else {
-										$('#header-wrapper').stop()
-												.removeClass('scroll-header');
-										$('#to-top').stop().hide(500);
-										$('#nav-header').stop().removeClass(
-												'navbar-header-custom-scroll');
-										$('#brand').stop().removeClass(
-												'brand-scroll');
-										$('#collapse-part').addClass(
-												'container');
-										$('#collapse-login')
-												.removeClass('collapse-login-scroll');
-										$('#header-holder').stop().hide().height(0);
-										$('#header-container').addClass(
-										'bottom-shadow');
-									}
-								});
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() > 100) {
+				$('#header-wrapper').stop().addClass(
+					'scroll-header');
+				$('#to-top').stop().show(500);
+				$('#nav-header').stop().addClass(
+					'navbar-header-custom-scroll');
+				$('#brand').stop().addClass(
+					'brand-scroll');
+				$('#collapse-part').removeClass(
+					'container');
+				$('#collapse-login').addClass('collapse-login-scroll');
+				$('#header-holder').stop().show().height(headerHeight);
+				$('#header-container').removeClass(
+					'bottom-shadow');
+				} else {
+				$('#header-wrapper').stop()
+					.removeClass('scroll-header');
+				$('#to-top').stop().hide(500);
+				$('#nav-header').stop().removeClass(
+					'navbar-header-custom-scroll');
+				$('#brand').stop().removeClass(
+					'brand-scroll');
+				$('#collapse-part').addClass(
+					'container');
+				$('#collapse-login')
+					.removeClass('collapse-login-scroll');
+				$('#header-holder').stop().hide().height(0);
+				$('#header-container').addClass(
+					'bottom-shadow');
+					}
+			});
 
 						// function for moving smoothly to anchor
-						$('a[href^="#top-anchor"]').click(function() {
+						$('a[name="smooth"]').click(function() {
 							$('html, body').animate(
 								{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 									return false;
