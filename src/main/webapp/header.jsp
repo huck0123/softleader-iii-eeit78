@@ -236,7 +236,7 @@ ul.nav {
 										href="/softleader-iii-eeit78/logout/logoutAction!logout.action">登出</a></li>
 								</ul></li>
 						</c:if>
-						<li id="to-top" style="display: none;"><a href="#top-anchor"><i class="fa fa-arrow-up" style="color: silver; font-size: 20px"></i></a></li>
+						<li id="to-top" style="display: none;"><a name="smooth" href="#top-anchor"><i class="fa fa-arrow-up" style="color: silver; font-size: 20px"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -339,7 +339,7 @@ console.log(headerHeight);
 								});
 
 						// function for moving smoothly to anchor
-						$('a[href^="#top-anchor"]').click(function() {
+						$('a[name="smooth"]').click(function() {
 							$('html, body').animate(
 								{scrollTop : $($.attr(this, 'href')).offset().top}, 600, 'easeInOutExpo');
 									return false;

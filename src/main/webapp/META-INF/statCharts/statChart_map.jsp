@@ -35,16 +35,22 @@ body{
 strong {
 	font-size: 36px;
 }
+.choosed{
+color: orangered;
+text-shadow: 1px 0px 1px orange;
+}
 @media{
 marquee{width: 100%}
 .forSidebar{text-align: left;
 border-bottom: 1px silver solid;
+margin-top: 0px;
 }
 }
 @media ( min-width : 992px) {
 marquee{width: 50%}
 .forSidebar{text-align: center;
-border-bottom: none;}
+border-bottom: none;
+margin-top: 62px;}
 }
 </style>
 </head>
@@ -63,20 +69,20 @@ border-bottom: none;}
 	<div class="container" style="margin-top: 20px">
 		<div class="row">
 			<div class="col-md-3 forSidebar">
-				<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
+
 				<nav class="navbar" role="navigation">
 					<div>
 
 						<div>
 							<ul class="nav nav-stacked">
-								<li class="active"><a
+								<li><a class="choosed"
 									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖<span
 										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
 								<li><a
-									href="/softleader-iii-eeit78/util/statChart#distribution1">活動類型圓餅圖<span
+									href="/softleader-iii-eeit78/util/statChart?chart=pi">活動類型圓餅圖<span
 										class="pull-right fa fa-pie-chart"></span></a></li>
 								<li><a
-									href="/softleader-iii-eeit78/util/statChart#distribution2">年齡分布橫條圖<span
+									href="/softleader-iii-eeit78/util/statChart?chart=bar">年齡分布橫條圖<span
 										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
 							</ul>
 						</div>
@@ -85,7 +91,7 @@ border-bottom: none;}
 			</div>
 			<div class="col-md-9">
 
-				<div id="distribution1">
+				<div>
 					<h2 class="sub-header" style="font-family: Microsoft JhengHei">活動位置分布圖</h2>
 					<div id="city_distribution"></div>
 					<br>
@@ -206,7 +212,7 @@ function taiwan(city) {
     // Initiate the chart
     $('#city_distribution').highcharts('Map', {
 		chart : {
-			backgroundColor: '#D2E9FF'
+			backgroundColor: '#FFFCEC'
 		},
     	
         title : {
