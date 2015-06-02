@@ -56,6 +56,14 @@ public class CampaignCommentAction {
 		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		return model;
 	}
+	public CampaignCommentModel transferToModel2(CampaignCommentForm form){
+		model = new CampaignCommentModel();
+		model.setId(form.getId());
+		model.setCommentary(form.getCommentary());
+		model.setCommentTime(new Timestamp(new java.util.Date().getTime()));
+		model.setIp(ServletActionContext.getRequest().getRemoteAddr());
+		return model;
+	}
 	public String newComment(){
 		CampaignCommentModel model = campaignCommentService.writeComment(transferToModel(form));
 		model = campaignCommentService.getByModelId(model.getId());
@@ -79,7 +87,7 @@ public class CampaignCommentAction {
 		return "findReplyComment";
 	}
 	public String renewComment(){
-		CampaignCommentModel model = campaignCommentService.modifyComment(transferToModel(form));
+		CampaignCommentModel model = campaignCommentService.modifyComment(transferToModel2(form));
 		model = campaignCommentService.getByModelId(model.getId());
 		String data = new Gson().toJson(model);
 		inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
@@ -87,9 +95,9 @@ public class CampaignCommentAction {
 		return "leaveRenewComment";
 	}
 	public String invalidComment(){
-		Boolean b = campaignCommentService.deleteComment(transferToModel(form).getId());
+		Boolean deleted = campaignCommentService.deleteComment(transferToModel(form).getId());
 		String status;
-		if(b){
+		if(deleted){
 			status = "刪除成功";
 		}else{
 			status = "刪除失敗，請再重試一次";

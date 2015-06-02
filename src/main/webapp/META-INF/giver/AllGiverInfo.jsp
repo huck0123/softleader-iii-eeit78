@@ -76,10 +76,12 @@ td{vertical-align: middle;}
 					<div class="col-md-3">
 						<select id="pageAmount"></select>顯示筆數(預設5筆)
 					</div>
-					<div class="col-md-6">
-						<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
-						<select id="page"></select>
-						<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+					<div class="col-md-6" style="text-align:center">
+						<div style="position:inline-block;">
+							<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
+							<select id="page"></select>
+							<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+						</div>
 					</div>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="condition"
@@ -212,7 +214,7 @@ td{vertical-align: middle;}
 						+ "<td>"+ obj.address +"</td>" 
 						+ "<td>"+ obj.email +"</td>" 
 						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
-						+ "<td>"+ "<input type='checkbox' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
+						+ "<td>"+ "<input type='checkbox' style='height:20px;width:20px' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
 						+ "</tr>");	
 				valid(obj.account, obj.valid);
 				

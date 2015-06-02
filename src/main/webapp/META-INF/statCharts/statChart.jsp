@@ -34,11 +34,23 @@ body{
 strong {
 	font-size: 36px;
 }
+.choosed{
+color: orangered;
+text-shadow: 1px 0px 1px orange;
+}
 @media{
 marquee{width: 100%}
+.forSidebar{text-align: left;
+border-bottom: 1px silver solid;
+margin-top: 0px;
+}
 }
 @media ( min-width : 992px) {
 marquee{width: 50%}
+.forSidebar{text-align: center;
+border-bottom: none;
+margin-top: 62px;
+}
 }
 </style>
 </head>
@@ -53,42 +65,53 @@ marquee{width: 50%}
 	</div>
 
 	<div class="container" style="margin-top: 20px">
-		<div class="row">
-			<div class="col-md-3">
-						<h3 class="visible-md-block visible-lg-block">&nbsp</h3>
-				<ul class="nav nav-sidebar">
-					<li style="background-color:#FFFFB9;">
-						<a href="/softleader-iii-eeit78/util/statChart_map">地圖分布</a>
-					</li>
-					<li class="active">
-						<a href="#distribution1">活動類型分布比例</a>
-					</li>
-					<li>
-						<a href="#distribution2">捐款註冊年齡分布</a>
-					</li>
-					
-				</ul>
+		<div class="row ">
+			<div  class="col-md-3 forSidebar">
+					<div id="side-nav">
+				<nav  class="navbar" role="navigation">
+
+
+						<div>
+
+							<ul class="nav nav-stacked" >
+								<li><a
+									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖&nbsp<span
+										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
+								<li><a id="piChart">活動類型圓餅圖&nbsp<span
+										class="pull-right fa fa-pie-chart"></span></a></li>
+								<li><a id="barChart">年齡分布橫條圖&nbsp<span
+										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
+							</ul>
+						</div>
+
+				</nav>
+									</div>
 			</div>
 			<div class="col-md-9">
 
-				<div id="distribution1">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">活動類型分布比例</h3>
-					<div id="type_distribution" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br>
-<!-- 					<p>目前本站所活動類型的分布比例</p> -->
+				<div id="distribution1" style="border-bottom: 1px silver solid">
+					<h2 class="sub-header" style="font-family: Microsoft JhengHei">活動類型分布比例</h2>
+					<div id="type_distribution"
+						style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+					<br>
+					<!-- 					<p>目前本站所活動類型的分布比例</p> -->
 				</div>
-				<div id="distribution2" style="margin-top: 60px; margin-bottom: 30px;">
-					<h3 class="sub-header" style="font-family:Microsoft JhengHei">捐款註冊年齡分布</h3>
-					<div id="age_distribution" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br>
-<!-- 					<p>目前本站所有捐款會員的年齡層分布</p> -->
+				<div id="distribution2"
+					style="margin-top: 60px; margin-bottom: 30px;">
+					<h2 class="sub-header" style="font-family: Microsoft JhengHei">捐款註冊年齡分布</h2>
+					<div id="age_distribution"
+						style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+					<br>
+					<!-- 					<p>目前本站所有捐款會員的年齡層分布</p> -->
 				</div>
-				
-				
+
+
 			</div>
 		</div>
 	</div>
-	
 
-	
+
+
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
@@ -103,11 +126,18 @@ $.post("/softleader-iii-eeit78/util/utilAction!util", onload);
 function onload(data){
 	getType(data);
 	ageDistribution(data);
-	$('text[text-anchor="end"]').hide();
+// 	$('text[text-anchor="end"]').hide();
 	
 	data = JSON.parse(data);
 	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
 					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+	if ("${param.chart}" == 'pi') {
+		moveTo({data : {to : $('#distribution1')}})
+		$('#piChart').addClass('choosed');
+	} else if ("${param.chart}" == 'bar') {
+		moveTo({data : {to : $('#distribution2')}})
+		$('#barChart').addClass('choosed');
+	} else{};
 }
 
 //活動類型分布圖
@@ -118,7 +148,6 @@ function getType(type) {
 	var keys = $.map( type, function( value, key ) {
 	  return [[key,value]];
 	});
-	
 	
 // 	console.log(type);
 // 	console.log(Object.keys(type))
@@ -257,7 +286,47 @@ function ageDistribution(data) {
 };
 
 
+// 	function test() {
+// 		console.log($('#distribution1').offset().top);
+// 		$(html).scrollTop(
+// 				$('#distribution1').offset().top
+// 						- $('#header-wrapper').height());
+// 	}
 
+
+//smooth move to chart
+	$('#piChart').on('click', {
+		to : $('#distribution1')
+	}, moveTo);
+	$('#barChart').on('click', {
+		to : $('#distribution2')
+	}, moveTo);
+	function moveTo(event) {
+		var to = event.data.to;
+		var top = $(to).offset().top - $('#header-wrapper').height()-10;
+		$('html, body').animate({
+			scrollTop : top
+		}, 600, 'easeInOutExpo');
+		changeChoosed(this);
+	}
+
+//change sidebar color when move to somewhere
+	function changeChoosed(a) {
+		$('.choosed').removeClass('choosed');
+		$(a).addClass('choosed');
+	}
+	
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > 100) {
+
+			var sideTop = $('#header-wrapper').height()+40;
+			$('#side-nav').stop().css({ top: sideTop , position: 'fixed'});
+			} else {
+			$('#side-nav').stop().css({ top: 'auto' , position: 'relative'});
+				}
+		});
+	
+	
 </script>
 
 
