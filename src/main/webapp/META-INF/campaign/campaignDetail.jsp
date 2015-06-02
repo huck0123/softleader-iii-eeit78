@@ -75,68 +75,45 @@ pre {
 	 background-color:#FFFFCE;
 	 display:inline-block;
 }
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+color: darkslategrey;
+background-color: #f2f2f2;}
+.nav-pills>li>a {
+border-radius: 0;}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="/header.jsp" />
 
 	<div class="container" id="showColumn"></div>
-	<div class="container">
-		<nav class="navbar navbar-default"
-			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
-			<div class="container"
-				style="display: table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#nav2" style="float: right;">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="nav2">
-					<ul class="nav navbar-nav">
-						<li><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" id="tab2">評論</a></li>
-
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container -->
-		</nav>
-	</div>
-	<div class="container" id="tabPageDiv">
-		<div class=row id="detailRowDiv">
+	
+<div class="container" >
+  <ul class="nav nav-pills" style="border-top: 1px black solid; border-bottom:1px black solid; height:60px ">
+    <li class="active" ><a data-toggle="pill" href="#detail-tab" style="width:120px; height:58px; line-height: 36px">詳細資訊</a></li>
+    <li><a data-toggle="pill" href="#message-tab" style="width:120px;height:58px;line-height: 36px">留言</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="detail-tab" class="tab-pane fade in active">
+     		<div class=row id="detailRowDiv">
 			<div class="col-md-8 col-md-offset-2" id="detailDiv"
 				style="text-align: justify;"></div>
 		</div>
+    </div>
+    <div id="message-tab" class="tab-pane fade">
 
-		<div id="commentDiv" style="display: none">
-			<div>
-				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
-				<div class="col-md-6 col-md-offset-3" id="No_mainPlace">					
-					<div class="col-md-2">							
-						<img id="img_user" src="../pictures/noPicture.jpg" style="width: 100%">
-					</div>
-					<div class="col-md-10">						
-						<textarea id="mainCommentPlace" class="form-control" rows="4" style="margin-bottom:4px"></textarea>
-						<button type="button" class="btn btn-success btn-xs"
-								onclick="startNewComment();" style="width: 50px">送出
-						</button>							
-						<button type="button" class="btn btn-warning btn-xs"
-								onclick="confirmCleanNewComment();" style="width: 50px">清除
-						</button>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="col-md-6 col-md-offset-3" id="No_mainShownCommentPlace"></div>
-			</div>
-		</div>
+    </div>
+  </div>
+</div>
+	
+	<div class="container">
+	</div>
+
+	<div class="container" id="tabPageDiv">
+
+
+
 	</div>
 
 	<div class="container" id="tabPageDiv">
