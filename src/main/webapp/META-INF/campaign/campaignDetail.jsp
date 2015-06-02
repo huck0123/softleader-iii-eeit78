@@ -75,48 +75,37 @@ pre {
 	 background-color:#FFFFCE;
 	 display:inline-block;
 }
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+color: darkslategrey;
+background-color: #f2f2f2;}
+.nav-pills>li>a {
+border-radius: 0;}
+
 </style>
 </head>
 <body id="body">
 	<jsp:include page="/header.jsp" />
 
 	<div class="container" id="showColumn"></div>
-	<div class="container">
-		<nav class="navbar navbar-default"
-			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
-			<div class="container"
-				style="display: table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#nav2" style="float: right;">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-				</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="nav2">
-					<ul class="nav navbar-nav">
-						<li><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" id="tab2">評論</a></li>
+	<div class="container" style="margin-top: 5%;">
+		<ul class="nav nav-pills"
+			style="border-top: 1px grey solid; border-bottom: 1px grey solid; height: 60px">
+			<li class="active"><a data-toggle="pill" href="#detail-tab"
+				style="width: 120px; height: 58px; line-height: 36px">詳細資訊</a></li>
+			<li><a data-toggle="pill" href="#message-tab"
+				style="width: 120px; height: 58px; line-height: 36px">留言</a></li>
+		</ul>
 
-					</ul>
+		<div class="tab-content">
+			<div id="detail-tab" class="tab-pane fade in active">
+				<div class=row id="detailRowDiv">
+					<div class="col-md-8 col-md-offset-2" id="detailDiv"
+						style="text-align: justify;"></div>
 				</div>
-				<!-- /.navbar-collapse -->
 			</div>
-			<!-- /.container -->
-		</nav>
-	</div>
-	<div class="container" id="tabPageDiv">
-		<div class=row id="detailRowDiv">
-			<div class="col-md-8 col-md-offset-2" id="detailDiv"
-				style="text-align: justify;"></div>
-		</div>
-
-		<div id="commentDiv" style="display: none">
-			<div>
+			<div id="message-tab" class="tab-pane fade">
+			<div style="text-align: left">
 				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
 				<div class="col-md-6 col-md-offset-3" id="No_mainPlace">					
 					<div class="col-md-2 hidden-xs hidden-sm">							
@@ -136,31 +125,12 @@ pre {
 			<div>
 				<div class="col-xs-6 col-xs-offset-3" id="No_mainShownCommentPlace"></div>
 			</div>
-		</div>
-	</div>
-
-	<div class="container" id="tabPageDiv">
-		<div class=row id="detailRowDiv">
-			<div class="col-md-8 col-md-offset-2" id="detailDiv"
-				style="text-align: justify;"></div>
-		</div>
-
-		<div id="commentDiv" style="display: none">
-			<div id="leaveComment" class="row">
-				<div class="col-sm-1 col-sm-offset-1">
-					<img width="60px" src="/softleader-iii-eeit78/pictures/login2.png">
-				</div>
-				<div class="col-sm-8" style="text-align: left">
-					<form
-						action="/softleader-iii-eeit78/campaignComment/campaignComment">
-						<textarea class="form-control" rows="4" id="comment"></textarea>
-						<button class="btn btn-primary" type="submit" name="method:"
-							style="margin-top: 20px;">留言</button>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>
+
+
+	
 	
 	<jsp:include page="/footer.jsp" />
 </body>
@@ -578,23 +548,6 @@ pre {
 		}else{
 		}
 	}
-
-	$('#tab1').on('click', function(evt) {
-		evt.preventDefault();
-		$('#nav2 *, .active').removeClass("active");
-		$('#tab1').parent().addClass('active');
-		$('#tabPageDiv>div').hide();
-		$('#detailRowDiv').slideDown();
-	});
-
-	$('#tab2').on('click', function(evt) {
-		evt.preventDefault();
-		$('#nav2 *, .active').removeClass("active");
-		$('#tab2').parent().addClass('active');
-		$('#tabPageDiv>div').hide();
-		$('#commentDiv').slideDown();
-
-	});
 
 	function load() {
 		appendCampaignDetail();
