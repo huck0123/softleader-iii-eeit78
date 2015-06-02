@@ -17,9 +17,8 @@ body {
 </style>
 
 <div class="tab-pane fade" id="raiserShow">
-
 	<div>
-		<div class="row">
+		<div class="row" style="margin:10px">
 			<div class="col-md-3">
 				<select id="raiserPageSize">
 					<option value="5" selected>5</option>
@@ -32,9 +31,9 @@ body {
 			</div>
 			<div class="col-md-3">
 				<input type="button" class="btn btn-primary" name="forward"
-					value="上一頁" id="btnf"><select id="btnw">
+					value="上一頁" id="btnf" style="margin:5px"><select id="btnw">
 				</select><input type="button" class="btn btn-primary" name="next" value="下一頁"
-					id="btnx">
+					id="btnx" style="margin:5px">
 			</div>
 			<div class="col-md-3">
 				<input type="button" name="Unvilbtn" value="啟用帳號" id="btnunVil"
