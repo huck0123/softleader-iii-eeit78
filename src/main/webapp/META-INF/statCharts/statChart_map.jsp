@@ -69,25 +69,25 @@ margin-top: 62px;}
 	<div class="container" style="margin-top: 20px">
 		<div class="row">
 			<div class="col-md-3 forSidebar">
-
+					<div id="side-nav">
 				<nav class="navbar" role="navigation">
-					<div>
+
 
 						<div>
 							<ul class="nav nav-stacked">
 								<li><a class="choosed"
-									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖<span
+									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖&nbsp<span
 										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
 								<li><a
-									href="/softleader-iii-eeit78/util/statChart?chart=pi">活動類型圓餅圖<span
+									href="/softleader-iii-eeit78/util/statChart?chart=pi">活動類型圓餅圖&nbsp<span
 										class="pull-right fa fa-pie-chart"></span></a></li>
 								<li><a
-									href="/softleader-iii-eeit78/util/statChart?chart=bar">年齡分布橫條圖<span
+									href="/softleader-iii-eeit78/util/statChart?chart=bar">年齡分布橫條圖&nbsp<span
 										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
 							</ul>
 						</div>
-					</div>
-				</nav>
+				
+				</nav>	</div>
 			</div>
 			<div class="col-md-9">
 
@@ -261,6 +261,15 @@ function onload(data){
 			 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
 
 }
+
+$(window).scroll(function() {
+	if ($(window).scrollTop() > 100) {
+		var sideTop = $('#header-wrapper').height()+40;
+		$('#side-nav').css({ top: sideTop , position: 'fixed'});
+		} else {
+		$('#side-nav').css({ top: 'auto' , position: 'relative'});
+			}
+	});
 </script>
 
 

@@ -300,43 +300,39 @@ ul.nav {
 var headerHeight = $('#header-wrapper').height();
 console.log(headerHeight);
 
-	$(document).ready(
-
-	
-					function() {
-						$(window).scroll(
-								function() {
-									if ($(window).scrollTop() > 100) {
-										$('#header-wrapper').stop().addClass(
-												'scroll-header');
-										$('#to-top').stop().show(500);
-										$('#nav-header').stop().addClass(
-												'navbar-header-custom-scroll');
-										$('#brand').stop().addClass(
-												'brand-scroll');
-										$('#collapse-part').removeClass(
-												'container');
-										$('#collapse-login').addClass('collapse-login-scroll');
-										$('#header-holder').stop().show().height(headerHeight);
-										$('#header-container').removeClass(
-										'bottom-shadow');
-									} else {
-										$('#header-wrapper').stop()
-												.removeClass('scroll-header');
-										$('#to-top').stop().hide(500);
-										$('#nav-header').stop().removeClass(
-												'navbar-header-custom-scroll');
-										$('#brand').stop().removeClass(
-												'brand-scroll');
-										$('#collapse-part').addClass(
-												'container');
-										$('#collapse-login')
-												.removeClass('collapse-login-scroll');
-										$('#header-holder').stop().hide().height(0);
-										$('#header-container').addClass(
-										'bottom-shadow');
-									}
-								});
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() > 100) {
+				$('#header-wrapper').stop().addClass(
+					'scroll-header');
+				$('#to-top').stop().show(500);
+				$('#nav-header').stop().addClass(
+					'navbar-header-custom-scroll');
+				$('#brand').stop().addClass(
+					'brand-scroll');
+				$('#collapse-part').removeClass(
+					'container');
+				$('#collapse-login').addClass('collapse-login-scroll');
+				$('#header-holder').stop().show().height(headerHeight);
+				$('#header-container').removeClass(
+					'bottom-shadow');
+				} else {
+				$('#header-wrapper').stop()
+					.removeClass('scroll-header');
+				$('#to-top').stop().hide(500);
+				$('#nav-header').stop().removeClass(
+					'navbar-header-custom-scroll');
+				$('#brand').stop().removeClass(
+					'brand-scroll');
+				$('#collapse-part').addClass(
+					'container');
+				$('#collapse-login')
+					.removeClass('collapse-login-scroll');
+				$('#header-holder').stop().hide().height(0);
+				$('#header-container').addClass(
+					'bottom-shadow');
+					}
+			});
 
 						// function for moving smoothly to anchor
 						$('a[name="smooth"]').click(function() {

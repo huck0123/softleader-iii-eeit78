@@ -66,25 +66,26 @@ margin-top: 62px;
 
 	<div class="container" style="margin-top: 20px">
 		<div class="row ">
-			<div class="col-md-3 forSidebar">
+			<div  class="col-md-3 forSidebar">
+					<div id="side-nav">
+				<nav  class="navbar" role="navigation">
 
-				<nav class="navbar" role="navigation">
-					<div>
 
 						<div>
 
-							<ul class="nav nav-stacked">
+							<ul class="nav nav-stacked" >
 								<li><a
-									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖<span
+									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖&nbsp<span
 										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
-								<li><a id="piChart">活動類型圓餅圖<span
+								<li><a id="piChart">活動類型圓餅圖&nbsp<span
 										class="pull-right fa fa-pie-chart"></span></a></li>
-								<li><a id="barChart">年齡分布橫條圖<span
+								<li><a id="barChart">年齡分布橫條圖&nbsp<span
 										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
 							</ul>
 						</div>
-					</div>
+
 				</nav>
+									</div>
 			</div>
 			<div class="col-md-9">
 
@@ -287,7 +288,7 @@ function ageDistribution(data) {
 
 // 	function test() {
 // 		console.log($('#distribution1').offset().top);
-// 		$(document).scrollTop(
+// 		$(html).scrollTop(
 // 				$('#distribution1').offset().top
 // 						- $('#header-wrapper').height());
 // 	}
@@ -297,12 +298,12 @@ function ageDistribution(data) {
 	$('#piChart').on('click', {
 		to : $('#distribution1')
 	}, moveTo);
-	$('#piChart').on('click', {
+	$('#barChart').on('click', {
 		to : $('#distribution2')
 	}, moveTo);
 	function moveTo(event) {
 		var to = event.data.to;
-		var top = $(to).offset().top - $('#header-wrapper').height();
+		var top = $(to).offset().top - $('#header-wrapper').height()-10;
 		$('html, body').animate({
 			scrollTop : top
 		}, 600, 'easeInOutExpo');
@@ -314,6 +315,18 @@ function ageDistribution(data) {
 		$('.choosed').removeClass('choosed');
 		$(a).addClass('choosed');
 	}
+	
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > 100) {
+
+			var sideTop = $('#header-wrapper').height()+40;
+			$('#side-nav').stop().css({ top: sideTop , position: 'fixed'});
+			} else {
+			$('#side-nav').stop().css({ top: 'auto' , position: 'relative'});
+				}
+		});
+	
+	
 </script>
 
 
