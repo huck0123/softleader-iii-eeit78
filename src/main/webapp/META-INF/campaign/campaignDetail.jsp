@@ -75,45 +75,68 @@ pre {
 	 background-color:#FFFFCE;
 	 display:inline-block;
 }
-
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-color: darkslategrey;
-background-color: #f2f2f2;}
-.nav-pills>li>a {
-border-radius: 0;}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="/header.jsp" />
 
 	<div class="container" id="showColumn"></div>
-	
-<div class="container" >
-  <ul class="nav nav-pills" style="border-top: 1px black solid; border-bottom:1px black solid; height:60px ">
-    <li class="active" ><a data-toggle="pill" href="#detail-tab" style="width:120px; height:58px; line-height: 36px">詳細資訊</a></li>
-    <li><a data-toggle="pill" href="#message-tab" style="width:120px;height:58px;line-height: 36px">留言</a></li>
-  </ul>
-  
-  <div class="tab-content">
-    <div id="detail-tab" class="tab-pane fade in active">
-     		<div class=row id="detailRowDiv">
+	<div class="container">
+		<nav class="navbar navbar-default"
+			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
+			<div class="container"
+				style="display: table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#nav2" style="float: right;">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="nav2">
+					<ul class="nav navbar-nav">
+						<li><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
+						<li><a href="#" id="tab2">評論</a></li>
+
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+	</div>
+	<div class="container" id="tabPageDiv">
+		<div class=row id="detailRowDiv">
 			<div class="col-md-8 col-md-offset-2" id="detailDiv"
 				style="text-align: justify;"></div>
 		</div>
-    </div>
-    <div id="message-tab" class="tab-pane fade">
 
-    </div>
-  </div>
-</div>
-	
-	<div class="container">
-	</div>
-
-	<div class="container" id="tabPageDiv">
-
-
-
+		<div id="commentDiv" style="display: none">
+			<div>
+				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
+				<div class="col-md-6 col-md-offset-3" id="No_mainPlace">					
+					<div class="col-md-2 hidden-xs hidden-sm">							
+						<img id="img_user" src="../pictures/noPicture.jpg" style="width: 100%">
+					</div>
+					<div class="col-md-10">						
+						<textarea id="mainCommentPlace" class="form-control" rows="4" style="margin-bottom:4px"></textarea>
+						<button type="button" class="btn btn-success btn-xs"
+								onclick="startNewComment();" style="width: 50px">送出
+						</button>							
+						<button type="button" class="btn btn-warning btn-xs"
+								onclick="confirmCleanNewComment();" style="width: 50px">清除
+						</button>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="col-xs-6 col-xs-offset-3" id="No_mainShownCommentPlace"></div>
+			</div>
+		</div>
 	</div>
 
 	<div class="container" id="tabPageDiv">
@@ -150,6 +173,7 @@ border-radius: 0;}
 	var permission = true;
 	var commentCampaignId;
 	var raiserId;
+	var commentCampaignRaiserName;
 	
 	var recordCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentsURL =      '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
@@ -190,18 +214,31 @@ border-radius: 0;}
 // 	});
 	
 	function startNewComment() {
-		if(confirm("確定送出留言嗎?")){
-			if($('#mainCommentPlace').val().trim() == ""){
-				alert("未輸入任何內容");
-			}else{
+		if($('#mainCommentPlace').val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			if("${giver}"){
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : '${giver.id}',
 					'form.replyId' : 0,
 					'form.commentary' : $('#mainCommentPlace').val()
 				}, assignFinalFixedPlace);
+			}else if("${raiser}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : 0,
+					'form.replyId' : 0,
+					'form.commentary' : $('#mainCommentPlace').val()
+				}, assignFinalFixedPlace);
+			}else if("${admin}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : null,
+					'form.replyId' : 0,
+					'form.commentary' : $('#mainCommentPlace').val()
+				}, assignFinalFixedPlace);
 			}
-		}else{
 		}
 	}
 	
@@ -221,13 +258,9 @@ border-radius: 0;}
 			if(permission){
 				permission = false;
 				$('#btn_' + replyParam).prop('disabled', true);
-				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
-					showOrHideAllReplies(replyParam);
-				}else{
-				}
 				$('#sub_' + replyParam)
 					.prepend('<div id="temp_' + replyParam + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-					+ 			'<div class="col-md-2">'
+					+ 			'<div class="col-md-2 hidden-xs hidden-sm">'
 					+ 				'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
 					+ 			'</div>'
 					+ 			'<div class="col-md-10">'
@@ -237,6 +270,10 @@ border-radius: 0;}
 					+ 			'</div>'
 					+ 		'</div>');
 				showUserPhoto("temp");
+				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
+					showOrHideAllReplies(replyParam);
+				}else{
+				}
 			}else{
 				alert("請先完成或取消前一個留言再進行新的回覆");
 			}
@@ -246,25 +283,38 @@ border-radius: 0;}
 	}
 	
 	function startNewReply(replyId) {
-		if(confirm("確定送出回覆嗎?")){
-			if($('#' + replyId).val().trim() == ""){
-				alert("未輸入任何內容");
-			}else{
-				permission = true;
-				$('#btn_' + replyId).prop('disabled', false);
-				$.getJSON(getReplyURL, {'form.id' : replyId}, function(data){
-					if(data.replyId != 0){
-						showOrHideAllReplies(replyId);
-					}
-				})
+		if($('#' + replyId).val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			permission = true;
+			$('#btn_' + replyId).prop('disabled', false);
+			$.getJSON(getReplyURL, {'form.id' : replyId}, function(data){
+				if(data.replyId != 0){
+					showOrHideAllReplies(replyId);
+				}
+			})
+			if("${giver}"){
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : "${giver.id}",
 					'form.replyId' : replyId,
 					'form.commentary' : $('#' + replyId).val()
 				}, assignFinalFixedPlace);
+			}else if("${raiser}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : 0,
+					'form.replyId' : replyId,
+					'form.commentary' : $('#' + replyId).val()
+				}, assignFinalFixedPlace);
+			}else if("${admin}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : null,
+					'form.replyId' : replyId,
+					'form.commentary' : $('#' + replyId).val()
+				}, assignFinalFixedPlace);
 			}
-		}else{
 		}
 	}
 	
@@ -293,14 +343,20 @@ border-radius: 0;}
 	}
 	
 	function showUserAccount(data, placeParam){
-		$.ajax({async : false,
-				dataType : "json",
-				url : getUserAccountURL,
-				data : {"form.id" : data.giverId},
-				success : function(dataJSON){
-					controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
-			  }});
-			
+		if(data.giverId == null){
+			controlCommentOrReplyDetails(data, "管理者", null, placeParam);
+		}else if(data.giverId == 0){
+			controlCommentOrReplyDetails(data, commentCampaignRaiserName, null, placeParam);
+		}else{
+			$.ajax({async : false,
+					dataType : "json",
+					url : getUserAccountURL,
+					data : {"form.id" : data.giverId},
+					success : function(dataJSON){
+						controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
+		  	  	  }});
+		}
+		
 //  	if(data.anonymous){
 //  		controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
 //  	}else{
@@ -310,9 +366,9 @@ border-radius: 0;}
 	function controlCommentOrReplyDetails(data, account, headshot, placeParam){
 		if(placeParam == 'mainShownCommentPlace'){
 	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
-	 		//console.log(data);
+	 		$('#sign_' + data.id).hide();
 	 		if(!'${admin}'){
-	 			if('${giver.account}' != account && '${raiser.account}' != account){
+	 			if('${giver.account}' != account && '${raiser.name}' != account){
 	 				$('#alt_' + data.id).text("");
 	 				$('#del_' + data.id).text("");
 	 			}
@@ -321,12 +377,11 @@ border-radius: 0;}
 	 		slideAllReplies(data.id);
 		}else{
 			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
+			$('#count_' + placeParam).text(parseInt($('#count_' + placeParam).text())+1);
 			$('#sign_' + placeParam).hide();
 			$('#sign_' + data.id).remove();
-			$('#count_' + placeParam).text(parseInt($('#count_' + placeParam).text())+1);
-			//console.log(data);
-			$('#a_' + data.id).remove();
 			$('#count_' + data.id).remove();
+			$('#a_' + data.id).remove();
 			if(!'${admin}'){
 	 			if('${giver.account}' != account && '${raiser.account}' != account){
 	 				$('#alt_' + data.id).text("");
@@ -336,9 +391,15 @@ border-radius: 0;}
 			substantiatePhoto(data.id, headshot);
 			slideAllReplies(data.id);
 			$.getJSON(getReplyURL, {"form.id" : data.replyId}, function(replyJSON){
- 				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
- 					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
- 				});
+				if(replyJSON.giverId == null){
+					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : 管理者</p>");
+				}else if(replyJSON.giverId == 0){
+					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + commentCampaignRaiserName + "</p>");
+				}else{
+					$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
+ 						document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+ 					});
+				}
 			});
 			
 // 				if(replyJSON.anonymous){
@@ -383,8 +444,8 @@ border-radius: 0;}
 		var date = new Date(data.commentTime);
 		var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
 
-		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:120px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-		+ 			'<div class="col-md-2">'
+		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
+		+ 			'<div class="col-md-2 hidden-xs hidden-sm">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
 	 	+ 			'</div>'
 		+ 			'<div class="col-md-10" id="forAlt_' + data.id + '">'
@@ -396,11 +457,11 @@ border-radius: 0;}
 		+               '<a id="a_' + data.id + '" onclick="slideAllReplies(' + data.id + ');">隱藏所有回覆</a>&nbsp;&nbsp;'
 		+               '<span class="badge" id="count_' + data.id + '">0</span>&nbsp;&nbsp;&nbsp;&nbsp;'
 		+               '<a id="alt_' + data.id + '" onclick="alterContent(' + data.id + ');">修改</a>&nbsp;&nbsp;&nbsp;'
-		+               '<a id="del_' + data.id + '" onclick="deleteContent(' + data.id + ');">刪除</a>'
+		+               '<a id="del_' + data.id + '" onclick="deleteContent(' + data.id + ',' + data.pendingId + ');">刪除</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
 		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;">'
-		+      '<p id="sign_' + data.id + '" style="padding:5px;margin:-5px 0px;font-size:40;background-color:#FFFFCE">&nbsp;&nbsp;&nbsp;查無回覆</p></div>';
+		+      '<p id="sign_' + data.id + '" style="padding:5px;margin:-5px 0px;font-size:40;background-color:#FFFFCE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查無回覆</p></div>';
 	}
 	
 	function substantiatePhoto(id, imgParam){
@@ -429,6 +490,8 @@ border-radius: 0;}
 			$('#a_' + id).text("隱藏所有回覆");
 			if(document.getElementById('sub_'+ id).getElementsByTagName('div').length == 0){
 				$('#sign_' + id).show();
+			}else{
+				$('#sign_' + id).hide();
 			}
 		}else if($('#a_' + id).text() == "隱藏所有回覆"){
 			$('#sub_' + id).slideUp();
@@ -443,6 +506,11 @@ border-radius: 0;}
 		if($('#a_' + id).text() == "查看所有回覆"){
 			$('#sub_' + id).show();
 			$('#a_' + id).text("隱藏所有回覆");
+			if(document.getElementById('sub_'+ id).getElementsByTagName('div').length == 0){
+				$('#sign_' + id).show();
+			}else{
+				$('#sign_' + id).hide();
+			}
 		}else if($('#a_' + id).text() == "隱藏所有回覆"){
 			$('#sub_' + id).hide();
 			$('#a_' + id).text("查看所有回覆");
@@ -460,31 +528,28 @@ border-radius: 0;}
 				          	  + 	  	 '<button type="button" class="btn btn-warning btn-xs" onclick="cancelAlteredReply(' + id + ');" style="width:50px">取消</button>'
 				          	  +       '</div>');
 			$('#' + id).val($('#p_' + id).text());
-			$('#p_' + id).hide(); $('#btn_' + id).hide(); $('#a_' + id).hide(); $('#alt_' + id).hide(); $('#del_' + id).hide();
+			$('#p_' + id).hide(); $('#btn_' + id).hide(); $('#a_' + id).hide(); $('#alt_' + id).hide(); $('#del_' + id).hide(); $('#count_' + id).hide();
 		}else{
 			alert("請先完成或取消前一個留言再進行修改");
 		}
 	}
 	
 	function sendAlteredReply(id){
-		if(confirm("確定送出修改嗎?")){
-			if($('#' + id).val().trim() == ""){
-				alert("未輸入任何內容");
-			}else{
-				permission = true;
-				$.getJSON(alterCommentOrReplyURL, {
-					'form.id' : id,
-					'form.commentary' : $('#' + id).val()
-				}, function(data){
-					var date = new Date(data.commentTime);
-					var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
-					$('#temp2_' + id).remove();
-					$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show();
-					$('#title_' + id).html("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
-					$('#p_' + id).text(data.commentary);
-				});
-			}
+		if($('#' + id).val().trim() == ""){
+			alert("未輸入任何內容");
 		}else{
+			permission = true;
+			$.getJSON(alterCommentOrReplyURL, {
+				'form.id' : id,
+				'form.commentary' : $('#' + id).val()
+			}, function(data){
+				var date = new Date(data.commentTime);
+				var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
+				$('#temp2_' + id).remove();
+				$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show(); $('#count_' + id).show();
+				$('#title_' + id).html("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
+				$('#p_' + id).text(data.commentary);
+			});
 		}
 	}
 	
@@ -497,15 +562,17 @@ border-radius: 0;}
 		}
 	}
 	
-	function deleteContent(id){
+	function deleteContent(id, pendingId){
 		if(confirm("確定刪除留言嗎?")){
 			$.getJSON(deleteCommentOrReplyURL, {
 				'form.id' : id
 			}, function(data){
-				alert(data);
 				if(data == "刪除成功"){
 					$('#No_' + id).remove();
 					$('#sub_' + id).remove();
+					$('#count_' + pendingId).text(parseInt($('#count_' + pendingId).text())-1);
+				}else{
+					alert(data);
 				}
 			});
 		}else{
@@ -540,6 +607,7 @@ border-radius: 0;}
 				data = JSON.parse(data);
 				value = data[0];
 				commentCampaignId = value.id;
+				commentCampaignRaiserName = value.raiserModel.name;
 				
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>' + value.name + '</h3>');
