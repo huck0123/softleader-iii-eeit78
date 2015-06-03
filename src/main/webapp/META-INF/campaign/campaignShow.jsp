@@ -64,6 +64,15 @@ a:hover {
 	margin-bottom: 20px;
 }
 .pagination{margin:8px 0px;}
+@media {
+.campaign-image{width:100%;
+height:auto;}
+}
+
+@media ( min-width : 992px) {
+.campaign-image{width:100%;
+height: 200px;}
+}
 </style>
 </head>
 <body>
@@ -71,7 +80,7 @@ a:hover {
 
 	<div class="container"
 		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 26px;margin-bottom: 16px;">
-		<div class="row" style="text-align: center; color: grey;">
+		<div class="row" style="text-align: center; color:darkslategray;">
 			<h1 style="margin-top: 30px; font-weight: bolder;">募款活動</h1>
 			<div class="row">
 				<div class="col-md-3"></div>
@@ -195,7 +204,7 @@ function load(){
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -276,7 +285,7 @@ function makeFunction(j){return function(){
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 			var str = arrayBufferToBase64(value.image);
-			var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+			var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
 			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);

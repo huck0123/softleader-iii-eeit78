@@ -107,11 +107,11 @@ border-radius: 0;}
 			<div id="message-tab" class="tab-pane fade">
 			<div style="text-align: left">
 				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
-				<div class="col-md-6 col-md-offset-3" id="No_mainPlace">					
-					<div class="col-md-2 hidden-xs hidden-sm">							
+				<div class="col-xs-12 col-md-6 col-md-offset-3" id="No_mainPlace">					
+					<div class="col-xs-2">							
 						<img id="img_user" src="../pictures/noPicture.jpg" style="width: 100%">
 					</div>
-					<div class="col-md-10">						
+					<div class="col-xs-10">						
 						<textarea id="mainCommentPlace" class="form-control" rows="4" style="margin-bottom:4px"></textarea>
 						<button type="button" class="btn btn-success btn-xs"
 								onclick="startNewComment();" style="width: 50px">送出
@@ -123,7 +123,7 @@ border-radius: 0;}
 				</div>
 			</div>
 			<div>
-				<div class="col-xs-6 col-xs-offset-3" id="No_mainShownCommentPlace"></div>
+				<div class="col-xs-12 col-md-6 col-md-offset-3" id="No_mainShownCommentPlace"></div>
 			</div>
 			</div>
 		</div>
@@ -230,10 +230,10 @@ border-radius: 0;}
 				$('#btn_' + replyParam).prop('disabled', true);
 				$('#sub_' + replyParam)
 					.prepend('<div id="temp_' + replyParam + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-					+ 			'<div class="col-md-2 hidden-xs hidden-sm">'
+					+ 			'<div class="col-xs-2">'
 					+ 				'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
 					+ 			'</div>'
-					+ 			'<div class="col-md-10">'
+					+ 			'<div class="col-xs-10">'
 					+ 				'<textarea id="' + replyParam + '" class="form-control" rows="4" style="margin-bottom:4px"></textarea>'
 					+ 				'<button type="button" class="btn btn-success btn-xs" onclick="startNewReply(' + replyParam + ');" style="width:50px">確定</button>&nbsp;'
 					+ 				'<button type="button" class="btn btn-warning btn-xs" onclick="confirmCancelNewReply(' + replyParam + ');" style="width:50px">取消</button>'
@@ -415,10 +415,10 @@ border-radius: 0;}
 		var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
 
 		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-		+ 			'<div class="col-md-2 hidden-xs hidden-sm">'
+		+ 			'<div class="col-xs-2">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
 	 	+ 			'</div>'
-		+ 			'<div class="col-md-10" id="forAlt_' + data.id + '">'
+		+ 			'<div class="col-xs-10" style="text-align:left" id="forAlt_' + data.id + '">'
 		+ 				'<p id="title_' + data.id + '">' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
 		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'

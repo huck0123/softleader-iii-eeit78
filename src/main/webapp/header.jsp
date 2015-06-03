@@ -346,7 +346,11 @@ console.log(headerHeight);
 													+ $('#header-name-search').val() + '&page=0';});
 						
 						$(window).on('resize',function(){
-								$('#to-top').attr('style',{});
+							if($(window).scrollTop() <=100){	
+							$('#to-top').css({display:none});
+							} else{
+							$('#to-top').attr('style','');
+							}
 							})
 
 						
