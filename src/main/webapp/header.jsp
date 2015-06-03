@@ -351,7 +351,6 @@ console.log(headerHeight);
 							} else{
 							$('#to-top').attr('style','');
 							}
-							
 							})
 
 						
