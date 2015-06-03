@@ -266,7 +266,7 @@ function onload(data){
 }
 
 $(window).scroll(function() {
-	if ($(window).scrollTop() > 100) {
+	if ($(window).scrollTop() > 100 && $(window).width() >600) {
 		var sideTop = $('#header-wrapper').height()+40;
 		$('#side-nav').css({ top: sideTop , position: 'fixed'});
 		} else {
