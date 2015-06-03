@@ -202,7 +202,7 @@ function load(){
 				var captionLower = $('<div class="captionLower"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
 				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-				var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
+				var p1 = $('<p><div>' + value.detail+ '...</div></p>');
 
 				var percent = value.currentFund/ value.goal * 100;
 				var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '
@@ -283,7 +283,7 @@ function makeFunction(j){return function(){
 			var captionLower = $('<div class="captionLower"></div>');
 			var h3 = $('<h3>' + value.name+ '</h3>');
 			var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-			var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
+			var p1 = $('<p><div>' + value.detail+ '...</div></p>');
 
 			var percent = value.currentFund/ value.goal * 100;
 			var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '

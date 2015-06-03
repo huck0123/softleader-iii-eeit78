@@ -617,7 +617,7 @@ border-radius: 0;}
 				vedioDiv.appendTo(rowDiv2);
 				sideDiv.appendTo(rowDiv2);
 				rowDiv2.appendTo($('#showColumn'));
-				$('#detailDiv').append('<pre>' + value.detail + '</pre>');
+				$('#detailDiv').append('<div>' + value.detail + '</div>');
 				
 				appendGiverData();
 				loadAllComments(commentCampaignId);

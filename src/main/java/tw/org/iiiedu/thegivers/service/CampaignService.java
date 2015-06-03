@@ -51,35 +51,24 @@ public class CampaignService {
 	}
 	
 	public boolean insert(CampaignModel cm) {
-//		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		// Transaction tx =
+		// sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.insert(cm);
-//		tx.commit();
-		if (b) {
-			return true;
-		} else {
-			return false;
-		}
+		// tx.commit();
+		return b;
 	}
 
 	public boolean update(CampaignModel cm) {
 
-		boolean b = campaignDao.update(cm); 
-		if (b) {
-			return true;
-		} else {
-			return false;
-		}
+		boolean b = campaignDao.update(cm);
+		return b;
 	}
 
 	public boolean delete(int id) {
 //		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		boolean b = campaignDao.delete(id);
-//		tx.commit();
-		if (b) {
-			return true;
-		} else {
-			return false;
-		}
+		// tx.commit();
+		return b;
 	}
 
 	public List<CampaignModel> getByCampaignName(String name) {
