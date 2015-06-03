@@ -71,7 +71,7 @@ a:hover {
 
 	<div class="container"
 		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 26px;margin-bottom: 16px;">
-		<div class="row" style="text-align: center; color: grey;">
+		<div class="row" style="text-align: center; color:darkslategray;">
 			<h1 style="margin-top: 30px; font-weight: bolder;">募款活動</h1>
 			<div class="row">
 				<div class="col-md-3"></div>

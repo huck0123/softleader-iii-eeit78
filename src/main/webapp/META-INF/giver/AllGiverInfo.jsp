@@ -57,7 +57,7 @@ td{vertical-align: middle;}
 	<jsp:include page="../../header.jsp" />
 	
 			<div class="container" style="background-color: #f2f2f2; margin-top: 20px; margin-bottom: 20px; padding-bottom: 15px">
-			<div class="row" style="text-align:center; color:	gray; padding-left: 20px;">
+			<div class="row" style="text-align:center; color:darkslategray; padding-left: 20px;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">管理員專區</h1>
 			</div>
 	</div>
