@@ -60,7 +60,7 @@ margin-top: 62px;
 	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
 			<div class="row" style="text-align:center; color:darkslategray;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
-				<marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
+				<marquee scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
 			</div>
 	</div>
 
