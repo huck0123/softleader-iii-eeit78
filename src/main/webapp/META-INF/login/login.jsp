@@ -147,10 +147,15 @@ margin-right:0px;}
 	      </div>
 	      <div class="modal-body">
 	      	<br>
-	      	<label for="">您的帳號</label>
+	      	<label for="">您的帳號:</label>
 	        <input type="text" id="yourAccount" autofocus>
+	        <br>
+	      	<b id="accountMessage"></b>
 	      	<br>
-	      	<b id="message"></b>
+	        <label for="">您的身分證字號:</label>
+	        <input type="text" id="yourIdNumber" disabled="disabled">
+	        <br>
+	        <b id="IdNumberMessage"></b>
 	        <br>
 	      </div>
 	      <div class="modal-footer">
@@ -164,26 +169,48 @@ margin-right:0px;}
 		<jsp:include page="/footer2.jsp" />
 	
 	<script>
-		var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 		
 		//判斷帳號
 		$('#yourAccount').on('keyup', function(){
+			var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 			var thisAccount = $(this).val();
 			//查看giver是否有相同的帳號
 			$.post(url, {'form.account' : thisAccount}, function(data) {
 				data = JSON.parse(data);
 				if (!data.checkAccount) {
 					$('#forgetPasswd').prop("disabled",true);
-					$('#message').empty().text("此帳號不存在");
+					$('#accountMessage').empty().text("此帳號不存在");
+					$('#yourIdNumber').val("");
+					$('#yourIdNumber').prop("disabled",true);
 					return;
 				}else{
 					$('#forgetPasswd').prop("disabled",false);
-					$('#message').empty();
+					$('#accountMessage').empty();
+					$('#yourIdNumber').prop("disabled",false);
 				}
 				
 			});
 		});
-	
+		
+		//判斷IDNumber
+		$('#yourIdNumber').on('keyup', function(){
+			var url = "${pageContext.request.contextPath}/giver/giverSelect!selectIdNumberByAccount";
+			var thisAccount = $('#yourAccount').val();
+			var thisIdNumber = $(this).val();
+			//查看是否有此身分證
+			$.post(url, {'form.account' : thisAccount, 'form.id_number' : thisIdNumber}, function(data){
+				data = JSON.parse(data);
+				if(!data.IdNumberByAccount){
+					$('#forgetPasswd').prop("disabled",true);
+					$('#IdNumberMessage').empty().text("此身分證錯誤");
+					return;
+				}else{
+					$('#forgetPasswd').prop("disabled",false);
+					$('#IdNumberMessage').empty();
+				}
+			});
+		});
+		
 		//送出Email
 		$('#forgetPasswd').on('click', function(){
 			var account = $('#yourAccount').val();

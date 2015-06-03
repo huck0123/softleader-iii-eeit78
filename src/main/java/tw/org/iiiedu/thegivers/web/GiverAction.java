@@ -377,7 +377,25 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return null;
 	}
 	
-	//身分證ID收尋    
+	//此帳號與身分證是否屬於同一人
+	public String selectIdNumberByAccount(){
+		model = service.getByAccount(form.getAccount().trim());
+		System.out.println(form.getAccount()+"  "+form.getId_number());
+		Map<String, Boolean> map = new HashMap<>();
+		if(model.getIdNumber().equals(form.getId_number())){
+			map.put("IdNumberByAccount", true);
+		}else{
+			map.put("IdNumberByAccount", false);
+		}
+		
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+		
+		return "checkIdNumberByAccount";
+	}
+	
+	//身分證ID收尋   (是否有此身分證)
 	public String selectByIdNumber(){
 		boolean b = service.getByIdNumber(form.getId_number().trim());
 		Map<String, Boolean> map = new HashMap<>();
