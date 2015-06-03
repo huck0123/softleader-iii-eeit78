@@ -318,15 +318,12 @@ function ageDistribution(data) {
 	
 	$(window).scroll(function() {
 		if ($(window).scrollTop() > 100 && $(window).width() >600) {
-
 			var sideTop = $('#header-wrapper').height()+40;
 			$('#side-nav').stop().css({ top: sideTop , position: 'fixed'});
 			} else {
 			$('#side-nav').stop().css({ top: 'auto' , position: 'relative'});
 				}
-		
-		
-		
+
 		});
 	
 	

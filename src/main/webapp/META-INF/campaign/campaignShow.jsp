@@ -157,7 +157,10 @@ var totalCount = 0;
 var totalPage = 0;
 //0是第一頁
 var currentPage =0;
+if("${param.page}"){currentPage = "${param.page}"}
 var nameSearch="";
+if("${param.nameSearch}"){nameSearch = "${param.nameSearch}"}
+
 var typeSearch="所有類型";
 var onGoing="現正進行";
 var pageSize = 6;
