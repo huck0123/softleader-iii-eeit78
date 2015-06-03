@@ -122,8 +122,15 @@ margin-bottom: -40px;
 	position:relative; /*因為pre已經設relative了，若這邊沒設的話，會被pre蓋過去*/
 	padding-top: 50px;
 }
+@media {
+.campaign-image{width:100%;
+height:auto;}
+}
 
-
+@media ( min-width : 992px) {
+.campaign-image{width:100%;
+height: 200px;}
+}
 </style>
 </head>
 
@@ -156,7 +163,7 @@ margin-bottom: -40px;
 		</div>
 	</div>
 	<!-- 	跑馬燈 -->
-	<div><marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" scrollamount="10" id="marquee1" ></marquee></div>
+<!-- 	<div><marquee onMouseOver="this.stop()" onMouseOut="this.start()" behavior="alternate" scrollamount="10" id="marquee1" ></marquee></div> -->
 	
 	<div id="raiserDiv">
 		<div>
@@ -182,11 +189,11 @@ margin-bottom: -40px;
 					data = JSON.parse(data);
 			$(data).each(function(index,value){
 				var rowDiv = $('#campaignRow');
-				var colDiv = $('<div class="col-sm-12 col-md-4"></div>');
+				var colDiv = $('<div class="col-xs-12 col-md-4"></div>');
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);

@@ -418,7 +418,7 @@ border-radius: 0;}
 		+ 			'<div class="col-md-2 hidden-xs hidden-sm">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
 	 	+ 			'</div>'
-		+ 			'<div class="col-md-10" id="forAlt_' + data.id + '">'
+		+ 			'<div class="col-md-10" style="text-align:left" id="forAlt_' + data.id + '">'
 		+ 				'<p id="title_' + data.id + '">' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
 		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'

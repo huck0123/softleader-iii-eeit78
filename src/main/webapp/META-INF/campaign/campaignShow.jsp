@@ -64,6 +64,15 @@ a:hover {
 	margin-bottom: 20px;
 }
 .pagination{margin:8px 0px;}
+@media {
+.campaign-image{width:100%;
+height:auto;}
+}
+
+@media ( min-width : 992px) {
+.campaign-image{width:100%;
+height: 200px;}
+}
 </style>
 </head>
 <body>
@@ -195,7 +204,7 @@ function load(){
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -276,7 +285,7 @@ function makeFunction(j){return function(){
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 			var str = arrayBufferToBase64(value.image);
-			var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+			var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
 			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
