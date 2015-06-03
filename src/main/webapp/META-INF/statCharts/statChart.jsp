@@ -180,7 +180,9 @@ function getType(type) {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
-        },
+        },credits:{
+    		enabled : false
+    	},
         title: {
             text: '',
             style : { "color": "red", "fontSize": "20px" }
@@ -234,7 +236,9 @@ function ageDistribution(data) {
             chart: {
             	backgroundColor: '#FFFCEC',
                 type: 'bar'
-            },
+            },credits:{
+        		enabled : false
+        	},
             title: {
                 text: '',
                 style : { "color": "red", "fontSize": "20px" }
