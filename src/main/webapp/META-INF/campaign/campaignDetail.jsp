@@ -42,15 +42,6 @@ strong {
 	font-size: 46px;
 }
 
-pre {
-	background-color: white;
-	border: white;
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	font-size: 16px;
-}
 
 #commentDiv {
 	text-align: left;
@@ -59,6 +50,10 @@ pre {
 .commentFont {
 	font-size: 20px;
 }
+
+pre{background-color: white;
+font-size: 18px;
+border: none};
 
 #No_mainPlace {
 	 margin-top:8px;

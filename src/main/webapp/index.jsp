@@ -260,8 +260,7 @@ pre {
 																	childDiv3
 																			.append(data);
 																})
-
-												var today = (new Date()).getTime();
+																var today = (new Date()).getTime();
 												var d = (new Date(value.endDate)).getTime();
 												
 												var timeRemain = d - today;
@@ -291,6 +290,7 @@ pre {
 															+ '已結束'+ '<br/></div>');
 													var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
 												}
+
 
 												otherInfoDiv.append(childDiv1)
 														.append(childDiv2)
