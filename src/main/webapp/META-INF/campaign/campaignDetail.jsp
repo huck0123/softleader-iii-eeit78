@@ -136,6 +136,7 @@ border-radius: 0;}
 </body>
 
 <script>
+
 	//0是第一頁
 	var currentPage = 0;
 	var totalCount = 0;
@@ -585,11 +586,33 @@ border-radius: 0;}
 					+ '</strong>元/' + commafy(value.goal)
 					+ '元</p>');
 				var d = new Date(value.endDate);
-				
+				var timeRemain = d.getTime() - new Date().getTime();
+				var hour = Math.floor(timeRemain/3600000);
+				var minutes = Math.floor((timeRemain - hour*3600000)/60000);
+				var seconds = Math.floor((timeRemain - hour*3600000 - minutes *60000) / 1000);
+				if( timeRemain > 86400000){
 				var dateP = $('<p>於<strong>' + d.getFullYear()
 							+ '/' + (d.getMonth()+1) + '/' + d.getDate()
 							+ '</strong>結束</p>');
-
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 3600000 && timeRemain <86400000){
+				var dateP = $('<p>將於<strong>' + hour
+							+ '</strong>小時後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 60000 && timeRemain < 3600000){
+				var dateP = $('<p>將於<strong>' + minutes
+							+ '</strong>分鐘後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 0 && timeRemain < 60000){
+				var dateP = $('<p>將於<strong>' + seconds 
+							+ '</strong>秒後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				}
+				else{
+				var dateP = $('<p>活動<strong>已結束</strong></p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button" disabled><strong>立即捐款</strong></a>');
+				}
+				
 				var percent = value.currentFund / value.goal * 100;
 				var progressDiv = $('<div class="progress"></div>');
 				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'
@@ -606,7 +629,7 @@ border-radius: 0;}
 
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id + '&name=' + value.name;
-				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				
 				donateBtn.attr('href', url);
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
