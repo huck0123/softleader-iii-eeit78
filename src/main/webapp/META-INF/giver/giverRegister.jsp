@@ -89,11 +89,11 @@ body{
 						<div class="form-group">
 							<label for="">姓:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.familyName"
-								value="${param.form.familyName }">
+								value="${param.form.familyName }" required="required">
 						</div>
 						<div class="form-group">
 							<label for="">名字:<b>*</b></label> 
-							<input type="text" class="form-control" name="form.name" value="${param.form.name }">
+							<input type="text" class="form-control" name="form.name" value="${param.form.name }" required="required">
 						</div>
 
 							<label for="">性別:<b>*</b></label>
@@ -101,21 +101,21 @@ body{
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
-								<input type="radio"	name="form.gender" value="true">男
+								<input type="radio"	name="form.gender" value="true" required="required">男
 								</label> <label class="btn btn-default"> 
-								<input type="radio" name="form.gender" value="false">女
+								<input type="radio" name="form.gender" value="false" required="required">女
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="">身分證字號:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.id_number"
-								value="${param.form.id_number }">
+								value="${param.form.id_number }" required="required">
 							<b id="idNumber"></b>
 						</div>
 						<div class="form-group">
 							<label for="">手機:<b>*</b></label> <input type="text"
-								class="form-control" name="form.tel" value="${param.form.tel }">
+								class="form-control" name="form.tel" value="${param.form.tel }" required="required">
 							<b id="tel"></b>
 						</div>
 						<div class="form-group">
@@ -126,7 +126,7 @@ body{
 						<div class="form-group">
 							<label for="">Email:<b>*</b></label> 
 							<input type="email"	class="form-control" name="form.email"
-								value="${param.form.email }">
+								value="${param.form.email }" required="required">
 						</div>
 
 							<label for="">是否獲得資訊:</label>
@@ -143,9 +143,9 @@ body{
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="">生日:</label> 
+							<label for="">生日:<b>*</b></label> 
 							<input type="date" class="form-control"
-								name="form.birth" value="" style="height: 30px;">
+								name="form.birth" value="" style="height: 30px;" required="required">
 							<b id="birthday"></b>
 						</div>
 						<div class="form-group">
