@@ -298,7 +298,6 @@ ul.nav {
 
 <script>
 var headerHeight = $('#header-wrapper').height();
-console.log(headerHeight);
 
 	$(document).ready(function() {
 		$(window).scroll(function() {

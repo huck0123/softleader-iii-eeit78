@@ -125,14 +125,19 @@ public class CampaignAction extends ActionSupport implements
 		return "input";
 		}
 
-		
+
 		CampaignModel cm = new CampaignModel();
 		RaiserModel rm = (RaiserModel) request.getSession().getAttribute(
 				"raiser");
 		cm.setGoal(campaignForm.getGoal());
 		cm.setDetail(campaignForm.getDetail());
 		cm.setStartDate(new Timestamp(new java.util.Date().getTime()));
-		cm.setEndDate(new Timestamp(cm.getStartDate().getTime()+campaignForm.getDuration()*24*3600*1000));
+		System.out.println(cm.getStartDate().getTime());
+		System.out.println(cm.getStartDate().getTime()+campaignForm.getDuration()*24*3600*1000);
+		long l = campaignForm.getDuration();
+		l= l*24*3600*1000;
+		cm.setEndDate(new Timestamp(cm.getStartDate().getTime()+ l));
+		System.out.println(cm.getEndDate().toString());
 		if (campaignForm.getImage() != null) {
 			cm.setImage(IOUtils.toByteArray(new FileInputStream(campaignForm
 					.getImage())));

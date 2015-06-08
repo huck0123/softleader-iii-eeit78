@@ -60,7 +60,23 @@ body{
 
 	<div class="container panel alert" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px">
 		<div class="row">
-			<div class="col-md-4"></div>
+			<div class="col-md-4">
+<!-- 				神奇小按鈕 -->
+				<button class="btn btn-default" id="xxx">填入表格</button>
+				<button class="btn btn-default" id="ooo">填入表格</button>
+			</div>
+			
+			<script>
+ 				$('#xxx').on("click", function(){
+ 					$('input[name="form.account"]').val("jerry0123"); 
+ 					$('input[name="form.familyName"]').val("李"); 
+ 					$('input[name="form.name"]').val("小強"); 
+ 					$('input[name="form.id_number"]').val("A118963080"); 
+ 					$('input[name="form.tel"]').val("0912145632"); 
+ 					$('input[name="form.address"]').val("台北市大安區信義路"); 
+ 					$('input[name="form.email"]').val("roger@gmail.com"); 
+ 				}); 
+			</script>
 
 			<div class="col-md-4">
 <!-- 			<div class="thumbnail"> -->
@@ -129,9 +145,9 @@ body{
 								value="${param.form.email }" required="required">
 						</div>
 
-							<label for="">是否獲得資訊:</label>
+							<label for="" style="display:none;">是否獲得資訊:</label>
 
-						<div class="form-group">
+						<div class="form-group" style="display:none;">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
 								<input type="radio"	name="form.get_info" value="true" id="getInfo1"

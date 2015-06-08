@@ -55,7 +55,7 @@ b {
 					<li><a href="#billInfo">Step2:信用卡資訊</a></li>
 					<li><a href="#infoConfirm">Step3:捐款資訊確認</a></li>
 				</ul>
-				<form action="<c:url value='/donate/donateAction!donate.action'/>" method="post">
+				<form action="<c:url value='/donate/donateAction!donate.action?id=${param.id }&name=${param.name }'/>" method="post">
 
 					<div class="tab-content">
 						<div class="panel alert tab-pane fade in active" id="donate">
@@ -152,6 +152,21 @@ b {
 	<jsp:include page="/footer.jsp" />
 
 </body>
+<script>
+	$('#magicBtn').on("click", function(){
+		$('input[name="form.amount"]').val("666");
+		$('input[name="cardNo_1"]').val("7987");
+		$('input[name="cardNo_2"]').val("1324");
+		$('input[name="cardNo_3"]').val("6456");
+		$('input[name="cardNo_4"]').val("1793");
+		$('input[name="form.cardNo"]').val("7987132464561793");
+		$('input[name="form.cardCheck"]').val("164");
+		$('input[name="form.cardHolder"]').val("陳思穎");
+		$('input[name="form.cardHolderBirth"]').val('1983-09-13');
+		$('input[name="form.cardHolderPhone"]').val("0913125489");
+		$('input[name="form.cardHolderEmail"]').val("jessica@gmail.com");
+	});
+</script>
 
 <script>
 	

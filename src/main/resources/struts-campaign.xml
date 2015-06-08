@@ -17,7 +17,7 @@
 		</action>
 		
 		<action name="campaignAction" class="campaignAction">
-			<result name="insert" type="redirect">/index.jsp</result>
+			<result name="insert" type="redirect">/campaign/campaignRaiseOK</result>
 			<result name="input">/META-INF/raiser/raiserUpdate.jsp?raiserTabs=3</result>
 			<result name="update" type="redirect">/index.jsp</result>
 			<result name="ban">/META-INF/campaign/campaignAdmin.jsp</result>

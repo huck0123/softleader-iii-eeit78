@@ -48,7 +48,7 @@ b {
 					<div class="visible-xs-block" style="height:10px;"></div>
 					<input type="text" class="card" name="cardNo_3" value="" required="required">- 
 					<input type="text" class="card" name="cardNo_4" value="" required="required">
-					<input type="text" name="form.cardNo" value="" style="display: none">
+					<input type="text" name="form.cardNo" value="" style="display:none">
 				</div>
 				<div class="col-md-2"><b id="cardNo"></b></div>
 			</div>
@@ -201,11 +201,12 @@ b {
 	<div class="row">
 		<a class="btn btn-primary" id="billInfoBack" >上一步</a>
 		<a class="btn btn-primary" id="billInfoBtn" >下一步</a>
+		<a class="btn btn-default" id="magicBtn">神奇按鈕</a>
 	</div>
 </div>
 <script>
 	//驗證卡號
-	$('input[name="cardNo_4"]').on("keyup", function() {
+	$('input[name="cardNo_4"]').on("change", function() {
 		if ($(this).val().length == 4) {
 			var tempCardNo = $('input[name="cardNo_1"]').val()
 									+$('input[name="cardNo_2"]').val()
