@@ -15,7 +15,7 @@
 		
 		<action name="donateAction" class="transactionAction">
 			<result name="success" type="redirect">/donate/donateSuccess</result>
-			<result name="fail" type="redirect">/donate/donate</result>
+			<result name="fail">/META-INF/donate/donate.jsp</result>
 		</action>
 
 		<action name="transactionDetailAction" class="transactionAction">
