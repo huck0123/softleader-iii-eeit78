@@ -41,10 +41,10 @@ label>b {
 	color: red;
 	font-size: 150%;
 }
-#dropZone img {
-margin-top:20px;
-max-width:  100%;
 
+#dropZone img {
+	margin-top: 20px;
+	max-width: 100%;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -74,6 +74,7 @@ max-width:  100%;
 				<div style="padding-top: 36px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
+						<button id="specButtonForRaiserRegister">Fill</button>
 						<div style="height: 50px">${insertErrorMSG}</div>
 						<div class="errorClassForRaiser">*號為必填欄位</div>
 
@@ -186,11 +187,11 @@ max-width:  100%;
 							<div>
 								<input type="file" name="raiserForm.logo" id="logo"
 									accept="image/*">
-<!-- 								<div id="dropZone" ondragover="dragoverHandler(event)" -->
-<!-- 									ondrop="dropHandler(event)"> -->
-<!-- 									<img id="dragpic" -->
-<!-- 										src="/softleader-iii-eeit78/pictures/fileupdate.png"> -->
-<!-- 								</div> -->
+								<!-- 								<div id="dropZone" ondragover="dragoverHandler(event)" -->
+								<!-- 									ondrop="dropHandler(event)"> -->
+								<!-- 									<img id="dragpic" -->
+								<!-- 										src="/softleader-iii-eeit78/pictures/fileupdate.png"> -->
+								<!-- 								</div> -->
 							</div>
 						</div>
 
@@ -229,7 +230,8 @@ max-width:  100%;
 							<div id="chkValidcode" class="errorClassForRaiser"></div>
 						</div>
 						<button type="submit" id="submitForRaiserRegister"
-							class="btn btn-default" disabled="disabled">確定送出</button>
+							class="btn btn-default">確定送出</button>
+						<!-- disabled="disabled" -->
 						<button type="reset" class="btn btn-default">清除資料</button>
 					</form>
 				</div>
@@ -293,16 +295,16 @@ max-width:  100%;
 
 		});
 
-		$("#inputpw2").blur(function() {
-			$("#chkPw2").text("")
+		// 		$("#inputpw2").blur(function() {
+		// 			$("#chkPw2").text("")
 
-			if ($(this).val().length == 0) {
-				$("#chkPw2").text("請輸入相同密碼")
-			}
-			if ($(this).val() != $("#inputpw").val()) {
-				$("#chkPw2").text("密碼不相符")
-			}
-		});
+		// 			if ($(this).val().length == 0) {
+		// 				$("#chkPw2").text("請輸入相同密碼")
+		// 			}
+		// 			if ($(this).val() != $("#inputpw").val()) {
+		// 				$("#chkPw2").text("密碼不相符")
+		// 			}
+		// 		});
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
@@ -373,6 +375,7 @@ max-width:  100%;
 						});
 
 		//以下驗證碼相關
+		var a;
 		//產生
 		createForJsp();
 		function createForJsp() {
@@ -389,60 +392,78 @@ max-width:  100%;
 			});
 		}
 		//驗證
-		$("#validCode").blur(
-				function() {
-					var inputCode = $("#validCode").val();
-					if (inputCode.length <= 0) {
-						$("#chkValidcode").text("請輸入驗證碼！");
-					} else if (inputCode.toUpperCase() != code) {
-						$("#chkValidcode").text("驗證碼輸入錯誤！");
-						createForJsp();
-					} else {
-						$("#chkValidcode").text("正確");
-					}
-					//如果上述資料驗證都沒錯才能送出
-					if ($("#chkValidcode").text().length == 2
-							&& $("#chkName").text().length <= 0
-							&& $("#name").val()
-							&& $("#chkPw2").text().length <= 0
-							&& $("#inputpw").val()
-							&& $("#chkAcc").text().length <= 0
-							&& $("#account").val()) {
-						$("#submitForRaiserRegister").removeAttr('disabled');
-					}
-				});
-
-		$("#vdl").change(function() {
-			if ($(this).val().length != 0) {
-				$("#vdlPre").show().attr("src", $(this).val());
+		$("#validCode").blur(function() {
+			var inputCode = $("#validCode").val();
+			if (inputCode.length <= 0) {
+				$("#chkValidcode").text("請輸入驗證碼！");
+			} else if (inputCode.toUpperCase() != code) {
+				$("#chkValidcode").text("驗證碼輸入錯誤！");
+				createForJsp();
 			} else {
-				$("#vdlPre").hide();
+				$("#chkValidcode").text("正確");
 			}
-		})
+			//如果上述資料驗證都沒錯才能送出  為了demo方便先關掉
+			// 					if ($("#chkValidcode").text().length == 2
+			// 							&& $("#chkName").text().length <= 0
+			// 							&& $("#name").val()
+			// 							&& $("#chkPw2").text().length <= 0
+			// 							&& $("#inputpw").val()
+			// 							&& $("#chkAcc").text().length <= 0
+			// 							&& $("#account").val()) {
+			// 						$("#submitForRaiserRegister").removeAttr('disabled');
+			// 					}
+		});
 
+// 		$("#vdl").change(function() {
+// 			if ($(this).val().length != 0) {
+// 				$("#vdlPre").show().attr("src", $(this).val());
+// 			} else {
+// 				$("#vdlPre").hide();
+// 			}
+// 		})
+
+		$("#specButtonForRaiserRegister")
+				.click(
+						function() {
+							$("#account").val("goh");
+							$("#inputpw").val("password");
+// 							$("#inputpw2").val("password");
+							$("#name").val("勵馨社會福利事業基金會");
+							$("#tel").val("(02)8911-8595");
+							$("#cname").val("廖俊松");
+							$("#ctel").val("0912435768");
+							$("#mail").val("master@goh.org.tw");
+							$("#add").val("新北市新店區順安街2-1號1樓");
+							$("#del")
+									.text(
+											"勵馨本著基督精神，以追求公義與愛的決心和勇氣，預防及消弭性侵害、性剝削及家庭暴力對婦女與兒少的傷害，並致力於社會改造，創造對婦女及兒少的友善環境。");
+							$("#vdl")
+									.val(
+											"https://www.youtube.com/embed/-Yl9xUmtZec");
+							$("#validCode").val($("#checkCode").val());
+						});
 		//test
 
-// 		function dragoverHandler(e) {
-// 			e.preventDefault();
-// 			$("#dragpic").css("opacity", 0.6);
-// 		}
+		// 		function dragoverHandler(e) {
+		// 			e.preventDefault();
+		// 			$("#dragpic").css("opacity", 0.6);
+		// 		}
 
-// 		function dropHandler(e) {
-// 			e.preventDefault();
-// 			e.stopPropagation();
-// 			var theFiles = e.dataTransfer.files;
-// 			for (var i = 0; i < theFiles.length; i++) {
-// 				var reader = new FileReader();
-// 				reader.readAsDataURL(theFiles[i]);
-// 				reader.onload = function(e) { //callback
-// 					var fileContent = e.target.result;
-// 					$("#dropZone").empty().append(
-// 							"<img src='" +fileContent +  "' />");
-// 				}
-// 			}
+		// 		function dropHandler(e) {
+		// 			e.preventDefault();
+		// 			e.stopPropagation();
+		// 			var theFiles = e.dataTransfer.files;
+		// 			for (var i = 0; i < theFiles.length; i++) {
+		// 				var reader = new FileReader();
+		// 				reader.readAsDataURL(theFiles[i]);
+		// 				reader.onload = function(e) { //callback
+		// 					var fileContent = e.target.result;
+		// 					$("#dropZone").empty().append(
+		// 							"<img src='" +fileContent +  "' />");
+		// 				}
+		// 			}
 
-// 		}
-		
+		// 		}
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>
