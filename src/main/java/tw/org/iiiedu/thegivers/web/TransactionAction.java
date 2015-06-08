@@ -139,6 +139,7 @@ public class TransactionAction extends ActionSupport {
 			model.setIp(ServletActionContext.getRequest().getRemoteAddr());
 		
 			service.insert(model, form.getCampaignId()); //Service insert接收兩參數
+			service.creditCheck(model.getId()); //Service 收到帳款
 			transactionCount++;
 			context.setAttribute("transactionCount", transactionCount);
 			log.debug("++++++++++++++transactionAction+++++++++++++ transactionCount:{}",transactionCount);
