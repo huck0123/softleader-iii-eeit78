@@ -379,11 +379,8 @@ pre {
 
 	//調整入板畫面會因header變成fixed造成長度變短的問題
 	var windowHeight = $(window).height();
-	console.log(windowHeight);
 
 	$('.cover-table-wrapper').height(windowHeight - headerHeight);
-	console.log($('.cover-table-wrapper').height())
-	console.log(windowHeight - headerHeight);
 </script>
 
 </html>
