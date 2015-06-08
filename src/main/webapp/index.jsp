@@ -154,11 +154,11 @@ pre {
 		<div class="cover-tr-wrapper">
 			<div class="cover-td-wrapper">
 				<div id="cover-content" class="container">
-					<h2 class="wow zoomIn" data-wow-duration="1.5s"
+					<h2 data-wow-duration="1.5s"
 						style="margin-bottom: 20px">改變，從你我開始</h2>
-					<h4 class="wow zoomIn" data-wow-duration="1.5s" data-wow-delay="1.5s"
+					<h4 data-wow-duration="1.5s" data-wow-delay="1.5s"
 						style="margin-bottom: 20px">讓每一分錢變得更有意義！</h4>
-					<a class="btn btn-default wow fadeIn" href="#campaignDiv" data-wow-duration="1.5s" data-wow-delay="2.7s">查看活動</a>
+					<a class="btn btn-default" href="#campaignDiv" data-wow-duration="1.5s" data-wow-delay="2.7s">查看活動</a>
 				</div>
 			</div>
 		</div>
@@ -196,7 +196,7 @@ pre {
 
 		$
 				.post(
-						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition?campaignForm.onGoing=現正進行',
 						{
 							'campaignForm.pageSize' : 3,
 						},
@@ -261,17 +261,36 @@ pre {
 																			.append(data);
 																})
 
-												var today = (new Date())
-														.getTime();
-
-												var d = (new Date(value.endDate))
-														.getTime();
-												var remain = Math
-														.floor((d - today)
-																/ (1000 * 60 * 60 * 24));
+												var today = (new Date()).getTime();
+												var d = (new Date(value.endDate)).getTime();
+												
+												var timeRemain = d - today;
+												var days = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+												var hour = Math.floor(timeRemain/3600000);
+												var minutes = Math.floor((timeRemain - hour*3600000)/60000);
+												var seconds = Math.floor((timeRemain - hour*3600000 - minutes *60000) / 1000);
+												if( timeRemain > 86400000){
 												var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
-														+ remain
-														+ '<br/></div>');
+															+ days+ ' days</div>');
+												var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+												} else if(timeRemain > 3600000 && timeRemain <86400000){
+												var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+															+ hour+ ' hours</div>');
+												var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+												} else if(timeRemain > 60000 && timeRemain < 3600000){
+													var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+															+ minutes+ ' mins</div>');
+													var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+												} else if(timeRemain > 0 && timeRemain < 60000){
+													var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+															+ seconds+ ' secs</div>');
+													var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+												}
+												else{
+													var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+															+ '已結束'+ '<br/></div>');
+													var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
+												}
 
 												otherInfoDiv.append(childDiv1)
 														.append(childDiv2)
@@ -279,7 +298,7 @@ pre {
 														.append(childDiv4);
 
 												var p2 = $('<p></p>');
-												var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+												
 												var url = '${pageContext.request.contextPath}/donate/donate?id='
 														+ value.id
 														+ '&name='
