@@ -247,19 +247,24 @@ function load(){
 					if( timeRemain > 86400000){
 					var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 								+ days+ ' days</div>');
+					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					} else if(timeRemain > 3600000 && timeRemain <86400000){
 					var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 								+ hour+ ' hours</div>');
+					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					} else if(timeRemain > 60000 && timeRemain < 3600000){
 						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 								+ minutes+ ' mins</div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					} else if(timeRemain > 0 && timeRemain < 60000){
 						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 								+ seconds+ ' secs</div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					}
 					else{
 						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 								+ '已結束'+ '<br/></div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
 					}
 					
 					
@@ -269,7 +274,6 @@ function load(){
 					otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
 
 					var p2 = $('<p></p>');
-					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id+ '&name='+ value.name;
 					a.attr('href', url);
@@ -351,25 +355,30 @@ function makeFunction(j){return function(){
 			if( timeRemain > 86400000){
 			var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ days+ ' days</div>');
+			var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 			} else if(timeRemain > 3600000 && timeRemain <86400000){
 			var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ hour+ ' hours</div>');
+			var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 			} else if(timeRemain > 60000 && timeRemain < 3600000){
 				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ minutes+ ' mins</div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 			} else if(timeRemain > 0 && timeRemain < 60000){
 				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ seconds+ ' secs</div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 			}
 			else{
 				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
 						+ '已結束'+ '<br/></div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
 			}
 
 				otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
 
 				var p2 = $('<p></p>');
-				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 						+ value.id+ '&name='+ value.name;
 				a.attr('href', url);

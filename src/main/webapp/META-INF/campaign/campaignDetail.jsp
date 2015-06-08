@@ -594,18 +594,23 @@ border-radius: 0;}
 				var dateP = $('<p>於<strong>' + d.getFullYear()
 							+ '/' + (d.getMonth()+1) + '/' + d.getDate()
 							+ '</strong>結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
 				} else if(timeRemain > 3600000 && timeRemain <86400000){
 				var dateP = $('<p>將於<strong>' + hour
 							+ '</strong>小時後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
 				} else if(timeRemain > 60000 && timeRemain < 3600000){
 				var dateP = $('<p>將於<strong>' + minutes
 							+ '</strong>分鐘後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
 				} else if(timeRemain > 0 && timeRemain < 60000){
 				var dateP = $('<p>將於<strong>' + seconds 
 							+ '</strong>秒後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
 				}
 				else{
-				var dateP = $('<p>活動已結束</p>');
+				var dateP = $('<p>活動<strong>已結束</strong></p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button" disabled><strong>立即捐款</strong></a>');
 				}
 				
 				var percent = value.currentFund / value.goal * 100;
@@ -624,7 +629,7 @@ border-radius: 0;}
 
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id + '&name=' + value.name;
-				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				
 				donateBtn.attr('href', url);
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
