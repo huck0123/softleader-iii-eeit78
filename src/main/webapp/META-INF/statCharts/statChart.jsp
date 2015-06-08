@@ -11,9 +11,15 @@
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/animate.css">
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/wow.min.js"></script>
+<script>
+	new WOW().init();
+</script>
+
 
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -60,7 +66,8 @@ margin-top: 62px;
 	<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
 			<div class="row" style="text-align:center; color:darkslategray;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
-				<marquee scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee>
+<!-- 				<marquee scrollamount="10" id="marquee" style="font-family:DFKai-sb"></marquee> -->
+				<div class="wow fadeInRight" data-wow-duration="1.5s" id="marquee"></div>
 			</div>
 	</div>
 
@@ -129,7 +136,7 @@ function onload(data){
 // 	$('text[text-anchor="end"]').hide();
 	
 	data = JSON.parse(data);
-	$('#marquee').html("<p style='font-size:24px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
+	$('#marquee').html("<p style='font-size:20px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
 					 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
 	if ("${param.chart}" == 'pi') {
 		moveTo({data : {to : $('#distribution1')}})

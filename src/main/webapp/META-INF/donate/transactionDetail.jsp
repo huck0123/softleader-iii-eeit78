@@ -147,12 +147,22 @@ tr th {
 		function transactionGetData(data){
 			$('#transactionDetail_tbdy').empty();
 			data = JSON.parse(data);
-			$.each(data, function(index,obj){				
+			$.each(data, function(index,obj){			
+				var d = new Date(obj.date);
+				var date = d.getFullYear() + "/" + (d.getMonth() + 1) + "/"
+							+ d.getDate();
+				if(d.getHours() < 12){
+					date += "下午" + d.getHours() + "點" + d.getMinutes() + "分";
+				}else{
+					date += "上午" + d.getHours() + "點" + d.getMinutes() + "分";
+				}
+				
+				
 				$(transactionDetail_tbdy).append("<tr>"
 						+"<td>"+ undefinedCheck(obj.giverId) +"</td>"
 						+"<td>"+ obj.campaignModel.name +"</td>"
 						+"<td>"+ obj.amount +"</td>"
-						+"<td>"+ obj.date +"</td>"
+						+"<td>"+ date +"</td>"
 						+"<td>"+ obj.cardType +"</td>"
 						+"<td>"+ obj.cardNo +"</td>"
 						+"<td>"+ obj.cardHolder +"</td>"
@@ -172,7 +182,6 @@ tr th {
 		
 		// 系統管理員管理是否收到帳款
 		function transactionValid(id, credit){
-			console.log(id+"oooo"+credit);
 			if(credit == true){
 				$('#transaction'+id).prop("checked", true);
 				$('.transaction'+id).text("true");
