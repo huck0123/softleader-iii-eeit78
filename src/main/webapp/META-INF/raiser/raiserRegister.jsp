@@ -19,7 +19,10 @@
 .errorClassForRaiser {
 	color: red
 }
-label{line-height: 30px;}
+
+label {
+	line-height: 30px;
+}
 
 .code {
 	background-image: url(/softleader-iii-eeit78/pictures/code.jpg);
@@ -33,9 +36,15 @@ label{line-height: 30px;}
 	cursor: pointer;
 	text-align: center;
 }
-label>b{
+
+label>b {
 	color: red;
 	font-size: 150%;
+}
+
+#dropZone img {
+	margin-top: 20px;
+	max-width: 100%;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,33 +53,35 @@ label>b{
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:grey;">
-				<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
-				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
-			</div>
-	
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px;">
+		<div class="row" style="text-align: center; color: darkslategray;">
+			<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
+			<p
+				style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
+		</div>
+
 	</div>
 
 
-	<div class="container" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top:20px; margin-bottom: 20px;">
-		<div class="row" >
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top: 20px; margin-bottom: 20px;">
+		<div class="row">
 
-			<div class="col-md-4"></div>
+			<div class="col-md-4"><button id="specButtonForRaiserRegister" style="margin-top: 46px;">Fill</button></div>
 			<div class="col-md-4">
-			
+
 				<div style="padding-top: 36px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-	
-					<div style="height: 50px">${insertErrorMSG}</div>
-					<div class="errorClassForRaiser">*號為必填欄位</div>
+						
 
 						<div class="form-group">
 
 							<label for="account">帳號 : <b>*</b></label> <input type="text"
 								class="form-control" id="account" name="raiserForm.account"
-								value="${form.account }" placeholder="請輸入帳號，須為英文開頭，不限大小寫" required="required" autofocus="autofocus">
+								value="${form.account }" placeholder="請輸入帳號，須為英文開頭，不限大小寫"
+								required="required" autofocus="autofocus">
 
 
 							<div id="chkAcc" class="errorClassForRaiser">${insertErrorACC}</div>
@@ -79,8 +90,9 @@ label>b{
 						<div class="form-group">
 
 							<label for="inputpw">密碼 : <b>*</b></label> <input type="password"
-								class="form-control" id="inputpw" placeholder="請輸入密碼，須為英數混合且為6-30字"
-								name="raiserForm.passwd" required="required">
+								class="form-control" id="inputpw"
+								placeholder="請輸入密碼，須為英數混合且為6-30字" name="raiserForm.passwd"
+								required="required">
 
 
 
@@ -137,10 +149,11 @@ label>b{
 							<div>
 								<input type="tel" class="form-control" id="ctel"
 									name="raiserForm.contactTel" value="${form.contactTel}"
-									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機" required="required">
+									placeholder=註冊成功後將進行認證，格式為(02)1234-5677或手機
+									" required="required">
 
 							</div>
-								<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
+							<div id="chkTel2" class="errorClassForRaiser">${insertErrorTEL2}</div>
 
 						</div>
 
@@ -171,10 +184,13 @@ label>b{
 							<label>圖標 : <b>*</b></label>
 							<div>
 								<input type="file" name="raiserForm.logo" id="logo"
-									required="required" accept="image/*">
-
+									accept="image/*">
+								<!-- 								<div id="dropZone" ondragover="dragoverHandler(event)" -->
+								<!-- 									ondrop="dropHandler(event)"> -->
+								<!-- 									<img id="dragpic" -->
+								<!-- 										src="/softleader-iii-eeit78/pictures/fileupdate.png"> -->
+								<!-- 								</div> -->
 							</div>
-							<div id="chkLogo"></div>
 						</div>
 
 						<div class="form-group">
@@ -211,14 +227,9 @@ label>b{
 
 							<div id="chkValidcode" class="errorClassForRaiser"></div>
 						</div>
-
-
-
-
-
-
 						<button type="submit" id="submitForRaiserRegister"
-							class="btn btn-default" disabled="disabled">確定送出</button>
+							class="btn btn-default">確定送出</button>
+						<!-- disabled="disabled" -->
 						<button type="reset" class="btn btn-default">清除資料</button>
 					</form>
 				</div>
@@ -237,14 +248,13 @@ label>b{
 		$("#account").change(function() {
 			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
-			if($(this).val().length == 0){
+			if ($(this).val().length == 0) {
 				$("#chkAcc").text("請輸入帳號")
 			}
 
 			if (!$(this).val().match(raiserACCChk)) {
 				$("#chkAcc").text("帳號不符合格式")
 			}
-				
 
 			if ($(this).val().toUpperCase() == "ADMIN") {
 				$("#chkAcc").text("帳號已存在");
@@ -272,7 +282,6 @@ label>b{
 		$("#inputpw").blur(function() {
 			$("#chkPw1").text("")
 
-
 			if ($(this).val().length == 0) {
 				$("#chkPw1").text("請輸入密碼")
 			} else {
@@ -283,23 +292,20 @@ label>b{
 			}
 
 		});
-		
 
-		$("#inputpw2").blur(function() {
-			$("#chkPw2").text("")
+		// 		$("#inputpw2").blur(function() {
+		// 			$("#chkPw2").text("")
 
-
-			if ($(this).val().length == 0) {
-				$("#chkPw2").text("請輸入相同密碼")
-			}
-			if ($(this).val() != $("#inputpw").val()) {
-				$("#chkPw2").text("密碼不相符")
-			}
-		});
+		// 			if ($(this).val().length == 0) {
+		// 				$("#chkPw2").text("請輸入相同密碼")
+		// 			}
+		// 			if ($(this).val() != $("#inputpw").val()) {
+		// 				$("#chkPw2").text("密碼不相符")
+		// 			}
+		// 		});
 
 		$("#name").blur(function() {
 			$("#chkName").text("")
-
 
 			if ($(this).val().length == 0) {
 				$("#chkName").text("請輸入團體名稱")
@@ -314,8 +320,6 @@ label>b{
 			}, "json");
 		});
 
-		
-		
 		$("#tel").blur(function() {
 			$("#chkTel1").text("");
 			if ($(this).val().length == 0) {
@@ -354,20 +358,22 @@ label>b{
 		$("#logo")
 				.change(
 						function() {
+							console.log($(this).val())
 							var file = logo.files[0];
 							if (file) {
 								var reader = new FileReader();
 								reader.onload = function(event) {
-									$("#chkLogo")
+									$("#dropZone")
+											.empty()
 											.append(
-													"<img src='"+event.target.result
-							+"' style='weight:50px; height:50px;'>");
+													"<img src='" +event.target.result +  "' />");
 								}
 							}
 							reader.readAsDataURL(file);
 						});
 
 		//以下驗證碼相關
+		var a;
 		//產生
 		createForJsp();
 		function createForJsp() {
@@ -384,32 +390,78 @@ label>b{
 			});
 		}
 		//驗證
-		$("#validCode").blur(
-				function() {
-					var inputCode = $("#validCode").val();
-					if (inputCode.length <= 0) {
-						$("#chkValidcode").text("請輸入驗證碼！");
-					} else if (inputCode.toUpperCase() != code) {
-						$("#chkValidcode").text("驗證碼輸入錯誤！");
-						createForJsp();
-					} else {
-						$("#chkValidcode").text("正確");
-					}
-					//如果上述資料驗證都沒錯才能送出
-					if ($("#chkValidcode").text().length == 2
-							&& $("#chkName").text().length <= 0
-							&& $("#name").val()
-							&& $("#chkPw2").text().length <= 0
-							&& $("#inputpw").val()
-							&& $("#chkAcc").text().length <= 0
-							&& $("#account").val()) {
-						$("#submitForRaiserRegister").removeAttr('disabled');
-					}
-				});
+		$("#validCode").blur(function() {
+			var inputCode = $("#validCode").val();
+			if (inputCode.length <= 0) {
+				$("#chkValidcode").text("請輸入驗證碼！");
+			} else if (inputCode.toUpperCase() != code) {
+				$("#chkValidcode").text("驗證碼輸入錯誤！");
+				createForJsp();
+			} else {
+				$("#chkValidcode").text("正確");
+			}
+			//如果上述資料驗證都沒錯才能送出  為了demo方便先關掉
+			// 					if ($("#chkValidcode").text().length == 2
+			// 							&& $("#chkName").text().length <= 0
+			// 							&& $("#name").val()
+			// 							&& $("#chkPw2").text().length <= 0
+			// 							&& $("#inputpw").val()
+			// 							&& $("#chkAcc").text().length <= 0
+			// 							&& $("#account").val()) {
+			// 						$("#submitForRaiserRegister").removeAttr('disabled');
+			// 					}
+		});
 
-		$("#vdl").change(function() {
-			$("#vdlPre").show().attr("src", $(this).val())
-		})
+// 		$("#vdl").change(function() {
+// 			if ($(this).val().length != 0) {
+// 				$("#vdlPre").show().attr("src", $(this).val());
+// 			} else {
+// 				$("#vdlPre").hide();
+// 			}
+// 		})
+
+		$("#specButtonForRaiserRegister")
+				.click(
+						function() {
+							$("#account").val("goh");
+							$("#inputpw").val("password");
+// 							$("#inputpw2").val("password");
+							$("#name").val("勵馨社會福利事業基金會");
+							$("#tel").val("(02)8911-8595");
+							$("#cname").val("廖俊松");
+							$("#ctel").val("0912435768");
+							$("#mail").val("master@goh.org.tw");
+							$("#add").val("新北市新店區順安街2-1號1樓");
+							$("#del")
+									.text(
+											"勵馨本著基督精神，以追求公義與愛的決心和勇氣，預防及消弭性侵害、性剝削及家庭暴力對婦女與兒少的傷害，並致力於社會改造，創造對婦女及兒少的友善環境。");
+							$("#vdl")
+									.val(
+											"https://www.youtube.com/embed/-Yl9xUmtZec");
+							$("#validCode").val($("#checkCode").val());
+						});
+		//test
+
+		// 		function dragoverHandler(e) {
+		// 			e.preventDefault();
+		// 			$("#dragpic").css("opacity", 0.6);
+		// 		}
+
+		// 		function dropHandler(e) {
+		// 			e.preventDefault();
+		// 			e.stopPropagation();
+		// 			var theFiles = e.dataTransfer.files;
+		// 			for (var i = 0; i < theFiles.length; i++) {
+		// 				var reader = new FileReader();
+		// 				reader.readAsDataURL(theFiles[i]);
+		// 				reader.onload = function(e) { //callback
+		// 					var fileContent = e.target.result;
+		// 					$("#dropZone").empty().append(
+		// 							"<img src='" +fileContent +  "' />");
+		// 				}
+		// 			}
+
+		// 		}
 	</script>
 	<jsp:include page="../../footer.jsp" />
 </body>

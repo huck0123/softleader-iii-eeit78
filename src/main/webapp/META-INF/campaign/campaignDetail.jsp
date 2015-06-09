@@ -42,15 +42,6 @@ strong {
 	font-size: 46px;
 }
 
-pre {
-	background-color: white;
-	border: white;
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	font-size: 16px;
-}
 
 #commentDiv {
 	text-align: left;
@@ -59,6 +50,10 @@ pre {
 .commentFont {
 	font-size: 20px;
 }
+
+pre{background-color: white;
+font-size: 18px;
+border: none};
 
 #No_mainPlace {
 	 margin-top:8px;
@@ -75,54 +70,43 @@ pre {
 	 background-color:#FFFFCE;
 	 display:inline-block;
 }
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+color: darkslategrey;
+background-color: #f2f2f2;}
+.nav-pills>li>a {
+border-radius: 0;}
+
 </style>
 </head>
 <body id="body">
 	<jsp:include page="/header.jsp" />
 
 	<div class="container" id="showColumn"></div>
-	<div class="container">
-		<nav class="navbar navbar-default"
-			style="height: 80px; margin-top: 40px; display: table; background-color: white; background-image: none; border-left: 0px; border-right: 0px">
-			<div class="container"
-				style="display: table-cell; vertical-align: middle; padding-top: 0px; padding-bottom: 0px">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#nav2" style="float: right;">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-				</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="nav2">
-					<ul class="nav navbar-nav">
-						<li><a href="#" id="tab1">詳細內容<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" id="tab2">評論</a></li>
+	<div class="container" style="margin-top: 5%;">
+		<ul class="nav nav-pills"
+			style="border-top: 1px grey solid; border-bottom: 1px grey solid; height: 60px">
+			<li class="active"><a data-toggle="pill" href="#detail-tab"
+				style="width: 120px; height: 58px; line-height: 36px">詳細資訊</a></li>
+			<li><a data-toggle="pill" href="#message-tab"
+				style="width: 120px; height: 58px; line-height: 36px">留言</a></li>
+		</ul>
 
-					</ul>
+		<div class="tab-content">
+			<div id="detail-tab" class="tab-pane fade in active">
+				<div class=row id="detailRowDiv">
+					<div class="col-md-8 col-md-offset-2" id="detailDiv"
+						style="text-align: justify;"></div>
 				</div>
-				<!-- /.navbar-collapse -->
 			</div>
-			<!-- /.container -->
-		</nav>
-	</div>
-	<div class="container" id="tabPageDiv">
-		<div class=row id="detailRowDiv">
-			<div class="col-md-8 col-md-offset-2" id="detailDiv"
-				style="text-align: justify;"></div>
-		</div>
-
-		<div id="commentDiv" style="display: none">
-			<div>
+			<div id="message-tab" class="tab-pane fade">
+			<div style="text-align: left">
 				<h3 class="col-md-6 col-md-offset-3">我要留言</h3>
-				<div class="col-md-6 col-md-offset-3" id="No_mainPlace">					
-					<div class="col-md-2">							
+				<div class="col-xs-12 col-md-6 col-md-offset-3" id="No_mainPlace">					
+					<div class="col-xs-2">							
 						<img id="img_user" src="../pictures/noPicture.jpg" style="width: 100%">
 					</div>
-					<div class="col-md-10">						
+					<div class="col-xs-10">						
 						<textarea id="mainCommentPlace" class="form-control" rows="4" style="margin-bottom:4px"></textarea>
 						<button type="button" class="btn btn-success btn-xs"
 								onclick="startNewComment();" style="width: 50px">送出
@@ -134,49 +118,36 @@ pre {
 				</div>
 			</div>
 			<div>
-				<div class="col-md-6 col-md-offset-3" id="No_mainShownCommentPlace"></div>
+				<div class="col-xs-12 col-md-6 col-md-offset-3" id="No_mainShownCommentPlace"></div>
+			</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="container" id="tabPageDiv">
-		<div class=row id="detailRowDiv">
-			<div class="col-md-8 col-md-offset-2" id="detailDiv"
-				style="text-align: justify;"></div>
-		</div>
 
-		<div id="commentDiv" style="display: none">
-			<div id="leaveComment" class="row">
-				<div class="col-sm-1 col-sm-offset-1">
-					<img width="60px" src="/softleader-iii-eeit78/pictures/login2.png">
-				</div>
-				<div class="col-sm-8" style="text-align: left">
-					<form
-						action="/softleader-iii-eeit78/campaignComment/campaignComment">
-						<textarea class="form-control" rows="4" id="comment"></textarea>
-						<button class="btn btn-primary" type="submit" name="method:"
-							style="margin-top: 20px;">留言</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	
 	<jsp:include page="/footer.jsp" />
 </body>
 
 <script>
+
 	//0是第一頁
 	var currentPage = 0;
 	var totalCount = 0;
 	var commentCurrentPage = 0;
-	var produceKey = null;
+	var permission = true;
 	var commentCampaignId;
+	var raiserId;
+	var commentCampaignRaiserName;
 	
 	var recordCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actNewComment!newComment';
 	var loadAllCommentsURL =      '${pageContext.request.contextPath}/campaignComment/actAllComment!allComment';
 	var getUserAccountURL =		  '${pageContext.request.contextPath}/giver/giverSelect!selectHeadshot';
 	var getReplyURL =             '${pageContext.request.contextPath}/campaignComment/actReplyComment!replyComment';
+	var alterCommentOrReplyURL =  '${pageContext.request.contextPath}/campaignComment/actRenewComment!renewComment';
+	var deleteCommentOrReplyURL = '${pageContext.request.contextPath}/campaignComment/actDeleteComment!invalidComment';
+	var getRaiserIdURL =          '${pageContext.request.contextPath}/campaign/campaignAction!selectRaiserIdById'; 
 	
 	load();
 	
@@ -187,14 +158,14 @@ pre {
 	}
 	
 	function loadComment(datas){
+		//console.log(datas);
 		$.each(datas, function(name, data){
 			assignFinalFixedPlace(data);
-			console.log(data);
-		})
+		});
 	}
 	
 	$('#mainCommentPlace').on('click', function(){
-		if("${giver}"){
+		if("${giver}" || "${raiser.id}" == raiserId || "${admin}"){
 		}else{
 			alert("請先登入或註冊後再留言");
 			$('#mainCommentPlace').blur();
@@ -209,18 +180,31 @@ pre {
 // 	});
 	
 	function startNewComment() {
-		if(confirm("確定送出留言嗎?")){
-			if($('#mainCommentPlace').val().trim() == ""){
-				alert("未輸入任何內容");
-			}else{
+		if($('#mainCommentPlace').val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			if("${giver}"){
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : '${giver.id}',
 					'form.replyId' : 0,
 					'form.commentary' : $('#mainCommentPlace').val()
 				}, assignFinalFixedPlace);
+			}else if("${raiser}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : 0,
+					'form.replyId' : 0,
+					'form.commentary' : $('#mainCommentPlace').val()
+				}, assignFinalFixedPlace);
+			}else if("${admin}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : null,
+					'form.replyId' : 0,
+					'form.commentary' : $('#mainCommentPlace').val()
+				}, assignFinalFixedPlace);
 			}
-		}else{
 		}
 	}
 	
@@ -236,33 +220,28 @@ pre {
 	}
 	
 	function growNewReplyPlace(replyParam) {
-		if('${giver}'){
-			if(produceKey == null){
-				produceKey = "temp_" + replyParam;
-				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
-					showAllReplies(replyParam);
-				}else{
-				}
+		if("${giver}" || "${raiser.id}" == raiserId || "${admin}"){
+			if(permission){
+				permission = false;
+				$('#btn_' + replyParam).prop('disabled', true);
 				$('#sub_' + replyParam)
 					.prepend('<div id="temp_' + replyParam + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-					+ 			'<div class="col-md-2">'
+					+ 			'<div class="col-xs-2">'
 					+ 				'<img id="img_temp" src="../pictures/noPicture.jpg" style="width:100%">'
 					+ 			'</div>'
-					+ 			'<div class="col-md-10">'
+					+ 			'<div class="col-xs-10">'
 					+ 				'<textarea id="' + replyParam + '" class="form-control" rows="4" style="margin-bottom:4px"></textarea>'
 					+ 				'<button type="button" class="btn btn-success btn-xs" onclick="startNewReply(' + replyParam + ');" style="width:50px">確定</button>&nbsp;'
 					+ 				'<button type="button" class="btn btn-warning btn-xs" onclick="confirmCancelNewReply(' + replyParam + ');" style="width:50px">取消</button>'
 					+ 			'</div>'
 					+ 		'</div>');
 				showUserPhoto("temp");
-			}else{
-				if(confirm("是否放棄前一個未完成的留言?")){
-					$('#' + produceKey).remove();
-					showAllReplies(produceKey.substring(5));
-					produceKey = null;
-					growNewReplyPlace(replyParam);
+				if($('#a_' + replyParam).text() == "查看所有回覆" || $('#a_' + replyParam).text() == ""){
+					showOrHideAllReplies(replyParam);
 				}else{
 				}
+			}else{
+				alert("請先完成或取消前一個留言再進行新的回覆");
 			}
 		}else{
 			alert("請先登入或註冊後再留言");
@@ -270,71 +249,123 @@ pre {
 	}
 	
 	function startNewReply(replyId) {
-		if(confirm("確定送出回覆嗎?")){
-			if($('#' + replyId).val().trim() == ""){
-				alert("未輸入任何內容");
-			}else{
-				produceKey = null;
-				showAllReplies(replyId);
+		if($('#' + replyId).val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			permission = true;
+			$('#btn_' + replyId).prop('disabled', false);
+			$.getJSON(getReplyURL, {'form.id' : replyId}, function(data){
+				if(data.replyId != 0){
+					showOrHideAllReplies(replyId);
+				}
+			})
+			if("${giver}"){
 				$.getJSON(recordCommentOrReplyURL, {
 					'form.campaignId' : commentCampaignId,
 					'form.giverId' : "${giver.id}",
 					'form.replyId' : replyId,
 					'form.commentary' : $('#' + replyId).val()
 				}, assignFinalFixedPlace);
+			}else if("${raiser}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : 0,
+					'form.replyId' : replyId,
+					'form.commentary' : $('#' + replyId).val()
+				}, assignFinalFixedPlace);
+			}else if("${admin}"){
+				$.getJSON(recordCommentOrReplyURL, {
+					'form.campaignId' : commentCampaignId,
+					'form.giverId' : null,
+					'form.replyId' : replyId,
+					'form.commentary' : $('#' + replyId).val()
+				}, assignFinalFixedPlace);
 			}
-		}else{
 		}
 	}
 	
 	function confirmCancelNewReply(replyId){
 		if(confirm("確定取消回覆嗎?")){
 			cancelNewReply(replyId);
-			showAllReplies(replyId);
+			permission = true;
+			$('#btn_' + replyId).prop('disabled', false);
+			showOrHideAllReplies(replyId);
 		}else{
 		}
 	}
 	
 	function cancelNewReply(replyId){
-		produceKey = null;
 		$('#temp_' + replyId).remove();
 	}
 	
 	function assignFinalFixedPlace(data) {
 		if (data.pendingId == 0) {
-			cleanNewComment();
 			showUserAccount(data, 'mainShownCommentPlace');
+			cleanNewComment();
 		}else{
-			cancelNewReply(data.replyId);
 			showUserAccount(data, data.pendingId);
+			cancelNewReply(data.replyId);
 		}
 	}
 	
 	function showUserAccount(data, placeParam){
-			$.getJSON(getUserAccountURL, {"form.id" : data.giverId}, function(dataJSON){
-				controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
-			});
-			
-//  		if(data.anonymous){
-//  			controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
-//  		}else{
-//  		}
+		if(data.giverId == null){
+			controlCommentOrReplyDetails(data, "管理者", null, placeParam);
+		}else if(data.giverId == 0){
+			controlCommentOrReplyDetails(data, commentCampaignRaiserName, null, placeParam);
+		}else{
+			$.ajax({async : false,
+					dataType : "json",
+					url : getUserAccountURL,
+					data : {"form.id" : data.giverId},
+					success : function(dataJSON){
+						controlCommentOrReplyDetails(data, dataJSON.account, dataJSON.headshot, placeParam);
+		  	  	  }});
+		}
+		
+//  	if(data.anonymous){
+//  		controlCommentOrReplyDetails(data, "未知的使用者", null, placeParam);
+//  	}else{
+//  	}
 	}
 	
 	function controlCommentOrReplyDetails(data, account, headshot, placeParam){
 		if(placeParam == 'mainShownCommentPlace'){
 	 		$('#No_' + placeParam).prepend(showCommentOrReplyContent(data, account));
+	 		$('#sign_' + data.id).hide();
+	 		if(!'${admin}'){
+	 			if('${giver.account}' != account && '${raiser.name}' != account){
+	 				$('#alt_' + data.id).text("");
+	 				$('#del_' + data.id).text("");
+	 			}
+	 		}
 	 		substantiatePhoto(data.id, headshot);
-	 		showAllReplies(data.id);
+	 		slideAllReplies(data.id);
 		}else{
 			$('#sub_' + placeParam).append(showCommentOrReplyContent(data, account));
-			$('#a_' + data.id).text("");
+			$('#count_' + placeParam).text(parseInt($('#count_' + placeParam).text())+1);
+			$('#sign_' + placeParam).hide();
+			$('#sign_' + data.id).remove();
+			$('#count_' + data.id).remove();
+			$('#a_' + data.id).remove();
+			if(!'${admin}'){
+	 			if('${giver.account}' != account && '${raiser.account}' != account){
+	 				$('#alt_' + data.id).text("");
+	 				$('#del_' + data.id).text("");
+	 			}
+			}
 			substantiatePhoto(data.id, headshot);
-			showAllReplies(data.id);
+			slideAllReplies(data.id);
 			$.getJSON(getReplyURL, {"form.id" : data.replyId}, function(replyJSON){
- 				$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
- 					document.getElementById('p_' + data.id).insertAdjacentHTML("afterBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
- 				});
+				if(replyJSON.giverId == null){
+					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : 管理者</p>");
+				}else if(replyJSON.giverId == 0){
+					document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + commentCampaignRaiserName + "</p>");
+				}else{
+					$.getJSON(getUserAccountURL, {"form.id" : replyJSON.giverId}, function(replyDataJSON){
+ 						document.getElementById('p_' + data.id).insertAdjacentHTML("beforeBegin", "<p style='color:gray'>----回覆給  : " + replyDataJSON.account + "</p>");
+ 					});
+				}
 			});
 			
 // 				if(replyJSON.anonymous){
@@ -379,20 +410,24 @@ pre {
 		var date = new Date(data.commentTime);
 		var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
 
-		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:120px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
-		+ 			'<div class="col-md-2">'
+		return '<div id="No_' + data.id + '" style="margin-top:2px ; margin-bottom:2px ; margin-left:8px ; margin-right:8px ; padding-top:12px ; padding-bottom:12px ; background-color:#FFF0AC ; display:inline-block;">'
+		+ 			'<div class="col-xs-2">'
 		+ 				'<img id="img_' + data.id + '" src="../pictures/noPicture.jpg" style="width:100%">'
 	 	+ 			'</div>'
-		+ 			'<div class="col-md-10" id="replyPlace">'
-		+ 				'<p>' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
+		+ 			'<div class="col-xs-10" style="text-align:left" id="forAlt_' + data.id + '">'
+		+ 				'<p id="title_' + data.id + '">' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
 		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
-		+               '<a id="a_' + data.id + '" onclick="showAllReplies(' + data.id + ');">隱藏所有回覆</a>'
+		+               '<a id="a_' + data.id + '" onclick="slideAllReplies(' + data.id + ');">隱藏所有回覆</a>&nbsp;&nbsp;'
+		+               '<span class="badge" id="count_' + data.id + '">0</span>&nbsp;&nbsp;&nbsp;&nbsp;'
+		+               '<a id="alt_' + data.id + '" onclick="alterContent(' + data.id + ');">修改</a>&nbsp;&nbsp;&nbsp;'
+		+               '<a id="del_' + data.id + '" onclick="deleteContent(' + data.id + ',' + data.pendingId + ');">刪除</a>'
 		+ 			'</div>'
 		+ 	   '</div>'
-		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;"></div>';
+		+      '<div id="sub_' + data.id + '" style="margin-top:0px ; margin-bottom:24px ; margin-left:80px ; margin-right:8px ; padding-top:4px ; padding-bottom:4px ; background-color:#FFF0AC ; display:inline-block;">'
+		+      '<p id="sign_' + data.id + '" style="padding:5px;margin:-5px 0px;font-size:40;background-color:#FFFFCE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查無回覆</p></div>';
 	}
 	
 	function substantiatePhoto(id, imgParam){
@@ -415,34 +450,100 @@ pre {
 		}
 	}
 	
-	function showAllReplies(id){
+	function slideAllReplies(id){
 		if($('#a_' + id).text() == "查看所有回覆"){
 			$('#sub_' + id).slideDown();
 			$('#a_' + id).text("隱藏所有回覆");
+			if(document.getElementById('sub_'+ id).getElementsByTagName('div').length == 0){
+				$('#sign_' + id).show();
+			}else{
+				$('#sign_' + id).hide();
+			}
 		}else if($('#a_' + id).text() == "隱藏所有回覆"){
 			$('#sub_' + id).slideUp();
 			$('#a_' + id).text("查看所有回覆");
+			$('#sign_' + id).hide();
 		}else{
 			$('#sub_' + id).slideToggle();
 		}
 	}
-
-	$('#tab1').on('click', function(evt) {
-		evt.preventDefault();
-		$('#nav2 *, .active').removeClass("active");
-		$('#tab1').parent().addClass('active');
-		$('#tabPageDiv>div').hide();
-		$('#detailRowDiv').slideDown();
-	});
-
-	$('#tab2').on('click', function(evt) {
-		evt.preventDefault();
-		$('#nav2 *, .active').removeClass("active");
-		$('#tab2').parent().addClass('active');
-		$('#tabPageDiv>div').hide();
-		$('#commentDiv').slideDown();
-
-	});
+	
+	function showOrHideAllReplies(id){
+		if($('#a_' + id).text() == "查看所有回覆"){
+			$('#sub_' + id).show();
+			$('#a_' + id).text("隱藏所有回覆");
+			if(document.getElementById('sub_'+ id).getElementsByTagName('div').length == 0){
+				$('#sign_' + id).show();
+			}else{
+				$('#sign_' + id).hide();
+			}
+		}else if($('#a_' + id).text() == "隱藏所有回覆"){
+			$('#sub_' + id).hide();
+			$('#a_' + id).text("查看所有回覆");
+		}else{
+			$('#sub_' + id).toggle();
+		}
+	}
+	
+	function alterContent(id){
+		if(permission){
+			permission = false;
+			$('#forAlt_' + id).append('<div id="temp2_' + id + '">'
+							  +		  	 '<textarea id="' + id + '" class="form-control" rows="4" style="margin-bottom:4px"></textarea>'
+				          	  + 	  	 '<button type="button" class="btn btn-success btn-xs" onclick="sendAlteredReply(' + id + ');" style="width:50px">確定</button>&nbsp;'
+				          	  + 	  	 '<button type="button" class="btn btn-warning btn-xs" onclick="cancelAlteredReply(' + id + ');" style="width:50px">取消</button>'
+				          	  +       '</div>');
+			$('#' + id).val($('#p_' + id).text());
+			$('#p_' + id).hide(); $('#btn_' + id).hide(); $('#a_' + id).hide(); $('#alt_' + id).hide(); $('#del_' + id).hide(); $('#count_' + id).hide();
+		}else{
+			alert("請先完成或取消前一個留言再進行修改");
+		}
+	}
+	
+	function sendAlteredReply(id){
+		if($('#' + id).val().trim() == ""){
+			alert("未輸入任何內容");
+		}else{
+			permission = true;
+			$.getJSON(alterCommentOrReplyURL, {
+				'form.id' : id,
+				'form.commentary' : $('#' + id).val()
+			}, function(data){
+				var date = new Date(data.commentTime);
+				var modifiedDate = date.getFullYear() + '/' + modifyTimeForm(date.getMonth()+1) + '/' + modifyTimeForm(date.getDate()) + '&nbsp;&nbsp;' + modifyTimeForm(date.getHours()) + ':' + modifyTimeForm(date.getMinutes());
+				$('#temp2_' + id).remove();
+				$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show(); $('#count_' + id).show();
+				$('#title_' + id).html("${giver.account}&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;" + modifiedDate);
+				$('#p_' + id).text(data.commentary);
+			});
+		}
+	}
+	
+	function cancelAlteredReply(id){
+		if(confirm("確定取消修改內容嗎?")){
+			permission = true;
+			$('#temp2_' + id).remove();
+			$('#p_' + id).show(); $('#btn_' + id).show(); $('#a_' + id).show(); $('#alt_' + id).show(); $('#del_' + id).show();
+		}else{
+		}
+	}
+	
+	function deleteContent(id, pendingId){
+		if(confirm("確定刪除留言嗎?")){
+			$.getJSON(deleteCommentOrReplyURL, {
+				'form.id' : id
+			}, function(data){
+				if(data == "刪除成功"){
+					$('#No_' + id).remove();
+					$('#sub_' + id).remove();
+					$('#count_' + pendingId).text(parseInt($('#count_' + pendingId).text())-1);
+				}else{
+					alert(data);
+				}
+			});
+		}else{
+		}
+	}
 
 	function load() {
 		appendCampaignDetail();
@@ -455,6 +556,7 @@ pre {
 				data = JSON.parse(data);
 				value = data[0];
 				commentCampaignId = value.id;
+				commentCampaignRaiserName = value.raiserModel.name;
 				
 				var rowDiv1 = $('<div  class="row"></div>');
 				var titleP = $('<h3>' + value.name + '</h3>');
@@ -479,11 +581,33 @@ pre {
 					+ '</strong>元/' + commafy(value.goal)
 					+ '元</p>');
 				var d = new Date(value.endDate);
-				
+				var timeRemain = d.getTime() - new Date().getTime();
+				var hour = Math.floor(timeRemain/3600000);
+				var minutes = Math.floor((timeRemain - hour*3600000)/60000);
+				var seconds = Math.floor((timeRemain - hour*3600000 - minutes *60000) / 1000);
+				if( timeRemain > 86400000){
 				var dateP = $('<p>於<strong>' + d.getFullYear()
-							+ '/' + d.getMonth()+1 + '/' + d.getDate()
+							+ '/' + (d.getMonth()+1) + '/' + d.getDate()
 							+ '</strong>結束</p>');
-
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 3600000 && timeRemain <86400000){
+				var dateP = $('<p>將於<strong>' + hour
+							+ '</strong>小時後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 60000 && timeRemain < 3600000){
+				var dateP = $('<p>將於<strong>' + minutes
+							+ '</strong>分鐘後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				} else if(timeRemain > 0 && timeRemain < 60000){
+				var dateP = $('<p>將於<strong>' + seconds 
+							+ '</strong>秒後結束</p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				}
+				else{
+				var dateP = $('<p>活動<strong>已結束</strong></p>');
+				var donateBtn = $('<a class="btn btn-primary" role="button" disabled><strong>立即捐款</strong></a>');
+				}
+				
 				var percent = value.currentFund / value.goal * 100;
 				var progressDiv = $('<div class="progress"></div>');
 				var progressBarDiv = $('<div id="aa" class="progress-bar progress-bar-success" role="progressbar" style="width:'
@@ -500,7 +624,7 @@ pre {
 
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id + '&name=' + value.name;
-				var donateBtn = $('<a class="btn btn-primary" role="button"><strong>立即捐款</strong></a>');
+				
 				donateBtn.attr('href', url);
 				giverP.appendTo(sideDiv);
 				moneyP.appendTo(sideDiv);
@@ -511,10 +635,13 @@ pre {
 				vedioDiv.appendTo(rowDiv2);
 				sideDiv.appendTo(rowDiv2);
 				rowDiv2.appendTo($('#showColumn'));
-				$('#detailDiv').append('<pre>' + value.detail + '</pre>');
+				$('#detailDiv').append('<div>' + value.detail + '</div>');
 				
 				appendGiverData();
 				loadAllComments(commentCampaignId);
+				$.getJSON(getRaiserIdURL, {'campaignForm.id' : commentCampaignId}, function(data){
+					raiserId = data;
+				})
 		})
 	}
 	

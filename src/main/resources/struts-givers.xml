@@ -52,6 +52,10 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result type="stream" name="checkIdNumberByAccount">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 <!-- 			<result type="stream" name="IdentityImage"> -->
 <!-- 				<param name="contentType">text/html</param> -->
 <!-- 				<param name="inputName">inputStream</param> -->

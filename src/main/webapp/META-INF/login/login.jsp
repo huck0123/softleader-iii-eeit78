@@ -18,7 +18,7 @@
 
 <title>登入</title>
 <style>
-
+html, body{height: 100%}
 .card-container.card {
 	width: 350px;
 	padding: 60px 40px;
@@ -108,7 +108,7 @@ margin-right:0px;}
 	
 <!-- 	<p>this is login.jsp</p> -->
 	
-	<div class="container">
+	<div class="container"  style="min-height: 90%">
 		<div class="card card-container">
 			<form class="form-signin" action="<c:url value='/login/loginAction.action' />" method="post">
 				<img id="profile-img" class="profile-img-card" src="../pictures/headshot1.png" />
@@ -147,15 +147,21 @@ margin-right:0px;}
 	      </div>
 	      <div class="modal-body">
 	      	<br>
-	      	<label for="">您的帳號</label>
+	      	<label for="">您的帳號:</label>
 	        <input type="text" id="yourAccount" autofocus>
+	        <br>
+	      	<b id="accountMessage"></b>
 	      	<br>
-	      	<b id="message"></b>
+	        <label for="">您的身分證字號:</label>
+	        <input type="text" id="yourIdNumber">
+	        <br>
+	        <b id="IdNumberMessage"></b>
 	        <br>
 	      </div>
 	      <div class="modal-footer">
+	      	<b id="message"></b>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="forgetPasswd" disabled>確認送出</button>
+	        <button type="button" class="btn btn-primary" id="forgetPasswd">確認送出</button>
 	      </div>
 	    </div>
 	  </div>
@@ -164,31 +170,23 @@ margin-right:0px;}
 		<jsp:include page="/footer2.jsp" />
 	
 	<script>
-		var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
-		
-		//判斷帳號
-		$('#yourAccount').on('keyup', function(){
-			var thisAccount = $(this).val();
-			//查看giver是否有相同的帳號
-			$.post(url, {'form.account' : thisAccount}, function(data) {
-				data = JSON.parse(data);
-				if (!data.checkAccount) {
-					$('#forgetPasswd').prop("disabled",true);
-					$('#message').empty().text("此帳號不存在");
-					return;
-				}else{
-					$('#forgetPasswd').prop("disabled",false);
-					$('#message').empty();
-				}
-				
-			});
-		});
 	
+		
 		//送出Email
 		$('#forgetPasswd').on('click', function(){
+			$(this).attr("disabled", true);
 			var account = $('#yourAccount').val();
-			$('#message').text('已寄信到您的信箱');
-			$.ajax("/softleader-iii-eeit78/giver/giverAction!newPassword?form.account=" + account);
+			var idNumber = $('#yourIdNumber').val();
+			$.post("/softleader-iii-eeit78/giver/giverSelect!selectIdNumberByAccount", {"form.account":account, "form.id_number":idNumber}, function(data){
+				data = JSON.parse(data);
+				if(data.IdNumberByAccount){
+					$('#message').empty().text('已寄信到您的信箱');
+					$('#forgetPasswd').attr("disabled", false);
+				}else{
+					$('#message').empty().text('此帳號或身分證有誤');
+					$('#forgetPasswd').attr("disabled", false);
+				}
+			});
 		});
 		
 		//更換驗證圖形

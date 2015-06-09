@@ -49,7 +49,7 @@ body{
 	<jsp:include page="../../header.jsp" />
 
 		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:grey;">
+			<div class="row" style="text-align:center; color:darkslategrey;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">會員註冊</h1>
 				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，取得TheGivers提供的更多功能</p>
 			</div>
@@ -60,7 +60,22 @@ body{
 
 	<div class="container panel alert" style="background-color:#f2f2f2; margin-top: 20px; padding-bottom: 20px">
 		<div class="row">
-			<div class="col-md-4"></div>
+			<div class="col-md-4">
+<!-- 				神奇小按鈕 -->
+				<button class="btn btn-default" id="xxx">填入表格</button>
+			</div>
+			
+			<script>
+ 				$('#xxx').on("click", function(){
+ 					$('input[name="form.account"]').val("jerry0123"); 
+ 					$('input[name="form.familyName"]').val("李"); 
+ 					$('input[name="form.name"]').val("小強"); 
+ 					$('input[name="form.id_number"]').val("A118963080"); 
+ 					$('input[name="form.tel"]').val("0912145632"); 
+ 					$('input[name="form.address"]').val("台北市大安區信義路"); 
+ 					$('input[name="form.email"]').val("roger@gmail.com"); 
+ 				}); 
+			</script>
 
 			<div class="col-md-4">
 <!-- 			<div class="thumbnail"> -->
@@ -89,11 +104,11 @@ body{
 						<div class="form-group">
 							<label for="">姓:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.familyName"
-								value="${param.form.familyName }">
+								value="${param.form.familyName }" required="required">
 						</div>
 						<div class="form-group">
 							<label for="">名字:<b>*</b></label> 
-							<input type="text" class="form-control" name="form.name" value="${param.form.name }">
+							<input type="text" class="form-control" name="form.name" value="${param.form.name }" required="required">
 						</div>
 
 							<label for="">性別:<b>*</b></label>
@@ -101,21 +116,21 @@ body{
 						<div class="form-group">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
-								<input type="radio"	name="form.gender" value="true">男
+								<input type="radio"	name="form.gender" value="true" required="required">男
 								</label> <label class="btn btn-default"> 
-								<input type="radio" name="form.gender" value="false">女
+								<input type="radio" name="form.gender" value="false" required="required">女
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="">身分證字號:<b>*</b></label> 
 							<input type="text" class="form-control" name="form.id_number"
-								value="${param.form.id_number }">
+								value="${param.form.id_number }" required="required">
 							<b id="idNumber"></b>
 						</div>
 						<div class="form-group">
 							<label for="">手機:<b>*</b></label> <input type="text"
-								class="form-control" name="form.tel" value="${param.form.tel }">
+								class="form-control" name="form.tel" value="${param.form.tel }" required="required">
 							<b id="tel"></b>
 						</div>
 						<div class="form-group">
@@ -126,12 +141,12 @@ body{
 						<div class="form-group">
 							<label for="">Email:<b>*</b></label> 
 							<input type="email"	class="form-control" name="form.email"
-								value="${param.form.email }">
+								value="${param.form.email }" required="required">
 						</div>
 
-							<label for="">是否獲得資訊:</label>
+							<label for="" style="display:none;">是否獲得資訊:</label>
 
-						<div class="form-group">
+						<div class="form-group" style="display:none;">
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default"> 
 								<input type="radio"	name="form.get_info" value="true" id="getInfo1"
@@ -143,9 +158,9 @@ body{
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="">生日:</label> 
+							<label for="">生日:<b>*</b></label> 
 							<input type="date" class="form-control"
-								name="form.birth" value="" style="height: 30px;">
+								name="form.birth" value="" style="height: 30px;" required="required">
 							<b id="birthday"></b>
 						</div>
 						<div class="form-group">

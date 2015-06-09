@@ -8,17 +8,19 @@ tr th {
 }
 </style>
 
-<div class="panel alert tab-pane fade" id="transactionDetail">
+<div class="tab-pane fade" id="transactionDetail">
 
 <!-- 	<div class="panel alert"> -->
-		<div class="row">
+		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-md-3">
 				<select id="transactionDetailPageAmount"></select>顯示筆數(預設5筆)
 			</div>
-			<div class="col-md-6">
-				<button class="btn btn-primary" id="transactionBefore" onclick="transactionBefore()">上一頁</button>
-				<select id="transactionDetailPage"></select>
-				<button class="btn btn-primary" id="transactionAfter" onclick="transactionAfter()">下一頁</button>
+			<div class="col-md-6" style="text-align:center">
+				<div style="position:inline-block;">
+					<button class="btn btn-primary" id="transactionBefore" onclick="transactionBefore()">上一頁</button>
+					<select id="transactionDetailPage"></select>
+					<button class="btn btn-primary" id="transactionAfter" onclick="transactionAfter()">下一頁</button>
+				</div>
 			</div>
 			<div class="col-md-3">
 				<input type="text" class="form-control" id="transactionCondition" placeholder="請輸入搜尋條件"> 
@@ -145,19 +147,29 @@ tr th {
 		function transactionGetData(data){
 			$('#transactionDetail_tbdy').empty();
 			data = JSON.parse(data);
-			$.each(data, function(index,obj){				
+			$.each(data, function(index,obj){			
+				var d = new Date(obj.date);
+				var date = d.getFullYear() + "/" + (d.getMonth() + 1) + "/"
+							+ d.getDate();
+				if(d.getHours() < 12){
+					date += "下午" + d.getHours() + "點" + d.getMinutes() + "分";
+				}else{
+					date += "上午" + d.getHours() + "點" + d.getMinutes() + "分";
+				}
+				
+				
 				$(transactionDetail_tbdy).append("<tr>"
 						+"<td>"+ undefinedCheck(obj.giverId) +"</td>"
 						+"<td>"+ obj.campaignModel.name +"</td>"
 						+"<td>"+ obj.amount +"</td>"
-						+"<td>"+ obj.date +"</td>"
+						+"<td>"+ date +"</td>"
 						+"<td>"+ obj.cardType +"</td>"
 						+"<td>"+ obj.cardNo +"</td>"
 						+"<td>"+ obj.cardHolder +"</td>"
 						+"<td>"+ obj.cardHolderEmail +"</td>"
-						+"<td>"+ "<input type='checkbox' id='"+ obj.id +"' value='"+ obj.credit +"'>" +"<span class='"+ obj.id +"'></span>" +"</td>"
+						+"<td>"+ "<input type='checkbox'style='height:20px;width:20px' id='transaction"+ obj.id +"' value='"+ obj.credit +"'>" +"<span class='transaction"+ obj.id +"'></span>" +"</td>"
 						+"</tr>");	
-				valid(obj.id, obj.credit);
+				transactionValid(obj.id, obj.credit);
 
 // 				$('#transactionBefore').prop("disabled", false);
 // 				$('#transactionAfter').prop("disabled", false);
@@ -169,25 +181,25 @@ tr th {
 		
 		
 		// 系統管理員管理是否收到帳款
-		function valid(id, credit){
+		function transactionValid(id, credit){
 			if(credit == true){
-				$('#'+id).prop("checked", true);
-				$('.'+id).text("true");
+				$('#transaction'+id).prop("checked", true);
+				$('.transaction'+id).text("true");
 			}else{
-				$('#'+id).prop("checked", false);
-				$('.'+id).text("false");
+				$('#transaction'+id).prop("checked", false);
+				$('.transaction'+id).text("false");
 			}
 			
-			$('#'+id).on('change', function(){
+			$('#transaction'+id).on('change', function(){
 				var temp = $(this).val();
 				if(temp == "true"){
 					$.post(transactionDetail_urlv, { 'thisId':id, 'credit':false});
 					$(this).val("false");
-					$('.'+id).text("false");
+					$('.transaction'+id).text("false");
 				}else{
 					$.post(transactionDetail_urlv, { 'thisId':id, 'credit':true});
 					$(this).val("true");
-					$('.'+id).text("true");
+					$('.transaction'+id).text("true");
 				}
 			})
 		};

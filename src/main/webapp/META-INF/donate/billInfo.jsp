@@ -4,7 +4,7 @@
 
 <style>
 .card {
-	width: 50px;
+	width: 70px;
 }
 
 label b {
@@ -19,92 +19,194 @@ b {
 
 
 <div class="panel alert tab-pane fade" id="billInfo">
-	<div>
-		<h3>信用卡資料</h3>
-		<table class="table">
-			<colgroup>
-				<col span="1" style="background-color: #ADADAD">
-				<col style="background-color: #F0F0F0;">
-				<col style="background-color: #F0F0F0; width: 150px;">
-			</colgroup>
-			<tr>
-				<td><label for="">卡別:<b>*</b></label></td>
-				<td><select name="form.cardType" required="required">
-						<option>VISA</option>
-						<option>JCB</option>
-						<option>MasterCard</option>
-						<option>銀聯卡</option>
-						<option>美國運通</option>
-					</select></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><label for="">卡號:<b>*</b></label></td>
-				<td><input type="text" class="card" name="cardNo_1" value="" required="required">- 
-					<input type="text" class="card"	name="cardNo_2" value="" required="required">- 
+<!-- 	<div> -->
+<!-- 		信用卡資料 -->
+		<div style="background: #f2f2f2">
+			<h3 style="padding-top: 10px;color:#FF2D2D">信用卡資料</h3>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">卡別:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<select name="form.cardType" required="required">
+							<option>VISA</option>
+							<option>JCB</option>
+							<option>MasterCard</option>
+							<option>銀聯卡</option>
+							<option>美國運通</option>
+					</select>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">卡號:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="text" class="card" name="cardNo_1" value="" required="required">- 
+					<input type="text" class="card"	name="cardNo_2" value="" required="required"><span class="hidden-xs">-</span> 
+					<div class="visible-xs-block" style="height:10px;"></div>
 					<input type="text" class="card" name="cardNo_3" value="" required="required">- 
 					<input type="text" class="card" name="cardNo_4" value="" required="required">
-					<input type="text" name="form.cardNo" value="" style="display: none"></td>
-				<td><b id="cardNo"></b></td>
-			</tr>
-			<tr>
-				<td><label for="">有效期限:<b>*</b></label></td>
-				<td><select name="month" id="month" required="required"></select>月
-					<select name="year" id="year" required="required"></select>年</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><label for="">驗證碼:<b>*</b></label></td>
-				<td><input type="text" class="card" name="form.cardCheck" value=""
-					required="required">(卡片簽名處末三碼)</td>
-				<td><b id="cardCheck"></b></td>
-			</tr>
-		</table>
-	</div>
-	<br>
-	<br>
-	<div>
-		<h3>持卡人資料</h3>
-		<table class="table">
-			<colgroup>
-				<col span="1" style="background-color: #ADADAD">
-				<col style="background-color: #F0F0F0;">
-				<col style="background-color: #F0F0F0; width: 250px;">
-			</colgroup>
-			<tr>
-				<td><label for="">持卡人姓名:<b>*</b></label></td>
-				<td><input type="text" name="form.cardHolder"
-					value="${param.cardHolder }" required="required"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><label for="">生日:<b>*</b></label></td>
-				<td><input type="date" name="form.cardHolderBirth"
-					style="height: 30px;" required="required"></td>
-				<td><b id="checkBirth"></b></td>
-			</tr>
-			<tr>
-				<td><label for="">持卡人手機:<b>*</b></label></td>
-				<td><input type="text" name="form.cardHolderPhone"
-					required="required"></td>
-				<td><b id="tel"></b></td>
-			</tr>
-			<tr>
-				<td><label for="">持卡人信箱:<b>*</b></label></td>
-				<td><input type="email" name="form.cardHolderEmail" id="holderEmail"
-					required="required"></td>
-				<td></td>
-			</tr>
-		</table>
-	</div>
-	<div>
+					<input type="text" name="form.cardNo" value="" style="display:none">
+				</div>
+				<div class="col-md-2"><b id="cardNo"></b></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">有效期限:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<select name="month" id="month" required="required"></select>月
+					<select name="year" id="year" required="required"></select>年
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="row" style="padding-bottom:10px;">
+				<div class="col-md-3">
+					<label for="">驗證碼:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="text" class="card" name="form.cardCheck" value=""
+						required="required">(卡片簽名處末三碼)
+				</div>
+				<div class="col-md-2"><b id="cardCheck"></b></div>
+			</div>
+		</div>
+		
+<!-- 		持卡人資料 -->
+		<div style="background: #f2f2f2;margin-top:40px">
+			<h3 style="padding-top: 10px;color:#FF2D2D">持卡人資料</h3>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">持卡人姓名:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="text" name="form.cardHolder" class="form-control"
+					value="${param.cardHolder }" required="required">
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">生日:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="date" name="form.cardHolderBirth" class="form-control"
+					style="height: 30px;" required="required">
+				</div>
+				<div class="col-md-2"><b id="checkBirth"></b></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">持卡人手機:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="text" name="form.cardHolderPhone" class="form-control"
+					required="required">
+				</div>
+				<div class="col-md-2"><b id="tel"></b></div>
+			</div>
+			<div class="row" style="padding-bottom:10px;">
+				<div class="col-md-3">
+					<label for="">持卡人信箱:<b>*</b></label>
+				</div>
+				<div class="col-md-7">
+					<input type="email" name="form.cardHolderEmail" class="form-control" id="holderEmail"
+					required="required">
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			
+		</div>
+
+
+
+<!-- 		<table class="table"> -->
+<!-- 			<colgroup> -->
+<!-- 				<col span="1" style="background-color: #ADADAD"> -->
+<!-- 				<col style="background-color: #F0F0F0;"> -->
+<!-- 				<col style="background-color: #F0F0F0; width: 150px;"> -->
+<!-- 			</colgroup> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">卡別:<b>*</b></label></td> -->
+<!-- 				<td><select name="form.cardType" required="required"> -->
+<!-- 						<option>VISA</option> -->
+<!-- 						<option>JCB</option> -->
+<!-- 						<option>MasterCard</option> -->
+<!-- 						<option>銀聯卡</option> -->
+<!-- 						<option>美國運通</option> -->
+<!-- 					</select></td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">卡號:<b>*</b></label></td> -->
+<!-- 				<td><input type="text" class="card" name="cardNo_1" value="" required="required">-  -->
+<!-- 					<input type="text" class="card"	name="cardNo_2" value="" required="required">-  -->
+<!-- 					<input type="text" class="card" name="cardNo_3" value="" required="required">-  -->
+<!-- 					<input type="text" class="card" name="cardNo_4" value="" required="required"> -->
+<!-- 					<input type="text" name="form.cardNo" value="" style="display: none"></td> -->
+<!-- 				<td><b id="cardNo"></b></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">有效期限:<b>*</b></label></td> -->
+<!-- 				<td><select name="month" id="month" required="required"></select>月 -->
+<!-- 					<select name="year" id="year" required="required"></select>年</td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">驗證碼:<b>*</b></label></td> -->
+<!-- 				<td><input type="text" class="card" name="form.cardCheck" value="" -->
+<!-- 					required="required">(卡片簽名處末三碼)</td> -->
+<!-- 				<td><b id="cardCheck"></b></td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+<!-- 	<br> -->
+<!-- 	<br> -->
+<!-- 	<div> -->
+<!-- 		<h3>持卡人資料</h3> -->
+<!-- 		<table class="table"> -->
+<!-- 			<colgroup> -->
+<!-- 				<col span="1" style="background-color: #ADADAD"> -->
+<!-- 				<col style="background-color: #F0F0F0;"> -->
+<!-- 				<col style="background-color: #F0F0F0; width: 250px;"> -->
+<!-- 			</colgroup> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">持卡人姓名:<b>*</b></label></td> -->
+<!-- 				<td><input type="text" name="form.cardHolder" -->
+<%-- 					value="${param.cardHolder }" required="required"></td> --%>
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">生日:<b>*</b></label></td> -->
+<!-- 				<td><input type="date" name="form.cardHolderBirth" -->
+<!-- 					style="height: 30px;" required="required"></td> -->
+<!-- 				<td><b id="checkBirth"></b></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">持卡人手機:<b>*</b></label></td> -->
+<!-- 				<td><input type="text" name="form.cardHolderPhone" -->
+<!-- 					required="required"></td> -->
+<!-- 				<td><b id="tel"></b></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="">持卡人信箱:<b>*</b></label></td> -->
+<!-- 				<td><input type="email" name="form.cardHolderEmail" id="holderEmail" -->
+<!-- 					required="required"></td> -->
+<!-- 				<td></td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+	<div class="row">
 		<a class="btn btn-primary" id="billInfoBack" >上一步</a>
 		<a class="btn btn-primary" id="billInfoBtn" >下一步</a>
+		<a class="btn btn-default" id="magicBtn">神奇按鈕</a>
 	</div>
 </div>
 <script>
 	//驗證卡號
-	$('input[name="cardNo_4"]').on("keyup", function() {
+	$('input[name="cardNo_4"]').on("change", function() {
 		if ($(this).val().length == 4) {
 			var tempCardNo = $('input[name="cardNo_1"]').val()
 									+$('input[name="cardNo_2"]').val()

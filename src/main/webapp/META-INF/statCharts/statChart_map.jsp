@@ -11,61 +11,103 @@
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/animate.css">
 <script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
-
+<script src="/softleader-iii-eeit78/js/wow.min.js"></script>
+<script>
+	new WOW().init();
+</script>
 
 <script src="http://code.highcharts.com/maps/highmaps.js"></script>
 <script src="http://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="http://code.highcharts.com/mapdata/countries/tw/tw-all.js"></script>
 
 <style>
+html, body{ height: 100%}
 #city_distribution {
-    height: 500px; 
+    min-height: 80%;  
     min-width: 310px; 
-    max-width: 800px; 
+/*     max-width: 800px;  */
     margin: 0px auto; 
 }
 
 body{
 /*  	background-color: #C4E1FF;  */
 }
-
+strong {
+	font-size: 36px;
+}
+.choosed{
+color: orangered;
+text-shadow: 1px 0px 1px orange;
+}
+@media{
+marquee{width: 100%}
+.forSidebar{text-align: left;
+border-bottom: 1px silver solid;
+margin-top: 0px;
+}
+}
+@media ( min-width : 992px) {
+marquee{width: 50%}
+.forSidebar{text-align: center;
+border-bottom: none;
+margin-top: 62px;}
+}
 </style>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
 
-	<div class="container-fluid" style="padding-top: 50px;">
+	<div class="container"
+		style="background-color: #f2f2f2; margin-top: 20px;">
+		<div class="row" style="text-align: center; color: darkslategray;">
+			<h1 style="margin-top: 30px; font-weight: bolder;">統計資料</h1>
+<!-- 			<marquee scrollamount="10" id="marquee" style="font-family: DFKai-sb"></marquee> -->
+			<div class="wow fadeInRight" data-wow-duration="1.5s" id="marquee"></div>
+		</div>
+	</div>
+
+	<div class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-3 sidebar">
-				<ul class="nav nav-sidebar" style="background-color: #FFFFB9;">
-					<li>
-						<a href="/softleader-iii-eeit78/util/statChart">圖表</a>
-					</li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li class="active">
-						<a href="#distribution1">活動區域分布統計</a>
-					</li>
-				</ul>
+			<div class="col-md-3 forSidebar">
+					<div id="side-nav">
+				<nav class="navbar" role="navigation">
+
+
+						<div>
+							<ul class="nav nav-stacked">
+								<li><a class="choosed"
+									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖&nbsp<span
+										class=" glyphicon glyphicon-map-marker"></span></a></li>
+								<li><a
+									href="/softleader-iii-eeit78/util/statChart?chart=pi">活動類型圓餅圖&nbsp<span
+										class=" fa fa-pie-chart"></span></a></li>
+								<li><a
+									href="/softleader-iii-eeit78/util/statChart?chart=bar">年齡分布橫條圖&nbsp<span
+										class=" showopacity glyphicon glyphicon-align-center"></span></a></li>
+							</ul>
+						</div>
+				
+				</nav>	</div>
 			</div>
 			<div class="col-md-9">
-				<h1 class="page-header">統計圖表</h1>
-				<div id="distribution1">
-					<h2 class="sub-header">活動區域分布統計</h2><br>
-					<p>統計各個活動發起的地點</p>
+
+				<div>
+					<h2 class="sub-header" style="font-family: Microsoft JhengHei">活動位置分布圖</h2>
 					<div id="city_distribution"></div>
+					<br>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
-	
 
-	
-	<jsp:include page="/footer2.jsp" />
+
+
+	<jsp:include page="/footer.jsp" />
 </body>
 <script>
 	
@@ -173,9 +215,16 @@ function taiwan(city) {
 
     // Initiate the chart
     $('#city_distribution').highcharts('Map', {
-
+		chart : {
+			backgroundColor : '#FFFCEC'
+		},
+    	
+		credits:{
+    		enabled : false
+    	},
+		
         title : {
-            text : '活動區域分布比例',
+            text : '',
             style : { "color": "red", "fontSize": "20px" }
         },
 
@@ -212,6 +261,23 @@ function taiwan(city) {
     });
 }
 
+$.post("/softleader-iii-eeit78/util/utilAction!util", onload);
+//所有圖形載入點
+function onload(data){
+	data = JSON.parse(data);
+	$('#marquee').html("<p style='font-size:20px'>目前有<strong>" + data.onlineCount +"</strong>人在線上"
+			 + "&nbsp&nbsp共有<strong>" + data.giverCount +"</strong>個Givers和<strong>"+ data.raiserCount +"</strong>個公益團體為了公益努力</p>");
+
+}
+
+$(window).scroll(function() {
+	if ($(window).scrollTop() > 100 && $(window).width() >600) {
+		var sideTop = $('#header-wrapper').height()+40;
+		$('#side-nav').css({ top: sideTop , position: 'fixed'});
+		} else {
+		$('#side-nav').css({ top: 'auto' , position: 'relative'});
+			}
+	});
 </script>
 
 

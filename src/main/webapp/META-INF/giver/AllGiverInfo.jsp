@@ -40,12 +40,28 @@
 tr th {
 	text-align: center;
 }
+.tab-content {
+	border-bottom: 1px solid silver;
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+	margin-bottom: 20px;
+	padding-right: 28px;
+	padding-left: 28px;
+}
+td{vertical-align: middle;}
 </style>
 
 </head>
 <body id="body">
 
 	<jsp:include page="../../header.jsp" />
+	
+			<div class="container" style="background-color: #f2f2f2; margin-top: 20px; margin-bottom: 20px; padding-bottom: 15px">
+			<div class="row" style="text-align:center; color:darkslategray; padding-left: 20px;">
+				<h1 style="margin-top: 30px; font-weight: bolder;">管理員專區</h1>
+			</div>
+	</div>
+	
 	<div class="container">
 		<ul class="nav nav-tabs" role="tablist">
 			<li><a href="#AllgiverInfo">所有捐款人資訊</a></li>
@@ -53,17 +69,19 @@ tr th {
 			<li><a href="#campaignAdmin">管理活動</a></li>
 			<li><a href="#transactionDetail">顯示所有交易紀錄</a></li>
 		</ul>
-		<div class="tab-content">
+		<div class="tab-content" style="padding-top: 20px;">
 		
-			<div class="panel alert tab-pane fade" id="AllgiverInfo">
-				<div class="row">
+			<div class="tab-pane fade" id="AllgiverInfo">
+				<div class="row" style="margin-bottom: 20px;">
 					<div class="col-md-3">
 						<select id="pageAmount"></select>顯示筆數(預設5筆)
 					</div>
-					<div class="col-md-6">
-						<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
-						<select id="page"></select>
-						<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+					<div class="col-md-6" style="text-align:center">
+						<div style="position:inline-block;">
+							<button class="btn btn-primary" id="before" onclick="before()">上一頁</button>
+							<select id="page"></select>
+							<button class="btn btn-primary" id="after" onclick="after()">下一頁</button>
+						</div>
 					</div>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="condition"
@@ -196,7 +214,7 @@ tr th {
 						+ "<td>"+ obj.address +"</td>" 
 						+ "<td>"+ obj.email +"</td>" 
 						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
-						+ "<td>"+ "<input type='checkbox' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
+						+ "<td>"+ "<input type='checkbox' style='height:20px;width:20px' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
 						+ "</tr>");	
 				valid(obj.account, obj.valid);
 				

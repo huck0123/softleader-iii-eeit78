@@ -377,7 +377,49 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return null;
 	}
 	
-	//身分證ID收尋    
+	//此帳號與身分證是否屬於同一人    
+	public String selectIdNumberByAccount() {
+		Map<String, Boolean> map = new HashMap<>();
+		map.put("IdNumberByAccount", false);
+
+		try {
+
+			model = service.getByAccount(form.getAccount().trim());
+			if (model != null) {
+				if (model.getIdNumber().equals(form.getId_number())) {
+					System.out.println("hahaha");
+
+					NewPassword newPasswd = new NewPassword();
+					String password = newPasswd.createPassword();
+					SendEmail send = new SendEmail(model.getEmail(), password);
+					send.email();
+
+					MessageDigest md;
+					try {
+						md = MessageDigest.getInstance("MD5");
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+						return null;
+					}
+					byte[] b = md.digest(password.getBytes());
+					model.setPasswd(b);
+					service.update(model);
+					map.put("IdNumberByAccount", true);
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String jsonStr = JSONObject.toJSONString(map);
+		inputStream = new ByteArrayInputStream(
+				jsonStr.getBytes(StandardCharsets.UTF_8));
+
+		return "checkIdNumberByAccount";
+
+	}
+	
+	//身分證ID收尋   (是否有此身分證)  
 	public String selectByIdNumber(){
 		boolean b = service.getByIdNumber(form.getId_number().trim());
 		Map<String, Boolean> map = new HashMap<>();
@@ -394,7 +436,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		return "selectByIdNumber";
 	}
 	
-	//忘記密碼
+	//忘記密碼    ----------deprecated----------
 	public String newPassword() {
 		model = service.getByAccount(form.getAccount());
 

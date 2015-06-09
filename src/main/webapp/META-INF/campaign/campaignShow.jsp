@@ -64,6 +64,15 @@ a:hover {
 	margin-bottom: 20px;
 }
 .pagination{margin:8px 0px;}
+@media {
+.campaign-image{width:100%;
+height:auto;}
+}
+
+@media ( min-width : 992px) {
+.campaign-image{width:100%;
+height: 200px !important;}
+}
 </style>
 </head>
 <body>
@@ -71,7 +80,7 @@ a:hover {
 
 	<div class="container"
 		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 26px;margin-bottom: 16px;">
-		<div class="row" style="text-align: center; color: grey;">
+		<div class="row" style="text-align: center; color:darkslategray;">
 			<h1 style="margin-top: 30px; font-weight: bolder;">募款活動</h1>
 			<div class="row">
 				<div class="col-md-3"></div>
@@ -157,7 +166,10 @@ var totalCount = 0;
 var totalPage = 0;
 //0是第一頁
 var currentPage =0;
+if("${param.page}"){currentPage = "${param.page}"}
 var nameSearch="";
+if("${param.nameSearch}"){nameSearch = "${param.nameSearch}"}
+
 var typeSearch="所有類型";
 var onGoing="現正進行";
 var pageSize = 6;
@@ -167,7 +179,7 @@ function load(){
 
 
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
+			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 		
 		totalCount = data;
 		totalPage = Math.ceil(totalCount / pageSize);
@@ -182,7 +194,7 @@ function load(){
 		
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,
-			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},
+			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},
 				 function(data){
 			data = JSON.parse(data);
  					$('#campaignRow').empty();
@@ -192,7 +204,7 @@ function load(){
 				var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 				var str = arrayBufferToBase64(value.image);
-				var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+				var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 				var imageA = $('<a></a>');
 				image.appendTo(imageA);
 				imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -202,7 +214,7 @@ function load(){
 				var captionLower = $('<div class="captionLower"></div>');
 				var h3 = $('<h3>' + value.name+ '</h3>');
 				var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-				var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
+				var p1 = $('<p><div>' + value.detail+ '...</div></p>');
 
 				var percent = value.currentFund/ value.goal * 100;
 				var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '
@@ -225,16 +237,43 @@ function load(){
 						childDiv3.append(data);})
 
 					var today = (new Date()).getTime();
-
 					var d = (new Date(value.endDate)).getTime();
-					var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+					
+					var timeRemain = d - today;
+					var days = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+					var hour = Math.floor(timeRemain/3600000);
+					var minutes = Math.floor((timeRemain - hour*3600000)/60000);
+					var seconds = Math.floor((timeRemain - hour*3600000 - minutes *60000) / 1000);
+					if( timeRemain > 86400000){
 					var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
-							+ remain+ '<br/></div>');
+								+ days+ ' days</div>');
+					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+					} else if(timeRemain > 3600000 && timeRemain <86400000){
+					var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+								+ hour+ ' hours</div>');
+					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+					} else if(timeRemain > 60000 && timeRemain < 3600000){
+						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+								+ minutes+ ' mins</div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+					} else if(timeRemain > 0 && timeRemain < 60000){
+						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+								+ seconds+ ' secs</div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+					}
+					else{
+						var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+								+ '已結束'+ '<br/></div>');
+						var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
+					}
+					
+					
+
+
 
 					otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
 
 					var p2 = $('<p></p>');
-					var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
 					var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id+ '&name='+ value.name;
 					a.attr('href', url);
@@ -263,7 +302,7 @@ function load(){
 
 function makeFunction(j){return function(){
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
-			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
+			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
  		$('#campaignRow').empty();
@@ -273,7 +312,7 @@ function makeFunction(j){return function(){
 			var thumbnailDiv = $('<div class="thumbnail"></div>');
 
 			var str = arrayBufferToBase64(value.image);
-			var image = $('<img style="height:200px; width:100%" src="data:image/png;base64,' + str +'"/>');
+			var image = $('<img class="campaign-image" src="data:image/png;base64,' + str +'"/>');
 			var imageA = $('<a></a>');
 			image.appendTo(imageA);
 			imageA.attr('href','${pageContext.request.contextPath}/campaign/campaignDetail?id='+ value.id);
@@ -283,7 +322,7 @@ function makeFunction(j){return function(){
 			var captionLower = $('<div class="captionLower"></div>');
 			var h3 = $('<h3>' + value.name+ '</h3>');
 			var p = $('<p><span class="glyphicon glyphicon-pencil"></span> '+value.raiserModel.name+'</p>');
-			var p1 = $('<p><pre>' + value.detail+ '...</pre></p>');
+			var p1 = $('<p><div>' + value.detail+ '...</div></p>');
 
 			var percent = value.currentFund/ value.goal * 100;
 			var otherInfo = $('<p class="makeShadow"><span class="glyphicon glyphicon-map-marker"></span> '
@@ -305,17 +344,41 @@ function makeFunction(j){return function(){
 				{'campaignForm.id' : value.id},function(data) {
 					childDiv3.append(data);})
 
-				var today = (new Date()).getTime();
-
-				var d = (new Date(value.endDate)).getTime();
-				var remain = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+					var today = (new Date()).getTime();
+			var d = (new Date(value.endDate)).getTime();
+			
+			var timeRemain = d - today;
+			var days = Math.floor((d - today)/ (1000 * 60 * 60 * 24));
+			var hour = Math.floor(timeRemain/3600000);
+			var minutes = Math.floor((timeRemain - hour*3600000)/60000);
+			var seconds = Math.floor((timeRemain - hour*3600000 - minutes *60000) / 1000);
+			if( timeRemain > 86400000){
+			var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+						+ days+ ' days</div>');
+			var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+			} else if(timeRemain > 3600000 && timeRemain <86400000){
+			var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+						+ hour+ ' hours</div>');
+			var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+			} else if(timeRemain > 60000 && timeRemain < 3600000){
 				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
-						+ remain+ '<br/></div>');
+						+ minutes+ ' mins</div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+			} else if(timeRemain > 0 && timeRemain < 60000){
+				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+						+ seconds+ ' secs</div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+			}
+			else{
+				var childDiv4 = $('<div class="col-xs-3 col-md-3" style="padding: 0"><span class="glyphicon glyphicon-time"></span><br/>倒數<br/>'
+						+ '已結束'+ '<br/></div>');
+				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px" disabled>立即捐款</a>');
+			}
 
 				otherInfoDiv.append(childDiv1).append(childDiv2).append(childDiv3).append(childDiv4);
 
 				var p2 = $('<p></p>');
-				var a = $('<a href="" class="btn btn-primary" role="button" style="margin-top:10px">立即捐款</a>');
+
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 						+ value.id+ '&name='+ value.name;
 				a.attr('href', url);

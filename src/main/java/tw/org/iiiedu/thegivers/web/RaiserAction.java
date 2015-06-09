@@ -1,6 +1,7 @@
 package tw.org.iiiedu.thegivers.web;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -48,6 +51,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 	private String name;
 	private String contactPerson;
 	private CampaignForm campaignForm;
+	private int pagesizeForRaiserShow;
+//	private File pic;
+//	public File getPic() {
+//		return pic;
+//	}
+//	public void setPic(File pic) {
+//		this.pic = pic;
+//	}
 
 	public CampaignForm getCampaignForm() {
 		return campaignForm;
@@ -101,6 +112,14 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 		this.name = name;
 	}
 
+	public int getPagesizeForRaiserShow() {
+		return pagesizeForRaiserShow;
+	}
+
+	public void setPagesizeForRaiserShow(int pagesizeForRaiserShow) {
+		this.pagesizeForRaiserShow = pagesizeForRaiserShow;
+	}
+
 	public String insert() {
 		RaiserModel rm = new RaiserModel();
 		HttpSession session = ServletActionContext.getRequest().getSession();
@@ -121,6 +140,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			rm.setEmail(raiserForm.getEmail());
 			if (raiserForm.getLogo() != null)
 				rm.setLogo(FileUtils.readFileToByteArray(raiserForm.getLogo()));
+//			rm.setLogo(aaa);
 			rm.setAddress(raiserForm.getAddress());
 			rm.setDetail(raiserForm.getDetail());
 			rm.setVideoUrl(raiserForm.getVideoUrl());
@@ -325,7 +345,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getByAllConditionCount() {
 		Integer resultCount = raiserService.getByAllConditionCount(account,
-				name, contactPerson, lock);
+				name, contactPerson, true);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(resultCount);
 		inputStream = new ByteArrayInputStream(
@@ -335,7 +355,7 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 
 	public String getRaiserCondition() {
 		List<RaiserModel> list = raiserService.getByAllCondition(account, name,
-				contactPerson, lock, page, 5);
+				contactPerson, true, page, pagesizeForRaiserShow);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(list);
 		inputStream = new ByteArrayInputStream(
@@ -397,7 +417,11 @@ public class RaiserAction extends ActionSupport implements ServletRequestAware {
 			return "select";
 		}
 	}
-
+//	byte[] aaa;
+//	public String aaa() throws IOException{
+//		aaa = FileUtils.readFileToByteArray(pic);
+//		return "error";
+//	}
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub

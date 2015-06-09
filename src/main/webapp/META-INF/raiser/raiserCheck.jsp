@@ -54,13 +54,12 @@
 		<jsp:include page="../../header.jsp" />
 		
 		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:	gray; padding-left: 20px;">
+			<div class="row" style="text-align:center; color:darkslategray; padding-left: 20px;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">參與團體</h1>
 				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即認識更多參與我們的公益團體</p>
 			</div>
-
-
 	</div>
+	
 	<div class="raiser-wrapper" style="margin-top: 20px; margin-bottom: 30px">
 		<div class="container" style=" background-color: #f2f2f2; padding-top:30px;padding-bottom: 20px">
 			<div class="row">

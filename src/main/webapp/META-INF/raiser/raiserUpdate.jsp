@@ -92,7 +92,7 @@ body {
 									<div class="form-group">
 										<label for="inputpw">密碼</label> <input type="password"
 											class="form-control" id="inputpw" name="raiserForm.passwd"
-											required="required" disabled="disabled">
+											required="required" disabled="disabled" placeholder="請輸入密碼，須為英數混合且為6-30字">
 										<div class="errorClassForRaiser">${updateErrorPSW}</div>
 										<div id="chkPw1" class="errorClassForRaiser"></div>
 									</div>
@@ -100,7 +100,7 @@ body {
 									<div class="form-group">
 										<label for="inputpwChk">確認密碼</label> <input type="password"
 											class="form-control" id="inputpwChk" required="required"
-											disabled="disabled">
+											disabled="disabled" placeholder="再輸入一次密碼">
 										<div id="chkPw2" class="errorClassForRaiser"></div>
 									</div>
 

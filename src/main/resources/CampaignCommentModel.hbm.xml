@@ -8,19 +8,19 @@
 			<column name="id"></column>
 			<generator class="identity"></generator>
 		</id>
-		<property name="campaignId" type="java.lang.Integer">
+		<property name="campaignId" type="java.lang.Integer" update="false">
 			<column name="campaignId" />
 		</property>
-		<property name="giverId" type="java.lang.Integer">
+		<property name="giverId" type="java.lang.Integer" update="false">
 			<column name="giverId" />
 		</property>
-		<property name="replyId" type="java.lang.Integer">
+		<property name="replyId" type="java.lang.Integer" update="false">
 			<column name="replyId" />
 		</property>
-		<property name="pendingId" type="java.lang.Integer">
+		<property name="pendingId" type="java.lang.Integer" update="false">
 			<column name="pendingId" />
 		</property>
-		<property name="pendingCount" type="java.lang.Integer">
+		<property name="pendingCount" type="java.lang.Integer" update="false">
 			<column name="pendingCount" />
 		</property>
 		<property name="commentary" type="java.lang.String">

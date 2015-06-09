@@ -173,3 +173,6 @@ ul.social-network li {
 	</div>
 </div>
 
+<script>
+var footerHeight = $('.footer-wrapper').height();
+</script>

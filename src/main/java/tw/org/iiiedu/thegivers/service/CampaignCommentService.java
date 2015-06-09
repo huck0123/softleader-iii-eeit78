@@ -16,28 +16,28 @@ public class CampaignCommentService {
 	CampaignCommentDao campaignCommentDao;
 	
 	public CampaignCommentModel writeComment(CampaignCommentModel model){
+		if(model.getReplyId() == 0){
+			model.setPendingId(0);
+		}else{
+			CampaignCommentModel ccm = campaignCommentDao.getById(model.getReplyId());
+			if(ccm.getReplyId() == 0){
+				model.setPendingId(ccm.getId());
+			}else{
+				model.setPendingId(ccm.getPendingId());
+			}
+		}
 		Integer id = campaignCommentDao.insert(model);
 		if(id != -1){
-			if(model.getReplyId() == 0){
-				model.setPendingId(0);
-			}else{
-				CampaignCommentModel ccm = campaignCommentDao.getById(model.getReplyId());
-				if(ccm.getReplyId() == 0){
-					model.setPendingId(ccm.getId());
-				}else{
-					model.setPendingId(ccm.getPendingId());
-				}
-			}
 			return campaignCommentDao.getById(id);
 		}else{
 			return null;
 		}
 	}
 	
-	public CampaignCommentModel alterComment(CampaignCommentForm form){
-		boolean b = campaignCommentDao.update(form);
+	public CampaignCommentModel modifyComment(CampaignCommentModel model){
+		boolean b = campaignCommentDao.update(model);
 		if(b == true){
-			return campaignCommentDao.getById(form.getId());
+			return campaignCommentDao.getById(model.getId());
 		}else{
 			return null;
 		}
