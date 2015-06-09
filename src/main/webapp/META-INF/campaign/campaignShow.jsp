@@ -179,7 +179,7 @@ function load(){
 
 
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
-			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
+			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 		
 		totalCount = data;
 		totalPage = Math.ceil(totalCount / pageSize);
@@ -194,7 +194,7 @@ function load(){
 		
 		$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
 				{'campaignForm.pageNum':currentPage,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,
-			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},
+			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},
 				 function(data){
 			data = JSON.parse(data);
  					$('#campaignRow').empty();
@@ -302,7 +302,7 @@ function load(){
 
 function makeFunction(j){return function(){
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
-			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing},function(data){
+			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
  		$('#campaignRow').empty();

@@ -109,7 +109,7 @@ public class CampaignDao {
 			}
 		}
 
-		// criteria.add(Restrictions.eq("show", true));
+
 
 		Long rows = (Long) criteria.setProjection(Projections.rowCount())
 				.uniqueResult();
@@ -158,7 +158,7 @@ public class CampaignDao {
 						new java.util.Date().getTime())));
 			}
 		}
-		// criteria.add(Restrictions.eq("show", true));
+
 		criteria.addOrder(Order.desc("lastModify"));
 
 		List campaignModels = criteria
