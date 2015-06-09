@@ -196,9 +196,10 @@ pre {
 
 		$
 				.post(
-						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition?campaignForm.onGoing=現正進行',
-						{
+						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
+						{	'campaignForm.onGoing' : '現正進行',
 							'campaignForm.pageSize' : 3,
+							'campaignForm.valid' : true
 						},
 						function(data) {
 							data = JSON.parse(data);
