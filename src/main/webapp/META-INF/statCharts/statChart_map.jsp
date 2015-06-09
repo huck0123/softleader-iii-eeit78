@@ -81,13 +81,13 @@ margin-top: 62px;}
 							<ul class="nav nav-stacked">
 								<li><a class="choosed"
 									href="/softleader-iii-eeit78/util/statChart_map">活動位置分布圖&nbsp<span
-										class="pull-right glyphicon glyphicon-map-marker"></span></a></li>
+										class=" glyphicon glyphicon-map-marker"></span></a></li>
 								<li><a
 									href="/softleader-iii-eeit78/util/statChart?chart=pi">活動類型圓餅圖&nbsp<span
-										class="pull-right fa fa-pie-chart"></span></a></li>
+										class=" fa fa-pie-chart"></span></a></li>
 								<li><a
 									href="/softleader-iii-eeit78/util/statChart?chart=bar">年齡分布橫條圖&nbsp<span
-										class="pull-right showopacity glyphicon glyphicon-align-center"></span></a></li>
+										class=" showopacity glyphicon glyphicon-align-center"></span></a></li>
 							</ul>
 						</div>
 				
