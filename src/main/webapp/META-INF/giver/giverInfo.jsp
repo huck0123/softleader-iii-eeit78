@@ -270,7 +270,6 @@ b {
 
 			$('#password0').on('blur', function() {
 				password = $(this).val();
-				console.log(password);
 				$.post(checkPasswd_url, {
 					'form.account' : '${sessionScope.giver.account}',
 					'form.passwd' : password
@@ -282,6 +281,8 @@ b {
 					} else {
 						$('#passwdMess0').text("密碼錯誤");
 						$('#save').prop("disabled", true);
+						$('#password1').val("");
+						$('#password2').val("");
 					}
 				})
 			});
