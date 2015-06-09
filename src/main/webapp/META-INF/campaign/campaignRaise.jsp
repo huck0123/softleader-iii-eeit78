@@ -49,7 +49,7 @@
 <div class="tab-pane fade" id="campaignRaise"
 	style="padding-top: 20px; padding-bottom: 20px;">
 	<div class="row">
-		<div class="col-md-1"></div>
+		<div class="col-md-1"><button class="btn btn-default" id="fillCampaignRaise">填入表格</button></div>
 		<div class="col-md-10">
 			<form id="campaignRaiseForm"
 				action="/softleader-iii-eeit78/campaign/campaignAction!insert"
@@ -209,13 +209,13 @@ if("${param['campaignForm.name']}"){
 
 //前端驗證不可為空白
 $('[id^=campaign-]').on('blur',checkContent);
+$('[id^=campaign-]').on('change',checkContent);
 function checkContent(){
 	if($(this).val().trim().length < 1){
 		$(this).siblings(":last").text('本欄位請勿留白').show();;
 	} else if($(this).val().trim().length > 1){
 		$(this).siblings(":last").empty();
 	}
-	console.log($('#campaignRaiseForm p').text().length)
 	if($('#campaignRaiseForm p').text().length <1){
 		$('#raiseSubmit').prop('disabled', false);
 	}
@@ -223,7 +223,9 @@ function checkContent(){
 
 //前端驗證數字須正確
 $('#campaign-duration-input').on('blur',checkNumberContent);
+$('#campaign-duration-input').on('change',checkNumberContent);
 $('#campaign-goal-input').on('blur',checkNumberContent);
+$('#campaign-goal-input').on('change',checkNumberContent);
 function checkNumberContent(){
 	if($(this).val().trim().length < 1){
 		$(this).siblings(":last").text('本欄位請勿留白').show();
@@ -332,4 +334,27 @@ function detailValidation(){
 
    		$('#campaignRaiseDetailDiv').append(CKEDITOR.instances['campaign-detail-input'].getData());
 	}
+	
+	$('#fillCampaignRaise').on('click',function(){
+		$('#campaign-name-input').val('勵馨-希望之門');
+		$('#campaign-goal-input').val('1000000');
+		$('#campaign-duration-input').val('60');
+		$('#campaign-type-input').val('婦幼關懷');
+		$('#campaign-location-input').val('南投縣');
+		$('#campaign-vedioUrl-input').val('http://www.youtube.com/embed/yZDMvUkdVi8');
+		CKEDITOR.instances['campaign-detail-input'].setData('<p>兩個命運相同的女人，一位長期受虐的女孩，她們為了逃命先後來到勵馨安置家園，交織出一段以愛相伴的重生之旅。</p>'
+
+				+'<p>長年處於家暴環境的莉莉，身心嚴重受創幾近崩潰，所幸勵馨姊姊及時趕到，帶著她離開暴力環境，輾轉住進安置受暴婦女的家園，在社工的悉心關照之下，逐漸恢復正常生活。莉莉下定決心成為社工，協助更多婦女走出受暴陰霾。有一天，莉莉突然接到緊急通知，冒著生命危險救出一位被打得半死的婦女，一路陪伴她來到自己熟悉的安置家園。</p>'
+
+				+'<p>在此同時，一位住在偏遠山區的小女孩，因為受不了爸爸對她身體長期施虐，趁著上學途中離家，徒步8小時才被發現。被社工安置到勵馨家園時，小女孩始終沉默不語，不吃飯也不洗澡，一心只想找媽媽。莉莉知道後十分不捨，主動說故事給女孩聽，還陪她一起玩遊戲，才漸漸打開女孩封閉的心房。</p>'
+
+				+'<p>小女孩認真地告訴莉莉，媽媽以前曾帶她去市區的一家診所看病，這是記憶中與母親連結的唯一線索，女孩寫了一張卡片放在診所，希望媽媽來看病時就會發現，期盼早日與母重逢。</p>'
+
+				+'<p>每逢歲末年終，勵馨基金會執行長紀惠容都會和安置家園的「家人」們一起吃年夜飯，大家圍爐而坐，由紀姊帶頭禱告：「感謝上帝賜下豐盛佳餚，希望勵馨成為受暴婦女和兒少的後盾，更期盼南投『女兒館』能盡快動工，讓神的孩子都有一個溫暖的家。」</p>'
+
+				+'<p>莉莉得知勵馨要在南投興建「女兒館」的消息，心中非常掛念，曾經住過安置家園的她深知受暴婦女和孩子們的需求，特地商請一位房仲好友幫忙看了30多個地方，終於找到一塊靠近學校的理想農地。</p>'
+
+				+'<p>光有土地還不夠，要順利動工還欠缺一筆龐大經費，此時莉莉主動捐出積攢已久的10萬元，這是母親生前借給她的急難救助金，而親愛的媽媽已返回天家，無法償還，如今勵馨就像她唯一的「娘家」，莉莉希望把母親對她的愛延續下去，用這筆錢來支持勵馨建設南投女兒館。</p>');
+		$('#raiseSubmit').prop('disabled', false);
+	})
 </script>
