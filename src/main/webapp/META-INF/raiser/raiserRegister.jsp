@@ -55,7 +55,7 @@ label>b {
 
 	<div class="container"
 		style="background-color: #f2f2f2; margin-top: 20px;">
-		<div class="row" style="text-align: center; color: grey;">
+		<div class="row" style="text-align: center; color: darkslategray;">
 			<h1 style="margin-top: 30px; font-weight: bolder;">公益團體註冊</h1>
 			<p
 				style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，讓愛心多一個管道傳遞</p>
@@ -68,15 +68,13 @@ label>b {
 		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top: 20px; margin-bottom: 20px;">
 		<div class="row">
 
-			<div class="col-md-4"></div>
+			<div class="col-md-4"><button id="specButtonForRaiserRegister" style="margin-top: 46px;">Fill</button></div>
 			<div class="col-md-4">
 
 				<div style="padding-top: 36px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-						<button id="specButtonForRaiserRegister">Fill</button>
-						<div style="height: 50px">${insertErrorMSG}</div>
-						<div class="errorClassForRaiser">*號為必填欄位</div>
+						
 
 						<div class="form-group">
 

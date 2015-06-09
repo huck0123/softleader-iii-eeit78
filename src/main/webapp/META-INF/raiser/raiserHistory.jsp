@@ -43,6 +43,7 @@
 <br/>
 <br/>
 
+<div class="hidden-xs....">
 		<table id="resultTableRH" class="table table-hover">
 			<thead>
 				<tr>
@@ -58,6 +59,16 @@
 			<tbody id="tbodyRH">
 			</tbody>
 		</table>
+		</div>
+		
+		<div class="visible-xs visible-sm">
+		
+		
+		
+		
+		</div>
+		
+		
 	</div>
 
 </div>

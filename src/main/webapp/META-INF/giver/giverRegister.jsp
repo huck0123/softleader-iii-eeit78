@@ -49,7 +49,7 @@ body{
 	<jsp:include page="../../header.jsp" />
 
 		<div class="container" style="background-color: #f2f2f2; margin-top: 20px;">
-			<div class="row" style="text-align:center; color:grey;">
+			<div class="row" style="text-align:center; color:darkslategrey;">
 				<h1 style="margin-top: 30px; font-weight: bolder;">會員註冊</h1>
 				<p style="font-size: 20px; margin-top: 16px; font-weight: bolder; margin-bottom: 46px;">立即註冊，取得TheGivers提供的更多功能</p>
 			</div>
