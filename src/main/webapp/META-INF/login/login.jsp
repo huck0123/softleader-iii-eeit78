@@ -153,14 +153,15 @@ margin-right:0px;}
 	      	<b id="accountMessage"></b>
 	      	<br>
 	        <label for="">您的身分證字號:</label>
-	        <input type="text" id="yourIdNumber" disabled="disabled">
+	        <input type="text" id="yourIdNumber">
 	        <br>
 	        <b id="IdNumberMessage"></b>
 	        <br>
 	      </div>
 	      <div class="modal-footer">
+	      	<b id="message"></b>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="forgetPasswd" disabled>確認送出</button>
+	        <button type="button" class="btn btn-primary" id="forgetPasswd">確認送出</button>
 	      </div>
 	    </div>
 	  </div>
@@ -169,53 +170,23 @@ margin-right:0px;}
 		<jsp:include page="/footer2.jsp" />
 	
 	<script>
-		
-		//判斷帳號
-		$('#yourAccount').on('keyup', function(){
-			var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
-			var thisAccount = $(this).val();
-			//查看giver是否有相同的帳號
-			$.post(url, {'form.account' : thisAccount}, function(data) {
-				data = JSON.parse(data);
-				if (!data.checkAccount) {
-					$('#forgetPasswd').prop("disabled",true);
-					$('#accountMessage').empty().text("此帳號不存在");
-					$('#yourIdNumber').val("");
-					$('#yourIdNumber').prop("disabled",true);
-					return;
-				}else{
-					$('#forgetPasswd').prop("disabled",false);
-					$('#accountMessage').empty();
-					$('#yourIdNumber').prop("disabled",false);
-				}
-				
-			});
-		});
-		
-		//判斷IDNumber
-		$('#yourIdNumber').on('keyup', function(){
-			var url = "${pageContext.request.contextPath}/giver/giverSelect!selectIdNumberByAccount";
-			var thisAccount = $('#yourAccount').val();
-			var thisIdNumber = $(this).val();
-			//查看是否有此身分證
-			$.post(url, {'form.account' : thisAccount, 'form.id_number' : thisIdNumber}, function(data){
-				data = JSON.parse(data);
-				if(!data.IdNumberByAccount){
-					$('#forgetPasswd').prop("disabled",true);
-					$('#IdNumberMessage').empty().text("此身分證錯誤");
-					return;
-				}else{
-					$('#forgetPasswd').prop("disabled",false);
-					$('#IdNumberMessage').empty();
-				}
-			});
-		});
+	
 		
 		//送出Email
 		$('#forgetPasswd').on('click', function(){
+			$(this).attr("disabled", true);
 			var account = $('#yourAccount').val();
-			$('#message').text('已寄信到您的信箱');
-			$.ajax("/softleader-iii-eeit78/giver/giverAction!newPassword?form.account=" + account);
+			var idNumber = $('#yourIdNumber').val();
+			$.post("/softleader-iii-eeit78/giver/giverSelect!selectIdNumberByAccount", {"form.account":account, "form.id_number":idNumber}, function(data){
+				data = JSON.parse(data);
+				if(data.IdNumberByAccount){
+					$('#message').empty().text('已寄信到您的信箱');
+					$('#forgetPasswd').attr("disabled", false);
+				}else{
+					$('#message').empty().text('此帳號或身分證有誤');
+					$('#forgetPasswd').attr("disabled", false);
+				}
+			});
 		});
 		
 		//更換驗證圖形
