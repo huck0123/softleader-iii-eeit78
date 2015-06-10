@@ -184,12 +184,12 @@ body {
 								var st1 = "<span class='glyphicon glyphicon-ok' id='spanCk'></span>";
 								stAll += "<td id='tdCk"+raiser.id+"'>"
 										+ st1
-										+ "</td><td><input type='checkbox' id='chbox' style='text-align:center'></td></tr>";
+										+ "</td><td><input type='checkbox' id='chbox' style='text-align:center ; height:20px;width:20px'></td></tr>";
 							} else {
 								var st2 = "<span class='glyphicon glyphicon-remove' id='spanCk'></span>";
 								stAll += "<td id='tdCk"+raiser.id+"'>"
 										+ st2
-										+ "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center'></td></tr>";
+										+ "</td><td><input type='checkbox' name='chbox' id='chbox' style='text-align:center ; height:20px;width:20px'></td></tr>";
 							}
 
 							$('#tbodyRS').append(stAll);

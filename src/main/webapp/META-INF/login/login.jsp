@@ -160,6 +160,7 @@ margin-right:0px;}
 	      </div>
 	      <div class="modal-footer">
 	      	<b id="message"></b>
+	      	<img src="" id="load">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" id="forgetPasswd">確認送出</button>
 	      </div>
@@ -175,14 +176,17 @@ margin-right:0px;}
 		//送出Email
 		$('#forgetPasswd').on('click', function(){
 			$(this).attr("disabled", true);
+			$('#load').attr("src","../pictures/load.gif");
 			var account = $('#yourAccount').val();
 			var idNumber = $('#yourIdNumber').val();
 			$.post("/softleader-iii-eeit78/giver/giverSelect!selectIdNumberByAccount", {"form.account":account, "form.id_number":idNumber}, function(data){
 				data = JSON.parse(data);
 				if(data.IdNumberByAccount){
+					$('#load').hide();
 					$('#message').empty().text('已寄信到您的信箱');
 					$('#forgetPasswd').attr("disabled", false);
 				}else{
+					$('#load').hide();
 					$('#message').empty().text('此帳號或身分證有誤');
 					$('#forgetPasswd').attr("disabled", false);
 				}
