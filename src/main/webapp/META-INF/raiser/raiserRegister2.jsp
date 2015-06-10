@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html id="body">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>The Givers å‹Ÿæ¬¾æ´»å‹•</title>
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -13,36 +17,43 @@
 <script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
 <script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
 <script src="/softleader-iii-eeit78/js/useful.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>½Ğµ¥«İÅçÃÒ...</title>
 <style>
-#divm {
-	height: 800px;
-	background-color: #fffff;
-	background-image: url(/softleader-iii-eeit78/pictures/bulb.jpeg);
-	filter: alpha(opacity = 30);
-	-moz-opacity: 0.3;
-	opacity: 0.3;
-	-khtml-opacity: 0.3;
-}
-#word{
-	margin-top: -500px;
-}
+html, body{height: 100%}
+#raise-ok{min-height:300px;}
 </style>
 </head>
-<body id="body">
-	<jsp:include page="../../header.jsp" />
-	<div class="container">
-		<div id="divm"></div>
-		<div id="word">
-			<h1>½Ğµ¥«İÅçÃÒ...</h1>
-			<br> <br> <br>
-			<h3>µy«áTheGivers±N·|Ápµ¸±z¶i¦æ³X½Í</h3>
-			<br> <br>
-			<h3>ÅçÃÒ§¹²¦§Y¥iµn¤J¨Ï¥Î±zªº±b¸¹</h3>
+<body>
+	<jsp:include page="/header.jsp" />
+
+	
+	<div id="raise-ok" class="container">
+		<div class="row"
+			style="text-align: center; color: slatedarkgray; padding-left: 20px;">
+			<div id="holder"></div>
+			<h1>è«‹ç­‰å¾…é©—è­‰...</h1>
+			<br/>
+			<h3>ç¨å¾ŒTheGiverså°‡æœƒè¯çµ¡æ‚¨é€²è¡Œè¨ªè«‡</h3>
+			<h3>é©—è­‰å®Œç•¢å³å¯ç™»å…¥ä½¿ç”¨æ‚¨çš„å¸³è™Ÿ</h3>
+
 		</div>
-		<div style="height:100px"></div>
 	</div>
-	<jsp:include page="../../footer.jsp" />
+
+	<jsp:include page="/footer.jsp" />
 </body>
+
+
+<script>
+var windowHeight = $(window).height();
+
+$('#raise-ok').height(windowHeight - headerHeight -footerHeight);
+
+
+
+$('#holder').height(0.3 * $('#raise-ok').height())
+</script>
 </html>
+
+
+
+
+
