@@ -74,6 +74,7 @@ body{
  					$('input[name="form.tel"]').val("0912145632"); 
  					$('input[name="form.address"]').val("台北市大安區信義路"); 
  					$('input[name="form.email"]').val("eeit78demothegivers@gmail.com"); 
+ 					$('input[name="form.birth"]').val("1980-01-13"); 
  				}); 
 			</script>
 
