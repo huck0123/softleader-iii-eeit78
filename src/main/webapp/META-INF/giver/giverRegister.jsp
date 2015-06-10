@@ -63,7 +63,6 @@ body{
 			<div class="col-md-4">
 <!-- 				神奇小按鈕 -->
 				<button class="btn btn-default" id="xxx">填入表格</button>
-				<button class="btn btn-default" id="ooo">填入表格</button>
 			</div>
 			
 			<script>

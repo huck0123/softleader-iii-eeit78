@@ -16,9 +16,9 @@
   <listener>
     <listener-class>tw.org.iiiedu.thegivers.listener.ContextParamListener</listener-class>
   </listener>
-  <listener>
-    <listener-class>tw.org.iiiedu.thegivers.listener.OnlineSessionListener</listener-class>
-  </listener>
+<!--   <listener> -->
+<!--     <listener-class>tw.org.iiiedu.thegivers.listener.OnlineSessionListener</listener-class> -->
+<!--   </listener> -->
   
   <filter>
     <filter-name>struts2</filter-name>

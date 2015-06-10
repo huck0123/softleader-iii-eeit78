@@ -133,7 +133,7 @@ public class LoginAction extends ActionSupport {
 				}
 			}
 		}
-		
+		System.out.println("gm: "+ gm);
 		if (gm != null) {
 			if(!gm.isValid()){
 				ServletActionContext.getRequest().setAttribute("wrongLogin",
