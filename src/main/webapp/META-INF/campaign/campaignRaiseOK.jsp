@@ -42,6 +42,9 @@ html, body{height: 100%}
 var windowHeight = $(window).height();
 
 $('#raise-ok').height(windowHeight - headerHeight -footerHeight);
+
+
+
 $('#holder').height(0.3 * $('#raise-ok').height())
 </script>
 </html>

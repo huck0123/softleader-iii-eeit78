@@ -318,7 +318,7 @@ function ageDistribution(data) {
 		$('html, body').animate({
 			scrollTop : top
 		}, 600, 'easeInOutExpo');
-		changeChoosed(this);
+// 		changeChoosed(this);
 	}
 
 //change sidebar color when move to somewhere
@@ -334,9 +334,16 @@ function ageDistribution(data) {
 			} else {
 			$('#side-nav').stop().css({ top: 'auto' , position: 'relative'});
 				}
-
 		});
 	
+	$(document).on('scroll',function(){
+		if ($(document).scrollTop() >  ($('#distribution2').offset().top-300)) {
+			changeChoosed($('#barChart'))
+			} else if($(document).scrollTop() > ($('#distribution1').offset().top-300)){
+				changeChoosed($('#piChart'));
+				}
+		
+	})
 	
 </script>
 
