@@ -49,9 +49,11 @@ public class LoginEmail {
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(email));
 			message.setSubject("請點此網址開通您的帳號");
-			message.setText("http://localhost:8080/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
+//			message.setText("http://localhost:8080/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
+//					+ account + "&form.id_number=" + idNumber);
+			message.setText("http://thegivers.cloudapp.net/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
 					+ account + "&form.id_number=" + idNumber);
-
+						
 			Transport.send(message);
 
 		} catch (MessagingException e) {

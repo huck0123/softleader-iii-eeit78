@@ -47,9 +47,11 @@ public class SendEmail {
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(email));
 			message.setSubject("新密碼");
-			message.setText("http://localhost:8080/softleader-iii-eeit78/login/login"
+			message.setText("http://thegivers.cloudapp.net/softleader-iii-eeit78/login/login"
 					+ "\n\n 您的新密碼為:  " + newPassword + "\n\n請記得變更密碼");
-
+//			message.setText("http://localhost:8080/softleader-iii-eeit78/login/login"
+//					+ "\n\n 您的新密碼為:  " + newPassword + "\n\n請記得變更密碼");
+			
 			Transport.send(message);
 
 		} catch (MessagingException e) {
