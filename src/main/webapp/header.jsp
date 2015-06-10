@@ -346,7 +346,7 @@ var headerHeight = $('#header-wrapper').height();
 						
 						$(window).on('resize',function(){
 							if($(window).scrollTop() <=100){	
-							$('#to-top').css({display:none});
+							$('#to-top').css({'display':'none'});
 							} else{
 							$('#to-top').attr('style','');
 							}
