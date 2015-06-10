@@ -48,7 +48,7 @@ label>b {
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>團體-註冊帳號</title>
+<title>公益團體註冊頁面</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
