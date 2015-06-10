@@ -68,13 +68,15 @@ label>b {
 		style="background-color: #f2f2f2; margin-top: 20px; padding-bottom: 20px; margin-top: 20px; margin-bottom: 20px;">
 		<div class="row">
 
-			<div class="col-md-4"><button id="specButtonForRaiserRegister" style="margin-top: 46px;">Fill</button></div>
+			<div class="col-md-4">
+				<button id="specButtonForRaiserRegister" style="margin-top: 46px;">Fill</button>
+			</div>
 			<div class="col-md-4">
 
 				<div style="padding-top: 36px; text-align: left;">
 					<form action="<c:url value='/raiser/raiserAction!insert' />"
 						method="post" enctype="multipart/form-data">
-						
+
 
 						<div class="form-group">
 
@@ -185,6 +187,8 @@ label>b {
 							<div>
 								<input type="file" name="raiserForm.logo" id="logo"
 									accept="image/*">
+								<div id="dropZone"></div>
+								<div id="chkimgg" class="errorClassForRaiser"></div>
 								<!-- 								<div id="dropZone" ondragover="dragoverHandler(event)" -->
 								<!-- 									ondrop="dropHandler(event)"> -->
 								<!-- 									<img id="dragpic" -->
@@ -355,10 +359,19 @@ label>b {
 			}
 		});
 
+		$("#logo").blur(function() {
+			$("#chkimgg").text("");
+			var file = logo.files[0];
+			if (!file) {
+				$("#dropZone").empty();
+				$("#chkimgg").text("請選擇圖片");
+			}
+		});
+
 		$("#logo")
 				.change(
 						function() {
-							console.log($(this).val())
+							$("#chkimgg").text("");
 							var file = logo.files[0];
 							if (file) {
 								var reader = new FileReader();
@@ -368,8 +381,11 @@ label>b {
 											.append(
 													"<img src='" +event.target.result +  "' />");
 								}
+								reader.readAsDataURL(file);
+							} else {
+								$("#dropZone").empty();
+								$("#chkimgg").text("請選擇圖片");
 							}
-							reader.readAsDataURL(file);
 						});
 
 		//以下驗證碼相關
@@ -412,20 +428,20 @@ label>b {
 			// 					}
 		});
 
-// 		$("#vdl").change(function() {
-// 			if ($(this).val().length != 0) {
-// 				$("#vdlPre").show().attr("src", $(this).val());
-// 			} else {
-// 				$("#vdlPre").hide();
-// 			}
-// 		})
+		// 		$("#vdl").change(function() {
+		// 			if ($(this).val().length != 0) {
+		// 				$("#vdlPre").show().attr("src", $(this).val());
+		// 			} else {
+		// 				$("#vdlPre").hide();
+		// 			}
+		// 		})
 
 		$("#specButtonForRaiserRegister")
 				.click(
 						function() {
 							$("#account").val("goh");
 							$("#inputpw").val("password");
-// 							$("#inputpw2").val("password");
+							// 							$("#inputpw2").val("password");
 							$("#name").val("勵馨社會福利事業基金會");
 							$("#tel").val("(02)8911-8595");
 							$("#cname").val("廖俊松");
