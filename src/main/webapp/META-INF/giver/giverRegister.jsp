@@ -216,6 +216,7 @@ $(function() {
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
 	
+	
 	//驗證帳號
 	$('input[name="form.account"]').on("blur", function(){
 		$('#account').empty();

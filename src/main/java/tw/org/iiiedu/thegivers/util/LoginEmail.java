@@ -13,16 +13,16 @@ import javax.mail.internet.MimeMessage;
 public class LoginEmail {
 	private String email;
 	private String account;
-	private String idNumber;
+	private String passwd;
 
 	public LoginEmail() {
 
 	}
 
-	public LoginEmail(String email, String account, String idNumber) {
+	public LoginEmail(String email, String account, String passwd) {
 		this.email = email;
 		this.account = account;
-		this.idNumber = idNumber;
+		this.passwd = passwd;
 	}
 
 	public void email() {
@@ -50,9 +50,9 @@ public class LoginEmail {
 					InternetAddress.parse(email));
 			message.setSubject("請點此網址開通您的帳號");
 //			message.setText("http://localhost:8080/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
-//					+ account + "&form.id_number=" + idNumber);
+//					+ account + "&condition=" + passwd);
 			message.setText("http://thegivers.cloudapp.net/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
-					+ account + "&form.id_number=" + idNumber);
+					+ account + "&condition=" + passwd);
 						
 			Transport.send(message);
 

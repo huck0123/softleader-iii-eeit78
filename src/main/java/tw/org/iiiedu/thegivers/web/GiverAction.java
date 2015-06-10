@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public void setForm(GiverForm form) {
 		this.form = form;
 	}
-	
+		
 	public int getThisPage() {
 		return thisPage;
 	}
@@ -146,10 +147,12 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			if(check.IdVerify() == false){
 				return FAIL;				
 			}
+			
+			byte[] b;
 			//驗證密碼
 			if(form.getPasswd().trim().matches(passRegex)){
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				byte[] b = md.digest(form.getPasswd().getBytes());
+				b = md.digest(form.getPasswd().getBytes());
 				model.setPasswd(b);
 			}else{
 				return FAIL;
@@ -167,8 +170,12 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			
 			model = service.register(model);
 			if (model != null) {
+				String temp = "";
+				for(int i:b){
+					temp += i;
+				}
 				//寄送email開通帳號
-				LoginEmail sendEmail = new LoginEmail(model.getEmail(), model.getAccount(), model.getIdNumber());
+				LoginEmail sendEmail = new LoginEmail(model.getEmail(), model.getAccount(), temp);
 				sendEmail.email();
 				giverCount++; // 資料筆數+1
 				context.setAttribute("giverCount", giverCount);
@@ -382,11 +389,14 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	
 	//新註冊者email登入
 	public String emailLogin(){
-		
 		try {
 			model = service.getByAccount(form.getAccount().trim());
 			if (model != null) {
-				if (model.getIdNumber().equals(form.getId_number())) {
+				String passwd = "";
+				for(int i : model.getPasswd()){
+					passwd += i;
+				}
+				if (condition.equals(passwd)) {
 
 					model.setValid(true);
 					service.update(model);
