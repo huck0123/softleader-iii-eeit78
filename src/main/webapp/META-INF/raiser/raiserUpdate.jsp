@@ -33,7 +33,7 @@ body {
 	padding-left: 28px;
 }
 </style>
-<title>團體-更新帳號</title>
+<title>團體專區</title>
 </head>
 <body id="body">
 	<jsp:include page="../../header.jsp" />
