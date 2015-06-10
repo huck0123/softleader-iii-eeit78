@@ -1,12 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html id="body">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>The Givers</title>
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/softleader-iii-eeit78/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/softleader-iii-eeit78/css/giver.css">
+<script src="/softleader-iii-eeit78/scripts/jquery-2.1.3.min.js"></script>
+<script src="/softleader-iii-eeit78/js/bootstrap.min.js"></script>
+<script src="/softleader-iii-eeit78/scripts/jquery-easing-1.3.js"></script>
+<script src="/softleader-iii-eeit78/js/useful.js"></script>
+<style>
+html, body{height: 100%}
+#raise-ok{min-height:300px;}
+</style>
 </head>
 <body>
+	<jsp:include page="/header.jsp" />
 
+	
+	<div id="raise-ok" class="container">
+		<div class="row"
+			style="text-align: center; color: slatedarkgray; padding-left: 20px;">
+			<div id="holder"></div>
+			<h1>找不到此頁面...</h1>
+
+
+		</div>
+	</div>
+
+	<jsp:include page="/footer.jsp" />
 </body>
+
+
+<script>
+var windowHeight = $(window).height();
+
+$('#raise-ok').height(windowHeight - headerHeight -footerHeight);
+
+
+
+$('#holder').height(0.3 * $('#raise-ok').height())
+</script>
 </html>
+
+
+
+
+

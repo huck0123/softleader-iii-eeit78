@@ -13,7 +13,7 @@
 	<include file="struts-campaignComment.xml"></include>
 
 	<constant name="struts.objectFactory" value="spring" /><!-- 把Action交給spring -->
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.custom.i18n.resources" value="locale/global" />
