@@ -387,7 +387,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			model = service.getByAccount(form.getAccount().trim());
 			if (model != null) {
 				if (model.getIdNumber().equals(form.getId_number())) {
-					System.out.println("hahaha");
 
 					NewPassword newPasswd = new NewPassword();
 					String password = newPasswd.createPassword();
