@@ -29,6 +29,7 @@ import tw.org.iiiedu.thegivers.form.GiverForm;
 import tw.org.iiiedu.thegivers.model.GiverModel;
 import tw.org.iiiedu.thegivers.service.GiverService;
 import tw.org.iiiedu.thegivers.util.IdCheck;
+import tw.org.iiiedu.thegivers.util.LoginEmail;
 import tw.org.iiiedu.thegivers.util.NewPassword;
 import tw.org.iiiedu.thegivers.util.SendEmail;
 
@@ -159,17 +160,20 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			}else{
 				return FAIL;
 			}
-			model.setValid(true);
+			model.setValid(false);
 			if(form.getHeadshot() != null){
 				model.setHeadshot(IOUtils.toByteArray(new FileInputStream(form.getHeadshot())));
 			}
 			
 			model = service.register(model);
 			if (model != null) {
+				//寄送email開通帳號
+				LoginEmail sendEmail = new LoginEmail(model.getEmail(), model.getAccount(), model.getIdNumber());
+				sendEmail.email();
 				giverCount++; // 資料筆數+1
 				context.setAttribute("giverCount", giverCount);
-				request.getSession().setAttribute("giver", model); // 註冊成功時，將資料丟進model
-				request.getSession().setAttribute("success", "註冊會員資料");
+//				request.getSession().setAttribute("giver", model); // 註冊成功時，將資料丟進model
+//				request.getSession().setAttribute("success", "註冊會員資料");
 				log.debug(
 						"++++++++++++++++++++++++++++++++++++++giverInsert+++++++++++++++++++++++++++++++++++ {}+++{}",
 						model, form);
@@ -197,7 +201,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 	public String update() {
 		GiverModel temp = (GiverModel) request.getSession().getAttribute(
 				"giver");
-		System.out.println("yyy"+form);
 		if(temp.getAccount().equals(form.getAccount())){
 			model = new GiverModel();
 
@@ -375,6 +378,26 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 			service.hide(thisAccount);
 		}
 		return null;
+	}
+	
+	//新註冊者email登入
+	public String emailLogin(){
+		
+		try {
+			model = service.getByAccount(form.getAccount().trim());
+			if (model != null) {
+				if (model.getIdNumber().equals(form.getId_number())) {
+
+					model.setValid(true);
+					service.update(model);
+					request.getSession().setAttribute("giver", model); // 註冊成功時，將資料丟進model
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "success";
 	}
 	
 	//此帳號與身分證是否屬於同一人    

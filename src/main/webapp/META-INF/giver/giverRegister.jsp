@@ -70,10 +70,10 @@ body{
  					$('input[name="form.account"]').val("jerry0123"); 
  					$('input[name="form.familyName"]').val("李"); 
  					$('input[name="form.name"]').val("小強"); 
- 					$('input[name="form.id_number"]').val("A118963080"); 
+ 					$('input[name="form.id_number"]').val("A123456789"); 
  					$('input[name="form.tel"]').val("0912145632"); 
  					$('input[name="form.address"]').val("台北市大安區信義路"); 
- 					$('input[name="form.email"]').val("roger@gmail.com"); 
+ 					$('input[name="form.email"]').val("eeit78demothegivers@gmail.com"); 
  				}); 
 			</script>
 
