@@ -38,7 +38,7 @@
 	width: 100%;
 }
 
-strong {
+#sideDiv strong {
 	font-size: 46px;
 }
 
