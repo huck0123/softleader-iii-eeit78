@@ -620,7 +620,7 @@ border-radius: 0;}
 							+ ' <span class="glyphicon glyphicon-tag"></span> '
 							+ value.type
 							+ ' <span class="glyphicon glyphicon-stats"></span> '
-							+ percent + '%已完成</p>');
+							+ formatFloat(percent,2) + '%已完成</p>');
 
 				var url = '${pageContext.request.contextPath}/donate/donate?id='
 							+ value.id + '&name=' + value.name;
