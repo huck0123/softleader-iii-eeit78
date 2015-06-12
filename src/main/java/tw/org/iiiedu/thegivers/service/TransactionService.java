@@ -39,7 +39,7 @@ public class TransactionService {
 		return count;
 	}
 	
-	//取出某campaignId的所有交易紀錄筆數
+	//取出某campaignId的所有交易紀錄筆數(捐款)
 	public int getCountByCampaignId(int cId){
 
 		CampaignModel cModel = new CampaignModel();

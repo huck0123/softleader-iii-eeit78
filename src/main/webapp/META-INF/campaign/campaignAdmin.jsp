@@ -34,6 +34,7 @@
 				<div class="col-md-3">
 					<input type="text" class="form-control" id="campaignCondition"
 						placeholder="請輸入搜尋條件">
+					<button class="btn btn-info" id="downloadExcel">下載所有活動excel</button>
 				</div>
 			</div>
 
@@ -177,5 +178,15 @@ function filter(){
 	campaignLoad();
 }
 $('#campaignCondition').on('keyup',filter);
+
+//下載檔案Excel
+$('#downloadExcel').on('click',function(){
+	
+	var url = "/softleader-iii-eeit78/campaign/campaignAction!downloadExcel";
+// 	window.open(url);
+	
+	location.href= url;
+	
+});
 </script>
 </html>

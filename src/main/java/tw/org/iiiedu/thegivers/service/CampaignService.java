@@ -39,6 +39,10 @@ public class CampaignService {
 		}
 	}
 	
+	public List<CampaignModel> getAllForExcel(){
+		return campaignDao.getAllForExcel();
+	}
+	
 	public CampaignModel getById(int id) {
 //		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		CampaignModel cm = campaignDao.getById(id);

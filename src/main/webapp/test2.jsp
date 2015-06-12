@@ -30,6 +30,8 @@
 
 <button id='hihihi' type="button">hihihi</button>
 
+<iframe src="http://localhost:8080/softleader-iii-eeit78/campaign/campaignAction!downloadExcel"></iframe>
+
 
 <script type="text/javascript">
 
@@ -37,9 +39,9 @@ $('#hihihi').on('click',function(){
 	
 	var url = "http://localhost:8080/softleader-iii-eeit78/campaign/campaignAction!downloadExcel";
 
-	// window.open(url);
+// 	window.open(url);
 	
-	location.href= url;
+//	location.href= url;
 	
 });
 

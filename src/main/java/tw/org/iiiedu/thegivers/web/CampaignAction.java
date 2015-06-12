@@ -2,7 +2,9 @@ package tw.org.iiiedu.thegivers.web;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -290,71 +292,86 @@ public class CampaignAction extends ActionSupport implements
 		this.request = request;
 	}
 	
-	public String downloadExcel(){
-		
-		   Workbook wb = new HSSFWorkbook();
-		   CreationHelper createHelper = wb.getCreationHelper();
+	public String downloadExcel() {
 
-		   // create a new sheet
-		   Sheet s = wb.createSheet();
-		   // declare a row object reference
-		   Row r = null;
-		   // declare a cell object reference
-		   Cell c = null;
-		   // create 2 cell styles
-		   CellStyle cs = wb.createCellStyle();
-		   CellStyle cs2 = wb.createCellStyle();
-		   DataFormat df = wb.createDataFormat();
+		Workbook wb = new HSSFWorkbook();
 
-		   // create 2 fonts objects
-		   Font f = wb.createFont();
-		   Font f2 = wb.createFont();
+		// create a new sheet
+		Sheet s = wb.createSheet();
+		// declare a row object reference
+		Row r = null;
+		// declare a cell object reference
+		Cell c = null;
+		Cell c2 = null;
+		Cell c3 = null;
+		Cell c4 = null;
+		Cell c5 = null;
+		Cell c6 = null;
+		Cell c7 = null;
+		Cell c8 = null;
+		Cell c9 = null;
 
-		   // Set font 1 to 12 point type, blue and bold
-		   f.setFontHeightInPoints((short) 12);
-		   f.setColor( IndexedColors.RED.getIndex() );
-		   f.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		// Define title
+		r = s.createRow(0);
+		c = r.createCell(0);
+		c2 = r.createCell(1);
+		c3 = r.createCell(2);
+		c4 = r.createCell(3);
+		c5 = r.createCell(4);
+		c6 = r.createCell(5);
+		c7 = r.createCell(6);
+		c8 = r.createCell(7);
+		c9 = r.createCell(8);
 
-		   // Set font 2 to 10 point type, red and bold
-		   f2.setFontHeightInPoints((short) 10);
-		   f2.setColor( IndexedColors.RED.getIndex() );
-		   f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		c.setCellValue("id");
+		c2.setCellValue("活動名稱");
+		c3.setCellValue("raiser_id");
+		c4.setCellValue("目標金額");
+		c5.setCellValue("活動開始日期");
+		c6.setCellValue("活動結束日期");
+		c7.setCellValue("目前金額");
+		c8.setCellValue("活動類型");
+		c9.setCellValue("捐款人數");
 
-		   // Set cell style and formatting
-		   cs.setFont(f);
-		   cs.setDataFormat(df.getFormat("#,##0.0"));
+		List<CampaignModel> list = campaignService.getAllForExcel();
+		CampaignModel model;
 
-		   // Set the other cell style and formatting
-		   cs2.setBorderBottom(cs2.BORDER_THIN);
-		   cs2.setDataFormat(df.getFormat("text"));
-		   cs2.setFont(f2);
+		// Define a few rows
+		for (int rownum = 1; rownum <= list.size(); rownum++) {
+			r = s.createRow(rownum);
+			c = r.createCell(0);
+			c2 = r.createCell(1);
+			c3 = r.createCell(2);
+			c4 = r.createCell(3);
+			c5 = r.createCell(4);
+			c6 = r.createCell(5);
+			c7 = r.createCell(6);
+			c8 = r.createCell(7);
+			c9 = r.createCell(8);
 
+			model = (CampaignModel) list.get(rownum - 1);
+			c.setCellValue(model.getId());
+			c2.setCellValue(model.getName());
+			c3.setCellValue(model.getRaiserModel().getId());
+			c4.setCellValue(model.getGoal());
+			c5.setCellValue(model.getStartDate().toString());
+			c6.setCellValue(model.getEndDate().toString());
+			c7.setCellValue(model.getCurrentFund());
+			c8.setCellValue(model.getType());
+			c9.setCellValue(transactionService.getCountByCampaignId(model
+					.getId()));
 
-		   // Define a few rows
-		   for(int rownum = 0; rownum < 3; rownum++) {
-			   r = s.createRow(rownum);
-			   for(int cellnum = 0; cellnum < 6; cellnum += 2) {
-				   c = r.createCell(cellnum);
-				   Cell c2 = r.createCell(cellnum+1);
-		   
-				   c.setCellValue((double)rownum + (cellnum/10));
-				   c2.setCellValue(
-				         createHelper.createRichTextString("Hello! " + cellnum)
-				   );
-			   }
-		   }
-		   
-		   
-		   ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		   try {
+		}
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
 			wb.write(baos);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   
-		   
-		   inputStream = new ByteArrayInputStream(baos.toByteArray());
+
+		inputStream = new ByteArrayInputStream(baos.toByteArray());
 		return "downloadExcel";
 	}
 

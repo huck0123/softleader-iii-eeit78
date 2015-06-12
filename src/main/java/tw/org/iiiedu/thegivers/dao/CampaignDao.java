@@ -43,7 +43,20 @@ public class CampaignDao {
 		}
 		return result;
 	}
-
+	public List<CampaignModel> getAllForExcel(){
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		List campaignModels = session.createCriteria(CampaignModel.class).addOrder(Order.asc("id")).list();
+		
+		if(campaignModels.size() > 0){
+			return campaignModels;
+		}else{
+			return null;
+		}
+		
+	}
+	
 	public List<CampaignModel> getAll(Integer pageNum, Integer pageSize) {
 
 		Session session = sessionFactory.getCurrentSession();
