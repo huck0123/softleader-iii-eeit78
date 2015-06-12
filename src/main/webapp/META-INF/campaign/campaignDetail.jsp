@@ -416,7 +416,7 @@ border-radius: 0;}
 	 	+ 			'</div>'
 		+ 			'<div class="col-xs-10" style="text-align:left" id="forAlt_' + data.id + '">'
 		+ 				'<p id="title_' + data.id + '">' + userAccount + '&nbsp;&nbsp;&nbsp;&nbsp;於&nbsp;&nbsp;&nbsp;&nbsp;' + modifiedDate + 	'</p>'
-		+ 				'<p id="p_' + data.id + '">' + data.commentary + '</p>'
+		+ 				'<p id="p_' + data.id + '">' + preventXssAttack(data.commentary) + '</p>'
 		+ 				'<button type="button" id="btn_' + data.id + '" class="btn btn-info btn-xs" style="width:70px" onclick="growNewReplyPlace(' + data.id + ');">'
 		+ 					'<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;回覆'
 		+ 				'</button>&nbsp;&nbsp;&nbsp;'
@@ -433,6 +433,16 @@ border-radius: 0;}
 	function substantiatePhoto(id, imgParam){
 		if(imgParam != null){
 			$('#img_' + id).attr("src", "data:image/png;base64," + arrayBufferToBase64(imgParam));
+		}
+	}
+	
+	function preventXssAttack(commentary){
+		rg = /(<script>.*<\/script>)|(<style>.*<\/style>)/gi;
+		
+		if(commentary.match(rg)){
+			return commentary.replace(rg,'');
+		}else{
+			return commentary;
 		}
 	}
 	
