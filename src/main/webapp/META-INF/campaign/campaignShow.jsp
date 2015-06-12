@@ -46,7 +46,6 @@ a:hover {
 	margin-right: 0px;
 }
 
-
 .innerCaption {
 	height: 220px;
 	overflow: hidden;
@@ -63,15 +62,29 @@ a:hover {
 	min-height: 800px;
 	margin-bottom: 20px;
 }
-.pagination{margin:8px 0px;}
+
+.nowPage {
+	font-weight: bolder !important;
+	color: 337ab7 !important;
+	background-color: #CCDDFF !important;
+}
+
+.pagination {
+	margin: 8px 0px;
+}
+
 @media {
-.campaign-image{width:100%;
-height:auto;}
+	.campaign-image {
+		width: 100%;
+		height: auto;
+	}
 }
 
 @media ( min-width : 992px) {
-.campaign-image{width:100%;
-height: 200px !important;}
+	.campaign-image {
+		width: 100%;
+		height: 200px !important;
+	}
 }
 </style>
 </head>
@@ -140,13 +153,14 @@ height: 200px !important;}
 	<div class="container">
 		<nav>
 			<ul class="pagination">
-				<li><a id="before" aria-label="Previous"><spanaria-hidden="true">&laquo;</span></a></li>
+				<li><a id="front"><spanaria-hidden="true">&laquo;</span></a></li>
+				<li><a id="before" aria-label="Previous"><spanaria-hidden="true">&lsaquo;</span></a></li>
 			</ul>
 			<ul id="navigation" class="pagination">
 			</ul>
 			<ul class="pagination">
-				<li><a id="after" aria-label="Next"> <span
-						aria-hidden="true">&raquo;</span></a></li>
+				<li><a id="after" aria-label="Next"> <span aria-hidden="true">&rsaquo;</span></a></li>
+				<li><a id="last" aria-label="last"> <span aria-hidden="true">&raquo;</span></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -173,6 +187,7 @@ if("${param.nameSearch}"){nameSearch = "${param.nameSearch}"}
 var typeSearch="所有類型";
 var onGoing="現正進行";
 var pageSize = 6;
+var totalPage = 0;
 load();
 
 function load(){
@@ -183,11 +198,14 @@ function load(){
 		
 		totalCount = data;
 		totalPage = Math.ceil(totalCount / pageSize);
-		console.log("total: "+totalPage);
 		$('#navigation').empty();
 		
 		for (var i = 0; i < Math.ceil(totalCount/pageSize); i++) { 
-		var child = $('<li><a>'+(i+1)+'</a></li>')
+			if(currentPage == i){
+		var child = $('<li><a>'+(i+1)+'</a></li>');
+			} else{
+		var child = $('<li><a>'+(i+1)+'</a></li>');
+			}
 		child.on('click',makeFunction(i))
 		child.appendTo($('#navigation'));
 		}
@@ -197,6 +215,12 @@ function load(){
 			'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},
 				 function(data){
 			data = JSON.parse(data);
+			$('#navigation li a').each(function(index, value){
+				if( $(value).html()-1 == currentPage){
+					$('.nowPage').removeClass('nowPage');
+					$(value).addClass('nowPage');
+				};
+			})
  					$('#campaignRow').empty();
 			$(data).each(function(index,value){
 				var rowDiv = $('#campaignRow');
@@ -305,6 +329,12 @@ function makeFunction(j){return function(){
 			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 				data = JSON.parse(data);
 				currentPage=j;
+				$('#navigation li a').each(function(index, value){
+					if( $(value).html()-1 == currentPage){
+						$('.nowPage').removeClass('nowPage');
+						$(value).addClass('nowPage');
+					};
+				})
  		$('#campaignRow').empty();
 		$(data).each(function(index,value){
 			var rowDiv = $('#campaignRow');
@@ -397,13 +427,18 @@ function makeFunction(j){return function(){
 
 
 function after(){
-	console.log(currentPage);
 	if(currentPage+1 < totalPage){
 		currentPage++;
 	}
 	load();
 }
 $('#after').on('click', after);
+
+function last(){
+	currentPage = totalPage -1;
+	load();
+}
+$('#last').on('click', last);
 
 function before(){
 	if(currentPage > 0){
@@ -412,6 +447,12 @@ function before(){
 	load();
 }
 $('#before').on('click', before);
+
+function front(){
+		currentPage = 0;
+	load();
+}
+$('#front').on('click', front);
 
 function arrayBufferToBase64( buffer ) {
     var binary = '';
