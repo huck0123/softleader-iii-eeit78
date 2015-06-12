@@ -254,7 +254,9 @@ label>b {
 			}
 		}
 
-		$("#account").change(function() {
+		$("#account").change(accountC);
+
+		function accountC() {
 			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
 
@@ -287,9 +289,11 @@ label>b {
 				}
 			});
 
-		});
+		}
 
-		$("#inputpw").blur(function() {
+		$("#inputpw").blur(inputpwB);
+
+		function inputpwB() {
 			$("#chkPw1").text("")
 
 			if ($(this).val().length == 0) {
@@ -301,20 +305,24 @@ label>b {
 				}
 			}
 
-		});
+		}
 
-		// 		$("#inputpw2").blur(function() {
-		// 			$("#chkPw2").text("")
+		$("#inputpw2").blur(inputpw2B);
 
-		// 			if ($(this).val().length == 0) {
-		// 				$("#chkPw2").text("請輸入相同密碼")
-		// 			}
-		// 			if ($(this).val() != $("#inputpw").val()) {
-		// 				$("#chkPw2").text("密碼不相符")
-		// 			}
-		// 		});
+		function inputpw2B() {
+			$("#chkPw2").text("")
 
-		$("#name").blur(function() {
+			if ($(this).val().length == 0) {
+				$("#chkPw2").text("請輸入相同密碼")
+			}
+			if ($(this).val() != $("#inputpw").val()) {
+				$("#chkPw2").text("密碼不相符")
+			}
+		}		
+		
+		$("#name").blur(nameB);
+
+		function nameB() {
 			$("#chkName").text("")
 
 			if ($(this).val().length == 0) {
@@ -328,71 +336,81 @@ label>b {
 					$("#chkName").text("此團體已註冊")
 				}
 			}, "json");
-		});
+		}
 
-		$("#tel").blur(function() {
+		$("#tel").blur(telB);
+
+		function telB() {
 			$("#chkTel1").text("");
 			if ($(this).val().length == 0) {
 				$("#chkTel1").text("請輸入正確格式的電話號碼")
 			}
-		});
+		}
 
-		$("#cname").blur(function() {
+		$("#cname").blur(cnameB);
+
+		function cnameB() {
 			$("#chkCname").text("");
 			if ($(this).val().length == 0) {
 				$("#chkCname").text("請輸入連絡人姓名")
 			}
-		});
+		}
 
-		$("#ctel").blur(function() {
+		$("#ctel").blur(ctelB);
+
+		function ctelB() {
 			$("#chkTel2").text("");
 			if ($(this).val().length == 0) {
 				$("#chkTel2").text("請輸入正確格式的連絡人電話")
 			}
-		});
+		}
 
-		$("#add").blur(function() {
+		$("#add").blur(addB);
+
+		function addB() {
 			$("#chkAdd").text("");
 			if ($(this).val().length == 0) {
 				$("#chkAdd").text("請輸入團體地址")
 			}
-		});
+		}
 
-		$("#mail").blur(function() {
+		$("#mail").blur(mailB);
+
+		function mailB() {
 			$("#chkMail").text("");
 			if ($(this).val().length == 0) {
 				$("#chkMail").text("請輸入正確格式的信箱")
 			}
-		});
+		}
 
-		$("#logo").blur(function() {
+		$("#logo").blur(logoB);
+
+		function logoB() {
 			$("#chkimgg").text("");
 			var file = logo.files[0];
 			if (!file) {
 				$("#dropZone").empty();
 				$("#chkimgg").text("請選擇圖片");
 			}
-		});
+		}
 
-		$("#logo")
-				.change(
-						function() {
-							$("#chkimgg").text("");
-							var file = logo.files[0];
-							if (file) {
-								var reader = new FileReader();
-								reader.onload = function(event) {
-									$("#dropZone")
-											.empty()
-											.append(
-													"<img src='" +event.target.result +  "' />");
-								}
-								reader.readAsDataURL(file);
-							} else {
-								$("#dropZone").empty();
-								$("#chkimgg").text("請選擇圖片");
-							}
-						});
+		$("#logo").change(logoC);
+
+		function logoC() {
+			$("#chkimgg").text("");
+			var file = logo.files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function(event) {
+					$("#dropZone").empty().append(
+							"<img src='" +event.target.result +  "' />");
+				}
+				reader.readAsDataURL(file);
+			} else {
+				$("#dropZone").empty();
+				$("#chkimgg").text("請選擇圖片");
+			}
+		}
 
 		//以下驗證碼相關
 		var a;
@@ -412,7 +430,9 @@ label>b {
 			});
 		}
 		//驗證
-		$("#validCode").blur(function() {
+		$("#validCode").blur(validCodeB);
+
+		function validCodeB() {
 			var inputCode = $("#validCode").val();
 			if (inputCode.length <= 0) {
 				$("#chkValidcode").text("請輸入驗證碼！");
@@ -432,15 +452,17 @@ label>b {
 			// 							&& $("#account").val()) {
 			// 						$("#submitForRaiserRegister").removeAttr('disabled');
 			// 					}
-		});
+		}
 
-		$("#vdl").change(function() {
+		$("#vdl").blur(vdlC);
+
+		function vdlC() {
 			if ($(this).val().length != 0) {
 				$("#vdlPre").show().attr("src", $(this).val());
 			} else {
 				$("#vdlPre").hide();
 			}
-		});
+		}
 
 		$("#specButtonForRaiserRegister")
 				.click(
@@ -463,6 +485,13 @@ label>b {
 							$("#validCode").val($("#checkCode").val());
 
 							accountB();
+							inputpwB();
+							nameB();
+							telB();
+							addB();
+							cnameB();
+							ctelB();
+							mailB();
 						});
 		//test
 
