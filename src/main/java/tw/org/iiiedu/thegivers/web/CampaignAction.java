@@ -1,6 +1,7 @@
 package tw.org.iiiedu.thegivers.web;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -279,7 +290,73 @@ public class CampaignAction extends ActionSupport implements
 		this.request = request;
 	}
 	
+	public String downloadExcel(){
+		
+		   Workbook wb = new HSSFWorkbook();
+		   CreationHelper createHelper = wb.getCreationHelper();
 
+		   // create a new sheet
+		   Sheet s = wb.createSheet();
+		   // declare a row object reference
+		   Row r = null;
+		   // declare a cell object reference
+		   Cell c = null;
+		   // create 2 cell styles
+		   CellStyle cs = wb.createCellStyle();
+		   CellStyle cs2 = wb.createCellStyle();
+		   DataFormat df = wb.createDataFormat();
+
+		   // create 2 fonts objects
+		   Font f = wb.createFont();
+		   Font f2 = wb.createFont();
+
+		   // Set font 1 to 12 point type, blue and bold
+		   f.setFontHeightInPoints((short) 12);
+		   f.setColor( IndexedColors.RED.getIndex() );
+		   f.setBoldweight(Font.BOLDWEIGHT_BOLD);
+
+		   // Set font 2 to 10 point type, red and bold
+		   f2.setFontHeightInPoints((short) 10);
+		   f2.setColor( IndexedColors.RED.getIndex() );
+		   f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+
+		   // Set cell style and formatting
+		   cs.setFont(f);
+		   cs.setDataFormat(df.getFormat("#,##0.0"));
+
+		   // Set the other cell style and formatting
+		   cs2.setBorderBottom(cs2.BORDER_THIN);
+		   cs2.setDataFormat(df.getFormat("text"));
+		   cs2.setFont(f2);
+
+
+		   // Define a few rows
+		   for(int rownum = 0; rownum < 3; rownum++) {
+			   r = s.createRow(rownum);
+			   for(int cellnum = 0; cellnum < 6; cellnum += 2) {
+				   c = r.createCell(cellnum);
+				   Cell c2 = r.createCell(cellnum+1);
+		   
+				   c.setCellValue((double)rownum + (cellnum/10));
+				   c2.setCellValue(
+				         createHelper.createRichTextString("Hello! " + cellnum)
+				   );
+			   }
+		   }
+		   
+		   
+		   ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		   try {
+			wb.write(baos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   
+		   
+		   inputStream = new ByteArrayInputStream(baos.toByteArray());
+		return "downloadExcel";
+	}
 
 
 
