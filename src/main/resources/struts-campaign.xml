@@ -38,6 +38,10 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result type="stream" name="downloadExcel">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 		
 		<action name="campaignTypeAction" class="campaignTypeAction">
