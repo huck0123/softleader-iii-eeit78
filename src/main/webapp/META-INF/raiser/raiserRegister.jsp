@@ -244,20 +244,26 @@ label>b {
 		raiserRegisCheckUrl1 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 		raiserRegisCheckUrl2 = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!checkName";
 		var giverurl = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
-		$("#account").blur(function() {
+
+		$("#account").blur(accountB);
+
+		function accountB() {
+			$("#chkAcc").text("");
 			if ($(this).val().length == 0) {
 				$("#chkAcc").text("請輸入帳號");
 			}
-		});
+		}
+
 		$("#account").change(function() {
 			var raiserACCChk = "^[a-zA-Z][a-zA-Z0-9]*$";
 			$("#chkAcc").text("");
+
 			if ($(this).val().length == 0) {
-				$("#chkAcc").text("請輸入帳號")
+				$("#chkAcc").text("請輸入帳號");
 			}
 
 			if (!$(this).val().match(raiserACCChk)) {
-				$("#chkAcc").text("帳號不符合格式")
+				$("#chkAcc").text("帳號不符合格式");
 			}
 
 			if ($(this).val().toUpperCase() == "ADMIN") {
@@ -428,13 +434,13 @@ label>b {
 			// 					}
 		});
 
-		// 		$("#vdl").change(function() {
-		// 			if ($(this).val().length != 0) {
-		// 				$("#vdlPre").show().attr("src", $(this).val());
-		// 			} else {
-		// 				$("#vdlPre").hide();
-		// 			}
-		// 		})
+		$("#vdl").change(function() {
+			if ($(this).val().length != 0) {
+				$("#vdlPre").show().attr("src", $(this).val());
+			} else {
+				$("#vdlPre").hide();
+			}
+		});
 
 		$("#specButtonForRaiserRegister")
 				.click(
@@ -455,6 +461,8 @@ label>b {
 									.val(
 											"https://www.youtube.com/embed/-Yl9xUmtZec");
 							$("#validCode").val($("#checkCode").val());
+
+							accountB();
 						});
 		//test
 
