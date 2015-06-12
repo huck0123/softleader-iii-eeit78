@@ -23,7 +23,7 @@
 	
 }
 </style>
-<title>使用者-所有團體資訊</title>
+<title>參與團體</title>
 <script>
 	var url = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!selectAll"
 	$.post(url, getData, "json");

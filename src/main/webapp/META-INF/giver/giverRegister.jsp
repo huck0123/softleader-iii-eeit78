@@ -70,10 +70,11 @@ body{
  					$('input[name="form.account"]').val("jerry0123"); 
  					$('input[name="form.familyName"]').val("李"); 
  					$('input[name="form.name"]').val("小強"); 
- 					$('input[name="form.id_number"]').val("A118963080"); 
+ 					$('input[name="form.id_number"]').val("A123456789"); 
  					$('input[name="form.tel"]').val("0912145632"); 
  					$('input[name="form.address"]').val("台北市大安區信義路"); 
- 					$('input[name="form.email"]').val("roger@gmail.com"); 
+ 					$('input[name="form.email"]').val("eeit78demothegivers@gmail.com"); 
+ 					$('input[name="form.birth"]').val("1980-01-13"); 
  				}); 
 			</script>
 
@@ -214,6 +215,7 @@ $(function() {
 	var raiserUrl = "${pageContext.request.contextPath}/raiser/raiserSelectForOne!select";
 	var url = "${pageContext.request.contextPath}/giver/giverSelect!selectAccount";
 	var urli = "${pageContext.request.contextPath}/giver/giverSelect!selectByIdNumber";
+	
 	
 	//驗證帳號
 	$('input[name="form.account"]').on("blur", function(){

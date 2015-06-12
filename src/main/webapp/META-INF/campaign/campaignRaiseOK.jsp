@@ -7,7 +7,7 @@
 <html id="body">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>The Givers 募款活動</title>
+<title>The Givers 活動發起成功</title>
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
 <link rel="stylesheet"

@@ -10,20 +10,22 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendEmail {
+public class LoginEmail {
 	private String email;
-	private String newPassword;
-	
-	public SendEmail(){
-		
+	private String account;
+	private String passwd;
+
+	public LoginEmail() {
+
 	}
-	
-	public SendEmail(String email, String newPassword){
+
+	public LoginEmail(String email, String account, String passwd) {
 		this.email = email;
-		this.newPassword = newPassword;
+		this.account = account;
+		this.passwd = passwd;
 	}
-	
-	public void email(){
+
+	public void email() {
 		final String username = "Thegivers2016@gmail.com";
 		final String password = "eeit7804";
 
@@ -46,17 +48,17 @@ public class SendEmail {
 			message.setFrom(new InternetAddress("Thegivers2016@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(email));
-			message.setSubject("新密碼");
-			message.setText("http://thegivers.cloudapp.net/softleader-iii-eeit78/login/login"
-					+ "\n\n 您的新密碼為:  " + newPassword + "\n\n請記得變更密碼");
-//			message.setText("http://localhost:8080/softleader-iii-eeit78/login/login"
-//					+ "\n\n 您的新密碼為:  " + newPassword + "\n\n請記得變更密碼");
-			
+			message.setSubject("請點此網址開通您的帳號");
+//			message.setText("http://localhost:8080/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
+//					+ account + "&condition=" + passwd);
+			message.setText("http://thegivers.cloudapp.net/softleader-iii-eeit78/giver/giverAction!emailLogin?form.account="
+					+ account + "&condition=" + passwd);
+						
 			Transport.send(message);
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 }
