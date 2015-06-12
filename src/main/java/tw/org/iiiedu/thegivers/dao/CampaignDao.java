@@ -91,7 +91,6 @@ public class CampaignDao {
 			if (campaignForm.getName() != null) {
 				or.add(Restrictions.like("name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
-				System.out.println("namename" + campaignForm.getName());
 				or.add(Restrictions.like("location",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				or.add(Restrictions.like("a.name",
@@ -141,7 +140,6 @@ public class CampaignDao {
 			if (campaignForm.getName() != null) {
 				or.add(Restrictions.like("name",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
-				System.out.println("namename" + campaignForm.getName());
 				or.add(Restrictions.like("location",
 						"%" + campaignForm.getName().trim() + "%").ignoreCase());
 				or.add(Restrictions.like("a.name",

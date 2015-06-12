@@ -72,7 +72,7 @@ public class CampaignCommentDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<CampaignCommentModel> getAll(Integer campaignId){
-		System.out.println("12345");
+
 		Session session = sessionFactory.getCurrentSession();
 		List<CampaignCommentModel> models = session.createCriteria(CampaignCommentModel.class)
 				.add(Restrictions.eq("campaignId", campaignId))
