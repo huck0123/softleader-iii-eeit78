@@ -192,7 +192,7 @@ load();
 
 function load(){
 
-
+    $('#campaignRow').prepend('<div class="row"><img src="../pictures/loader3.gif" style="height:50px; width:50px"/></div>');
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
 			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 		
@@ -325,6 +325,7 @@ function load(){
 	}
 
 function makeFunction(j){return function(){
+	$('#campaignRow').prepend('<div class="row"><img src="../pictures/loader3.gif" style="height:50px; width:50px"/></div>');
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 				data = JSON.parse(data);

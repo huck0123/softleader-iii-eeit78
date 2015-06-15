@@ -49,7 +49,7 @@
 <div class="tab-pane fade" id="campaignRaise"
 	style="padding-top: 20px; padding-bottom: 20px;">
 	<div class="row">
-		<div class="col-md-1"><button class="btn btn-default" id="fillCampaignRaise">填入表格</button></div>
+		<div class="col-md-1"><button class="btn btn-default" id="fillCampaignRaise">DEMO</button></div>
 		<div class="col-md-10">
 			<form id="campaignRaiseForm"
 				action="/softleader-iii-eeit78/campaign/campaignAction!insert"

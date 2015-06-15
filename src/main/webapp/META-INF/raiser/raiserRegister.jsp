@@ -69,7 +69,7 @@ label>b {
 		<div class="row">
 
 			<div class="col-md-4">
-				<button id="specButtonForRaiserRegister" style="margin-top: 46px;">Fill</button>
+				<button id="specButtonForRaiserRegister" style="margin-top: 46px;">DEMO</button>
 			</div>
 			<div class="col-md-4">
 

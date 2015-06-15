@@ -201,7 +201,7 @@ b {
 	<div class="row">
 		<a class="btn btn-primary" id="billInfoBack" >上一步</a>
 		<a class="btn btn-primary" id="billInfoBtn" >下一步</a>
-		<a class="btn btn-default" id="magicBtn">神奇按鈕</a>
+		<a class="btn btn-default" id="magicBtn">DEMO</a>
 	</div>
 </div>
 <script>
