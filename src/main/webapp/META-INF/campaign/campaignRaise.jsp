@@ -203,9 +203,9 @@
 		<script>
 
 // 若之前送出過表單，則送出按鈕可以按
-if("${param['campaignForm.name']}"){
-	$('#raiseSubmit').prop('disabled', false);
-}
+// if("${param['campaignForm.name']}"){
+// 	$('#raiseSubmit').prop('disabled', false);
+// }
 
 //前端驗證不可為空白
 $('[id^=campaign-]').on('blur',checkContent);
@@ -218,7 +218,7 @@ function checkContent(){
 	}
 	if($('#campaignRaiseForm p').text().length <1){
 		$('#raiseSubmit').prop('disabled', false);
-	}
+	}else{$('#raiseSubmit').prop('disabled', true);}
 }
 
 //前端驗證數字須正確
@@ -237,7 +237,7 @@ function checkNumberContent(){
 	}
 	if($('#campaignRaiseForm p').text().length <1){
 		$('#raiseSubmit').prop('disabled', false);
-	}
+	} else{$('#raiseSubmit').prop('disabled', true);}
 }
 
 // CKEDITOR設置
