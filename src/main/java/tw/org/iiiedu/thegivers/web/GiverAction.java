@@ -521,7 +521,6 @@ public class GiverAction extends ActionSupport implements ServletRequestAware{
 		this.request = request;
 		
 	}
-	
 //	public String IdentityImage() throws IOException{
 //		
 //		Random random = new Random();

@@ -32,9 +32,9 @@
 					<input class="btn btn-warning" type="button" value="加入黑名單" id="invalidate">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" id="campaignCondition"
-						placeholder="請輸入搜尋條件">
-					<button class="btn btn-info" id="downloadExcel">下載所有活動excel</button>
+				<div class="col-md-6"><input type="text" class="form-control" id="campaignCondition"
+						placeholder="請輸入搜尋條件"></div>
+						<div class="col-md-6"><button class="btn btn-info" id="downloadExcel">下載活動excel</button></div>
 				</div>
 			</div>
 

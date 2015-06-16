@@ -212,7 +212,7 @@ $('[id^=campaign-]').on('blur',checkContent);
 $('[id^=campaign-]').on('change',checkContent);
 function checkContent(){
 	if($(this).val().trim().length < 1){
-		$(this).siblings(":last").text('本欄位請勿留白').show();;
+		$(this).siblings(":last").text('本欄位請勿留白').show();
 	} else if($(this).val().trim().length > 1){
 		$(this).siblings(":last").empty();
 	}

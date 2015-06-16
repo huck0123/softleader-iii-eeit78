@@ -384,6 +384,8 @@ pre {
 	var windowHeight = $(window).height();
 
 	$('.cover-table-wrapper').height(windowHeight - headerHeight);
+	
+	
 </script>
 
 </html>
