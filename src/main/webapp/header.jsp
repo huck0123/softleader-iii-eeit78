@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <!-- facebook og -->
-<meta property="og:image" content="http://thegivers.cloudapp.net/softleader-iii-eeit78/pictures/rsz_thanks.jpg" />
+
 <style type="text/css">
 /*general setting*/
 .container {

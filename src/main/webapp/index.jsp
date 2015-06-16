@@ -4,14 +4,16 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
 
 <meta charset="utf-8">
 <!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <!--      <link rel="icon" href="../../favicon.ico"> -->
-
+<meta property="og:image" content="pictures/rsz_thanks.jpg" />
 <title>The Givers</title>
 <link rel="stylesheet"
 	href="/softleader-iii-eeit78/css/bootstrap.min.css">
