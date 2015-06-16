@@ -100,7 +100,7 @@ td{vertical-align: middle;}
 						<th>手機號碼</th>
 						<th>地址</th>
 						<th>email</th>
-						<th>獲得資訊</th>
+<!-- 						<th>獲得資訊</th> -->
 						<th>validate</th>
 					</tr>
 					<tbody id="tbdy">
@@ -213,7 +213,7 @@ td{vertical-align: middle;}
 						+ "<td>"+ obj.tel +"</td>" 
 						+ "<td>"+ obj.address +"</td>" 
 						+ "<td>"+ obj.email +"</td>" 
-						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
+// 						+ "<td>"+ getInfo(obj.getInfo) +"</td>" 
 						+ "<td>"+ "<input type='checkbox' style='height:20px;width:20px' id='"+ obj.account +"' value='"+ obj.valid +"'>" +"<span class='"+ obj.account +"'></span>" +"</td>"
 						+ "</tr>");	
 				valid(obj.account, obj.valid);

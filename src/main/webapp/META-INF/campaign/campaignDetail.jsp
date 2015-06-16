@@ -93,7 +93,7 @@ border-radius: 0;}
 		</ul>
 
 		<div class="tab-content">
-			<div id="detail-tab" class="tab-pane fade in active">
+			<div id="detail-tab" class="tab-pane fade in active" style="margin: 26px 0px;">
 				<div class=row id="detailRowDiv">
 					<div class="col-md-8 col-md-offset-2" id="detailDiv"
 						style="text-align: justify;"></div>

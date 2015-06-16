@@ -119,18 +119,18 @@ ul.social-network li {
 					<p class="ul-header">分享我們</p>
 					<ul class="social-network social-circle">
 						<li><a target="_blank"
-							href="http://www.facebook.com/share.php?u=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							href="http://www.facebook.com/share.php?u=http://thegivers.cloudapp.net/softleader-iii-eeit78/index.jsp"
 							class="icoFacebook" title="Facebook"><i
 								class="fa fa-facebook"></i></a></li>
 						<li><a target="_blank"
-							href="http://twitter.com/home/?status=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							href="http://twitter.com/home/?status=http://thegivers.cloudapp.net/softleader-iii-eeit78/index.jsp"
 							class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
 						<li><a target="_blank"
-							href="https://plus.google.com/share?url=http://localhost:8080/softleader-iii-eeit78/index.jsp"
+							href="https://plus.google.com/share?url=http://thegivers.cloudapp.net/softleader-iii-eeit78/index.jsp"
 							class="icoGoogle" title="Google +"><i
 								class="fa fa-google-plus"></i></a></li>
 						<li><a target="_blank"
-							href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:8080/softleader-iii-eeit78/index.jsp&title=The%20Givers&summary=The%20Givers.%0AMake%20every%20penny%20meaningful.&source="
+							href="https://www.linkedin.com/shareArticle?mini=true&url=http://thegivers.cloudapp.net/softleader-iii-eeit78/index.jsp&title=The%20Givers&summary=The%20Givers.%0AMake%20every%20penny%20meaningful.&source="
 							class="icoLinkedin" title="Linkedin"><i
 								class="fa fa-linkedin"></i></a></li>
 					</ul>

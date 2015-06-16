@@ -195,7 +195,7 @@ pre {
 	loadRaiser();
 
 	function loadCampaign() {
-
+		$('#campaignRow').prepend('<img src="pictures/loader3.gif" style="height:50px; width:50px"/>');
 		$
 				.post(
 						'/softleader-iii-eeit78/campaign/campaignAction!selectByAllCondition',
@@ -205,6 +205,7 @@ pre {
 						},
 						function(data) {
 							data = JSON.parse(data);
+							$('#campaignRow').empty();
 							$(data)
 									.each(
 											function(index, value) {
@@ -327,13 +328,12 @@ pre {
 	}
 
 	function loadRaiser() {
-		$
-				.post(
-						"${pageContext.request.contextPath}/raiser/raiserSelectForOne!selectAll",
-						getData);
+		$('#raiserRow').prepend('<img src="pictures/loader3.gif" style="height:50px; width:50px"/>');
+		$.post("${pageContext.request.contextPath}/raiser/raiserSelectForOne!selectAll",getData);
 
 		function getData(raisers) {
 			raisers = JSON.parse(raisers);
+			$('#raiserRow').empty();
 			$(raisers)
 					.each( 
 							function(index, raiser) {

@@ -55,7 +55,7 @@ body {
 						<th style="width: 200px">團體名稱</th>
 						<th style="width: 120px">電話</th>
 						<th style="width: 230px">信箱</th>
-						<th style="width: 100px">帳號是否啟用</th>
+						<th style="width: 120px">帳號是否啟用</th>
 						<th style="width: 10px"></th>
 					</tr>
 					<tbody id="tbodyRS">

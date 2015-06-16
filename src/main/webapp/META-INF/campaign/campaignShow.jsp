@@ -192,7 +192,7 @@ load();
 
 function load(){
 
-
+    $('#campaignRow').prepend('<div class="row"><img src="../pictures/loader3.gif" style="height:50px; width:50px"/></div>');
 	$.post('/softleader-iii-eeit78/campaign/campaignAction!selectByAllConditionCount',
 			{'campaignForm.name':nameSearch,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 		
@@ -325,9 +325,7 @@ function load(){
 	}
 
 function makeFunction(j){return function(){
-	
-	if(currentPage == $(this).text()){return;}
-	
+	$('#campaignRow').prepend('<div class="row"><img src="../pictures/loader3.gif" style="height:50px; width:50px"/></div>');
 	$.post('${pageContext.request.contextPath}/campaign/campaignAction!selectByAllCondition',
 			{'campaignForm.pageNum':j,'campaignForm.name':nameSearch,'campaignForm.pageSize':pageSize,'campaignForm.type':typeSearch,'campaignForm.onGoing':onGoing,'campaignForm.valid' : true},function(data){
 				data = JSON.parse(data);
@@ -432,14 +430,12 @@ function makeFunction(j){return function(){
 function after(){
 	if(currentPage+1 < totalPage){
 		currentPage++;
-		load();
 	}
-	
+	load();
 }
 $('#after').on('click', after);
 
 function last(){
-	if(currentPage == totalPage -1){return}
 	currentPage = totalPage -1;
 	load();
 }
@@ -448,14 +444,12 @@ $('#last').on('click', last);
 function before(){
 	if(currentPage > 0){
 		currentPage--;
-		load();
 	}
-	
+	load();
 }
 $('#before').on('click', before);
 
 function front(){
-	if(currentPage == 0) {return;}
 		currentPage = 0;
 	load();
 }
